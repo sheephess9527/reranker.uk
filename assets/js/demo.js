@@ -106,6 +106,13 @@ const SAMPLE = {
   ],
 };
 
+function isZh() {
+  return (document.documentElement.lang || "").toLowerCase().indexOf("zh") === 0;
+}
+function L(en, zh) {
+  return isZh() ? zh : en;
+}
+
 function setStatus(text, spinning) {
   if (!els.status) return;
   els.status.innerHTML = spinning
@@ -140,14 +147,15 @@ function render(query, scored) {
     .map((s, i) => {
       const pct = Math.round((s.score / max) * 100);
       const delta = s.origIndex - i;
-      let deltaHtml = '<span class="delta">no move</span>';
-      if (delta > 0) deltaHtml = `<span class="delta up">▲ up ${delta}</span>`;
+      let deltaHtml = `<span class="delta">${L("no move", "未移动")}</span>`;
+      if (delta > 0) deltaHtml = `<span class="delta up">▲ ${L("up", "上升")} ${delta}</span>`;
       else if (delta < 0)
-        deltaHtml = `<span class="delta down">▼ down ${-delta}</span>`;
+        deltaHtml = `<span class="delta down">▼ ${L("down", "下降")} ${-delta}</span>`;
+      const wasLabel = L("was #", "原 #");
       return `
         <div class="result-item ${i === 0 ? "top" : ""}" style="animation-delay:${i * 40}ms">
           <div class="result-head">
-            <div><span class="rank">${i + 1}</span><span class="muted" style="font-size:.8rem">was #${s.origIndex + 1}</span>${deltaHtml}</div>
+            <div><span class="rank">${i + 1}</span><span class="muted" style="font-size:.8rem">${wasLabel}${s.origIndex + 1}</span>${deltaHtml}</div>
             <div class="result-score">${s.score.toFixed(4)}</div>
           </div>
           <div class="result-text">${esc(s.text)}</div>
@@ -160,13 +168,13 @@ function render(query, scored) {
 async function run() {
   const query = (els.query.value || "").trim();
   const docs = parseDocs(els.docs.value || "");
-  if (!query) return setStatus("Enter a query first.", false);
+  if (!query) return setStatus(L("Enter a query first.", "请先输入一个查询。"), false);
   if (docs.length < 2)
-    return setStatus("Add at least two candidate passages (one per line).", false);
+    return setStatus(L("Add at least two candidate passages (one per line).", "请至少添加两段候选文本（每行一段）。"), false);
 
   const modelId = els.model.value;
   els.run.disabled = true;
-  setStatus("Loading model… first run downloads weights, then they are cached.", true);
+  setStatus(L("Loading model… first run downloads weights, then they are cached.", "正在加载模型…… 首次运行会下载权重，之后即缓存。"), true);
   showProgress(0);
 
   const seen = {};
@@ -176,14 +184,14 @@ async function run() {
       const vals = Object.values(seen);
       const avg = vals.reduce((a, b) => a + b, 0) / vals.length;
       showProgress(Math.min(99, Math.round(avg)));
-      setStatus(`Downloading model weights… ${Math.round(avg)}%`, true);
+      setStatus(L(`Downloading model weights… ${Math.round(avg)}%`, `正在下载模型权重…… ${Math.round(avg)}%`), true);
     }
   };
 
   try {
     const reranker = await getReranker(modelId, onProgress);
     showProgress(100);
-    setStatus("Scoring candidates…", true);
+    setStatus(L("Scoring candidates…", "正在为候选打分……"), true);
     const t0 = performance.now();
     const scores = await reranker.score(query, docs);
     const ms = Math.round(performance.now() - t0);
@@ -195,13 +203,16 @@ async function run() {
     render(query, scored);
     showProgress(null);
     setStatus(
-      `Done — reranked ${docs.length} passages in ${ms} ms, fully in your browser.`,
+      L(
+        `Done — reranked ${docs.length} passages in ${ms} ms, fully in your browser.`,
+        `完成 —— 在 ${ms} ms 内对 ${docs.length} 段文本完成重排序，全程在你的浏览器中运行。`
+      ),
       false
     );
   } catch (err) {
     console.error(err);
     showProgress(null);
-    setStatus("Something went wrong: " + (err && err.message ? err.message : err), false);
+    setStatus(L("Something went wrong: ", "出错了：") + (err && err.message ? err.message : err), false);
   } finally {
     els.run.disabled = false;
   }
@@ -210,12 +221,25 @@ async function run() {
 function loadSample() {
   if (els.query) els.query.value = SAMPLE.query;
   if (els.docs) els.docs.value = SAMPLE.docs.join("\n");
-  setStatus("Sample loaded — hit “Rerank” to see scores.", false);
+  setStatus(L("Sample loaded — hit “Rerank” to see scores.", "示例已载入 —— 点击“重排序”查看分数。"), false);
 }
 
 if (els.run) els.run.addEventListener("click", run);
 if (els.sample) els.sample.addEventListener("click", loadSample);
 
+function idleStatus() {
+  setStatus(L('Ready. Click “Rerank” to load the model and score.', "准备就绪。点击“重排序”加载模型并打分。"), false);
+}
+
 // Preload a sample so the demo never looks empty.
 loadSample();
-setStatus('Ready. Click “Rerank” to load the model and score.', false);
+idleStatus();
+
+// Keep the idle/ready status line in sync when the user switches language.
+document.addEventListener("i18n:changed", function () {
+  if (!els.status) return;
+  var txt = els.status.textContent || "";
+  if (/Ready|准备就绪/.test(txt)) idleStatus();
+  else if (/Sample loaded|示例已载入/.test(txt))
+    setStatus(L("Sample loaded — hit “Rerank” to see scores.", "示例已载入 —— 点击“重排序”查看分数。"), false);
+});
