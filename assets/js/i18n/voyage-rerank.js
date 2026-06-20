@@ -1,0 +1,57 @@
+window.I18N_PAGE = { zh: {
+  "_title": "Voyage Rerank：高精度重排序 API 评测 | reranker.uk",
+  "_desc": "Voyage Rerank 评测：voyage-rerank-2 及面向代码、金融的领域变体。基准、价格、Python 用法，以及为 RAG 加高质量重排序的优缺点。",
+
+  "<a href=\"/\">Home</a><span>/</span><a href=\"/models/\">Models</a><span>/</span>Voyage Rerank": "<a href=\"/\">首页</a><span>/</span><a href=\"/models/\">模型对比</a><span>/</span>Voyage Rerank",
+  "Voyage Rerank": "Voyage Rerank",
+  "Hosted API · Voyage AI": "托管 API · Voyage AI",
+  "Voyage AI built their rerankers with a single goal: maximise retrieval precision. <code>voyage-rerank-2</code> consistently ranks among the highest on BEIR and MTEB retrieval tasks, and the company offers domain-specific variants for code and financial documents — a strong choice when generic quality isn't enough.": "Voyage AI 打造重排序器只有一个目标：把检索精度做到极致。<code>voyage-rerank-2</code> 在 BEIR 和 MTEB 检索任务上始终名列前茅，公司还为代码和金融文档提供面向特定领域的变体 —— 当通用质量不够用时，它是个强力选择。",
+
+  "Available models": "可用模型",
+  "Pricing": "价格",
+  "Quick start": "快速上手",
+  "Pros and cons": "优缺点",
+
+  "Model": "模型",
+  "Context": "上下文",
+  "Best for": "最适合",
+  "16K tokens": "16K token",
+  "4K tokens": "4K token",
+  "General-purpose flagship; top BEIR scores": "通用旗舰；顶级 BEIR 成绩",
+  "Faster, lower cost; good quality": "更快、更省；质量不错",
+  "Legacy lite model": "旧版轻量模型",
+  "The 16K context window on <code>rerank-2</code> is notably large — useful for reranking long legal, medical or financial documents without chunking.": "<code>rerank-2</code> 的 16K 上下文窗口相当大 —— 适合在不分块的情况下重排长篇法律、医疗或金融文档。",
+
+  "Price": "价格",
+  "~$0.05 / 1M tokens": "约 $0.05 / 百万 token",
+  "~$0.02 / 1M tokens": "约 $0.02 / 百万 token",
+  "Free trial": "免费试用",
+  "200M tokens included on sign-up": "注册即赠 2 亿 token",
+  "Voyage uses token-based pricing, which is cost-effective at high volume. Check the Voyage AI website for current rates.": "Voyage 采用按 token 计费，在高流量下更具成本效益。当前费率请查阅 Voyage AI 官网。",
+
+  "Python": "Python",
+  "REST (curl)": "REST（curl）",
+  "In a RAG pipeline": "在 RAG 流水线中",
+
+  "Top-tier BEIR retrieval precision scores": "顶级的 BEIR 检索精度成绩",
+  "16K token context — great for long documents": "16K token 上下文 —— 非常适合长文档",
+  "Competitive token-based pricing": "有竞争力的按 token 计费",
+  "200M free tokens on sign-up": "注册赠送 2 亿免费 token",
+  "Works seamlessly with Voyage embeddings": "与 Voyage 的 embedding 无缝配合",
+  "Clean Python SDK": "简洁的 Python SDK",
+  "Hosted-only — no open weights": "仅托管 —— 没有开源权重",
+  "Smaller community than Cohere or bge": "社区规模小于 Cohere 或 bge",
+  "SDK is Python-only (REST for other languages)": "SDK 仅支持 Python（其他语言用 REST）",
+  "No multilingual flagship (general model is multilingual but not marketed as such)": "没有多语言旗舰（通用模型支持多语言，但并未以此为卖点）",
+
+  "See reranking in action": "看看重排序的实际效果",
+  "Our demo runs a cross-encoder in your browser — no API key, no cost, same reranking logic.": "我们的 Demo 在你的浏览器里运行一个 cross-encoder —— 无 API 密钥、零成本，重排序逻辑完全相同。",
+  "Open the demo →": "打开 Demo →",
+
+  "bge-reranker": "bge-reranker",
+  "Free, open-weight alternative.": "免费的开源权重替代品。",
+  "Cohere Rerank": "Cohere Rerank",
+  "Mature hosted API.": "成熟的托管 API。",
+  "Jina Reranker": "Jina Reranker",
+  "Open weights + hosted API.": "开源权重 + 托管 API。"
+}};

@@ -1,0 +1,63 @@
+window.I18N_PAGE = { zh: {
+  "_title": "Cross-encoder vs bi-encoder：区别与实例 | reranker.uk",
+  "_desc": "通俗讲清 cross-encoder 与 bi-encoder 的区别：bi-encoder 分别嵌入查询和文档（快、可扩展，适合一阶段检索）；cross-encoder 把一对一起打分（准，适合重排序）。何时用哪一个，以及如何在两阶段流水线中结合。",
+
+  "<a href=\"/\">Home</a><span>/</span><a href=\"/guides/what-is-a-reranker.html\">Guides</a><span>/</span>Cross-encoder vs bi-encoder": "<a href=\"/\">首页</a><span>/</span><a href=\"/guides/what-is-a-reranker.html\">指南</a><span>/</span>Cross-encoder vs bi-encoder",
+  "Cross-encoder vs bi-encoder": "Cross-encoder vs bi-encoder",
+  "Architecture · ~8 min read": "架构 · 约 8 分钟阅读",
+  "These two architectures are the heart of modern retrieval. A <strong>bi-encoder</strong> turns each text into a vector independently — fast and scalable, perfect for first-stage search. A <strong>cross-encoder</strong> reads the query and document together and outputs a relevance score — slower, but far more accurate, which is exactly what a reranker needs.": "这两种架构是现代检索的核心。<strong>bi-encoder</strong> 独立地把每段文本变成一个向量 —— 又快又可扩展，非常适合一阶段搜索。<strong>cross-encoder</strong> 把查询和文档一起读入并输出相关性分数 —— 更慢，但准确得多，而这正是 reranker 所需要的。",
+
+  "How a bi-encoder works": "bi-encoder 如何工作",
+  "How a cross-encoder works": "cross-encoder 如何工作",
+  "Side-by-side comparison": "逐项对比",
+  "Why you use both": "为什么两者都要用",
+  "A concrete example": "一个具体例子",
+
+  "A bi-encoder (also called a dual encoder) passes the query and each document through the same model <em>separately</em>, producing one fixed-length vector per text. Relevance is then just the cosine similarity (or dot product) between two vectors.": "bi-encoder（又称双编码器，dual encoder）把查询和每个文档<em>分别</em>送入同一个模型，为每段文本产生一个定长向量。相关性就是两个向量之间的余弦相似度（或点积）。",
+  "The crucial property: <strong>document vectors don’t depend on the query</strong>. You can embed your whole corpus once, store the vectors in an index, and at query time only embed the query and look up nearest neighbours. That’s what makes vector search fast enough for millions of documents. The downside is that the query and document never “see” each other, so the score is a blunt instrument.": "关键特性是：<strong>文档向量不依赖于查询</strong>。你可以一次性把整个语料库嵌入并存入索引，查询时只需嵌入查询并查找最近邻。这正是向量搜索能够快到处理数百万文档的原因。缺点是查询和文档从不“见面”，因此分数是个粗糙的工具。",
+  "A cross-encoder concatenates the query and document into one sequence — <code>[CLS] query [SEP] document [SEP]</code> — and runs the pair through the transformer together. Self-attention lets every query token interact with every document token, and the model outputs a single relevance score.": "cross-encoder 把查询和文档拼接成一个序列 —— <code>[CLS] query [SEP] document [SEP]</code> —— 并把这一对一起送入 transformer。自注意力让每个查询 token 都能与每个文档 token 交互，模型输出一个相关性分数。",
+  "This is dramatically more accurate because the model can reason about the <em>relationship</em> between the texts, not just their surface similarity. The catch: the score depends on the specific pair, so you can’t precompute anything. Every (query, document) combination is a fresh forward pass — which is why you only run a cross-encoder on a shortlist, never on the whole corpus. That shortlisted use <em>is</em> reranking.": "这准确得多，因为模型能推理两段文本之间的<em>关系</em>，而不只是表面相似度。代价是：分数取决于具体的那一对，所以什么都没法预计算。每一个 (query, document) 组合都是一次全新的前向传播 —— 这也是为什么你只在短名单上跑 cross-encoder，绝不在整个语料库上跑。这种“只对短名单”的用法<em>就是</em>重排序。",
+
+  "Property": "项目",
+  "Bi-encoder": "Bi-encoder",
+  "Cross-encoder": "Cross-encoder",
+  "Input": "输入",
+  "Query and doc encoded separately": "查询与文档分别编码",
+  "Query and doc encoded together": "查询与文档一起编码",
+  "Output": "输出",
+  "A vector per text": "每段文本一个向量",
+  "One relevance score per pair": "每一对一个相关性分数",
+  "Precompute corpus?": "可预计算语料？",
+  "Yes — embed once, reuse": "可以 —— 嵌入一次，反复复用",
+  "No — must score at query time": "不行 —— 必须在查询时打分",
+  "Speed": "速度",
+  "Very fast (vector lookup)": "非常快（向量查找）",
+  "Slow (one model call per candidate)": "慢（每个候选一次模型调用）",
+  "Accuracy": "准确性",
+  "Good for recall": "适合召回",
+  "Excellent for precision": "精度极佳",
+  "Scales to millions of docs?": "可扩展到百万级文档？",
+  "Yes": "可以",
+  "No — only a shortlist": "不行 —— 只能用于短名单",
+  "Typical role": "典型角色",
+  "First-stage retrieval": "第一阶段检索",
+  "Second-stage reranking": "第二阶段重排序",
+
+  "They’re complementary, not competing. The bi-encoder’s job is <strong>recall</strong>: cheaply pull a few dozen candidates that probably contain the answer. The cross-encoder’s job is <strong>precision</strong>: carefully reorder that shortlist so the best candidates are unambiguously on top.": "它们是互补而非竞争。bi-encoder 的职责是 <strong>recall（召回）</strong>：低成本地拉出几十个很可能包含答案的候选。cross-encoder 的职责是 <strong>precision（精度）</strong>：仔细重排这个短名单，让最好的候选明确地排在最前。",
+  "Bi-encoder finds the haystack’s promising corner. Cross-encoder finds the needle in it.": "bi-encoder 找到草垛中最有希望的那个角落，cross-encoder 则在那里找到那根针。",
+  "Trying to use only one is usually a mistake: a cross-encoder alone can’t scan a million documents in time, and a bi-encoder alone leaves quality on the table. The standard answer is the <a href=\"/guides/rerank-rag.html\">two-stage pipeline</a> — retrieve with the bi-encoder, rerank with the cross-encoder.": "只用其中一个通常是个错误：单靠 cross-encoder 无法及时扫描百万文档，单靠 bi-encoder 又把质量白白浪费。标准答案是<a href=\"/guides/rerank-rag.html\">两阶段流水线</a> —— 用 bi-encoder 检索，用 cross-encoder 重排序。",
+
+  "Take the query <em>“Does the free plan include API access?”</em> and two candidates:": "以查询 <em>“免费套餐包含 API 访问吗？”</em> 和两个候选为例：",
+  "<strong>A:</strong> “Our pricing has free, pro and enterprise plans, billed monthly.”": "<strong>A：</strong>“我们的定价有免费版、专业版和企业版，按月计费。”",
+  "<strong>B:</strong> “API access is available on every plan, including the free tier.”": "<strong>B：</strong>“所有套餐都提供 API 访问，包括免费版。”",
+  "A bi-encoder may rank A highly — it’s densely on-topic about “plans” and “pricing”, sharing lots of vocabulary with the query. But B actually answers the question. A cross-encoder, reading the query and each candidate together, can tell that B resolves the specific ask and push it to the top. That gap is the whole reason rerankers exist.": "bi-encoder 可能把 A 排得很高 —— 它密集地围绕“套餐”“定价”这些主题，与查询共享大量词汇。但真正回答了问题的是 B。cross-encoder 把查询和每个候选一起读入，能看出 B 解决了那个具体诉求并把它顶到最前。正是这道鸿沟，构成了 reranker 存在的全部理由。",
+
+  "Feel the difference yourself": "亲自感受这种差别",
+  "Our demo runs a cross-encoder in your browser. Paste a tricky query and watch which passage it promotes.": "我们的 Demo 在你的浏览器里运行一个 cross-encoder。粘贴一个刁钻的查询，看它把哪段文本顶上去。",
+  "Open the live demo →": "打开在线 Demo →",
+
+  "What is a reranker?": "什么是 reranker？",
+  "Start with the fundamentals.": "从基础概念开始。",
+  "How to add reranking to RAG": "如何为 RAG 加重排序",
+  "Put both encoders to work in a pipeline.": "让两种编码器在流水线中各司其职。"
+}};

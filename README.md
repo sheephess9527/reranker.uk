@@ -21,10 +21,24 @@ assets/
   css/style.css
   js/main.js                # Nav + shared UI
   js/demo.js                # transformers.js reranking engine (ES module)
+  js/i18n.js                # EN/中文 toggle engine (capture-original + dictionary)
+  js/i18n/*.js              # Per-page Chinese dictionaries (window.I18N_PAGE)
   img/favicon.svg
 sitemap.xml
 robots.txt
 ```
+
+## Bilingual (EN / 中文)
+
+The site ships in English (default, SEO-friendly) and switches to Chinese
+client-side via the 🌐 toggle in the nav. `assets/js/i18n.js` captures each
+translatable block's original English `innerHTML` on load and swaps in Chinese
+from a per-page dictionary (`assets/js/i18n/<page>.js`), keyed by the normalised
+English text. Shared chrome (nav/footer) lives in the engine's `SHARED` map. The
+choice is persisted in `localStorage` and auto-detected from `navigator.language`
+on first visit. Missing keys fall back to English, so partial dictionaries never
+break a page. The demo's dynamic strings (status, rank deltas) follow the
+language via an `i18n:changed` event.
 
 ## How the demo works
 
