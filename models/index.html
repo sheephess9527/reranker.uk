@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rerank model comparison: bge, Cohere, Jina, Voyage | reranker.uk</title>
+  <meta name="description" content="Side-by-side comparison of the leading rerank models: bge-reranker (open weights), Cohere Rerank, Jina Reranker, and Voyage Rerank. Compare quality, languages, latency, pricing, and when to use each." />
+  <link rel="canonical" href="https://reranker.uk/models/" />
+  <meta name="theme-color" content="#0b0d17" />
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Rerank model comparison — bge, Cohere, Jina, Voyage" />
+  <meta property="og:description" content="Which rerank model should you use? Side-by-side comparison of the top options." />
+  <meta property="og:url" content="https://reranker.uk/models/" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="/guides/what-is-a-reranker.html">What is a reranker</a></li>
+        <li><a href="/guides/cross-encoder-vs-bi-encoder.html">Cross- vs bi-encoder</a></li>
+        <li><a href="/guides/rerank-rag.html">Rerank for RAG</a></li>
+        <li><a href="/models/">Models</a></li>
+        <li><a class="nav-cta" href="/demo.html">Live demo</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero container" style="padding-bottom:1.5rem">
+      <h1>Rerank model comparison</h1>
+      <p class="lead">Four families dominate the reranking space. Here's how they compare on quality, speed, language support, and cost — so you can pick the right one for your stack.</p>
+    </section>
+
+    <section class="section container">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Type</th>
+              <th>Best for</th>
+              <th>Languages</th>
+              <th>Pricing</th>
+              <th>BEIR NDCG@10</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="/models/bge-reranker.html">bge-reranker-v2-m3</a></td>
+              <td><span class="pill good">Open weights</span></td>
+              <td>Self-hosted, free, multilingual</td>
+              <td>100+ langs</td>
+              <td>Free (self-host)</td>
+              <td>~60.1</td>
+            </tr>
+            <tr>
+              <td><a href="/models/cohere-rerank.html">Cohere Rerank v3.5</a></td>
+              <td><span class="pill">Hosted API</span></td>
+              <td>Best multilingual quality, mature API</td>
+              <td>100+ langs</td>
+              <td>~$0.002/1k docs</td>
+              <td>~61.2</td>
+            </tr>
+            <tr>
+              <td><a href="/models/jina-reranker.html">Jina Reranker v2</a></td>
+              <td><span class="pill good">Open + Hosted</span></td>
+              <td>Open weights + API + tiny browser model</td>
+              <td>100+ langs</td>
+              <td>Free tier + pay-as-you-go</td>
+              <td>~59.6</td>
+            </tr>
+            <tr>
+              <td><a href="/models/voyage-rerank.html">Voyage Rerank 2</a></td>
+              <td><span class="pill">Hosted API</span></td>
+              <td>High retrieval precision, domain-specific</td>
+              <td>Multilingual</td>
+              <td>~$0.0005/1k docs</td>
+              <td>~61.0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem;margin-top:.6rem">BEIR NDCG@10 figures are approximate and vary by dataset — treat them as a rough guide. Check each vendor's benchmarks for task-specific results.</p>
+
+      <div class="grid grid-2" style="margin-top:2.5rem">
+        <a class="card" href="/models/bge-reranker.html">
+          <h3>bge-reranker</h3>
+          <div class="tag-row" style="margin-bottom:.8rem"><span class="pill good">Open weights</span><span class="pill">Self-host</span></div>
+          <p>Open-weight rerankers from BAAI. A strong English baseline (bge-reranker-base) and excellent multilingual models (bge-reranker-v2-m3). The default choice when you want to self-host for free.</p>
+        </a>
+        <a class="card" href="/models/cohere-rerank.html">
+          <h3>Cohere Rerank</h3>
+          <div class="tag-row" style="margin-bottom:.8rem"><span class="pill">Hosted API</span><span class="pill">Multilingual</span></div>
+          <p>The most mature hosted rerank API, with consistent multilingual quality, a generous free tier and SDK support across Python, Node, Java and Go.</p>
+        </a>
+        <a class="card" href="/models/jina-reranker.html">
+          <h3>Jina Reranker</h3>
+          <div class="tag-row" style="margin-bottom:.8rem"><span class="pill good">Open + Hosted</span><span class="pill">Tiny variant</span></div>
+          <p>Unique in offering both a hosted API and open weights — including a tiny model small enough to run in the browser (which powers our demo).</p>
+        </a>
+        <a class="card" href="/models/voyage-rerank.html">
+          <h3>Voyage Rerank</h3>
+          <div class="tag-row" style="margin-bottom:.8rem"><span class="pill">Hosted API</span><span class="pill">Domain-specific</span></div>
+          <p>Voyage AI's rerankers are optimised specifically for retrieval precision and offer domain-tuned variants for code and finance.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="section container narrow">
+      <h2>How to choose</h2>
+      <div class="card stack">
+        <h3 style="margin-top:0">Use bge-reranker if…</h3>
+        <ul class="feature-list">
+          <li>You want to self-host with no per-call cost</li>
+          <li>You need strong multilingual reranking for free</li>
+          <li>You're already using sentence-transformers and want a drop-in</li>
+        </ul>
+      </div>
+      <div class="card stack" style="margin-top:1rem">
+        <h3 style="margin-top:0">Use Cohere Rerank if…</h3>
+        <ul class="feature-list">
+          <li>You want a battle-tested hosted API with official SDK support</li>
+          <li>Multilingual quality is the top priority</li>
+          <li>You're already in the Cohere ecosystem</li>
+        </ul>
+      </div>
+      <div class="card stack" style="margin-top:1rem">
+        <h3 style="margin-top:0">Use Jina Reranker if…</h3>
+        <ul class="feature-list">
+          <li>You want the option to self-host OR call an API</li>
+          <li>You need a tiny model that can run in the browser or on edge</li>
+          <li>You want a free tier with no credit card required</li>
+        </ul>
+      </div>
+      <div class="card stack" style="margin-top:1rem">
+        <h3 style="margin-top:0">Use Voyage Rerank if…</h3>
+        <ul class="feature-list">
+          <li>You need top-tier retrieval-specific precision</li>
+          <li>You're working on code search or financial documents</li>
+          <li>You're already using Voyage embeddings</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section container narrow center">
+      <div class="cta-band">
+        <h2 style="margin-top:0">Try a cross-encoder live</h2>
+        <p class="soft">See how any of these models would reorder your retrieval results — demo runs in your browser.</p>
+        <a class="btn btn-primary" href="/demo.html">Open the demo →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch">An open educational resource on rerankers for retrieval and RAG — plus a zero-cost demo that runs in your browser.</p>
+        </div>
+        <div>
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="/guides/what-is-a-reranker.html">What is a reranker</a></li>
+            <li><a href="/guides/cross-encoder-vs-bi-encoder.html">Cross- vs bi-encoder</a></li>
+            <li><a href="/guides/rerank-rag.html">Rerank for RAG</a></li>
+            <li><a href="/demo.html">Live demo</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Models</h4>
+          <ul>
+            <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
+            <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
+            <li><a href="/models/jina-reranker.html">Jina Reranker</a></li>
+            <li><a href="/models/voyage-rerank.html">Voyage Rerank</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> reranker.uk</span>
+        <span class="muted">Open educational resource · not affiliated with any model vendor</span>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

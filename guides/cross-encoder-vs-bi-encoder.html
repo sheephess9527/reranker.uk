@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cross-encoder vs bi-encoder: the difference, with examples | reranker.uk</title>
+  <meta name="description" content="Cross-encoder vs bi-encoder explained: bi-encoders embed query and document separately (fast, scalable retrieval); cross-encoders score the pair together (accurate reranking). When to use each, and how they combine in a two-stage pipeline." />
+  <link rel="canonical" href="https://reranker.uk/guides/cross-encoder-vs-bi-encoder.html" />
+  <meta name="theme-color" content="#0b0d17" />
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Cross-encoder vs bi-encoder" />
+  <meta property="og:description" content="The architecture behind fast retrieval and accurate reranking — and how to use both." />
+  <meta property="og:url" content="https://reranker.uk/guides/cross-encoder-vs-bi-encoder.html" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Cross-encoder vs bi-encoder",
+    "description": "Bi-encoders embed query and document separately; cross-encoders score the pair together. When to use each.",
+    "author": { "@type": "Organization", "name": "reranker.uk" },
+    "publisher": { "@type": "Organization", "name": "reranker.uk" },
+    "mainEntityOfPage": "https://reranker.uk/guides/cross-encoder-vs-bi-encoder.html"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="/guides/what-is-a-reranker.html">What is a reranker</a></li>
+        <li><a href="/guides/cross-encoder-vs-bi-encoder.html">Cross- vs bi-encoder</a></li>
+        <li><a href="/guides/rerank-rag.html">Rerank for RAG</a></li>
+        <li><a href="/models/">Models</a></li>
+        <li><a class="nav-cta" href="/demo.html">Live demo</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/what-is-a-reranker.html">Guides</a><span>/</span>Cross-encoder vs bi-encoder</div>
+      <h1>Cross-encoder vs bi-encoder</h1>
+      <p class="meta">Architecture · ~8 min read</p>
+      <p class="lead">These two architectures are the heart of modern retrieval. A <strong>bi-encoder</strong> turns each text into a vector independently — fast and scalable, perfect for first-stage search. A <strong>cross-encoder</strong> reads the query and document together and outputs a relevance score — slower, but far more accurate, which is exactly what a reranker needs.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#bi">How a bi-encoder works</a></li>
+          <li><a href="#cross">How a cross-encoder works</a></li>
+          <li><a href="#table">Side-by-side comparison</a></li>
+          <li><a href="#together">Why you use both</a></li>
+          <li><a href="#example">A concrete example</a></li>
+        </ol>
+      </div>
+
+      <h2 id="bi">How a bi-encoder works</h2>
+      <p>A bi-encoder (also called a dual encoder) passes the query and each document through the same model <em>separately</em>, producing one fixed-length vector per text. Relevance is then just the cosine similarity (or dot product) between two vectors.</p>
+      <div class="card" style="margin:1.3rem 0">
+<pre><code>query ───▶ [encoder] ───▶ q⃗  ┐
+                              ├─▶ cosine(q⃗, d⃗) = score
+doc   ───▶ [encoder] ───▶ d⃗  ┘</code></pre>
+      </div>
+      <p>The crucial property: <strong>document vectors don’t depend on the query</strong>. You can embed your whole corpus once, store the vectors in an index, and at query time only embed the query and look up nearest neighbours. That’s what makes vector search fast enough for millions of documents. The downside is that the query and document never “see” each other, so the score is a blunt instrument.</p>
+
+      <h2 id="cross">How a cross-encoder works</h2>
+      <p>A cross-encoder concatenates the query and document into one sequence — <code>[CLS] query [SEP] document [SEP]</code> — and runs the pair through the transformer together. Self-attention lets every query token interact with every document token, and the model outputs a single relevance score.</p>
+      <div class="card" style="margin:1.3rem 0">
+<pre><code>query + doc ───▶ [encoder, full cross-attention] ───▶ relevance score</code></pre>
+      </div>
+      <p>This is dramatically more accurate because the model can reason about the <em>relationship</em> between the texts, not just their surface similarity. The catch: the score depends on the specific pair, so you can’t precompute anything. Every (query, document) combination is a fresh forward pass — which is why you only run a cross-encoder on a shortlist, never on the whole corpus. That shortlisted use <em>is</em> reranking.</p>
+
+      <h2 id="table">Side-by-side comparison</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Property</th><th>Bi-encoder</th><th>Cross-encoder</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Input</td><td>Query and doc encoded separately</td><td>Query and doc encoded together</td></tr>
+            <tr><td>Output</td><td>A vector per text</td><td>One relevance score per pair</td></tr>
+            <tr><td>Precompute corpus?</td><td>Yes — embed once, reuse</td><td>No — must score at query time</td></tr>
+            <tr><td>Speed</td><td>Very fast (vector lookup)</td><td>Slow (one model call per candidate)</td></tr>
+            <tr><td>Accuracy</td><td>Good for recall</td><td>Excellent for precision</td></tr>
+            <tr><td>Scales to millions of docs?</td><td>Yes</td><td>No — only a shortlist</td></tr>
+            <tr><td>Typical role</td><td>First-stage retrieval</td><td>Second-stage reranking</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="together">Why you use both</h2>
+      <p>They’re complementary, not competing. The bi-encoder’s job is <strong>recall</strong>: cheaply pull a few dozen candidates that probably contain the answer. The cross-encoder’s job is <strong>precision</strong>: carefully reorder that shortlist so the best candidates are unambiguously on top.</p>
+      <blockquote>Bi-encoder finds the haystack’s promising corner. Cross-encoder finds the needle in it.</blockquote>
+      <p>Trying to use only one is usually a mistake: a cross-encoder alone can’t scan a million documents in time, and a bi-encoder alone leaves quality on the table. The standard answer is the <a href="/guides/rerank-rag.html">two-stage pipeline</a> — retrieve with the bi-encoder, rerank with the cross-encoder.</p>
+
+      <h2 id="example">A concrete example</h2>
+      <p>Take the query <em>“Does the free plan include API access?”</em> and two candidates:</p>
+      <ul>
+        <li><strong>A:</strong> “Our pricing has free, pro and enterprise plans, billed monthly.”</li>
+        <li><strong>B:</strong> “API access is available on every plan, including the free tier.”</li>
+      </ul>
+      <p>A bi-encoder may rank A highly — it’s densely on-topic about “plans” and “pricing”, sharing lots of vocabulary with the query. But B actually answers the question. A cross-encoder, reading the query and each candidate together, can tell that B resolves the specific ask and push it to the top. That gap is the whole reason rerankers exist.</p>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">Feel the difference yourself</h2>
+        <p class="soft">Our demo runs a cross-encoder in your browser. Paste a tricky query and watch which passage it promotes.</p>
+        <a class="btn btn-primary" href="/demo.html">Open the live demo →</a>
+      </div>
+
+      <h2>Keep reading</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/guides/what-is-a-reranker.html"><h3>What is a reranker?</h3><p>Start with the fundamentals.</p></a>
+        <a class="card" href="/guides/rerank-rag.html"><h3>How to add reranking to RAG</h3><p>Put both encoders to work in a pipeline.</p></a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch">An open educational resource on rerankers for retrieval and RAG — plus a zero-cost demo that runs in your browser.</p>
+        </div>
+        <div>
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="/guides/what-is-a-reranker.html">What is a reranker</a></li>
+            <li><a href="/guides/cross-encoder-vs-bi-encoder.html">Cross- vs bi-encoder</a></li>
+            <li><a href="/guides/rerank-rag.html">Rerank for RAG</a></li>
+            <li><a href="/demo.html">Live demo</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Models</h4>
+          <ul>
+            <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
+            <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
+            <li><a href="/models/jina-reranker.html">Jina Reranker</a></li>
+            <li><a href="/models/voyage-rerank.html">Voyage Rerank</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> reranker.uk</span>
+        <span class="muted">Open educational resource · not affiliated with any model vendor</span>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

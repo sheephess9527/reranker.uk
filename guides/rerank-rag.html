@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to add reranking to your RAG pipeline — practical guide | reranker.uk</title>
+  <meta name="description" content="Step-by-step guide to adding a rerank model to RAG: retrieve 50–100 candidates with vector search, rerank with a cross-encoder, keep the top 5 for the prompt. Includes Python code, top-k tips, latency trade-offs, and model choices." />
+  <link rel="canonical" href="https://reranker.uk/guides/rerank-rag.html" />
+  <meta name="theme-color" content="#0b0d17" />
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="How to add reranking to your RAG pipeline" />
+  <meta property="og:description" content="Retrieve wide, rerank for precision, send fewer tokens to the LLM. A practical walkthrough with code." />
+  <meta property="og:url" content="https://reranker.uk/guides/rerank-rag.html" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to add reranking to a RAG pipeline",
+    "description": "Add a cross-encoder reranker between retrieval and the LLM call to improve answer quality.",
+    "step": [
+      { "@type": "HowToStep", "name": "Retrieve candidates", "text": "Use vector search or BM25 to pull the top 50–100 candidate chunks." },
+      { "@type": "HowToStep", "name": "Rerank", "text": "Score each (query, candidate) pair with a cross-encoder reranker." },
+      { "@type": "HowToStep", "name": "Keep the best", "text": "Pass only the top 3–10 reranked passages to the LLM." }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="/guides/what-is-a-reranker.html">What is a reranker</a></li>
+        <li><a href="/guides/cross-encoder-vs-bi-encoder.html">Cross- vs bi-encoder</a></li>
+        <li><a href="/guides/rerank-rag.html">Rerank for RAG</a></li>
+        <li><a href="/models/">Models</a></li>
+        <li><a class="nav-cta" href="/demo.html">Live demo</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/what-is-a-reranker.html">Guides</a><span>/</span>Rerank for RAG</div>
+      <h1>How to add reranking to your RAG pipeline</h1>
+      <p class="meta">Practical · ~10 min read</p>
+      <p class="lead">The fix for mediocre RAG answers is rarely a bigger LLM — it's usually a better retrieval order. A reranker sits between your vector search and your LLM call, re-scores the candidates, and ensures only the most relevant passages land in the prompt.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#problem">The ordering problem in RAG</a></li>
+          <li><a href="#pattern">The retrieve-rerank-generate pattern</a></li>
+          <li><a href="#code">Code walkthrough</a></li>
+          <li><a href="#topk">Choosing top-k values</a></li>
+          <li><a href="#latency">Latency trade-offs</a></li>
+          <li><a href="#models">Which reranker to pick</a></li>
+        </ol>
+      </div>
+
+      <h2 id="problem">The ordering problem in RAG</h2>
+      <p>A typical RAG system embeds your documents and stores the vectors. At query time it fetches the k-nearest vectors to the query embedding and stuffs those chunks into the LLM prompt. The problem: <strong>cosine similarity between independent embeddings is a coarse relevance signal</strong>. The correct chunk might be in the top 20 results, but sitting at position 14 — outside the 5 you actually send to the model.</p>
+      <p>This is the "lost in the middle" problem in reverse: the right answer was never at the top in the first place. Reranking fixes it by applying a more expensive, more accurate relevance model to the shortlist the retriever already found.</p>
+
+      <h2 id="pattern">The retrieve-rerank-generate pattern</h2>
+      <div class="card" style="margin:1.3rem 0">
+<pre><code>User query
+    │
+    ▼
+┌───────────────────────────────────────────────────┐
+│  Stage 1 — Retrieve                               │
+│  Embed query → vector search / BM25               │
+│  → top 50–100 candidate chunks  (fast, recall)    │
+└───────────────────┬───────────────────────────────┘
+                    │
+                    ▼
+┌───────────────────────────────────────────────────┐
+│  Stage 2 — Rerank                                 │
+│  Score each (query, chunk) pair with cross-encoder│
+│  Sort by score → keep top 5–10  (slow, precise)   │
+└───────────────────┬───────────────────────────────┘
+                    │
+                    ▼
+┌───────────────────────────────────────────────────┐
+│  Stage 3 — Generate                               │
+│  Feed top-k reranked chunks + query to LLM        │
+│  → grounded answer                                │
+└───────────────────────────────────────────────────┘</code></pre>
+      </div>
+      <p>The retriever handles scale (millions of documents at millisecond speed). The reranker handles quality (precise ordering of a few dozen candidates). The LLM handles synthesis. Each stage does only what it's good at.</p>
+
+      <h2 id="code">Code walkthrough</h2>
+      <p>Here's a self-contained Python example using a local bge-reranker. In production you'd swap <code>rank_documents</code> for a call to Cohere, Jina, or Voyage if you prefer hosted APIs.</p>
+
+      <h3>With a local cross-encoder (sentence-transformers)</h3>
+      <pre><code>from sentence_transformers import CrossEncoder
+
+# Load once at startup — reuse across requests
+reranker = CrossEncoder("BAAI/bge-reranker-base", max_length=512)
+
+def rerank(query: str, candidates: list[str], top_n: int = 5) -&gt; list[str]:
+    """Return top_n candidates reranked by relevance to query."""
+    pairs = [(query, doc) for doc in candidates]
+    scores = reranker.predict(pairs)
+    ranked = sorted(zip(scores, candidates), reverse=True)
+    return [doc for _, doc in ranked[:top_n]]
+
+# --- In your RAG pipeline ---
+raw_chunks = vector_db.search(query, top_k=50)   # retrieve wide
+best_chunks = rerank(query, raw_chunks, top_n=5)  # rerank tight
+answer = llm.complete(build_prompt(query, best_chunks))  # generate</code></pre>
+
+      <h3>With the Cohere hosted API</h3>
+      <pre><code>import cohere
+
+co = cohere.Client("YOUR_API_KEY")
+
+def rerank(query: str, candidates: list[str], top_n: int = 5) -&gt; list[str]:
+    result = co.rerank(
+        model="rerank-v3.5",
+        query=query,
+        documents=candidates,
+        top_n=top_n,
+    )
+    return [candidates[r.index] for r in result.results]</code></pre>
+
+      <h3>With Jina Reranker API</h3>
+      <pre><code>import requests
+
+def rerank(query: str, candidates: list[str], top_n: int = 5) -&gt; list[str]:
+    resp = requests.post(
+        "https://api.jina.ai/v1/rerank",
+        headers={"Authorization": "Bearer YOUR_KEY"},
+        json={
+            "model": "jina-reranker-v2-base-multilingual",
+            "query": query,
+            "documents": candidates,
+            "top_n": top_n,
+        },
+    ).json()
+    indices = [r["index"] for r in resp["results"]]
+    return [candidates[i] for i in indices]</code></pre>
+
+      <h2 id="topk">Choosing top-k values</h2>
+      <p>You have two k values to tune: <em>how many to retrieve</em> and <em>how many to keep after reranking</em>.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Parameter</th><th>Typical range</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>retrieval_k</code></td><td>20–100</td><td>More = better recall, slower reranker. 50 is a common default. Don't go below 20 or you may miss the right chunk entirely.</td></tr>
+            <tr><td><code>rerank_top_n</code></td><td>3–10</td><td>Fewer = cheaper prompt, but higher risk of excluding a useful chunk. Start at 5; tune based on your context window and answer quality.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout">
+        <p><strong>Rule of thumb:</strong> retrieve at least 5× what you plan to keep. If you want 5 final chunks, retrieve at least 25–50. The reranker can only fix order, not conjure chunks that weren't retrieved at all.</p>
+      </div>
+
+      <h2 id="latency">Latency trade-offs</h2>
+      <p>Reranking adds a model call to your pipeline. The cost depends on the approach:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Approach</th><th>P50 latency (50 docs)</th><th>Cost</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Cohere / Jina / Voyage API</td><td>80–200 ms</td><td>Per-call pricing (~$0.0002–0.002 / 1k chunks)</td></tr>
+            <tr><td>bge-reranker on CPU (small)</td><td>200–600 ms</td><td>Your infra cost; free per-call</td></tr>
+            <tr><td>bge-reranker on GPU</td><td>15–60 ms</td><td>GPU cost; free per-call</td></tr>
+            <tr><td>Local tiny model (e.g. jina-tiny)</td><td>30–120 ms CPU</td><td>Free</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>For most RAG applications, 100–300 ms total pipeline latency is fine and the quality gain is worth it. If your SLA is very tight, either host on GPU, use a tiny model, or cap <code>retrieval_k</code> at 20–30 instead of 50.</p>
+      <div class="callout accent">
+        <p><strong>Cache aggressively:</strong> if the same query recurs (e.g. in a customer support bot), cache the reranked results by (query, corpus version) hash. The reranker becomes effectively free for repeat queries.</p>
+      </div>
+
+      <h2 id="models">Which reranker to pick</h2>
+      <p>The short version:</p>
+      <ul>
+        <li><strong>Want to self-host, English-only, free:</strong> <a href="/models/bge-reranker.html">bge-reranker-v2-m3</a> — strong, widely deployed.</li>
+        <li><strong>Want a hosted API, best multilingual quality:</strong> <a href="/models/cohere-rerank.html">Cohere Rerank v3.5</a>.</li>
+        <li><strong>Want open weights + hosted API + tiny browser-runnable model:</strong> <a href="/models/jina-reranker.html">Jina Reranker v2</a>.</li>
+        <li><strong>Optimising for retrieval-specific quality:</strong> <a href="/models/voyage-rerank.html">Voyage Rerank 2</a>.</li>
+      </ul>
+      <p>See the full <a href="/models/">model comparison →</a></p>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">See reranking in action</h2>
+        <p class="soft">Paste your own query and candidates. A cross-encoder scores them in your browser — zero API cost.</p>
+        <a class="btn btn-primary" href="/demo.html">Open the live demo →</a>
+      </div>
+
+      <h2>Keep reading</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/guides/what-is-a-reranker.html"><h3>What is a reranker?</h3><p>Start with the fundamentals.</p></a>
+        <a class="card" href="/guides/cross-encoder-vs-bi-encoder.html"><h3>Cross-encoder vs bi-encoder</h3><p>The architecture behind the speed/accuracy trade-off.</p></a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch">An open educational resource on rerankers for retrieval and RAG — plus a zero-cost demo that runs in your browser.</p>
+        </div>
+        <div>
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="/guides/what-is-a-reranker.html">What is a reranker</a></li>
+            <li><a href="/guides/cross-encoder-vs-bi-encoder.html">Cross- vs bi-encoder</a></li>
+            <li><a href="/guides/rerank-rag.html">Rerank for RAG</a></li>
+            <li><a href="/demo.html">Live demo</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Models</h4>
+          <ul>
+            <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
+            <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
+            <li><a href="/models/jina-reranker.html">Jina Reranker</a></li>
+            <li><a href="/models/voyage-rerank.html">Voyage Rerank</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> reranker.uk</span>
+        <span class="muted">Open educational resource · not affiliated with any model vendor</span>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>
