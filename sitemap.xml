@@ -10,4 +10,5 @@
   <url><loc>https://reranker.uk/models/cohere-rerank.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://reranker.uk/models/jina-reranker.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://reranker.uk/models/voyage-rerank.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://reranker.uk/models/mxbai-rerank.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

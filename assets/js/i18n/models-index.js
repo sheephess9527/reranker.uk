@@ -1,9 +1,9 @@
 window.I18N_PAGE = { zh: {
-  "_title": "重排序模型对比：bge、Cohere、Jina、Voyage | reranker.uk",
-  "_desc": "主流 rerank 模型横向对比：bge-reranker（开源权重）、Cohere Rerank、Jina Reranker、Voyage Rerank。对比质量、语言、延迟、价格，以及各自适用场景。",
+  "_title": "重排序模型对比：bge、Cohere、Jina、Voyage、mxbai | reranker.uk",
+  "_desc": "主流 rerank 模型横向对比：bge-reranker（开源权重）、Cohere Rerank、Jina Reranker、Voyage Rerank、mxbai-rerank。对比质量、语言、延迟、价格，以及各自适用场景。",
 
   "Rerank model comparison": "重排序模型对比",
-  "Four families dominate the reranking space. Here's how they compare on quality, speed, language support, and cost — so you can pick the right one for your stack.": "四大家族主导着重排序领域。这里对比它们在质量、速度、语言支持和成本上的差异 —— 帮你为自己的技术栈选对那一个。",
+  "Four families dominate the reranking space. Here's how they compare on quality, speed, language support, and cost — so you can pick the right one for your stack.": "主流重排序家族横向对比。从质量、速度、语言支持到成本，一表说清 —— 帮你为自己的技术栈选对那一个。",
 
   "Model": "模型",
   "Type": "类型",
@@ -39,10 +39,22 @@ window.I18N_PAGE = { zh: {
   "You want the option to self-host OR call an API": "你希望既能自建、也能调用 API",
   "You need a tiny model that can run in the browser or on edge": "你需要一个能在浏览器或边缘端运行的微型模型",
   "You want a free tier with no credit card required": "你想要无需信用卡的免费额度",
+  "Open weights + browser-runnable xsmall": "开源权重 + 可在浏览器运行的 xsmall",
+  "High retrieval precision, domain-specific": "高检索精度、面向特定领域",
+  "English": "英文",
+
+  "Voyage AI's rerankers are optimised specifically for retrieval precision and offer domain-tuned variants for code and finance.": "Voyage AI 的重排序器专门为检索精度优化，并为代码和金融提供领域调优的变体。",
+  "Apache 2.0 DeBERTa-v3 rerankers from mixedbread-ai. The xsmall variant runs in the browser and powers our demo.": "mixedbread-ai 推出的 Apache 2.0 DeBERTa-v3 重排序器。xsmall 变体可在浏览器中运行，正是本站 Demo 的驱动模型。",
+
   "Use Voyage Rerank if…": "在以下情况选 Voyage Rerank……",
   "You need top-tier retrieval-specific precision": "你需要顶级的检索专项精度",
   "You're working on code search or financial documents": "你在做代码搜索或金融文档",
   "You're already using Voyage embeddings": "你已经在用 Voyage 的 embedding",
+
+  "Use mxbai-rerank if…": "在以下情况选 mxbai-rerank……",
+  "You want open weights with a permissive Apache 2.0 licence": "你希望使用宽松 Apache 2.0 协议的开源权重",
+  "You need a browser-runnable model for edge or client-side use": "你需要一个可在浏览器或边缘端运行的模型",
+  "You want strong English precision without an API dependency": "你想要强英文精度，同时不依赖任何 API",
 
   "Try a cross-encoder live": "实时体验一个 cross-encoder",
   "See how any of these models would reorder your retrieval results — demo runs in your browser.": "看看这些模型会如何重排你的检索结果 —— Demo 在你的浏览器里运行。",
