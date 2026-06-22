@@ -1,6 +1,6 @@
 window.I18N_PAGE = { zh: {
-  "_title": "Reranker 重排序 — 原理、用法与浏览器实时 Demo | reranker.uk",
-  "_desc": "面向搜索与 RAG 的重排序实用指南：什么是 rerank 模型、cross-encoder 与 bi-encoder 的区别、如何为 RAG 加重排序、主流模型对比（bge、Cohere、Jina、Voyage），以及一个完全在浏览器中运行的免费 Demo。",
+  "_title": "Reranker 是什么？浏览器内免费体验重排序模型 | reranker.uk",
+  "_desc": "免费在浏览器里体验 Reranker（重排序模型）。纯客户端运行，无需 API Key，保护隐私。学习 reranker 原理，并通过交互式 Demo 理解它如何提升 RAG 检索效果。",
 
   "Reranker · rerank model · rerank for RAG": "Reranker · rerank 模型 · 为 RAG 重排序",
   "Understand rerankers. Then watch one run in your browser.": "读懂 reranker，再亲眼看它在你的浏览器里运行。",
