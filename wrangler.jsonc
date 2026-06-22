@@ -1,0 +1,15 @@
+{
+  // Cloudflare Workers Static Assets config for reranker.uk.
+  //
+  // The site is plain HTML/CSS/JS under public/ — there is no build step
+  // and no Worker script — so we serve that directory as static assets.
+  // This is what `npx wrangler deploy` and `npx wrangler versions upload`
+  // need to find an entry point.
+  "name": "reranker",
+  "compatibility_date": "2025-01-01",
+  "assets": {
+    "directory": "./public",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

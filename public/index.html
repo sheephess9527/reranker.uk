@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reranker — what it is, how it works, and a live in-browser demo | reranker.uk</title>
+  <meta name="description" content="A practical guide to rerankers for search and RAG: what a rerank model is, cross-encoder vs bi-encoder, how to add reranking to RAG, model comparisons (bge, Cohere, Jina, Voyage), and a free demo that runs entirely in your browser." />
+  <link rel="canonical" href="https://reranker.uk/" />
+  <meta name="theme-color" content="#0b0d17" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="author" content="reranker.uk" />
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Reranker — the resource + a live in-browser rerank demo" />
+  <meta property="og:description" content="Learn rerankers for RAG and search, compare rerank models, and try a cross-encoder reranking demo that runs 100% in your browser — no API, no cost." />
+  <meta property="og:url" content="https://reranker.uk/" />
+  <meta property="og:site_name" content="reranker.uk" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" />
+  <meta property="og:locale" content="en_GB" />
+  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://reranker.uk/#org",
+        "name": "reranker.uk",
+        "url": "https://reranker.uk/",
+        "logo": { "@type": "ImageObject", "url": "https://reranker.uk/assets/img/icon-512.png" }
+      },
+      {
+        "@type": "WebSite",
+        "name": "reranker.uk",
+        "url": "https://reranker.uk/",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://reranker.uk/#org" },
+        "description": "A resource on rerankers for retrieval and RAG, plus a browser-based reranking demo."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a reranker?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A reranker is a model that takes a query and a set of candidate documents and reorders them by relevance. It usually runs as a second stage after fast retrieval, scoring each query–document pair jointly with a cross-encoder for higher precision." }
+          },
+          {
+            "@type": "Question",
+            "name": "Why use a rerank model in RAG?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Vector search returns roughly relevant chunks, but the order is often imperfect. A rerank model re-scores the top candidates so the most relevant passages land at the top of the prompt, improving answer quality and letting you send fewer tokens to the LLM." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="/guides/what-is-a-reranker.html">What is a reranker</a></li>
+        <li><a href="/guides/cross-encoder-vs-bi-encoder.html">Cross- vs bi-encoder</a></li>
+        <li><a href="/guides/rerank-rag.html">Rerank for RAG</a></li>
+        <li><a href="/models/">Models</a></li>
+        <li><a class="nav-cta" href="/demo.html">Live demo</a></li>
+      </ul>
+      <button class="lang-toggle" aria-label="切换到中文" title="切换到中文">中文</button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero container">
+      <span class="eyebrow">Reranker · rerank model · rerank for RAG</span>
+      <h1>Understand rerankers. Then watch one run in your browser.</h1>
+      <p class="lead">A reranker re-scores your retrieved candidates so the most relevant passages rise to the top. Learn how it works, compare the popular models, and try a cross-encoder live — with zero API cost and nothing leaving your machine.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/demo.html">▶ Try the live demo</a>
+        <a class="btn btn-ghost" href="/guides/what-is-a-reranker.html">Start with the basics</a>
+      </div>
+      <p class="muted" style="margin-top:1.4rem;font-size:.88rem">Runs on transformers.js · 100% client-side · no key required</p>
+    </section>
+
+    <section class="section container">
+      <div class="section-head">
+        <h2>Start here</h2>
+        <p>Three short guides take you from “what is a reranker?” to a working reranking stage in your RAG pipeline.</p>
+      </div>
+      <div class="grid grid-3">
+        <a class="card" href="/guides/what-is-a-reranker.html">
+          <span class="ico">🧭</span>
+          <h3>What is a reranker?</h3>
+          <p>The two-stage retrieval pattern, why order matters, and where reranking fits.</p>
+          <div class="tag-row"><span class="pill info">Fundamentals</span></div>
+        </a>
+        <a class="card" href="/guides/cross-encoder-vs-bi-encoder.html">
+          <span class="ico">⚖️</span>
+          <h3>Cross-encoder vs bi-encoder</h3>
+          <p>Why bi-encoders are fast and cross-encoders are accurate — and how to use both.</p>
+          <div class="tag-row"><span class="pill info">Architecture</span></div>
+        </a>
+        <a class="card" href="/guides/rerank-rag.html">
+          <span class="ico">🔧</span>
+          <h3>How to add reranking to RAG</h3>
+          <p>Retrieve wide, rerank, keep the best. With code, top-k tips and latency trade-offs.</p>
+          <div class="tag-row"><span class="pill info">Practical</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="cta-band">
+        <span class="eyebrow">The fun part</span>
+        <h2>Rerank in your browser, right now</h2>
+        <p class="soft" style="max-width:620px;margin:0 auto 1.4rem">Paste a query and a few candidate passages. A real cross-encoder downloads once, caches, and scores every pair locally — you watch the ranking reshuffle in milliseconds. No server, no API key, no data leaving the page.</p>
+        <ul class="feature-list" style="display:inline-block;text-align:left;margin:0 auto 1.5rem">
+          <li>Real model weights via transformers.js + ONNX Runtime Web</li>
+          <li>Zero API cost and zero abuse risk — it’s all on your device</li>
+          <li>See exactly how scores reorder your retrieval results</li>
+        </ul>
+        <div><a class="btn btn-primary" href="/demo.html">Open the demo →</a></div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="section-head">
+        <h2>Compare the rerank models</h2>
+        <p>Hosted APIs and open-weight models, side by side — quality, latency, languages and cost.</p>
+      </div>
+      <div class="grid grid-2">
+        <a class="card" href="/models/bge-reranker.html"><h3>bge-reranker</h3><p>Open-weight rerankers from BAAI. Self-host for free, strong multilingual options.</p><div class="tag-row"><span class="pill good">Open weights</span><span class="pill">Self-host</span></div></a>
+        <a class="card" href="/models/cohere-rerank.html"><h3>Cohere Rerank</h3><p>A mature hosted rerank API with strong multilingual quality and simple integration.</p><div class="tag-row"><span class="pill">Hosted API</span><span class="pill">Multilingual</span></div></a>
+        <a class="card" href="/models/jina-reranker.html"><h3>Jina Reranker</h3><p>Hosted API and open weights, including tiny models small enough to run in a browser.</p><div class="tag-row"><span class="pill good">Open weights</span><span class="pill">Hosted API</span></div></a>
+        <a class="card" href="/models/voyage-rerank.html"><h3>Voyage Rerank</h3><p>Hosted rerankers tuned for retrieval quality, with domain-specific variants.</p><div class="tag-row"><span class="pill">Hosted API</span><span class="pill">High quality</span></div></a>
+      </div>
+      <p class="center" style="margin-top:1.5rem"><a class="btn btn-ghost" href="/models/">See the full comparison →</a></p>
+    </section>
+
+    <section class="section container narrow">
+      <h2 class="center">Reranking in one diagram</h2>
+      <div class="card" style="margin-top:1.2rem">
+<pre><code>query ─┐
+       ▼
+┌───────────────┐   top 100   ┌────────────────┐   top 5   ┌─────┐
+│  Retriever    │────────────▶│   Reranker     │──────────▶│ LLM │
+│ (bi-encoder / │  candidates │ (cross-encoder │  best few │     │
+│  BM25, fast)  │             │  scores pairs) │           └─────┘
+└───────────────┘             └────────────────┘
+  recall-oriented               precision-oriented</code></pre>
+      </div>
+      <p class="muted center" style="margin-top:1rem">Retrieve wide for recall, rerank for precision, send only the best to the model.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch">An open educational resource on rerankers for retrieval and RAG — plus a zero-cost demo that runs in your browser.</p>
+        </div>
+        <div>
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="/guides/what-is-a-reranker.html">What is a reranker</a></li>
+            <li><a href="/guides/cross-encoder-vs-bi-encoder.html">Cross- vs bi-encoder</a></li>
+            <li><a href="/guides/rerank-rag.html">Rerank for RAG</a></li>
+            <li><a href="/demo.html">Live demo</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Models</h4>
+          <ul>
+            <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
+            <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
+            <li><a href="/models/jina-reranker.html">Jina Reranker</a></li>
+            <li><a href="/models/mxbai-rerank.html">mxbai-rerank</a></li>
+            <li><a href="/models/voyage-rerank.html">Voyage Rerank</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> reranker.uk</span>
+        <span class="muted">Open educational resource · not affiliated with any model vendor</span>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/i18n/home.js"></script>
+  <script src="/assets/js/i18n.js"></script>
+</body>
+</html>
