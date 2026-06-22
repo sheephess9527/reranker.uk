@@ -102,18 +102,21 @@
           <span class="ico">🧭</span>
           <h3>What is a reranker?</h3>
           <p>The two-stage retrieval pattern, why order matters, and where reranking fits.</p>
+          <p class="card-takeaway">A reranker scores (query, document) pairs jointly — far more accurate than cosine similarity alone.</p>
           <div class="tag-row"><span class="pill info">Fundamentals</span></div>
         </a>
         <a class="card" href="/guides/cross-encoder-vs-bi-encoder.html">
           <span class="ico">⚖️</span>
           <h3>Cross-encoder vs bi-encoder</h3>
           <p>Why bi-encoders are fast and cross-encoders are accurate — and how to use both.</p>
+          <p class="card-takeaway">Bi-encoders retrieve at scale; cross-encoders rank with precision. Use them in two stages.</p>
           <div class="tag-row"><span class="pill info">Architecture</span></div>
         </a>
         <a class="card" href="/guides/rerank-rag.html">
           <span class="ico">🔧</span>
           <h3>How to add reranking to RAG</h3>
           <p>Retrieve wide, rerank, keep the best. With code, top-k tips and latency trade-offs.</p>
+          <p class="card-takeaway">Retrieve 50+ candidates, rerank, keep 5 — better answers and fewer tokens to the LLM.</p>
           <div class="tag-row"><span class="pill info">Practical</span></div>
         </a>
       </div>
@@ -149,17 +152,50 @@
 
     <section class="section container narrow">
       <h2 class="center">Reranking in one diagram</h2>
-      <div class="card" style="margin-top:1.2rem">
-<pre><code>query ─┐
-       ▼
-┌───────────────┐   top 100   ┌────────────────┐   top 5   ┌─────┐
-│  Retriever    │────────────▶│   Reranker     │──────────▶│ LLM │
-│ (bi-encoder / │  candidates │ (cross-encoder │  best few │     │
-│  BM25, fast)  │             │  scores pairs) │           └─────┘
-└───────────────┘             └────────────────┘
-  recall-oriented               precision-oriented</code></pre>
-      </div>
-      <p class="muted center" style="margin-top:1rem">Retrieve wide for recall, rerank for precision, send only the best to the model.</p>
+      <figure class="pipeline-figure no-i18n" style="margin-top:1.2rem">
+        <svg viewBox="0 0 620 100" role="img" aria-label="Query flows through a retriever to get 50-100 candidates, then a reranker scores each pair to keep the top 5, then the LLM generates an answer." xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" class="pipe-arrowhead" />
+            </marker>
+          </defs>
+          <style>
+            .pb { fill: var(--bg-elev); stroke: var(--border); stroke-width: 1.5; }
+            .pb.focus { stroke: var(--primary); stroke-width: 2; }
+            .pt { fill: var(--text); font: 600 13px var(--sans); }
+            .ps { fill: var(--text-soft); font: 12px var(--sans); }
+            .pm { fill: var(--text-mut); font: 11px var(--sans); }
+            .pl { stroke: var(--text-mut); stroke-width: 1.8; fill: none; }
+            .pipe-arrowhead { fill: var(--text-mut); }
+          </style>
+          <!-- query -->
+          <rect class="pb" x="2" y="28" width="80" height="44" rx="10" />
+          <text class="pt" x="42" y="52" text-anchor="middle">Query</text>
+          <!-- arrow 1 -->
+          <line class="pl" x1="82" y1="50" x2="138" y2="50" marker-end="url(#arr)" />
+          <text class="pm" x="110" y="44" text-anchor="middle">top 50–100</text>
+          <!-- retriever -->
+          <rect class="pb" x="140" y="14" width="130" height="72" rx="10" />
+          <text class="pt" x="205" y="44" text-anchor="middle">Retriever</text>
+          <text class="ps" x="205" y="61" text-anchor="middle">bi-encoder / BM25</text>
+          <text class="pm" x="205" y="77" text-anchor="middle">fast · recall</text>
+          <!-- arrow 2 -->
+          <line class="pl" x1="270" y1="50" x2="326" y2="50" marker-end="url(#arr)" />
+          <text class="pm" x="298" y="44" text-anchor="middle">top 5–10</text>
+          <!-- reranker (focus) -->
+          <rect class="pb focus" x="328" y="14" width="140" height="72" rx="10" />
+          <text class="pt" x="398" y="44" text-anchor="middle">Reranker</text>
+          <text class="ps" x="398" y="61" text-anchor="middle">cross-encoder scores</text>
+          <text class="pm" x="398" y="77" text-anchor="middle">slow · precise</text>
+          <!-- arrow 3 -->
+          <line class="pl" x1="468" y1="50" x2="524" y2="50" marker-end="url(#arr)" />
+          <!-- llm -->
+          <rect class="pb" x="526" y="28" width="90" height="44" rx="10" />
+          <text class="pt" x="571" y="48" text-anchor="middle">LLM</text>
+          <text class="ps" x="571" y="64" text-anchor="middle">generate</text>
+        </svg>
+        <figcaption>Retrieve wide for recall, rerank for precision, send only the best to the model.</figcaption>
+      </figure>
     </section>
   </main>
 

@@ -623,6 +623,30 @@ function clearAll() {
 
 if (els.run) els.run.addEventListener("click", run);
 if (els.clear) els.clear.addEventListener("click", clearAll);
+
+// Keyboard shortcuts: Enter in query field → run; Ctrl/Cmd+Enter in textarea → run; Esc → clear.
+if (els.query) {
+  els.query.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey && !e.ctrlKey && !e.metaKey) {
+      e.preventDefault();
+      run();
+    }
+  });
+}
+if (els.docs) {
+  els.docs.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      run();
+    }
+  });
+}
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && document.activeElement &&
+      (document.activeElement === els.query || document.activeElement === els.docs)) {
+    clearAll();
+  }
+});
 if (els.copyJson)
   els.copyJson.addEventListener("click", () =>
     copyText(exportJson(), els.copyJson)

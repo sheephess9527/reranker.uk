@@ -14,10 +14,13 @@ window.I18N_PAGE = { zh: {
 
   "What is a reranker?": "什么是 reranker？",
   "The two-stage retrieval pattern, why order matters, and where reranking fits.": "两阶段检索范式、排序为何重要，以及重排序在其中的位置。",
+  "A reranker scores (query, document) pairs jointly — far more accurate than cosine similarity alone.": "reranker 联合对 (query, document) 对打分 —— 远比单独做余弦相似度准确。",
   "Cross-encoder vs bi-encoder": "Cross-encoder vs bi-encoder",
   "Why bi-encoders are fast and cross-encoders are accurate — and how to use both.": "为什么 bi-encoder 快、cross-encoder 准，以及如何把两者结合使用。",
+  "Bi-encoders retrieve at scale; cross-encoders rank with precision. Use them in two stages.": "bi-encoder 负责大规模召回，cross-encoder 负责精准排序。把它们组合成两个阶段来使用。",
   "How to add reranking to RAG": "如何为 RAG 加重排序",
   "Retrieve wide, rerank, keep the best. With code, top-k tips and latency trade-offs.": "宽召回、重排序、保留最优。含代码、top-k 取值建议与延迟取舍。",
+  "Retrieve 50+ candidates, rerank, keep 5 — better answers and fewer tokens to the LLM.": "召回 50+ 个候选，重排序，保留 5 个 —— 更好的答案，更少的 token 送进 LLM。",
 
   "The fun part": "最有意思的部分",
   "Rerank in your browser, right now": "现在就在你的浏览器里重排序",

@@ -131,6 +131,7 @@
               <th>Type</th>
               <th>Best for</th>
               <th>Languages</th>
+              <th>Typ. latency <span class="th-hint">50 docs</span></th>
               <th>Pricing</th>
               <th>BEIR NDCG@10</th>
             </tr>
@@ -141,6 +142,7 @@
               <td><span class="pill good">Open weights</span></td>
               <td>Self-hosted, free, multilingual</td>
               <td>100+ langs</td>
+              <td>200–500 ms CPU<br><span class="muted">20–50 ms GPU</span></td>
               <td>Free (self-host)</td>
               <td>~60.1</td>
             </tr>
@@ -149,14 +151,16 @@
               <td><span class="pill">Hosted API</span></td>
               <td>Best multilingual quality, mature API</td>
               <td>100+ langs</td>
+              <td>80–200 ms API</td>
               <td>~$0.002/1k docs</td>
               <td>~61.2</td>
             </tr>
             <tr>
               <td><a href="/models/jina-reranker.html">Jina Reranker v2</a></td>
-              <td><span class="pill good">Open + Hosted</span></td>
+              <td><span class="pill good">Open + Hosted</span><br><span class="pill info">Browser ✓</span></td>
               <td>Open weights + API + tiny browser model</td>
               <td>100+ langs</td>
+              <td>100–300 ms API<br><span class="muted">30–80 ms CPU (tiny)</span></td>
               <td>Free tier + pay-as-you-go</td>
               <td>~59.6</td>
             </tr>
@@ -165,21 +169,23 @@
               <td><span class="pill">Hosted API</span></td>
               <td>High retrieval precision, domain-specific</td>
               <td>Multilingual</td>
+              <td>100–250 ms API</td>
               <td>~$0.0005/1k docs</td>
               <td>~61.0</td>
             </tr>
             <tr>
               <td><a href="/models/mxbai-rerank.html">mxbai-rerank-large-v1</a></td>
-              <td><span class="pill good">Open + Hosted</span></td>
+              <td><span class="pill good">Open weights</span><br><span class="pill info">Browser ✓</span></td>
               <td>Open weights + browser-runnable xsmall</td>
               <td>English</td>
+              <td>150–400 ms CPU<br><span class="muted">~30 ms GPU</span></td>
               <td>Free (self-host)</td>
               <td>~62.1</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="muted" style="font-size:.85rem;margin-top:.6rem">BEIR NDCG@10 figures are approximate and vary by dataset — treat them as a rough guide. Check each vendor's benchmarks for task-specific results.</p>
+      <p class="muted" style="font-size:.82rem;margin-top:.6rem">BEIR NDCG@10 figures are approximate and vary by dataset — treat them as a rough guide, not a definitive ranking. Latency figures are ballpark estimates for ~50 documents on commodity hardware; actual numbers depend heavily on model size, hardware, and batch size. Check each vendor's benchmarks for task-specific results.</p>
 
       <div class="grid grid-2" style="margin-top:2.5rem">
         <a class="card" href="/models/bge-reranker.html">
@@ -212,45 +218,57 @@
 
     <section class="section container narrow">
       <h2>How to choose</h2>
-      <div class="card stack">
-        <h3 style="margin-top:0">Use bge-reranker if…</h3>
-        <ul class="feature-list">
-          <li>You want to self-host with no per-call cost</li>
-          <li>You need strong multilingual reranking for free</li>
-          <li>You're already using sentence-transformers and want a drop-in</li>
-        </ul>
-      </div>
-      <div class="card stack" style="margin-top:1rem">
-        <h3 style="margin-top:0">Use Cohere Rerank if…</h3>
-        <ul class="feature-list">
-          <li>You want a battle-tested hosted API with official SDK support</li>
-          <li>Multilingual quality is the top priority</li>
-          <li>You're already in the Cohere ecosystem</li>
-        </ul>
-      </div>
-      <div class="card stack" style="margin-top:1rem">
-        <h3 style="margin-top:0">Use Jina Reranker if…</h3>
-        <ul class="feature-list">
-          <li>You want the option to self-host OR call an API</li>
-          <li>You need a tiny model that can run in the browser or on edge</li>
-          <li>You want a free tier with no credit card required</li>
-        </ul>
-      </div>
-      <div class="card stack" style="margin-top:1rem">
-        <h3 style="margin-top:0">Use Voyage Rerank if…</h3>
-        <ul class="feature-list">
-          <li>You need top-tier retrieval-specific precision</li>
-          <li>You're working on code search or financial documents</li>
-          <li>You're already using Voyage embeddings</li>
-        </ul>
-      </div>
-      <div class="card stack" style="margin-top:1rem">
-        <h3 style="margin-top:0">Use mxbai-rerank if…</h3>
-        <ul class="feature-list">
-          <li>You want open weights with a permissive Apache 2.0 licence</li>
-          <li>You need a browser-runnable model for edge or client-side use</li>
-          <li>You want strong English precision without an API dependency</li>
-        </ul>
+      <div class="chooser-grid">
+        <div class="chooser-card">
+          <div class="chooser-badge chooser-open">Open</div>
+          <h3><a href="/models/bge-reranker.html">bge-reranker</a></h3>
+          <p class="chooser-tagline">Best free self-hosted option</p>
+          <ul class="feature-list">
+            <li>Zero per-call cost — runs on your own infra</li>
+            <li>Strong multilingual quality (v2-m3 covers 100+ languages)</li>
+            <li>Drop-in with <code>sentence-transformers</code>, LangChain, LlamaIndex</li>
+          </ul>
+        </div>
+        <div class="chooser-card">
+          <div class="chooser-badge chooser-api">API</div>
+          <h3><a href="/models/cohere-rerank.html">Cohere Rerank</a></h3>
+          <p class="chooser-tagline">Easiest hosted API, top multilingual quality</p>
+          <ul class="feature-list">
+            <li>Official SDK for Python, Node, Java, Go — one-liner integration</li>
+            <li>Consistent multilingual quality across 100+ languages</li>
+            <li>Generous free tier; mature, production-proven API</li>
+          </ul>
+        </div>
+        <div class="chooser-card">
+          <div class="chooser-badge chooser-both">Open + API</div>
+          <h3><a href="/models/jina-reranker.html">Jina Reranker</a></h3>
+          <p class="chooser-tagline">Maximum flexibility — API, self-host, or browser</p>
+          <ul class="feature-list">
+            <li>Choose hosted API <em>or</em> open weights — same model family</li>
+            <li>Tiny variant runs in the browser (no server needed)</li>
+            <li>Free tier, no credit card required to start</li>
+          </ul>
+        </div>
+        <div class="chooser-card">
+          <div class="chooser-badge chooser-api">API</div>
+          <h3><a href="/models/voyage-rerank.html">Voyage Rerank</a></h3>
+          <p class="chooser-tagline">Top retrieval precision, domain-specific variants</p>
+          <ul class="feature-list">
+            <li>Tuned specifically for retrieval quality, not just classification</li>
+            <li>Domain-specific models for code search and finance</li>
+            <li>Lowest per-1k-doc price among the hosted APIs</li>
+          </ul>
+        </div>
+        <div class="chooser-card">
+          <div class="chooser-badge chooser-open">Open</div>
+          <h3><a href="/models/mxbai-rerank.html">mxbai-rerank</a></h3>
+          <p class="chooser-tagline">Apache 2.0 open weights, browser-runnable xsmall</p>
+          <ul class="feature-list">
+            <li>Permissive Apache 2.0 licence — use commercially without restrictions</li>
+            <li>xsmall variant runs in the browser (powers our live demo)</li>
+            <li>Highest BEIR score in this table at the large size</li>
+          </ul>
+        </div>
       </div>
     </section>
 
