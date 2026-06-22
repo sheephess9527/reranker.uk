@@ -233,6 +233,12 @@ a.card:hover { text-decoration: none; border-color: var(--primary); transform: t
 }
 .callout.accent { background: var(--accent-soft); border-color: rgba(45,212,191,0.25); }
 .callout strong { color: var(--text); }
+
+/* Inline figures (e.g. the pipeline diagram) */
+figure { margin: 1.6rem 0; }
+.pipeline-figure { text-align: center; }
+.pipeline-figure svg { width: 100%; max-width: 560px; height: auto; display: inline-block; }
+.pipeline-figure figcaption { margin-top: 0.7rem; font-size: 0.85rem; color: var(--text-mut); }
 .callout p:last-child { margin-bottom: 0; }
 
 /* Table of contents */

@@ -12,6 +12,7 @@ window.I18N_PAGE = { zh: {
   "Code walkthrough": "代码讲解",
   "Choosing top-k values": "如何选 top-k 取值",
   "Latency trade-offs": "延迟取舍",
+  "Measuring whether it helped": "评估是否真的有用",
   "Which reranker to pick": "该选哪个 reranker",
 
   "A typical RAG system embeds your documents and stores the vectors. At query time it fetches the k-nearest vectors to the query embedding and stuffs those chunks into the LLM prompt. The problem: <strong>cosine similarity between independent embeddings is a coarse relevance signal</strong>. The correct chunk might be in the top 20 results, but sitting at position 14 — outside the 5 you actually send to the model.": "典型的 RAG 系统会嵌入你的文档并存储向量。查询时它取出与查询嵌入最近的 k 个向量，把这些片段塞进 LLM 的 prompt。问题在于：<strong>独立嵌入之间的余弦相似度是个粗糙的相关性信号</strong>。正确的片段可能在前 20 个结果里，却排在第 14 位 —— 落在你真正送进模型的那 5 个之外。",
@@ -23,6 +24,9 @@ window.I18N_PAGE = { zh: {
   "With a local cross-encoder (sentence-transformers)": "使用本地 cross-encoder（sentence-transformers）",
   "With the Cohere hosted API": "使用 Cohere 托管 API",
   "With Jina Reranker API": "使用 Jina Reranker API",
+  "Inside a framework (LangChain · LlamaIndex · Haystack)": "在框架内（LangChain · LlamaIndex · Haystack）",
+  "If you already use a RAG framework, reranking is usually a drop-in node that wraps your existing retriever. The pattern is identical — retrieve wide, rerank, keep the top-n — just expressed in the framework's vocabulary.": "如果你已经在用某个 RAG 框架，重排序通常就是一个即插即用的节点，把你现有的检索器包起来。模式完全一样 —— 宽召回、重排序、保留 top-n —— 只是换成了框架的术语来表达。",
+  "All three accept hosted rerankers too (Cohere, Jina, Voyage) via their respective integration packages — swap the component, keep the pipeline.": "这三者也都能通过各自的集成包接入托管 reranker（Cohere、Jina、Voyage）—— 换掉组件，流水线照旧。",
 
   "You have two k values to tune: <em>how many to retrieve</em> and <em>how many to keep after reranking</em>.": "你有两个 k 值要调：<em>召回多少个</em>，以及<em>重排序后保留多少个</em>。",
   "Parameter": "参数",
@@ -42,6 +46,20 @@ window.I18N_PAGE = { zh: {
   "Free": "免费",
   "For most RAG applications, 100–300 ms total pipeline latency is fine and the quality gain is worth it. If your SLA is very tight, either host on GPU, use a tiny model, or cap <code>retrieval_k</code> at 20–30 instead of 50.": "对大多数 RAG 应用来说，整条流水线 100–300 ms 的延迟完全可以接受，而质量提升是值得的。如果你的 SLA 非常紧，可以部署到 GPU、改用微型模型，或把 <code>retrieval_k</code> 从 50 降到 20–30。",
   "<strong>Cache aggressively:</strong> if the same query recurs (e.g. in a customer support bot), cache the reranked results by (query, corpus version) hash. The reranker becomes effectively free for repeat queries.": "<strong>积极使用缓存：</strong>如果同一查询反复出现（例如客服机器人），就按 (query, 语料版本) 的哈希缓存重排序结果。对重复查询而言，reranker 实际上变成了免费。",
+
+  "Measuring whether it actually helped": "如何衡量它是否真的有帮助",
+  "Don't add a reranker on faith — measure it. Build a small evaluation set of queries paired with the chunk(s) that <em>should</em> be retrieved, then compare retrieval-only vs retrieval+rerank on the same set. Three metrics cover almost every case:": "不要凭感觉就加 reranker —— 要量化它。构建一个小型评测集，把查询与<em>应当</em>被检索到的片段配对，然后在同一集合上对比「仅检索」与「检索 + 重排序」。三个指标几乎覆盖所有场景：",
+  "What it asks": "它衡量什么",
+  "Use it when": "适用场景",
+  "Is the right chunk anywhere in the top k?": "正确片段是否出现在前 k 个里？",
+  "Sizing <code>retrieval_k</code> — the reranker can't recover a chunk the retriever never returned.": "用来确定 <code>retrieval_k</code> —— reranker 无法找回检索器从未返回的片段。",
+  "How high is the <em>first</em> relevant chunk, on average?": "平均而言，<em>第一个</em>相关片段排得有多高？",
+  "Single-answer lookups (FAQ, support, \"find the clause\").": "单一答案的查找（FAQ、客服、「找出某条款」）。",
+  "Are the relevant chunks ranked high, weighted by position?": "相关片段是否排得靠前（按位置加权）？",
+  "Multi-passage answers where several chunks matter and order counts.": "多段落答案：多个片段都重要，且顺序也要紧。",
+  "MRR is the intuitive one: if the right chunk lands at position 1 you score 1.0, at position 2 you score 0.5, at position 4 you score 0.25. Averaged over your query set, it's a single number that captures \"how near the top is the answer?\" — exactly what a reranker is meant to improve.": "MRR 最直观：正确片段排第 1 得 1.0，排第 2 得 0.5，排第 4 得 0.25。在整个查询集上取平均，就得到一个数字，刻画「答案离顶部有多近？」—— 这正是 reranker 应当改善的东西。",
+  "<strong>Even 30–50 labelled queries</strong> are enough to see a signal. Pull real queries from your logs, label which chunk answered each one, and you have a regression test you can re-run every time you change the retriever, the chunking, or the reranker. <code>ir-measures</code>, <code>ranx</code>, and BEIR's evaluator all compute these metrics for you if you'd rather not hand-roll them.": "<strong>哪怕只有 30–50 条标注查询</strong>，也足以看出信号。从日志里捞出真实查询，标注每条由哪个片段回答，你就有了一套回归测试 —— 每次改动检索器、分块或 reranker 都能重跑。若不想自己手写，<code>ir-measures</code>、<code>ranx</code> 以及 BEIR 的评测器都能替你算出这些指标。",
+  "<strong>Common pitfalls:</strong> retrieving too few candidates (the reranker can only reorder what it's given); leaving <code>max_length</code> too short so long chunks get truncated before scoring; sorting ascending instead of descending; and assuming raw scores are comparable across models — they aren't calibrated, so rank order is what matters, not the absolute number.": "<strong>常见坑：</strong>召回的候选太少（reranker 只能对拿到的东西重新排序）；<code>max_length</code> 留得太短，长片段在打分前就被截断；把排序写成升序而非降序；以及以为不同模型的原始分数可以互相比较 —— 它们并未校准，重要的是排名顺序，而非绝对数值。",
 
   "The short version:": "简短版：",
   "<strong>Want to self-host, English-only, free:</strong> <a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> — strong, widely deployed.": "<strong>想自建、仅英文、免费：</strong><a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> —— 强大且广泛部署。",
