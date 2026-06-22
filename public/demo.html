@@ -80,34 +80,49 @@
     </section>
 
     <section class="demo-wrap container">
-      <div class="demo-grid">
-        <div>
-          <div class="field">
-            <label for="model-select">Rerank model <span class="hint">— downloaded once, cached in your browser</span></label>
-            <select id="model-select"></select>
+      <div class="demo-panel">
+        <div class="demo-input-grid">
+          <div>
+            <div class="field">
+              <label for="model-select">Rerank model <span class="hint">— downloaded once, cached in your browser</span></label>
+              <select id="model-select"></select>
+              <p class="model-meta" id="model-meta"></p>
+            </div>
+            <div class="field">
+              <label>Try a scenario <span class="hint">— a realistic query mixed with distractor passages</span></label>
+              <div class="preset-row" id="preset-row"></div>
+            </div>
+            <div class="field">
+              <label for="query-input">Query</label>
+              <input type="text" id="query-input" placeholder="e.g. How do I add reranking to my RAG pipeline?" />
+            </div>
           </div>
-          <div class="field">
-            <label for="query-input">Query</label>
-            <input type="text" id="query-input" placeholder="e.g. How do I add reranking to my RAG pipeline?" />
+          <div>
+            <div class="field field-fill">
+              <label for="docs-input">Candidate passages <span class="hint">— one per line</span></label>
+              <textarea id="docs-input" placeholder="Paste one candidate passage per line…"></textarea>
+            </div>
           </div>
-          <div class="field">
-            <label for="docs-input">Candidate passages <span class="hint">— one per line</span></label>
-            <textarea id="docs-input" placeholder="Paste one candidate passage per line…"></textarea>
-          </div>
-          <div class="demo-toolbar">
-            <button class="btn btn-primary" id="run-btn">Rerank</button>
-            <button class="btn btn-ghost" id="sample-btn">Load sample</button>
-          </div>
-          <div class="status" id="status"></div>
-          <div class="progress-bar" id="progress-wrap" style="display:none"><i id="progress-bar"></i></div>
         </div>
+        <div class="demo-toolbar">
+          <button class="btn btn-primary" id="run-btn">Rerank</button>
+          <button class="btn btn-ghost" id="clear-btn">Clear</button>
+        </div>
+        <div class="status" id="status"></div>
+        <div class="progress-bar" id="progress-wrap" style="display:none"><i id="progress-bar"></i></div>
+      </div>
 
-        <div>
-          <div id="results-head" style="display:none">
-            <h3 style="margin-top:0">Reranked results</h3>
-            <p class="muted" style="margin-top:-.5rem;font-size:.9rem">Sorted by relevance score (higher = more relevant). The badge shows each passage’s original input position.</p>
-          </div>
-          <div class="results" id="results"></div>
+      <div class="demo-output" id="results-region" hidden>
+        <div class="results-bar" id="results-bar"></div>
+        <div class="stat-row" id="stat-row"></div>
+        <div class="compare-grid">
+          <div class="compare-col"><div class="results" id="results-before"></div></div>
+          <div class="compare-col"><div class="results" id="results-after"></div></div>
+        </div>
+        <div class="copy-actions">
+          <span class="copy-label">Copy results:</span>
+          <button class="btn btn-ghost btn-sm" id="copy-json">Copy JSON</button>
+          <button class="btn btn-ghost btn-sm" id="copy-md">Copy Markdown</button>
         </div>
       </div>
 
@@ -127,7 +142,7 @@
       </ol>
       <p>That’s the same operation you’d run as the second stage of a <a href="/guides/rerank-rag.html">RAG pipeline</a> — only here it happens in a browser tab instead of behind an API.</p>
       <div class="callout">
-        <p><strong>Tips:</strong> include a couple of clearly off-topic lines (the sample has “London” and “bananas”) to watch them sink to the bottom. Try rephrasing the query to see scores shift. First load is slower because of the model download; subsequent runs reuse the cached weights.</p>
+        <p><strong>Tips:</strong> the built-in scenarios each mix one or two clearly off-topic lines in with the relevant ones — watch them sink to the bottom (red) while the on-topic passages rise (green). The harder <em>Legal clause</em> example packs in several passages that are all about termination, so only a precise cross-encoder picks the right one. Try rephrasing the query to see scores shift. First load is slower because of the model download; subsequent runs reuse the cached weights.</p>
       </div>
       <p class="center" style="margin-top:2rem"><a class="btn btn-ghost" href="/guides/what-is-a-reranker.html">Read: what is a reranker? →</a></p>
     </section>
