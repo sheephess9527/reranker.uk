@@ -62,7 +62,30 @@ class Reranker {
     const { logits } = await this.model(inputs);
     const cfg = MODELS[this.modelId];
     const raw = (cfg && cfg.sigmoid ? logits.sigmoid() : logits).tolist();
-    return raw.map((row) => (Array.isArray(row) ? row[0] : row));
+    const scores = raw.map((row) => (Array.isArray(row) ? row[0] : row));
+    return { scores, tokens: tokenStats(inputs) };
+  }
+}
+
+/** Derive token counts from a tokenizer output, for the educational stats row.
+ *  Cross-encoders run one forward pass per (query, passage) pair, so total
+ *  tokens and the longest padded sequence both drive latency and truncation. */
+function tokenStats(inputs) {
+  try {
+    const dims = inputs.input_ids.dims; // [pairs, seqLen]
+    const pairs = dims[0];
+    const maxSeqLen = dims[dims.length - 1];
+    let totalTokens = pairs * maxSeqLen;
+    const mask = inputs.attention_mask;
+    if (mask && typeof mask.tolist === "function") {
+      totalTokens = 0;
+      for (const row of mask.tolist()) {
+        for (const v of row) totalTokens += Number(v);
+      }
+    }
+    return { pairs, maxSeqLen, totalTokens };
+  } catch (e) {
+    return null;
   }
 }
 
@@ -588,7 +611,7 @@ function rowHtml(opts) {
         <div class="result-score lvl-${lvl}">${score.toFixed(4)}</div>
       </div>
       <div class="result-text">${esc(text)}</div>
-      <div class="score-track lvl-${lvl}"><i style="width:${pct}%"></i></div>
+      <div class="score-track lvl-${lvl}"><i style="width:0%" data-pct="${pct}"></i></div>
     </div>`;
 }
 
@@ -619,7 +642,7 @@ function renderResults(run) {
   if (!els.region) return;
   els.region.hidden = false;
 
-  const { query, items, biItems, modelId, ms, didDownload, bytes, compareRun } = run;
+  const { query, items, biItems, modelId, ms, tokens, didDownload, bytes, compareRun } = run;
   const maxScore = Math.max(...items.map((s) => s.score), 0.0001);
   const maxBi = Math.max(...biItems.map((s) => s.score), 0.0001);
 
@@ -639,12 +662,25 @@ function renderResults(run) {
     const loadChip = didDownload
       ? L(`downloaded ${mb(bytes)} MB`, `已下载 ${mb(bytes)} MB`)
       : L("loaded from cache", "从缓存加载");
-    els.stats.innerHTML = [
+    const chips = [
       `<span class="chip"><span class="chip-k">${L("Model", "模型")}</span>${esc(m ? m.name : modelId)}</span>`,
       `<span class="chip"><span class="chip-k">${L("Inference", "推理")}</span>${ms} ms</span>`,
       `<span class="chip"><span class="chip-k">${L("Passages", "候选")}</span>${items.length}</span>`,
-      `<span class="chip chip-soft">${loadChip}</span>`,
-    ].join("");
+    ];
+    if (tokens) {
+      chips.push(
+        `<span class="chip" title="${L(
+          "Total non-padding tokens across all (query, passage) pairs",
+          "所有 (查询, 段落) 对中非填充词元的总数"
+        )}"><span class="chip-k">${L("Tokens", "词元")}</span>${tokens.totalTokens.toLocaleString()}</span>`,
+        `<span class="chip" title="${L(
+          "Longest padded sequence — the per-pair cost the cross-encoder pays",
+          "最长的填充后序列 —— cross-encoder 为每一对付出的成本"
+        )}"><span class="chip-k">${L("Max seq", "最长序列")}</span>${tokens.maxSeqLen}</span>`
+      );
+    }
+    chips.push(`<span class="chip chip-soft">${loadChip}</span>`);
+    els.stats.innerHTML = chips.join("");
   }
 
   renderColumn(
@@ -684,6 +720,24 @@ function renderResults(run) {
     if (els.dualRegion) els.dualRegion.hidden = true;
     if (els.dualDiff) els.dualDiff.hidden = true;
   }
+
+  fillScoreBars();
+}
+
+/** Grow every score bar from 0 to its target width so each rerank reads as
+ *  motion, not a static repaint. Honours prefers-reduced-motion. */
+function fillScoreBars() {
+  if (!els.region) return;
+  const bars = els.region.querySelectorAll(".score-track > i[data-pct]");
+  const reduce =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const apply = () =>
+    bars.forEach((bar) => {
+      bar.style.width = bar.dataset.pct + "%";
+    });
+  if (reduce) apply();
+  else requestAnimationFrame(() => requestAnimationFrame(apply));
 }
 
 function renderDualCompare(compareRun) {
@@ -1055,10 +1109,10 @@ async function scoreWithModel(modelId, query, docs, useWebgpu) {
   };
   const reranker = await getReranker(modelId, onProgress, useWebgpu);
   const t0 = performance.now();
-  const scores = await reranker.score(query, docs);
+  const { scores, tokens } = await reranker.score(query, docs);
   const ms = Math.round(performance.now() - t0);
   const bytes = Object.values(files).reduce((a, b) => a + b.loaded, 0);
-  return { scores, ms, didDownload, bytes };
+  return { scores, tokens, ms, didDownload, bytes };
 }
 
 async function run() {
@@ -1127,6 +1181,7 @@ async function run() {
       biItems,
       modelId,
       ms: primary.ms,
+      tokens: primary.tokens,
       didDownload: primary.didDownload,
       bytes: primary.bytes,
       compareRun,
