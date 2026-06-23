@@ -151,17 +151,35 @@ Static assets under `public/assets/` are edited directly — no build step.
 
 ### 1. Authenticate (once per machine)
 
-Either log in interactively:
+**Recommended if `wrangler login` shows “localhost refused connection”:** use an API token (no local callback server).
+
+Or log in interactively (keep the terminal open until you see “Successfully logged in”):
 
 ```bash
 npx wrangler login
+# if localhost:8976 is refused, try:
+npx wrangler login --callback-host 127.0.0.1 --callback-port 8976
 ```
 
-Or set an API token ([create in Cloudflare dashboard](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/)) with **Workers Scripts → Edit** on the reranker.uk account:
+#### `localhost` / `127.0.0.1` connection refused?
 
-```bash
-# PowerShell
-$env:CLOUDFLARE_API_TOKEN = "your-token"
+`wrangler login` starts a **temporary server on your machine** (default port **8976**). After you approve access in the browser, Cloudflare redirects to `http://localhost:8976/oauth/callback`. “Connection refused” means that server is not reachable. Common causes:
+
+- The terminal running `wrangler login` was closed or timed out before you finished in the browser
+- Firewall / antivirus blocked localhost
+- VPN or proxy interfered
+- Port 8976 is in use (try `--callback-port 9786`)
+
+**Reliable workaround — API token** ([create in Cloudflare dashboard](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/)):
+
+1. Cloudflare Dashboard → **My Profile** → **API Tokens** → **Create Token**
+2. Use template **Edit Cloudflare Workers** (or custom: Account + Workers Scripts → Edit)
+3. Copy the token, then in PowerShell:
+
+```powershell
+$env:CLOUDFLARE_API_TOKEN = "paste-your-token-here"
+node scripts/build.mjs
+node "C:\Program Files\nodejs\node_modules\npm\bin\npx-cli.js" wrangler deploy
 ```
 
 On Windows, if `npx` is blocked by execution policy, use:
