@@ -149,6 +149,29 @@ Static assets under `public/assets/` are edited directly — no build step.
 
 ## Deploy (Cloudflare Workers static assets)
 
+### 1. Authenticate (once per machine)
+
+Either log in interactively:
+
+```bash
+npx wrangler login
+```
+
+Or set an API token ([create in Cloudflare dashboard](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/)) with **Workers Scripts → Edit** on the reranker.uk account:
+
+```bash
+# PowerShell
+$env:CLOUDFLARE_API_TOKEN = "your-token"
+```
+
+On Windows, if `npx` is blocked by execution policy, use:
+
+```bash
+node "C:\Program Files\nodejs\node_modules\npm\bin\npx-cli.js" wrangler deploy
+```
+
+### 2. Build and deploy
+
 ```bash
 node scripts/build.mjs      # always build before deploy
 npx wrangler deploy         # production → reranker.uk
@@ -163,6 +186,16 @@ npx wrangler versions upload
 `wrangler.jsonc` serves `./public` with `not_found_handling: "404-page"` → `public/404.html`.
 
 The same `public/` folder can be uploaded to GitHub Pages, Netlify, Cloudflare Pages, etc.
+
+### Release status (2026-06-23)
+
+| Step | Status |
+|------|--------|
+| Code + README | Pushed to `main` → commit `9861226` on [GitHub](https://github.com/sheephess9527/reranker.uk) |
+| `node scripts/build.mjs` | OK (15 pages) |
+| `wrangler deploy` | **Pending** — requires `wrangler login` or `CLOUDFLARE_API_TOKEN` on the deploy machine |
+
+After deploy, verify: `/guides/`, `/demo.html` (three-column results), `/models/` (benchmark sources block).
 
 ---
 
