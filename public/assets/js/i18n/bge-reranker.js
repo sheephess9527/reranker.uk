@@ -4,7 +4,8 @@ window.I18N_PAGE = { zh: {
 
   "<a href=\"/\">Home</a><span>/</span><a href=\"/models/\">Models</a><span>/</span>bge-reranker": "<a href=\"/\">首页</a><span>/</span><a href=\"/models/\">模型对比</a><span>/</span>bge-reranker",
   "bge-reranker": "bge-reranker",
-  "Open weights · BAAI · free to self-host": "开源权重 · 智源 BAAI · 可免费自建",
+  "Open weights · BAAI · free to self-host · <time datetime=\"2026-06-21\">Updated 21 Jun 2026</time>": "开源权重 · 智源 BAAI · 可免费自建 · <time datetime=\"2026-06-21\">更新于 2026年6月21日</time>",
+  "On this page": "本页目录",
   "The bge-reranker family from BAAI (Beijing Academy of Artificial Intelligence) are open-weight cross-encoders trained specifically for passage reranking. They're the standard self-hosted option: free to download, drop into sentence-transformers, and strong enough to beat most commercial APIs on English benchmarks.": "来自智源研究院（BAAI）的 bge-reranker 系列，是专门为段落重排序训练的开源权重 cross-encoder。它们是自建部署的标准选择：免费下载、可直接接入 sentence-transformers，且在英文基准上强到能击败大多数商业 API。",
 
   "Model variants": "模型变体",

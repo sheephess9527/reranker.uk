@@ -2,10 +2,12 @@ window.I18N_PAGE = { zh: {
   "_title": "什么是 reranker？rerank 模型通俗指南 | reranker.uk",
   "_desc": "什么是 reranker？重排序器（rerank 模型）会按相关性对检索到的候选重新打分，通常作为快速检索之后的第二阶段。了解 reranker 的工作原理、它如何提升搜索与 RAG 质量，以及何时该用它。",
 
-  "<a href=\"/\">Home</a><span>/</span><a href=\"/guides/what-is-a-reranker.html\">Guides</a><span>/</span>What is a reranker": "<a href=\"/\">首页</a><span>/</span><a href=\"/guides/what-is-a-reranker.html\">指南</a><span>/</span>什么是 reranker",
+  "<a href=\"/\">Home</a><span>/</span><a href=\"/guides/\">Guides</a><span>/</span>What is a reranker": "<a href=\"/\">首页</a><span>/</span><a href=\"/guides/\">指南</a><span>/</span>什么是 reranker",
   "What is a reranker?": "什么是 reranker？",
-  "Fundamentals · ~7 min read": "基础概念 · 约 7 分钟阅读",
+  "Fundamentals · ~7 min read · <time datetime=\"2026-06-21\">Updated 21 Jun 2026</time>": "基础概念 · 约 7 分钟阅读 · <time datetime=\"2026-06-21\">更新于 2026年6月21日</time>",
   "A <strong>reranker</strong> is a model that takes a query and a list of candidate documents and reorders them by how relevant each one actually is to the query. It almost always runs as a <em>second stage</em>: something fast retrieves a broad set of candidates, then the reranker carefully re-scores the top of that list.": "<strong>重排序器（reranker）</strong>是一个模型：它接收一个查询和一组候选文档，并根据每个文档与查询的真实相关性重新排序。它几乎总是作为<em>第二阶段</em>运行：先由某种快速方法召回一大批候选，再由 reranker 仔细地对这批候选的头部重新打分。",
+
+  "On this page": "本页目录",
 
   "Why ranking order is a problem": "为什么排序顺序是个问题",
   "The two-stage retrieval pattern": "两阶段检索范式",

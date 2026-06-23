@@ -4,7 +4,8 @@ window.I18N_PAGE = { zh: {
 
   "<a href=\"/\">Home</a><span>/</span><a href=\"/models/\">Models</a><span>/</span>Cohere Rerank": "<a href=\"/\">首页</a><span>/</span><a href=\"/models/\">模型对比</a><span>/</span>Cohere Rerank",
   "Cohere Rerank": "Cohere Rerank",
-  "Hosted API · Cohere": "托管 API · Cohere",
+  "Hosted API · Cohere · <time datetime=\"2026-06-21\">Updated 21 Jun 2026</time>": "托管 API · Cohere · <time datetime=\"2026-06-21\">更新于 2026年6月21日</time>",
+  "On this page": "本页目录",
   "Cohere Rerank was one of the first commercial reranking APIs and remains among the most widely deployed. The current generation — <code>rerank-v3.5</code> — delivers strong multilingual precision on BEIR benchmarks, a clean REST + SDK interface, and a free tier generous enough for development and low-volume production.": "Cohere Rerank 是最早的商业重排序 API 之一，至今仍是部署最广泛的产品之一。当前这一代 —— <code>rerank-v3.5</code> —— 在 BEIR 基准上有很强的多语言精度，提供简洁的 REST + SDK 接口，免费额度也足够开发和低流量生产使用。",
 
   "Available models": "可用模型",

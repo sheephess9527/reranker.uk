@@ -4,7 +4,8 @@ window.I18N_PAGE = { zh: {
 
   "<a href=\"/\">Home</a><span>/</span><a href=\"/models/\">Models</a><span>/</span>Voyage Rerank": "<a href=\"/\">首页</a><span>/</span><a href=\"/models/\">模型对比</a><span>/</span>Voyage Rerank",
   "Voyage Rerank": "Voyage Rerank",
-  "Hosted API · Voyage AI": "托管 API · Voyage AI",
+  "Hosted API · Voyage AI · <time datetime=\"2026-06-21\">Updated 21 Jun 2026</time>": "托管 API · Voyage AI · <time datetime=\"2026-06-21\">更新于 2026年6月21日</time>",
+  "On this page": "本页目录",
   "Voyage AI built their rerankers with a single goal: maximise retrieval precision. <code>voyage-rerank-2</code> consistently ranks among the highest on BEIR and MTEB retrieval tasks, and the company offers domain-specific variants for code and financial documents — a strong choice when generic quality isn't enough.": "Voyage AI 打造重排序器只有一个目标：把检索精度做到极致。<code>voyage-rerank-2</code> 在 BEIR 和 MTEB 检索任务上始终名列前茅，公司还为代码和金融文档提供面向特定领域的变体 —— 当通用质量不够用时，它是个强力选择。",
 
   "Available models": "可用模型",

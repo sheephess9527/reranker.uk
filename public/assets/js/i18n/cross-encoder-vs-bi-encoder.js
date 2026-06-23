@@ -2,10 +2,12 @@ window.I18N_PAGE = { zh: {
   "_title": "Cross-encoder vs bi-encoder：区别与实例 | reranker.uk",
   "_desc": "通俗讲清 cross-encoder 与 bi-encoder 的区别：bi-encoder 分别嵌入查询和文档（快、可扩展，适合一阶段检索）；cross-encoder 把一对一起打分（准，适合重排序）。何时用哪一个，以及如何在两阶段流水线中结合。",
 
-  "<a href=\"/\">Home</a><span>/</span><a href=\"/guides/what-is-a-reranker.html\">Guides</a><span>/</span>Cross-encoder vs bi-encoder": "<a href=\"/\">首页</a><span>/</span><a href=\"/guides/what-is-a-reranker.html\">指南</a><span>/</span>Cross-encoder vs bi-encoder",
+  "<a href=\"/\">Home</a><span>/</span><a href=\"/guides/\">Guides</a><span>/</span>Cross-encoder vs bi-encoder": "<a href=\"/\">首页</a><span>/</span><a href=\"/guides/\">指南</a><span>/</span>Cross-encoder vs bi-encoder",
   "Cross-encoder vs bi-encoder": "Cross-encoder vs bi-encoder",
-  "Architecture · ~8 min read": "架构 · 约 8 分钟阅读",
+  "Architecture · ~8 min read · <time datetime=\"2026-06-21\">Updated 21 Jun 2026</time>": "架构 · 约 8 分钟阅读 · <time datetime=\"2026-06-21\">更新于 2026年6月21日</time>",
   "These two architectures are the heart of modern retrieval. A <strong>bi-encoder</strong> turns each text into a vector independently — fast and scalable, perfect for first-stage search. A <strong>cross-encoder</strong> reads the query and document together and outputs a relevance score — slower, but far more accurate, which is exactly what a reranker needs.": "这两种架构是现代检索的核心。<strong>bi-encoder</strong> 独立地把每段文本变成一个向量 —— 又快又可扩展，非常适合一阶段搜索。<strong>cross-encoder</strong> 把查询和文档一起读入并输出相关性分数 —— 更慢，但准确得多，而这正是 reranker 所需要的。",
+
+  "On this page": "本页目录",
 
   "How a bi-encoder works": "bi-encoder 如何工作",
   "How a cross-encoder works": "cross-encoder 如何工作",

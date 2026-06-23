@@ -4,7 +4,8 @@ window.I18N_PAGE = { zh: {
 
   "<a href=\"/\">Home</a><span>/</span><a href=\"/models/\">Models</a><span>/</span>Jina Reranker": "<a href=\"/\">首页</a><span>/</span><a href=\"/models/\">模型对比</a><span>/</span>Jina Reranker",
   "Jina Reranker": "Jina Reranker",
-  "Open weights + Hosted API · Jina AI": "开源权重 + 托管 API · Jina AI",
+  "Open weights + Hosted API · Jina AI · <time datetime=\"2026-06-21\">Updated 21 Jun 2026</time>": "开源权重 + 托管 API · Jina AI · <time datetime=\"2026-06-21\">更新于 2026年6月21日</time>",
+  "On this page": "本页目录",
   "Jina AI's reranker family is unique in offering both open-weight models you can self-host <em>and</em> a hosted API — with the same model. Their <code>v1-tiny</code> variant is small enough to run in the browser via transformers.js, which is exactly what powers <a href=\"/demo.html\">this site's live demo</a>.": "Jina AI 的重排序系列与众不同：它同时提供可自建的开源权重模型<em>和</em>托管 API —— 而且是同一个模型。其 <code>v1-tiny</code> 变体小到可以通过 transformers.js 在浏览器里运行，这正是驱动<a href=\"/demo.html\">本站在线 Demo</a> 的模型。",
 
   "Model variants": "模型变体",

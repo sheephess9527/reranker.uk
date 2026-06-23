@@ -2,10 +2,12 @@ window.I18N_PAGE = { zh: {
   "_title": "如何为 RAG 流水线加重排序 —— 实操指南 | reranker.uk",
   "_desc": "为 RAG 加 rerank 模型的分步指南：用向量搜索召回 50–100 个候选，用 cross-encoder 重排序，保留前 5 个进 prompt。含 Python 代码、top-k 建议、延迟取舍与模型选择。",
 
-  "<a href=\"/\">Home</a><span>/</span><a href=\"/guides/what-is-a-reranker.html\">Guides</a><span>/</span>Rerank for RAG": "<a href=\"/\">首页</a><span>/</span><a href=\"/guides/what-is-a-reranker.html\">指南</a><span>/</span>为 RAG 加重排序",
+  "<a href=\"/\">Home</a><span>/</span><a href=\"/guides/\">Guides</a><span>/</span>Rerank for RAG": "<a href=\"/\">首页</a><span>/</span><a href=\"/guides/\">指南</a><span>/</span>为 RAG 加重排序",
   "How to add reranking to your RAG pipeline": "如何为你的 RAG 流水线加重排序",
-  "Practical · ~10 min read": "实操 · 约 10 分钟阅读",
+  "Practical · ~10 min read · <time datetime=\"2026-06-21\">Updated 21 Jun 2026</time>": "实操 · 约 10 分钟阅读 · <time datetime=\"2026-06-21\">更新于 2026年6月21日</time>",
   "The fix for mediocre RAG answers is rarely a bigger LLM — it's usually a better retrieval order. A reranker sits between your vector search and your LLM call, re-scores the candidates, and ensures only the most relevant passages land in the prompt.": "改善平庸 RAG 答案的办法，很少是换更大的 LLM —— 通常是更好的检索排序。reranker 位于向量搜索和 LLM 调用之间，对候选重新打分，确保只有最相关的段落进入 prompt。",
+
+  "On this page": "本页目录",
 
   "The ordering problem in RAG": "RAG 中的排序问题",
   "The retrieve-rerank-generate pattern": "检索—重排序—生成 范式",

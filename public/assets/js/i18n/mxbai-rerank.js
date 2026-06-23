@@ -4,7 +4,8 @@ window.I18N_PAGE = { zh: {
 
   "<a href=\"/\">Home</a><span>/</span><a href=\"/models/\">Models</a><span>/</span>mxbai-rerank": "<a href=\"/\">首页</a><span>/</span><a href=\"/models/\">模型对比</a><span>/</span>mxbai-rerank",
   "mxbai-rerank": "mxbai-rerank",
-  "Open weights + Hosted API · mixedbread-ai": "开源权重 + 托管 API · mixedbread-ai",
+  "Open weights · mixedbread-ai · <time datetime=\"2026-06-21\">Updated 21 Jun 2026</time>": "开源权重 · mixedbread-ai · <time datetime=\"2026-06-21\">更新于 2026年6月21日</time>",
+  "On this page": "本页目录",
   "mixedbread-ai's reranker family is built on DeBERTa-v3 — an architecture with disentangled attention that delivers strong cross-encoder precision. All three variants ship under Apache 2.0, so you can self-host freely. The <code>xsmall</code> model is compact enough to run in the browser, which is why it's one of the options in <a href=\"/demo.html\">this site's live demo</a>.": "mixedbread-ai 的重排序器系列基于 DeBERTa-v3 —— 一种采用解耦注意力机制的架构，能带来出色的 cross-encoder 精度。三个变体均采用 Apache 2.0 协议，可自由自建部署。<code>xsmall</code> 模型足够轻量，可以在浏览器中运行，这也是它成为<a href=\"/demo.html\">本站在线 Demo</a> 选项之一的原因。",
 
   "Model variants": "模型变体",
