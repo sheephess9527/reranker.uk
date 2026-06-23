@@ -2,128 +2,201 @@
 
 Educational resource on rerankers for retrieval and RAG, with a live in-browser cross-encoder demo.
 
-Live site: **https://reranker.uk**
+- **Live site:** https://reranker.uk
+- **Repository:** https://github.com/sheephess9527/reranker.uk
+- **Workers preview:** https://reranker.sheephess44.workers.dev
 
 ---
 
-## Changelog (2026-06-23)
+## Changelog — full release (2026-06-23)
 
-Site-wide improvements from the June 2026 review. Items **1–5, 7–10** from the improvement plan were implemented (item 6 — hreflang / separate Chinese URLs — was deferred).
+This release implements improvement-plan items **1, 2, 3, 4, 5, 7, 8, 9, 10**. Item **6** (hreflang / separate Chinese URLs) was **not** done.
 
-### Content & copy
+| # | Plan item | What shipped |
+|---|-----------|--------------|
+| 1 | Copy fixes | mxbai homepage card; Five families; breadcrumbs → `/guides/` |
+| 2 | Demo UX | aria-live, URL share, 30-doc cap + warnings |
+| 3 | Footer + dates | GitHub link; `Updated …` on guides/models |
+| 4 | Benchmark trust | Last verified June 2026 + source links on `/models/` |
+| 5 | Bi-encoder baseline | Demo middle column: token-overlap proxy |
+| 7 | i18n refactor | `data-i18n` keys + `shared.js`; legacy body fallback |
+| 8 | New content | Guides index, hybrid retrieval, evaluate rerankers |
+| 9 | Build system | `src/partials` + `src/pages` + `scripts/build.mjs` |
+| 10 | Demo advanced | Dual-model compare; WebGPU toggle |
+| 6 | hreflang / `/zh/` | **Deferred** — Chinese still client-side toggle only |
 
-| Change | Detail |
-|--------|--------|
-| Homepage model cards | Added **mxbai-rerank** card (was only in footer / models index) |
-| Models index lead | **Four families** → **Five families** (matches 5 rows in the table) |
-| Breadcrumbs | Guide pages link **Guides** → `/guides/` (new index) instead of a random guide URL |
-| Article dates | Guides and model pages show **Updated …** in the meta line |
-| New guides | [`/guides/`](public/guides/index.html) index, [Hybrid retrieval + rerank](public/guides/hybrid-retrieval-rerank.html), [Evaluate rerankers](public/guides/evaluate-reranker.html) |
-| Sitemap | New URLs added; `lastmod` bumped to 2026-06-23 where relevant |
+### 1. Content & copy
 
-### Models comparison (`/models/`)
+| Change | Before | After |
+|--------|--------|-------|
+| Homepage model grid | 4 cards (no mxbai) | 5 cards incl. **mxbai-rerank** |
+| `/models/` lead text | “Four families…” | “**Five families**…” |
+| Guide breadcrumbs | `Guides` → random guide URL | `Guides` → **`/guides/`** |
+| Article meta | No visible date | `Updated 21 Jun 2026` (guides/models); `23 Jun 2026` (new guides) |
+| Sitemap | 11 URLs | 14 URLs; new guides + `/guides/` |
 
-- **Last verified: June 2026** callout under the comparison table
-- Methodology note (BEIR NDCG@10 approximate; latency for ~50 docs on commodity hardware)
-- Source links: BEIR, BAAI, Cohere, Jina, Voyage, mixedbread-ai HuggingFace cards
+**New pages:**
 
-### Footer & trust
+| URL | File (source) |
+|-----|----------------|
+| `/guides/` | `src/pages/guides/index.html` |
+| `/guides/hybrid-retrieval-rerank.html` | `src/pages/guides/hybrid-retrieval-rerank.html` |
+| `/guides/evaluate-reranker.html` | `src/pages/guides/evaluate-reranker.html` |
 
-- **View source on GitHub** → `https://github.com/sheephess9527/reranker.uk`
-- Footer guides list: All guides, hybrid + evaluate links
+### 2. Models comparison (`/models/`)
 
-### Live demo (`/demo.html`)
+- Callout block: **Last verified: June 2026**
+- Methodology: BEIR NDCG@10 approximate (18-dataset avg); latency ~50 docs commodity CPU/API
+- Source links: [BEIR](https://github.com/beir-cellar/beir), [BAAI HF](https://huggingface.co/BAAI/bge-reranker-v2-m3), [Cohere](https://docs.cohere.com/docs/rerank), [Jina](https://jina.ai/reranker), [Voyage](https://docs.voyageai.com/docs/reranker), [mixedbread-ai HF](https://huggingface.co/mixedbread-ai/mxbai-rerank-large-v1)
 
-| Feature | Description |
-|---------|-------------|
-| **Bi-encoder proxy column** | Middle column ranks by token overlap (no cross-attention) vs cross-encoder on the right |
-| **Three-column results** | Before (input order) → bi-encoder proxy → cross-encoder reranked |
-| **Dual-model compare** | Optional second model; side-by-side ranking below main results |
-| **WebGPU** | Checkbox to use WebGPU when the browser supports it; falls back with a clear message |
-| **URL sharing** | Query, passages, and model(s) encoded in `?q=&docs=&m=&m2=`; **Copy share link** button |
-| **Passage limit** | Hard cap **30** passages; warning UI above ~75% of limit |
-| **Accessibility** | `#status` has `aria-live="polite"`; `prefers-reduced-motion` disables result animations |
-| **Keyboard** | Enter in query → run; Ctrl+Enter in passages → run; Esc → clear |
+### 3. Footer & trust
 
-Models in the demo (unchanged): ms-marco MiniLM-L6, jina-reranker v1 tiny, mxbai-rerank xsmall — via transformers.js @ 3.5.1, ONNX q8, browser cache.
+- **View source on GitHub** in every page footer
+- Footer guides: All guides, hybrid, evaluate, existing three guides, demo
 
-### i18n (EN / 中文)
+### 4. Live demo (`/demo.html`) — `public/assets/js/demo.js`
 
-- **New engine** (`public/assets/js/i18n.js`): prefers stable **`data-i18n`** keys on shared chrome
-- **Shared keys** (`public/assets/js/i18n/shared.js`): nav, footer, skip link, new guide labels
-- **Legacy fallback**: per-page `window.I18N_PAGE.zh` dictionaries keyed by normalised English `innerHTML` still work for long article body text during migration
-- New pages ship with `_title` / `_desc` Chinese meta; full body zh for hybrid/evaluate/guides-index is minimal (expand in `assets/js/i18n/*.js`)
+| Feature | Implementation |
+|---------|----------------|
+| **Three-column results** | Before (input order) → **bi-encoder proxy** (Jaccard token overlap) → cross-encoder |
+| **Dual-model compare** | Checkbox + second `<select>`; extra two-column block under main results |
+| **WebGPU** | Checkbox; `device: 'webgpu'` when supported; clear error if it fails |
+| **URL sharing** | `?q=&docs=&m=&m2=` via `history.replaceState`; **Copy share link** button |
+| **Passage limit** | `MAX_DOCS = 30`; hard block + yellow warning above ~75% |
+| **Accessibility** | `#status` → `aria-live="polite"` `aria-atomic="true"` |
+| **Keyboard** | Enter (query) · Ctrl+Enter (passages) · Esc (clear) |
+| **Reduced motion** | CSS disables `.result-item` animation |
 
-### Build system (new)
+Demo models (unchanged): `Xenova/ms-marco-MiniLM-L-6-v2`, `jinaai/jina-reranker-v1-tiny-en`, `mixedbread-ai/mxbai-rerank-xsmall-v1` — transformers.js 3.5.1, ONNX q8, browser cache.
 
-Previously every HTML file duplicated ~60 lines of header/footer. Now:
+### 5. i18n (EN / 中文)
+
+| File | Role |
+|------|------|
+| `public/assets/js/i18n.js` | Engine: `data-i18n` / `data-i18n-html` keys first; legacy `I18N_PAGE.zh` innerHTML fallback for article body |
+| `public/assets/js/i18n/shared.js` | Stable keys: nav, footer, skip link, new guide labels (`window.I18N_SHARED.keys`) |
+| `public/assets/js/i18n/*.js` | Per-page `_title`, `_desc`, and body zh maps (legacy) |
+
+Nav/footer partials use `data-i18n="shared.*"`. Long guide paragraphs still use legacy dictionaries until migrated to keys.
+
+### 6. Build system (item 9)
+
+**Before:** 12 HTML files each duplicated ~60 lines of `<header>` / `<footer>`.
+
+**After:**
 
 ```
 src/
   partials/
-    head-open.html    # <!DOCTYPE> … common <head> ({{TITLE}}, {{HEAD_EXTRA}}, …)
-    nav.html          # Sticky nav + lang toggle (data-i18n keys)
-    footer.html       # Footer + script tags
+    head-open.html       # DOCTYPE + shared <head> placeholders
+    nav.html             # Sticky nav (data-i18n)
+    footer.html          # Footer + script injection
   pages/
-    index.html        # <main>…</main> only
-    index.meta.json   # title, description, canonical, head_extra, page_scripts, …
-    guides/…
-    models/…
+    *.html               # <main>…</main> only
+    *.meta.json          # title, description, canonical, head_extra, page_scripts
 scripts/
-  build.mjs           # Assemble partials + pages → public/*.html
-  migrate-pages.mjs   # One-time: extract <main> from legacy flat HTML
-  split-meta.mjs      # One-time: move @meta JSON to *.meta.json
-  fix-meta.mjs        # Repair meta when inline JSON broke on `-->` in head_extra
-package.json          # npm run build | npm run dev
+  build.mjs              # Assemble → public/*.html (15 pages)
+  migrate-pages.mjs      # One-time: public → src/pages
+  split-meta.mjs         # One-time: inline @meta → *.meta.json
+  fix-meta.mjs           # Fix meta when `-->` in head_extra broke JSON comments
+package.json             # npm run build | npm run dev
 ```
 
-**Important:** Edit page content in `src/pages/`, shared chrome in `src/partials/`, then run the build. Do not hand-edit generated `public/*.html` — changes will be overwritten.
+**Rule:** Edit `src/pages/` + `src/partials/` → `node scripts/build.mjs`. Do **not** hand-edit generated `public/*.html`.
 
-### CSS
+### 7. CSS — `public/assets/css/style.css`
 
-- `.compare-grid-3` for demo three-column layout
-- `.check-row`, `.doc-warning`, `.dual-compare`, `.benchmark-meta`
-- `kbd` styling; `@media (prefers-reduced-motion: reduce)` for demo animations
+- `.compare-grid-3` — demo three columns
+- `.check-row`, `.doc-warning`, `.dual-compare`, `.dual-head`, `.benchmark-meta`
+- `kbd` styles
+- `@media (prefers-reduced-motion: reduce)` — no result animations; `scroll-behavior: auto`
 
-### Files touched (summary)
+### 8. Complete file manifest
 
-**New:** `package.json`, `src/**`, `scripts/*.mjs`, `public/assets/js/i18n/shared.js`, `guides-index.js`, `hybrid-retrieval-rerank.js`, `evaluate-reranker.js`, `public/guides/index.html`, `hybrid-retrieval-rerank.html`, `evaluate-reranker.html`
+**New directories / files:**
 
-**Updated:** `README.md`, `public/sitemap.xml`, `public/assets/js/i18n.js`, `demo.js`, `home.js`, `models-index.js`, `style.css`, all rebuilt `public/*.html`
+```
+package.json
+scripts/build.mjs
+scripts/migrate-pages.mjs
+scripts/split-meta.mjs
+scripts/fix-meta.mjs
+src/partials/head-open.html
+src/partials/nav.html
+src/partials/footer.html
+src/pages/404.html + 404.meta.json
+src/pages/index.html + index.meta.json
+src/pages/demo.html + demo.meta.json
+src/pages/guides/*.html + *.meta.json (7 guide pages incl. index, hybrid, evaluate)
+src/pages/models/*.html + *.meta.json (6 model pages)
+public/assets/js/i18n/shared.js
+public/assets/js/i18n/guides-index.js
+public/assets/js/i18n/hybrid-retrieval-rerank.js
+public/assets/js/i18n/evaluate-reranker.js
+public/guides/index.html
+public/guides/hybrid-retrieval-rerank.html
+public/guides/evaluate-reranker.html
+```
 
-### Not in this release
+**Modified:**
 
-- **hreflang** / separate `/zh/` URLs for Chinese SEO (planned separately)
-- Server-side analytics (privacy-friendly option left to operator)
+```
+README.md
+public/sitemap.xml
+public/assets/css/style.css
+public/assets/js/i18n.js
+public/assets/js/demo.js
+public/assets/js/i18n/home.js
+public/assets/js/i18n/models-index.js
+public/*.html (all 15 pages rebuilt from src)
+```
+
+### 9. Git commits (this release)
+
+| Commit | Summary |
+|--------|---------|
+| `9861226` | All feature changes: build, demo, guides, i18n, copy fixes |
+| `95e44d6` | README deploy auth + release status |
+| `1808583` | README: wrangler login localhost troubleshooting |
+| `0e48fa5` | README: production deploy marked Done |
+
+### 10. Deploy record
+
+| Step | Result |
+|------|--------|
+| `git push origin main` | ✅ On GitHub |
+| `wrangler login` | ✅ OAuth via `127.0.0.1:8976` (after initial localhost timeout) |
+| `node scripts/build.mjs` | ✅ 15 pages |
+| `wrangler deploy` | ✅ Version **`503f4ceb-bbf0-4f09-9c47-34b0d1f079e3`** |
+| Production | ✅ https://reranker.uk |
+| Assets uploaded | 31 new/modified (+ 12 unchanged) |
+
+**Post-deploy verification (2026-06-23):**
+
+- https://reranker.uk/ — mxbai card present
+- https://reranker.uk/guides/ — index with 6 cards
+- https://reranker.uk/guides/hybrid-retrieval-rerank.html — live
+- https://reranker.uk/guides/evaluate-reranker.html — live
+- https://reranker.uk/demo.html — WebGPU, dual-model, share link, 3-column UI
+- https://reranker.uk/models/ — Five families + Last verified block
+
+### 11. Not in this release
+
+- **hreflang** / separate `/zh/` URLs (Chinese SEO)
+- Privacy-friendly analytics (Plausible/Umami etc.)
+- Full migration of all article paragraphs to `data-i18n` keys (body text still mostly legacy)
 
 ---
 
-## Project structure (after build)
+## Project structure
 
 ```
-wrangler.jsonc              # Cloudflare Workers static-assets config
-src/                        # Source of truth for HTML pages (see above)
-public/                     # Deploy directory
-  index.html                # Homepage (generated)
-  demo.html                 # Live demo (generated)
-  404.html
-  guides/
-    index.html              # All guides
-    what-is-a-reranker.html
-    cross-encoder-vs-bi-encoder.html
-    rerank-rag.html
-    hybrid-retrieval-rerank.html
-    evaluate-reranker.html
-  models/
-    index.html              # Comparison table
-    bge-reranker.html … mxbai-rerank.html
-  assets/
-    css/style.css
-    js/main.js
-    js/demo.js              # ES module — transformers.js engine
-    js/i18n.js              # Bilingual engine
-    js/i18n/*.js            # Per-page + shared zh dictionaries
-    img/…
+wrangler.jsonc              # Cloudflare Workers static assets → ./public
+src/                        # HTML source (build before deploy)
+public/                     # Deploy root (HTML generated + static assets)
+  guides/                   # 7 pages
+  models/                   # 6 pages
+  assets/css|js|img/
   sitemap.xml
   robots.txt
   site.webmanifest
@@ -134,102 +207,62 @@ public/                     # Deploy directory
 ## Local development
 
 ```bash
-# Assemble HTML (required after editing src/pages or src/partials)
-node scripts/build.mjs
-# or: npm run build
-
-# Rebuild on file changes
-node scripts/build.mjs --watch
-# or: npm run dev
+node scripts/build.mjs          # assemble HTML
+node scripts/build.mjs --watch  # rebuild on src/ changes
 ```
 
-Static assets under `public/assets/` are edited directly — no build step.
+Edit static assets directly under `public/assets/` (no build).
+
+Windows if `npx` blocked:
+
+```bash
+node "C:\Program Files\nodejs\node_modules\npm\bin\npx-cli.js" wrangler deploy
+```
 
 ---
 
-## Deploy (Cloudflare Workers static assets)
+## Deploy (Cloudflare Workers)
 
-### 1. Authenticate (once per machine)
-
-**Recommended if `wrangler login` shows “localhost refused connection”:** use an API token (no local callback server).
-
-Or log in interactively (keep the terminal open until you see “Successfully logged in”):
+### Authenticate (once per machine)
 
 ```bash
 npx wrangler login
-# if localhost:8976 is refused, try:
+# If browser shows "localhost refused connection":
 npx wrangler login --callback-host 127.0.0.1 --callback-port 8976
+# Keep terminal open until: "Successfully logged in"
 ```
 
-#### `localhost` / `127.0.0.1` connection refused?
-
-`wrangler login` starts a **temporary server on your machine** (default port **8976**). After you approve access in the browser, Cloudflare redirects to `http://localhost:8976/oauth/callback`. “Connection refused” means that server is not reachable. Common causes:
-
-- The terminal running `wrangler login` was closed or timed out before you finished in the browser
-- Firewall / antivirus blocked localhost
-- VPN or proxy interfered
-- Port 8976 is in use (try `--callback-port 9786`)
-
-**Reliable workaround — API token** ([create in Cloudflare dashboard](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/)):
-
-1. Cloudflare Dashboard → **My Profile** → **API Tokens** → **Create Token**
-2. Use template **Edit Cloudflare Workers** (or custom: Account + Workers Scripts → Edit)
-3. Copy the token, then in PowerShell:
+**Alternative — API token** (no localhost callback): [Create token](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) → template **Edit Cloudflare Workers**:
 
 ```powershell
-$env:CLOUDFLARE_API_TOKEN = "paste-your-token-here"
+$env:CLOUDFLARE_API_TOKEN = "your-token"
+```
+
+### Build + deploy
+
+```bash
 node scripts/build.mjs
-node "C:\Program Files\nodejs\node_modules\npm\bin\npx-cli.js" wrangler deploy
+npx wrangler deploy                    # → reranker.uk
+# npx wrangler versions upload         # preview only
 ```
 
-On Windows, if `npx` is blocked by execution policy, use:
-
-```bash
-node "C:\Program Files\nodejs\node_modules\npm\bin\npx-cli.js" wrangler deploy
-```
-
-### 2. Build and deploy
-
-```bash
-node scripts/build.mjs      # always build before deploy
-npx wrangler deploy         # production → reranker.uk
-```
-
-Preview / non-production version:
-
-```bash
-npx wrangler versions upload
-```
-
-`wrangler.jsonc` serves `./public` with `not_found_handling: "404-page"` → `public/404.html`.
-
-The same `public/` folder can be uploaded to GitHub Pages, Netlify, Cloudflare Pages, etc.
-
-### Release status (2026-06-23)
-
-| Step | Status |
-|------|--------|
-| Code + README | On `main` → [GitHub](https://github.com/sheephess9527/reranker.uk) |
-| `node scripts/build.mjs` | OK (15 pages) |
-| `wrangler deploy` | **Done** — Version `503f4ceb-bbf0-4f09-9c47-34b0d1f079e3` → https://reranker.uk |
-
-Verify: [/guides/](https://reranker.uk/guides/), [/demo.html](https://reranker.uk/demo.html), [/models/](https://reranker.uk/models/).
+`wrangler.jsonc`: `assets.directory = ./public`, `not_found_handling = 404-page`.
 
 ---
 
-## Bilingual behaviour
+## Bilingual (EN / 中文)
 
-1. HTML ships in **English** (default, SEO-friendly).
-2. User toggles **中文** in the nav → `localStorage` key `rr_lang`.
-3. `data-i18n` elements swap via `I18N_SHARED.keys` + `I18N_PAGE.keys`.
-4. Article paragraphs without `data-i18n` still use legacy `I18N_PAGE.zh` innerHTML maps.
-5. Demo dynamic strings listen for `i18n:changed`.
+1. HTML defaults to **English** (SEO crawl).
+2. Nav **中文** toggle → `localStorage` `rr_lang`.
+3. Shared chrome: `data-i18n` + `I18N_SHARED.keys`.
+4. Article body: legacy `I18N_PAGE.zh` maps (normalised English `innerHTML` as key).
+5. Demo listens for `i18n:changed` to refresh dynamic labels.
 
 ---
 
 ## Demo architecture
 
-`public/assets/js/demo.js` lazy-loads quantised cross-encoders from HuggingFace Hub via [transformers.js](https://github.com/huggingface/transformers.js) (ONNX Runtime Web, optional WebGPU). Weights download once and cache in the browser. No server, API key, or outbound query data.
+`demo.js` (ES module) loads cross-encoders from HuggingFace via [transformers.js](https://github.com/huggingface/transformers.js). Scoring runs in-browser (WASM or WebGPU). No server, API key, or outbound query data.
 
 ---
 
