@@ -1,19 +1,14 @@
-/* reranker.uk — in-browser cross-encoder reranking demo.
- *
- * Runs entirely client-side with transformers.js (ONNX Runtime Web).
- * No API key, no server, no data leaves the browser. A cross-encoder
- * scores each (query, candidate) pair for relevance, then we sort.
- */
+/* reranker.uk — in-browser cross-encoder reranking demo. */
 import {
   AutoTokenizer,
   AutoModelForSequenceClassification,
   env,
 } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.1";
 
-// Cache models/tokenizers in the browser so a reload is instant.
 env.allowLocalModels = false;
 env.useBrowserCache = true;
 
+const MAX_DOCS = 30;
 const MODELS = {
   "Xenova/ms-marco-MiniLM-L-6-v2": {
     name: "ms-marco MiniLM-L6",
@@ -38,18 +33,19 @@ const MODELS = {
   },
 };
 
-// One reranker instance per model id, loaded on demand.
 const cache = new Map();
+let webgpuAvailable = null;
 
 class Reranker {
   constructor(modelId) {
     this.modelId = modelId;
   }
-  async init(onProgress) {
+  async init(onProgress, device) {
     const opts = {
-      dtype: "q8", // quantized: smaller download, fine for a demo
+      dtype: "q8",
       progress_callback: onProgress,
     };
+    if (device === "webgpu") opts.device = "webgpu";
     [this.tokenizer, this.model] = await Promise.all([
       AutoTokenizer.from_pretrained(this.modelId, opts),
       AutoModelForSequenceClassification.from_pretrained(this.modelId, opts),
@@ -65,19 +61,33 @@ class Reranker {
     const { logits } = await this.model(inputs);
     const cfg = MODELS[this.modelId];
     const raw = (cfg && cfg.sigmoid ? logits.sigmoid() : logits).tolist();
-    // logits shape is [batch, 1] for these single-label rerankers.
     return raw.map((row) => (Array.isArray(row) ? row[0] : row));
   }
 }
 
-async function getReranker(modelId, onProgress) {
-  if (cache.has(modelId)) return cache.get(modelId);
-  const r = await new Reranker(modelId).init(onProgress);
-  cache.set(modelId, r);
-  return r;
+async function probeWebGPU() {
+  if (webgpuAvailable != null) return webgpuAvailable;
+  try {
+    if (!navigator.gpu) {
+      webgpuAvailable = false;
+      return false;
+    }
+    const adapter = await navigator.gpu.requestAdapter();
+    webgpuAvailable = !!adapter;
+  } catch (e) {
+    webgpuAvailable = false;
+  }
+  return webgpuAvailable;
 }
 
-/* ---------------- i18n helpers ---------------- */
+async function getReranker(modelId, onProgress, useWebgpu) {
+  const device = useWebgpu ? "webgpu" : "wasm";
+  const cacheKey = modelId + ":" + device;
+  if (cache.has(cacheKey)) return cache.get(cacheKey);
+  const r = await new Reranker(modelId).init(onProgress, useWebgpu ? "webgpu" : undefined);
+  cache.set(cacheKey, r);
+  return r;
+}
 
 function isZh() {
   return (document.documentElement.lang || "").toLowerCase().indexOf("zh") === 0;
@@ -85,10 +95,6 @@ function isZh() {
 function L(en, zh) {
   return isZh() ? zh : en;
 }
-
-/* ---------------- Sample scenarios ----------------
- * Realistic query + a mix of relevant and distractor passages, at three
- * difficulty levels, so the reranker has something meaningful to do. */
 
 const SAMPLES = [
   {
@@ -180,23 +186,19 @@ const SAMPLES = [
   },
 ];
 
-function sampleById(id) {
-  return SAMPLES.find((s) => s.id === id) || null;
-}
-function sampleText(s) {
-  return isZh() ? s.zh : s.en;
-}
-
-/* ---------------- UI wiring ---------------- */
-
 const els = {
   model: document.getElementById("model-select"),
+  modelB: document.getElementById("model-select-b"),
+  compareToggle: document.getElementById("compare-toggle"),
+  webgpuToggle: document.getElementById("webgpu-toggle"),
   modelMeta: document.getElementById("model-meta"),
   presets: document.getElementById("preset-row"),
   query: document.getElementById("query-input"),
   docs: document.getElementById("docs-input"),
+  docWarning: document.getElementById("doc-warning"),
   run: document.getElementById("run-btn"),
   clear: document.getElementById("clear-btn"),
+  share: document.getElementById("share-btn"),
   status: document.getElementById("status"),
   progressWrap: document.getElementById("progress-wrap"),
   progressBar: document.getElementById("progress-bar"),
@@ -204,41 +206,87 @@ const els = {
   resultsBar: document.getElementById("results-bar"),
   stats: document.getElementById("stat-row"),
   before: document.getElementById("results-before"),
+  bi: document.getElementById("results-bi"),
   after: document.getElementById("results-after"),
+  dualRegion: document.getElementById("dual-results"),
+  dualA: document.getElementById("dual-col-a"),
+  dualB: document.getElementById("dual-col-b"),
   copyJson: document.getElementById("copy-json"),
   copyMd: document.getElementById("copy-md"),
   copyLabel: document.querySelector(".copy-label"),
 };
 
-// Populate model dropdown.
-if (els.model) {
+function sampleById(id) {
+  return SAMPLES.find((s) => s.id === id) || null;
+}
+function sampleText(s) {
+  return isZh() ? s.zh : s.en;
+}
+
+function fillModelSelect(sel, selectedId) {
+  if (!sel) return;
+  sel.innerHTML = "";
   Object.entries(MODELS).forEach(([id, m], i) => {
     const opt = document.createElement("option");
     opt.value = id;
     opt.textContent = `${m.name} · ~${m.sizeMB} MB · ${L(m.noteEn, m.noteZh)}`;
-    if (i === 0) opt.selected = true;
-    els.model.appendChild(opt);
+    if (id === selectedId || (i === 0 && !selectedId)) opt.selected = true;
+    sel.appendChild(opt);
   });
-  els.model.addEventListener("change", renderModelMeta);
 }
+
+if (els.model) {
+  fillModelSelect(els.model);
+  fillModelSelect(els.modelB, "jinaai/jina-reranker-v1-tiny-en");
+  els.model.addEventListener("change", () => {
+    renderModelMeta();
+    syncUrl();
+  });
+}
+if (els.modelB) {
+  els.modelB.addEventListener("change", syncUrl);
+}
+if (els.compareToggle) {
+  els.compareToggle.addEventListener("change", () => {
+    if (els.modelB) els.modelB.disabled = !els.compareToggle.checked;
+    if (els.dualRegion) els.dualRegion.hidden = true;
+  });
+}
+if (els.webgpuToggle) {
+  probeWebGPU().then((ok) => {
+    if (!ok && els.webgpuToggle) {
+      els.webgpuToggle.disabled = true;
+      els.webgpuToggle.parentElement.title = L(
+        "WebGPU not available in this browser",
+        "此浏览器不支持 WebGPU"
+      );
+    }
+  });
+}
+
+let currentPreset = SAMPLES[0].id;
+let userEdited = false;
+let lastRun = null;
 
 function renderModelMeta() {
   if (!els.modelMeta || !els.model) return;
   const m = MODELS[els.model.value];
   if (!m) return;
-  const cached = cache.has(els.model.value);
+  const device = els.webgpuToggle && els.webgpuToggle.checked ? "webgpu" : "wasm";
+  const cacheKey = els.model.value + ":" + device;
+  const cached = cache.has(cacheKey);
   const cachedNote = cached
     ? L(" · already loaded in this tab", " · 本标签页已加载")
     : "";
+  const devNote =
+    device === "webgpu"
+      ? L(" · WebGPU", " · WebGPU")
+      : L(" · WASM/CPU", " · WASM/CPU");
   els.modelMeta.textContent = L(
-    `≈${m.sizeMB} MB quantised — downloaded once, then cached; runs on CPU/WASM in your browser${cachedNote}`,
-    `约 ${m.sizeMB} MB（量化）—— 仅下载一次，之后缓存；在你浏览器的 CPU/WASM 上运行${cachedNote}`
+    `≈${m.sizeMB} MB quantised — downloaded once, then cached${devNote}${cachedNote}`,
+    `约 ${m.sizeMB} MB（量化）—— 仅下载一次，之后缓存${devNote}${cachedNote}`
   );
 }
-
-// Build the preset / scenario buttons.
-let currentPreset = SAMPLES[0].id;
-let userEdited = false;
 
 function renderPresets() {
   if (!els.presets) return;
@@ -263,11 +311,10 @@ function loadPreset(id) {
   currentPreset = id;
   userEdited = false;
   renderPresets();
+  updateDocWarning();
+  syncUrl();
   setStatus(
-    L(
-      "Scenario loaded — hit “Rerank” to score it.",
-      "示例已载入 —— 点击“重排序”为它打分。"
-    ),
+    L("Scenario loaded — hit “Rerank” to score it.", "示例已载入 —— 点击“重排序”为它打分。"),
     false
   );
 }
@@ -275,8 +322,8 @@ function loadPreset(id) {
 function setStatus(text, spinning) {
   if (!els.status) return;
   els.status.innerHTML = spinning
-    ? '<span class="spinner"></span> ' + text
-    : text;
+    ? '<span class="spinner"></span> ' + esc(text)
+    : esc(text);
 }
 
 function showProgress(pct) {
@@ -302,22 +349,38 @@ function mb(bytes) {
   return (bytes / 1048576).toFixed(1);
 }
 
-// Color band for a 0–1 relevance score.
+function tokenize(s) {
+  return s
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .split(/\s+/)
+    .filter((w) => w.length > 2);
+}
+
+/** Lightweight bi-encoder proxy: independent token overlap (no cross-attention). */
+function biEncoderProxyScores(query, docs) {
+  const qTokens = tokenize(query);
+  const qSet = new Set(qTokens);
+  if (!qTokens.length) return docs.map(() => 0);
+  return docs.map((doc) => {
+    const dTokens = tokenize(doc);
+    const dSet = new Set(dTokens);
+    let inter = 0;
+    for (const t of qSet) if (dSet.has(t)) inter++;
+    const union = new Set([...qSet, ...dSet]).size || 1;
+    return inter / union;
+  });
+}
+
 function scoreLevel(score) {
   if (score >= 0.6) return "good";
   if (score >= 0.3) return "mid";
   return "low";
 }
 
-/* ---------------- Rendering ---------------- */
-
-let lastRun = null; // keep the most recent run so we can re-render on lang switch
-
 function deltaHtml(delta) {
-  if (delta > 0)
-    return `<span class="delta up">▲ ${delta}</span>`;
-  if (delta < 0)
-    return `<span class="delta down">▼ ${-delta}</span>`;
+  if (delta > 0) return `<span class="delta up">▲ ${delta}</span>`;
+  if (delta < 0) return `<span class="delta down">▼ ${-delta}</span>`;
   return `<span class="delta">${L("—", "—")}</span>`;
 }
 
@@ -343,106 +406,176 @@ function rowHtml(opts) {
     </div>`;
 }
 
+function renderColumn(el, items, maxScore, showDelta, animate, headText) {
+  if (!el) return;
+  const sorted = showDelta
+    ? items.slice().sort((a, b) => b.score - a.score)
+    : items.slice().sort((a, b) => a.origIndex - b.origIndex);
+  el.innerHTML =
+    `<div class="compare-head">${headText}</div>` +
+    sorted
+      .map((s, i) =>
+        rowHtml({
+          rank: showDelta ? i + 1 : s.origIndex + 1,
+          text: s.text,
+          score: s.score,
+          maxScore,
+          origIndex: s.origIndex,
+          showDelta,
+          animate,
+        })
+      )
+      .join("");
+}
+
 function renderResults(run) {
   lastRun = run;
   if (!els.region) return;
   els.region.hidden = false;
 
-  const { query, items, modelId, ms, didDownload, bytes } = run;
+  const { query, items, biItems, modelId, ms, didDownload, bytes, compareRun } = run;
   const maxScore = Math.max(...items.map((s) => s.score), 0.0001);
+  const maxBi = Math.max(...biItems.map((s) => s.score), 0.0001);
 
-  // Before = original input order; After = sorted by score desc.
-  const before = items.slice().sort((a, b) => a.origIndex - b.origIndex);
-  const after = items.slice().sort((a, b) => b.score - a.score);
-
-  // Heading + copy actions.
   if (els.resultsBar) {
     els.resultsBar.innerHTML = `
       <div>
         <h3 class="mt-0">${L("Reranked results", "重排序结果")}</h3>
         <p class="muted results-sub">${L(
-          "Color shows the relevance band; the badge shows how far each passage moved.",
-          "颜色表示相关性区间；标签显示每段文本移动了多少位。"
+          "Middle column is a bi-encoder proxy (token overlap). Right column is the real cross-encoder.",
+          "中间列为 bi-encoder 代理（词元重叠）。右列为真实 cross-encoder。"
         )}</p>
       </div>`;
   }
 
-  // Stat chips.
   if (els.stats) {
     const m = MODELS[modelId];
     const loadChip = didDownload
       ? L(`downloaded ${mb(bytes)} MB`, `已下载 ${mb(bytes)} MB`)
       : L("loaded from cache", "从缓存加载");
     els.stats.innerHTML = [
-      `<span class="chip"><span class="chip-k">${L("Model", "模型")}</span>${esc(
-        m ? m.name : modelId
-      )}</span>`,
-      `<span class="chip"><span class="chip-k">${L("Size", "大小")}</span>~${
-        m ? m.sizeMB : "?"
-      } MB</span>`,
-      `<span class="chip"><span class="chip-k">${L(
-        "Inference",
-        "推理"
-      )}</span>${ms} ms</span>`,
-      `<span class="chip"><span class="chip-k">${L(
-        "Passages",
-        "候选"
-      )}</span>${items.length}</span>`,
+      `<span class="chip"><span class="chip-k">${L("Model", "模型")}</span>${esc(m ? m.name : modelId)}</span>`,
+      `<span class="chip"><span class="chip-k">${L("Inference", "推理")}</span>${ms} ms</span>`,
+      `<span class="chip"><span class="chip-k">${L("Passages", "候选")}</span>${items.length}</span>`,
       `<span class="chip chip-soft">${loadChip}</span>`,
     ].join("");
   }
 
-  if (els.before) {
-    els.before.innerHTML =
-      `<div class="compare-head">${L(
-        "Before — as retrieved",
-        "重排前 —— 检索原序"
-      )}</div>` +
-      before
-        .map((s) =>
-          rowHtml({
-            rank: s.origIndex + 1,
-            text: s.text,
-            score: s.score,
-            maxScore,
-            origIndex: s.origIndex,
-            showDelta: false,
-            animate: false,
-          })
-        )
-        .join("");
-  }
-  if (els.after) {
-    els.after.innerHTML =
-      `<div class="compare-head">${L(
-        "After — reranked",
-        "重排后 —— 按相关性"
-      )}</div>` +
-      after
-        .map((s, i) =>
-          rowHtml({
-            rank: i + 1,
-            text: s.text,
-            score: s.score,
-            maxScore,
-            origIndex: s.origIndex,
-            showDelta: true,
-            animate: true,
-          })
-        )
-        .join("");
-  }
+  renderColumn(
+    els.before,
+    items,
+    maxScore,
+    false,
+    false,
+    L("Before — as retrieved", "重排前 —— 检索原序")
+  );
+  renderColumn(
+    els.bi,
+    biItems,
+    maxBi,
+    true,
+    false,
+    L("Bi-encoder proxy — token overlap", "Bi-encoder 代理 —— 词元重叠")
+  );
+  renderColumn(
+    els.after,
+    items,
+    maxScore,
+    true,
+    true,
+    L("After — cross-encoder", "重排后 —— cross-encoder")
+  );
 
-  // Copy buttons.
-  if (els.copyLabel)
-    els.copyLabel.textContent = L("Copy results:", "复制结果：");
-  if (els.copyJson)
-    els.copyJson.textContent = L("Copy JSON", "复制 JSON");
-  if (els.copyMd)
-    els.copyMd.textContent = L("Copy Markdown", "复制 Markdown");
+  if (els.copyLabel) els.copyLabel.textContent = L("Copy results:", "复制结果：");
+  if (els.copyJson) els.copyJson.textContent = L("Copy JSON", "复制 JSON");
+  if (els.copyMd) els.copyMd.textContent = L("Copy Markdown", "复制 Markdown");
+
+  if (compareRun && els.dualRegion) {
+    els.dualRegion.hidden = false;
+    renderDualCompare(compareRun);
+  } else if (els.dualRegion) {
+    els.dualRegion.hidden = true;
+  }
 }
 
-/* ---------------- Copy results ---------------- */
+function renderDualCompare(compareRun) {
+  const { itemsA, itemsB, modelA, modelB, msB } = compareRun;
+  const maxA = Math.max(...itemsA.map((s) => s.score), 0.0001);
+  const maxB = Math.max(...itemsB.map((s) => s.score), 0.0001);
+  const headA = `${MODELS[modelA]?.name || modelA}`;
+  const headB = `${MODELS[modelB]?.name || modelB} (${msB} ms)`;
+  renderColumn(els.dualA, itemsA, maxA, true, true, headA);
+  renderColumn(els.dualB, itemsB, maxB, true, true, headB);
+}
+
+function updateDocWarning() {
+  if (!els.docWarning || !els.docs) return;
+  const n = parseDocs(els.docs.value || "").length;
+  if (n > MAX_DOCS) {
+    els.docWarning.hidden = false;
+    els.docWarning.textContent = L(
+      `Warning: ${n} passages — scoring more than ${MAX_DOCS} may freeze the tab. Consider trimming the list.`,
+      `警告：共 ${n} 段文本 —— 超过 ${MAX_DOCS} 段可能导致页面卡顿，建议精简列表。`
+    );
+  } else if (n > MAX_DOCS * 0.75) {
+    els.docWarning.hidden = false;
+    els.docWarning.textContent = L(
+      `${n} passages — approaching the recommended limit of ${MAX_DOCS}.`,
+      `共 ${n} 段 —— 接近建议上限 ${MAX_DOCS}。`
+    );
+  } else {
+    els.docWarning.hidden = true;
+  }
+}
+
+function syncUrl() {
+  const query = (els.query?.value || "").trim();
+  const docs = els.docs?.value || "";
+  if (!query && !docs) return;
+  const p = new URLSearchParams();
+  if (query) p.set("q", query);
+  if (docs) p.set("docs", docs);
+  if (els.model?.value) p.set("m", els.model.value);
+  if (els.compareToggle?.checked && els.modelB?.value) p.set("m2", els.modelB.value);
+  history.replaceState(null, "", "?" + p.toString());
+}
+
+function loadFromUrl() {
+  const p = new URLSearchParams(location.search);
+  if (p.has("q") && els.query) els.query.value = p.get("q");
+  if (p.has("docs") && els.docs) els.docs.value = p.get("docs");
+  if (p.has("m") && MODELS[p.get("m")] && els.model) els.model.value = p.get("m");
+  if (p.has("m2") && MODELS[p.get("m2")] && els.modelB) {
+    els.modelB.value = p.get("m2");
+    if (els.compareToggle) {
+      els.compareToggle.checked = true;
+      els.modelB.disabled = false;
+    }
+  }
+  if (p.has("q") || p.has("docs")) {
+    currentPreset = null;
+    userEdited = true;
+    renderPresets();
+  }
+  updateDocWarning();
+}
+
+async function shareLink() {
+  syncUrl();
+  const url = location.href;
+  try {
+    await navigator.clipboard.writeText(url);
+    if (els.share) {
+      const orig = els.share.textContent;
+      els.share.textContent = L("Link copied ✓", "链接已复制 ✓");
+      setTimeout(() => {
+        els.share.textContent = orig;
+      }, 1400);
+    }
+  } catch (e) {
+    setStatus(L("Could not copy link", "无法复制链接"), false);
+  }
+}
 
 function rankedForExport() {
   if (!lastRun) return [];
@@ -477,9 +610,7 @@ function exportMarkdown() {
     rows
       .map(
         (r) =>
-          `| ${r.rank} | #${r.originalPosition} | ${r.score.toFixed(
-            4
-          )} | ${r.text.replace(/\|/g, "\\|")} |`
+          `| ${r.rank} | #${r.originalPosition} | ${r.score.toFixed(4)} | ${r.text.replace(/\|/g, "\\|")} |`
       )
       .join("\n");
   return head + table + "\n";
@@ -489,18 +620,8 @@ async function copyText(text, btn) {
   const ok = L("Copied ✓", "已复制 ✓");
   const original = btn.textContent;
   try {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      await navigator.clipboard.writeText(text);
-    } else {
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      ta.style.position = "fixed";
-      ta.style.opacity = "0";
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      document.body.removeChild(ta);
-    }
+    if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(text);
+    else throw new Error("no clipboard");
     btn.textContent = ok;
   } catch (e) {
     btn.textContent = L("Copy failed", "复制失败");
@@ -510,36 +631,7 @@ async function copyText(text, btn) {
   }, 1400);
 }
 
-/* ---------------- Run ---------------- */
-
-async function run() {
-  const query = (els.query.value || "").trim();
-  const docs = parseDocs(els.docs.value || "");
-  if (!query)
-    return setStatus(L("Enter a query first.", "请先输入一个查询。"), false);
-  if (docs.length < 2)
-    return setStatus(
-      L(
-        "Add at least two candidate passages (one per line).",
-        "请至少添加两段候选文本（每行一段）。"
-      ),
-      false
-    );
-
-  const modelId = els.model.value;
-  const wasCached = cache.has(modelId);
-  els.run.disabled = true;
-  setStatus(
-    wasCached
-      ? L("Loading cached model…", "正在加载已缓存的模型……")
-      : L(
-          "Loading model… first run downloads weights, then they are cached.",
-          "正在加载模型…… 首次运行会下载权重，之后即缓存。"
-        ),
-    true
-  );
-  showProgress(wasCached ? null : 0);
-
+async function scoreWithModel(modelId, query, docs, useWebgpu) {
   const files = {};
   let didDownload = false;
   const onProgress = (p) => {
@@ -553,55 +645,114 @@ async function run() {
       showProgress(pct);
       setStatus(
         L(
-          `Downloading model weights… ${mb(loaded)} / ${mb(total)} MB (${pct}%)`,
-          `正在下载模型权重…… ${mb(loaded)} / ${mb(total)} MB（${pct}%）`
+          `Downloading ${MODELS[modelId]?.name || modelId}… ${mb(loaded)}/${mb(total)} MB (${pct}%)`,
+          `正在下载 ${MODELS[modelId]?.name || modelId}…… ${mb(loaded)}/${mb(total)} MB（${pct}%）`
         ),
         true
       );
     }
   };
+  const reranker = await getReranker(modelId, onProgress, useWebgpu);
+  const t0 = performance.now();
+  const scores = await reranker.score(query, docs);
+  const ms = Math.round(performance.now() - t0);
+  const bytes = Object.values(files).reduce((a, b) => a + b.loaded, 0);
+  return { scores, ms, didDownload, bytes };
+}
+
+async function run() {
+  const query = (els.query?.value || "").trim();
+  const docs = parseDocs(els.docs?.value || "");
+  if (!query)
+    return setStatus(L("Enter a query first.", "请先输入一个查询。"), false);
+  if (docs.length < 2)
+    return setStatus(
+      L("Add at least two candidate passages (one per line).", "请至少添加两段候选文本（每行一段）。"),
+      false
+    );
+  if (docs.length > MAX_DOCS)
+    return setStatus(
+      L(
+        `Too many passages (${docs.length}). Trim to ${MAX_DOCS} or fewer.`,
+        `候选过多（${docs.length}）。请精简到 ${MAX_DOCS} 条以内。`
+      ),
+      false
+    );
+
+  const modelId = els.model.value;
+  const compareOn = els.compareToggle?.checked;
+  const modelB = els.modelB?.value;
+  const useWebgpu = !!(els.webgpuToggle?.checked && (await probeWebGPU()));
+
+  els.run.disabled = true;
+  setStatus(L("Loading model…", "正在加载模型……"), true);
+  showProgress(0);
 
   try {
-    const reranker = await getReranker(modelId, onProgress);
-    showProgress(100);
-    setStatus(L("Scoring candidates…", "正在为候选打分……"), true);
-    const t0 = performance.now();
-    const scores = await reranker.score(query, docs);
-    const ms = Math.round(performance.now() - t0);
+    const biScores = biEncoderProxyScores(query, docs);
+    const primary = await scoreWithModel(modelId, query, docs, useWebgpu);
+    showProgress(null);
 
     const items = docs.map((text, origIndex) => ({
       text,
       origIndex,
-      score: scores[origIndex],
+      score: primary.scores[origIndex],
     }));
-    const bytes = Object.values(files).reduce((a, b) => a + b.loaded, 0);
+    const biItems = docs.map((text, origIndex) => ({
+      text,
+      origIndex,
+      score: biScores[origIndex],
+    }));
 
-    renderResults({ query, items, modelId, ms, didDownload, bytes });
+    let compareRun = null;
+    if (compareOn && modelB && modelB !== modelId) {
+      setStatus(L("Scoring with second model…", "正在为第二个模型打分……"), true);
+      const second = await scoreWithModel(modelB, query, docs, useWebgpu);
+      compareRun = {
+        modelA: modelId,
+        modelB,
+        msB: second.ms,
+        itemsA: items,
+        itemsB: docs.map((text, origIndex) => ({
+          text,
+          origIndex,
+          score: second.scores[origIndex],
+        })),
+      };
+    }
+
+    renderResults({
+      query,
+      items,
+      biItems,
+      modelId,
+      ms: primary.ms,
+      didDownload: primary.didDownload,
+      bytes: primary.bytes,
+      compareRun,
+    });
     renderModelMeta();
-    showProgress(null);
+    syncUrl();
     setStatus(
-      didDownload
-        ? L(
-            `Done — reranked ${docs.length} passages in ${ms} ms (model downloaded once; cached from now on).`,
-            `完成 —— 在 ${ms} ms 内对 ${docs.length} 段文本完成重排序（模型已下载一次，之后将走缓存）。`
-          )
-        : L(
-            `Done — reranked ${docs.length} passages in ${ms} ms, fully in your browser.`,
-            `完成 —— 在 ${ms} ms 内对 ${docs.length} 段文本完成重排序，全程在你的浏览器中运行。`
-          ),
+      L(
+        `Done — ${docs.length} passages in ${primary.ms} ms (cross-encoder) + bi-encoder proxy shown for comparison.`,
+        `完成 —— ${docs.length} 段文本 cross-encoder 耗时 ${primary.ms} ms，并已展示 bi-encoder 代理对比。`
+      ),
       false
     );
-    if (els.region && els.region.scrollIntoView) {
-      els.region.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
+    els.region?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   } catch (err) {
     console.error(err);
     showProgress(null);
-    setStatus(
-      L("Something went wrong: ", "出错了：") +
-        (err && err.message ? err.message : err),
-      false
-    );
+    const msg = err?.message || String(err);
+    if (/webgpu/i.test(msg) && useWebgpu) {
+      setStatus(
+        L("WebGPU failed — uncheck WebGPU and retry.", "WebGPU 失败 —— 请取消勾选后重试。"),
+        false
+      );
+    } else {
+      setStatus(L("Something went wrong: ", "出错了：") + msg, false);
+    }
   } finally {
     els.run.disabled = false;
   }
@@ -611,26 +762,30 @@ function clearAll() {
   if (els.query) els.query.value = "";
   if (els.docs) els.docs.value = "";
   if (els.region) els.region.hidden = true;
+  if (els.dualRegion) els.dualRegion.hidden = true;
   lastRun = null;
-  currentPreset = null;
+  currentPreset = SAMPLES[0].id;
   userEdited = false;
+  history.replaceState(null, "", location.pathname);
   renderPresets();
+  loadPreset(currentPreset);
   idleStatus();
   if (els.query) els.query.focus();
 }
 
-/* ---------------- Wiring & lifecycle ---------------- */
-
 if (els.run) els.run.addEventListener("click", run);
 if (els.clear) els.clear.addEventListener("click", clearAll);
-
-// Keyboard shortcuts: Enter in query field → run; Ctrl/Cmd+Enter in textarea → run; Esc → clear.
+if (els.share) els.share.addEventListener("click", shareLink);
 if (els.query) {
   els.query.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.shiftKey && !e.ctrlKey && !e.metaKey) {
       e.preventDefault();
       run();
     }
+  });
+  els.query.addEventListener("input", () => {
+    markEdited();
+    syncUrl();
   });
 }
 if (els.docs) {
@@ -640,21 +795,25 @@ if (els.docs) {
       run();
     }
   });
+  els.docs.addEventListener("input", () => {
+    markEdited();
+    updateDocWarning();
+    syncUrl();
+  });
 }
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && document.activeElement &&
-      (document.activeElement === els.query || document.activeElement === els.docs)) {
+  if (
+    e.key === "Escape" &&
+    document.activeElement &&
+    (document.activeElement === els.query || document.activeElement === els.docs)
+  ) {
     clearAll();
   }
 });
 if (els.copyJson)
-  els.copyJson.addEventListener("click", () =>
-    copyText(exportJson(), els.copyJson)
-  );
+  els.copyJson.addEventListener("click", () => copyText(exportJson(), els.copyJson));
 if (els.copyMd)
-  els.copyMd.addEventListener("click", () =>
-    copyText(exportMarkdown(), els.copyMd)
-  );
+  els.copyMd.addEventListener("click", () => copyText(exportMarkdown(), els.copyMd));
 
 function markEdited() {
   if (!userEdited) {
@@ -662,43 +821,36 @@ function markEdited() {
     renderPresets();
   }
 }
-if (els.query) els.query.addEventListener("input", markEdited);
-if (els.docs) els.docs.addEventListener("input", markEdited);
 
 function idleStatus() {
   setStatus(
     L(
-      "Ready. Pick a scenario or paste your own, then click “Rerank”.",
-      "准备就绪。选择一个示例或粘贴你自己的内容，然后点击“重排序”。"
+      "Ready. Pick a scenario or paste your own, then click “Rerank”. Enter in query · Ctrl+Enter in passages · Esc to clear.",
+      "准备就绪。选择示例或粘贴内容，点击“重排序”。查询框 Enter · 段落 Ctrl+Enter · Esc 清空。"
     ),
     false
   );
 }
 
-// First paint: model meta, preset buttons, a loaded sample, idle status.
 renderModelMeta();
 renderPresets();
-loadPreset(currentPreset);
+if (location.search) loadFromUrl();
+else loadPreset(currentPreset);
 idleStatus();
 
-// Keep dynamic UI in sync when the user switches language.
 document.addEventListener("i18n:changed", function () {
-  // Re-label the model dropdown notes.
   if (els.model) {
-    Array.from(els.model.options).forEach((opt) => {
-      const m = MODELS[opt.value];
-      if (m) opt.textContent = `${m.name} · ~${m.sizeMB} MB · ${L(m.noteEn, m.noteZh)}`;
-    });
+    const sel = els.model.value;
+    fillModelSelect(els.model, sel);
+    if (els.modelB) fillModelSelect(els.modelB, els.modelB.value);
   }
   renderModelMeta();
   renderPresets();
-  // Reload the active preset in the new language if the user hasn't edited it.
+  updateDocWarning();
   if (currentPreset && !userEdited) {
-    const keepStatus = els.status ? els.status.textContent : "";
+    const keepStatus = els.status?.textContent || "";
     loadPreset(currentPreset);
-    // loadPreset overwrites the status line; restore a neutral one if we were idle.
     if (/Ready|准备就绪/.test(keepStatus)) idleStatus();
   }
-  // Re-render the results chrome (heads, stats, copy labels) in the new language.
   if (lastRun) renderResults(lastRun);
 });

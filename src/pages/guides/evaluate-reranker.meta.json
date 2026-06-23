@@ -1,0 +1,11 @@
+{
+  "title": "How to evaluate rerankers — NDCG, MRR, and labelled queries | reranker.uk",
+  "description": "Practical guide to evaluating rerank models: build a labelled query set, measure NDCG@k and MRR, compare before/after reranking, and regression-test pipeline changes.",
+  "canonical": "https://reranker.uk/guides/evaluate-reranker.html",
+  "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  "og_type": "article",
+  "og_title": "How to evaluate rerankers",
+  "og_description": "NDCG, MRR, labelled queries, and regression tests for rerank models.",
+  "head_extra": "<script type=\"application/ld+json\">\r\n  {\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"headline\":\"How to evaluate rerankers\",\"datePublished\":\"2026-06-23\",\"dateModified\":\"2026-06-23\",\"author\":{\"@type\":\"Organization\",\"name\":\"reranker.uk\"},\"mainEntityOfPage\":\"https://reranker.uk/guides/evaluate-reranker.html\"}\r\n  </script>",
+  "page_scripts": "<script src=\"/assets/js/i18n/evaluate-reranker.js\"></script>"
+}

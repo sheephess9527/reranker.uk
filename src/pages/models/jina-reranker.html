@@ -1,0 +1,132 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Jina Reranker</div>
+      <h1>Jina Reranker</h1>
+      <p class="meta">Open weights + Hosted API · Jina AI · <time datetime="2026-06-21">Updated 21 Jun 2026</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Open weights</span><span class="pill">Hosted API</span><span class="pill info">Free tier</span><span class="pill">Browser-runnable tiny</span></div>
+      <p class="lead">Jina AI's reranker family is unique in offering both open-weight models you can self-host <em>and</em> a hosted API — with the same model. Their <code>v1-tiny</code> variant is small enough to run in the browser via transformers.js, which is exactly what powers <a href="/demo.html">this site's live demo</a>.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#models">Model variants</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#usage">Quick start</a></li>
+          <li><a href="#browser">Browser / edge use</a></li>
+          <li><a href="#pros-cons">Pros and cons</a></li>
+        </ol>
+      </div>
+
+      <h2 id="models">Model variants</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Size</th><th>Languages</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>jina-reranker-v2-base-multilingual</code></td><td>~278 MB</td><td>100+ langs</td><td>Flagship; strong multilingual BEIR</td></tr>
+            <tr><td><code>jina-reranker-v1-base-en</code></td><td>~278 MB</td><td>English</td><td>Good English baseline</td></tr>
+            <tr><td><code>jina-reranker-v1-tiny-en</code></td><td>~33 MB</td><td>English</td><td>Tiny; runs in browser / on edge</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="pricing">Pricing</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Tier</th><th>Price</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Free tier</td><td>1 M tokens/month free — no credit card</td></tr>
+            <tr><td>Pay-as-you-go</td><td>~$0.018 / 1M tokens</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">Token-based pricing is friendlier for long documents than per-call pricing. Check the Jina AI website for current rates.</p>
+
+      <h2 id="usage">Quick start</h2>
+      <h3>Hosted API (Python)</h3>
+      <pre><code>import requests
+
+def rerank(query: str, documents: list[str], top_n: int = 5) -> list[str]:
+    resp = requests.post(
+        "https://api.jina.ai/v1/rerank",
+        headers={"Authorization": "Bearer YOUR_KEY", "Content-Type": "application/json"},
+        json={
+            "model": "jina-reranker-v2-base-multilingual",
+            "query": query,
+            "documents": documents,
+            "top_n": top_n,
+        },
+    ).json()
+    return [documents[r["index"]] for r in resp["results"]]</code></pre>
+
+      <h3>Self-hosted (sentence-transformers)</h3>
+      <pre><code>from sentence_transformers import CrossEncoder
+
+# Open weights — same model, self-hosted
+model = CrossEncoder("jinaai/jina-reranker-v2-base-multilingual",
+                     trust_remote_code=True, max_length=1024)
+
+scores = model.predict([(query, doc) for doc in documents])
+ranked = sorted(zip(scores, documents), reverse=True)</code></pre>
+
+      <h2 id="browser">Browser / edge use</h2>
+      <p>The <code>v1-tiny</code> model (33 MB quantised) loads via transformers.js in under 10 seconds on a typical broadband connection and runs scoring at ~200 ms for a 10-candidate batch. This is what powers our demo:</p>
+      <pre><code>// transformers.js (ES module in the browser)
+import { AutoTokenizer, AutoModelForSequenceClassification }
+  from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3";
+
+const tokenizer = await AutoTokenizer.from_pretrained(
+  "jinaai/jina-reranker-v1-tiny-en", { dtype: "q8" }
+);
+const model = await AutoModelForSequenceClassification.from_pretrained(
+  "jinaai/jina-reranker-v1-tiny-en", { dtype: "q8" }
+);
+
+const inputs = tokenizer([query, query], {
+  text_pair: [doc1, doc2],
+  padding: true, truncation: true,
+});
+const { logits } = await model(inputs);
+const scores = logits.sigmoid().tolist();</code></pre>
+
+      <h2 id="pros-cons">Pros and cons</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 style="color:var(--good);margin-top:0">Pros</h3>
+          <ul class="feature-list">
+            <li>Dual-mode: same model as API or self-hosted weights</li>
+            <li>Tiny variant runs in the browser — unique in the space</li>
+            <li>Generous free tier (1M tokens/month, no card needed)</li>
+            <li>Strong multilingual quality on v2</li>
+            <li>Token-based pricing suits long documents</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--danger);margin-top:0">Cons</h3>
+          <ul style="padding-left:1.2rem;color:var(--text-soft)">
+            <li>v1-tiny is English-only and lower quality</li>
+            <li>Smaller company than Cohere — less ecosystem tooling</li>
+            <li>Self-hosted requires <code>trust_remote_code=True</code></li>
+            <li>Token pricing can be opaque for short passages</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta-band" style="margin-top:2rem">
+        <h2 style="margin-top:0">jina-reranker-v1-tiny powers this demo</h2>
+        <p class="soft">See it score your own passages live in the browser — no API key, no data leaving the page.</p>
+        <a class="btn btn-primary" href="/demo.html">Open the demo →</a>
+      </div>
+
+      <h2>Other models</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/models/bge-reranker.html"><h3>bge-reranker</h3><p>Free, open-weight alternative.</p></a>
+        <a class="card" href="/models/cohere-rerank.html"><h3>Cohere Rerank</h3><p>Mature hosted API.</p></a>
+        <a class="card" href="/models/mxbai-rerank.html"><h3>mxbai-rerank</h3><p>Apache 2.0 open weights, browser xsmall.</p></a>
+        <a class="card" href="/models/voyage-rerank.html"><h3>Voyage Rerank</h3><p>High-precision hosted API.</p></a>
+      </div>
+    </article>
+  </main>

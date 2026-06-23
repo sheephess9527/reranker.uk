@@ -1,0 +1,11 @@
+{
+  "title": "Live reranker demo — cross-encoder reranking in your browser | reranker.uk",
+  "description": "Try a rerank model live in your browser. Paste a query and candidate passages and a cross-encoder scores and reorders them in real time — 100% client-side with transformers.js, no API key and no cost.",
+  "canonical": "https://reranker.uk/demo.html",
+  "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  "og_type": "website",
+  "og_title": "Live in-browser reranker demo",
+  "og_description": "A real cross-encoder reranking your text, running entirely in your browser. No API, no cost.",
+  "head_extra": "<link rel=\"preconnect\" href=\"https://cdn.jsdelivr.net\" crossorigin />\r\n  <link rel=\"dns-prefetch\" href=\"https://cdn.jsdelivr.net\" />\r\n  <script type=\"application/ld+json\">\r\n  {\r\n    \"@context\": \"https://schema.org\",\r\n    \"@graph\": [\r\n      {\r\n        \"@type\": \"BreadcrumbList\",\r\n        \"itemListElement\": [\r\n          { \"@type\": \"ListItem\", \"position\": 1, \"name\": \"Home\", \"item\": \"https://reranker.uk/\" },\r\n          { \"@type\": \"ListItem\", \"position\": 2, \"name\": \"Live demo\", \"item\": \"https://reranker.uk/demo.html\" }\r\n        ]\r\n      },\r\n      {\r\n        \"@type\": \"WebApplication\",\r\n        \"name\": \"In-browser reranker demo\",\r\n        \"url\": \"https://reranker.uk/demo.html\",\r\n        \"description\": \"A cross-encoder reranking demo that scores and reorders candidate passages entirely in the browser with transformers.js — no API key and no cost.\",\r\n        \"applicationCategory\": \"DeveloperApplication\",\r\n        \"operatingSystem\": \"Any (modern web browser)\",\r\n        \"browserRequirements\": \"Requires JavaScript and WebAssembly\",\r\n        \"inLanguage\": \"en\",\r\n        \"isPartOf\": { \"@type\": \"WebSite\", \"name\": \"reranker.uk\", \"url\": \"https://reranker.uk/\" },\r\n        \"offers\": { \"@type\": \"Offer\", \"price\": \"0\", \"priceCurrency\": \"USD\" }\r\n      }\r\n    ]\r\n  }\r\n  </script>",
+  "page_scripts": "<script src=\"/assets/js/i18n/demo.js\"></script>\n  <script type=\"module\" src=\"/assets/js/demo.js\"></script>"
+}

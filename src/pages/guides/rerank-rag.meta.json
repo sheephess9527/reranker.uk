@@ -1,0 +1,11 @@
+{
+  "title": "How to add reranking to your RAG pipeline — practical guide | reranker.uk",
+  "description": "Step-by-step guide to adding a rerank model to RAG: retrieve 50–100 candidates with vector search, rerank with a cross-encoder, keep the top 5 for the prompt. Includes Python code, top-k tips, latency trade-offs, and model choices.",
+  "canonical": "https://reranker.uk/guides/rerank-rag.html",
+  "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  "og_type": "article",
+  "og_title": "How to add reranking to your RAG pipeline",
+  "og_description": "Retrieve wide, rerank for precision, send fewer tokens to the LLM. A practical walkthrough with code.",
+  "head_extra": "<script type=\"application/ld+json\">\r\n  {\r\n    \"@context\": \"https://schema.org\",\r\n    \"@type\": \"HowTo\",\r\n    \"name\": \"How to add reranking to a RAG pipeline\",\r\n    \"description\": \"Add a cross-encoder reranker between retrieval and the LLM call to improve answer quality.\",\r\n    \"step\": [\r\n      { \"@type\": \"HowToStep\", \"name\": \"Retrieve candidates\", \"text\": \"Use vector search or BM25 to pull the top 50–100 candidate chunks.\" },\r\n      { \"@type\": \"HowToStep\", \"name\": \"Rerank\", \"text\": \"Score each (query, candidate) pair with a cross-encoder reranker.\" },\r\n      { \"@type\": \"HowToStep\", \"name\": \"Keep the best\", \"text\": \"Pass only the top 3–10 reranked passages to the LLM.\" }\r\n    ]\r\n  }\r\n  </script>\r\n  <!-- seo:jsonld -->\r\n  <script type=\"application/ld+json\">\r\n  {\r\n    \"@context\": \"https://schema.org\",\r\n    \"@graph\": [\r\n      {\r\n        \"@type\": \"BreadcrumbList\",\r\n        \"itemListElement\": [\r\n          {\r\n            \"@type\": \"ListItem\",\r\n            \"position\": 1,\r\n            \"name\": \"Home\",\r\n            \"item\": \"https://reranker.uk/\"\r\n          },\r\n          {\r\n            \"@type\": \"ListItem\",\r\n            \"position\": 2,\r\n            \"name\": \"How to add reranking to RAG\",\r\n            \"item\": \"https://reranker.uk/guides/rerank-rag.html\"\r\n          }\r\n        ]\r\n      }\r\n    ]\r\n  }\r\n  </script>",
+  "page_scripts": "<script src=\"/assets/js/i18n/rerank-rag.js\"></script>"
+}

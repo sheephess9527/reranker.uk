@@ -1,0 +1,126 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>bge-reranker</div>
+      <h1>bge-reranker</h1>
+      <p class="meta">Open weights · BAAI · free to self-host · <time datetime="2026-06-21">Updated 21 Jun 2026</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Open weights</span><span class="pill">Self-host</span><span class="pill">Multilingual</span></div>
+      <p class="lead">The bge-reranker family from BAAI (Beijing Academy of Artificial Intelligence) are open-weight cross-encoders trained specifically for passage reranking. They're the standard self-hosted option: free to download, drop into sentence-transformers, and strong enough to beat most commercial APIs on English benchmarks.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#models">Model variants</a></li>
+          <li><a href="#benchmarks">Benchmarks</a></li>
+          <li><a href="#usage">Quick start</a></li>
+          <li><a href="#pros-cons">Pros and cons</a></li>
+        </ol>
+      </div>
+
+      <h2 id="models">Model variants</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Size</th><th>Languages</th><th>Best for</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>BAAI/bge-reranker-base</code></td><td>278 MB</td><td>English</td><td>Fast CPU inference, good baseline</td></tr>
+            <tr><td><code>BAAI/bge-reranker-large</code></td><td>560 MB</td><td>English</td><td>Stronger English quality</td></tr>
+            <tr><td><code>BAAI/bge-reranker-v2-m3</code></td><td>568 MB</td><td>100+ langs</td><td>Best all-round; multilingual powerhouse</td></tr>
+            <tr><td><code>BAAI/bge-reranker-v2-gemma</code></td><td>2.5 GB</td><td>100+ langs</td><td>Highest quality; needs GPU</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Recommendation:</strong> start with <code>bge-reranker-v2-m3</code>. It's multilingual, has strong BEIR numbers, and works fine on CPU for moderate traffic. Upgrade to the Gemma variant only if you have GPU and need maximum quality.</p>
+
+      <h2 id="benchmarks">Benchmarks</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>BEIR NDCG@10 (avg)</th><th>MS MARCO MRR@10</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>bge-reranker-base</td><td>~56.8</td><td>~39.0</td></tr>
+            <tr><td>bge-reranker-large</td><td>~58.4</td><td>~40.7</td></tr>
+            <tr><td>bge-reranker-v2-m3</td><td>~60.1</td><td>~41.1</td></tr>
+            <tr><td>bge-reranker-v2-gemma</td><td>~61.8</td><td>~42.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">Scores are approximate averages across the 18 BEIR datasets. Results vary by dataset — always evaluate on your own domain.</p>
+
+      <h2 id="usage">Quick start</h2>
+      <h3>Install</h3>
+      <pre><code>pip install sentence-transformers</code></pre>
+
+      <h3>Rerank a list of passages</h3>
+      <pre><code>from sentence_transformers import CrossEncoder
+
+model = CrossEncoder("BAAI/bge-reranker-v2-m3", max_length=512)
+
+query = "How do I add reranking to my RAG pipeline?"
+passages = [
+    "Rerankers score each query-passage pair with a cross-encoder.",
+    "BM25 is a classical keyword-based retrieval method.",
+    "London is the capital of the United Kingdom.",
+    "Two-stage retrieval: retrieve 50 candidates, rerank to top 5.",
+]
+
+scores = model.predict([(query, p) for p in passages])
+ranked = sorted(zip(scores, passages), reverse=True)
+
+for score, text in ranked:
+    print(f"{score:.4f}  {text[:80]}")</code></pre>
+
+      <h3>In a RAG pipeline</h3>
+      <pre><code>from sentence_transformers import CrossEncoder
+
+reranker = CrossEncoder("BAAI/bge-reranker-v2-m3")
+
+def rag_answer(query: str, vector_db, llm) -> str:
+    # Stage 1: retrieve wide
+    candidates = vector_db.search(query, top_k=50)
+    # Stage 2: rerank tight
+    scores = reranker.predict([(query, c) for c in candidates])
+    top5 = [c for _, c in sorted(zip(scores, candidates), reverse=True)[:5]]
+    # Stage 3: generate
+    return llm.complete(f"Context:\n" + "\n\n".join(top5) + f"\n\nQ: {query}")</code></pre>
+
+      <h2 id="pros-cons">Pros and cons</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 style="color:var(--good);margin-top:0">Pros</h3>
+          <ul class="feature-list">
+            <li>Completely free — no API key, no per-call cost</li>
+            <li>Strong BEIR numbers competitive with commercial APIs</li>
+            <li>Easy integration via sentence-transformers / HuggingFace</li>
+            <li>Multilingual (v2-m3 covers 100+ languages)</li>
+            <li>Full control: quantise, fine-tune, distil</li>
+            <li>Active development from BAAI</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--danger);margin-top:0">Cons</h3>
+          <ul style="padding-left:1.2rem;color:var(--text-soft)">
+            <li>You host, you operate — infra overhead</li>
+            <li>CPU inference is slow beyond ~50 candidates</li>
+            <li>No SLA, no managed scaling</li>
+            <li>Largest variants need a GPU to be practical</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta-band" style="margin-top:2rem">
+        <h2 style="margin-top:0">See a cross-encoder score live</h2>
+        <p class="soft">Our demo uses a quantised open-weight cross-encoder — same family, running entirely in your browser.</p>
+        <a class="btn btn-primary" href="/demo.html">Open the demo →</a>
+      </div>
+
+      <h2>Other models</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/models/cohere-rerank.html"><h3>Cohere Rerank</h3><p>Best hosted multilingual API.</p></a>
+        <a class="card" href="/models/jina-reranker.html"><h3>Jina Reranker</h3><p>Open weights + hosted API.</p></a>
+        <a class="card" href="/models/mxbai-rerank.html"><h3>mxbai-rerank</h3><p>Apache 2.0 open weights, browser xsmall.</p></a>
+        <a class="card" href="/models/voyage-rerank.html"><h3>Voyage Rerank</h3><p>High-precision hosted API.</p></a>
+      </div>
+    </article>
+  </main>

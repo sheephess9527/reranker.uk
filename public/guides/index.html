@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Page not found (404) | reranker.uk</title>
-  <meta name="description" content="That page could not be found. Head back to reranker.uk for guides on rerankers, model comparisons, and a live in-browser reranking demo." />
-  <link rel="canonical" href="" />
+  <title>Reranker guides — fundamentals to production | reranker.uk</title>
+  <meta name="description" content="All reranker.uk guides: what is a reranker, cross-encoder vs bi-encoder, RAG integration, hybrid retrieval, and how to evaluate rerank models." />
+  <link rel="canonical" href="https://reranker.uk/guides/" />
   <meta name="theme-color" content="#0b0d17" />
-  <meta name="robots" content="noindex, follow" />
+  <meta name="robots" content="index, follow" />
   <meta name="author" content="reranker.uk" />
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Page not found (404) | reranker.uk" />
-  <meta property="og:description" content="That page could not be found. Head back to reranker.uk for guides on rerankers, model comparisons, and a live in-browser reranking demo." />
-  <meta property="og:url" content="" />
+  <meta property="og:title" content="Reranker guides" />
+  <meta property="og:description" content="From fundamentals to production: every guide on rerankers for retrieval and RAG." />
+  <meta property="og:url" content="https://reranker.uk/guides/" />
   <meta property="og:site_name" content="reranker.uk" />
   <meta property="og:locale" content="en_GB" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -44,21 +44,49 @@
     </nav>
   </header>
 <main id="main">
-    <section class="hero container center">
-      <span class="eyebrow">404</span>
-      <h1>This page took a wrong turn</h1>
-      <p class="lead">The page you were looking for doesn't exist — it may have moved or never been here. Let's get you back on track.</p>
-      <div class="hero-actions" style="justify-content:center">
-        <a class="btn btn-primary" href="/">Back to home</a>
-        <a class="btn btn-ghost" href="/demo.html">Try the live demo</a>
-      </div>
+    <section class="hero container" style="padding-bottom:1.5rem">
+      <h1>Guides</h1>
+      <p class="lead">From “what is a reranker?” to hybrid retrieval pipelines and evaluation — pick a starting point or read straight through.</p>
     </section>
 
     <section class="section container">
-      <div class="grid grid-3">
-        <a class="card" href="/guides/what-is-a-reranker.html"><h3>What is a reranker?</h3><p>Start with the fundamentals of two-stage retrieval.</p></a>
-        <a class="card" href="/models/"><h3>Compare rerank models</h3><p>bge, Cohere, Jina, Voyage and mxbai side by side.</p></a>
-        <a class="card" href="/guides/rerank-rag.html"><h3>Rerank for RAG</h3><p>Add a reranking stage to your pipeline, with code.</p></a>
+      <div class="grid grid-2">
+        <a class="card" href="/guides/what-is-a-reranker.html">
+          <span class="ico" aria-hidden="true">🧭</span>
+          <h3>What is a reranker?</h3>
+          <p>Two-stage retrieval, why order matters, when reranking pays off.</p>
+          <div class="tag-row"><span class="pill info">Fundamentals</span><span class="pill">~7 min</span></div>
+        </a>
+        <a class="card" href="/guides/cross-encoder-vs-bi-encoder.html">
+          <span class="ico" aria-hidden="true">⚖️</span>
+          <h3>Cross-encoder vs bi-encoder</h3>
+          <p>Speed vs accuracy — and why production stacks use both.</p>
+          <div class="tag-row"><span class="pill info">Architecture</span><span class="pill">~8 min</span></div>
+        </a>
+        <a class="card" href="/guides/rerank-rag.html">
+          <span class="ico" aria-hidden="true">🔧</span>
+          <h3>How to add reranking to RAG</h3>
+          <p>Retrieve wide, rerank tight — with Python, LangChain, and latency tips.</p>
+          <div class="tag-row"><span class="pill info">Practical</span><span class="pill">~10 min</span></div>
+        </a>
+        <a class="card" href="/guides/hybrid-retrieval-rerank.html">
+          <span class="ico" aria-hidden="true">🔀</span>
+          <h3>Hybrid retrieval + rerank</h3>
+          <p>Combine BM25 and vector search, then let the reranker fix the merge.</p>
+          <div class="tag-row"><span class="pill info">Production</span><span class="pill">~9 min</span></div>
+        </a>
+        <a class="card" href="/guides/evaluate-reranker.html">
+          <span class="ico" aria-hidden="true">📊</span>
+          <h3>How to evaluate rerankers</h3>
+          <p>NDCG, MRR, labelled queries, and regression tests for your domain.</p>
+          <div class="tag-row"><span class="pill info">Evaluation</span><span class="pill">~8 min</span></div>
+        </a>
+        <a class="card" href="/demo.html">
+          <span class="ico" aria-hidden="true">▶️</span>
+          <h3>Live in-browser demo</h3>
+          <p>Watch a cross-encoder reorder passages — bi-encoder proxy included.</p>
+          <div class="tag-row"><span class="pill good">Interactive</span></div>
+        </a>
       </div>
     </section>
   </main>
@@ -100,7 +128,7 @@
     </div>
   </footer>
   <script src="/assets/js/main.js"></script>
-  <script src="/assets/js/i18n/404.js"></script>
+  <script src="/assets/js/i18n/guides-index.js"></script>
   <script src="/assets/js/i18n/shared.js"></script>
   <script src="/assets/js/i18n.js"></script>
 </body>

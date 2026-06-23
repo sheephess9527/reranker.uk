@@ -16,13 +16,13 @@
   <meta property="og:title" content="Cohere Rerank — hosted rerank API review" />
   <meta property="og:description" content="A mature hosted rerank API with strong multilingual quality, generous free tier, and SDK support in Python, Node, Java and Go." />
   <meta property="og:url" content="https://reranker.uk/models/cohere-rerank.html" />
+  <meta property="og:site_name" content="reranker.uk" />
+  <meta property="og:locale" content="en_GB" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" />
-  <meta property="og:site_name" content="reranker.uk" />
-  <meta property="og:locale" content="en_GB" />
-  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" />
   <link rel="stylesheet" href="/assets/css/style.css" />
   <!-- seo:jsonld -->
@@ -89,30 +89,28 @@
     ]
   }
   </script>
-
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main" data-i18n="shared.skip">Skip to content</a>
   <header class="site-header">
     <nav class="nav container">
       <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       <ul class="nav-links">
-        <li><a href="/guides/what-is-a-reranker.html">What is a reranker</a></li>
-        <li><a href="/guides/cross-encoder-vs-bi-encoder.html">Cross- vs bi-encoder</a></li>
-        <li><a href="/guides/rerank-rag.html">Rerank for RAG</a></li>
-        <li><a href="/models/">Models</a></li>
-        <li><a class="nav-cta" href="/demo.html">Live demo</a></li>
+        <li><a href="/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
+        <li><a href="/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
+        <li><a href="/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
+        <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
+        <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <button class="lang-toggle" aria-label="切换到中文" title="切换到中文">中文</button>
     </nav>
   </header>
-
-  <main id="main">
+<main id="main">
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Cohere Rerank</div>
       <h1>Cohere Rerank</h1>
-      <p class="meta">Hosted API · Cohere</p>
+      <p class="meta">Hosted API · Cohere · <time datetime="2026-06-21">Updated 21 Jun 2026</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">Hosted API</span><span class="pill">Multilingual</span><span class="pill info">Free tier</span></div>
       <p class="lead">Cohere Rerank was one of the first commercial reranking APIs and remains among the most widely deployed. The current generation — <code>rerank-v3.5</code> — delivers strong multilingual precision on BEIR benchmarks, a clean REST + SDK interface, and a free tier generous enough for development and low-volume production.</p>
 
@@ -244,25 +242,28 @@ result.results.forEach((r) => console.log(r.relevanceScore, documents[r.index]))
       </div>
     </article>
   </main>
-
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div>
           <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
-          <p class="muted" style="margin-top:.8rem;max-width:34ch">An open educational resource on rerankers for retrieval and RAG — plus a zero-cost demo that runs in your browser.</p>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch" data-i18n="shared.footer.blurb">An open educational resource on rerankers for retrieval and RAG — plus a zero-cost demo that runs in your browser.</p>
+          <p style="margin-top:.6rem"><a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer" data-i18n="shared.footer.github">View source on GitHub</a></p>
         </div>
         <div>
-          <h4>Guides</h4>
+          <h4 data-i18n="shared.footer.guides">Guides</h4>
           <ul>
-            <li><a href="/guides/what-is-a-reranker.html">What is a reranker</a></li>
-            <li><a href="/guides/cross-encoder-vs-bi-encoder.html">Cross- vs bi-encoder</a></li>
-            <li><a href="/guides/rerank-rag.html">Rerank for RAG</a></li>
-            <li><a href="/demo.html">Live demo</a></li>
+            <li><a href="/guides/" data-i18n="shared.footer.allGuides">All guides</a></li>
+            <li><a href="/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
+            <li><a href="/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
+            <li><a href="/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
+            <li><a href="/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
+            <li><a href="/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
+            <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
           </ul>
         </div>
         <div>
-          <h4>Models</h4>
+          <h4 data-i18n="shared.footer.models">Models</h4>
           <ul>
             <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
             <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
@@ -274,12 +275,13 @@ result.results.forEach((r) => console.log(r.relevanceScore, documents[r.index]))
       </div>
       <div class="footer-bottom">
         <span>© <span id="year"></span> reranker.uk</span>
-        <span class="muted">Open educational resource · not affiliated with any model vendor</span>
+        <span class="muted" data-i18n="shared.footer.disclaimer">Open educational resource · not affiliated with any model vendor</span>
       </div>
     </div>
   </footer>
   <script src="/assets/js/main.js"></script>
   <script src="/assets/js/i18n/cohere-rerank.js"></script>
+  <script src="/assets/js/i18n/shared.js"></script>
   <script src="/assets/js/i18n.js"></script>
 </body>
 </html>

@@ -1,0 +1,24 @@
+window.I18N_SHARED = {
+  keys: {
+    "shared.skip": "跳到正文",
+    "shared.nav.whatIs": "什么是 reranker",
+    "shared.nav.crossVsBi": "Cross- vs Bi-encoder",
+    "shared.nav.rerankRag": "为 RAG 加重排序",
+    "shared.nav.models": "模型对比",
+    "shared.nav.demo": "在线 Demo",
+    "shared.footer.blurb":
+      "一个关于检索与 RAG 重排序（reranker）的开放学习资源，外加一个在浏览器里零成本运行的实时 Demo。",
+    "shared.footer.github": "在 GitHub 上查看源码",
+    "shared.footer.guides": "指南",
+    "shared.footer.allGuides": "全部指南",
+    "shared.footer.hybrid": "混合检索 + 重排序",
+    "shared.footer.evaluate": "评测 reranker",
+    "shared.footer.models": "模型",
+    "shared.footer.disclaimer": "开放教育资源 · 与任何模型厂商无关",
+    "shared.article.updated": "更新于",
+    "shared.toc": "本页目录",
+    "shared.breadcrumb.home": "首页",
+    "shared.breadcrumb.guides": "指南",
+    "shared.keepReading": "继续阅读",
+  },
+};

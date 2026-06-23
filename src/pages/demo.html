@@ -1,0 +1,98 @@
+<main id="main">
+    <section class="hero container" style="padding-bottom:1.5rem">
+      <span class="eyebrow">100% in your browser</span>
+      <h1>Live reranking demo</h1>
+      <p class="lead">Paste a query and candidate passages. A cross-encoder scores every pair; a bi-encoder proxy (token overlap) shows why independent embeddings mis-order. Compare two models, share a link, or enable WebGPU for faster inference.</p>
+    </section>
+
+    <section class="demo-wrap container">
+      <div class="demo-panel">
+        <div class="demo-input-grid">
+          <div>
+            <div class="field">
+              <label for="model-select">Rerank model <span class="hint">— downloaded once, cached in your browser</span></label>
+              <select id="model-select"></select>
+              <p class="model-meta" id="model-meta"></p>
+            </div>
+            <div class="field">
+              <label class="check-row">
+                <input type="checkbox" id="webgpu-toggle" />
+                <span>Use WebGPU if available <span class="hint">— faster on supported GPUs</span></span>
+              </label>
+            </div>
+            <div class="field">
+              <label class="check-row">
+                <input type="checkbox" id="compare-toggle" />
+                <span>Compare two models side by side</span>
+              </label>
+              <select id="model-select-b" disabled aria-label="Second model for comparison"></select>
+            </div>
+            <div class="field">
+              <label>Try a scenario <span class="hint">— a realistic query mixed with distractor passages</span></label>
+              <div class="preset-row" id="preset-row"></div>
+            </div>
+            <div class="field">
+              <label for="query-input">Query</label>
+              <input type="text" id="query-input" placeholder="e.g. How do I add reranking to my RAG pipeline?" />
+            </div>
+          </div>
+          <div>
+            <div class="field field-fill">
+              <label for="docs-input">Candidate passages <span class="hint">— one per line (max 30)</span></label>
+              <textarea id="docs-input" placeholder="Paste one candidate passage per line…"></textarea>
+            </div>
+            <p class="doc-warning" id="doc-warning" hidden role="status"></p>
+          </div>
+        </div>
+        <div class="demo-toolbar">
+          <button class="btn btn-primary" id="run-btn">Rerank</button>
+          <button class="btn btn-ghost" id="clear-btn">Clear</button>
+          <button class="btn btn-ghost btn-sm" id="share-btn" type="button">Copy share link</button>
+        </div>
+        <div class="status" id="status" aria-live="polite" aria-atomic="true"></div>
+        <div class="progress-bar" id="progress-wrap" style="display:none"><i id="progress-bar"></i></div>
+      </div>
+
+      <div class="demo-output" id="results-region" hidden>
+        <div class="results-bar" id="results-bar"></div>
+        <div class="stat-row" id="stat-row"></div>
+        <div class="compare-grid compare-grid-3">
+          <div class="compare-col"><div class="results" id="results-before"></div></div>
+          <div class="compare-col"><div class="results" id="results-bi"></div></div>
+          <div class="compare-col"><div class="results" id="results-after"></div></div>
+        </div>
+        <div class="dual-compare" id="dual-results" hidden>
+          <h3 class="dual-head">Model comparison</h3>
+          <div class="compare-grid">
+            <div class="compare-col"><div class="results" id="dual-col-a"></div></div>
+            <div class="compare-col"><div class="results" id="dual-col-b"></div></div>
+          </div>
+        </div>
+        <div class="copy-actions">
+          <span class="copy-label">Copy results:</span>
+          <button class="btn btn-ghost btn-sm" id="copy-json">Copy JSON</button>
+          <button class="btn btn-ghost btn-sm" id="copy-md">Copy Markdown</button>
+        </div>
+      </div>
+
+      <div class="callout accent" style="margin-top:2rem">
+        <p><strong>Privacy &amp; cost:</strong> everything here runs locally with <a href="https://github.com/huggingface/transformers.js" rel="noopener noreferrer">transformers.js</a> on ONNX Runtime Web. Your query and passages never leave the browser, there’s no API key, and there’s no per-call cost — which is exactly why this page can be free and abuse-proof.</p>
+      </div>
+    </section>
+
+    <section class="section container narrow">
+      <h2>How this demo works</h2>
+      <p>The model is a <strong>cross-encoder</strong>: instead of embedding the query and each passage separately, it feeds the pair <code>(query, passage)</code> through the network together and outputs a single relevance score. The middle column shows a <strong>bi-encoder proxy</strong> (token overlap only) so you can see why cosine-style retrieval often mis-orders before reranking.</p>
+      <ol>
+        <li>Your query is paired with every candidate passage.</li>
+        <li>Each pair is tokenised and run through the cross-encoder.</li>
+        <li>The output logit is squashed to a 0–1 relevance score.</li>
+        <li>Passages are sorted by score; compare against the bi-encoder proxy column.</li>
+      </ol>
+      <p>That’s the same operation you’d run as the second stage of a <a href="/guides/rerank-rag.html">RAG pipeline</a> — only here it happens in a browser tab instead of behind an API.</p>
+      <div class="callout">
+        <p><strong>Tips:</strong> use <kbd>Enter</kbd> in the query field to run, <kbd>Ctrl</kbd>+<kbd>Enter</kbd> in the passages box, <kbd>Esc</kbd> to clear. Copy the share link to send your exact query to a colleague. Enable model comparison to see how jina-tiny and mxbai-xsmall disagree on edge cases.</p>
+      </div>
+      <p class="center" style="margin-top:2rem"><a class="btn btn-ghost" href="/guides/what-is-a-reranker.html">Read: what is a reranker? →</a></p>
+    </section>
+  </main>

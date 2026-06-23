@@ -1,0 +1,11 @@
+{
+  "title": "Reranker guides — fundamentals to production | reranker.uk",
+  "description": "All reranker.uk guides: what is a reranker, cross-encoder vs bi-encoder, RAG integration, hybrid retrieval, and how to evaluate rerank models.",
+  "canonical": "https://reranker.uk/guides/",
+  "robots": "index, follow",
+  "og_type": "website",
+  "og_title": "Reranker guides",
+  "og_description": "From fundamentals to production: every guide on rerankers for retrieval and RAG.",
+  "head_extra": "",
+  "page_scripts": "<script src=\"/assets/js/i18n/guides-index.js\"></script>"
+}

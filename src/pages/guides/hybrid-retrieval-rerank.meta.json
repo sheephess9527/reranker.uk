@@ -1,0 +1,11 @@
+{
+  "title": "Hybrid retrieval + reranking — BM25, vectors, then rerank | reranker.uk",
+  "description": "How to combine BM25 and vector search for better recall, then use a cross-encoder reranker to fix ordering. Fusion strategies, top-k tuning, and when hybrid beats vectors alone.",
+  "canonical": "https://reranker.uk/guides/hybrid-retrieval-rerank.html",
+  "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  "og_type": "article",
+  "og_title": "Hybrid retrieval + reranking",
+  "og_description": "BM25 + vectors for recall, cross-encoder for precision.",
+  "head_extra": "<script type=\"application/ld+json\">\r\n  {\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"headline\":\"Hybrid retrieval + reranking\",\"datePublished\":\"2026-06-23\",\"dateModified\":\"2026-06-23\",\"author\":{\"@type\":\"Organization\",\"name\":\"reranker.uk\"},\"mainEntityOfPage\":\"https://reranker.uk/guides/hybrid-retrieval-rerank.html\"}\r\n  </script>",
+  "page_scripts": "<script src=\"/assets/js/i18n/hybrid-retrieval-rerank.js\"></script>"
+}

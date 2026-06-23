@@ -1,0 +1,71 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>What is a reranker</div>
+      <h1>What is a reranker?</h1>
+      <p class="meta">Fundamentals · ~7 min read · <time datetime="2026-06-21">Updated 21 Jun 2026</time></p>
+      <p class="lead">A <strong>reranker</strong> is a model that takes a query and a list of candidate documents and reorders them by how relevant each one actually is to the query. It almost always runs as a <em>second stage</em>: something fast retrieves a broad set of candidates, then the reranker carefully re-scores the top of that list.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#why">Why ranking order is a problem</a></li>
+          <li><a href="#two-stage">The two-stage retrieval pattern</a></li>
+          <li><a href="#how">How a rerank model scores relevance</a></li>
+          <li><a href="#when">When you should (and shouldn’t) rerank</a></li>
+          <li><a href="#try">Try it yourself</a></li>
+        </ol>
+      </div>
+
+      <h2 id="why">Why ranking order is a problem</h2>
+      <p>Modern search and <a href="/guides/rerank-rag.html">retrieval-augmented generation (RAG)</a> usually start with a vector database. You embed your documents once, embed the query at request time, and fetch the nearest neighbours by cosine similarity. This is fast and scales to millions of documents — but the <strong>ordering it produces is only roughly right</strong>.</p>
+      <p>The reason is structural. To stay fast, the retriever embeds the query and each document <em>independently</em>, with no chance for the two texts to interact. A passage that merely shares vocabulary with the query can score as highly as one that genuinely answers it. So the correct document is often <em>in</em> the top 50 — just not at position 1, 2 or 3, which is exactly where it needs to be when you only feed a few passages to an LLM.</p>
+      <blockquote>Retrieval is good at <em>recall</em> (“is the answer somewhere in the shortlist?”). It’s mediocre at <em>precision</em> (“is the answer at the very top?”). Reranking fixes precision.</blockquote>
+
+      <h2 id="two-stage">The two-stage retrieval pattern</h2>
+      <p>Rerankers exist because of a speed-versus-accuracy trade-off. The accurate way to compare a query and a document is to run them through a model <em>together</em> — but doing that against every document in your corpus would be impossibly slow. So we split the work:</p>
+      <div class="card" style="margin:1.3rem 0">
+<pre><code>Stage 1 — Retrieve (fast, approximate)
+  vector search / BM25 over the whole corpus  →  top 50–100 candidates
+
+Stage 2 — Rerank (slow per item, but only on the shortlist)
+  cross-encoder scores each (query, candidate) pair  →  reorder  →  keep top 3–10</code></pre>
+      </div>
+      <p>The retriever casts a wide net cheaply; the reranker applies an expensive, accurate model only to the handful of candidates that survived. You get most of the quality of running the big model everywhere, at a tiny fraction of the cost.</p>
+
+      <h2 id="how">How a rerank model scores relevance</h2>
+      <p>Most rerankers are <strong>cross-encoders</strong>. The query and a candidate document are concatenated into a single input and passed through a transformer, which outputs one number: a relevance score. Because every token of the query can attend to every token of the document, the model can judge things a similarity score can’t — negation, specificity, whether the passage truly answers the question rather than just mentioning the topic.</p>
+      <p>You run this once per candidate, then sort by score. The output is typically turned into a 0–1 value (via a sigmoid) so it’s easy to threshold or display.</p>
+      <div class="callout">
+        <p><strong>The key contrast:</strong> a <a href="/guides/cross-encoder-vs-bi-encoder.html">bi-encoder</a> embeds query and document separately and compares vectors — fast, but coarse. A cross-encoder reads them together and scores the pair — slow per item, but far more accurate. Rerankers are the cross-encoders you apply to a short list.</p>
+      </div>
+
+      <h2 id="when">When you should (and shouldn’t) rerank</h2>
+      <p><strong>Reranking pays off when:</strong></p>
+      <ul>
+        <li>You feed retrieved context to an LLM and want the most relevant passages first (classic RAG).</li>
+        <li>Your top-k looks “mostly right but mis-ordered”, or the right answer is in the top 50 but not the top 5.</li>
+        <li>You can afford ~tens of milliseconds of extra latency for a meaningful jump in answer quality.</li>
+        <li>You want to send <em>fewer</em> passages to the LLM (cheaper prompts) without losing the good one.</li>
+      </ul>
+      <p><strong>It’s less useful when:</strong></p>
+      <ul>
+        <li>Your retriever already returns near-perfect ordering for your domain.</li>
+        <li>You’re extremely latency-bound and can’t add a second model call.</li>
+        <li>Your candidate set is tiny (rerank 3 items and there’s little to reorder).</li>
+      </ul>
+
+      <h2 id="try">Try it yourself</h2>
+      <p>The fastest way to build intuition is to watch a reranker work. Our <a href="/demo.html">in-browser demo</a> loads a real cross-encoder and scores your own query against passages you paste — entirely on your device, no API key, no cost. Drop in a couple of off-topic lines and watch them sink.</p>
+      <div class="cta-band">
+        <h2 style="margin-top:0">See a reranker reorder text live</h2>
+        <p class="soft">No setup. A cross-encoder runs in your browser and re-scores passages in milliseconds.</p>
+        <a class="btn btn-primary" href="/demo.html">Open the live demo →</a>
+      </div>
+
+      <h2>Keep reading</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/guides/cross-encoder-vs-bi-encoder.html"><h3>Cross-encoder vs bi-encoder</h3><p>The architecture behind the speed/accuracy trade-off.</p></a>
+        <a class="card" href="/guides/rerank-rag.html"><h3>How to add reranking to RAG</h3><p>A practical, code-level walkthrough.</p></a>
+      </div>
+    </article>
+  </main>

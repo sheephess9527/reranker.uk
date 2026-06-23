@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to evaluate rerankers — NDCG, MRR, and labelled queries | reranker.uk</title>
+  <meta name="description" content="Practical guide to evaluating rerank models: build a labelled query set, measure NDCG@k and MRR, compare before/after reranking, and regression-test pipeline changes." />
+  <link rel="canonical" href="https://reranker.uk/guides/evaluate-reranker.html" />
+  <meta name="theme-color" content="#0b0d17" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="author" content="reranker.uk" />
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="How to evaluate rerankers" />
+  <meta property="og:description" content="NDCG, MRR, labelled queries, and regression tests for rerank models." />
+  <meta property="og:url" content="https://reranker.uk/guides/evaluate-reranker.html" />
+  <meta property="og:site_name" content="reranker.uk" />
+  <meta property="og:locale" content="en_GB" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" />
+  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"How to evaluate rerankers","datePublished":"2026-06-23","dateModified":"2026-06-23","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/evaluate-reranker.html"}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="shared.skip">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
+        <li><a href="/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
+        <li><a href="/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
+        <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
+        <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
+      </ul>
+      <button class="lang-toggle" aria-label="切换到中文" title="切换到中文">中文</button>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Evaluate rerankers</div>
+      <h1>How to evaluate rerankers</h1>
+      <p class="meta">Evaluation · ~8 min read · <time datetime="2026-06-23">Updated 23 Jun 2026</time></p>
+      <p class="lead">Public BEIR scores are a starting point, not a verdict. A reranker that wins on English news may flop on your support tickets. You need a <strong>small labelled set of real queries</strong> and two metrics: <strong>NDCG@k</strong> (ranking quality) and <strong>MRR</strong> (is the best answer near the top?).</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#dataset">Build a labelled query set</a></li>
+          <li><a href="#metrics">Metrics that matter</a></li>
+          <li><a href="#protocol">Evaluation protocol</a></li>
+          <li><a href="#code">Python with ranx</a></li>
+          <li><a href="#compare">Comparing rerankers</a></li>
+        </ol>
+      </div>
+
+      <h2 id="dataset">Build a labelled query set</h2>
+      <p>Pull 30–100 real queries from logs (anonymised). For each query, mark which document IDs are <em>relevant</em> (binary is enough to start). Store as JSON:</p>
+      <pre><code>{
+  "q-001": {
+    "query": "How do I reset my API key?",
+    "relevant": ["doc-42", "doc-108"]
+  }
+}</code></pre>
+      <p>Thirty queries with one gold document each is enough to see whether reranking beats retrieval-only — you’re measuring relative lift, not publishing a leaderboard.</p>
+
+      <h2 id="metrics">Metrics that matter</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Metric</th><th>What it tells you</th><th>Typical k</th></tr></thead>
+          <tbody>
+            <tr><td><strong>NDCG@k</strong></td><td>Rewards putting highly relevant docs at the top; graded relevance if you have it</td><td>5 or 10</td></tr>
+            <tr><td><strong>MRR</strong></td><td>How high the <em>first</em> relevant doc ranks — great for single-answer RAG</td><td>—</td></tr>
+            <tr><td><strong>Recall@k</strong></td><td>Is the right doc in the shortlist at all? Diagnoses retrieval, not reranker</td><td>50–100</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Run metrics <strong>before and after</strong> reranking on the <em>same</em> retrieved candidates. If NDCG@5 jumps but Recall@50 is low, your problem is retrieval — reranking can’t invent missing chunks.</p>
+
+      <h2 id="protocol">Evaluation protocol</h2>
+      <ol>
+        <li>Fix a retrieval pipeline (vector-only or <a href="/guides/hybrid-retrieval-rerank.html">hybrid</a>) and log top-50 candidates per query.</li>
+        <li>Score baseline: order as retrieved (or bi-encoder scores).</li>
+        <li>Apply reranker A, measure NDCG@5 and MRR.</li>
+        <li>Swap reranker B (different model or hosted API), repeat.</li>
+        <li>Track latency p50/p95 alongside quality — a 2-point NDCG gain may not justify 400 ms.</li>
+      </ol>
+
+      <h2 id="code">Python with ranx</h2>
+      <pre><code>from ranx import Qrels, Run, evaluate
+
+qrels = Qrels.from_file("qrels.json")      # ground truth
+run_before = Run.from_file("retrieve.json")
+run_after = Run.from_file("rerank.json")
+
+for name, run in [("retrieve", run_before), ("rerank", run_after)]:
+    print(name, evaluate(qrels, run, ["ndcg@5", "mrr@10"]))</code></pre>
+      <p><code>ir-measures</code> and BEIR’s evaluator work too. The important part is consistent qrels and the same candidate pool — not which library you pick.</p>
+
+      <h2 id="compare">Comparing rerankers</h2>
+      <p>Use the <a href="/models/">model comparison table</a> for ballpark BEIR numbers, then validate on your labelled set. Hosted APIs (Cohere, Jina, Voyage) are fastest to A/B; open models (bge, mxbai) need GPU for fair latency comparison.</p>
+      <div class="callout">
+        <p><strong>Regression tests:</strong> check eval metrics into CI. When you change chunk size, embedding model, or reranker version, re-run the same JSON qrels — quality drops should block deploys.</p>
+      </div>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">Build intuition before you benchmark</h2>
+        <p class="soft">Use the live demo to see how a cross-encoder reorders a hand-picked shortlist — then scale up with labelled queries.</p>
+        <a class="btn btn-primary" href="/demo.html">Try the demo →</a>
+      </div>
+
+      <h2>Keep reading</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/guides/rerank-rag.html"><h3>Rerank for RAG</h3><p>Wire reranking into your pipeline.</p></a>
+        <a class="card" href="/models/">Model comparison</a>
+      </div>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch" data-i18n="shared.footer.blurb">An open educational resource on rerankers for retrieval and RAG — plus a zero-cost demo that runs in your browser.</p>
+          <p style="margin-top:.6rem"><a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer" data-i18n="shared.footer.github">View source on GitHub</a></p>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.guides">Guides</h4>
+          <ul>
+            <li><a href="/guides/" data-i18n="shared.footer.allGuides">All guides</a></li>
+            <li><a href="/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
+            <li><a href="/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
+            <li><a href="/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
+            <li><a href="/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
+            <li><a href="/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
+            <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.models">Models</h4>
+          <ul>
+            <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
+            <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
+            <li><a href="/models/jina-reranker.html">Jina Reranker</a></li>
+            <li><a href="/models/mxbai-rerank.html">mxbai-rerank</a></li>
+            <li><a href="/models/voyage-rerank.html">Voyage Rerank</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> reranker.uk</span>
+        <span class="muted" data-i18n="shared.footer.disclaimer">Open educational resource · not affiliated with any model vendor</span>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/i18n/evaluate-reranker.js"></script>
+  <script src="/assets/js/i18n/shared.js"></script>
+  <script src="/assets/js/i18n.js"></script>
+</body>
+</html>

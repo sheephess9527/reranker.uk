@@ -1,0 +1,82 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Hybrid retrieval + rerank</div>
+      <h1>Hybrid retrieval + reranking</h1>
+      <p class="meta">Production · ~9 min read · <time datetime="2026-06-23">Updated 23 Jun 2026</time></p>
+      <p class="lead">Vector search alone often misses exact keyword matches; BM25 alone misses paraphrases. <strong>Hybrid retrieval</strong> runs both, merges the candidate lists, and a <strong>reranker</strong> then fixes the final order before your LLM sees anything.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#why">Why hybrid?</a></li>
+          <li><a href="#pattern">The retrieve-merge-rerank pattern</a></li>
+          <li><a href="#fusion">Fusion strategies</a></li>
+          <li><a href="#code">Minimal Python example</a></li>
+          <li><a href="#tuning">Tuning tips</a></li>
+        </ol>
+      </div>
+
+      <h2 id="why">Why hybrid?</h2>
+      <p>Bi-encoder vector search excels at semantic similarity — “vehicle” matches “car”. BM25 excels at lexical overlap — product SKUs, legal clause numbers, error codes. In enterprise RAG, the right chunk often needs <em>both</em> signals. Hybrid retrieval widens recall; reranking supplies precision on the merged shortlist.</p>
+      <blockquote>Hybrid finds more of the right hay. Reranking finds the needle in it.</blockquote>
+
+      <h2 id="pattern">The retrieve-merge-rerank pattern</h2>
+      <div class="card" style="margin:1.3rem 0">
+<pre><code>1. BM25 top 50        ─┐
+                       ├─▶ dedupe + merge ─▶ ~80 unique candidates
+2. Vector top 50      ─┘
+3. Cross-encoder rerank on merged list ─▶ top 5–10 for LLM</code></pre>
+      </div>
+      <p>Retrieve wider than you would with a single channel — each list might return 40–60 items. After deduplication you still want 50–100 unique chunks going into the reranker. See <a href="/guides/rerank-rag.html">rerank for RAG</a> for top-k defaults.</p>
+
+      <h2 id="fusion">Fusion strategies</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Method</th><th>How it works</th><th>When to use</th></tr></thead>
+          <tbody>
+            <tr><td>Reciprocal Rank Fusion (RRF)</td><td>Score = Σ 1/(k + rank) per list</td><td>Default choice — no score normalisation needed</td></tr>
+            <tr><td>Linear combination</td><td>α·vector_score + (1-α)·BM25_score</td><td>When both scores are calibrated on your data</td></tr>
+            <tr><td>Union + rerank only</td><td>Concatenate lists, dedupe, skip fusion</td><td>When reranker is strong and latency budget allows</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="code">Minimal Python example</h2>
+      <pre><code>from rank_bm25 import BM25Okapi
+from sentence_transformers import CrossEncoder
+
+reranker = CrossEncoder("BAAI/bge-reranker-base")
+
+def hybrid_rerank(query, corpus_chunks, vector_hits, bm25_hits, top_n=5):
+    # Merge by chunk id, preserve text
+    seen, merged = set(), []
+    for chunk_id, text in vector_hits + bm25_hits:
+        if chunk_id in seen: continue
+        seen.add(chunk_id)
+        merged.append(corpus_chunks[chunk_id])
+    pairs = [(query, c) for c in merged]
+    scores = reranker.predict(pairs)
+    ranked = sorted(zip(scores, merged), reverse=True)
+    return [c for _, c in ranked[:top_n]]</code></pre>
+      <p>Frameworks like Elasticsearch hybrid queries, Weaviate hybrid search, and LlamaIndex <code>QueryFusionRetriever</code> wrap the same idea — retrieve from multiple backends, then optionally rerank.</p>
+
+      <h2 id="tuning">Tuning tips</h2>
+      <ul>
+        <li><strong>Over-retrieve each channel.</strong> If BM25 returns 30 and vectors return 30, overlap means fewer than 60 unique — aim higher per channel.</li>
+        <li><strong>Reranker is the equaliser.</strong> Fusion order matters less once a good cross-encoder sees every candidate.</li>
+        <li><strong>Measure on your data.</strong> Hybrid helps most when your eval set has both lexical and semantic queries — see <a href="/guides/evaluate-reranker.html">evaluate rerankers</a>.</li>
+      </ul>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">See reranking fix a messy shortlist</h2>
+        <p class="soft">Our demo includes a bi-encoder proxy column — paste distractors and watch the cross-encoder recover.</p>
+        <a class="btn btn-primary" href="/demo.html">Open the demo →</a>
+      </div>
+
+      <h2>Keep reading</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/guides/rerank-rag.html"><h3>Rerank for RAG</h3><p>End-to-end pipeline code.</p></a>
+        <a class="card" href="/guides/evaluate-reranker.html"><h3>Evaluate rerankers</h3><p>Metrics and labelled test sets.</p></a>
+      </div>
+    </article>
+  </main>

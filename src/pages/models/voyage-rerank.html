@@ -1,0 +1,137 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Voyage Rerank</div>
+      <h1>Voyage Rerank</h1>
+      <p class="meta">Hosted API · Voyage AI · <time datetime="2026-06-21">Updated 21 Jun 2026</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">Hosted API</span><span class="pill info">High precision</span><span class="pill">Domain-specific variants</span></div>
+      <p class="lead">Voyage AI built their rerankers with a single goal: maximise retrieval precision. <code>voyage-rerank-2</code> consistently ranks among the highest on BEIR and MTEB retrieval tasks, and the company offers domain-specific variants for code and financial documents — a strong choice when generic quality isn't enough.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#models">Available models</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#usage">Quick start</a></li>
+          <li><a href="#pros-cons">Pros and cons</a></li>
+        </ol>
+      </div>
+
+      <h2 id="models">Available models</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Context</th><th>Best for</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>rerank-2</code></td><td>16K tokens</td><td>General-purpose flagship; top BEIR scores</td></tr>
+            <tr><td><code>rerank-2-lite</code></td><td>16K tokens</td><td>Faster, lower cost; good quality</td></tr>
+            <tr><td><code>rerank-lite-1</code></td><td>4K tokens</td><td>Legacy lite model</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The 16K context window on <code>rerank-2</code> is notably large — useful for reranking long legal, medical or financial documents without chunking.</p>
+
+      <h2 id="pricing">Pricing</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Price</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>rerank-2</code></td><td>~$0.05 / 1M tokens</td></tr>
+            <tr><td><code>rerank-2-lite</code></td><td>~$0.02 / 1M tokens</td></tr>
+            <tr><td>Free trial</td><td>200M tokens included on sign-up</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">Voyage uses token-based pricing, which is cost-effective at high volume. Check the Voyage AI website for current rates.</p>
+
+      <h2 id="usage">Quick start</h2>
+      <h3>Python</h3>
+      <pre><code>pip install voyageai</code></pre>
+      <pre><code>import voyageai
+
+vo = voyageai.Client(api_key="YOUR_API_KEY")
+
+query = "How do I add reranking to my RAG pipeline?"
+documents = [
+    "Rerankers score each query-passage pair with a cross-encoder.",
+    "BM25 is a classical keyword-based retrieval method.",
+    "London is the capital of the United Kingdom.",
+    "Two-stage retrieval: retrieve 50 candidates, rerank to top 5.",
+]
+
+result = vo.rerank(
+    query=query,
+    documents=documents,
+    model="rerank-2",
+    top_k=3,
+)
+
+for r in result.results:
+    print(f"{r.relevance_score:.4f}  {documents[r.index][:80]}")</code></pre>
+
+      <h3>REST (curl)</h3>
+      <pre><code>curl https://api.voyageai.com/v1/rerank \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "rerank-2",
+    "query": "How do I add reranking to my RAG pipeline?",
+    "documents": ["Rerankers score...", "BM25 is..."],
+    "top_k": 3
+  }'</code></pre>
+
+      <h3>In a RAG pipeline</h3>
+      <pre><code>import voyageai
+
+vo = voyageai.Client(api_key="YOUR_API_KEY")
+
+def rag_answer(query: str, vector_db, llm) -> str:
+    # Stage 1: retrieve wide
+    candidates = vector_db.search(query, top_k=50)
+    # Stage 2: rerank tight
+    result = vo.rerank(query=query, documents=candidates, model="rerank-2", top_k=5)
+    top5 = [candidates[r.index] for r in result.results]
+    # Stage 3: generate
+    return llm.complete(f"Context:\n" + "\n\n".join(top5) + f"\n\nQ: {query}")</code></pre>
+
+      <h2 id="pros-cons">Pros and cons</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 style="color:var(--good);margin-top:0">Pros</h3>
+          <ul class="feature-list">
+            <li>Top-tier BEIR retrieval precision scores</li>
+            <li>16K token context — great for long documents</li>
+            <li>Competitive token-based pricing</li>
+            <li>200M free tokens on sign-up</li>
+            <li>Works seamlessly with Voyage embeddings</li>
+            <li>Clean Python SDK</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--danger);margin-top:0">Cons</h3>
+          <ul style="padding-left:1.2rem;color:var(--text-soft)">
+            <li>Hosted-only — no open weights</li>
+            <li>Smaller community than Cohere or bge</li>
+            <li>SDK is Python-only (REST for other languages)</li>
+            <li>No multilingual flagship (general model is multilingual but not marketed as such)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta-band" style="margin-top:2rem">
+        <h2 style="margin-top:0">See reranking in action</h2>
+        <p class="soft">Our demo runs a cross-encoder in your browser — no API key, no cost, same reranking logic.</p>
+        <a class="btn btn-primary" href="/demo.html">Open the demo →</a>
+      </div>
+
+      <h2>Other models</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/models/bge-reranker.html"><h3>bge-reranker</h3><p>Free, open-weight alternative.</p></a>
+        <a class="card" href="/models/cohere-rerank.html"><h3>Cohere Rerank</h3><p>Mature hosted API.</p></a>
+        <a class="card" href="/models/jina-reranker.html"><h3>Jina Reranker</h3><p>Open weights + hosted API.</p></a>
+        <a class="card" href="/models/mxbai-rerank.html"><h3>mxbai-rerank</h3><p>Apache 2.0 open weights, browser xsmall.</p></a>
+      </div>
+    </article>
+  </main>

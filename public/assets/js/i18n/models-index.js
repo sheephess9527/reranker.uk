@@ -3,7 +3,7 @@ window.I18N_PAGE = { zh: {
   "_desc": "主流 rerank 模型横向对比：bge-reranker（开源权重）、Cohere Rerank、Jina Reranker、Voyage Rerank、mxbai-rerank。对比质量、语言、延迟、价格，以及各自适用场景。",
 
   "Rerank model comparison": "重排序模型对比",
-  "Four families dominate the reranking space. Here's how they compare on quality, speed, language support, and cost — so you can pick the right one for your stack.": "主流重排序家族横向对比。从质量、速度、语言支持到成本，一表说清 —— 帮你为自己的技术栈选对那一个。",
+  "Five families dominate the reranking space. Here's how they compare on quality, speed, language support, and cost — so you can pick the right one for your stack.": "五大主流重排序家族横向对比。从质量、速度、语言支持到成本，一表说清 —— 帮你为自己的技术栈选对那一个。",
 
   "Model": "模型",
   "Type": "类型",

@@ -1,0 +1,11 @@
+{
+  "title": "Page not found (404) | reranker.uk",
+  "description": "That page could not be found. Head back to reranker.uk for guides on rerankers, model comparisons, and a live in-browser reranking demo.",
+  "canonical": "",
+  "robots": "noindex, follow",
+  "og_type": "website",
+  "og_title": "Page not found (404) | reranker.uk",
+  "og_description": "That page could not be found. Head back to reranker.uk for guides on rerankers, model comparisons, and a live in-browser reranking demo.",
+  "head_extra": "",
+  "page_scripts": "<script src=\"/assets/js/i18n/404.js\"></script>"
+}
