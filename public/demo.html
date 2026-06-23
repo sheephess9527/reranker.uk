@@ -28,6 +28,9 @@
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://huggingface.co" crossorigin />
+  <link rel="preconnect" href="https://cdn-lfs.huggingface.co" crossorigin />
+  <link rel="dns-prefetch" href="https://huggingface.co" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -81,6 +84,11 @@
     </section>
 
     <section class="demo-wrap container">
+      <noscript>
+        <div class="callout" style="margin-bottom:1.5rem">
+          <p><strong>This demo needs JavaScript.</strong> It downloads and runs a real cross-encoder model entirely in your browser, so JavaScript and WebAssembly have to be enabled. You can still read <a href="/guides/what-is-a-reranker.html">what a reranker is</a> and <a href="/models/">compare the rerank models</a> without it.</p>
+        </div>
+      </noscript>
       <div class="demo-panel">
         <div class="demo-input-grid">
           <div>
