@@ -209,11 +209,11 @@ The same `public/` folder can be uploaded to GitHub Pages, Netlify, Cloudflare P
 
 | Step | Status |
 |------|--------|
-| Code + README | Pushed to `main` → commit `9861226` on [GitHub](https://github.com/sheephess9527/reranker.uk) |
+| Code + README | On `main` → [GitHub](https://github.com/sheephess9527/reranker.uk) |
 | `node scripts/build.mjs` | OK (15 pages) |
-| `wrangler deploy` | **Pending** — requires `wrangler login` or `CLOUDFLARE_API_TOKEN` on the deploy machine |
+| `wrangler deploy` | **Done** — Version `503f4ceb-bbf0-4f09-9c47-34b0d1f079e3` → https://reranker.uk |
 
-After deploy, verify: `/guides/`, `/demo.html` (three-column results), `/models/` (benchmark sources block).
+Verify: [/guides/](https://reranker.uk/guides/), [/demo.html](https://reranker.uk/demo.html), [/models/](https://reranker.uk/models/).
 
 ---
 
