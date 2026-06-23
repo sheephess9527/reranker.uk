@@ -15,6 +15,8 @@ window.I18N_SHARED = {
     "shared.footer.allGuides": "全部指南",
     "shared.footer.hybrid": "混合检索 + 重排序",
     "shared.footer.evaluate": "评测 reranker",
+    "shared.footer.selfHost": "自托管 reranker",
+    "shared.footer.scenario": "按场景选型",
     "shared.footer.models": "模型",
     "shared.footer.changelog": "更新日志",
     "shared.footer.changelogShort": "更新日志",

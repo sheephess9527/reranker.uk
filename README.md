@@ -8,6 +8,21 @@ Educational resource on rerankers for retrieval and RAG, with a live in-browser 
 
 ---
 
+## Changelog — medium priority (2026-06-23)
+
+| Feature | Implementation |
+|---------|----------------|
+| **Self-host guide** | `/guides/self-host-reranker.html` |
+| **Scenario guide** | `/guides/choose-reranker-scenario.html` |
+| **Passage char counts** | `#doc-char-stats` + per-row counts on mobile; warn above 512 chars |
+| **New presets** | Technical docs, Code search (5 → 7 scenarios) |
+| **CSV export** | `Copy CSV` button + `exportCsv()` |
+| **Light theme** | Nav ☀/🌙 toggle, `data-theme="light"`, `rr_theme` in localStorage |
+
+19 built pages after `node scripts/build.mjs`.
+
+---
+
 ## Changelog — demo UX round 2 (2026-06-23)
 
 High-priority improvements from the second review:

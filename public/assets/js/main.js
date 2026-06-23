@@ -25,4 +25,41 @@
   // Footer year
   var y = document.getElementById("year");
   if (y) y.textContent = new Date().getFullYear();
+
+  // Light / dark theme toggle
+  var THEME_KEY = "rr_theme";
+  var themeBtn = document.getElementById("theme-toggle");
+  var metaTheme = document.querySelector('meta[name="theme-color"]');
+
+  function applyTheme(theme) {
+    var light = theme === "light";
+    if (light) document.documentElement.dataset.theme = "light";
+    else document.documentElement.removeAttribute("data-theme");
+    if (themeBtn) {
+      themeBtn.textContent = light ? "🌙" : "☀";
+      themeBtn.setAttribute(
+        "aria-label",
+        light ? "Switch to dark theme" : "Switch to light theme"
+      );
+      themeBtn.title = light ? "Dark theme" : "Light theme";
+    }
+    if (metaTheme) metaTheme.setAttribute("content", light ? "#f4f5f9" : "#0b0d17");
+  }
+
+  try {
+    applyTheme(localStorage.getItem(THEME_KEY) === "light" ? "light" : "dark");
+  } catch (e) {
+    applyTheme("dark");
+  }
+
+  if (themeBtn) {
+    themeBtn.addEventListener("click", function () {
+      var next =
+        document.documentElement.dataset.theme === "light" ? "dark" : "light";
+      try {
+        localStorage.setItem(THEME_KEY, next);
+      } catch (e) {}
+      applyTheme(next);
+    });
+  }
 })();

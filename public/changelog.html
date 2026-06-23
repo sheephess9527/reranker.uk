@@ -24,6 +24,7 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" />
   <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" />
+  <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
   <link rel="stylesheet" href="/assets/css/style.css" />
   
 </head>
@@ -42,7 +43,10 @@
         <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
         <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
-      <button class="lang-toggle" aria-label="切换到中文" title="切换到中文">中文</button>
+      <div class="nav-right">
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+        <button class="lang-toggle" aria-label="切换到中文" title="切换到中文">中文</button>
+      </div>
     </nav>
   </header>
 <main id="main">
@@ -52,6 +56,18 @@
     </section>
 
     <section class="section container narrow">
+      <article class="changelog-entry">
+        <h2 id="2026-06-23c">23 Jun 2026 — Medium-priority UX &amp; content</h2>
+        <ul class="feature-list">
+          <li><strong>Self-host guide</strong> — <a href="/guides/self-host-reranker.html">sentence-transformers, serving, ops</a></li>
+          <li><strong>Scenario guide</strong> — <a href="/guides/choose-reranker-scenario.html">RAG vs support vs legal vs code</a></li>
+          <li><strong>Passage char counts</strong> — per-list stats + 512-char truncation warning</li>
+          <li><strong>New presets</strong> — Technical docs, Code search</li>
+          <li><strong>CSV export</strong> — Copy CSV alongside JSON and Markdown</li>
+          <li><strong>Light theme</strong> — toggle in nav, persisted in <code>localStorage</code></li>
+        </ul>
+      </article>
+
       <article class="changelog-entry">
         <h2 id="2026-06-23b">23 Jun 2026 — Demo UX round 2</h2>
         <ul class="feature-list">
@@ -108,6 +124,8 @@
             <li><a href="/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
             <li><a href="/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
             <li><a href="/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
+            <li><a href="/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
+            <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
             <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
             <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
             <li><a href="/privacy.html" data-i18n="shared.footer.privacy">Privacy</a></li>

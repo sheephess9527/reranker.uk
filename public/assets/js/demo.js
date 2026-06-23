@@ -9,6 +9,7 @@ env.allowLocalModels = false;
 env.useBrowserCache = true;
 
 const MAX_DOCS = 30;
+const PASSAGE_CHAR_WARN = 512;
 const MODELS = {
   "Xenova/ms-marco-MiniLM-L-6-v2": {
     name: "ms-marco MiniLM-L6",
@@ -184,6 +185,64 @@ const SAMPLES = [
       ],
     },
   },
+  {
+    id: "techdocs",
+    labelEn: "Technical docs",
+    labelZh: "技术文档",
+    difficultyEn: "medium",
+    difficultyZh: "中等",
+    en: {
+      query: "What is the rate limit for the REST API per API key?",
+      docs: [
+        "Rate limits: 1000 requests per minute per API key on the Pro plan; 100 req/min on Free. Burst allowance of 50 requests for 10 seconds.",
+        "Authentication uses Bearer tokens in the Authorization header. Rotate keys from the dashboard under Settings → API keys.",
+        "Webhooks retry failed deliveries up to 5 times with exponential backoff starting at 30 seconds.",
+        "The GraphQL endpoint shares the same rate limit pool as REST — combined traffic counts toward your key quota.",
+        "SDK changelog: v2.4 added pagination cursors; v2.3 deprecated the legacy /v1/search route.",
+        "Our office cafeteria serves lunch from 11:30 to 1:30 on weekdays.",
+      ],
+    },
+    zh: {
+      query: "REST API 每个 API key 的速率限制是多少？",
+      docs: [
+        "速率限制：Pro 计划每个 API key 每分钟 1000 次请求；Free 为 100 次/分钟。允许 10 秒内 50 次突发请求。",
+        "认证使用 Authorization 头中的 Bearer token。可在控制台 设置 → API 密钥 中轮换密钥。",
+        "Webhook 失败投递最多重试 5 次，从 30 秒起指数退避。",
+        "GraphQL 端点与 REST 共享同一速率限制池 —— 合并流量计入 key 配额。",
+        "SDK 更新日志：v2.4 增加分页游标；v2.3 废弃旧版 /v1/search 路由。",
+        "公司食堂工作日 11:30–13:30 供应午餐。",
+      ],
+    },
+  },
+  {
+    id: "code",
+    labelEn: "Code search",
+    labelZh: "代码检索",
+    difficultyEn: "hard",
+    difficultyZh: "困难",
+    en: {
+      query: "How do I implement binary search on a sorted array in Python?",
+      docs: [
+        "def binary_search(arr, target):\n    lo, hi = 0, len(arr) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target: return mid\n        elif arr[mid] < target: lo = mid + 1\n        else: hi = mid - 1\n    return -1",
+        "bisect.bisect_left(a, x) returns the insertion point for x in sorted list a — useful for lower-bound binary search in the standard library.",
+        "Linear scan: for i, v in enumerate(arr):\n    if v == target: return i\n# O(n) — fine for small arrays but not for large sorted data.",
+        "Recursive binary search splits the array in half each call; watch Python recursion depth on very large inputs — prefer iterative.",
+        "numpy.searchsorted(a, v) performs binary search on sorted NumPy arrays and returns the index.",
+        "Quicksort picks a pivot and partitions the array — average O(n log n), not the same as binary search.",
+      ],
+    },
+    zh: {
+      query: "如何在 Python 里对已排序数组实现二分查找？",
+      docs: [
+        "def binary_search(arr, target):\n    lo, hi = 0, len(arr) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if arr[mid] == target: return mid\n        elif arr[mid] < target: lo = mid + 1\n        else: hi = mid - 1\n    return -1",
+        "bisect.bisect_left(a, x) 返回 x 在有序列表 a 中的插入位置 —— 标准库中常用于下界二分查找。",
+        "线性扫描：for i, v in enumerate(arr):\n    if v == target: return i\n# O(n) —— 小数组可以，大数据不适用。",
+        "递归二分每次把数组一分为二；注意 Python 递归深度 —— 大数组建议用迭代写法。",
+        "numpy.searchsorted(a, v) 在有序 NumPy 数组上做二分查找并返回索引。",
+        "快速排序选 pivot 分区 —— 平均 O(n log n)，与二分查找不是同一算法。",
+      ],
+    },
+  },
 ];
 
 const els = {
@@ -198,6 +257,7 @@ const els = {
   docsList: document.getElementById("docs-list"),
   docsListItems: document.getElementById("docs-list-items"),
   docsAddBtn: document.getElementById("docs-add-btn"),
+  docCharStats: document.getElementById("doc-char-stats"),
   docWarning: document.getElementById("doc-warning"),
   run: document.getElementById("run-btn"),
   clear: document.getElementById("clear-btn"),
@@ -228,6 +288,7 @@ const els = {
   diffTbody: document.getElementById("diff-tbody"),
   copyJson: document.getElementById("copy-json"),
   copyMd: document.getElementById("copy-md"),
+  copyCsv: document.getElementById("copy-csv"),
   copyLabel: document.querySelector(".copy-label"),
 };
 
@@ -614,6 +675,7 @@ function renderResults(run) {
   if (els.copyLabel) els.copyLabel.textContent = L("Copy results:", "复制结果：");
   if (els.copyJson) els.copyJson.textContent = L("Copy JSON", "复制 JSON");
   if (els.copyMd) els.copyMd.textContent = L("Copy Markdown", "复制 Markdown");
+  if (els.copyCsv) els.copyCsv.textContent = L("Copy CSV", "复制 CSV");
 
   if (compareRun && els.dualRegion) {
     els.dualRegion.hidden = false;
@@ -715,7 +777,7 @@ function renderDocsList() {
     .map(
       (text, i) => `
     <div class="docs-list-row" data-idx="${i}">
-      <span class="docs-list-num">${i + 1}</span>
+      <span class="docs-list-num">${i + 1}<small class="docs-list-chars${text.length > PASSAGE_CHAR_WARN ? " over" : ""}">${text.length}</small></span>
       <textarea class="docs-list-input" rows="2" aria-label="${L("Passage", "候选段落")} ${i + 1}">${esc(text)}</textarea>
       <button type="button" class="docs-list-del" aria-label="${L("Remove passage", "删除段落")}">×</button>
     </div>`
@@ -724,6 +786,12 @@ function renderDocsList() {
 
   els.docsListItems.querySelectorAll(".docs-list-input").forEach((ta) => {
     ta.addEventListener("input", () => {
+      const row = ta.closest(".docs-list-row");
+      const ch = row?.querySelector(".docs-list-chars");
+      if (ch) {
+        ch.textContent = ta.value.length;
+        ch.classList.toggle("over", ta.value.length > PASSAGE_CHAR_WARN);
+      }
       syncTextareaFromList();
       markEdited();
       syncUrl();
@@ -748,9 +816,35 @@ function updateDocsEditorMode() {
 }
 
 function updateDocWarning() {
-  if (!els.docWarning || !els.docs) return;
+  if (!els.docs) return;
   const raw = els.docs.value || "";
-  const n = parseDocs(raw).length;
+  const docs = parseDocs(raw);
+  const n = docs.length;
+  const lengths = docs.map((d) => d.length);
+  const maxLen = lengths.length ? Math.max(...lengths) : 0;
+  const overChars = lengths.filter((l) => l > PASSAGE_CHAR_WARN).length;
+
+  if (els.docCharStats) {
+    if (n > 0) {
+      els.docCharStats.hidden = false;
+      let stat = L(
+        `${n} passage${n === 1 ? "" : "s"} · longest ${maxLen} chars`,
+        `${n} 段 · 最长 ${maxLen} 字符`
+      );
+      if (overChars) {
+        stat += L(
+          ` · ${overChars} over ${PASSAGE_CHAR_WARN} (may truncate)`,
+          ` · ${overChars} 段超过 ${PASSAGE_CHAR_WARN}（可能被截断）`
+        );
+      }
+      els.docCharStats.textContent = stat;
+      els.docCharStats.classList.toggle("warn-chars", overChars > 0);
+    } else {
+      els.docCharStats.hidden = true;
+    }
+  }
+
+  if (!els.docWarning) return;
   const fmt = inputFormatHint(raw);
   const parts = [];
   if (fmt) parts.push(fmt);
@@ -900,6 +994,24 @@ function exportMarkdown() {
       )
       .join("\n");
   return head + table + "\n";
+}
+
+function escCsvCell(s) {
+  const t = String(s);
+  if (/[",\n\r]/.test(t)) return `"${t.replace(/"/g, '""')}"`;
+  return t;
+}
+
+function exportCsv() {
+  const rows = rankedForExport();
+  const lines = [
+    "rank,original_position,score,passage",
+    ...rows.map(
+      (r) =>
+        `${r.rank},${r.originalPosition},${r.score},${escCsvCell(r.text)}`
+    ),
+  ];
+  return lines.join("\n") + "\n";
 }
 
 async function copyText(text, btn) {
@@ -1091,11 +1203,17 @@ if (els.docsAddBtn) {
     row.className = "docs-list-row";
     const n = els.docsListItems.querySelectorAll(".docs-list-row").length + 1;
     row.innerHTML = `
-      <span class="docs-list-num">${n}</span>
+      <span class="docs-list-num">${n}<small class="docs-list-chars">0</small></span>
       <textarea class="docs-list-input" rows="2" aria-label="${L("Passage", "候选段落")} ${n}"></textarea>
       <button type="button" class="docs-list-del" aria-label="${L("Remove passage", "删除段落")}">×</button>`;
     els.docsListItems.appendChild(row);
     row.querySelector(".docs-list-input").addEventListener("input", () => {
+      const ta = row.querySelector(".docs-list-input");
+      const ch = row.querySelector(".docs-list-chars");
+      if (ta && ch) {
+        ch.textContent = ta.value.length;
+        ch.classList.toggle("over", ta.value.length > PASSAGE_CHAR_WARN);
+      }
       syncTextareaFromList();
       markEdited();
       syncUrl();
@@ -1127,6 +1245,8 @@ if (els.copyJson)
   els.copyJson.addEventListener("click", () => copyText(exportJson(), els.copyJson));
 if (els.copyMd)
   els.copyMd.addEventListener("click", () => copyText(exportMarkdown(), els.copyMd));
+if (els.copyCsv)
+  els.copyCsv.addEventListener("click", () => copyText(exportCsv(), els.copyCsv));
 
 function markEdited() {
   if (!userEdited) {

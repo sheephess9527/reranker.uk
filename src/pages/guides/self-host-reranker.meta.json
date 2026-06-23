@@ -1,0 +1,11 @@
+{
+  "title": "How to self-host a reranker — sentence-transformers, GPU, serving | reranker.uk",
+  "description": "Practical guide to self-hosting cross-encoder rerankers: model choice (bge, mxbai, Jina), sentence-transformers quick start, FastAPI serving, and production ops.",
+  "canonical": "https://reranker.uk/guides/self-host-reranker.html",
+  "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  "og_type": "article",
+  "og_title": "How to self-host a reranker",
+  "og_description": "Zero per-call cost reranking on your own infra — from CrossEncoder to a production microservice.",
+  "head_extra": "<script type=\"application/ld+json\">\r\n  {\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"headline\":\"How to self-host a reranker\",\"datePublished\":\"2026-06-23\",\"dateModified\":\"2026-06-23\",\"author\":{\"@type\":\"Organization\",\"name\":\"reranker.uk\"},\"mainEntityOfPage\":\"https://reranker.uk/guides/self-host-reranker.html\"}\r\n  </script>",
+  "page_scripts": "<script src=\"/assets/js/i18n/self-host-reranker.js\"></script>"
+}

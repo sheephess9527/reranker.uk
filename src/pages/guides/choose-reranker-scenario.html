@@ -1,0 +1,89 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Choose by scenario</div>
+      <h1>Which reranker fits your scenario?</h1>
+      <p class="meta">Decision guide · ~8 min read · <time datetime="2026-06-23">Updated 23 Jun 2026</time></p>
+      <p class="lead">Rerankers are not one-size-fits-all. The right choice depends on <strong>language coverage</strong>, <strong>latency budget</strong>, <strong>data sensitivity</strong>, and whether your queries look more like <em>support tickets</em>, <em>legal clauses</em>, <em>code search</em>, or <em>RAG chunks</em>.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#matrix">Scenario matrix</a></li>
+          <li><a href="#rag">RAG &amp; knowledge bases</a></li>
+          <li><a href="#support">Customer support</a></li>
+          <li><a href="#legal">Legal &amp; compliance</a></li>
+          <li><a href="#code">Code &amp; technical docs</a></li>
+          <li><a href="#try">Try it in the demo</a></li>
+        </ol>
+      </div>
+
+      <h2 id="matrix">Scenario matrix</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Scenario</th><th>Typical challenge</th><th>Starting recommendation</th><th>Run where</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>RAG pipeline</td>
+              <td>Noisy vector recall, need top-5 precision</td>
+              <td><a href="/models/bge-reranker.html">bge-reranker-v2-m3</a> (self-host) or <a href="/models/cohere-rerank.html">Cohere Rerank</a> (API)</td>
+              <td>Your GPU / hosted API</td>
+            </tr>
+            <tr>
+              <td>Customer support</td>
+              <td>Many similar FAQ lines, fast response</td>
+              <td><a href="/models/jina-reranker.html">jina-reranker tiny</a> or <a href="/models/cohere-rerank.html">Cohere</a> free tier</td>
+              <td>API or browser demo</td>
+            </tr>
+            <tr>
+              <td>Legal / contracts</td>
+              <td>Subtle wording, distractors share vocabulary</td>
+              <td><a href="/models/mxbai-rerank.html">mxbai-rerank-large</a> or <a href="/models/voyage-rerank.html">Voyage</a> legal-tuned</td>
+              <td>Self-host / API</td>
+            </tr>
+            <tr>
+              <td>Code &amp; API docs</td>
+              <td>Exact identifiers, syntax matters</td>
+              <td><a href="/models/voyage-rerank.html">Voyage code</a> or hybrid BM25 + <a href="/models/bge-reranker.html">bge</a></td>
+              <td>Hybrid retrieve + rerank</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="rag">RAG &amp; knowledge bases</h2>
+      <p>Retrieve 50–100 chunks, rerank to 5–10, then prompt. Multilingual knowledge bases favour <strong>bge-v2-m3</strong> or <strong>Cohere v3.5</strong>. English-only stacks with tight quality targets often pick <strong>mxbai-large</strong>. See <a href="/guides/rerank-rag.html">rerank for RAG</a> and <a href="/guides/hybrid-retrieval-rerank.html">hybrid retrieval</a> when lexical matches matter.</p>
+      <blockquote>Rule of thumb: if bi-encoder recall is already good, a mid-size reranker is enough. If recall is messy, fix retrieval width first.</blockquote>
+
+      <h2 id="support">Customer support</h2>
+      <p>Queries are short, passages are FAQ-sized, and latency dominates UX. A <strong>tiny</strong> cross-encoder (Jina tiny, ms-marco MiniLM) often suffices — you are choosing among a handful of similar answers, not reading 100-page PDFs. Try the <strong>Customer support</strong> preset in our <a href="/demo.html">demo</a>.</p>
+
+      <h2 id="legal">Legal &amp; compliance</h2>
+      <p>Distractors share vocabulary (“termination”, “notice period”, “breach”). Bi-encoders confuse them; cross-encoders separate nuance. Budget extra latency for a larger model and keep passages to single clauses. Demo preset: <strong>Legal clause</strong>.</p>
+
+      <h2 id="code">Code &amp; technical docs</h2>
+      <p>Vector search alone misses exact function names; BM25 alone misses paraphrased “how do I…” questions. Use <strong>hybrid retrieval</strong>, then rerank. Domain rerankers (Voyage code) help; otherwise bge-base + good chunking works. Demo presets: <strong>Technical docs</strong> and <strong>Code search</strong>.</p>
+
+      <h2 id="try">Try it in the demo</h2>
+      <p>Each scenario below maps to a built-in preset — load it, hit Rerank, and watch the bi-encoder proxy column mis-order before the cross-encoder fixes it.</p>
+      <div class="grid grid-2" style="margin:1.2rem 0">
+        <a class="card" href="/demo.html"><h3>RAG pipeline</h3><p>Mixed on-topic + off-topic chunks.</p></a>
+        <a class="card" href="/demo.html"><h3>Customer support</h3><p>Tracking vs refunds vs passwords.</p></a>
+        <a class="card" href="/demo.html"><h3>Legal clause</h3><p>Several “termination” distractors.</p></a>
+        <a class="card" href="/demo.html"><h3>Technical docs</h3><p>API rate limits vs unrelated endpoints.</p></a>
+      </div>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">Still deciding?</h2>
+        <p class="soft">Compare all five model families side by side, then jump into the demo with one click.</p>
+        <a class="btn btn-primary" href="/models/">Compare models →</a>
+      </div>
+
+      <h2>Keep reading</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/guides/self-host-reranker.html"><h3>Self-host a reranker</h3><p>sentence-transformers + serving.</p></a>
+        <a class="card" href="/guides/evaluate-reranker.html"><h3>Evaluate rerankers</h3><p>Prove the choice on your data.</p></a>
+      </div>
+    </article>
+  </main>
