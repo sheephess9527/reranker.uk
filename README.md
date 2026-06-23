@@ -8,6 +8,44 @@ Educational resource on rerankers for retrieval and RAG, with a live in-browser 
 
 ---
 
+## Changelog — i18n completeness + demo polish (2026-06-23)
+
+Two follow-ups: a Chinese-toggle review and a demo UX review. All edits are to
+static assets under `public/assets/js/` (no `src/` rebuild needed).
+
+### Chinese translation gaps (`public/assets/js/i18n/`)
+
+Switching to 中文 left some elements in English because dictionary keys had
+drifted from the rendered HTML. Fixed across every guide and model page:
+
+| Fix | Detail |
+|-----|--------|
+| **Breadcrumb keys** | 3 guides still keyed the old `/guides/what-is-a-reranker.html` href; updated to `/guides/` |
+| **`.meta` date line** | A `<time>…Updated …</time>` element was appended *after* the keys were written, so the whole line stopped matching; keys now include the `<time>` markup (guides + models) |
+| **“On this page”** | TOC heading had no key on any page; added `"On this page": "本页目录"` to all guide + model dicts |
+| **4 newer guides** | `hybrid-retrieval-rerank`, `evaluate-reranker`, `self-host-reranker`, `choose-reranker-scenario` had only `_title`/`_desc`; added full body translations (headings, paragraphs, tables, CTAs) |
+| **Guides index** | `guides-index.js` gained card title + description translations |
+
+### Demo token stats + bar animation (`public/assets/js/demo.js`)
+
+| Feature | Implementation |
+|---------|----------------|
+| **Token stats** | `tokenStats()` reads `input_ids.dims` + `attention_mask`; the results stat row now shows **total non-padding tokens** (across all query/passage pairs) and the **longest padded sequence**, each with a tooltip and bilingual label |
+| **Score-bar fill** | Bars render at `width:0` carrying `data-pct`; `fillScoreBars()` grows them to target via a double-`requestAnimationFrame` pass over the existing width transition, so each rerank reads as motion rather than a static repaint. Honours `prefers-reduced-motion` |
+
+**Considered but deferred:** a true FLIP reorder animation (passages physically
+sliding from retrieved rank → reranked rank) — larger, higher-risk render change,
+left out to avoid regressing the working demo.
+
+### Git commits
+
+| Commit | Summary |
+|--------|---------|
+| `5057b1c` | i18n: fix Chinese translation gaps across all pages |
+| `079eb33` | Demo: add token stats and animate score bars on each rerank |
+
+---
+
 ## Changelog — medium priority (2026-06-23)
 
 | Feature | Implementation |
