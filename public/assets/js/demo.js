@@ -195,11 +195,21 @@ const els = {
   presets: document.getElementById("preset-row"),
   query: document.getElementById("query-input"),
   docs: document.getElementById("docs-input"),
+  docsList: document.getElementById("docs-list"),
+  docsListItems: document.getElementById("docs-list-items"),
+  docsAddBtn: document.getElementById("docs-add-btn"),
   docWarning: document.getElementById("doc-warning"),
   run: document.getElementById("run-btn"),
   clear: document.getElementById("clear-btn"),
   share: document.getElementById("share-btn"),
   status: document.getElementById("status"),
+  loadPanel: document.getElementById("load-panel"),
+  loadLabel: document.getElementById("load-label"),
+  loadModelName: document.getElementById("load-model-name"),
+  loadCacheStatus: document.getElementById("load-cache-status"),
+  loadPct: document.getElementById("load-pct"),
+  loadEta: document.getElementById("load-eta"),
+  loadFile: document.getElementById("load-file"),
   progressWrap: document.getElementById("progress-wrap"),
   progressBar: document.getElementById("progress-bar"),
   region: document.getElementById("results-region"),
@@ -211,10 +221,18 @@ const els = {
   dualRegion: document.getElementById("dual-results"),
   dualA: document.getElementById("dual-col-a"),
   dualB: document.getElementById("dual-col-b"),
+  dualDiff: document.getElementById("dual-diff"),
+  dualDiffSub: document.getElementById("dual-diff-sub"),
+  diffThA: document.getElementById("diff-th-a"),
+  diffThB: document.getElementById("diff-th-b"),
+  diffTbody: document.getElementById("diff-tbody"),
   copyJson: document.getElementById("copy-json"),
   copyMd: document.getElementById("copy-md"),
   copyLabel: document.querySelector(".copy-label"),
 };
+
+const MOBILE_MQ = window.matchMedia("(max-width: 760px)");
+let loadTrack = { start: 0, lastLoaded: 0, lastTime: 0 };
 
 function sampleById(id) {
   return SAMPLES.find((s) => s.id === id) || null;
@@ -250,6 +268,7 @@ if (els.compareToggle) {
   els.compareToggle.addEventListener("change", () => {
     if (els.modelB) els.modelB.disabled = !els.compareToggle.checked;
     if (els.dualRegion) els.dualRegion.hidden = true;
+    if (els.dualDiff) els.dualDiff.hidden = true;
   });
 }
 if (els.webgpuToggle) {
@@ -312,6 +331,7 @@ function loadPreset(id) {
   userEdited = false;
   renderPresets();
   updateDocWarning();
+  if (MOBILE_MQ.matches) renderDocsList();
   syncUrl();
   setStatus(
     L("Scenario loaded — hit “Rerank” to score it.", "示例已载入 —— 点击“重排序”为它打分。"),
@@ -327,16 +347,121 @@ function setStatus(text, spinning) {
 }
 
 function showProgress(pct) {
-  if (!els.progressWrap) return;
-  els.progressWrap.style.display = pct == null ? "none" : "block";
   if (pct != null && els.progressBar) els.progressBar.style.width = pct + "%";
 }
 
+function showLoadPanel(modelId, cachedInTab) {
+  if (!els.loadPanel) return;
+  const m = MODELS[modelId];
+  els.loadPanel.hidden = false;
+  if (els.loadLabel)
+    els.loadLabel.textContent = L("Loading model", "正在加载模型");
+  if (els.loadModelName)
+    els.loadModelName.textContent = m
+      ? `${m.name} · ~${m.sizeMB} MB`
+      : modelId;
+  if (els.loadCacheStatus) {
+    els.loadCacheStatus.textContent = cachedInTab
+      ? L("In tab memory", "已在标签页内存")
+      : L("Checking browser cache…", "正在检查浏览器缓存…");
+  }
+  if (els.loadPct) els.loadPct.textContent = "0%";
+  if (els.loadEta) els.loadEta.textContent = "";
+  if (els.loadFile) els.loadFile.textContent = "";
+  showProgress(0);
+  loadTrack = { start: performance.now(), lastLoaded: 0, lastTime: performance.now() };
+}
+
+function hideLoadPanel() {
+  if (els.loadPanel) els.loadPanel.hidden = true;
+  showProgress(0);
+}
+
+function formatEta(seconds) {
+  if (!seconds || !isFinite(seconds) || seconds < 0) return "";
+  if (seconds < 60)
+    return L(`~${Math.ceil(seconds)}s left`, `约剩 ${Math.ceil(seconds)} 秒`);
+  return L(`~${Math.ceil(seconds / 60)}m left`, `约剩 ${Math.ceil(seconds / 60)} 分钟`);
+}
+
+function updateLoadProgress(modelId, files, currentFile, cachedInTab) {
+  const vals = Object.values(files);
+  const loaded = vals.reduce((a, b) => a + b.loaded, 0);
+  const total = vals.reduce((a, b) => a + b.total, 0);
+  const pct = total ? Math.min(99, Math.round((loaded / total) * 100)) : 0;
+  showProgress(pct);
+
+  const now = performance.now();
+  const dt = (now - loadTrack.lastTime) / 1000;
+  let eta = "";
+  if (dt > 0.2 && loaded > loadTrack.lastLoaded && total > loaded) {
+    const speed = (loaded - loadTrack.lastLoaded) / dt;
+    if (speed > 0) eta = formatEta((total - loaded) / speed);
+    loadTrack.lastLoaded = loaded;
+    loadTrack.lastTime = now;
+  }
+
+  if (els.loadPct)
+    els.loadPct.textContent = total
+      ? `${pct}% · ${mb(loaded)}/${mb(total)} MB`
+      : L("Preparing…", "准备中…");
+  if (els.loadEta) els.loadEta.textContent = eta;
+  if (els.loadFile && currentFile) {
+    const short = currentFile.split("/").pop() || currentFile;
+    els.loadFile.textContent = short;
+  }
+  if (els.loadCacheStatus && !cachedInTab) {
+    els.loadCacheStatus.textContent =
+      loaded > 0 && total > 0 && loaded < total
+        ? L("Downloading", "正在下载")
+        : L("Checking browser cache…", "正在检查浏览器缓存…");
+  }
+  setStatus(
+    L(
+      `Downloading ${MODELS[modelId]?.name || modelId}… ${pct}%`,
+      `正在下载 ${MODELS[modelId]?.name || modelId}…… ${pct}%`
+    ),
+    true
+  );
+}
+
 function parseDocs(raw) {
-  return raw
+  const trimmed = (raw || "").trim();
+  if (!trimmed) return [];
+  if (trimmed.startsWith("[")) {
+    try {
+      const parsed = JSON.parse(trimmed);
+      if (Array.isArray(parsed)) {
+        return parsed.map((s) => String(s).trim()).filter(Boolean);
+      }
+    } catch (e) {
+      /* fall through to line mode */
+    }
+  }
+  if (trimmed.startsWith("{")) {
+    try {
+      const parsed = JSON.parse(trimmed);
+      const arr = parsed.passages || parsed.docs || parsed.documents;
+      if (Array.isArray(arr)) {
+        return arr.map((s) => String(s).trim()).filter(Boolean);
+      }
+    } catch (e) {
+      /* fall through */
+    }
+  }
+  return trimmed
     .split(/\n\s*\n|\n/)
     .map((s) => s.trim())
     .filter(Boolean);
+}
+
+function inputFormatHint(raw) {
+  const t = (raw || "").trim();
+  if (!t) return null;
+  if (t.startsWith("[") || (t.startsWith("{") && /passages|docs|documents/i.test(t))) {
+    return L("JSON input detected", "已识别 JSON 输入");
+  }
+  return null;
 }
 
 function esc(s) {
@@ -493,8 +618,9 @@ function renderResults(run) {
   if (compareRun && els.dualRegion) {
     els.dualRegion.hidden = false;
     renderDualCompare(compareRun);
-  } else if (els.dualRegion) {
-    els.dualRegion.hidden = true;
+  } else {
+    if (els.dualRegion) els.dualRegion.hidden = true;
+    if (els.dualDiff) els.dualDiff.hidden = true;
   }
 }
 
@@ -506,26 +632,185 @@ function renderDualCompare(compareRun) {
   const headB = `${MODELS[modelB]?.name || modelB} (${msB} ms)`;
   renderColumn(els.dualA, itemsA, maxA, true, true, headA);
   renderColumn(els.dualB, itemsB, maxB, true, true, headB);
+  renderDualDiff(compareRun);
+}
+
+function rankMap(items) {
+  const sorted = items.slice().sort((a, b) => b.score - a.score);
+  const map = new Map();
+  sorted.forEach((item, i) => map.set(item.origIndex, i + 1));
+  return map;
+}
+
+function scoreDiffHtml(delta) {
+  const sign = delta > 0 ? "+" : "";
+  const cls = delta > 0 ? "diff-up" : delta < 0 ? "diff-down" : "";
+  return `<span class="${cls}">${sign}${delta.toFixed(4)}</span>`;
+}
+
+function rankDiffHtml(delta) {
+  if (delta > 0) return `<span class="diff-up">▲ ${delta}</span>`;
+  if (delta < 0) return `<span class="diff-down">▼ ${-delta}</span>`;
+  return `<span class="muted">${L("—", "—")}</span>`;
+}
+
+function renderDualDiff(compareRun) {
+  if (!els.dualDiff || !els.diffTbody) return;
+  const { itemsA, itemsB, modelA, modelB } = compareRun;
+  const ranksA = rankMap(itemsA);
+  const ranksB = rankMap(itemsB);
+  const nameA = MODELS[modelA]?.name || modelA;
+  const nameB = MODELS[modelB]?.name || modelB;
+
+  if (els.diffThA) els.diffThA.textContent = nameA;
+  if (els.diffThB) els.diffThB.textContent = nameB;
+  if (els.dualDiffSub) {
+    els.dualDiffSub.textContent = L(
+      "Rows aligned by input order. Positive Δ rank means model B ranked this passage higher.",
+      "按输入顺序对齐。Δ 名次为正表示模型 B 将该段排名更靠前。"
+    );
+  }
+
+  const bByIndex = new Map(itemsB.map((item) => [item.origIndex, item]));
+  const rows = itemsA
+    .slice()
+    .sort((a, b) => a.origIndex - b.origIndex)
+    .map((itemA) => {
+      const itemB = bByIndex.get(itemA.origIndex);
+      const rA = ranksA.get(itemA.origIndex);
+      const rB = ranksB.get(itemA.origIndex);
+      const scoreDelta = itemB ? itemB.score - itemA.score : 0;
+      const rankDelta = rB != null && rA != null ? rA - rB : 0;
+      const text =
+        itemA.text.length > 120 ? itemA.text.slice(0, 117) + "…" : itemA.text;
+      return `<tr>
+        <td class="diff-idx">${itemA.origIndex + 1}</td>
+        <td class="diff-text">${esc(text)}</td>
+        <td class="diff-score"><span class="mono">${itemA.score.toFixed(4)}</span> <span class="muted">#${rA}</span></td>
+        <td class="diff-score"><span class="mono">${itemB ? itemB.score.toFixed(4) : "—"}</span> <span class="muted">#${rB ?? "—"}</span></td>
+        <td>${scoreDiffHtml(scoreDelta)}</td>
+        <td>${rankDiffHtml(rankDelta)}</td>
+      </tr>`;
+    })
+    .join("");
+
+  els.diffTbody.innerHTML = rows;
+  els.dualDiff.hidden = false;
+}
+
+function syncTextareaFromList() {
+  if (!els.docsListItems || !els.docs) return;
+  const lines = Array.from(els.docsListItems.querySelectorAll(".docs-list-input"))
+    .map((el) => el.value.trim())
+    .filter(Boolean);
+  els.docs.value = lines.join("\n");
+  updateDocWarning();
+}
+
+function renderDocsList() {
+  if (!els.docsListItems || !els.docs) return;
+  const docs = parseDocs(els.docs.value);
+  const rows = docs.length ? docs : ["", ""];
+  els.docsListItems.innerHTML = rows
+    .map(
+      (text, i) => `
+    <div class="docs-list-row" data-idx="${i}">
+      <span class="docs-list-num">${i + 1}</span>
+      <textarea class="docs-list-input" rows="2" aria-label="${L("Passage", "候选段落")} ${i + 1}">${esc(text)}</textarea>
+      <button type="button" class="docs-list-del" aria-label="${L("Remove passage", "删除段落")}">×</button>
+    </div>`
+    )
+    .join("");
+
+  els.docsListItems.querySelectorAll(".docs-list-input").forEach((ta) => {
+    ta.addEventListener("input", () => {
+      syncTextareaFromList();
+      markEdited();
+      syncUrl();
+    });
+  });
+  els.docsListItems.querySelectorAll(".docs-list-del").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      btn.closest(".docs-list-row")?.remove();
+      syncTextareaFromList();
+      if (!els.docsListItems.querySelector(".docs-list-row")) renderDocsList();
+      markEdited();
+      syncUrl();
+    });
+  });
+}
+
+function updateDocsEditorMode() {
+  if (!els.docsList) return;
+  const mobile = MOBILE_MQ.matches;
+  els.docsList.hidden = !mobile;
+  if (mobile) renderDocsList();
 }
 
 function updateDocWarning() {
   if (!els.docWarning || !els.docs) return;
-  const n = parseDocs(els.docs.value || "").length;
+  const raw = els.docs.value || "";
+  const n = parseDocs(raw).length;
+  const fmt = inputFormatHint(raw);
+  const parts = [];
+  if (fmt) parts.push(fmt);
   if (n > MAX_DOCS) {
-    els.docWarning.hidden = false;
-    els.docWarning.textContent = L(
-      `Warning: ${n} passages — scoring more than ${MAX_DOCS} may freeze the tab. Consider trimming the list.`,
-      `警告：共 ${n} 段文本 —— 超过 ${MAX_DOCS} 段可能导致页面卡顿，建议精简列表。`
+    parts.push(
+      L(
+        `Warning: ${n} passages — scoring more than ${MAX_DOCS} may freeze the tab. Consider trimming the list.`,
+        `警告：共 ${n} 段文本 —— 超过 ${MAX_DOCS} 段可能导致页面卡顿，建议精简列表。`
+      )
     );
   } else if (n > MAX_DOCS * 0.75) {
-    els.docWarning.hidden = false;
-    els.docWarning.textContent = L(
-      `${n} passages — approaching the recommended limit of ${MAX_DOCS}.`,
-      `共 ${n} 段 —— 接近建议上限 ${MAX_DOCS}。`
+    parts.push(
+      L(
+        `${n} passages — approaching the recommended limit of ${MAX_DOCS}.`,
+        `共 ${n} 段 —— 接近建议上限 ${MAX_DOCS}。`
+      )
     );
+  }
+  if (parts.length) {
+    els.docWarning.hidden = false;
+    els.docWarning.textContent = parts.join(" · ");
   } else {
     els.docWarning.hidden = true;
   }
+}
+
+function formatError(err, ctx) {
+  const msg = (err?.message || String(err)).toLowerCase();
+  const { useWebgpu, docCount } = ctx || {};
+  if (/webgpu|gpu|device/.test(msg) && useWebgpu) {
+    return L(
+      "WebGPU error — uncheck “Use WebGPU” and retry on WASM/CPU.",
+      "WebGPU 出错 —— 请取消勾选“使用 WebGPU”，改用 WASM/CPU 重试。"
+    );
+  }
+  if (/fetch|network|failed to fetch|timeout|abort|cors|download|load/.test(msg)) {
+    return L(
+      "Network error — model files could not download. Check your connection or ad-blocker, then retry.",
+      "网络错误 —— 模型文件下载失败。请检查网络或广告拦截器后重试。"
+    );
+  }
+  if (/memory|oom|allocation|out of memory/.test(msg)) {
+    return L(
+      "Memory limit — try fewer passages, close other tabs, or pick a smaller model (jina-tiny).",
+      "内存不足 —— 请减少候选段落、关闭其他标签页，或选择更小模型（jina-tiny）。"
+    );
+  }
+  if (docCount > MAX_DOCS) {
+    return L(
+      `Too many passages (${docCount}). Trim to ${MAX_DOCS} or fewer.`,
+      `候选过多（${docCount}）。请精简到 ${MAX_DOCS} 条以内。`
+    );
+  }
+  if (/token|length|truncat|sequence|max/.test(msg)) {
+    return L(
+      "Text too long — shorten the query or individual passages.",
+      "文本过长 —— 请缩短查询或单段候选文本。"
+    );
+  }
+  return L("Something went wrong: ", "出错了：") + (err?.message || String(err));
 }
 
 function syncUrl() {
@@ -558,6 +843,7 @@ function loadFromUrl() {
     renderPresets();
   }
   updateDocWarning();
+  if (MOBILE_MQ.matches) renderDocsList();
 }
 
 async function shareLink() {
@@ -632,24 +918,27 @@ async function copyText(text, btn) {
 }
 
 async function scoreWithModel(modelId, query, docs, useWebgpu) {
+  const device = useWebgpu ? "webgpu" : "wasm";
+  const cacheKey = modelId + ":" + device;
+  const cachedInTab = cache.has(cacheKey);
+  showLoadPanel(modelId, cachedInTab);
+  if (cachedInTab && els.loadCacheStatus) {
+    els.loadCacheStatus.textContent = L("In tab memory", "已在标签页内存");
+    if (els.loadPct) els.loadPct.textContent = L("Ready", "就绪");
+  }
+
   const files = {};
   let didDownload = false;
   const onProgress = (p) => {
     if (p.status === "progress" && p.file) {
       didDownload = true;
       files[p.file] = { loaded: p.loaded || 0, total: p.total || 0 };
-      const vals = Object.values(files);
-      const loaded = vals.reduce((a, b) => a + b.loaded, 0);
-      const total = vals.reduce((a, b) => a + b.total, 0);
-      const pct = total ? Math.min(99, Math.round((loaded / total) * 100)) : 0;
-      showProgress(pct);
-      setStatus(
-        L(
-          `Downloading ${MODELS[modelId]?.name || modelId}… ${mb(loaded)}/${mb(total)} MB (${pct}%)`,
-          `正在下载 ${MODELS[modelId]?.name || modelId}…… ${mb(loaded)}/${mb(total)} MB（${pct}%）`
-        ),
-        true
-      );
+      updateLoadProgress(modelId, files, p.file, cachedInTab);
+      if (els.loadCacheStatus) {
+        els.loadCacheStatus.textContent = L("Downloading", "正在下载");
+      }
+    } else if (p.status === "done" && !didDownload && els.loadCacheStatus) {
+      els.loadCacheStatus.textContent = L("Browser cache hit", "浏览器缓存命中");
     }
   };
   const reranker = await getReranker(modelId, onProgress, useWebgpu);
@@ -686,12 +975,11 @@ async function run() {
 
   els.run.disabled = true;
   setStatus(L("Loading model…", "正在加载模型……"), true);
-  showProgress(0);
 
   try {
     const biScores = biEncoderProxyScores(query, docs);
     const primary = await scoreWithModel(modelId, query, docs, useWebgpu);
-    showProgress(null);
+    hideLoadPanel();
 
     const items = docs.map((text, origIndex) => ({
       text,
@@ -743,16 +1031,8 @@ async function run() {
     els.region?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   } catch (err) {
     console.error(err);
-    showProgress(null);
-    const msg = err?.message || String(err);
-    if (/webgpu/i.test(msg) && useWebgpu) {
-      setStatus(
-        L("WebGPU failed — uncheck WebGPU and retry.", "WebGPU 失败 —— 请取消勾选后重试。"),
-        false
-      );
-    } else {
-      setStatus(L("Something went wrong: ", "出错了：") + msg, false);
-    }
+    hideLoadPanel();
+    setStatus(formatError(err, { useWebgpu, docCount: docs.length }), false);
   } finally {
     els.run.disabled = false;
   }
@@ -763,6 +1043,8 @@ function clearAll() {
   if (els.docs) els.docs.value = "";
   if (els.region) els.region.hidden = true;
   if (els.dualRegion) els.dualRegion.hidden = true;
+  if (els.dualDiff) els.dualDiff.hidden = true;
+  hideLoadPanel();
   lastRun = null;
   currentPreset = SAMPLES[0].id;
   userEdited = false;
@@ -798,8 +1080,39 @@ if (els.docs) {
   els.docs.addEventListener("input", () => {
     markEdited();
     updateDocWarning();
+    if (MOBILE_MQ.matches) renderDocsList();
     syncUrl();
   });
+}
+if (els.docsAddBtn) {
+  els.docsAddBtn.addEventListener("click", () => {
+    if (!els.docsListItems) return;
+    const row = document.createElement("div");
+    row.className = "docs-list-row";
+    const n = els.docsListItems.querySelectorAll(".docs-list-row").length + 1;
+    row.innerHTML = `
+      <span class="docs-list-num">${n}</span>
+      <textarea class="docs-list-input" rows="2" aria-label="${L("Passage", "候选段落")} ${n}"></textarea>
+      <button type="button" class="docs-list-del" aria-label="${L("Remove passage", "删除段落")}">×</button>`;
+    els.docsListItems.appendChild(row);
+    row.querySelector(".docs-list-input").addEventListener("input", () => {
+      syncTextareaFromList();
+      markEdited();
+      syncUrl();
+    });
+    row.querySelector(".docs-list-del").addEventListener("click", () => {
+      row.remove();
+      syncTextareaFromList();
+      markEdited();
+      syncUrl();
+    });
+    row.querySelector(".docs-list-input").focus();
+  });
+}
+if (typeof MOBILE_MQ.addEventListener === "function") {
+  MOBILE_MQ.addEventListener("change", updateDocsEditorMode);
+} else {
+  MOBILE_MQ.addListener(updateDocsEditorMode);
 }
 document.addEventListener("keydown", (e) => {
   if (
@@ -834,6 +1147,7 @@ function idleStatus() {
 
 renderModelMeta();
 renderPresets();
+updateDocsEditorMode();
 if (location.search) loadFromUrl();
 else loadPreset(currentPreset);
 idleStatus();
@@ -847,6 +1161,7 @@ document.addEventListener("i18n:changed", function () {
   renderModelMeta();
   renderPresets();
   updateDocWarning();
+  updateDocsEditorMode();
   if (currentPreset && !userEdited) {
     const keepStatus = els.status?.textContent || "";
     loadPreset(currentPreset);

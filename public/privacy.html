@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Page not found (404) | reranker.uk</title>
-  <meta name="description" content="That page could not be found. Head back to reranker.uk for guides on rerankers, model comparisons, and a live in-browser reranking demo." />
-  <link rel="canonical" href="" />
+  <title>Privacy — reranker.uk | reranker.uk</title>
+  <meta name="description" content="How reranker.uk handles your data: static pages, in-browser demo processing, third-party CDNs, and share links." />
+  <link rel="canonical" href="https://reranker.uk/privacy.html" />
   <meta name="theme-color" content="#0b0d17" />
-  <meta name="robots" content="noindex, follow" />
+  <meta name="robots" content="index, follow" />
   <meta name="author" content="reranker.uk" />
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Page not found (404) | reranker.uk" />
-  <meta property="og:description" content="That page could not be found. Head back to reranker.uk for guides on rerankers, model comparisons, and a live in-browser reranking demo." />
-  <meta property="og:url" content="" />
+  <meta property="og:title" content="reranker.uk privacy" />
+  <meta property="og:description" content="Your query and passages stay in the browser. No first-party analytics." />
+  <meta property="og:url" content="https://reranker.uk/privacy.html" />
   <meta property="og:site_name" content="reranker.uk" />
   <meta property="og:locale" content="en_GB" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -46,22 +46,30 @@
     </nav>
   </header>
 <main id="main">
-    <section class="hero container center">
-      <span class="eyebrow">404</span>
-      <h1>This page took a wrong turn</h1>
-      <p class="lead">The page you were looking for doesn't exist — it may have moved or never been here. Let's get you back on track.</p>
-      <div class="hero-actions" style="justify-content:center">
-        <a class="btn btn-primary" href="/">Back to home</a>
-        <a class="btn btn-ghost" href="/demo.html">Try the live demo</a>
-      </div>
+    <section class="hero container" style="padding-bottom:1.5rem">
+      <h1>Privacy</h1>
+      <p class="lead">reranker.uk is a static educational site. Here is what happens to your data when you browse or use the live demo.</p>
     </section>
 
-    <section class="section container">
-      <div class="grid grid-3">
-        <a class="card" href="/guides/what-is-a-reranker.html"><h3>What is a reranker?</h3><p>Start with the fundamentals of two-stage retrieval.</p></a>
-        <a class="card" href="/models/"><h3>Compare rerank models</h3><p>bge, Cohere, Jina, Voyage and mxbai side by side.</p></a>
-        <a class="card" href="/guides/rerank-rag.html"><h3>Rerank for RAG</h3><p>Add a reranking stage to your pipeline, with code.</p></a>
-      </div>
+    <section class="section container narrow prose">
+      <h2>Static pages</h2>
+      <p>Guide and model pages are plain HTML served from Cloudflare. We do not run first-party analytics, tracking pixels, or sign-in flows on this site.</p>
+
+      <h2>Live demo</h2>
+      <p>The <a href="/demo.html">reranking demo</a> runs entirely in your browser with <a href="https://github.com/huggingface/transformers.js" rel="noopener noreferrer">transformers.js</a>. Your query and candidate passages are processed locally on your device. They are <strong>not</strong> sent to reranker.uk servers or any rerank API.</p>
+      <p>On first use, the demo downloads open-weight model files from the Hugging Face CDN (via jsDelivr). Those weights are cached in your browser storage for faster repeat visits. Share links encode your query and passages in the URL — only share them with people you trust, since anyone with the link can read that text.</p>
+
+      <h2>Third parties</h2>
+      <ul>
+        <li><strong>Cloudflare</strong> — hosts static files and may log standard request metadata (IP, user agent) per their <a href="https://www.cloudflare.com/privacypolicy/" rel="noopener noreferrer">privacy policy</a>.</li>
+        <li><strong>jsDelivr / Hugging Face</strong> — serves transformers.js and ONNX model weights when you open the demo.</li>
+        <li><strong>GitHub</strong> — if you follow the “View source” link, GitHub’s terms apply.</li>
+      </ul>
+
+      <h2>Contact</h2>
+      <p>Questions or corrections: open an issue on <a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer">GitHub</a>.</p>
+
+      <p class="muted" style="margin-top:2rem">Last updated: 23 June 2026</p>
     </section>
   </main>
   <footer class="site-footer">
@@ -108,7 +116,7 @@
     </div>
   </footer>
   <script src="/assets/js/main.js"></script>
-  <script src="/assets/js/i18n/404.js"></script>
+  
   <script src="/assets/js/i18n/shared.js"></script>
   <script src="/assets/js/i18n.js"></script>
 </body>

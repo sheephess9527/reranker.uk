@@ -352,8 +352,36 @@ select { font-family: var(--mono); font-size: 0.85rem; }
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+.load-panel {
+  margin-top: 0.75rem; padding: 0.85rem 1rem; background: var(--bg-soft);
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+}
+.load-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.55rem; }
+.load-label { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-mut); }
+.load-model { font-weight: 700; font-size: 0.9rem; color: var(--text); }
+.load-meta { display: flex; flex-wrap: wrap; gap: 0.65rem 1rem; margin-top: 0.45rem; font-size: 0.8rem; font-family: var(--mono); color: var(--text-soft); }
+.load-file { font-family: var(--sans); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
 .progress-bar { height: 6px; background: var(--bg-elev); border-radius: 999px; overflow: hidden; margin-top: 0.4rem; }
 .progress-bar > i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--primary-strong), var(--accent)); transition: width 0.25s; }
+
+.docs-editor textarea { display: block; }
+@media (max-width: 760px) {
+  .docs-editor > textarea { display: none; }
+  .docs-editor .docs-list { display: block; }
+}
+.docs-list-items { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 0.55rem; max-height: 280px; overflow-y: auto; }
+.docs-list-row { display: grid; grid-template-columns: 1.6rem 1fr 2rem; gap: 0.45rem; align-items: start; }
+.docs-list-num { font-size: 0.78rem; color: var(--text-mut); font-weight: 700; padding-top: 0.55rem; text-align: center; }
+.docs-list-input {
+  min-height: 0; resize: vertical; font-size: 0.88rem; padding: 0.5rem 0.65rem;
+}
+.docs-list-del {
+  background: var(--bg-elev); border: 1px solid var(--border); color: var(--text-mut);
+  border-radius: 7px; width: 2rem; height: 2rem; cursor: pointer; font-size: 1.1rem; line-height: 1;
+}
+.docs-list-del:hover { color: var(--danger); border-color: var(--danger); }
+.docs-add-btn { width: 100%; }
 
 /* Results output region */
 .demo-output { margin-top: 2rem; }
@@ -386,7 +414,36 @@ select { font-family: var(--mono); font-size: 0.85rem; }
   font-size: 0.82rem; color: var(--warn); margin-top: 0.5rem; line-height: 1.4;
 }
 .dual-compare { margin-top: 1.8rem; padding-top: 1.4rem; border-top: 1px solid var(--border-soft); }
+.dual-diff { margin-top: 1.6rem; padding-top: 1.2rem; border-top: 1px solid var(--border-soft); }
 .dual-head { font-size: 1rem; margin: 0 0 1rem; color: var(--text-soft); }
+.diff-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.diff-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+.diff-table th, .diff-table td { padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--border-soft); text-align: left; vertical-align: top; }
+.diff-table th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-mut); background: var(--bg-soft); }
+.diff-table tr:last-child td { border-bottom: none; }
+.diff-idx { color: var(--text-mut); font-weight: 700; white-space: nowrap; }
+.diff-text { color: var(--text-soft); max-width: 28ch; }
+.diff-score { font-size: 0.82rem; white-space: nowrap; }
+.diff-up { color: var(--good); font-family: var(--mono); font-weight: 700; }
+.diff-down { color: var(--danger); font-family: var(--mono); font-weight: 700; }
+.mono { font-family: var(--mono); }
+
+.models-toolbar { display: flex; flex-wrap: wrap; gap: 0.65rem; align-items: center; margin-bottom: 1rem; }
+.models-filter {
+  flex: 1; min-width: 180px; max-width: 320px;
+  background: var(--bg-soft); border: 1px solid var(--border); color: var(--text);
+  border-radius: var(--radius-sm); padding: 0.55rem 0.75rem; font-size: 0.9rem;
+}
+.models-count { font-size: 0.82rem; margin-left: auto; }
+#models-table th[data-sort]::after { content: " ⇅"; opacity: 0.35; font-size: 0.75em; }
+#models-table th.sort-asc::after { content: " ↑"; opacity: 1; }
+#models-table th.sort-desc::after { content: " ↓"; opacity: 1; }
+.demo-link-cell { white-space: nowrap; }
+
+.changelog-entry { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border-soft); }
+.changelog-entry:last-of-type { border-bottom: none; }
+.footer-legal a { color: var(--text-mut); }
+.footer-legal a:hover { color: var(--text); }
 .benchmark-meta a { color: var(--primary); }
 
 @media (prefers-reduced-motion: reduce) {

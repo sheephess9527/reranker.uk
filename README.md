@@ -8,6 +8,25 @@ Educational resource on rerankers for retrieval and RAG, with a live in-browser 
 
 ---
 
+## Changelog — demo UX round 2 (2026-06-23)
+
+High-priority improvements from the second review:
+
+| Feature | Implementation |
+|---------|----------------|
+| **Model loading panel** | `#load-panel`: % progress, MB loaded/total, ETA, current file, cache status (tab memory / browser cache / downloading) |
+| **JSON passages** | `parseDocs()` accepts JSON arrays or `{ "passages": [...] }` objects |
+| **Dual-model diff** | `#dual-diff` aligned table: per-passage scores, ranks, Δ score, Δ rank |
+| **Models table UX** | `public/assets/js/models-index.js` — filter, sortable columns, “Try in demo” → `?m=` for Jina & mxbai |
+| **Mobile passage editor** | `#docs-list` add/remove rows on viewports ≤760px; syncs with textarea |
+| **Error classification** | `formatError()` — network, WebGPU, memory, token length, passage limit |
+| **Changelog + Privacy** | `/changelog.html`, `/privacy.html`; footer links |
+| **Nav** | Home + Guides in top bar |
+
+**New pages:** `/changelog.html`, `/privacy.html` (17 built pages after `node scripts/build.mjs`).
+
+---
+
 ## Changelog — full release (2026-06-23)
 
 This release implements improvement-plan items **1, 2, 3, 4, 5, 7, 8, 9, 10**. Item **6** (hreflang / separate Chinese URLs) was **not** done.

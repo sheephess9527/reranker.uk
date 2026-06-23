@@ -1,6 +1,8 @@
 window.I18N_SHARED = {
   keys: {
     "shared.skip": "跳到正文",
+    "shared.nav.home": "首页",
+    "shared.nav.guides": "指南",
     "shared.nav.whatIs": "什么是 reranker",
     "shared.nav.crossVsBi": "Cross- vs Bi-encoder",
     "shared.nav.rerankRag": "为 RAG 加重排序",
@@ -14,6 +16,10 @@ window.I18N_SHARED = {
     "shared.footer.hybrid": "混合检索 + 重排序",
     "shared.footer.evaluate": "评测 reranker",
     "shared.footer.models": "模型",
+    "shared.footer.changelog": "更新日志",
+    "shared.footer.changelogShort": "更新日志",
+    "shared.footer.privacy": "隐私说明",
+    "shared.footer.privacyShort": "隐私",
     "shared.footer.disclaimer": "开放教育资源 · 与任何模型厂商无关",
     "shared.article.updated": "更新于",
     "shared.toc": "本页目录",

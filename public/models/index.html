@@ -105,6 +105,8 @@
       <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       <ul class="nav-links">
+        <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
+        <li><a href="/guides/" data-i18n="shared.nav.guides">Guides</a></li>
         <li><a href="/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
         <li><a href="/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
         <li><a href="/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
@@ -121,21 +123,32 @@
     </section>
 
     <section class="section container">
+      <div class="models-toolbar">
+        <input type="search" id="models-filter" class="models-filter" placeholder="Filter models…" aria-label="Filter models" />
+        <select id="models-type-filter" aria-label="Filter by type">
+          <option value="all">All types</option>
+          <option value="open">Open weights</option>
+          <option value="api">Hosted API</option>
+          <option value="browser">Browser runnable</option>
+        </select>
+        <span class="muted models-count" id="models-count"></span>
+      </div>
       <div class="table-wrap">
-        <table>
+        <table id="models-table">
           <thead>
             <tr>
-              <th>Model</th>
-              <th>Type</th>
+              <th data-sort="name">Model</th>
+              <th data-sort="type">Type</th>
               <th>Best for</th>
-              <th>Languages</th>
+              <th data-sort="langs">Languages</th>
               <th>Typ. latency <span class="th-hint">50 docs</span></th>
-              <th>Pricing</th>
-              <th>BEIR NDCG@10</th>
+              <th data-sort="pricing">Pricing</th>
+              <th data-sort="beir">BEIR NDCG@10</th>
+              <th>Demo</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr data-name="bge-reranker-v2-m3" data-type="open" data-langs="100+" data-pricing="free" data-beir="60.1">
               <td><a href="/models/bge-reranker.html">bge-reranker-v2-m3</a></td>
               <td><span class="pill good">Open weights</span></td>
               <td>Self-hosted, free, multilingual</td>
@@ -143,8 +156,9 @@
               <td>200–500 ms CPU<br><span class="muted">20–50 ms GPU</span></td>
               <td>Free (self-host)</td>
               <td>~60.1</td>
+              <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr>
+            <tr data-name="cohere-rerank-v3.5" data-type="api" data-langs="100+" data-pricing="paid" data-beir="61.2">
               <td><a href="/models/cohere-rerank.html">Cohere Rerank v3.5</a></td>
               <td><span class="pill">Hosted API</span></td>
               <td>Best multilingual quality, mature API</td>
@@ -152,8 +166,9 @@
               <td>80–200 ms API</td>
               <td>~$0.002/1k docs</td>
               <td>~61.2</td>
+              <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr>
+            <tr data-name="jina-reranker-v2" data-type="open api browser" data-langs="100+" data-pricing="freemium" data-beir="59.6" data-demo="jina-reranker">
               <td><a href="/models/jina-reranker.html">Jina Reranker v2</a></td>
               <td><span class="pill good">Open + Hosted</span><br><span class="pill info">Browser ✓</span></td>
               <td>Open weights + API + tiny browser model</td>
@@ -161,8 +176,9 @@
               <td>100–300 ms API<br><span class="muted">30–80 ms CPU (tiny)</span></td>
               <td>Free tier + pay-as-you-go</td>
               <td>~59.6</td>
+              <td class="demo-link-cell"></td>
             </tr>
-            <tr>
+            <tr data-name="voyage-rerank-2" data-type="api" data-langs="multi" data-pricing="paid" data-beir="61.0">
               <td><a href="/models/voyage-rerank.html">Voyage Rerank 2</a></td>
               <td><span class="pill">Hosted API</span></td>
               <td>High retrieval precision, domain-specific</td>
@@ -170,8 +186,9 @@
               <td>100–250 ms API</td>
               <td>~$0.0005/1k docs</td>
               <td>~61.0</td>
+              <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr>
+            <tr data-name="mxbai-rerank-large-v1" data-type="open browser" data-langs="en" data-pricing="free" data-beir="62.1" data-demo="mxbai-rerank">
               <td><a href="/models/mxbai-rerank.html">mxbai-rerank-large-v1</a></td>
               <td><span class="pill good">Open weights</span><br><span class="pill info">Browser ✓</span></td>
               <td>Open weights + browser-runnable xsmall</td>
@@ -179,6 +196,7 @@
               <td>150–400 ms CPU<br><span class="muted">~30 ms GPU</span></td>
               <td>Free (self-host)</td>
               <td>~62.1</td>
+              <td class="demo-link-cell"></td>
             </tr>
           </tbody>
         </table>
@@ -299,6 +317,8 @@
             <li><a href="/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
             <li><a href="/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
             <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
+            <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
+            <li><a href="/privacy.html" data-i18n="shared.footer.privacy">Privacy</a></li>
           </ul>
         </div>
         <div>
@@ -314,12 +334,17 @@
       </div>
       <div class="footer-bottom">
         <span>© <span id="year"></span> reranker.uk</span>
-        <span class="muted" data-i18n="shared.footer.disclaimer">Open educational resource · not affiliated with any model vendor</span>
+        <span class="footer-legal muted">
+          <span data-i18n="shared.footer.disclaimer">Open educational resource · not affiliated with any model vendor</span>
+          · <a href="/privacy.html" data-i18n="shared.footer.privacyShort">Privacy</a>
+          · <a href="/changelog.html" data-i18n="shared.footer.changelogShort">Changelog</a>
+        </span>
       </div>
     </div>
   </footer>
   <script src="/assets/js/main.js"></script>
   <script src="/assets/js/i18n/models-index.js"></script>
+  <script src="/assets/js/models-index.js"></script>
   <script src="/assets/js/i18n/shared.js"></script>
   <script src="/assets/js/i18n.js"></script>
 </body>

@@ -38,8 +38,14 @@
           </div>
           <div>
             <div class="field field-fill">
-              <label for="docs-input">Candidate passages <span class="hint">— one per line (max 30)</span></label>
-              <textarea id="docs-input" placeholder="Paste one candidate passage per line…"></textarea>
+              <label for="docs-input">Candidate passages <span class="hint">— one per line, or a JSON array (max 30)</span></label>
+              <div class="docs-editor">
+                <textarea id="docs-input" placeholder="Paste one candidate passage per line, or a JSON array like [&quot;passage 1&quot;, &quot;passage 2&quot;]…"></textarea>
+                <div class="docs-list" id="docs-list" hidden>
+                  <div class="docs-list-items" id="docs-list-items"></div>
+                  <button type="button" class="btn btn-ghost btn-sm docs-add-btn" id="docs-add-btn">+ Add passage</button>
+                </div>
+              </div>
             </div>
             <p class="doc-warning" id="doc-warning" hidden role="status"></p>
           </div>
@@ -50,7 +56,21 @@
           <button class="btn btn-ghost btn-sm" id="share-btn" type="button">Copy share link</button>
         </div>
         <div class="status" id="status" aria-live="polite" aria-atomic="true"></div>
-        <div class="progress-bar" id="progress-wrap" style="display:none"><i id="progress-bar"></i></div>
+        <div class="load-panel" id="load-panel" hidden>
+          <div class="load-head">
+            <div>
+              <span class="load-label" id="load-label">Loading model</span>
+              <span class="load-model" id="load-model-name"></span>
+            </div>
+            <span class="load-cache chip" id="load-cache-status"></span>
+          </div>
+          <div class="progress-bar" id="progress-wrap"><i id="progress-bar"></i></div>
+          <div class="load-meta">
+            <span id="load-pct"></span>
+            <span id="load-eta"></span>
+            <span class="load-file muted" id="load-file"></span>
+          </div>
+        </div>
       </div>
 
       <div class="demo-output" id="results-region" hidden>
@@ -66,6 +86,25 @@
           <div class="compare-grid">
             <div class="compare-col"><div class="results" id="dual-col-a"></div></div>
             <div class="compare-col"><div class="results" id="dual-col-b"></div></div>
+          </div>
+        </div>
+        <div class="dual-diff" id="dual-diff" hidden>
+          <h3 class="dual-head">Aligned diff — same passage, two models</h3>
+          <p class="muted results-sub" id="dual-diff-sub"></p>
+          <div class="diff-table-wrap">
+            <table class="diff-table" id="diff-table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Passage</th>
+                  <th scope="col" id="diff-th-a"></th>
+                  <th scope="col" id="diff-th-b"></th>
+                  <th scope="col">Δ score</th>
+                  <th scope="col">Δ rank</th>
+                </tr>
+              </thead>
+              <tbody id="diff-tbody"></tbody>
+            </table>
           </div>
         </div>
         <div class="copy-actions">

@@ -1,0 +1,27 @@
+<main id="main">
+    <section class="hero container" style="padding-bottom:1.5rem">
+      <h1>Privacy</h1>
+      <p class="lead">reranker.uk is a static educational site. Here is what happens to your data when you browse or use the live demo.</p>
+    </section>
+
+    <section class="section container narrow prose">
+      <h2>Static pages</h2>
+      <p>Guide and model pages are plain HTML served from Cloudflare. We do not run first-party analytics, tracking pixels, or sign-in flows on this site.</p>
+
+      <h2>Live demo</h2>
+      <p>The <a href="/demo.html">reranking demo</a> runs entirely in your browser with <a href="https://github.com/huggingface/transformers.js" rel="noopener noreferrer">transformers.js</a>. Your query and candidate passages are processed locally on your device. They are <strong>not</strong> sent to reranker.uk servers or any rerank API.</p>
+      <p>On first use, the demo downloads open-weight model files from the Hugging Face CDN (via jsDelivr). Those weights are cached in your browser storage for faster repeat visits. Share links encode your query and passages in the URL — only share them with people you trust, since anyone with the link can read that text.</p>
+
+      <h2>Third parties</h2>
+      <ul>
+        <li><strong>Cloudflare</strong> — hosts static files and may log standard request metadata (IP, user agent) per their <a href="https://www.cloudflare.com/privacypolicy/" rel="noopener noreferrer">privacy policy</a>.</li>
+        <li><strong>jsDelivr / Hugging Face</strong> — serves transformers.js and ONNX model weights when you open the demo.</li>
+        <li><strong>GitHub</strong> — if you follow the “View source” link, GitHub’s terms apply.</li>
+      </ul>
+
+      <h2>Contact</h2>
+      <p>Questions or corrections: open an issue on <a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer">GitHub</a>.</p>
+
+      <p class="muted" style="margin-top:2rem">Last updated: 23 June 2026</p>
+    </section>
+  </main>

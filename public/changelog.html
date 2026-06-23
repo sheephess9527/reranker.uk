@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Page not found (404) | reranker.uk</title>
-  <meta name="description" content="That page could not be found. Head back to reranker.uk for guides on rerankers, model comparisons, and a live in-browser reranking demo." />
-  <link rel="canonical" href="" />
+  <title>Changelog — reranker.uk updates | reranker.uk</title>
+  <meta name="description" content="Release notes for reranker.uk: demo features, new guides, model comparison updates, and site improvements." />
+  <link rel="canonical" href="https://reranker.uk/changelog.html" />
   <meta name="theme-color" content="#0b0d17" />
-  <meta name="robots" content="noindex, follow" />
+  <meta name="robots" content="index, follow" />
   <meta name="author" content="reranker.uk" />
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Page not found (404) | reranker.uk" />
-  <meta property="og:description" content="That page could not be found. Head back to reranker.uk for guides on rerankers, model comparisons, and a live in-browser reranking demo." />
-  <meta property="og:url" content="" />
+  <meta property="og:title" content="reranker.uk changelog" />
+  <meta property="og:description" content="What shipped on reranker.uk — demo UX, guides, and infrastructure." />
+  <meta property="og:url" content="https://reranker.uk/changelog.html" />
   <meta property="og:site_name" content="reranker.uk" />
   <meta property="og:locale" content="en_GB" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -46,22 +46,49 @@
     </nav>
   </header>
 <main id="main">
-    <section class="hero container center">
-      <span class="eyebrow">404</span>
-      <h1>This page took a wrong turn</h1>
-      <p class="lead">The page you were looking for doesn't exist — it may have moved or never been here. Let's get you back on track.</p>
-      <div class="hero-actions" style="justify-content:center">
-        <a class="btn btn-primary" href="/">Back to home</a>
-        <a class="btn btn-ghost" href="/demo.html">Try the live demo</a>
-      </div>
+    <section class="hero container" style="padding-bottom:1.5rem">
+      <h1>Changelog</h1>
+      <p class="lead">What shipped on reranker.uk — demo improvements, new guides, and site infrastructure.</p>
     </section>
 
-    <section class="section container">
-      <div class="grid grid-3">
-        <a class="card" href="/guides/what-is-a-reranker.html"><h3>What is a reranker?</h3><p>Start with the fundamentals of two-stage retrieval.</p></a>
-        <a class="card" href="/models/"><h3>Compare rerank models</h3><p>bge, Cohere, Jina, Voyage and mxbai side by side.</p></a>
-        <a class="card" href="/guides/rerank-rag.html"><h3>Rerank for RAG</h3><p>Add a reranking stage to your pipeline, with code.</p></a>
-      </div>
+    <section class="section container narrow">
+      <article class="changelog-entry">
+        <h2 id="2026-06-23b">23 Jun 2026 — Demo UX round 2</h2>
+        <ul class="feature-list">
+          <li><strong>Model loading panel</strong> — progress %, ETA, file name, cache status</li>
+          <li><strong>JSON passages</strong> — paste a JSON array or <code>{ "passages": [...] }</code> object</li>
+          <li><strong>Dual-model diff view</strong> — aligned table with score and rank deltas</li>
+          <li><strong>Models table</strong> — sort, filter, and jump to demo with <code>?m=</code></li>
+          <li><strong>Mobile passage editor</strong> — add/remove list on small screens</li>
+          <li><strong>Error hints</strong> — classified messages for network, WebGPU, memory, and limits</li>
+          <li><strong>Changelog + Privacy</strong> — this page and a short privacy statement</li>
+          <li><strong>Nav</strong> — Home and Guides links in the top bar</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
+        <h2 id="2026-06-23">23 Jun 2026 — Full release (plan items 1–5, 7–10)</h2>
+        <ul class="feature-list">
+          <li>Build system: <code>src/partials</code> + <code>src/pages</code> → <code>scripts/build.mjs</code></li>
+          <li>Demo: three-column results, bi-encoder proxy, dual-model compare, WebGPU, URL sharing</li>
+          <li>Guides index, hybrid retrieval, evaluate rerankers</li>
+          <li>Models: Last verified June 2026, chooser cards, mxbai on homepage</li>
+          <li>i18n: <code>data-i18n</code> keys + shared dictionary; EN/中文 toggle</li>
+          <li>Footer GitHub link; sticky nav; aria-live status</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
+        <h2 id="2026-06-21">21 Jun 2026 — Initial launch</h2>
+        <ul class="feature-list">
+          <li>Educational guides on rerankers, cross- vs bi-encoder, and RAG</li>
+          <li>Model comparison pages for bge, Cohere, Jina, Voyage, mxbai</li>
+          <li>In-browser cross-encoder demo with transformers.js</li>
+          <li>Deployed on Cloudflare Workers (static assets)</li>
+        </ul>
+      </article>
+
+      <p class="center" style="margin-top:2.5rem"><a class="btn btn-primary" href="/demo.html">Try the demo →</a></p>
     </section>
   </main>
   <footer class="site-footer">
@@ -108,7 +135,7 @@
     </div>
   </footer>
   <script src="/assets/js/main.js"></script>
-  <script src="/assets/js/i18n/404.js"></script>
+  
   <script src="/assets/js/i18n/shared.js"></script>
   <script src="/assets/js/i18n.js"></script>
 </body>
