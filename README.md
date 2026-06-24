@@ -18,6 +18,7 @@ Reduce friction with the vendors whose products the site compares.
 | **Footer links** | `Terms & disclaimer` added to the footer column list and the legal bottom row (`shared.footer.terms` / `shared.footer.termsShort` in `shared.js`) — rebuilt into all 20 pages |
 | **Pricing → official links** | The “check current rates” notes on Cohere / Jina / Voyage pages now link to each vendor’s official pricing page and say figures are approximate |
 | **Sitemap** | `+ /terms.html` (18 → 19 URLs) |
+| **Privacy page bilingual** | Added `public/assets/js/i18n/privacy.js` + `page_scripts` so the privacy body translates to 中文 (was English-only on toggle) |
 
 **Build-system fix (prevented a regression):** the earlier huggingface preconnect
 hints and the demo `<noscript>` fallback had been hand-edited directly into
