@@ -8,6 +8,32 @@ Educational resource on rerankers for retrieval and RAG, with a live in-browser 
 
 ---
 
+## Changelog — legal hardening (2026-06-24)
+
+Reduce friction with the vendors whose products the site compares.
+
+| Change | Detail |
+|--------|--------|
+| **Terms & disclaimer page** | New `src/pages/terms.html` (+ `.meta.json`, bilingual via `public/assets/js/i18n/terms.js`). Covers: educational/no-warranty, **trademark attribution** (all product names belong to their owners; nominative use; no affiliation/endorsement; no logos used), benchmarks/pricing are approximate & may be outdated, model-licence responsibility, external-link disclaimer, limitation of liability, and a good-faith “open an issue and we’ll correct it” note |
+| **Footer links** | `Terms & disclaimer` added to the footer column list and the legal bottom row (`shared.footer.terms` / `shared.footer.termsShort` in `shared.js`) — rebuilt into all 20 pages |
+| **Pricing → official links** | The “check current rates” notes on Cohere / Jina / Voyage pages now link to each vendor’s official pricing page and say figures are approximate |
+| **Sitemap** | `+ /terms.html` (18 → 19 URLs) |
+
+**Build-system fix (prevented a regression):** the earlier huggingface preconnect
+hints and the demo `<noscript>` fallback had been hand-edited directly into
+`public/demo.html`, never into source — so the first rebuild stripped them. Ported
+both into `src/pages/demo.meta.json` (`head_extra`) and `src/pages/demo.html` so
+rebuilds keep them. Built HTML is normalised to LF after `build.mjs` (meta
+`head_extra` carries `\r\n`, which would otherwise churn JSON-LD blocks to CRLF).
+
+### Git commits
+
+| Commit | Summary |
+|--------|---------|
+| `_pending_` | Legal: terms & disclaimer page, footer links, vendor pricing links; restore demo preconnect/noscript in source |
+
+---
+
 ## Changelog — i18n completeness + demo polish (2026-06-23)
 
 Two follow-ups: a Chinese-toggle review and a demo UX review. All edits are to

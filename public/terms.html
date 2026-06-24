@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog — reranker.uk updates | reranker.uk</title>
-  <meta name="description" content="Release notes for reranker.uk: demo features, new guides, model comparison updates, and site improvements." />
-  <link rel="canonical" href="https://reranker.uk/changelog.html" />
+  <title>Terms and disclaimer — reranker.uk | reranker.uk</title>
+  <meta name="description" content="Terms of use and disclaimer for reranker.uk: educational purpose, trademark attribution, approximate benchmarks and pricing, and no affiliation with any model vendor." />
+  <link rel="canonical" href="https://reranker.uk/terms.html" />
   <meta name="theme-color" content="#0b0d17" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="reranker.uk" />
@@ -13,9 +13,9 @@
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="reranker.uk changelog" />
-  <meta property="og:description" content="What shipped on reranker.uk — demo UX, guides, and infrastructure." />
-  <meta property="og:url" content="https://reranker.uk/changelog.html" />
+  <meta property="og:title" content="reranker.uk terms & disclaimer" />
+  <meta property="og:description" content="Educational resource · trademarks belong to their owners · no vendor affiliation · figures approximate." />
+  <meta property="og:url" content="https://reranker.uk/terms.html" />
   <meta property="og:site_name" content="reranker.uk" />
   <meta property="og:locale" content="en_GB" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -48,60 +48,37 @@
   </header>
 <main id="main">
     <section class="hero container" style="padding-bottom:1.5rem">
-      <h1>Changelog</h1>
-      <p class="lead">What shipped on reranker.uk — demo improvements, new guides, and site infrastructure.</p>
+      <h1>Terms &amp; disclaimer</h1>
+      <p class="lead">reranker.uk is a free, open educational resource. By using this site and its in-browser demo you accept the terms below.</p>
     </section>
 
-    <section class="section container narrow">
-      <article class="changelog-entry">
-        <h2 id="2026-06-23c">23 Jun 2026 — Medium-priority UX &amp; content</h2>
-        <ul class="feature-list">
-          <li><strong>Self-host guide</strong> — <a href="/guides/self-host-reranker.html">sentence-transformers, serving, ops</a></li>
-          <li><strong>Scenario guide</strong> — <a href="/guides/choose-reranker-scenario.html">RAG vs support vs legal vs code</a></li>
-          <li><strong>Passage char counts</strong> — per-list stats + 512-char truncation warning</li>
-          <li><strong>New presets</strong> — Technical docs, Code search</li>
-          <li><strong>CSV export</strong> — Copy CSV alongside JSON and Markdown</li>
-          <li><strong>Light theme</strong> — toggle in nav, persisted in <code>localStorage</code></li>
-        </ul>
-      </article>
+    <section class="section container narrow prose">
+      <h2>Educational purpose, no warranty</h2>
+      <p>All content — guides, model comparisons, benchmarks and the demo — is provided on an as-is basis for general educational purposes, without warranty of any kind. We make no guarantee that information is accurate, complete or current, and nothing here is professional, legal or commercial advice. You are responsible for validating anything before relying on it in production.</p>
 
-      <article class="changelog-entry">
-        <h2 id="2026-06-23b">23 Jun 2026 — Demo UX round 2</h2>
-        <ul class="feature-list">
-          <li><strong>Model loading panel</strong> — progress %, ETA, file name, cache status</li>
-          <li><strong>JSON passages</strong> — paste a JSON array or <code>{ "passages": [...] }</code> object</li>
-          <li><strong>Dual-model diff view</strong> — aligned table with score and rank deltas</li>
-          <li><strong>Models table</strong> — sort, filter, and jump to demo with <code>?m=</code></li>
-          <li><strong>Mobile passage editor</strong> — add/remove list on small screens</li>
-          <li><strong>Error hints</strong> — classified messages for network, WebGPU, memory, and limits</li>
-          <li><strong>Changelog + Privacy</strong> — this page and a short privacy statement</li>
-          <li><strong>Nav</strong> — Home and Guides links in the top bar</li>
-        </ul>
-      </article>
+      <h2>Trademarks &amp; affiliation</h2>
+      <p>Product and company names referenced on this site — including <strong>Cohere</strong> and Cohere Rerank, <strong>Jina AI</strong> and Jina Reranker, <strong>Voyage AI</strong> and Voyage Rerank, <strong>BAAI</strong> and bge-reranker, <strong>mixedbread-ai</strong> and mxbai-rerank, <strong>Hugging Face</strong>, <strong>Cloudflare</strong> and <strong>ONNX</strong> — are the trademarks or registered trademarks of their respective owners.</p>
+      <p>They are used here only for <em>identification and comparison</em> (nominative reference). reranker.uk is an independent resource and is <strong>not affiliated with, endorsed by, or sponsored by</strong> any of these organisations. No logos or brand assets are used.</p>
 
-      <article class="changelog-entry">
-        <h2 id="2026-06-23">23 Jun 2026 — Full release (plan items 1–5, 7–10)</h2>
-        <ul class="feature-list">
-          <li>Build system: <code>src/partials</code> + <code>src/pages</code> → <code>scripts/build.mjs</code></li>
-          <li>Demo: three-column results, bi-encoder proxy, dual-model compare, WebGPU, URL sharing</li>
-          <li>Guides index, hybrid retrieval, evaluate rerankers</li>
-          <li>Models: Last verified June 2026, chooser cards, mxbai on homepage</li>
-          <li>i18n: <code>data-i18n</code> keys + shared dictionary; EN/中文 toggle</li>
-          <li>Footer GitHub link; sticky nav; aria-live status</li>
-        </ul>
-      </article>
+      <h2>Benchmarks &amp; pricing</h2>
+      <p>Benchmark scores (e.g. BEIR NDCG@10), latency estimates and pricing figures are <strong>approximate</strong>, gathered from public sources and last verified in June 2026. They vary by dataset, hardware and vendor changes, and may be out of date. Always confirm current numbers and prices with the official vendor documentation before making decisions. Figures are offered in good faith and not as an authoritative comparison.</p>
 
-      <article class="changelog-entry">
-        <h2 id="2026-06-21">21 Jun 2026 — Initial launch</h2>
-        <ul class="feature-list">
-          <li>Educational guides on rerankers, cross- vs bi-encoder, and RAG</li>
-          <li>Model comparison pages for bge, Cohere, Jina, Voyage, mxbai</li>
-          <li>In-browser cross-encoder demo with transformers.js</li>
-          <li>Deployed on Cloudflare Workers (static assets)</li>
-        </ul>
-      </article>
+      <h2>The in-browser demo</h2>
+      <p>The <a href="/demo.html">demo</a> downloads open-weight models (Apache-2.0 licensed) from the Hugging Face CDN and runs them locally in your browser. The models, weights and the <a href="https://github.com/huggingface/transformers.js" rel="noopener noreferrer">transformers.js</a> library are the property of their respective authors and governed by their own licences. If you reuse these models in your own product, you are responsible for complying with the licence and terms of each model and vendor.</p>
 
-      <p class="center" style="margin-top:2.5rem"><a class="btn btn-primary" href="/demo.html">Try the demo →</a></p>
+      <h2>External links</h2>
+      <p>This site links to third-party documentation, repositories and vendor sites. We do not control and are not responsible for the content, accuracy or practices of those external sites.</p>
+
+      <h2>Limitation of liability</h2>
+      <p>To the maximum extent permitted by law, reranker.uk and its maintainers accept no liability for any loss or damage arising from use of, or reliance on, this site, its content or the demo.</p>
+
+      <h2>Site content</h2>
+      <p>The original text and source of this site are available on <a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer">GitHub</a>. Third-party names, marks, model weights and quoted figures remain the property of their owners.</p>
+
+      <h2>Corrections</h2>
+      <p>If any vendor or reader believes something here is inaccurate or misattributed, please <a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer">open an issue on GitHub</a> and we will correct it promptly.</p>
+
+      <p class="muted" style="margin-top:2rem">Last updated: 24 June 2026</p>
     </section>
   </main>
   <footer class="site-footer">
@@ -152,7 +129,7 @@
     </div>
   </footer>
   <script src="/assets/js/main.js"></script>
-  
+  <script src="/assets/js/i18n/terms.js"></script>
   <script src="/assets/js/i18n/shared.js"></script>
   <script src="/assets/js/i18n.js"></script>
 </body>

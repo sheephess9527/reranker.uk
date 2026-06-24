@@ -22,6 +22,8 @@ window.I18N_SHARED = {
     "shared.footer.changelogShort": "更新日志",
     "shared.footer.privacy": "隐私说明",
     "shared.footer.privacyShort": "隐私",
+    "shared.footer.terms": "条款与免责声明",
+    "shared.footer.termsShort": "条款",
     "shared.footer.disclaimer": "开放教育资源 · 与任何模型厂商无关",
     "shared.article.updated": "更新于",
     "shared.toc": "本页目录",
