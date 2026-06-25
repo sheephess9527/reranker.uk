@@ -401,6 +401,26 @@ select { font-family: var(--mono); font-size: 0.85rem; }
   padding: 0.05rem 0.4rem; border-radius: 999px; background: var(--bg-elev); color: var(--text-mut);
 }
 .preset-btn.active .preset-diff { background: rgba(255,255,255,0.22); color: #fff; }
+@media (max-width: 560px) {
+  .preset-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.4rem;
+  }
+  .preset-btn {
+    justify-content: center;
+    padding: 0.35rem 0.5rem;
+    font-size: 0.76rem;
+    border-radius: var(--radius-sm);
+    white-space: normal;
+    text-align: center;
+    line-height: 1.25;
+  }
+  .preset-diff { font-size: 0.62rem; }
+}
+@media (max-width: 380px) {
+  .preset-row { grid-template-columns: 1fr; }
+}
 
 .demo-toolbar { display: flex; gap: 0.7rem; flex-wrap: wrap; align-items: center; margin: 1rem 0 0.6rem; }
 .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.82rem; }

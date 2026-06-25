@@ -10,6 +10,7 @@ env.useBrowserCache = true;
 
 const MAX_DOCS = 30;
 const PASSAGE_CHAR_WARN = 512;
+const URL_COMPRESS_THRESHOLD = 1600;
 const MODELS = {
   "Xenova/ms-marco-MiniLM-L-6-v2": {
     name: "ms-marco MiniLM-L6",
@@ -319,11 +320,11 @@ if (els.model) {
   fillModelSelect(els.modelB, "jinaai/jina-reranker-v1-tiny-en");
   els.model.addEventListener("change", () => {
     renderModelMeta();
-    syncUrl();
+    void syncUrl();
   });
 }
 if (els.modelB) {
-  els.modelB.addEventListener("change", syncUrl);
+  els.modelB.addEventListener("change", () => void syncUrl());
 }
 if (els.compareToggle) {
   els.compareToggle.addEventListener("change", () => {
@@ -393,7 +394,7 @@ function loadPreset(id) {
   renderPresets();
   updateDocWarning();
   if (MOBILE_MQ.matches) renderDocsList();
-  syncUrl();
+  void syncUrl();
   setStatus(
     L("Scenario loaded — hit “Rerank” to score it.", "示例已载入 —— 点击“重排序”为它打分。"),
     false
@@ -794,7 +795,7 @@ function renderDocsList() {
       }
       syncTextareaFromList();
       markEdited();
-      syncUrl();
+      void syncUrl();
     });
   });
   els.docsListItems.querySelectorAll(".docs-list-del").forEach((btn) => {
@@ -803,7 +804,7 @@ function renderDocsList() {
       syncTextareaFromList();
       if (!els.docsListItems.querySelector(".docs-list-row")) renderDocsList();
       markEdited();
-      syncUrl();
+      void syncUrl();
     });
   });
 }
@@ -907,31 +908,64 @@ function formatError(err, ctx) {
   return L("Something went wrong: ", "出错了：") + (err?.message || String(err));
 }
 
-function syncUrl() {
+function bytesToBase64Url(bytes) {
+  let bin = "";
+  const step = 0x8000;
+  for (let i = 0; i < bytes.length; i += step) {
+    bin += String.fromCharCode(...bytes.subarray(i, i + step));
+  }
+  return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+
+function base64UrlToBytes(b64) {
+  const pad = b64.length % 4 ? "=".repeat(4 - (b64.length % 4)) : "";
+  const std = (b64 + pad).replace(/-/g, "+").replace(/_/g, "/");
+  const bin = atob(std);
+  const out = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+  return out;
+}
+
+async function gzipToBase64Url(text) {
+  if (typeof CompressionStream === "undefined") return null;
+  const stream = new Blob([new TextEncoder().encode(text)])
+    .stream()
+    .pipeThrough(new CompressionStream("gzip"));
+  const buf = await new Response(stream).arrayBuffer();
+  return bytesToBase64Url(new Uint8Array(buf));
+}
+
+async function base64UrlToGunzip(b64) {
+  const stream = new Blob([base64UrlToBytes(b64)])
+    .stream()
+    .pipeThrough(new DecompressionStream("gzip"));
+  return new Response(stream).text();
+}
+
+function buildShareParams() {
   const query = (els.query?.value || "").trim();
   const docs = els.docs?.value || "";
-  if (!query && !docs) return;
+  if (!query && !docs) return null;
   const p = new URLSearchParams();
   if (query) p.set("q", query);
   if (docs) p.set("docs", docs);
   if (els.model?.value) p.set("m", els.model.value);
   if (els.compareToggle?.checked && els.modelB?.value) p.set("m2", els.modelB.value);
-  history.replaceState(null, "", "?" + p.toString());
+  return p;
 }
 
-function loadFromUrl() {
-  const p = new URLSearchParams(location.search);
-  if (p.has("q") && els.query) els.query.value = p.get("q");
-  if (p.has("docs") && els.docs) els.docs.value = p.get("docs");
-  if (p.has("m") && MODELS[p.get("m")] && els.model) els.model.value = p.get("m");
-  if (p.has("m2") && MODELS[p.get("m2")] && els.modelB) {
-    els.modelB.value = p.get("m2");
+function applyShareState(state) {
+  if (state.q && els.query) els.query.value = state.q;
+  if (state.docs && els.docs) els.docs.value = state.docs;
+  if (state.m && MODELS[state.m] && els.model) els.model.value = state.m;
+  if (state.m2 && MODELS[state.m2] && els.modelB) {
+    els.modelB.value = state.m2;
     if (els.compareToggle) {
       els.compareToggle.checked = true;
       els.modelB.disabled = false;
     }
   }
-  if (p.has("q") || p.has("docs")) {
+  if (state.q || state.docs) {
     currentPreset = null;
     userEdited = true;
     renderPresets();
@@ -940,8 +974,52 @@ function loadFromUrl() {
   if (MOBILE_MQ.matches) renderDocsList();
 }
 
+async function syncUrl() {
+  const p = buildShareParams();
+  if (!p) return;
+  const plain = "?" + p.toString();
+  const plainLen = location.pathname.length + plain.length;
+  if (plainLen > URL_COMPRESS_THRESHOLD && typeof CompressionStream !== "undefined") {
+    const payload = {};
+    if (p.has("q")) payload.q = p.get("q");
+    if (p.has("docs")) payload.docs = p.get("docs");
+    if (p.has("m")) payload.m = p.get("m");
+    if (p.has("m2")) payload.m2 = p.get("m2");
+    try {
+      const z = await gzipToBase64Url(JSON.stringify(payload));
+      const compressed = "?z=" + z;
+      if (z && location.pathname.length + compressed.length < plainLen) {
+        history.replaceState(null, "", compressed);
+        return;
+      }
+    } catch (e) {
+      /* fall through to plain params */
+    }
+  }
+  history.replaceState(null, "", plain);
+}
+
+async function loadFromUrl() {
+  const p = new URLSearchParams(location.search);
+  if (p.has("z")) {
+    try {
+      const state = JSON.parse(await base64UrlToGunzip(p.get("z")));
+      applyShareState(state);
+      return;
+    } catch (e) {
+      console.warn("Failed to decompress share URL", e);
+    }
+  }
+  const state = {};
+  if (p.has("q")) state.q = p.get("q");
+  if (p.has("docs")) state.docs = p.get("docs");
+  if (p.has("m")) state.m = p.get("m");
+  if (p.has("m2")) state.m2 = p.get("m2");
+  if (Object.keys(state).length) applyShareState(state);
+}
+
 async function shareLink() {
-  syncUrl();
+  await syncUrl();
   const url = location.href;
   try {
     await navigator.clipboard.writeText(url);
@@ -1132,7 +1210,7 @@ async function run() {
       compareRun,
     });
     renderModelMeta();
-    syncUrl();
+    void syncUrl();
     setStatus(
       L(
         `Done — ${docs.length} passages in ${primary.ms} ms (cross-encoder) + bi-encoder proxy shown for comparison.`,
@@ -1179,7 +1257,7 @@ if (els.query) {
   });
   els.query.addEventListener("input", () => {
     markEdited();
-    syncUrl();
+    void syncUrl();
   });
 }
 if (els.docs) {
@@ -1193,7 +1271,7 @@ if (els.docs) {
     markEdited();
     updateDocWarning();
     if (MOBILE_MQ.matches) renderDocsList();
-    syncUrl();
+    void syncUrl();
   });
 }
 if (els.docsAddBtn) {
@@ -1216,13 +1294,13 @@ if (els.docsAddBtn) {
       }
       syncTextareaFromList();
       markEdited();
-      syncUrl();
+      void syncUrl();
     });
     row.querySelector(".docs-list-del").addEventListener("click", () => {
       row.remove();
       syncTextareaFromList();
       markEdited();
-      syncUrl();
+      void syncUrl();
     });
     row.querySelector(".docs-list-input").focus();
   });
@@ -1268,11 +1346,13 @@ function idleStatus() {
 renderModelMeta();
 renderPresets();
 updateDocsEditorMode();
-if (location.search) loadFromUrl();
-if (!(els.query?.value || "").trim() && !parseDocs(els.docs?.value || "").length) {
-  loadPreset(currentPreset);
-}
-idleStatus();
+void (async function initFromUrl() {
+  if (location.search) await loadFromUrl();
+  if (!(els.query?.value || "").trim() && !parseDocs(els.docs?.value || "").length) {
+    loadPreset(currentPreset);
+  }
+  idleStatus();
+})();
 
 document.addEventListener("i18n:changed", function () {
   if (els.model) {

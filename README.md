@@ -8,6 +8,16 @@ Educational resource on rerankers for retrieval and RAG, with a live in-browser 
 
 ---
 
+## Changelog — low priority (2026-06-25)
+
+| Feature | Implementation |
+|---------|----------------|
+| **Guide i18n (full body)** | `self-host-reranker.js`, `choose-reranker-scenario.js` — TOC, tables, CTA, keep-reading |
+| **Compressed share links** | Demo `?z=` gzip + base64url when URL exceeds ~1600 chars; `CompressionStream` with plain-param fallback |
+| **Preset mobile layout** | `.preset-row` 2-column grid ≤560px, single column ≤380px |
+
+---
+
 ## Changelog — medium priority (2026-06-23)
 
 | Feature | Implementation |

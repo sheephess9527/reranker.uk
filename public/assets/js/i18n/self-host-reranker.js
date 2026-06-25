@@ -1,4 +1,65 @@
 window.I18N_PAGE = { zh: {
   "_title": "如何自托管 reranker — sentence-transformers、GPU、部署 | reranker.uk",
   "_desc": "自托管 cross-encoder reranker 实战指南：模型选择（bge、mxbai、Jina）、sentence-transformers 快速上手、FastAPI 服务化与运维清单。",
+
+  "<a href=\"/\">Home</a><span>/</span><a href=\"/guides/\">Guides</a><span>/</span>Self-host a reranker": "<a href=\"/\">首页</a><span>/</span><a href=\"/guides/\">指南</a><span>/</span>自托管 reranker",
+  "How to self-host a reranker": "如何自托管 reranker",
+  "Production · ~10 min read · <time datetime=\"2026-06-23\">Updated 23 Jun 2026</time>": "生产实践 · 约 10 分钟阅读 · <time datetime=\"2026-06-23\">更新于 2026 年 6 月 23 日</time>",
+  "Hosted rerank APIs are convenient, but <strong>self-hosting</strong> gives you zero per-call cost, full data control, and predictable latency on your own GPU or CPU fleet. Here’s a practical path from a first <code>CrossEncoder</code> call to a production microservice.": "托管 rerank API 很方便，但<strong>自托管</strong>能带来零按次成本、数据完全可控，以及在自己 GPU/CPU 集群上的可预测延迟。本文从第一次 <code>CrossEncoder</code> 调用，到生产级微服务的实操路径。",
+
+  "On this page": "本页目录",
+  "When self-hosting wins": "何时值得自托管",
+  "Pick a model": "选择模型",
+  "Quick start with sentence-transformers": "sentence-transformers 快速上手",
+  "Serving options": "服务化方案",
+  "Ops checklist": "运维清单",
+
+  "<a href=\"#when\">When self-hosting wins</a>": "<a href=\"#when\">何时值得自托管</a>",
+  "<a href=\"#models\">Pick a model</a>": "<a href=\"#models\">选择模型</a>",
+  "<a href=\"#quickstart\">Quick start with sentence-transformers</a>": "<a href=\"#quickstart\">sentence-transformers 快速上手</a>",
+  "<a href=\"#serve\">Serving options</a>": "<a href=\"#serve\">服务化方案</a>",
+  "<a href=\"#ops\">Ops checklist</a>": "<a href=\"#ops\">运维清单</a>",
+
+  "When self-hosting wins": "何时值得自托管",
+  "<strong>High volume.</strong> Reranking 50–100 chunks per query adds up fast on per-1k-doc APIs.": "<strong>调用量大。</strong>每个查询对 50–100 个 chunk 重排序，按千条文档计费的 API 成本会迅速累积。",
+  "<strong>Data residency.</strong> Queries and documents never leave your VPC.": "<strong>数据驻留。</strong>查询与文档不出你的 VPC。",
+  "<strong>Custom fine-tuning.</strong> You can swap in a domain-tuned checkpoint without waiting on a vendor.": "<strong>自定义微调。</strong>可随时换上领域微调 checkpoint，无需等厂商。",
+  "When you need multilingual quality with minimal ops, a hosted API like <a href=\"/models/cohere-rerank.html\">Cohere Rerank</a> or <a href=\"/models/jina-reranker.html\">Jina</a> may still be cheaper all-in — see <a href=\"/guides/choose-reranker-scenario.html\">choose by scenario</a>.": "若你需要多语言质量且运维要极简，<a href=\"/models/cohere-rerank.html\">Cohere Rerank</a> 或 <a href=\"/models/jina-reranker.html\">Jina</a> 等托管 API 的综合成本可能更低 —— 见<a href=\"/guides/choose-reranker-scenario.html\">按场景选型</a>。",
+
+  "Pick a model": "选择模型",
+  "Model": "模型",
+  "Size": "规模",
+  "Best for": "最适合",
+  "Strong English default, easy HF integration": "英文默认基线强，HF 集成简单",
+  "Multilingual production choice": "多语言生产首选",
+  "Top BEIR score, Apache 2.0 licence": "BEIR 分数领先，Apache 2.0 许可",
+  "Same family as the hosted API": "与托管 API 同一家族",
+  "Start with <strong>bge-reranker-base</strong> on CPU for prototyping; move to <strong>v2-m3</strong> or <strong>mxbai-large</strong> on GPU when quality metrics justify it.": "原型阶段用 CPU 跑 <strong>bge-reranker-base</strong>；当质量指标值得时，再上 GPU 换 <strong>v2-m3</strong> 或 <strong>mxbai-large</strong>。",
+
+  "Quick start with sentence-transformers": "sentence-transformers 快速上手",
+  "Batch your pairs — scoring 50 documents in one <code>predict()</code> call is far faster than 50 separate forwards. Cap passage length at 512 tokens (model default) to avoid silent truncation.": "批量打分 —— 一次 <code>predict()</code> 处理 50 段远比 50 次单独前向快。单段长度建议不超过 512 token（模型默认），避免静默截断。",
+
+  "Serving options": "服务化方案",
+  "Embedded in your app": "嵌入应用进程",
+  "Load the model inside your FastAPI / Flask RAG service. Simplest for low QPS; scale replicas horizontally.": "在 FastAPI / Flask RAG 服务内加载模型。低 QPS 最简单；水平扩展副本即可。",
+  "Dedicated rerank microservice": "独立 rerank 微服务",
+  "Expose <code>POST /rerank</code> with <code>{ query, documents[] }</code>. Share one GPU across many app pods.": "暴露 <code>POST /rerank</code>，请求体 <code>{ query, documents[] }</code>。多个应用 Pod 共享一块 GPU。",
+  "For ONNX export and C++ runtimes, see the model cards on Hugging Face. For browser-only experiments, try our <a href=\"/demo.html\">in-browser demo</a> with the xsmall ONNX builds.": "ONNX 导出与 C++ 运行时见 Hugging Face 模型卡。仅浏览器实验可用我们的 <a href=\"/demo.html\">在线 Demo</a>（xsmall ONNX 构建）。",
+
+  "Ops checklist": "运维清单",
+  "<strong>GPU:</strong> a single T4 handles ~30–80 ms for 50 docs with bge-base; CPU is 5–10× slower.": "<strong>GPU：</strong>单张 T4 跑 bge-base 对 50 段约 30–80 ms；CPU 慢 5–10 倍。",
+  "<strong>Memory:</strong> budget ~1–2 GB VRAM for base models; large variants need more.": "<strong>内存：</strong>base 模型预留约 1–2 GB VRAM；大模型需更多。",
+  "<strong>Warm-up:</strong> run a dummy predict on startup to avoid cold-start latency spikes.": "<strong>预热：</strong>启动时跑一次 dummy predict，避免冷启动延迟尖峰。",
+  "<strong>Monitoring:</strong> track p95 latency and NDCG on a labelled slice — <a href=\"/guides/evaluate-reranker.html\">evaluate rerankers</a>.": "<strong>监控：</strong>在标注子集上跟踪 p95 延迟与 NDCG —— <a href=\"/guides/evaluate-reranker.html\">评测 reranker</a>。",
+  "<strong>Fallback:</strong> if the rerank service is down, pass through vector top-k rather than failing the whole RAG request.": "<strong>降级：</strong>rerank 服务不可用时，透传向量 top-k，不要让整条 RAG 请求失败。",
+
+  "Prototype before you deploy": "部署前先原型验证",
+  "Paste your own query and passages in the browser demo — no server required.": "在浏览器 Demo 粘贴自己的查询与段落 —— 无需服务器。",
+  "Open the demo →": "打开 Demo →",
+
+  "Keep reading": "继续阅读",
+  "Choose by scenario": "按场景选型",
+  "RAG vs support vs code — which stack fits.": "RAG / 客服 / 代码 —— 哪种栈更合适。",
+  "Rerank for RAG": "为 RAG 加重排序",
+  "Pipeline integration patterns.": "流水线集成模式。",
 }};
