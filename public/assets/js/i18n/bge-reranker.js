@@ -50,5 +50,22 @@ window.I18N_PAGE = { zh: {
   "Jina Reranker": "Jina Reranker",
   "Open weights + hosted API.": "开源权重 + 托管 API。",
   "Voyage Rerank": "Voyage Rerank",
-  "High-precision hosted API.": "高精度托管 API。"
+  "High-precision hosted API.": "高精度托管 API。",
+  "mxbai-rerank": "mxbai-rerank",
+  "Apache 2.0 open weights, browser xsmall.": "Apache 2.0 开源权重，浏览器可跑 xsmall。",
+
+  "Open weights · BAAI · free to self-host · <time datetime=\"2026-06-21\">Updated 21 Jun 2026</time>": "开源权重 · 智源 BAAI · 可免费自建 · <time datetime=\"2026-06-21\">更新于 2026 年 6 月 21 日</time>",
+  "Open weights": "开源权重",
+  "Self-host": "自建部署",
+  "Multilingual": "多语言",
+  "On this page": "本页目录",
+  "<a href=\"#models\">Model variants</a>": "<a href=\"#models\">模型变体</a>",
+  "<a href=\"#benchmarks\">Benchmarks</a>": "<a href=\"#benchmarks\">基准测试</a>",
+  "<a href=\"#usage\">Quick start</a>": "<a href=\"#usage\">快速上手</a>",
+  "<a href=\"#pros-cons\">Pros and cons</a>": "<a href=\"#pros-cons\">优缺点</a>",
+  "BEIR NDCG@10 (avg)": "BEIR NDCG@10（均值）",
+  "MS MARCO MRR@10": "MS MARCO MRR@10",
+  "Pros": "优点",
+  "Cons": "缺点",
+  "Other models": "其他模型",
 }};

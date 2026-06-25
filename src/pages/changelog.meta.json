@@ -5,5 +5,6 @@
   "robots": "index, follow",
   "og_type": "website",
   "og_title": "reranker.uk changelog",
-  "og_description": "What shipped on reranker.uk — demo UX, guides, and infrastructure."
+  "og_description": "What shipped on reranker.uk — demo UX, guides, and infrastructure.",
+  "page_scripts": "<script src=\"/assets/js/i18n/changelog.js\"></script>"
 }

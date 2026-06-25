@@ -53,5 +53,20 @@ window.I18N_PAGE = { zh: {
   "Cohere Rerank": "Cohere Rerank",
   "Mature hosted API.": "成熟的托管 API。",
   "Jina Reranker": "Jina Reranker",
-  "Open weights + hosted API.": "开源权重 + 托管 API。"
+  "Open weights + hosted API.": "开源权重 + 托管 API。",
+  "mxbai-rerank": "mxbai-rerank",
+  "Apache 2.0 open weights, browser xsmall.": "Apache 2.0 开源权重，浏览器可跑 xsmall。",
+
+  "Hosted API · Voyage AI · <time datetime=\"2026-06-21\">Updated 21 Jun 2026</time>": "托管 API · Voyage AI · <time datetime=\"2026-06-21\">更新于 2026 年 6 月 21 日</time>",
+  "Hosted API": "托管 API",
+  "High precision": "高精度",
+  "Domain-specific variants": "领域专用变体",
+  "On this page": "本页目录",
+  "<a href=\"#models\">Available models</a>": "<a href=\"#models\">可用模型</a>",
+  "<a href=\"#pricing\">Pricing</a>": "<a href=\"#pricing\">价格</a>",
+  "<a href=\"#usage\">Quick start</a>": "<a href=\"#usage\">快速上手</a>",
+  "<a href=\"#pros-cons\">Pros and cons</a>": "<a href=\"#pros-cons\">优缺点</a>",
+  "Pros": "优点",
+  "Cons": "缺点",
+  "Other models": "其他模型",
 }};

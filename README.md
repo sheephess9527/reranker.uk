@@ -8,6 +8,17 @@ Educational resource on rerankers for retrieval and RAG, with a live in-browser 
 
 ---
 
+## Changelog — i18n & SEO (2026-06-25, batch 2)
+
+| Feature | Implementation |
+|---------|----------------|
+| **Model page i18n gaps** | Pills, TOC anchors, meta dates, benchmark headers, Pros/Cons, Other models — all 5 families |
+| **Changelog + Privacy i18n** | `changelog.js`, `privacy.js` full body zh |
+| **hreflang** | `head-open.html`: `en`, `zh-Hans`, `x-default` → same canonical (client toggle) |
+| **og:locale:alternate** | `i18n.js` swaps `zh_CN` ↔ `en_GB` with primary `og:locale` |
+
+---
+
 ## Changelog — low priority (2026-06-25)
 
 | Feature | Implementation |

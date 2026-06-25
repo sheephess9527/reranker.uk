@@ -25,6 +25,8 @@
   var origDesc = descEl ? descEl.getAttribute("content") : null;
   var ogLocaleEl = document.querySelector('meta[property="og:locale"]');
   var origOgLocale = ogLocaleEl ? ogLocaleEl.getAttribute("content") : null;
+  var ogLocaleAltEl = document.querySelector('meta[property="og:locale:alternate"]');
+  var origOgLocaleAlt = ogLocaleAltEl ? ogLocaleAltEl.getAttribute("content") : null;
 
   function sharedKeys() {
     return (window.I18N_SHARED && window.I18N_SHARED.keys) || {};
@@ -119,6 +121,12 @@
       ogLocaleEl.setAttribute(
         "content",
         lang === "zh" ? "zh_CN" : origOgLocale || "en_GB"
+      );
+    }
+    if (ogLocaleAltEl) {
+      ogLocaleAltEl.setAttribute(
+        "content",
+        lang === "zh" ? origOgLocale || "en_GB" : origOgLocaleAlt || "zh_CN"
       );
     }
     document.querySelectorAll(".lang-toggle").forEach(function (b) {

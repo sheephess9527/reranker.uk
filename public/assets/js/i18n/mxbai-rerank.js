@@ -53,5 +53,22 @@ window.I18N_PAGE = { zh: {
   "Cohere Rerank": "Cohere Rerank",
   "Mature hosted API with top multilingual quality.": "成熟的托管 API，多语言质量领先。",
   "Voyage Rerank": "Voyage Rerank",
-  "High-precision hosted API with domain-specific variants.": "高精度托管 API，提供特定领域变体。"
+  "High-precision hosted API with domain-specific variants.": "高精度托管 API，提供特定领域变体。",
+
+  "Open weights · mixedbread-ai · <time datetime=\"2026-06-21\">Updated 21 Jun 2026</time>": "开源权重 · mixedbread-ai · <time datetime=\"2026-06-21\">更新于 2026 年 6 月 21 日</time>",
+  "Open weights": "开源权重",
+  "Apache 2.0": "Apache 2.0",
+  "Browser-runnable xsmall": "浏览器可跑 xsmall",
+  "On this page": "本页目录",
+  "<a href=\"#models\">Model variants</a>": "<a href=\"#models\">模型变体</a>",
+  "<a href=\"#benchmarks\">Benchmarks</a>": "<a href=\"#benchmarks\">基准测试</a>",
+  "<a href=\"#usage\">Quick start</a>": "<a href=\"#usage\">快速上手</a>",
+  "<a href=\"#api\">Hosted API</a>": "<a href=\"#api\">托管 API</a>",
+  "<a href=\"#browser\">Browser use</a>": "<a href=\"#browser\">浏览器使用</a>",
+  "<a href=\"#pros-cons\">Pros and cons</a>": "<a href=\"#pros-cons\">优缺点</a>",
+  "BEIR NDCG@10 (avg)": "BEIR NDCG@10（均值）",
+  "MS MARCO MRR@10": "MS MARCO MRR@10",
+  "Pros": "优点",
+  "Cons": "缺点",
+  "Other models": "其他模型",
 }};

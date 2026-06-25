@@ -54,5 +54,21 @@ window.I18N_PAGE = { zh: {
   "Cohere Rerank": "Cohere Rerank",
   "Mature hosted API.": "成熟的托管 API。",
   "Voyage Rerank": "Voyage Rerank",
-  "High-precision hosted API.": "高精度托管 API。"
+  "High-precision hosted API.": "高精度托管 API。",
+  "mxbai-rerank": "mxbai-rerank",
+  "Apache 2.0 open weights, browser xsmall.": "Apache 2.0 开源权重，浏览器可跑 xsmall。",
+
+  "Open weights + Hosted API · Jina AI · <time datetime=\"2026-06-21\">Updated 21 Jun 2026</time>": "开源权重 + 托管 API · Jina AI · <time datetime=\"2026-06-21\">更新于 2026 年 6 月 21 日</time>",
+  "Open weights": "开源权重",
+  "Hosted API": "托管 API",
+  "Browser-runnable tiny": "浏览器可跑 tiny",
+  "On this page": "本页目录",
+  "<a href=\"#models\">Model variants</a>": "<a href=\"#models\">模型变体</a>",
+  "<a href=\"#pricing\">Pricing</a>": "<a href=\"#pricing\">价格</a>",
+  "<a href=\"#usage\">Quick start</a>": "<a href=\"#usage\">快速上手</a>",
+  "<a href=\"#browser\">Browser / edge use</a>": "<a href=\"#browser\">浏览器 / 边缘端使用</a>",
+  "<a href=\"#pros-cons\">Pros and cons</a>": "<a href=\"#pros-cons\">优缺点</a>",
+  "Pros": "优点",
+  "Cons": "缺点",
+  "Other models": "其他模型",
 }};
