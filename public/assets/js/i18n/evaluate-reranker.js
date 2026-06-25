@@ -1,4 +1,65 @@
 window.I18N_PAGE = { zh: {
   "_title": "如何评测 reranker — NDCG、MRR 与标注查询 | reranker.uk",
   "_desc": "评测重排序模型的实用指南：构建标注查询集、衡量 NDCG@k 与 MRR、对比重排前后效果，并对流水线变更做回归测试。",
+
+  "<a href=\"/\">Home</a><span>/</span><a href=\"/guides/\">Guides</a><span>/</span>Evaluate rerankers": "<a href=\"/\">首页</a><span>/</span><a href=\"/guides/\">指南</a><span>/</span>评测 reranker",
+  "How to evaluate rerankers": "如何评测 reranker",
+  "Evaluation · ~8 min read · <time datetime=\"2026-06-23\">Updated 23 Jun 2026</time>": "评测 · 约 8 分钟阅读 · <time datetime=\"2026-06-23\">更新于 2026 年 6 月 23 日</time>",
+  "Public BEIR scores are a starting point, not a verdict. A reranker that wins on English news may flop on your support tickets. You need a <strong>small labelled set of real queries</strong> and two metrics: <strong>NDCG@k</strong> (ranking quality) and <strong>MRR</strong> (is the best answer near the top?).": "公开 BEIR 分数只是起点，不是定论。英文新闻上领先的 reranker 在你的客服工单上可能翻车。你需要<strong>一小套真实查询的标注集</strong>和两个指标：<strong>NDCG@k</strong>（排序质量）与 <strong>MRR</strong>（最佳答案是否靠前）。",
+
+  "On this page": "本页目录",
+  "Build a labelled query set": "构建标注查询集",
+  "Metrics that matter": "关键指标",
+  "Evaluation protocol": "评测流程",
+  "Python with ranx": "用 ranx 的 Python 示例",
+  "Comparing rerankers": "对比 reranker",
+
+  "<a href=\"#dataset\">Build a labelled query set</a>": "<a href=\"#dataset\">构建标注查询集</a>",
+  "<a href=\"#metrics\">Metrics that matter</a>": "<a href=\"#metrics\">关键指标</a>",
+  "<a href=\"#protocol\">Evaluation protocol</a>": "<a href=\"#protocol\">评测流程</a>",
+  "<a href=\"#code\">Python with ranx</a>": "<a href=\"#code\">用 ranx 的 Python 示例</a>",
+  "<a href=\"#compare\">Comparing rerankers</a>": "<a href=\"#compare\">对比 reranker</a>",
+
+  "Build a labelled query set": "构建标注查询集",
+  "Pull 30–100 real queries from logs (anonymised). For each query, mark which document IDs are <em>relevant</em> (binary is enough to start). Store as JSON:": "从日志抽取 30–100 条真实查询（脱敏）。每条标记哪些文档 ID <em>相关</em>（二值标注即可起步）。存为 JSON：",
+  "Thirty queries with one gold document each is enough to see whether reranking beats retrieval-only — you’re measuring relative lift, not publishing a leaderboard.": "每条一个金标文档的 30 条查询，就足以判断 rerank 是否优于纯检索 —— 你量的是相对提升，不是发排行榜。",
+
+  "Metrics that matter": "关键指标",
+  "Metric": "指标",
+  "What it tells you": "含义",
+  "Typical k": "常用 k",
+  "<strong>NDCG@k</strong>": "<strong>NDCG@k</strong>",
+  "Rewards putting highly relevant docs at the top; graded relevance if you have it": "奖励把高相关文档排在前面；有分级标注时更完整",
+  "5 or 10": "5 或 10",
+  "<strong>MRR</strong>": "<strong>MRR</strong>",
+  "How high the <em>first</em> relevant doc ranks — great for single-answer RAG": "第一条相关文档排多靠前 —— 适合单答案 RAG",
+  "—": "—",
+  "<strong>Recall@k</strong>": "<strong>Recall@k</strong>",
+  "Is the right doc in the shortlist at all? Diagnoses retrieval, not reranker": "正确文档是否在短名单里？诊断检索，不是 reranker",
+  "50–100": "50–100",
+  "Run metrics <strong>before and after</strong> reranking on the <em>same</em> retrieved candidates. If NDCG@5 jumps but Recall@50 is low, your problem is retrieval — reranking can’t invent missing chunks.": "在<em>同一批</em>召回候选上，分别计算重排<strong>前后</strong>指标。若 NDCG@5 大涨但 Recall@50 很低，问题在检索 —— rerank 变不出缺失的 chunk。",
+
+  "Evaluation protocol": "评测流程",
+  "Fix a retrieval pipeline (vector-only or <a href=\"/guides/hybrid-retrieval-rerank.html\">hybrid</a>) and log top-50 candidates per query.": "固定检索流水线（纯向量或 <a href=\"/guides/hybrid-retrieval-rerank.html\">混合</a>），每条查询记录 top-50 候选。",
+  "Score baseline: order as retrieved (or bi-encoder scores).": "基线：按检索顺序（或 bi-encoder 分数）打分。",
+  "Apply reranker A, measure NDCG@5 and MRR.": "应用 reranker A，测 NDCG@5 与 MRR。",
+  "Swap reranker B (different model or hosted API), repeat.": "换 reranker B（不同模型或托管 API），重复。",
+  "Track latency p50/p95 alongside quality — a 2-point NDCG gain may not justify 400 ms.": "质量与延迟 p50/p95 一起看 —— NDCG 涨 2 分未必值得多 400 ms。",
+
+  "Python with ranx": "用 ranx 的 Python 示例",
+  "<code>ir-measures</code> and BEIR’s evaluator work too. The important part is consistent qrels and the same candidate pool — not which library you pick.": "<code>ir-measures</code> 与 BEIR 评测器也行。关键是 qrels 一致、候选池相同 —— 用哪个库次要。",
+
+  "Comparing rerankers": "对比 reranker",
+  "Use the <a href=\"/models/\">model comparison table</a> for ballpark BEIR numbers, then validate on your labelled set. Hosted APIs (Cohere, Jina, Voyage) are fastest to A/B; open models (bge, mxbai) need GPU for fair latency comparison.": "用 <a href=\"/models/\">模型对比表</a> 看 BEIR 大致区间，再在你的标注集上验证。托管 API（Cohere、Jina、Voyage）A/B 最快；开源模型（bge、mxbai）需 GPU 才公平比延迟。",
+  "<strong>Regression tests:</strong> check eval metrics into CI. When you change chunk size, embedding model, or reranker version, re-run the same JSON qrels — quality drops should block deploys.": "<strong>回归测试：</strong>把评测指标纳入 CI。改分块大小、嵌入模型或 reranker 版本时，用同一 JSON qrels 重跑 —— 质量下滑应阻止发布。",
+
+  "Build intuition before you benchmark": "先建立直觉再跑基准",
+  "Use the live demo to see how a cross-encoder reorders a hand-picked shortlist — then scale up with labelled queries.": "用在线 Demo 看 cross-encoder 如何重排手选短名单 —— 再用标注查询放大规模。",
+  "Try the demo →": "试用 Demo →",
+
+  "Keep reading": "继续阅读",
+  "Rerank for RAG": "为 RAG 加重排序",
+  "Wire reranking into your pipeline.": "把重排序接入流水线。",
+  "Model comparison": "模型对比",
+  "BEIR ballparks + your own labels.": "BEIR 参考值 + 你自己的标注。",
 }};

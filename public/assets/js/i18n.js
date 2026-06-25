@@ -23,6 +23,8 @@
   var origTitle = document.title;
   var descEl = document.querySelector('meta[name="description"]');
   var origDesc = descEl ? descEl.getAttribute("content") : null;
+  var ogLocaleEl = document.querySelector('meta[property="og:locale"]');
+  var origOgLocale = ogLocaleEl ? ogLocaleEl.getAttribute("content") : null;
 
   function sharedKeys() {
     return (window.I18N_SHARED && window.I18N_SHARED.keys) || {};
@@ -113,6 +115,12 @@
       if (descEl && origDesc != null) descEl.setAttribute("content", origDesc);
     }
     document.documentElement.lang = lang === "zh" ? "zh-Hans" : "en";
+    if (ogLocaleEl) {
+      ogLocaleEl.setAttribute(
+        "content",
+        lang === "zh" ? "zh_CN" : origOgLocale || "en_GB"
+      );
+    }
     document.querySelectorAll(".lang-toggle").forEach(function (b) {
       b.textContent = lang === "zh" ? "EN" : "中文";
       b.setAttribute("aria-label", lang === "zh" ? "Switch to English" : "切换到中文");

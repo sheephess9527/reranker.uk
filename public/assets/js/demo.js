@@ -287,6 +287,7 @@ const els = {
   diffThA: document.getElementById("diff-th-a"),
   diffThB: document.getElementById("diff-th-b"),
   diffTbody: document.getElementById("diff-tbody"),
+  diffTableCaption: document.getElementById("diff-table-caption"),
   copyJson: document.getElementById("copy-json"),
   copyMd: document.getElementById("copy-md"),
   copyCsv: document.getElementById("copy-csv"),
@@ -727,11 +728,23 @@ function renderDualDiff(compareRun) {
 
   if (els.diffThA) els.diffThA.textContent = nameA;
   if (els.diffThB) els.diffThB.textContent = nameB;
-  if (els.dualDiffSub) {
-    els.dualDiffSub.textContent = L(
-      "Rows aligned by input order. Positive Δ rank means model B ranked this passage higher.",
-      "按输入顺序对齐。Δ 名次为正表示模型 B 将该段排名更靠前。"
+  const subText = L(
+    "Rows aligned by input order. Positive Δ rank means model B ranked this passage higher.",
+    "按输入顺序对齐。Δ 名次为正表示模型 B 将该段排名更靠前。"
+  );
+  if (els.dualDiffSub) els.dualDiffSub.textContent = subText;
+  if (els.diffTableCaption) {
+    els.diffTableCaption.textContent = L(
+      `Per-passage scores and rank deltas: ${nameA} vs ${nameB}`,
+      `各段落分数与名次差异：${nameA} 对比 ${nameB}`
     );
+  }
+
+  if (!itemsA.length) {
+    const emptyMsg = L("No passages to compare.", "没有可对比的段落。");
+    els.diffTbody.innerHTML = `<tr><td colspan="6" class="diff-empty">${esc(emptyMsg)}</td></tr>`;
+    els.dualDiff.hidden = false;
+    return;
   }
 
   const bByIndex = new Map(itemsB.map((item) => [item.origIndex, item]));
@@ -746,8 +759,9 @@ function renderDualDiff(compareRun) {
       const rankDelta = rB != null && rA != null ? rA - rB : 0;
       const text =
         itemA.text.length > 120 ? itemA.text.slice(0, 117) + "…" : itemA.text;
+      const rowNum = itemA.origIndex + 1;
       return `<tr>
-        <td class="diff-idx">${itemA.origIndex + 1}</td>
+        <th scope="row" class="diff-idx">${rowNum}</th>
         <td class="diff-text">${esc(text)}</td>
         <td class="diff-score"><span class="mono">${itemA.score.toFixed(4)}</span> <span class="muted">#${rA}</span></td>
         <td class="diff-score"><span class="mono">${itemB ? itemB.score.toFixed(4) : "—"}</span> <span class="muted">#${rB ?? "—"}</span></td>

@@ -502,6 +502,11 @@ select { font-family: var(--mono); font-size: 0.85rem; }
 .docs-list-chars.over { color: var(--warn); font-weight: 700; }
 .dual-compare { margin-top: 1.8rem; padding-top: 1.4rem; border-top: 1px solid var(--border-soft); }
 .dual-diff { margin-top: 1.6rem; padding-top: 1.2rem; border-top: 1px solid var(--border-soft); }
+.diff-empty { text-align: center; color: var(--text-mut); padding: 1rem 0.5rem; font-size: 0.9rem; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
 .dual-head { font-size: 1rem; margin: 0 0 1rem; color: var(--text-soft); }
 .diff-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-sm); }
 .diff-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }

@@ -89,11 +89,12 @@
             <div class="compare-col"><div class="results" id="dual-col-b"></div></div>
           </div>
         </div>
-        <div class="dual-diff" id="dual-diff" hidden>
-          <h3 class="dual-head">Aligned diff — same passage, two models</h3>
+        <div class="dual-diff" id="dual-diff" role="region" aria-labelledby="dual-diff-head" hidden>
+          <h3 class="dual-head" id="dual-diff-head">Aligned diff — same passage, two models</h3>
           <p class="muted results-sub" id="dual-diff-sub"></p>
           <div class="diff-table-wrap">
-            <table class="diff-table" id="diff-table">
+            <table class="diff-table" id="diff-table" aria-describedby="dual-diff-sub">
+              <caption class="sr-only" id="diff-table-caption">Per-passage scores and rank deltas between two rerank models</caption>
               <thead>
                 <tr>
                   <th scope="col">#</th>

@@ -12,9 +12,11 @@ Educational resource on rerankers for retrieval and RAG, with a live in-browser 
 
 | Feature | Implementation |
 |---------|----------------|
-| **Guide i18n (full body)** | `self-host-reranker.js`, `choose-reranker-scenario.js` — TOC, tables, CTA, keep-reading |
+| **Guide i18n (full body)** | `self-host-reranker.js`, `choose-reranker-scenario.js`, `hybrid-retrieval-rerank.js`, `evaluate-reranker.js` |
 | **Compressed share links** | Demo `?z=` gzip + base64url when URL exceeds ~1600 chars; `CompressionStream` with plain-param fallback |
 | **Preset mobile layout** | `.preset-row` 2-column grid ≤560px, single column ≤380px |
+| **og:locale** | `i18n.js` sets `zh_CN` / `en_GB` on language toggle |
+| **Dual-diff a11y** | Table caption, `scope="row"`, empty row, `role="region"` + `aria-describedby` |
 
 ---
 
