@@ -105,9 +105,34 @@
     cell.appendChild(a);
   });
 
+  function translateFilterUI() {
+    if (filterInput) {
+      filterInput.placeholder = L("Filter models…", "筛选模型…");
+      filterInput.setAttribute("aria-label", L("Filter models", "筛选模型"));
+    }
+    if (typeFilter) {
+      const map = [
+        ["all", "All types", "全部类型"],
+        ["open", "Open weights", "开源权重"],
+        ["api", "Hosted API", "托管 API"],
+        ["browser", "Browser runnable", "浏览器可运行"],
+      ];
+      map.forEach(([val, en, zh]) => {
+        const opt = typeFilter.querySelector(`option[value="${val}"]`);
+        if (opt) opt.textContent = L(en, zh);
+      });
+    }
+    const demoTh = table.querySelector("thead th:last-child");
+    if (demoTh && !demoTh.dataset.sort) {
+      demoTh.textContent = L("Demo", "Demo");
+    }
+  }
+
+  translateFilterUI();
   applyFilters();
 
   document.addEventListener("i18n:changed", () => {
+    translateFilterUI();
     applyFilters();
     rows.forEach((row) => {
       const slug = row.dataset.demo;

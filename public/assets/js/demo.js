@@ -1269,7 +1269,9 @@ renderModelMeta();
 renderPresets();
 updateDocsEditorMode();
 if (location.search) loadFromUrl();
-else loadPreset(currentPreset);
+if (!(els.query?.value || "").trim() && !parseDocs(els.docs?.value || "").length) {
+  loadPreset(currentPreset);
+}
 idleStatus();
 
 document.addEventListener("i18n:changed", function () {

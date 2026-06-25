@@ -11,7 +11,7 @@
     "main p", "main li", "main blockquote",
     "main td", "main th", "main label",
     "main .eyebrow", "main .btn", "main .meta", "main .breadcrumb",
-    "main .toc strong",
+    "main .toc strong", "main .pill",
   ].join(", ");
 
   var norm = function (s) {

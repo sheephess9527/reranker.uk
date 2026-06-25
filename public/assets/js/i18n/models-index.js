@@ -27,6 +27,7 @@ window.I18N_PAGE = { zh: {
   "Unique in offering both a hosted API and open weights — including a tiny model small enough to run in the browser (which powers our demo).": "独特之处在于同时提供托管 API 和开源权重 —— 包含一个小到能在浏览器里运行的微型模型（正是它驱动了我们的 Demo）。",
   "Voyage AI's rerankers are optimised specifically for retrieval precision and offer domain-tuned variants for code and finance.": "Voyage AI 的重排序器专门为检索精度优化，并为代码和金融提供领域调优的变体。",
 
+  "Demo": "试用",
   "How to choose": "如何选择",
   "Best free self-hosted option": "最佳免费自建方案",
   "Zero per-call cost — runs on your own infra": "零按次成本 —— 跑在你自己的基础设施上",

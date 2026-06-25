@@ -39,6 +39,16 @@ window.I18N_PAGE = { zh: {
   "Apache 2.0 open weights with a browser-runnable xsmall variant — highest BEIR score in our table.": "Apache 2.0 开源权重，含可在浏览器运行的 xsmall 变体 —— 本表中 BEIR 分数最高。",
   "See the full comparison →": "查看完整对比 →",
 
+  "Fundamentals": "基础",
+  "Architecture": "架构",
+  "Practical": "实战",
+  "Open weights": "开源权重",
+  "Self-host": "自建部署",
+  "Hosted API": "托管 API",
+  "Multilingual": "多语言",
+  "High quality": "高质量",
+  "Browser ✓": "浏览器 ✓",
+
   "Reranking in one diagram": "一张图看懂重排序",
   "Retrieve wide for recall, rerank for precision, send only the best to the model.": "宽召回保证 recall，重排序保证 precision，只把最优结果送进模型。"
 }};
