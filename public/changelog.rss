@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>reranker.uk changelog</title>
+    <link>https://reranker.uk/changelog.html</link>
+    <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
+    <language>en-gb</language>
+    <lastBuildDate>Wed, 25 Jun 2026 12:00:00 GMT</lastBuildDate>
+    <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>25 Jun 2026 — Content expansion &amp; polish</title>
+      <link>https://reranker.uk/changelog.html#2026-06-25c</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog.html#2026-06-25c</guid>
+      <pubDate>Wed, 25 Jun 2026 12:00:00 GMT</pubDate>
+      <description>Architecture column on models table; Qwen3, Contextual AI, ColBERT rows; late-interaction guide; 7 demo presets; JSON-LD inLanguage; changelog RSS.</description>
+    </item>
+    <item>
+      <title>25 Jun 2026 — i18n &amp; SEO completion</title>
+      <link>https://reranker.uk/changelog.html#2026-06-25b</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog.html#2026-06-25b</guid>
+      <pubDate>Wed, 25 Jun 2026 10:00:00 GMT</pubDate>
+      <description>Model page i18n gaps; changelog &amp; privacy Chinese; hreflang tags; og:locale:alternate.</description>
+    </item>
+    <item>
+      <title>25 Jun 2026 — Low-priority polish</title>
+      <link>https://reranker.uk/changelog.html#2026-06-25</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog.html#2026-06-25</guid>
+      <pubDate>Wed, 25 Jun 2026 08:00:00 GMT</pubDate>
+      <description>Guide i18n; gzip share links; preset mobile layout; dual-diff a11y.</description>
+    </item>
+  </channel>
+</rss>

@@ -18,6 +18,8 @@ window.I18N_PAGE = { zh: {
   "sentence-transformers, GPU sizing, and a minimal FastAPI service.": "sentence-transformers、GPU 选型与最小 FastAPI 服务。",
   "Choose by scenario": "按场景选型",
   "RAG vs support vs legal vs code — which model fits your use case.": "RAG / 客服 / 法律 / 代码 —— 哪种模型适合你的场景。",
+  "Late-interaction (ColBERT)": "Late-interaction（ColBERT）",
+  "When ColBERT beats bi-encoders and when you still need cross-encoder rerank.": "ColBERT 何时胜过 bi-encoder，何时仍需要 cross-encoder rerank。",
   "Live in-browser demo": "浏览器在线 Demo",
   "Watch a cross-encoder reorder passages — bi-encoder proxy included.": "观看 cross-encoder 重排段落 —— 含 bi-encoder 代理对比。",
 

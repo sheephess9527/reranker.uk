@@ -30,7 +30,7 @@
   <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" />
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
   <link rel="stylesheet" href="/assets/css/style.css" />
-  
+  <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" />
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="shared.skip">Skip to content</a>
@@ -57,6 +57,17 @@
     </section>
 
     <section class="section container narrow">
+      <article class="changelog-entry">
+        <h2 id="2026-06-25c">25 Jun 2026 — Content expansion &amp; polish</h2>
+        <ul class="feature-list">
+          <li><strong>Models table</strong> — architecture column; Qwen3-Reranker, Contextual AI, ColBERTv2, ms-marco browser rows</li>
+          <li><strong>Late-interaction guide</strong> — <a href="/guides/late-interaction-rerank.html">ColBERT &amp; when to skip cross-encoder rerank</a></li>
+          <li><strong>Demo presets</strong> — E-commerce + Multilingual (7 scenarios); ms-marco <code>?m=</code> on models table</li>
+          <li><strong>JSON-LD</strong> — <code>inLanguage</code> follows zh/en toggle</li>
+          <li><strong>Changelog RSS</strong> — <a href="/changelog.rss">/changelog.rss</a> feed</li>
+        </ul>
+      </article>
+
       <article class="changelog-entry">
         <h2 id="2026-06-25b">25 Jun 2026 — i18n &amp; SEO completion</h2>
         <ul class="feature-list">
@@ -148,8 +159,10 @@
             <li><a href="/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
             <li><a href="/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
             <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
+            <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
             <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
             <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
+            <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>
             <li><a href="/privacy.html" data-i18n="shared.footer.privacy">Privacy</a></li>
           </ul>
         </div>

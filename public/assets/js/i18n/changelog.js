@@ -12,6 +12,13 @@ window.I18N_PAGE = { zh: {
   "<strong>og:locale</strong> — switches to <code>zh_CN</code> when language toggle is 中文": "<strong>og:locale</strong> —— 语言切换为中文时设为 <code>zh_CN</code>",
   "<strong>Dual-diff a11y</strong> — table caption, row headers, empty state, <code>aria-labelledby</code>": "<strong>双模型差异 a11y</strong> —— 表格 caption、行表头、空状态、<code>aria-labelledby</code>",
 
+  "25 Jun 2026 — Content expansion &amp; polish": "2026 年 6 月 25 日 — 内容扩展与打磨",
+  "<strong>Models table</strong> — architecture column; Qwen3-Reranker, Contextual AI, ColBERTv2, ms-marco browser rows": "<strong>模型表</strong> —— 架构列；Qwen3-Reranker、Contextual AI、ColBERTv2、ms-marco 浏览器行",
+  "<strong>Late-interaction guide</strong> — <a href=\"/guides/late-interaction-rerank.html\">ColBERT &amp; when to skip cross-encoder rerank</a>": "<strong>Late-interaction 指南</strong> —— <a href=\"/guides/late-interaction-rerank.html\">ColBERT 与何时跳过 cross-encoder rerank</a>",
+  "<strong>Demo presets</strong> — E-commerce + Multilingual (7 scenarios); ms-marco <code>?m=</code> on models table": "<strong>Demo 预设</strong> —— 电商 + 多语言（7 个场景）；模型表 ms-marco <code>?m=</code>",
+  "<strong>JSON-LD</strong> — <code>inLanguage</code> follows zh/en toggle": "<strong>JSON-LD</strong> —— <code>inLanguage</code> 随中/英切换",
+  "<strong>Changelog RSS</strong> — <a href=\"/changelog.rss\">/changelog.rss</a> feed": "<strong>更新日志 RSS</strong> —— <a href=\"/changelog.rss\">/changelog.rss</a> 订阅",
+
   "25 Jun 2026 — i18n &amp; SEO completion": "2026 年 6 月 25 日 — i18n 与 SEO 补全",
   "<strong>Model page i18n</strong> — pills, TOC, meta dates, Pros/Cons, Other models for all five families": "<strong>模型页 i18n</strong> —— 五个模型家族的标签、目录、日期、优缺点、其他模型",
   "<strong>Changelog + Privacy i18n</strong> — full Chinese body on both pages": "<strong>更新日志 + 隐私 i18n</strong> —— 两页全文中文",

@@ -1,0 +1,11 @@
+{
+  "title": "Late-interaction reranking — ColBERTv2 & when to skip cross-encoders | reranker.uk",
+  "description": "Guide to late-interaction rerankers (ColBERTv2): how they differ from cross-encoders and bi-encoders, when to skip reranking, and how to combine architectures in 2026 stacks.",
+  "canonical": "https://reranker.uk/guides/late-interaction-rerank.html",
+  "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  "og_type": "article",
+  "og_title": "Late-interaction reranking — ColBERT & beyond",
+  "og_description": "ColBERTv2 vs cross-encoder rerankers: when late-interaction is enough and when you still need stage-2 reranking.",
+  "head_extra": "<script type=\"application/ld+json\">\r\n  {\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"headline\":\"Late-interaction reranking (ColBERT & beyond)\",\"datePublished\":\"2026-06-25\",\"dateModified\":\"2026-06-25\",\"inLanguage\":\"en\",\"author\":{\"@type\":\"Organization\",\"name\":\"reranker.uk\"},\"mainEntityOfPage\":\"https://reranker.uk/guides/late-interaction-rerank.html\"}\r\n  </script>",
+  "page_scripts": "<script src=\"/assets/js/i18n/late-interaction-rerank.js\"></script>"
+}

@@ -1,0 +1,93 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Late-interaction reranking</div>
+      <h1>Late-interaction reranking (ColBERT &amp; beyond)</h1>
+      <p class="meta">Architecture · ~9 min read · <time datetime="2026-06-25">Updated 25 Jun 2026</time></p>
+      <p class="lead">Not every retrieval stack needs a <strong>cross-encoder</strong> reranker. <strong>Late-interaction</strong> models such as ColBERT score query–document pairs with token-level interactions while keeping embeddings cacheable — often a better fit than bi-encoders <em>and</em> cheaper than full cross-encoders at scale.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#what">What late-interaction means</a></li>
+          <li><a href="#vs">Cross-encoder vs late-interaction vs bi-encoder</a></li>
+          <li><a href="#when-skip">When to skip cross-encoder rerank</a></li>
+          <li><a href="#colbert">ColBERTv2 in practice</a></li>
+          <li><a href="#pick">How to pick an architecture</a></li>
+        </ol>
+      </div>
+
+      <h2 id="what">What late-interaction means</h2>
+      <p>A bi-encoder embeds the query and each document <em>independently</em> — fast, but no token-level matching. A cross-encoder feeds query + document through one transformer and outputs a single relevance score — accurate, but you pay full inference per pair.</p>
+      <p><strong>Late-interaction</strong> sits between them: you still pre-compute document token embeddings offline, but at query time you run a cheap interaction (typically MaxSim — max cosine per query token) between query tokens and document tokens. You get finer matching than a single vector dot product without scoring every pair with a full cross-encoder.</p>
+
+      <h2 id="vs">Cross-encoder vs late-interaction vs bi-encoder</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Architecture</th><th>Precompute docs?</th><th>Query-time cost</th><th>Typical use</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Bi-encoder</td><td>Yes (1 vector/doc)</td><td>Very low</td><td>Stage-1 recall over millions</td></tr>
+            <tr><td>Late-interaction (ColBERT)</td><td>Yes (token vectors/doc)</td><td>Low–medium</td><td>Stage-1 or stage-1.5; lexical-ish precision</td></tr>
+            <tr><td>Cross-encoder reranker</td><td>No</td><td>High per pair</td><td>Stage-2 on 50–100 candidates</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Many 2026 stacks chain them: bi-encoder or hybrid recall → optional ColBERT rescore on hundreds → cross-encoder rerank on dozens. See <a href="/guides/hybrid-retrieval-rerank.html">hybrid retrieval + rerank</a> for the merge step.</p>
+
+      <h2 id="when-skip">When to skip cross-encoder rerank</h2>
+      <p>Cross-encoder reranking pays off when your shortlist is small (≤100) and order quality matters for downstream LLM prompts. Consider <strong>not</strong> adding one when:</p>
+      <ul>
+        <li><strong>Late-interaction already fixes order.</strong> ColBERTv2 or SPLADE++ on your eval set beats retrieval-only NDCG@10 — the marginal gain from a cross-encoder may be tiny.</li>
+        <li><strong>Latency budget is sub-50 ms.</strong> You cannot afford another transformer pass after retrieval; invest in better embeddings or late-interaction instead.</li>
+        <li><strong>Candidate count is huge per query.</strong> Reranking 500+ passages with a cross-encoder is slow; use late-interaction to prune to 50 first.</li>
+        <li><strong>Instruction-shaped queries.</strong> Newer APIs (e.g. Contextual AI instruction rerankers) bake task context into the score — a generic cross-encoder may underperform without prompt engineering.</li>
+        <li><strong>Multilingual with one strong bi-encoder.</strong> Models like Qwen3-Embedding + a tuned reranker may suffice; always <a href="/guides/evaluate-reranker.html">measure on your labels</a>.</li>
+      </ul>
+      <blockquote>Rule of thumb: if Recall@50 is low, fix retrieval — no reranker architecture invents missing chunks.</blockquote>
+
+      <h2 id="colbert">ColBERTv2 in practice</h2>
+      <pre><code># Conceptual flow with pyserini / ragatouille-style tooling
+# 1. Index token embeddings offline
+# 2. At query time: MaxSim between query tokens and doc token vectors
+# 3. Take top 50 for optional cross-encoder rerank
+
+from ragatouille import RAGPretrainedModel
+
+colbert = RAGPretrainedModel.from_pretrained("colbert-ir/colbertv2.0")
+results = colbert.search(query="reset API key", k=50)
+# Pass `results` to bge-reranker or Cohere for final ordering</code></pre>
+      <p>ColBERT shines on keyword-heavy corpora (support KBs, legal clauses, SKUs) where bi-encoders blur exact tokens. It does <em>not</em> run in our browser demo — different inference path — but belongs on your <a href="/models/">architecture comparison</a> checklist.</p>
+
+      <h2 id="pick">How to pick an architecture</h2>
+      <div class="card" style="margin:1.2rem 0">
+<pre><code>Millions of docs, tight latency?
+  → bi-encoder (+ BM25 hybrid if lexical matters)
+
+Recall OK but order noisy, 100–1000 candidates?
+  → late-interaction (ColBERT) OR widen cross-encoder input
+
+Top 50–100 need LLM-grade precision?
+  → cross-encoder rerank (bge, Cohere, Jina, mxbai…)
+
+Task-specific instructions in the query?
+  → instruction-following hosted rerank (Contextual AI, etc.)
+
+Unsure?
+  → 30 labelled queries + NDCG@5 before/after each stage</code></pre>
+      </div>
+      <p>Emerging open cross-encoders such as <a href="https://huggingface.co/Qwen/Qwen3-Reranker-0.6B" rel="noopener noreferrer">Qwen3-Reranker</a> compete with bge on multilingual stacks; pair them with late-interaction when you need both scale and precision.</p>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">See cross-encoder rerank in the browser</h2>
+        <p class="soft">Our demo shows stage-2 cross-encoder scoring — compare it with the bi-encoder proxy column to see what late-interaction or hybrid retrieval would need to fix.</p>
+        <a class="btn btn-primary" href="/demo.html">Open the demo →</a>
+      </div>
+
+      <h2>Keep reading</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/guides/cross-encoder-vs-bi-encoder.html"><h3>Cross-encoder vs bi-encoder</h3><p>The speed/accuracy trade-off in depth.</p></a>
+        <a class="card" href="/guides/hybrid-retrieval-rerank.html"><h3>Hybrid retrieval + rerank</h3><p>BM25 + vectors, then cross-encoder.</p></a>
+      </div>
+    </article>
+  </main>

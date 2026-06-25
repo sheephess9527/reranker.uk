@@ -1,12 +1,17 @@
 window.I18N_PAGE = { zh: {
-  "_title": "重排序模型对比：bge、Cohere、Jina、Voyage、mxbai | reranker.uk",
-  "_desc": "主流 rerank 模型横向对比：bge-reranker（开源权重）、Cohere Rerank、Jina Reranker、Voyage Rerank、mxbai-rerank。对比质量、语言、延迟、价格，以及各自适用场景。",
+  "_title": "重排序模型对比：cross-encoder、ColBERT、Qwen3 等 | reranker.uk",
+  "_desc": "rerank 模型横向对比：五大成熟家族 + Qwen3-Reranker、Contextual AI、ColBERTv2 等 2026 方向。架构、质量、延迟、语言与成本一览。",
 
   "Rerank model comparison": "重排序模型对比",
-  "Five families dominate the reranking space. Here's how they compare on quality, speed, language support, and cost — so you can pick the right one for your stack.": "五大主流重排序家族横向对比。从质量、速度、语言支持到成本，一表说清 —— 帮你为自己的技术栈选对那一个。",
+  "Production stacks mix <strong>cross-encoders</strong>, <strong>late-interaction</strong> models, and instruction-tuned APIs. This table compares five mature families plus emerging 2026 options — architecture, quality, latency, languages, and cost.": "生产栈混合 <strong>cross-encoder</strong>、<strong>late-interaction</strong> 与指令调优 API。本表对比五大成熟家族与 2026 新兴选项 —— 架构、质量、延迟、语言与成本。",
 
   "Model": "模型",
+  "Architecture": "架构",
   "Type": "类型",
+  "Cross-encoder": "Cross-encoder",
+  "Late-interaction": "Late-interaction",
+  "Instruction": "Instruction",
+  "Emerging": "新兴",
   "Best for": "最适合",
   "Languages": "语言",
   "Typ. latency <span class=\"th-hint\">50 docs</span>": "典型延迟 <span class=\"th-hint\">50 条文档</span>",
@@ -20,7 +25,16 @@ window.I18N_PAGE = { zh: {
   "Free (self-host)": "免费（自建）",
   "Free tier + pay-as-you-go": "免费额度 + 按量付费",
 
-  "BEIR NDCG@10 figures are approximate and vary by dataset — treat them as a rough guide, not a definitive ranking. Latency figures are ballpark estimates for ~50 documents on commodity hardware; actual numbers depend heavily on model size, hardware, and batch size. Check each vendor's benchmarks for task-specific results.": "BEIR NDCG@10 数值为近似值，且随数据集变化 —— 仅作粗略参考，不构成确定性排名。延迟数据是在普通硬件上处理约 50 条文档的粗略估计；实际数值在很大程度上取决于模型大小、硬件配置和批量大小。具体任务请查阅各厂商的基准测试结果。",
+  "<strong>Last verified:</strong> June 2026. <strong>BEIR NDCG@10</strong> figures are approximate averages across the 18-dataset suite — treat as a rough guide, not a definitive ranking. <strong>Late-interaction</strong> and <strong>instruction</strong> rows are not directly comparable to cross-encoder BEIR scores. <strong>Latency</strong> is estimated for ~50 documents on commodity CPU/API.": "<strong>最近核验：</strong>2026 年 6 月。<strong>BEIR NDCG@10</strong> 为 18 数据集近似均值 —— 仅供参考。<strong>Late-interaction</strong> 与 <strong>instruction</strong> 行不宜与 cross-encoder BEIR 直接比。<strong>延迟</strong> 为普通 CPU/API 上约 50 段的估计。",
+  "Classic baseline; default in our demo": "经典基线；本站 Demo 默认",
+  "2026 multilingual open reranker; Qwen ecosystem": "2026 多语言开源 reranker；Qwen 生态",
+  "Instruction-following rerank for task-shaped queries": "面向任务型查询的指令跟随 rerank",
+  "Token-level MaxSim; stage-1.5 not full rerank": "Token 级 MaxSim；1.5 阶段而非完整 rerank",
+  "Contact vendor": "联系厂商",
+  "GPU recommended": "建议 GPU",
+  "Fast rescore @ scale": "大规模快速重打分",
+  "Late-interaction (ColBERT)": "Late-interaction（ColBERT）",
+  "When ColBERTv2 beats bi-encoders and when you still need a cross-encoder — decision guide for 2026 stacks.": "ColBERTv2 何时胜过 bi-encoder、何时仍要 cross-encoder —— 2026 栈决策指南。",
 
   "Open-weight rerankers from BAAI. A strong English baseline (bge-reranker-base) and excellent multilingual models (bge-reranker-v2-m3). The default choice when you want to self-host for free.": "智源（BAAI）的开源权重重排序器。既有强力的英文基线（bge-reranker-base），也有出色的多语言模型（bge-reranker-v2-m3）。想免费自建时的默认选择。",
   "The most mature hosted rerank API, with consistent multilingual quality, a generous free tier and SDK support across Python, Node, Java and Go.": "最成熟的托管重排序 API，多语言质量稳定，免费额度慷慨，并提供 Python、Node、Java、Go 的 SDK。",

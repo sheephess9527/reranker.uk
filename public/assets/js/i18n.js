@@ -20,6 +20,7 @@
 
   var legacyNodes = [];
   var legacyOriginals = [];
+  var jsonLdOriginals = [];
   var origTitle = document.title;
   var descEl = document.querySelector('meta[name="description"]');
   var origDesc = descEl ? descEl.getAttribute("content") : null;
@@ -104,6 +105,43 @@
     });
   }
 
+  function patchJsonLdLang(obj, lang) {
+    if (!obj || typeof obj !== "object") return;
+    var t = obj["@type"];
+    if (
+      t === "Article" ||
+      t === "WebPage" ||
+      t === "WebSite" ||
+      t === "Organization"
+    ) {
+      obj.inLanguage = lang === "zh" ? "zh-Hans" : "en";
+    }
+    if (Array.isArray(obj["@graph"])) obj["@graph"].forEach(function (n) {
+      patchJsonLdLang(n, lang);
+    });
+    Object.keys(obj).forEach(function (k) {
+      if (obj[k] && typeof obj[k] === "object") patchJsonLdLang(obj[k], lang);
+    });
+  }
+
+  function captureJsonLd() {
+    document.querySelectorAll('script[type="application/ld+json"]').forEach(function (script) {
+      jsonLdOriginals.push({ el: script, text: script.textContent });
+    });
+  }
+
+  function applyJsonLd(lang) {
+    jsonLdOriginals.forEach(function (item) {
+      try {
+        var data = JSON.parse(item.text);
+        patchJsonLdLang(data, lang);
+        item.el.textContent = JSON.stringify(data);
+      } catch (e) {
+        item.el.textContent = item.text;
+      }
+    });
+  }
+
   function applyMeta(lang) {
     var page = window.I18N_PAGE || {};
     var d = page.zh || {};
@@ -145,6 +183,7 @@
     applyKeyed(lang);
     applyLegacy(lang);
     applyMeta(lang);
+    applyJsonLd(lang);
     try {
       document.dispatchEvent(
         new CustomEvent("i18n:changed", { detail: { lang: lang } })
@@ -154,6 +193,7 @@
 
   function init() {
     captureDefaults();
+    captureJsonLd();
     collectLegacy();
     var saved = null;
     try {

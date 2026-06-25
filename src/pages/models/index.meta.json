@@ -1,6 +1,6 @@
 {
-  "title": "Rerank model comparison: bge, Cohere, Jina, Voyage | reranker.uk",
-  "description": "Side-by-side comparison of the leading rerank models: bge-reranker (open weights), Cohere Rerank, Jina Reranker, and Voyage Rerank. Compare quality, languages, latency, pricing, and when to use each.",
+  "title": "Rerank model comparison: cross-encoder, ColBERT, Qwen3 | reranker.uk",
+  "description": "Compare rerank architectures: bge, Cohere, Jina, Voyage, mxbai, plus Qwen3-Reranker, Contextual AI instruction rerank, and ColBERTv2 late-interaction. Quality, latency, languages, and cost.",
   "canonical": "https://reranker.uk/models/",
   "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
   "og_type": "website",

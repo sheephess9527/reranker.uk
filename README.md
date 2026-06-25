@@ -8,6 +8,20 @@ Educational resource on rerankers for retrieval and RAG, with a live in-browser 
 
 ---
 
+## Changelog — content expansion (2026-06-25, batch 3)
+
+| Feature | Implementation |
+|---------|----------------|
+| **Models table** | Architecture column + Qwen3 / Contextual / ColBERT / ms-marco rows |
+| **Late-interaction guide** | `/guides/late-interaction-rerank.html` |
+| **Demo presets** | E-commerce + Multilingual (7 total); ms-marco demo deep link |
+| **JSON-LD** | `inLanguage` zh-Hans / en on toggle |
+| **Changelog RSS** | `/changelog.rss` |
+
+20 built pages after `node scripts/build.mjs`.
+
+---
+
 ## Changelog — i18n & SEO (2026-06-25, batch 2)
 
 | Feature | Implementation |

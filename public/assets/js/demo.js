@@ -244,6 +244,64 @@ const SAMPLES = [
       ],
     },
   },
+  {
+    id: "ecommerce",
+    labelEn: "E-commerce",
+    labelZh: "电商搜索",
+    difficultyEn: "medium",
+    difficultyZh: "中等",
+    en: {
+      query: "waterproof hiking boots size 10 under £120",
+      docs: [
+        "TrailMaster GTX hiking boots — waterproof Gore-Tex, men's sizes 7–13, currently £109. Free returns within 30 days.",
+        "Cotton summer sandals size 10 — breathable, not waterproof. Sale price £34.",
+        "Kids' school shoes size 10 — leather, not suitable for hiking or wet conditions.",
+        "TrailMaster GTX care guide: re-proof with spray every 6 months; do not machine dry.",
+        "Warehouse clearance: mixed footwear lot, assorted sizes, no warranty.",
+        "London store opening hours: Mon–Sat 9am–7pm.",
+      ],
+    },
+    zh: {
+      query: "防水徒步靴 10 码 120 英镑以内",
+      docs: [
+        "TrailMaster GTX 徒步靴 —— Gore-Tex 防水，男款 7–13 码，现价 £109，30 天内免费退换。",
+        "棉质夏季凉鞋 10 码 —— 透气，不防水，特价 £34。",
+        "儿童校服鞋 10 码 —— 皮革，不适合徒步或潮湿环境。",
+        "TrailMaster GTX 保养：每 6 个月喷涂防水剂；勿机烘干。",
+        "仓库清仓：混批鞋类，尺码不一，无保修。",
+        "伦敦门店营业时间：周一至周六 9:00–19:00。",
+      ],
+    },
+  },
+  {
+    id: "multilingual",
+    labelEn: "Multilingual",
+    labelZh: "多语言",
+    difficultyEn: "hard",
+    difficultyZh: "困难",
+    en: {
+      query: "How do I cancel my subscription before the next billing cycle?",
+      docs: [
+        "To cancel your subscription: Settings → Billing → Cancel plan. Access continues until the end of the current period.",
+        "Comment annuler mon abonnement : Paramètres → Facturation → Résilier. L'accès reste actif jusqu'à la fin de la période en cours.",
+        "So kündigen Sie Ihr Abo: Einstellungen → Abrechnung → Plan kündigen. Zugriff bis Periodenende.",
+        "Our Paris office moved to 12 Rue de Rivoli in January 2026.",
+        "API rate limits reset every minute per API key on the Pro plan.",
+        "The refund policy for annual plans allows pro-rata credit within 14 days of renewal.",
+      ],
+    },
+    zh: {
+      query: "如何在下一个账单周期之前取消订阅？",
+      docs: [
+        "取消订阅：设置 → 账单 → 取消方案。当前周期结束前仍可访问。",
+        "To cancel your subscription: Settings → Billing → Cancel plan. Access continues until the end of the current period.",
+        "Comment annuler mon abonnement : Paramètres → Facturation → Résilier.",
+        "巴黎办公室于 2026 年 1 月迁至里沃利街 12 号。",
+        "Pro 计划 API 限流按 API key 每分钟重置。",
+        "年付方案退款政策：续费后 14 天内可按比例抵扣。",
+      ],
+    },
+  },
 ];
 
 const els = {

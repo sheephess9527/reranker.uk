@@ -10,6 +10,7 @@
   const tbody = table?.querySelector("tbody");
   const filterInput = document.getElementById("models-filter");
   const typeFilter = document.getElementById("models-type-filter");
+  const archFilter = document.getElementById("models-arch-filter");
   if (!table || !tbody) return;
 
   const rows = Array.from(tbody.querySelectorAll("tr"));
@@ -28,11 +29,13 @@
   function applyFilters() {
     const q = (filterInput?.value || "").trim().toLowerCase();
     const type = typeFilter?.value || "all";
+    const arch = archFilter?.value || "all";
     rows.forEach((row) => {
       const types = (row.dataset.type || "").split(/\s+/);
       const typeOk = type === "all" || types.includes(type);
+      const archOk = arch === "all" || row.dataset.arch === arch;
       const textOk = !q || rowText(row).includes(q);
-      row.hidden = !(typeOk && textOk);
+      row.hidden = !(typeOk && archOk && textOk);
     });
     const visible = rows.filter((r) => !r.hidden).length;
     const countEl = document.getElementById("models-count");
@@ -91,6 +94,7 @@
 
   if (filterInput) filterInput.addEventListener("input", applyFilters);
   if (typeFilter) typeFilter.addEventListener("change", applyFilters);
+  if (archFilter) archFilter.addEventListener("change", applyFilters);
 
   rows.forEach((row) => {
     const slug = row.dataset.demo;
@@ -119,6 +123,17 @@
       ];
       map.forEach(([val, en, zh]) => {
         const opt = typeFilter.querySelector(`option[value="${val}"]`);
+        if (opt) opt.textContent = L(en, zh);
+      });
+    }
+    if (archFilter) {
+      const map = [
+        ["all", "All architectures", "全部架构"],
+        ["cross-encoder", "Cross-encoder", "Cross-encoder"],
+        ["late-interaction", "Late-interaction", "Late-interaction"],
+      ];
+      map.forEach(([val, en, zh]) => {
+        const opt = archFilter.querySelector(`option[value="${val}"]`);
         if (opt) opt.textContent = L(en, zh);
       });
     }

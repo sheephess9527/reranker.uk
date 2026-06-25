@@ -2,6 +2,7 @@ window.I18N_PAGE = { zh: {
   "_title": "页面未找到（404） | reranker.uk",
   "_desc": "找不到该页面。返回 reranker.uk，查看重排序指南、模型对比，以及在浏览器中运行的实时重排序 Demo。",
 
+  "404": "404",
   "This page took a wrong turn": "这个页面走错路了",
   "The page you were looking for doesn't exist — it may have moved or never been here. Let's get you back on track.": "你要找的页面不存在 —— 它可能已被移动，或者从未存在过。我们带你回到正轨。",
   "Back to home": "返回首页",

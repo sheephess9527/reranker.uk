@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rerank model comparison: bge, Cohere, Jina, Voyage | reranker.uk</title>
-  <meta name="description" content="Side-by-side comparison of the leading rerank models: bge-reranker (open weights), Cohere Rerank, Jina Reranker, and Voyage Rerank. Compare quality, languages, latency, pricing, and when to use each." />
+  <title>Rerank model comparison: cross-encoder, ColBERT, Qwen3 | reranker.uk</title>
+  <meta name="description" content="Compare rerank architectures: bge, Cohere, Jina, Voyage, mxbai, plus Qwen3-Reranker, Contextual AI instruction rerank, and ColBERTv2 late-interaction. Quality, latency, languages, and cost." />
   <link rel="canonical" href="https://reranker.uk/models/" />
   <link rel="alternate" hreflang="en" href="https://reranker.uk/models/" />
   <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/models/" />
@@ -124,7 +124,7 @@
 <main id="main">
     <section class="hero container" style="padding-bottom:1.5rem">
       <h1>Rerank model comparison</h1>
-      <p class="lead">Five families dominate the reranking space. Here's how they compare on quality, speed, language support, and cost — so you can pick the right one for your stack.</p>
+      <p class="lead">Production stacks mix <strong>cross-encoders</strong>, <strong>late-interaction</strong> models, and instruction-tuned APIs. This table compares five mature families plus emerging 2026 options — architecture, quality, latency, languages, and cost.</p>
     </section>
 
     <section class="section container">
@@ -136,6 +136,11 @@
           <option value="api">Hosted API</option>
           <option value="browser">Browser runnable</option>
         </select>
+        <select id="models-arch-filter" aria-label="Filter by architecture">
+          <option value="all">All architectures</option>
+          <option value="cross-encoder">Cross-encoder</option>
+          <option value="late-interaction">Late-interaction</option>
+        </select>
         <span class="muted models-count" id="models-count"></span>
       </div>
       <div class="table-wrap">
@@ -143,6 +148,7 @@
           <thead>
             <tr>
               <th data-sort="name">Model</th>
+              <th data-sort="arch">Architecture</th>
               <th data-sort="type">Type</th>
               <th>Best for</th>
               <th data-sort="langs">Languages</th>
@@ -153,8 +159,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr data-name="bge-reranker-v2-m3" data-type="open" data-langs="100+" data-pricing="free" data-beir="60.1">
+            <tr data-name="bge-reranker-v2-m3" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="60.1">
               <td><a href="/models/bge-reranker.html">bge-reranker-v2-m3</a></td>
+              <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span></td>
               <td>Self-hosted, free, multilingual</td>
               <td>100+ langs</td>
@@ -163,8 +170,9 @@
               <td>~60.1</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="cohere-rerank-v3.5" data-type="api" data-langs="100+" data-pricing="paid" data-beir="61.2">
+            <tr data-name="cohere-rerank-v3.5" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="61.2">
               <td><a href="/models/cohere-rerank.html">Cohere Rerank v3.5</a></td>
+              <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Hosted API</span></td>
               <td>Best multilingual quality, mature API</td>
               <td>100+ langs</td>
@@ -173,8 +181,9 @@
               <td>~61.2</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="jina-reranker-v2" data-type="open api browser" data-langs="100+" data-pricing="freemium" data-beir="59.6" data-demo="jina-reranker">
+            <tr data-name="jina-reranker-v2" data-type="open api browser" data-arch="cross-encoder" data-langs="100+" data-pricing="freemium" data-beir="59.6" data-demo="jina-reranker">
               <td><a href="/models/jina-reranker.html">Jina Reranker v2</a></td>
+              <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open + Hosted</span><br><span class="pill info">Browser ✓</span></td>
               <td>Open weights + API + tiny browser model</td>
               <td>100+ langs</td>
@@ -183,8 +192,9 @@
               <td>~59.6</td>
               <td class="demo-link-cell"></td>
             </tr>
-            <tr data-name="voyage-rerank-2" data-type="api" data-langs="multi" data-pricing="paid" data-beir="61.0">
+            <tr data-name="voyage-rerank-2" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="61.0">
               <td><a href="/models/voyage-rerank.html">Voyage Rerank 2</a></td>
+              <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Hosted API</span></td>
               <td>High retrieval precision, domain-specific</td>
               <td>Multilingual</td>
@@ -193,8 +203,9 @@
               <td>~61.0</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="mxbai-rerank-large-v1" data-type="open browser" data-langs="en" data-pricing="free" data-beir="62.1" data-demo="mxbai-rerank">
+            <tr data-name="mxbai-rerank-large-v1" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="62.1" data-demo="mxbai-rerank">
               <td><a href="/models/mxbai-rerank.html">mxbai-rerank-large-v1</a></td>
+              <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><br><span class="pill info">Browser ✓</span></td>
               <td>Open weights + browser-runnable xsmall</td>
               <td>English</td>
@@ -203,12 +214,56 @@
               <td>~62.1</td>
               <td class="demo-link-cell"></td>
             </tr>
+            <tr data-name="ms-marco-minilm" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="55.0" data-demo="ms-marco">
+              <td>ms-marco MiniLM-L6 <span class="muted">(browser)</span></td>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill good">Open weights</span><br><span class="pill info">Browser ✓</span></td>
+              <td>Classic baseline; default in our demo</td>
+              <td>English</td>
+              <td>50–150 ms CPU<br><span class="muted">browser WASM</span></td>
+              <td>Free (self-host)</td>
+              <td>~55.0</td>
+              <td class="demo-link-cell"></td>
+            </tr>
+            <tr data-name="qwen3-reranker-0.6b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="59.8">
+              <td><a href="https://huggingface.co/Qwen/Qwen3-Reranker-0.6B" rel="noopener noreferrer">Qwen3-Reranker-0.6B</a></td>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill good">Open weights</span><span class="pill info">Emerging</span></td>
+              <td>2026 multilingual open reranker; Qwen ecosystem</td>
+              <td>100+ langs</td>
+              <td>GPU recommended</td>
+              <td>Free (self-host)</td>
+              <td>~59.8</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr data-name="contextual-rerank-v2" data-type="api" data-arch="cross-encoder" data-langs="en" data-pricing="paid" data-beir="">
+              <td><a href="https://contextual.ai/blog/rerank-v2/" rel="noopener noreferrer">Contextual AI Rerank v2</a></td>
+              <td><span class="pill">Instruction</span></td>
+              <td><span class="pill">Hosted API</span><span class="pill info">Emerging</span></td>
+              <td>Instruction-following rerank for task-shaped queries</td>
+              <td>English</td>
+              <td>API</td>
+              <td>Contact vendor</td>
+              <td class="muted">—</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr data-name="colbertv2" data-type="open" data-arch="late-interaction" data-langs="en" data-pricing="free" data-beir="">
+              <td><a href="/guides/late-interaction-rerank.html">ColBERTv2</a></td>
+              <td><span class="pill info">Late-interaction</span></td>
+              <td><span class="pill good">Open weights</span></td>
+              <td>Token-level MaxSim; stage-1.5 not full rerank</td>
+              <td>English</td>
+              <td>Fast rescore @ scale</td>
+              <td>Free (self-host)</td>
+              <td class="muted">—</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
           </tbody>
         </table>
       </div>
       <div class="benchmark-meta callout" style="margin-top:.8rem;padding:.85rem 1rem">
-        <p class="muted" style="font-size:.82rem;margin:0"><strong>Last verified:</strong> June 2026. <strong>BEIR NDCG@10</strong> figures are approximate averages across the 18-dataset suite — treat as a rough guide, not a definitive ranking. <strong>Latency</strong> is estimated for ~50 documents on commodity CPU/API; GPU and batching change results significantly.</p>
-        <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">Sources: <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR benchmark</a> · <a href="https://huggingface.co/BAAI/bge-reranker-v2-m3" rel="noopener noreferrer">BAAI model cards</a> · <a href="https://docs.cohere.com/docs/rerank" rel="noopener noreferrer">Cohere docs</a> · <a href="https://jina.ai/reranker" rel="noopener noreferrer">Jina</a> · <a href="https://docs.voyageai.com/docs/reranker" rel="noopener noreferrer">Voyage</a> · <a href="https://huggingface.co/mixedbread-ai/mxbai-rerank-large-v1" rel="noopener noreferrer">mixedbread-ai</a></p>
+        <p class="muted" style="font-size:.82rem;margin:0"><strong>Last verified:</strong> June 2026. <strong>BEIR NDCG@10</strong> figures are approximate averages across the 18-dataset suite — treat as a rough guide, not a definitive ranking. <strong>Late-interaction</strong> and <strong>instruction</strong> rows are not directly comparable to cross-encoder BEIR scores. <strong>Latency</strong> is estimated for ~50 documents on commodity CPU/API.</p>
+        <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">Sources: <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR</a> · <a href="https://huggingface.co/BAAI/bge-reranker-v2-m3" rel="noopener noreferrer">BAAI</a> · <a href="https://huggingface.co/Qwen/Qwen3-Reranker-0.6B" rel="noopener noreferrer">Qwen3-Reranker</a> · <a href="https://contextual.ai/blog/rerank-v2/" rel="noopener noreferrer">Contextual AI</a> · <a href="/guides/late-interaction-rerank.html">ColBERT guide</a> · <a href="https://docs.cohere.com/docs/rerank" rel="noopener noreferrer">Cohere</a> · <a href="https://jina.ai/reranker" rel="noopener noreferrer">Jina</a> · <a href="https://docs.voyageai.com/docs/reranker" rel="noopener noreferrer">Voyage</a> · <a href="https://huggingface.co/mixedbread-ai/mxbai-rerank-large-v1" rel="noopener noreferrer">mixedbread-ai</a></p>
       </div>
 
       <div class="grid grid-2" style="margin-top:2.5rem">
@@ -236,6 +291,11 @@
           <h3>mxbai-rerank</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill good">Open weights</span><span class="pill">Browser xsmall</span></div>
           <p>Apache 2.0 DeBERTa-v3 rerankers from mixedbread-ai. The xsmall variant runs in the browser and powers our demo.</p>
+        </a>
+        <a class="card" href="/guides/late-interaction-rerank.html">
+          <h3>Late-interaction (ColBERT)</h3>
+          <div class="tag-row" style="margin-bottom:.8rem"><span class="pill info">Architecture</span><span class="pill">Emerging</span></div>
+          <p>When ColBERTv2 beats bi-encoders and when you still need a cross-encoder — decision guide for 2026 stacks.</p>
         </a>
       </div>
     </section>
@@ -323,8 +383,10 @@
             <li><a href="/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
             <li><a href="/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
             <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
+            <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
             <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
             <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
+            <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>
             <li><a href="/privacy.html" data-i18n="shared.footer.privacy">Privacy</a></li>
           </ul>
         </div>
