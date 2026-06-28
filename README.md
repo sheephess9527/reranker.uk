@@ -5,6 +5,197 @@ Educational resource on rerankers for retrieval and RAG, with a live in-browser 
 - **Live site:** https://reranker.uk
 - **Repository:** https://github.com/sheephess9527/reranker.uk
 - **Workers preview:** https://reranker.sheephess44.workers.dev
+- **Active branch:** `claude/reranker-uk-resource-demo-i09f5t` (do all work here; push with `git push -u origin <branch>`)
+
+---
+
+## 🚀 Start here — handoff guide for a new contributor / AI agent
+
+> Read this whole section before editing anything. It is written so a fresh
+> session (any model, any account) can be productive in five minutes. The
+> dated changelogs further down are history; **this section is the source of
+> truth for how the project works today.**
+
+### Mental model in three sentences
+
+reranker.uk is a **static, backend-less educational site** about rerankers, plus
+a **live demo that runs a real cross-encoder entirely in the browser** (no API,
+no server, no cost). HTML pages are **generated** from `src/` by a ~140-line Node
+script; CSS/JS/translations are **hand-written static assets** under `public/`.
+The site is **fully bilingual (English + 中文)** via a client-side toggle.
+
+### Golden rules (break these and you create silent bugs)
+
+1. **HTML is generated — never hand-edit `public/*.html`.** Edit `src/pages/` and
+   `src/partials/`, then run `node scripts/build.mjs`. A rebuild overwrites every
+   `public/*.html`. (We were bitten by this: demo `<noscript>` + preconnect hints
+   were once edited into `public/demo.html` only, and the next build silently
+   dropped them. Always put HTML changes in `src/`.)
+2. **Normalise line endings after every build:**
+   `find public -name "*.html" -exec sed -i 's/\r$//' {} +`
+   The `.meta.json` `head_extra` fields contain `\r\n`; without this step the
+   build flips JSON-LD blocks to CRLF and produces a noisy, misleading diff.
+3. **Static assets are NOT generated — edit them directly** under `public/`:
+   `assets/css/style.css`, `assets/js/*.js`, `assets/js/i18n/*.js`,
+   `sitemap.xml`, `robots.txt`, images. There is no build step for these.
+4. **Work on the active branch** (top of this file). Rebase on `origin/main`
+   before pushing if you are behind; the remote has at times been ahead.
+
+### Repository map
+
+```
+wrangler.jsonc            # Cloudflare Workers static-assets config (serves ./public)
+package.json              # npm run build | npm run dev (watch). type: module
+scripts/build.mjs         # src/ → public/ assembler (the only build step)
+src/
+  partials/
+    head-open.html        # <head> template with {{TITLE}}, {{HEAD_EXTRA}}, … placeholders
+    nav.html              # Shared sticky nav (data-i18n keys)
+    footer.html           # Shared footer + {{PAGE_SCRIPTS}} + i18n script tags
+  pages/
+    <name>.html           # Page BODY only (<main>…</main>), no <head>/<nav>/<footer>
+    <name>.meta.json      # Per-page: title, description, canonical, og_*, head_extra, page_scripts
+    guides/  models/      # Same pattern, nested
+public/                   # DEPLOY ROOT. *.html are GENERATED; everything else is source.
+  assets/css/style.css    # All styles (hand-edited)
+  assets/js/demo.js       # The in-browser demo (ES module, hand-edited)
+  assets/js/main.js       # Nav toggle, year, small chrome
+  assets/js/i18n.js       # Bilingual engine (do not duplicate logic; read it once)
+  assets/js/i18n/
+    shared.js             # window.I18N_SHARED.keys — nav/footer/chrome (all pages)
+    <page>.js             # window.I18N_PAGE — per-page _title/_desc + body translations
+  sitemap.xml robots.txt site.webmanifest
+```
+
+### Build & preview
+
+```bash
+node scripts/build.mjs                       # build once (prints "Built N pages")
+find public -name "*.html" -exec sed -i 's/\r$//' {} +   # ALWAYS run after build
+node scripts/build.mjs --watch               # rebuild on src/ change (no LF-normalise)
+npx serve public      # or: python3 -m http.server -d public 8000   # local preview
+```
+
+### The i18n system (the most error-prone part — read carefully)
+
+Two layers, both live in `assets/js/i18n.js`:
+
+- **Keyed layer (preferred, for shared chrome):** elements carry
+  `data-i18n="shared.nav.home"` / `data-i18n-html="…"`. Values come from
+  `window.I18N_SHARED.keys` (in `shared.js`) and optional `window.I18N_PAGE.keys`.
+  Used by nav + footer in `src/partials/`.
+- **Legacy layer (for article bodies):** `window.I18N_PAGE.zh` is a dictionary
+  whose **keys are the element's exact rendered `innerHTML`** (whitespace
+  collapsed) and whose values are the Chinese. The engine walks `main h1, h2, h3,
+  h4, p, li, blockquote, td, th, label, .eyebrow, .btn, .meta, .breadcrumb,
+  .toc strong` and swaps innerHTML when the language is `zh`.
+
+**Script load order matters** (set automatically by the footer partial +
+`page_scripts`): `main.js` → `<page>.js` (via `page_scripts`) → `shared.js` →
+`i18n.js`. So every page's `.meta.json` must point `page_scripts` at its dict.
+
+**Legacy-key gotchas (these cause silent "stays English" bugs):**
+
+- The key must match innerHTML **exactly**, including inline tags
+  (`<strong>`, `<code>`, `<a href="…">`), HTML entities (`&amp;`), em-dashes
+  (`—`), en-dashes (`–`) and curly quotes (`" " '`). One mismatched character =
+  no translation, no error.
+- **Prefer plain ASCII punctuation in new English body text** (write `as-is`,
+  not “as is”; avoid `'`) so keys are easy to match. If the existing text already
+  has smart quotes, copy them verbatim into the key.
+- A CTA button inside a `<p>` is collected twice (the `<p>` and the `<a.btn>`).
+  Provide **both** keys: the button text *and* the full `<a …>…</a>` wrapper, or
+  the wrapper will re-render English. See `changelog.js` for the pattern.
+- `_title` and `_desc` in a page dict translate `<title>` and the meta
+  description; they are not innerHTML keys.
+
+**Always validate a new/edited dict** — this prints any string with no key:
+
+```bash
+node -e '
+const fs=require("fs");const page=process.argv[1];
+const html=fs.readFileSync(`public/${page}.html`,"utf8");
+const js=fs.readFileSync(`public/assets/js/i18n/${page.split("/").pop()}.js`,"utf8");
+const main=html.slice(html.indexOf("<main"),html.indexOf("</main>"));
+const re=/<(h1|h2|h3|h4|p|li|blockquote|td|th)(?:\s[^>]*)?>([\s\S]*?)<\/\1>/g;
+let m,ok=0,miss=0;
+while((m=re.exec(main))){const t=m[2].replace(/\s+/g," ").trim();if(!t)continue;
+ if(js.includes(JSON.stringify(t)))ok++;else{miss++;console.log("NO KEY:",t.slice(0,80));}}
+console.log("matched",ok,"missing",miss);
+' changelog        # ← page path, e.g. "privacy", "guides/rerank-rag"
+```
+
+### Recipe: add a new page
+
+1. `src/pages/foo.html` — body only (`<main id="main">…</main>`).
+2. `src/pages/foo.meta.json` — `title`, `description`, `canonical`, `og_*`,
+   optional `head_extra` (JSON-LD etc.), and
+   `"page_scripts": "<script src=\"/assets/js/i18n/foo.js\"></script>"`.
+3. `public/assets/js/i18n/foo.js` — `window.I18N_PAGE = { zh: { "_title":…, "_desc":…, …body keys… } };`
+4. If it should be discoverable, add a link in `src/partials/footer.html` and a
+   `shared.footer.*` key in `shared.js`.
+5. Add the URL to `public/sitemap.xml`.
+6. `node scripts/build.mjs` → LF-normalise → run the validation snippet → commit.
+
+### Recipe: add a demo model or preset
+
+`public/assets/js/demo.js` (ES module). Models are the `MODELS` map near the top
+(`id`, `name`, `sigmoid`); presets are the `SAMPLES` array (each has bilingual
+`query`/`docs`). Inference loads transformers.js from the jsDelivr CDN and model
+weights from the Hugging Face CDN; scoring runs on WASM or WebGPU. Results render
+in three columns (Before / bi-encoder proxy / cross-encoder) with an optional
+dual-model compare + aligned diff. Keep new models small enough to run in a
+browser (Apache-2.0, ONNX, ≤ ~30 MB q8).
+
+### Deploy (Cloudflare Workers static assets)
+
+```bash
+node scripts/build.mjs && find public -name "*.html" -exec sed -i 's/\r$//' {} +
+npx wrangler deploy        # → https://reranker.uk   (needs `npx wrangler login` once)
+```
+
+Auth and API-token alternatives are documented in the **Deploy** section below.
+Cloudflare auto-serves `./public`; there is no Worker script.
+
+### Conventions
+
+- Commit messages: imperative summary + short body; this project tags commits
+  with `Co-Authored-By:` and a `Claude-Session:` trailer.
+- British spelling in copy (`licence`, `organisation`); `en_GB` locale.
+- No vendor logos; product names are nominative references (see `/terms.html`).
+- Keep the README current: append a dated changelog entry for each change set.
+
+### Current state (2026-06-24)
+
+- **20 generated pages**; every page has a translation dict wired via
+  `page_scripts`, and shared chrome (nav/footer) + the bulk of body prose
+  translate to 中文.
+- Pages: home, demo, guides (index + 7 guides), models (index + 5 models),
+  changelog, privacy, terms, 404.
+- Legal: `/terms.html` (trademark attribution + disclaimers) and a privacy page;
+  vendor pricing notes link to official pricing pages.
+- Demo: 3 in-browser models, 5 presets, WebGPU toggle, dual-model compare, token
+  stats, animated score bars, share links, CSV/JSON/Markdown export.
+
+**Known i18n gaps (run the validation snippet above to enumerate per page):**
+
+- **In-page TOC anchor links** — `<li><a href="#x">Heading</a></li>` is collected
+  by the engine keyed on the *whole anchor*, but most dicts only contain the bare
+  heading text. So the “On this page” list still shows English even though the
+  matching `<h2>` translates. To fix, add anchor-form keys, e.g.
+  `"<a href=\"#why\">Why ranking order is a problem</a>": "<a href=\"#why\">为什么排序顺序是个问题</a>"`.
+  This is the single biggest remaining gap and is systematic across guide/model pages.
+- A handful of **short labels** still render English on some pages: model-page
+  `Pros` / `Cons` / `Other models`, a few table headers, and one or two model-card
+  blurbs. The validator flags them.
+- **Intentionally NOT translated:** code spans, model IDs (`BAAI/bge-reranker-base`),
+  file sizes, and benchmark numbers — these should stay as-is; ignore them in the
+  validator output.
+
+**Other possible next steps:** hreflang or separate `/zh/` URLs for Chinese SEO
+(currently a client-side toggle only); privacy-friendly analytics; migrating the
+legacy innerHTML dictionaries to stable `data-i18n` keys (would make the TOC gap
+disappear and end the exact-innerHTML-matching fragility).
 
 ---
 
