@@ -15,6 +15,11 @@ Educational resource on rerankers for retrieval and RAG, with a live in-browser 
 > session (any model, any account) can be productive in five minutes. The
 > dated changelogs further down are history; **this section is the source of
 > truth for how the project works today.**
+>
+> **Using Claude Code?** `CLAUDE.md` at the repo root is the condensed,
+> auto-loaded operational version of this section — it is pulled into every
+> session's context automatically, so a fresh Claude session picks up the
+> golden rules, build/i18n gotchas, and recipes with no prompting.
 
 ### Mental model in three sentences
 
