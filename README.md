@@ -9,6 +9,23 @@ Educational resource on rerankers for retrieval and RAG, with a live in-browser 
 
 ---
 
+## Changelog — installable PWA + new icon (2026-06-24)
+
+The site can now be added to the iPhone (and Android) home screen and launches
+standalone, with a redesigned icon.
+
+| Change | Detail |
+|--------|--------|
+| **iOS "Add to Home Screen"** | `src/partials/head-open.html` gains `apple-mobile-web-app-capable`, `mobile-web-app-capable`, `apple-mobile-web-app-status-bar-style=black`, `apple-mobile-web-app-title`, and a sized `apple-touch-icon` (180). Manifest already had `display: standalone` |
+| **Maskable icons** | `site.webmanifest` adds `purpose: "maskable"` entries (192 + 512) so Android masks cleanly; full-bleed icon keeps content in the safe zone |
+| **New icon** | Redesigned around the brand "ranked bars" motif: dark gradient backdrop + glow, top bar vibrant indigo→teal (glossy), lower bars fading to muted — literally depicts reranking. Master at `public/assets/img/icon-master.svg` |
+| **Reproducible rasterisation** | `scripts/render-icons.mjs` (`npm run icons`) renders the master SVG → `apple-touch-icon.png` (180), `icon-192.png`, `icon-512.png` via `@resvg/resvg-js` (new devDependency). `favicon.svg` refreshed to match |
+
+To install on iPhone: open https://reranker.uk in Safari → Share → **Add to Home
+Screen**. It launches full-screen with the new icon and a dark status bar.
+
+---
+
 ## 🚀 Start here — handoff guide for a new contributor / AI agent
 
 > Read this whole section before editing anything. It is written so a fresh

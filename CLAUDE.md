@@ -128,6 +128,16 @@ innerHTML exactly; run the validator until `missing 0`.
 load from the Hugging Face CDN, transformers.js from jsDelivr; keep models small
 enough for a browser (Apache-2.0, ONNX q8, ≤ ~30 MB).
 
+**Change the app icon (PWA / iOS home screen):** edit the master
+`public/assets/img/icon-master.svg` (full-bleed square — iOS/Android apply their
+own corner mask, so do NOT pre-round it), then `npm install && npm run icons` to
+regenerate `apple-touch-icon.png` (180), `icon-192.png`, `icon-512.png` via
+`scripts/render-icons.mjs` (`@resvg/resvg-js`, a dev dependency). Update
+`favicon.svg` (rounded, served as-is to browsers) to match by hand. The
+"Add to Home Screen" wiring lives in `src/partials/head-open.html`
+(`apple-mobile-web-app-*` meta + `apple-touch-icon`) and `public/site.webmanifest`
+(`display: standalone`, icons incl. `maskable`); rebuild after editing the partial.
+
 ## Conventions
 
 - Commit messages: imperative summary + short body. This project tags commits
