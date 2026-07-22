@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hybrid retrieval + reranking — BM25, vectors, then rerank | reranker.uk</title>
-  <meta name="description" content="How to combine BM25 and vector search for better recall, then use a cross-encoder reranker to fix ordering. Fusion strategies, top-k tuning, and when hybrid beats vectors alone." />
-  <link rel="canonical" href="https://reranker.uk/guides/hybrid-retrieval-rerank.html" />
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/hybrid-retrieval-rerank.html" />
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/guides/hybrid-retrieval-rerank.html" />
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/hybrid-retrieval-rerank.html" />
+  <title>Instruction-following rerankers — Contextual AI & task-shaped ranking | reranker.uk</title>
+  <meta name="description" content="What instruction-following rerankers add over classic cross-encoders: task instructions, when to use Contextual AI-style APIs, and how to evaluate them on your own labels." />
+  <link rel="canonical" href="https://reranker.uk/guides/instruction-reranker.html" />
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/instruction-reranker.html" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/guides/instruction-reranker.html" />
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/instruction-reranker.html" />
   <meta name="theme-color" content="#0b0d17" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="author" content="reranker.uk" />
@@ -16,9 +16,9 @@
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="Hybrid retrieval + reranking" />
-  <meta property="og:description" content="BM25 + vectors for recall, cross-encoder for precision." />
-  <meta property="og:url" content="https://reranker.uk/guides/hybrid-retrieval-rerank.html" />
+  <meta property="og:title" content="Instruction-following rerankers" />
+  <meta property="og:description" content="When relevance is policy-shaped: instruction rerank vs plain cross-encoders." />
+  <meta property="og:url" content="https://reranker.uk/guides/instruction-reranker.html" />
   <meta property="og:site_name" content="reranker.uk" />
   <meta property="og:locale" content="en_GB" />
   <meta property="og:locale:alternate" content="zh_CN" />
@@ -31,7 +31,7 @@
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
   <link rel="stylesheet" href="/assets/css/style.css" />
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Article","headline":"Hybrid retrieval + reranking","datePublished":"2026-06-23","dateModified":"2026-06-23","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/hybrid-retrieval-rerank.html"}
+  {"@context":"https://schema.org","@type":"Article","headline":"Instruction-following rerankers","datePublished":"2026-06-25","dateModified":"2026-06-25","inLanguage":"en","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/instruction-reranker.html"}
   </script>
 </head>
 <body>
@@ -54,83 +54,77 @@
   </header>
 <main id="main">
     <article class="article container narrow">
-      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Hybrid retrieval + rerank</div>
-      <h1>Hybrid retrieval + reranking</h1>
-      <p class="meta">Production · ~9 min read · <time datetime="2026-06-23">Updated 23 Jun 2026</time></p>
-      <p class="lead">Vector search alone often misses exact keyword matches; BM25 alone misses paraphrases. <strong>Hybrid retrieval</strong> runs both, merges the candidate lists, and a <strong>reranker</strong> then fixes the final order before your LLM sees anything.</p>
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Instruction-following rerank</div>
+      <h1>Instruction-following rerankers</h1>
+      <p class="meta">Emerging · ~7 min read · <time datetime="2026-06-25">Updated 25 Jun 2026</time></p>
+      <p class="lead">Classic cross-encoders answer one question: <em>“how relevant is this passage to this query?”</em> <strong>Instruction-following</strong> rerankers (e.g. Contextual AI Rerank v2) take an extra control signal — a short instruction that defines what “relevant” means for this task.</p>
 
       <div class="toc">
         <strong>On this page</strong>
         <ol>
-          <li><a href="#why">Why hybrid?</a></li>
-          <li><a href="#pattern">The retrieve-merge-rerank pattern</a></li>
-          <li><a href="#fusion">Fusion strategies</a></li>
-          <li><a href="#code">Minimal Python example</a></li>
-          <li><a href="#tuning">Tuning tips</a></li>
+          <li><a href="#why">Why plain relevance is not enough</a></li>
+          <li><a href="#how">How instruction rerank differs</a></li>
+          <li><a href="#when">When to use it</a></li>
+          <li><a href="#vs">Vs classic cross-encoders</a></li>
+          <li><a href="#eval">How to evaluate</a></li>
         </ol>
       </div>
 
-      <h2 id="why">Why hybrid?</h2>
-      <p>Bi-encoder vector search excels at semantic similarity — “vehicle” matches “car”. BM25 excels at lexical overlap — product SKUs, legal clause numbers, error codes. In enterprise RAG, the right chunk often needs <em>both</em> signals. Hybrid retrieval widens recall; reranking supplies precision on the merged shortlist.</p>
-      <blockquote>Hybrid finds more of the right hay. Reranking finds the needle in it.</blockquote>
+      <h2 id="why">Why plain relevance is not enough</h2>
+      <p>Two documents can both “match” a query while serving opposite user goals. “Cancel subscription” might need the <em>self-serve steps</em> for a support bot, or the <em>retention offer</em> for a sales agent. A generic MS MARCO-style reranker was trained on topical relevance — not on task policy.</p>
+      <p>Instructions let you steer ranking without fine-tuning a new checkpoint for every product surface.</p>
 
-      <h2 id="pattern">The retrieve-merge-rerank pattern</h2>
-      <div class="card" style="margin:1.3rem 0">
-<pre><code>1. BM25 top 50        ─┐
-                       ├─▶ dedupe + merge ─▶ ~80 unique candidates
-2. Vector top 50      ─┘
-3. Cross-encoder rerank on merged list ─▶ top 5–10 for LLM</code></pre>
-      </div>
-      <p>Retrieve wider than you would with a single channel — each list might return 40–60 items. After deduplication you still want 50–100 unique chunks going into the reranker. See <a href="/guides/rerank-rag.html">rerank for RAG</a> for top-k defaults.</p>
-
-      <h2 id="fusion">Fusion strategies</h2>
+      <h2 id="how">How instruction rerank differs</h2>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Method</th><th>How it works</th><th>When to use</th></tr></thead>
+          <thead>
+            <tr><th>Input</th><th>Classic cross-encoder</th><th>Instruction reranker</th></tr>
+          </thead>
           <tbody>
-            <tr><td>Reciprocal Rank Fusion (RRF)</td><td>Score = Σ 1/(k + rank) per list</td><td>Default choice — no score normalisation needed</td></tr>
-            <tr><td>Linear combination</td><td>α·vector_score + (1-α)·BM25_score</td><td>When both scores are calibrated on your data</td></tr>
-            <tr><td>Union + rerank only</td><td>Concatenate lists, dedupe, skip fusion</td><td>When reranker is strong and latency budget allows</td></tr>
+            <tr><td>Query</td><td>Yes</td><td>Yes</td></tr>
+            <tr><td>Passage</td><td>Yes</td><td>Yes</td></tr>
+            <tr><td>Task instruction</td><td>No (or baked into query text)</td><td>First-class field</td></tr>
+            <tr><td>Typical deploy</td><td>Self-host or API</td><td>Mostly hosted API today</td></tr>
           </tbody>
         </table>
       </div>
+      <pre><code># Conceptual API shape (vendor SDKs differ)
+results = client.rerank(
+    query="cancel my plan",
+    documents=candidates,
+    instruction="Prefer official help articles with step-by-step cancel steps; demote marketing and upsell pages.",
+)  # higher score = better match to query under that instruction</code></pre>
+      <p>You can approximate this with a classic model by prefixing the query (<code>"[Support KB] cancel my plan"</code>), but dedicated instruction models are trained to treat the control text as constraints rather than bag-of-words topics.</p>
 
-      <h2 id="code">Minimal Python example</h2>
-      <pre><code>from rank_bm25 import BM25Okapi
-from sentence_transformers import CrossEncoder
-
-reranker = CrossEncoder("BAAI/bge-reranker-base")
-
-def hybrid_rerank(query, corpus_chunks, vector_hits, bm25_hits, top_n=5):
-    # Merge by chunk id, preserve text
-    seen, merged = set(), []
-    for chunk_id, text in vector_hits + bm25_hits:
-        if chunk_id in seen: continue
-        seen.add(chunk_id)
-        merged.append(corpus_chunks[chunk_id])
-    pairs = [(query, c) for c in merged]
-    scores = reranker.predict(pairs)
-    ranked = sorted(zip(scores, merged), reverse=True)
-    return [c for _, c in ranked[:top_n]]</code></pre>
-      <p>Frameworks like Elasticsearch hybrid queries, Weaviate hybrid search, and LlamaIndex <code>QueryFusionRetriever</code> wrap the same idea — retrieve from multiple backends, then optionally rerank.</p>
-
-      <h2 id="tuning">Tuning tips</h2>
+      <h2 id="when">When to use it</h2>
       <ul>
-        <li><strong>Over-retrieve each channel.</strong> If BM25 returns 30 and vectors return 30, overlap means fewer than 60 unique — aim higher per channel.</li>
-        <li><strong>Reranker is the equaliser.</strong> Fusion order matters less once a good cross-encoder sees every candidate.</li>
-        <li><strong>Measure on your data.</strong> Hybrid helps most when your eval set has both lexical and semantic queries — see <a href="/guides/evaluate-reranker.html">evaluate rerankers</a>.</li>
+        <li><strong>Multi-surface products.</strong> Same corpus, different ranking policies (support vs sales vs compliance).</li>
+        <li><strong>Hard negatives share vocabulary.</strong> Legal “termination for convenience” vs “for cause”; support “refund” vs “exchange”.</li>
+        <li><strong>You lack fine-tuning budget.</strong> Steering via instructions is cheaper than training domain adapters every quarter.</li>
+      </ul>
+      <p>Skip it when your queries are single-intent FAQ lines and a small cross-encoder (Jina tiny, mxbai xsmall, bge-base) already hits NDCG on your labels — see <a href="/guides/evaluate-reranker.html">evaluate rerankers</a>.</p>
+
+      <h2 id="vs">Vs classic cross-encoders</h2>
+      <ul>
+        <li><strong>Classic (bge, Cohere, Jina, mxbai):</strong> best documented BEIR-style numbers; open weights or mature free tiers; great default for RAG “topical precision”.</li>
+        <li><strong>Instruction APIs (Contextual AI, etc.):</strong> stronger when relevance is policy-shaped; less portable; harder to compare on public leaderboards — our <a href="/models/">models table</a> marks BEIR as <em>n/a</em> on purpose.</li>
+        <li><strong>Late-interaction (ColBERT):</strong> different axis entirely (token MaxSim at scale) — see <a href="/guides/late-interaction-rerank.html">late-interaction guide</a>.</li>
       </ul>
 
+      <h2 id="eval">How to evaluate</h2>
+      <p>Do not paste a generic BEIR number and call it done. Build 30–50 queries <em>with the instruction you will ship</em>, label which docs are correct under that policy, and measure NDCG@5 / MRR before vs after. Swap instruction text alone and check that rankings move in the intended direction.</p>
+      <blockquote>If changing the instruction does not change the top-5, you are paying for a feature you are not using — fall back to a classic reranker.</blockquote>
+
       <div class="cta-band">
-        <h2 style="margin-top:0">See reranking fix a messy shortlist</h2>
-        <p class="soft">Our demo includes a bi-encoder proxy column — paste distractors and watch the cross-encoder recover.</p>
+        <h2 style="margin-top:0">See classic cross-encoder behaviour</h2>
+        <p class="soft">Our in-browser demo scores topical relevance only (no instruction field). Use it to baseline what a plain reranker does, then A/B an instruction API on your labelled set.</p>
         <a class="btn btn-primary" href="/demo.html">Open the demo →</a>
       </div>
 
       <h2>Keep reading</h2>
       <div class="grid grid-2">
-        <a class="card" href="/guides/rerank-rag.html"><h3>Rerank for RAG</h3><p>End-to-end pipeline code.</p></a>
-        <a class="card" href="/guides/evaluate-reranker.html"><h3>Evaluate rerankers</h3><p>Metrics and labelled test sets.</p></a>
+        <a class="card" href="/guides/choose-reranker-scenario.html"><h3>Choose by scenario</h3><p>RAG vs support vs legal vs code.</p></a>
+        <a class="card" href="/guides/evaluate-reranker.html"><h3>Evaluate rerankers</h3><p>NDCG, MRR, labelled queries.</p></a>
       </div>
     </article>
   </main>
@@ -183,7 +177,7 @@ def hybrid_rerank(query, corpus_chunks, vector_hits, bm25_hits, top_n=5):
     </div>
   </footer>
   <script src="/assets/js/main.js"></script>
-  <script src="/assets/js/i18n/hybrid-retrieval-rerank.js"></script>
+  <script src="/assets/js/i18n/instruction-reranker.js"></script>
   <script src="/assets/js/i18n/shared.js"></script>
   <script src="/assets/js/i18n.js"></script>
 </body>

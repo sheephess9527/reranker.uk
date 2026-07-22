@@ -225,7 +225,7 @@
               <td>~55.0</td>
               <td class="demo-link-cell"></td>
             </tr>
-            <tr data-name="qwen3-reranker-0.6b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="59.8">
+            <tr data-name="qwen3-reranker-0.6b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="">
               <td><a href="https://huggingface.co/Qwen/Qwen3-Reranker-0.6B" rel="noopener noreferrer">Qwen3-Reranker-0.6B</a></td>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><span class="pill info">Emerging</span></td>
@@ -233,18 +233,18 @@
               <td>100+ langs</td>
               <td>GPU recommended</td>
               <td>Free (self-host)</td>
-              <td>~59.8</td>
+              <td class="muted" title="Not a unified BEIR avg — early reports only">≈ / unaligned</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="contextual-rerank-v2" data-type="api" data-arch="cross-encoder" data-langs="en" data-pricing="paid" data-beir="">
-              <td><a href="https://contextual.ai/blog/rerank-v2/" rel="noopener noreferrer">Contextual AI Rerank v2</a></td>
+              <td><a href="/guides/instruction-reranker.html">Contextual AI Rerank v2</a></td>
               <td><span class="pill">Instruction</span></td>
               <td><span class="pill">Hosted API</span><span class="pill info">Emerging</span></td>
               <td>Instruction-following rerank for task-shaped queries</td>
               <td>English</td>
               <td>API</td>
               <td>Contact vendor</td>
-              <td class="muted">—</td>
+              <td class="muted" title="No public BEIR avg — product metric differs">n/a</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="colbertv2" data-type="open" data-arch="late-interaction" data-langs="en" data-pricing="free" data-beir="">
@@ -255,15 +255,15 @@
               <td>English</td>
               <td>Fast rescore @ scale</td>
               <td>Free (self-host)</td>
-              <td class="muted">—</td>
+              <td class="muted" title="Late-interaction metrics are not BEIR cross-encoder averages">n/a</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="benchmark-meta callout" style="margin-top:.8rem;padding:.85rem 1rem">
-        <p class="muted" style="font-size:.82rem;margin:0"><strong>Last verified:</strong> June 2026. <strong>BEIR NDCG@10</strong> figures are approximate averages across the 18-dataset suite — treat as a rough guide, not a definitive ranking. <strong>Late-interaction</strong> and <strong>instruction</strong> rows are not directly comparable to cross-encoder BEIR scores. <strong>Latency</strong> is estimated for ~50 documents on commodity CPU/API.</p>
-        <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">Sources: <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR</a> · <a href="https://huggingface.co/BAAI/bge-reranker-v2-m3" rel="noopener noreferrer">BAAI</a> · <a href="https://huggingface.co/Qwen/Qwen3-Reranker-0.6B" rel="noopener noreferrer">Qwen3-Reranker</a> · <a href="https://contextual.ai/blog/rerank-v2/" rel="noopener noreferrer">Contextual AI</a> · <a href="/guides/late-interaction-rerank.html">ColBERT guide</a> · <a href="https://docs.cohere.com/docs/rerank" rel="noopener noreferrer">Cohere</a> · <a href="https://jina.ai/reranker" rel="noopener noreferrer">Jina</a> · <a href="https://docs.voyageai.com/docs/reranker" rel="noopener noreferrer">Voyage</a> · <a href="https://huggingface.co/mixedbread-ai/mxbai-rerank-large-v1" rel="noopener noreferrer">mixedbread-ai</a></p>
+        <p class="muted" style="font-size:.82rem;margin:0"><strong>Last verified:</strong> June 2026 · <strong>Next review:</strong> Sep 2026. <strong>BEIR NDCG@10</strong> for mature rows is an approximate average across the 18-dataset suite — a rough guide, not a leaderboard. <strong>Emerging rows</strong> (Qwen3, Contextual, ColBERT) use ≈ / n/a because public scores are not aligned to the same protocol. <strong>Pricing</strong> and <strong>latency</strong> lag vendor pages; re-check before production decisions.</p>
+        <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">Sources: <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR</a> · <a href="https://huggingface.co/BAAI/bge-reranker-v2-m3" rel="noopener noreferrer">BAAI</a> · <a href="https://huggingface.co/Qwen/Qwen3-Reranker-0.6B" rel="noopener noreferrer">Qwen3-Reranker</a> · <a href="/guides/instruction-reranker.html">instruction rerank</a> · <a href="/guides/late-interaction-rerank.html">ColBERT guide</a> · <a href="https://docs.cohere.com/docs/rerank" rel="noopener noreferrer">Cohere</a> · <a href="https://jina.ai/reranker" rel="noopener noreferrer">Jina</a> · <a href="https://docs.voyageai.com/docs/reranker" rel="noopener noreferrer">Voyage</a> · <a href="https://huggingface.co/mixedbread-ai/mxbai-rerank-large-v1" rel="noopener noreferrer">mixedbread-ai</a></p>
       </div>
 
       <div class="grid grid-2" style="margin-top:2.5rem">
@@ -296,6 +296,11 @@
           <h3>Late-interaction (ColBERT)</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill info">Architecture</span><span class="pill">Emerging</span></div>
           <p>When ColBERTv2 beats bi-encoders and when you still need a cross-encoder — decision guide for 2026 stacks.</p>
+        </a>
+        <a class="card" href="/guides/instruction-reranker.html">
+          <h3>Instruction-following rerank</h3>
+          <div class="tag-row" style="margin-bottom:.8rem"><span class="pill info">Emerging</span><span class="pill">API</span></div>
+          <p>When task instructions change relevance — Contextual AI-style rerankers vs plain cross-encoders.</p>
         </a>
       </div>
     </section>
@@ -384,6 +389,7 @@
             <li><a href="/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
             <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
             <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
+            <li><a href="/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
             <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
             <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>

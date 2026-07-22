@@ -31,7 +31,8 @@ window.I18N_PAGE = { zh: {
   "Open the demo →": "打开 Demo →",
 
   "Compare the rerank models": "对比主流重排序模型",
-  "Hosted APIs and open-weight models, side by side — quality, latency, languages and cost.": "托管 API 与开源权重模型横向对比 —— 质量、延迟、语言支持与成本。",
+  "Not only five mature families — also late-interaction (ColBERT), instruction-following APIs, and newer open models such as Qwen3-Reranker. Compare architecture, quality, latency, languages, and cost.": "不只五大家 —— 还有 late-interaction（ColBERT）、指令跟随 API，以及 Qwen3-Reranker 等新兴开源。对比架构、质量、延迟、语言与成本。",
+  "Also: <a href=\"/guides/late-interaction-rerank.html\">ColBERT / late-interaction</a> · <a href=\"/guides/instruction-reranker.html\">instruction-following rerank</a>": "另见：<a href=\"/guides/late-interaction-rerank.html\">ColBERT / late-interaction</a> · <a href=\"/guides/instruction-reranker.html\">指令跟随 rerank</a>",
   "Open-weight rerankers from BAAI. Self-host for free, strong multilingual options.": "智源（BAAI）的开源权重重排序器。可免费自建部署，多语言能力出色。",
   "A mature hosted rerank API with strong multilingual quality and simple integration.": "成熟的托管重排序 API，多语言质量强、接入简单。",
   "Hosted API and open weights, including tiny models small enough to run in a browser.": "同时提供托管 API 与开源权重，包含小到能在浏览器里运行的微型模型。",

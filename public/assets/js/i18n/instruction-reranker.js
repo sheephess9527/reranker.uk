@@ -1,0 +1,66 @@
+window.I18N_PAGE = { zh: {
+  "_title": "指令跟随 reranker — Contextual AI 与任务导向排序 | reranker.uk",
+  "_desc": "指令跟随（instruction-following）reranker 与经典 cross-encoder 的区别：任务指令如何改变相关性、何时用 Contextual AI 类 API，以及如何在自有标注上评测。",
+
+  "<a href=\"/\">Home</a><span>/</span><a href=\"/guides/\">Guides</a><span>/</span>Instruction-following rerank": "<a href=\"/\">首页</a><span>/</span><a href=\"/guides/\">指南</a><span>/</span>指令跟随 rerank",
+  "Instruction-following rerankers": "指令跟随 reranker",
+  "Emerging · ~7 min read · <time datetime=\"2026-06-25\">Updated 25 Jun 2026</time>": "新兴方向 · 约 7 分钟阅读 · <time datetime=\"2026-06-25\">更新于 2026 年 6 月 25 日</time>",
+  "Classic cross-encoders answer one question: <em>“how relevant is this passage to this query?”</em> <strong>Instruction-following</strong> rerankers (e.g. Contextual AI Rerank v2) take an extra control signal — a short instruction that defines what “relevant” means for this task.": "经典 cross-encoder 只回答一个问题：<em>「这段与查询有多相关？」</em><strong>指令跟随</strong> reranker（如 Contextual AI Rerank v2）多一个控制信号 —— 简短指令，定义本任务下何谓「相关」。",
+
+  "On this page": "本页目录",
+  "Why plain relevance is not enough": "为何纯相关性不够",
+  "How instruction rerank differs": "指令 rerank 有何不同",
+  "When to use it": "何时使用",
+  "Vs classic cross-encoders": "对比经典 cross-encoder",
+  "How to evaluate": "如何评测",
+
+  "<a href=\"#why\">Why plain relevance is not enough</a>": "<a href=\"#why\">为何纯相关性不够</a>",
+  "<a href=\"#how\">How instruction rerank differs</a>": "<a href=\"#how\">指令 rerank 有何不同</a>",
+  "<a href=\"#when\">When to use it</a>": "<a href=\"#when\">何时使用</a>",
+  "<a href=\"#vs\">Vs classic cross-encoders</a>": "<a href=\"#vs\">对比经典 cross-encoder</a>",
+  "<a href=\"#eval\">How to evaluate</a>": "<a href=\"#eval\">如何评测</a>",
+
+  "Why plain relevance is not enough": "为何纯相关性不够",
+  "Two documents can both “match” a query while serving opposite user goals. “Cancel subscription” might need the <em>self-serve steps</em> for a support bot, or the <em>retention offer</em> for a sales agent. A generic MS MARCO-style reranker was trained on topical relevance — not on task policy.": "两篇文档都可能「匹配」查询，却服务相反目标。「取消订阅」对客服机器人可能要<em>自助步骤</em>，对销售侧可能要<em>挽留优惠</em>。通用 MS MARCO 式 reranker 学的是话题相关，不是任务策略。",
+  "Instructions let you steer ranking without fine-tuning a new checkpoint for every product surface.": "指令让你无需为每个产品面微调新 checkpoint 就能引导排序。",
+
+  "How instruction rerank differs": "指令 rerank 有何不同",
+  "Input": "输入",
+  "Classic cross-encoder": "经典 cross-encoder",
+  "Instruction reranker": "指令 reranker",
+  "Query": "查询",
+  "Yes": "是",
+  "Passage": "段落",
+  "Task instruction": "任务指令",
+  "No (or baked into query text)": "否（或塞进查询文本）",
+  "First-class field": "一等字段",
+  "Typical deploy": "典型部署",
+  "Self-host or API": "自托管或 API",
+  "Mostly hosted API today": "目前多为托管 API",
+  "You can approximate this with a classic model by prefixing the query (<code>\"[Support KB] cancel my plan\"</code>), but dedicated instruction models are trained to treat the control text as constraints rather than bag-of-words topics.": "经典模型可用查询前缀近似（<code>\"[Support KB] cancel my plan\"</code>），但专用指令模型会把控制文本当约束，而非词袋话题。",
+
+  "When to use it": "何时使用",
+  "<strong>Multi-surface products.</strong> Same corpus, different ranking policies (support vs sales vs compliance).": "<strong>多产品面。</strong>同一语料，不同排序策略（客服 / 销售 / 合规）。",
+  "<strong>Hard negatives share vocabulary.</strong> Legal “termination for convenience” vs “for cause”; support “refund” vs “exchange”.": "<strong>难负例共享词汇。</strong>法律「便利终止」vs「因故终止」；客服「退款」vs「换货」。",
+  "<strong>You lack fine-tuning budget.</strong> Steering via instructions is cheaper than training domain adapters every quarter.": "<strong>微调预算不足。</strong>用指令引导比每季度训领域适配器更便宜。",
+  "Skip it when your queries are single-intent FAQ lines and a small cross-encoder (Jina tiny, mxbai xsmall, bge-base) already hits NDCG on your labels — see <a href=\"/guides/evaluate-reranker.html\">evaluate rerankers</a>.": "若查询是单意图 FAQ，且小 cross-encoder（Jina tiny、mxbai xsmall、bge-base）已在标注上达标，可跳过 —— 见 <a href=\"/guides/evaluate-reranker.html\">评测 reranker</a>。",
+
+  "Vs classic cross-encoders": "对比经典 cross-encoder",
+  "<strong>Classic (bge, Cohere, Jina, mxbai):</strong> best documented BEIR-style numbers; open weights or mature free tiers; great default for RAG “topical precision”.": "<strong>经典（bge、Cohere、Jina、mxbai）：</strong>BEIR 类数字最全；开源或成熟免费档；RAG「话题精度」的默认好选择。",
+  "<strong>Instruction APIs (Contextual AI, etc.):</strong> stronger when relevance is policy-shaped; less portable; harder to compare on public leaderboards — our <a href=\"/models/\">models table</a> marks BEIR as <em>n/a</em> on purpose.": "<strong>指令 API（Contextual AI 等）：</strong>相关性偏策略时更强；可移植性差；公开榜难比 —— 本站 <a href=\"/models/\">模型表</a> 故意标 BEIR 为 <em>n/a</em>。",
+  "<strong>Late-interaction (ColBERT):</strong> different axis entirely (token MaxSim at scale) — see <a href=\"/guides/late-interaction-rerank.html\">late-interaction guide</a>.": "<strong>Late-interaction（ColBERT）：</strong>完全另一轴（大规模 token MaxSim）—— 见 <a href=\"/guides/late-interaction-rerank.html\">late-interaction 指南</a>。",
+
+  "How to evaluate": "如何评测",
+  "Do not paste a generic BEIR number and call it done. Build 30–50 queries <em>with the instruction you will ship</em>, label which docs are correct under that policy, and measure NDCG@5 / MRR before vs after. Swap instruction text alone and check that rankings move in the intended direction.": "不要贴一个通用 BEIR 数字就算完。用<em>将上线的指令</em>建 30–50 条查询，标注该策略下正确文档，测前后 NDCG@5 / MRR。只改指令文本，检查排序是否按预期移动。",
+  "If changing the instruction does not change the top-5, you are paying for a feature you are not using — fall back to a classic reranker.": "若改指令顶 5 不变，你在为用不上的功能付费 —— 退回经典 reranker。",
+
+  "See classic cross-encoder behaviour": "看经典 cross-encoder 行为",
+  "Our in-browser demo scores topical relevance only (no instruction field). Use it to baseline what a plain reranker does, then A/B an instruction API on your labelled set.": "浏览器 Demo 只打话题相关性（无指令字段）。用它建立经典 baseline，再在标注集上 A/B 指令 API。",
+  "Open the demo →": "打开 Demo →",
+
+  "Keep reading": "继续阅读",
+  "Choose by scenario": "按场景选型",
+  "RAG vs support vs legal vs code.": "RAG / 客服 / 法律 / 代码。",
+  "Evaluate rerankers": "评测 reranker",
+  "NDCG, MRR, labelled queries.": "NDCG、MRR、标注查询。",
+}};

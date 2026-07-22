@@ -12,6 +12,13 @@ window.I18N_PAGE = { zh: {
   "<strong>og:locale</strong> — switches to <code>zh_CN</code> when language toggle is 中文": "<strong>og:locale</strong> —— 语言切换为中文时设为 <code>zh_CN</code>",
   "<strong>Dual-diff a11y</strong> — table caption, row headers, empty state, <code>aria-labelledby</code>": "<strong>双模型差异 a11y</strong> —— 表格 caption、行表头、空状态、<code>aria-labelledby</code>",
 
+  "25 Jun 2026 — Minimal polish pack": "2026 年 6 月 25 日 — 最小打磨包",
+  "<strong>Honest benchmarks</strong> — emerging rows use ≈ / n/a; next review Sep 2026; pricing lag disclaimer": "<strong>诚实基准</strong> —— 新兴行用 ≈ / n/a；下次复核 2026 年 9 月；价格滞后说明",
+  "<strong>Demo max_length</strong> — 256 / 384 / 512 tokens; char warnings follow selection": "<strong>Demo max_length</strong> —— 256 / 384 / 512 token；字符警告随选择变化",
+  "<strong>Lazy transformers.js</strong> — loaded on first Rerank only": "<strong>按需加载 transformers.js</strong> —— 首次点重排序才加载",
+  "<strong>Instruction-rerank guide</strong> — <a href=\"/guides/instruction-reranker.html\">task-shaped ranking</a>": "<strong>指令 rerank 指南</strong> —— <a href=\"/guides/instruction-reranker.html\">任务导向排序</a>",
+  "<strong>Homepage</strong> — beyond five families + links to ColBERT / instruction guides": "<strong>首页</strong> —— 不止五大家 + ColBERT / 指令指南链接",
+
   "25 Jun 2026 — Content expansion &amp; polish": "2026 年 6 月 25 日 — 内容扩展与打磨",
   "<strong>Models table</strong> — architecture column; Qwen3-Reranker, Contextual AI, ColBERTv2, ms-marco browser rows": "<strong>模型表</strong> —— 架构列；Qwen3-Reranker、Contextual AI、ColBERTv2、ms-marco 浏览器行",
   "<strong>Late-interaction guide</strong> — <a href=\"/guides/late-interaction-rerank.html\">ColBERT &amp; when to skip cross-encoder rerank</a>": "<strong>Late-interaction 指南</strong> —— <a href=\"/guides/late-interaction-rerank.html\">ColBERT 与何时跳过 cross-encoder rerank</a>",

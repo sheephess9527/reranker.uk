@@ -1,0 +1,11 @@
+{
+  "title": "Instruction-following rerankers — Contextual AI & task-shaped ranking | reranker.uk",
+  "description": "What instruction-following rerankers add over classic cross-encoders: task instructions, when to use Contextual AI-style APIs, and how to evaluate them on your own labels.",
+  "canonical": "https://reranker.uk/guides/instruction-reranker.html",
+  "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  "og_type": "article",
+  "og_title": "Instruction-following rerankers",
+  "og_description": "When relevance is policy-shaped: instruction rerank vs plain cross-encoders.",
+  "head_extra": "<script type=\"application/ld+json\">\r\n  {\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"headline\":\"Instruction-following rerankers\",\"datePublished\":\"2026-06-25\",\"dateModified\":\"2026-06-25\",\"inLanguage\":\"en\",\"author\":{\"@type\":\"Organization\",\"name\":\"reranker.uk\"},\"mainEntityOfPage\":\"https://reranker.uk/guides/instruction-reranker.html\"}\r\n  </script>",
+  "page_scripts": "<script src=\"/assets/js/i18n/instruction-reranker.js\"></script>"
+}

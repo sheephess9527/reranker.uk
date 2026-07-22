@@ -100,6 +100,14 @@
               </label>
             </div>
             <div class="field">
+              <label for="max-length-select">Max sequence length <span class="hint">— query + passage tokens; longer text is truncated</span></label>
+              <select id="max-length-select" aria-label="Max sequence length for tokenization">
+                <option value="256">256 tokens</option>
+                <option value="384">384 tokens</option>
+                <option value="512" selected>512 tokens (default)</option>
+              </select>
+            </div>
+            <div class="field">
               <label class="check-row">
                 <input type="checkbox" id="compare-toggle" />
                 <span data-i18n="demo.compare">Compare two models side by side</span>
@@ -237,6 +245,7 @@
             <li><a href="/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
             <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
             <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
+            <li><a href="/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
             <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
             <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>

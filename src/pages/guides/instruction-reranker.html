@@ -1,0 +1,76 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Instruction-following rerank</div>
+      <h1>Instruction-following rerankers</h1>
+      <p class="meta">Emerging · ~7 min read · <time datetime="2026-06-25">Updated 25 Jun 2026</time></p>
+      <p class="lead">Classic cross-encoders answer one question: <em>“how relevant is this passage to this query?”</em> <strong>Instruction-following</strong> rerankers (e.g. Contextual AI Rerank v2) take an extra control signal — a short instruction that defines what “relevant” means for this task.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#why">Why plain relevance is not enough</a></li>
+          <li><a href="#how">How instruction rerank differs</a></li>
+          <li><a href="#when">When to use it</a></li>
+          <li><a href="#vs">Vs classic cross-encoders</a></li>
+          <li><a href="#eval">How to evaluate</a></li>
+        </ol>
+      </div>
+
+      <h2 id="why">Why plain relevance is not enough</h2>
+      <p>Two documents can both “match” a query while serving opposite user goals. “Cancel subscription” might need the <em>self-serve steps</em> for a support bot, or the <em>retention offer</em> for a sales agent. A generic MS MARCO-style reranker was trained on topical relevance — not on task policy.</p>
+      <p>Instructions let you steer ranking without fine-tuning a new checkpoint for every product surface.</p>
+
+      <h2 id="how">How instruction rerank differs</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Input</th><th>Classic cross-encoder</th><th>Instruction reranker</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Query</td><td>Yes</td><td>Yes</td></tr>
+            <tr><td>Passage</td><td>Yes</td><td>Yes</td></tr>
+            <tr><td>Task instruction</td><td>No (or baked into query text)</td><td>First-class field</td></tr>
+            <tr><td>Typical deploy</td><td>Self-host or API</td><td>Mostly hosted API today</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <pre><code># Conceptual API shape (vendor SDKs differ)
+results = client.rerank(
+    query="cancel my plan",
+    documents=candidates,
+    instruction="Prefer official help articles with step-by-step cancel steps; demote marketing and upsell pages.",
+)  # higher score = better match to query under that instruction</code></pre>
+      <p>You can approximate this with a classic model by prefixing the query (<code>"[Support KB] cancel my plan"</code>), but dedicated instruction models are trained to treat the control text as constraints rather than bag-of-words topics.</p>
+
+      <h2 id="when">When to use it</h2>
+      <ul>
+        <li><strong>Multi-surface products.</strong> Same corpus, different ranking policies (support vs sales vs compliance).</li>
+        <li><strong>Hard negatives share vocabulary.</strong> Legal “termination for convenience” vs “for cause”; support “refund” vs “exchange”.</li>
+        <li><strong>You lack fine-tuning budget.</strong> Steering via instructions is cheaper than training domain adapters every quarter.</li>
+      </ul>
+      <p>Skip it when your queries are single-intent FAQ lines and a small cross-encoder (Jina tiny, mxbai xsmall, bge-base) already hits NDCG on your labels — see <a href="/guides/evaluate-reranker.html">evaluate rerankers</a>.</p>
+
+      <h2 id="vs">Vs classic cross-encoders</h2>
+      <ul>
+        <li><strong>Classic (bge, Cohere, Jina, mxbai):</strong> best documented BEIR-style numbers; open weights or mature free tiers; great default for RAG “topical precision”.</li>
+        <li><strong>Instruction APIs (Contextual AI, etc.):</strong> stronger when relevance is policy-shaped; less portable; harder to compare on public leaderboards — our <a href="/models/">models table</a> marks BEIR as <em>n/a</em> on purpose.</li>
+        <li><strong>Late-interaction (ColBERT):</strong> different axis entirely (token MaxSim at scale) — see <a href="/guides/late-interaction-rerank.html">late-interaction guide</a>.</li>
+      </ul>
+
+      <h2 id="eval">How to evaluate</h2>
+      <p>Do not paste a generic BEIR number and call it done. Build 30–50 queries <em>with the instruction you will ship</em>, label which docs are correct under that policy, and measure NDCG@5 / MRR before vs after. Swap instruction text alone and check that rankings move in the intended direction.</p>
+      <blockquote>If changing the instruction does not change the top-5, you are paying for a feature you are not using — fall back to a classic reranker.</blockquote>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">See classic cross-encoder behaviour</h2>
+        <p class="soft">Our in-browser demo scores topical relevance only (no instruction field). Use it to baseline what a plain reranker does, then A/B an instruction API on your labelled set.</p>
+        <a class="btn btn-primary" href="/demo.html">Open the demo →</a>
+      </div>
+
+      <h2>Keep reading</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/guides/choose-reranker-scenario.html"><h3>Choose by scenario</h3><p>RAG vs support vs legal vs code.</p></a>
+        <a class="card" href="/guides/evaluate-reranker.html"><h3>Evaluate rerankers</h3><p>NDCG, MRR, labelled queries.</p></a>
+      </div>
+    </article>
+  </main>

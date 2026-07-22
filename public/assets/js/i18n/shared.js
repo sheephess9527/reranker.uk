@@ -18,6 +18,7 @@ window.I18N_SHARED = {
     "shared.footer.selfHost": "自托管 reranker",
     "shared.footer.scenario": "按场景选型",
     "shared.footer.lateInteraction": "Late-interaction（ColBERT）",
+    "shared.footer.instructionRerank": "指令跟随 rerank",
     "shared.footer.models": "模型",
     "shared.footer.changelogRss": "更新日志 RSS",
     "shared.footer.changelog": "更新日志",

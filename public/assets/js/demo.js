@@ -1,16 +1,20 @@
-/* reranker.uk — in-browser cross-encoder reranking demo. */
-import {
-  AutoTokenizer,
-  AutoModelForSequenceClassification,
-  env,
-} from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.1";
+/* reranker.uk — in-browser cross-encoder reranking demo.
+ * transformers.js is loaded on first Rerank (dynamic import) to keep initial page light.
+ */
+const TF_CDN = "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.1";
+let tfModule = null;
 
-env.allowLocalModels = false;
-env.useBrowserCache = true;
+async function loadTransformers() {
+  if (tfModule) return tfModule;
+  tfModule = await import(TF_CDN);
+  tfModule.env.allowLocalModels = false;
+  tfModule.env.useBrowserCache = true;
+  return tfModule;
+}
 
 const MAX_DOCS = 30;
-const PASSAGE_CHAR_WARN = 512;
 const URL_COMPRESS_THRESHOLD = 1600;
+const MAX_LENGTH_OPTIONS = [256, 384, 512];
 const MODELS = {
   "Xenova/ms-marco-MiniLM-L-6-v2": {
     name: "ms-marco MiniLM-L6",
@@ -43,6 +47,7 @@ class Reranker {
     this.modelId = modelId;
   }
   async init(onProgress, device) {
+    const { AutoTokenizer, AutoModelForSequenceClassification } = await loadTransformers();
     const opts = {
       dtype: "q8",
       progress_callback: onProgress,
@@ -54,17 +59,28 @@ class Reranker {
     ]);
     return this;
   }
-  async score(query, documents) {
+  async score(query, documents, maxLength = 512) {
     const inputs = this.tokenizer(new Array(documents.length).fill(query), {
       text_pair: documents,
       padding: true,
       truncation: true,
+      max_length: maxLength,
     });
     const { logits } = await this.model(inputs);
     const cfg = MODELS[this.modelId];
     const raw = (cfg && cfg.sigmoid ? logits.sigmoid() : logits).tolist();
     return raw.map((row) => (Array.isArray(row) ? row[0] : row));
   }
+}
+
+function getMaxLength() {
+  const v = parseInt(els.maxLength?.value || "512", 10);
+  return MAX_LENGTH_OPTIONS.includes(v) ? v : 512;
+}
+
+/** Rough char budget before model truncation (≈ 3 chars/token for mixed text). */
+function getPassageCharWarn() {
+  return getMaxLength() * 3;
 }
 
 async function probeWebGPU() {
@@ -309,6 +325,7 @@ const els = {
   modelB: document.getElementById("model-select-b"),
   compareToggle: document.getElementById("compare-toggle"),
   webgpuToggle: document.getElementById("webgpu-toggle"),
+  maxLength: document.getElementById("max-length-select"),
   modelMeta: document.getElementById("model-meta"),
   presets: document.getElementById("preset-row"),
   query: document.getElementById("query-input"),
@@ -401,6 +418,12 @@ if (els.webgpuToggle) {
         "此浏览器不支持 WebGPU"
       );
     }
+  });
+}
+if (els.maxLength) {
+  els.maxLength.addEventListener("change", () => {
+    updateDocWarning();
+    if (MOBILE_MQ.matches) renderDocsList();
   });
 }
 
@@ -850,7 +873,7 @@ function renderDocsList() {
     .map(
       (text, i) => `
     <div class="docs-list-row" data-idx="${i}">
-      <span class="docs-list-num">${i + 1}<small class="docs-list-chars${text.length > PASSAGE_CHAR_WARN ? " over" : ""}">${text.length}</small></span>
+      <span class="docs-list-num">${i + 1}<small class="docs-list-chars${text.length > getPassageCharWarn() ? " over" : ""}">${text.length}</small></span>
       <textarea class="docs-list-input" rows="2" aria-label="${L("Passage", "候选段落")} ${i + 1}">${esc(text)}</textarea>
       <button type="button" class="docs-list-del" aria-label="${L("Remove passage", "删除段落")}">×</button>
     </div>`
@@ -863,7 +886,7 @@ function renderDocsList() {
       const ch = row?.querySelector(".docs-list-chars");
       if (ch) {
         ch.textContent = ta.value.length;
-        ch.classList.toggle("over", ta.value.length > PASSAGE_CHAR_WARN);
+        ch.classList.toggle("over", ta.value.length > getPassageCharWarn());
       }
       syncTextareaFromList();
       markEdited();
@@ -895,7 +918,7 @@ function updateDocWarning() {
   const n = docs.length;
   const lengths = docs.map((d) => d.length);
   const maxLen = lengths.length ? Math.max(...lengths) : 0;
-  const overChars = lengths.filter((l) => l > PASSAGE_CHAR_WARN).length;
+  const overChars = lengths.filter((l) => l > getPassageCharWarn()).length;
 
   if (els.docCharStats) {
     if (n > 0) {
@@ -906,8 +929,8 @@ function updateDocWarning() {
       );
       if (overChars) {
         stat += L(
-          ` · ${overChars} over ${PASSAGE_CHAR_WARN} (may truncate)`,
-          ` · ${overChars} 段超过 ${PASSAGE_CHAR_WARN}（可能被截断）`
+          ` · ${overChars} over ${getPassageCharWarn()} (may truncate)`,
+          ` · ${overChars} 段超过 ${getPassageCharWarn()}（可能被截断）`
         );
       }
       els.docCharStats.textContent = stat;
@@ -1205,7 +1228,7 @@ async function scoreWithModel(modelId, query, docs, useWebgpu) {
   };
   const reranker = await getReranker(modelId, onProgress, useWebgpu);
   const t0 = performance.now();
-  const scores = await reranker.score(query, docs);
+  const scores = await reranker.score(query, docs, getMaxLength());
   const ms = Math.round(performance.now() - t0);
   const bytes = Object.values(files).reduce((a, b) => a + b.loaded, 0);
   return { scores, ms, didDownload, bytes };
@@ -1236,9 +1259,11 @@ async function run() {
   const useWebgpu = !!(els.webgpuToggle?.checked && (await probeWebGPU()));
 
   els.run.disabled = true;
-  setStatus(L("Loading model…", "正在加载模型……"), true);
+  setStatus(L("Loading runtime…", "正在加载运行时……"), true);
 
   try {
+    await loadTransformers();
+    setStatus(L("Loading model…", "正在加载模型……"), true);
     const biScores = biEncoderProxyScores(query, docs);
     const primary = await scoreWithModel(modelId, query, docs, useWebgpu);
     hideLoadPanel();
@@ -1362,7 +1387,7 @@ if (els.docsAddBtn) {
       const ch = row.querySelector(".docs-list-chars");
       if (ta && ch) {
         ch.textContent = ta.value.length;
-        ch.classList.toggle("over", ta.value.length > PASSAGE_CHAR_WARN);
+        ch.classList.toggle("over", ta.value.length > getPassageCharWarn());
       }
       syncTextareaFromList();
       markEdited();

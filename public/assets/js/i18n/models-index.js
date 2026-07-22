@@ -25,7 +25,7 @@ window.I18N_PAGE = { zh: {
   "Free (self-host)": "免费（自建）",
   "Free tier + pay-as-you-go": "免费额度 + 按量付费",
 
-  "<strong>Last verified:</strong> June 2026. <strong>BEIR NDCG@10</strong> figures are approximate averages across the 18-dataset suite — treat as a rough guide, not a definitive ranking. <strong>Late-interaction</strong> and <strong>instruction</strong> rows are not directly comparable to cross-encoder BEIR scores. <strong>Latency</strong> is estimated for ~50 documents on commodity CPU/API.": "<strong>最近核验：</strong>2026 年 6 月。<strong>BEIR NDCG@10</strong> 为 18 数据集近似均值 —— 仅供参考。<strong>Late-interaction</strong> 与 <strong>instruction</strong> 行不宜与 cross-encoder BEIR 直接比。<strong>延迟</strong> 为普通 CPU/API 上约 50 段的估计。",
+  "<strong>Last verified:</strong> June 2026 · <strong>Next review:</strong> Sep 2026. <strong>BEIR NDCG@10</strong> for mature rows is an approximate average across the 18-dataset suite — a rough guide, not a leaderboard. <strong>Emerging rows</strong> (Qwen3, Contextual, ColBERT) use ≈ / n/a because public scores are not aligned to the same protocol. <strong>Pricing</strong> and <strong>latency</strong> lag vendor pages; re-check before production decisions.": "<strong>最近核验：</strong>2026 年 6 月 · <strong>下次复核：</strong>2026 年 9 月。成熟行的 <strong>BEIR NDCG@10</strong> 为 18 数据集近似均值 —— 粗略参考，非排行榜。<strong>新兴行</strong>（Qwen3、Contextual、ColBERT）用 ≈ / n/a，因公开分数协议不统一。<strong>价格</strong>与<strong>延迟</strong>可能滞后厂商页，上线前请复核。",
   "Classic baseline; default in our demo": "经典基线；本站 Demo 默认",
   "2026 multilingual open reranker; Qwen ecosystem": "2026 多语言开源 reranker；Qwen 生态",
   "Instruction-following rerank for task-shaped queries": "面向任务型查询的指令跟随 rerank",
@@ -33,8 +33,12 @@ window.I18N_PAGE = { zh: {
   "Contact vendor": "联系厂商",
   "GPU recommended": "建议 GPU",
   "Fast rescore @ scale": "大规模快速重打分",
+  "≈ / unaligned": "≈ / 未对齐",
+  "n/a": "不适用",
   "Late-interaction (ColBERT)": "Late-interaction（ColBERT）",
   "When ColBERTv2 beats bi-encoders and when you still need a cross-encoder — decision guide for 2026 stacks.": "ColBERTv2 何时胜过 bi-encoder、何时仍要 cross-encoder —— 2026 栈决策指南。",
+  "Instruction-following rerank": "指令跟随 rerank",
+  "When task instructions change relevance — Contextual AI-style rerankers vs plain cross-encoders.": "任务指令如何改变相关性 —— Contextual AI 类 vs 经典 cross-encoder。",
 
   "Open-weight rerankers from BAAI. A strong English baseline (bge-reranker-base) and excellent multilingual models (bge-reranker-v2-m3). The default choice when you want to self-host for free.": "智源（BAAI）的开源权重重排序器。既有强力的英文基线（bge-reranker-base），也有出色的多语言模型（bge-reranker-v2-m3）。想免费自建时的默认选择。",
   "The most mature hosted rerank API, with consistent multilingual quality, a generous free tier and SDK support across Python, Node, Java and Go.": "最成熟的托管重排序 API，多语言质量稳定，免费额度慷慨，并提供 Python、Node、Java、Go 的 SDK。",

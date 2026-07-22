@@ -21,6 +21,14 @@
               </label>
             </div>
             <div class="field">
+              <label for="max-length-select">Max sequence length <span class="hint">— query + passage tokens; longer text is truncated</span></label>
+              <select id="max-length-select" aria-label="Max sequence length for tokenization">
+                <option value="256">256 tokens</option>
+                <option value="384">384 tokens</option>
+                <option value="512" selected>512 tokens (default)</option>
+              </select>
+            </div>
+            <div class="field">
               <label class="check-row">
                 <input type="checkbox" id="compare-toggle" />
                 <span data-i18n="demo.compare">Compare two models side by side</span>

@@ -8,6 +8,27 @@ Educational resource on rerankers for retrieval and RAG, with a live in-browser 
 
 ---
 
+## Maintaining benchmarks
+
+Review the models table each quarter (target: **Sep 2026**, then Dec/Mar/Jun):
+
+1. Re-check BEIR / vendor numbers for mature rows (bge, Cohere, Jina, Voyage, mxbai).
+2. Keep emerging rows as **≈ / unaligned** or **n/a** unless you re-run a shared protocol.
+3. Spot-check pricing and latency claims against vendor docs.
+4. Bump **Last verified** / **Next review** in `/models/` and add a changelog line.
+
+## Changelog — minimal polish pack (2026-06-25, batch 4)
+
+| Feature | Implementation |
+|---------|----------------|
+| **Honest table** | Qwen/Contextual/ColBERT non-aligned metrics; next review date |
+| **Demo max_length** | 256/384/512 + char warn scaled to selection |
+| **Lazy TF.js** | Dynamic import on first Rerank |
+| **Instruction guide** | `/guides/instruction-reranker.html` |
+| **Homepage** | Beyond five families + guide links |
+
+---
+
 ## Changelog — content expansion (2026-06-25, batch 3)
 
 | Feature | Implementation |
