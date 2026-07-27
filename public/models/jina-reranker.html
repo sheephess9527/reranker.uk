@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jina Reranker: open weights + hosted API review | reranker.uk</title>
-  <meta name="description" content="Jina Reranker review: open-weight cross-encoders with a hosted API. Covers jina-reranker-v2-base-multilingual, jina-reranker-v1-tiny-en (browser-runnable), benchmarks, pricing, and Python usage." />
+  <meta name="description" content="Jina Reranker review for 2026: jina-reranker-v3 listwise long-context, v2 multilingual, v1-tiny browser demo, pricing, and Python usage." />
   <link rel="canonical" href="https://reranker.uk/models/jina-reranker.html" />
   <link rel="alternate" hreflang="en" href="https://reranker.uk/models/jina-reranker.html" />
   <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/models/jina-reranker.html" />
@@ -16,8 +16,8 @@
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="Jina Reranker — open weights + hosted API" />
-  <meta property="og:description" content="The only major reranker family that offers both open weights and a hosted API, including a tiny model that runs in the browser." />
+  <meta property="og:title" content="Jina Reranker v3 — listwise + browser tiny" />
+  <meta property="og:description" content="v3 listwise long-context flagship; open weights + hosted API; v1-tiny for the browser demo." />
   <meta property="og:url" content="https://reranker.uk/models/jina-reranker.html" />
   <meta property="og:site_name" content="reranker.uk" />
   <meta property="og:locale" content="en_GB" />
@@ -117,14 +117,15 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Jina Reranker</div>
       <h1>Jina Reranker</h1>
-      <p class="meta">Open weights + Hosted API · Jina AI · <time datetime="2026-06-21">Updated 21 Jun 2026</time></p>
-      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Open weights</span><span class="pill">Hosted API</span><span class="pill info">Free tier</span><span class="pill">Browser-runnable tiny</span></div>
-      <p class="lead">Jina AI's reranker family is unique in offering both open-weight models you can self-host <em>and</em> a hosted API — with the same model. Their <code>v1-tiny</code> variant is small enough to run in the browser via transformers.js, which is exactly what powers <a href="/demo.html">this site's live demo</a>.</p>
+      <p class="meta">Open weights + Hosted API · Jina AI · <time datetime="2026-06-25">Updated 25 Jun 2026</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Open weights</span><span class="pill">Hosted API</span><span class="pill info">v3 listwise</span><span class="pill">Browser tiny</span></div>
+      <p class="lead">Jina’s 2026 flagship is <strong>jina-reranker-v3</strong>: <em>listwise</em> ranking over many candidates with a very long context window (reports cite scoring dozens of docs together). Older <strong>v2</strong> pairwise models remain useful; <strong>v1-tiny</strong> is still what runs in <a href="/demo.html">our browser demo</a>.</p>
 
       <div class="toc">
         <strong>On this page</strong>
         <ol>
           <li><a href="#models">Model variants</a></li>
+          <li><a href="#v3">What listwise v3 changes</a></li>
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="#usage">Quick start</a></li>
           <li><a href="#browser">Browser / edge use</a></li>
@@ -139,12 +140,17 @@
             <tr><th>Model</th><th>Size</th><th>Languages</th><th>Notes</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>jina-reranker-v2-base-multilingual</code></td><td>~278 MB</td><td>100+ langs</td><td>Flagship; strong multilingual BEIR</td></tr>
-            <tr><td><code>jina-reranker-v1-base-en</code></td><td>~278 MB</td><td>English</td><td>Good English baseline</td></tr>
-            <tr><td><code>jina-reranker-v1-tiny-en</code></td><td>~33 MB</td><td>English</td><td>Tiny; runs in browser / on edge</td></tr>
+            <tr><td><code>jina-reranker-v3</code></td><td>large</td><td>100+ langs</td><td><strong>Flagship 2026</strong> — listwise, long context (~64 docs)</td></tr>
+            <tr><td><code>jina-reranker-v2-base-multilingual</code></td><td>~278 MB</td><td>100+ langs</td><td>Prior multilingual pair-wise flagship</td></tr>
+            <tr><td><code>jina-reranker-v1-base-en</code></td><td>~278 MB</td><td>English</td><td>English baseline</td></tr>
+            <tr><td><code>jina-reranker-v1-tiny-en</code></td><td>~33 MB</td><td>English</td><td>Browser / edge; powers our demo</td></tr>
           </tbody>
         </table>
       </div>
+
+      <h2 id="v3">What listwise v3 changes</h2>
+      <p>Classic cross-encoders score each <code>(query, doc)</code> independently. <strong>Listwise</strong> models see a slate of candidates at once, which can improve relative ordering when many passages share vocabulary. The trade-off is higher memory and a different serving path than MiniLM-style pair scoring.</p>
+      <p>Published BEIR nDCG@10 for v3 is often cited around <strong>~61.9</strong> — in the same ballpark as mature hosted APIs, with the listwise / long-context story as the real differentiator. Confirm model IDs and context limits on <a href="https://jina.ai/reranker" rel="noopener noreferrer">jina.ai/reranker</a>.</p>
 
       <h2 id="pricing">Pricing</h2>
       <div class="table-wrap">
@@ -169,7 +175,7 @@ def rerank(query: str, documents: list[str], top_n: int = 5) -> list[str]:
         "https://api.jina.ai/v1/rerank",
         headers={"Authorization": "Bearer YOUR_KEY", "Content-Type": "application/json"},
         json={
-            "model": "jina-reranker-v2-base-multilingual",
+            "model": "jina-reranker-v3",  # or jina-reranker-v2-base-multilingual
             "query": query,
             "documents": documents,
             "top_n": top_n,
@@ -212,10 +218,10 @@ const scores = logits.sigmoid().tolist();</code></pre>
         <div class="card">
           <h3 style="color:var(--good);margin-top:0">Pros</h3>
           <ul class="feature-list">
-            <li>Dual-mode: same model as API or self-hosted weights</li>
-            <li>Tiny variant runs in the browser — unique in the space</li>
+            <li>v3 listwise long-context for multi-doc ranking</li>
+            <li>Dual-mode: hosted API + open weights</li>
+            <li>Tiny variant still runs in the browser (our demo)</li>
             <li>Generous free tier (1M tokens/month, no card needed)</li>
-            <li>Strong multilingual quality on v2</li>
             <li>Token-based pricing suits long documents</li>
           </ul>
         </div>
@@ -238,6 +244,7 @@ const scores = logits.sigmoid().tolist();</code></pre>
 
       <h2>Other models</h2>
       <div class="grid grid-2">
+        <a class="card" href="/models/qwen-reranker.html"><h3>Qwen3-Reranker</h3><p>2026 open SOTA family (GPU).</p></a>
         <a class="card" href="/models/bge-reranker.html"><h3>bge-reranker</h3><p>Free, open-weight alternative.</p></a>
         <a class="card" href="/models/cohere-rerank.html"><h3>Cohere Rerank</h3><p>Mature hosted API.</p></a>
         <a class="card" href="/models/mxbai-rerank.html"><h3>mxbai-rerank</h3><p>Apache 2.0 open weights, browser xsmall.</p></a>
@@ -275,6 +282,7 @@ const scores = logits.sigmoid().tolist();</code></pre>
         <div>
           <h4 data-i18n="shared.footer.models">Models</h4>
           <ul>
+            <li><a href="/models/qwen-reranker.html">Qwen3-Reranker</a></li>
             <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
             <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
             <li><a href="/models/jina-reranker.html">Jina Reranker</a></li>

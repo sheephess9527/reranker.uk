@@ -29,14 +29,15 @@
         <table>
           <thead><tr><th>Model</th><th>Size</th><th>Best for</th></tr></thead>
           <tbody>
-            <tr><td><a href="/models/bge-reranker.html">bge-reranker-base</a></td><td>~278M</td><td>Strong English default, easy HF integration</td></tr>
-            <tr><td><a href="/models/bge-reranker.html">bge-reranker-v2-m3</a></td><td>~568M</td><td>Multilingual production choice</td></tr>
-            <tr><td><a href="/models/mxbai-rerank.html">mxbai-rerank-large-v1</a></td><td>~435M</td><td>Top BEIR score, Apache 2.0 licence</td></tr>
-            <tr><td><a href="/models/jina-reranker.html">jina-reranker-v2-base-multilingual</a></td><td>~278M</td><td>Same family as the hosted API</td></tr>
+            <tr><td><a href="/models/bge-reranker.html">bge-reranker-base</a></td><td>~278M</td><td>CPU-friendly English default</td></tr>
+            <tr><td><a href="/models/bge-reranker.html">bge-reranker-v2-m3</a></td><td>~568M</td><td>Multilingual when GPU is limited</td></tr>
+            <tr><td><a href="/models/qwen-reranker.html">Qwen3-Reranker-4B</a></td><td>~4B</td><td><strong>2026 open SOTA pick</strong> (needs GPU)</td></tr>
+            <tr><td><a href="/models/mxbai-rerank.html">mxbai-rerank-large-v1</a></td><td>~435M</td><td>Strong classic BEIR, Apache 2.0</td></tr>
+            <tr><td><a href="/models/jina-reranker.html">jina-reranker-v3</a></td><td>large</td><td>Listwise long-context; or v2 pair-wise</td></tr>
           </tbody>
         </table>
       </div>
-      <p>Start with <strong>bge-reranker-base</strong> on CPU for prototyping; move to <strong>v2-m3</strong> or <strong>mxbai-large</strong> on GPU when quality metrics justify it.</p>
+      <p>Start with <strong>bge-reranker-base</strong> on CPU for prototyping. On GPU, A/B <strong>Qwen3-Reranker-4B</strong> against <strong>bge-v2-m3</strong> or <strong>mxbai-large</strong> on your labelled set — do not assume leaderboard order transfers.</p>
 
       <h2 id="quickstart">Quick start with sentence-transformers</h2>
       <pre><code>pip install sentence-transformers torch

@@ -130,6 +130,7 @@
       const map = [
         ["all", "All architectures", "全部架构"],
         ["cross-encoder", "Cross-encoder", "Cross-encoder"],
+        ["listwise", "Listwise", "Listwise"],
         ["late-interaction", "Late-interaction", "Late-interaction"],
       ];
       map.forEach(([val, en, zh]) => {

@@ -1,6 +1,6 @@
 {
-  "title": "Rerank model comparison: cross-encoder, ColBERT, Qwen3 | reranker.uk",
-  "description": "Compare rerank architectures: bge, Cohere, Jina, Voyage, mxbai, plus Qwen3-Reranker, Contextual AI instruction rerank, and ColBERTv2 late-interaction. Quality, latency, languages, and cost.",
+  "title": "Rerank model comparison 2026: Qwen3, Jina v3, bge, mxbai | reranker.uk",
+  "description": "2026 reranker comparison: Qwen3-Reranker 0.6B/4B/8B, Jina v3 listwise, bge, mxbai, Cohere, Voyage, GTE ModernBERT, NVIDIA, ColBERT, instruction APIs.",
   "canonical": "https://reranker.uk/models/",
   "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
   "og_type": "website",

@@ -8,6 +8,13 @@
     <lastBuildDate>Wed, 25 Jun 2026 12:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
     <item>
+      <title>25 Jun 2026 — Model landscape refresh</title>
+      <link>https://reranker.uk/changelog.html#2026-06-25e</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog.html#2026-06-25e</guid>
+      <pubDate>Wed, 25 Jun 2026 16:00:00 GMT</pubDate>
+      <description>Qwen3 family + deep page; Jina v3 listwise; GTE ModernBERT; NVIDIA; honest score footnotes.</description>
+    </item>
+    <item>
       <title>25 Jun 2026 — Minimal polish pack</title>
       <link>https://reranker.uk/changelog.html#2026-06-25d</link>
       <guid isPermaLink="true">https://reranker.uk/changelog.html#2026-06-25d</guid>

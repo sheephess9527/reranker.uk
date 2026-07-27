@@ -1,0 +1,112 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Qwen3-Reranker</div>
+      <h1>Qwen3-Reranker</h1>
+      <p class="meta">Open weights · Qwen / Tongyi · <time datetime="2026-06-25">Updated 25 Jun 2026</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Open weights</span><span class="pill info">2026 SOTA*</span><span class="pill">GPU recommended</span></div>
+      <p class="lead">The <strong>Qwen3-Reranker</strong> family (0.6B / 4B / 8B) is the headline open-weight reranker story of 2026: multilingual, long-context friendly, and frequently topping community open-weight leaderboards. Treat published MTEB-R / BEIR-style numbers as <em>directionally</em> strong — always validate on your own labels before replacing bge or a hosted API.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#variants">Model variants</a></li>
+          <li><a href="#scores">Scores &amp; honesty</a></li>
+          <li><a href="#usage">Quick start</a></li>
+          <li><a href="#when">When to pick Qwen3</a></li>
+          <li><a href="#pros-cons">Pros and cons</a></li>
+        </ol>
+      </div>
+
+      <h2 id="variants">Model variants</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Size</th><th>Best for</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>Qwen/Qwen3-Reranker-0.6B</code></td><td>~0.6B</td><td>Lightest sibling; still prefers GPU</td></tr>
+            <tr><td><code>Qwen/Qwen3-Reranker-4B</code></td><td>~4B</td><td><strong>Default self-host pick</strong> when quality matters</td></tr>
+            <tr><td><code>Qwen/Qwen3-Reranker-8B</code></td><td>~8B</td><td>Maximum open quality; highest VRAM / latency</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Recommendation:</strong> start with <strong>4B</strong> on a single modern GPU. Drop to 0.6B only if memory is tight; move to 8B only when labelled eval shows a clear NDCG gain worth the cost.</p>
+
+      <h2 id="scores">Scores &amp; honesty</h2>
+      <p>Public write-ups often cite MTEB-R / multilingual rerank suites in the <strong>~70+</strong> range for mid/large Qwen3 sizes, with 8B at the top of open-weight tables. Those figures are <strong>not</strong> guaranteed to match the classic BEIR 18-dataset averages we list for bge (~60) or mxbai (~62).</p>
+      <ul>
+        <li>Different suites, languages, and preprocessing → different numbers.</li>
+        <li>On some English-only product benches, compact models (e.g. ModernBERT-GTE) can beat a 4B model on Hit@1 while being far cheaper.</li>
+        <li>Our <a href="/models/">comparison table</a> marks Qwen scores with <strong>*</strong> for this reason.</li>
+      </ul>
+
+      <h2 id="usage">Quick start</h2>
+      <h3>Hugging Face / transformers</h3>
+      <pre><code># Check the model card for the recommended stack (transformers / vLLM / SGLang).
+# IDs (examples):
+#   Qwen/Qwen3-Reranker-0.6B
+#   Qwen/Qwen3-Reranker-4B
+#   Qwen/Qwen3-Reranker-8B
+
+from sentence_transformers import CrossEncoder  # if card supports CE API
+
+# Prefer the loading recipe on the official model card — Qwen3 may use
+# a chat-style scoring template rather than a plain CrossEncoder pair.
+model_id = "Qwen/Qwen3-Reranker-4B"
+# model = CrossEncoder(model_id, max_length=8192)  # only if supported
+# scores = model.predict([(query, d) for d in docs])</code></pre>
+      <p>For production serving, many teams use <strong>vLLM</strong> / OpenAI-compatible <code>/v1/rerank</code> endpoints. Follow the current Qwen docs for the exact prompt format — wrong templates silently destroy quality.</p>
+
+      <h3>In a RAG pipeline</h3>
+      <pre><code># Pseudocode — same two-stage pattern as any cross-encoder
+candidates = vector_db.search(query, top_k=80)   # or hybrid
+scores = qwen3_rerank(query, candidates)         # official template
+top = sorted(zip(scores, candidates), reverse=True)[:8]
+answer = llm.complete(context=top, query=query)</code></pre>
+
+      <h2 id="when">When to pick Qwen3</h2>
+      <ul>
+        <li><strong>Yes:</strong> you have GPU, need multilingual quality, and want open weights without per-call API cost.</li>
+        <li><strong>Yes:</strong> long passages / long context matter and you can afford 4B–8B memory.</li>
+        <li><strong>Maybe not:</strong> CPU-only or edge — prefer <a href="/models/bge-reranker.html">bge-v2-m3</a>, mxbai, or Jina tiny for demos.</li>
+        <li><strong>Maybe not:</strong> instruction-shaped policies — see <a href="/guides/instruction-reranker.html">instruction-following rerank</a>.</li>
+      </ul>
+
+      <h2 id="pros-cons">Pros and cons</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 style="color:var(--good);margin-top:0">Pros</h3>
+          <ul class="feature-list">
+            <li>Leading open-weight narrative in 2026 (0.6B–8B ladder)</li>
+            <li>Strong multilingual + long-context positioning</li>
+            <li>Zero per-call cost once self-hosted</li>
+            <li>Active ecosystem (HF, vLLM, community recipes)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--danger);margin-top:0">Cons</h3>
+          <ul style="padding-left:1.2rem;color:var(--text-soft)">
+            <li>GPU (or heavy quant) required for comfort</li>
+            <li>Scoring template / serving stack more fiddly than MiniLM</li>
+            <li>Public leaderboard numbers not 1:1 with classic BEIR avg</li>
+            <li>Too large for our in-browser demo</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">Compare on your data first</h2>
+        <p class="soft">Use a tiny browser model to learn the UX of reranking, then A/B Qwen3-4B vs bge-v2-m3 on 30 labelled queries.</p>
+        <a class="btn btn-primary" href="/demo.html">Open the demo →</a>
+        <a class="btn btn-ghost" href="/guides/evaluate-reranker.html" style="margin-left:.5rem">Evaluate guide →</a>
+      </div>
+
+      <h2>Other models</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/models/bge-reranker.html"><h3>bge-reranker</h3><p>CPU-friendly open default.</p></a>
+        <a class="card" href="/models/jina-reranker.html"><h3>Jina Reranker v3</h3><p>Listwise long-context + tiny demo.</p></a>
+        <a class="card" href="/models/mxbai-rerank.html"><h3>mxbai-rerank</h3><p>Classic BEIR + browser xsmall.</p></a>
+        <a class="card" href="/guides/self-host-reranker.html"><h3>Self-host guide</h3><p>Serving and ops checklist.</p></a>
+      </div>
+    </article>
+  </main>

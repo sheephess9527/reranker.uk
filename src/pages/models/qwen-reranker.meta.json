@@ -1,0 +1,11 @@
+{
+  "title": "Qwen3-Reranker: 0.6B / 4B / 8B open-weight review | reranker.uk",
+  "description": "Qwen3-Reranker family review for 2026: when to use 0.6B, 4B, or 8B, how scores compare to classic BEIR rows, self-host tips, and trade-offs vs bge and hosted APIs.",
+  "canonical": "https://reranker.uk/models/qwen-reranker.html",
+  "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  "og_type": "article",
+  "og_title": "Qwen3-Reranker — 2026 open-weight SOTA candidate",
+  "og_description": "0.6B / 4B / 8B open rerankers. Start with 4B on GPU; validate on your labels.",
+  "head_extra": "<script type=\"application/ld+json\">\r\n  {\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"headline\":\"Qwen3-Reranker\",\"datePublished\":\"2026-06-25\",\"dateModified\":\"2026-06-25\",\"inLanguage\":\"en\",\"author\":{\"@type\":\"Organization\",\"name\":\"reranker.uk\"},\"mainEntityOfPage\":\"https://reranker.uk/models/qwen-reranker.html\"}\r\n  </script>",
+  "page_scripts": "<script src=\"/assets/js/i18n/qwen-reranker.js\"></script>"
+}

@@ -12,6 +12,13 @@ window.I18N_PAGE = { zh: {
   "<strong>og:locale</strong> — switches to <code>zh_CN</code> when language toggle is 中文": "<strong>og:locale</strong> —— 语言切换为中文时设为 <code>zh_CN</code>",
   "<strong>Dual-diff a11y</strong> — table caption, row headers, empty state, <code>aria-labelledby</code>": "<strong>双模型差异 a11y</strong> —— 表格 caption、行表头、空状态、<code>aria-labelledby</code>",
 
+  "25 Jun 2026 — Model landscape refresh": "2026 年 6 月 25 日 — 模型版图刷新",
+  "<strong>Qwen3-Reranker</strong> — 0.6B / 4B / 8B rows + <a href=\"/models/qwen-reranker.html\">deep review page</a>": "<strong>Qwen3-Reranker</strong> —— 0.6B / 4B / 8B 行 + <a href=\"/models/qwen-reranker.html\">深评页</a>",
+  "<strong>Jina v3</strong> — listwise flagship; tiny kept for browser demo": "<strong>Jina v3</strong> —— listwise 旗舰；tiny 保留给浏览器 Demo",
+  "<strong>Table adds</strong> — gte-reranker-modernbert-base, NVIDIA nv-rerankqa / Nemotron": "<strong>表新增</strong> —— gte-reranker-modernbert-base、NVIDIA nv-rerankqa / Nemotron",
+  "<strong>Self-host / homepage / chooser</strong> — GPU default Qwen3-4B; bge remains CPU path": "<strong>自托管 / 首页 / 选型</strong> —— GPU 默认 Qwen3-4B；bge 仍为 CPU 路径",
+  "<strong>Score footnotes</strong> — MTEB-R* vs classic BEIR; next review Oct 2026": "<strong>分数脚注</strong> —— MTEB-R* vs 经典 BEIR；下次复核 2026 年 10 月",
+
   "25 Jun 2026 — Minimal polish pack": "2026 年 6 月 25 日 — 最小打磨包",
   "<strong>Honest benchmarks</strong> — emerging rows use ≈ / n/a; next review Sep 2026; pricing lag disclaimer": "<strong>诚实基准</strong> —— 新兴行用 ≈ / n/a；下次复核 2026 年 9 月；价格滞后说明",
   "<strong>Demo max_length</strong> — 256 / 384 / 512 tokens; char warnings follow selection": "<strong>Demo max_length</strong> —— 256 / 384 / 512 token；字符警告随选择变化",
