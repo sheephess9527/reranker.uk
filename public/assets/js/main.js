@@ -13,14 +13,8 @@
     });
   }
 
-  // Highlight active nav link by pathname
-  var here = location.pathname.replace(/index\.html$/, "").replace(/\/$/, "") || "/";
-  document.querySelectorAll(".nav-links a").forEach(function (a) {
-    var href = a.getAttribute("href") || "";
-    var path = href.replace(/index\.html$/, "").replace(/\/$/, "") || "/";
-    if (path !== "/" && here.indexOf(path) === 0) a.classList.add("active");
-    if (path === "/" && here === "/") a.classList.add("active");
-  });
+  // The active nav item is marked at build time (scripts/build.mjs), so there
+  // is nothing to do here — no first-paint flash, no work on every navigation.
 
   // Footer year
   var y = document.getElementById("year");

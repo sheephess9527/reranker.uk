@@ -1,11 +1,11 @@
 import fs from "fs";
 
 const pages = [
-  ["bge", "src/pages/models/bge-reranker.html", "public/assets/js/i18n/bge-reranker.js"],
-  ["cohere", "src/pages/models/cohere-rerank.html", "public/assets/js/i18n/cohere-rerank.js"],
-  ["jina", "src/pages/models/jina-reranker.html", "public/assets/js/i18n/jina-reranker.js"],
-  ["voyage", "src/pages/models/voyage-rerank.html", "public/assets/js/i18n/voyage-rerank.js"],
-  ["mxbai", "src/pages/models/mxbai-rerank.html", "public/assets/js/i18n/mxbai-rerank.js"],
+  ["bge", "src/pages/models/bge-reranker.html", "src/i18n/bge-reranker.js"],
+  ["cohere", "src/pages/models/cohere-rerank.html", "src/i18n/cohere-rerank.js"],
+  ["jina", "src/pages/models/jina-reranker.html", "src/i18n/jina-reranker.js"],
+  ["voyage", "src/pages/models/voyage-rerank.html", "src/i18n/voyage-rerank.js"],
+  ["mxbai", "src/pages/models/mxbai-rerank.html", "src/i18n/mxbai-rerank.js"],
 ];
 
 const norm = (s) => (s || "").replace(/\s+/g, " ").trim();

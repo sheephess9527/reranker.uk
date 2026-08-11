@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-locale="en">
+<html lang="zh-Hans" data-locale="zh" data-prerendered="zh">
 <head>
   <meta charset="UTF-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-  <title>How to add reranking to your RAG pipeline — practical guide | reranker.uk</title>
-  <meta name="description" content="Step-by-step guide to adding a rerank model to RAG: retrieve 50–100 candidates with vector search, rerank with a cross-encoder, keep the top 5 for the prompt. Includes Python code, top-k tips, latency trade-offs, and model choices." >
-  <link rel="canonical" href="https://reranker.uk/guides/rerank-rag.html" >
+  <title>如何为 RAG 流水线加重排序 —— 实操指南 | reranker.uk</title>
+  <meta name="description" content="为 RAG 加 rerank 模型的分步指南：用向量搜索召回 50–100 个候选，用 cross-encoder 重排序，保留前 5 个进 prompt。含 Python 代码、top-k 建议、延迟取舍与模型选择。" >
+  <link rel="canonical" href="https://reranker.uk/zh/guides/rerank-rag.html" >
   <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/rerank-rag.html" >
   <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/rerank-rag.html" >
   <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/rerank-rag.html" >
@@ -16,12 +16,12 @@
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
   <link rel="manifest" href="/site.webmanifest" >
   <meta property="og:type" content="article" >
-  <meta property="og:title" content="How to add reranking to your RAG pipeline" >
-  <meta property="og:description" content="Retrieve wide, rerank for precision, send fewer tokens to the LLM. A practical walkthrough with code." >
-  <meta property="og:url" content="https://reranker.uk/guides/rerank-rag.html" >
+  <meta property="og:title" content="如何为 RAG 流水线加重排序 —— 实操指南 | reranker.uk" >
+  <meta property="og:description" content="为 RAG 加 rerank 模型的分步指南：用向量搜索召回 50–100 个候选，用 cross-encoder 重排序，保留前 5 个进 prompt。含 Python 代码、top-k 建议、延迟取舍与模型选择。" >
+  <meta property="og:url" content="https://reranker.uk/zh/guides/rerank-rag.html" >
   <meta property="og:site_name" content="reranker.uk" >
-  <meta property="og:locale" content="en_GB" >
-  <meta property="og:locale:alternate" content="zh_CN" >
+  <meta property="og:locale" content="zh_CN" >
+  <meta property="og:locale:alternate" content="en_GB" >
   <meta name="twitter:card" content="summary_large_image" >
   <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" >
   <meta property="og:image:width" content="1200" >
@@ -56,13 +56,13 @@
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://reranker.uk/"
+            "item": "https://reranker.uk/zh/"
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "How to add reranking to RAG",
-            "item": "https://reranker.uk/guides/rerank-rag.html"
+            "item": "https://reranker.uk/zh/guides/rerank-rag.html"
           }
         ]
       }
@@ -72,29 +72,29 @@
 
 </head>
 <body>
-  <a class="skip-link" href="#main" data-i18n="shared.skip">Skip to content</a>
+  <a class="skip-link" href="#main" data-i18n="shared.skip">跳到正文</a>
   <header class="site-header">
     <nav class="nav container">
-      <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+      <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       <ul class="nav-links">
-        <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
-        <li><a href="/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">Guides</a></li>
-        <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
-        <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
+        <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
+        <li><a href="/zh/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">指南</a></li>
+        <li><a href="/zh/models/" data-i18n="shared.nav.models">模型对比</a></li>
+        <li><a class="nav-cta" href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <a class="lang-toggle" href="/zh/guides/rerank-rag.html" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
+        <a class="lang-toggle" href="/guides/rerank-rag.html" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
       </div>
     </nav>
   </header>
 <main id="main">
     <article class="article container narrow">
-      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Rerank for RAG</div>
-      <h1>How to add reranking to your RAG pipeline</h1>
+      <div class="breadcrumb"><a href="/zh/">Home</a><span>/</span><a href="/zh/guides/">Guides</a><span>/</span>Rerank for RAG</div>
+      <h1>如何为你的 RAG 流水线加重排序</h1>
       <p class="meta">Practical · ~10 min read · <time datetime="2026-06-21">Updated 21 Jun 2026</time></p>
-      <p class="lead">The fix for mediocre RAG answers is rarely a bigger LLM — it's usually a better retrieval order. A reranker sits between your vector search and your LLM call, re-scores the candidates, and ensures only the most relevant passages land in the prompt.</p>
+      <p class="lead">改善平庸 RAG 答案的办法，很少是换更大的 LLM —— 通常是更好的检索排序。reranker 位于向量搜索和 LLM 调用之间，对候选重新打分，确保只有最相关的段落进入 prompt。</p>
 
       <div class="toc">
         <strong>On this page</strong>
@@ -109,11 +109,11 @@
         </ol>
       </div>
 
-      <h2 id="problem">The ordering problem in RAG</h2>
-      <p>A typical RAG system embeds your documents and stores the vectors. At query time it fetches the k-nearest vectors to the query embedding and stuffs those chunks into the LLM prompt. The problem: <strong>cosine similarity between independent embeddings is a coarse relevance signal</strong>. The correct chunk might be in the top 20 results, but sitting at position 14 — outside the 5 you actually send to the model.</p>
-      <p>This is the "lost in the middle" problem in reverse: the right answer was never at the top in the first place. Reranking fixes it by applying a more expensive, more accurate relevance model to the shortlist the retriever already found.</p>
+      <h2 id="problem">RAG 中的排序问题</h2>
+      <p>典型的 RAG 系统会嵌入你的文档并存储向量。查询时它取出与查询嵌入最近的 k 个向量，把这些片段塞进 LLM 的 prompt。问题在于：<strong>独立嵌入之间的余弦相似度是个粗糙的相关性信号</strong>。正确的片段可能在前 20 个结果里，却排在第 14 位 —— 落在你真正送进模型的那 5 个之外。</p>
+      <p>这是“lost in the middle（迷失在中间）”问题的反面：正确答案一开始就没排在最前。重排序通过对检索器已经找到的短名单施加一个更昂贵、更准确的相关性模型来修复它。</p>
 
-      <h2 id="pattern">The retrieve-rerank-generate pattern</h2>
+      <h2 id="pattern">检索—重排序—生成 范式</h2>
       <figure class="pipeline-figure no-i18n">
         <svg viewBox="0 0 640 548" role="img" aria-labelledby="pipe-title pipe-desc" xmlns="http://www.w3.org/2000/svg">
           <title id="pipe-title">Retrieve, rerank, generate pipeline</title>
@@ -182,12 +182,12 @@
         </svg>
         <figcaption>The reranker (stage 2) is the precision step between fast retrieval and the LLM.</figcaption>
       </figure>
-      <p>The retriever handles scale (millions of documents at millisecond speed). The reranker handles quality (precise ordering of a few dozen candidates). The LLM handles synthesis. Each stage does only what it's good at.</p>
+      <p>检索器负责规模（毫秒级处理数百万文档）。reranker 负责质量（对几十个候选做精确排序）。LLM 负责综合。每个阶段只做自己擅长的事。</p>
 
-      <h2 id="code">Code walkthrough</h2>
-      <p>Here's a self-contained Python example using a local bge-reranker. In production you'd swap <code>rank_documents</code> for a call to Cohere, Jina, or Voyage if you prefer hosted APIs.</p>
+      <h2 id="code">代码讲解</h2>
+      <p>下面是一个使用本地 bge-reranker 的自包含 Python 示例。在生产中，如果你更喜欢托管 API，可以把 <code>rank_documents</code> 换成对 Cohere、Jina 或 Voyage 的调用。</p>
 
-      <h3>With a local cross-encoder (sentence-transformers)</h3>
+      <h3>使用本地 cross-encoder（sentence-transformers）</h3>
       <pre><code>from sentence_transformers import CrossEncoder
 
 # Load once at startup — reuse across requests
@@ -205,7 +205,7 @@ raw_chunks = vector_db.search(query, top_k=50)   # retrieve wide
 best_chunks = rerank(query, raw_chunks, top_n=5)  # rerank tight
 answer = llm.complete(build_prompt(query, best_chunks))  # generate</code></pre>
 
-      <h3>With the Cohere hosted API</h3>
+      <h3>使用 Cohere 托管 API</h3>
       <pre><code>import cohere
 
 co = cohere.Client("YOUR_API_KEY")
@@ -219,7 +219,7 @@ def rerank(query: str, candidates: list[str], top_n: int = 5) -&gt; list[str]:
     )
     return [candidates[r.index] for r in result.results]</code></pre>
 
-      <h3>With Jina Reranker API</h3>
+      <h3>使用 Jina Reranker API</h3>
       <pre><code>import requests
 
 def rerank(query: str, candidates: list[str], top_n: int = 5) -&gt; list[str]:
@@ -236,8 +236,8 @@ def rerank(query: str, candidates: list[str], top_n: int = 5) -&gt; list[str]:
     indices = [r["index"] for r in resp["results"]]
     return [candidates[i] for i in indices]</code></pre>
 
-      <h3>Inside a framework (LangChain · LlamaIndex · Haystack)</h3>
-      <p>If you already use a RAG framework, reranking is usually a drop-in node that wraps your existing retriever. The pattern is identical — retrieve wide, rerank, keep the top-n — just expressed in the framework's vocabulary.</p>
+      <h3>在框架内（LangChain · LlamaIndex · Haystack）</h3>
+      <p>如果你已经在用某个 RAG 框架，重排序通常就是一个即插即用的节点，把你现有的检索器包起来。模式完全一样 —— 宽召回、重排序、保留 top-n —— 只是换成了框架的术语来表达。</p>
       <pre><code># LangChain — ContextualCompressionRetriever wraps any base retriever
 from langchain.retrievers import ContextualCompressionRetriever
 from langchain.retrievers.document_compressors import CrossEncoderReranker
@@ -268,60 +268,60 @@ pipe = Pipeline()
 pipe.add_component("retriever", retriever)   # returns ~50 docs
 pipe.add_component("ranker", ranker)
 pipe.connect("retriever.documents", "ranker.documents")</code></pre>
-      <p>All three accept hosted rerankers too (Cohere, Jina, Voyage) via their respective integration packages — swap the component, keep the pipeline.</p>
+      <p>这三者也都能通过各自的集成包接入托管 reranker（Cohere、Jina、Voyage）—— 换掉组件，流水线照旧。</p>
 
-      <h2 id="topk">Choosing top-k values</h2>
-      <p>You have two k values to tune: <em>how many to retrieve</em> and <em>how many to keep after reranking</em>.</p>
+      <h2 id="topk">如何选 top-k 取值</h2>
+      <p>你有两个 k 值要调：<em>召回多少个</em>，以及<em>重排序后保留多少个</em>。</p>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Parameter</th><th>Typical range</th><th>Notes</th></tr>
+            <tr><th>参数</th><th>常见范围</th><th>说明</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>retrieval_k</code></td><td>20–100</td><td>More = better recall, slower reranker. 50 is a common default. Don't go below 20 or you may miss the right chunk entirely.</td></tr>
-            <tr><td><code>rerank_top_n</code></td><td>3–10</td><td>Fewer = cheaper prompt, but higher risk of excluding a useful chunk. Start at 5; tune based on your context window and answer quality.</td></tr>
+            <tr><td><code>retrieval_k</code></td><td>20–100</td><td>越多 = 召回越好、reranker 越慢。50 是常见默认值。不要低于 20，否则可能彻底错过正确片段。</td></tr>
+            <tr><td><code>rerank_top_n</code></td><td>3–10</td><td>越少 = prompt 越便宜，但漏掉有用片段的风险越高。从 5 开始；根据你的上下文窗口和答案质量来调。</td></tr>
           </tbody>
         </table>
       </div>
       <div class="callout">
-        <p><strong>Rule of thumb:</strong> retrieve at least 5× what you plan to keep. If you want 5 final chunks, retrieve at least 25–50. The reranker can only fix order, not conjure chunks that weren't retrieved at all.</p>
+        <p><strong>经验法则：</strong>召回的数量至少是你打算保留数量的 5 倍。想要最终 5 个片段，就至少召回 25–50 个。reranker 只能修正顺序，无法凭空变出根本没被召回的片段。</p>
       </div>
 
-      <h2 id="latency">Latency trade-offs</h2>
-      <p>Reranking adds a model call to your pipeline. The cost depends on the approach:</p>
+      <h2 id="latency">延迟取舍</h2>
+      <p>重排序会给你的流水线增加一次模型调用。成本取决于具体方案：</p>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Approach</th><th>P50 latency (50 docs)</th><th>Cost</th></tr>
+            <tr><th>方案</th><th>P50 延迟（50 篇文档）</th><th>成本</th></tr>
           </thead>
           <tbody>
-            <tr><td>Cohere / Jina / Voyage API</td><td>80–200 ms</td><td>Per-call pricing (~$0.0002–0.002 / 1k chunks)</td></tr>
-            <tr><td>bge-reranker on CPU (small)</td><td>200–600 ms</td><td>Your infra cost; free per-call</td></tr>
-            <tr><td>bge-reranker on GPU</td><td>15–60 ms</td><td>GPU cost; free per-call</td></tr>
-            <tr><td>Local tiny model (e.g. jina-tiny)</td><td>30–120 ms CPU</td><td>Free</td></tr>
+            <tr><td>Cohere / Jina / Voyage API</td><td>80–200 ms</td><td>按次计费（约 $0.0002–0.002 / 千片段）</td></tr>
+            <tr><td>bge-reranker on CPU (small)</td><td>200–600 ms</td><td>你的基础设施成本；按次免费</td></tr>
+            <tr><td>bge-reranker on GPU</td><td>15–60 ms</td><td>GPU 成本；按次免费</td></tr>
+            <tr><td>Local tiny model (e.g. jina-tiny)</td><td>30–120 ms CPU</td><td>免费</td></tr>
           </tbody>
         </table>
       </div>
-      <p>For most RAG applications, 100–300 ms total pipeline latency is fine and the quality gain is worth it. If your SLA is very tight, either host on GPU, use a tiny model, or cap <code>retrieval_k</code> at 20–30 instead of 50.</p>
+      <p>对大多数 RAG 应用来说，整条流水线 100–300 ms 的延迟完全可以接受，而质量提升是值得的。如果你的 SLA 非常紧，可以部署到 GPU、改用微型模型，或把 <code>retrieval_k</code> 从 50 降到 20–30。</p>
       <div class="callout accent">
-        <p><strong>Cache aggressively:</strong> if the same query recurs (e.g. in a customer support bot), cache the reranked results by (query, corpus version) hash. The reranker becomes effectively free for repeat queries.</p>
+        <p><strong>积极使用缓存：</strong>如果同一查询反复出现（例如客服机器人），就按 (query, 语料版本) 的哈希缓存重排序结果。对重复查询而言，reranker 实际上变成了免费。</p>
       </div>
 
-      <h2 id="evaluate">Measuring whether it actually helped</h2>
-      <p>Don't add a reranker on faith — measure it. Build a small evaluation set of queries paired with the chunk(s) that <em>should</em> be retrieved, then compare retrieval-only vs retrieval+rerank on the same set. Three metrics cover almost every case:</p>
+      <h2 id="evaluate">如何衡量它是否真的有帮助</h2>
+      <p>不要凭感觉就加 reranker —— 要量化它。构建一个小型评测集，把查询与<em>应当</em>被检索到的片段配对，然后在同一集合上对比「仅检索」与「检索 + 重排序」。三个指标几乎覆盖所有场景：</p>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Metric</th><th>What it asks</th><th>Use it when</th></tr>
+            <tr><th>Metric</th><th>它衡量什么</th><th>适用场景</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>Recall@k</strong></td><td>Is the right chunk anywhere in the top k?</td><td>Sizing <code>retrieval_k</code> — the reranker can't recover a chunk the retriever never returned.</td></tr>
-            <tr><td><strong>MRR</strong> (Mean Reciprocal Rank)</td><td>How high is the <em>first</em> relevant chunk, on average?</td><td>Single-answer lookups (FAQ, support, "find the clause").</td></tr>
-            <tr><td><strong>nDCG@k</strong></td><td>Are the relevant chunks ranked high, weighted by position?</td><td>Multi-passage answers where several chunks matter and order counts.</td></tr>
+            <tr><td><strong>Recall@k</strong></td><td>正确片段是否出现在前 k 个里？</td><td>用来确定 <code>retrieval_k</code> —— reranker 无法找回检索器从未返回的片段。</td></tr>
+            <tr><td><strong>MRR</strong> (Mean Reciprocal Rank)</td><td>平均而言，<em>第一个</em>相关片段排得有多高？</td><td>单一答案的查找（FAQ、客服、「找出某条款」）。</td></tr>
+            <tr><td><strong>nDCG@k</strong></td><td>相关片段是否排得靠前（按位置加权）？</td><td>多段落答案：多个片段都重要，且顺序也要紧。</td></tr>
           </tbody>
         </table>
       </div>
-      <p>MRR is the intuitive one: if the right chunk lands at position 1 you score 1.0, at position 2 you score 0.5, at position 4 you score 0.25. Averaged over your query set, it's a single number that captures "how near the top is the answer?" — exactly what a reranker is meant to improve.</p>
+      <p>MRR 最直观：正确片段排第 1 得 1.0，排第 2 得 0.5，排第 4 得 0.25。在整个查询集上取平均，就得到一个数字，刻画「答案离顶部有多近？」—— 这正是 reranker 应当改善的东西。</p>
       <pre><code># Minimal MRR + Recall@k over a labelled eval set.
 # Each example: a query, the candidate texts, and the indices that are relevant.
 def reciprocal_rank(ranked_ids, relevant_ids):
@@ -343,33 +343,33 @@ base = evaluate(eval_set, retrieve_only)        # baseline
 reranked = evaluate(eval_set, retrieve_then_rerank)  # with the reranker
 print(base, reranked)   # expect MRR and nDCG to rise after reranking</code></pre>
       <div class="callout">
-        <p><strong>Even 30–50 labelled queries</strong> are enough to see a signal. Pull real queries from your logs, label which chunk answered each one, and you have a regression test you can re-run every time you change the retriever, the chunking, or the reranker. <code>ir-measures</code>, <code>ranx</code>, and BEIR's evaluator all compute these metrics for you if you'd rather not hand-roll them.</p>
+        <p><strong>哪怕只有 30–50 条标注查询</strong>，也足以看出信号。从日志里捞出真实查询，标注每条由哪个片段回答，你就有了一套回归测试 —— 每次改动检索器、分块或 reranker 都能重跑。若不想自己手写，<code>ir-measures</code>、<code>ranx</code> 以及 BEIR 的评测器都能替你算出这些指标。</p>
       </div>
       <div class="callout accent">
-        <p><strong>Common pitfalls:</strong> retrieving too few candidates (the reranker can only reorder what it's given); leaving <code>max_length</code> too short so long chunks get truncated before scoring; sorting ascending instead of descending; and assuming raw scores are comparable across models — they aren't calibrated, so rank order is what matters, not the absolute number.</p>
+        <p><strong>常见坑：</strong>召回的候选太少（reranker 只能对拿到的东西重新排序）；<code>max_length</code> 留得太短，长片段在打分前就被截断；把排序写成升序而非降序；以及以为不同模型的原始分数可以互相比较 —— 它们并未校准，重要的是排名顺序，而非绝对数值。</p>
       </div>
 
-      <h2 id="models">Which reranker to pick</h2>
-      <p>The short version:</p>
+      <h2 id="models">该选哪个 reranker</h2>
+      <p>简短版：</p>
       <ul>
-        <li><strong>Want to self-host, English-only, free:</strong> <a href="/models/bge-reranker.html">bge-reranker-v2-m3</a> — strong, widely deployed.</li>
-        <li><strong>Want a hosted API, best multilingual quality:</strong> <a href="/models/cohere-rerank.html">Cohere Rerank v3.5</a>.</li>
-        <li><strong>Want open weights + hosted API + tiny browser-runnable model:</strong> <a href="/models/jina-reranker.html">Jina Reranker v2</a>.</li>
-        <li><strong>Optimising for retrieval-specific quality:</strong> <a href="/models/voyage-rerank.html">Voyage Rerank 2</a>.</li>
-        <li><strong>Want Apache 2.0 open weights, browser-runnable xsmall:</strong> <a href="/models/mxbai-rerank.html">mxbai-rerank</a>.</li>
+        <li><strong>想自建、仅英文、免费：</strong><a href="/zh/models/bge-reranker.html">bge-reranker-v2-m3</a> —— 强大且广泛部署。</li>
+        <li><strong>想要托管 API、最佳多语言质量：</strong><a href="/zh/models/cohere-rerank.html">Cohere Rerank v3.5</a>。</li>
+        <li><strong>想要开源权重 + 托管 API + 可在浏览器运行的微型模型：</strong><a href="/zh/models/jina-reranker.html">Jina Reranker v2</a>。</li>
+        <li><strong>专注检索专项质量：</strong><a href="/zh/models/voyage-rerank.html">Voyage Rerank 2</a>。</li>
+        <li><strong>Want Apache 2.0 open weights, browser-runnable xsmall:</strong> <a href="/zh/models/mxbai-rerank.html">mxbai-rerank</a>.</li>
       </ul>
-      <p>See the full <a href="/models/">model comparison →</a></p>
+      <p>查看完整<a href="/zh/models/">模型对比 →</a></p>
 
       <div class="cta-band">
-        <h2 style="margin-top:0">See reranking in action</h2>
-        <p class="soft">Paste your own query and candidates. A cross-encoder scores them in your browser — zero API cost.</p>
-        <a class="btn btn-primary" href="/demo.html">Open the live demo →</a>
+        <h2 style="margin-top:0">看看重排序的实际效果</h2>
+        <p class="soft">粘贴你自己的查询和候选。一个 cross-encoder 在你的浏览器里为它们打分 —— 零 API 成本。</p>
+        <a class="btn btn-primary" href="/zh/demo.html">打开在线 Demo →</a>
       </div>
 
       <h2>Keep reading</h2>
       <div class="grid grid-2">
-        <a class="card" href="/guides/what-is-a-reranker.html"><h3>What is a reranker?</h3><p>Start with the fundamentals.</p></a>
-        <a class="card" href="/guides/cross-encoder-vs-bi-encoder.html"><h3>Cross-encoder vs bi-encoder</h3><p>The architecture behind the speed/accuracy trade-off.</p></a>
+        <a class="card" href="/zh/guides/what-is-a-reranker.html"><h3>什么是 reranker？</h3><p>从基础概念开始。</p></a>
+        <a class="card" href="/zh/guides/cross-encoder-vs-bi-encoder.html"><h3>Cross-encoder vs bi-encoder</h3><p>速度／准确性取舍背后的架构。</p></a>
       </div>
     </article>
   </main>
@@ -377,47 +377,47 @@ print(base, reranked)   # expect MRR and nDCG to rise after reranking</code></pr
     <div class="container">
       <div class="footer-grid">
         <div>
-          <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
-          <p class="muted" style="margin-top:.8rem;max-width:34ch" data-i18n="shared.footer.blurb">An open educational resource on rerankers for retrieval and RAG — plus a zero-cost demo that runs in your browser.</p>
-          <p style="margin-top:.6rem"><a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer" data-i18n="shared.footer.github">View source on GitHub</a></p>
+          <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch" data-i18n="shared.footer.blurb">一个关于检索与 RAG 重排序（reranker）的开放学习资源，外加一个在浏览器里零成本运行的实时 Demo。</p>
+          <p style="margin-top:.6rem"><a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer" data-i18n="shared.footer.github">在 GitHub 上查看源码</a></p>
         </div>
         <div>
-          <h4 data-i18n="shared.footer.guides">Guides</h4>
+          <h4 data-i18n="shared.footer.guides">指南</h4>
           <ul>
-            <li><a href="/guides/" data-i18n="shared.footer.allGuides">All guides</a></li>
-            <li><a href="/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
-            <li><a href="/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
-            <li><a href="/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
-            <li><a href="/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
-            <li><a href="/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
-            <li><a href="/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
-            <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
-            <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
-            <li><a href="/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
-            <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
-            <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
-            <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>
-            <li><a href="/privacy.html" data-i18n="shared.footer.privacy">Privacy</a></li>
+            <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog.html" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
+            <li><a href="/zh/privacy.html" data-i18n="shared.footer.privacy">隐私说明</a></li>
           </ul>
         </div>
         <div>
-          <h4 data-i18n="shared.footer.models">Models</h4>
+          <h4 data-i18n="shared.footer.models">模型</h4>
           <ul>
-            <li><a href="/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker.html">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank.html">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker.html">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank.html">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank.html">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
-          <span data-i18n="shared.footer.disclaimer">Open educational resource · not affiliated with any model vendor</span>
-          · <a href="/privacy.html" data-i18n="shared.footer.privacyShort">Privacy</a>
-          · <a href="/changelog.html" data-i18n="shared.footer.changelogShort">Changelog</a>
+          <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
+          · <a href="/zh/privacy.html" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog.html" data-i18n="shared.footer.changelogShort">更新日志</a>
         </span>
       </div>
     </div>

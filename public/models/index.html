@@ -1,35 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-locale="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>Rerank model comparison 2026: Qwen3, Jina v3, bge, mxbai | reranker.uk</title>
-  <meta name="description" content="2026 reranker comparison: Qwen3-Reranker 0.6B/4B/8B, Jina v3 listwise, bge, mxbai, Cohere, Voyage, GTE ModernBERT, NVIDIA, ColBERT, instruction APIs." />
-  <link rel="canonical" href="https://reranker.uk/models/" />
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/models/" />
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/models/" />
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/" />
-  <meta name="theme-color" content="#0b0d17" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="author" content="reranker.uk" />
-  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Rerank model comparison — bge, Cohere, Jina, Voyage" />
-  <meta property="og:description" content="Which rerank model should you use? Side-by-side comparison of the top options." />
-  <meta property="og:url" content="https://reranker.uk/models/" />
-  <meta property="og:site_name" content="reranker.uk" />
-  <meta property="og:locale" content="en_GB" />
-  <meta property="og:locale:alternate" content="zh_CN" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" />
-  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" />
+  <meta name="description" content="2026 reranker comparison: Qwen3-Reranker 0.6B/4B/8B, Jina v3 listwise, bge, mxbai, Cohere, Voyage, GTE ModernBERT, NVIDIA, ColBERT, instruction APIs." >
+  <link rel="canonical" href="https://reranker.uk/models/" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/models/" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/" >
+  <meta name="theme-color" content="#0b0d17" >
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
+  <meta name="author" content="reranker.uk" >
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
+  <link rel="manifest" href="/site.webmanifest" >
+  <meta property="og:type" content="website" >
+  <meta property="og:title" content="Rerank model comparison — bge, Cohere, Jina, Voyage" >
+  <meta property="og:description" content="Which rerank model should you use? Side-by-side comparison of the top options." >
+  <meta property="og:url" content="https://reranker.uk/models/" >
+  <meta property="og:site_name" content="reranker.uk" >
+  <meta property="og:locale" content="en_GB" >
+  <meta property="og:locale:alternate" content="zh_CN" >
+  <meta name="twitter:card" content="summary_large_image" >
+  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <meta property="og:image:width" content="1200" >
+  <meta property="og:image:height" content="630" >
+  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" >
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
-  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="preload" href="/assets/css/style.css" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css" >
   <!-- seo:jsonld -->
   <script type="application/ld+json">
   {
@@ -102,6 +103,7 @@
     ]
   }
   </script>
+
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="shared.skip">Skip to content</a>
@@ -112,12 +114,12 @@
       <ul class="nav-links">
         <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
         <li><a href="/guides/" data-i18n="shared.nav.guides">Guides</a></li>
-        <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
+        <li><a href="/models/" data-i18n="shared.nav.models" aria-current="page" class="active">Models</a></li>
         <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <button class="lang-toggle" aria-label="切换到中文" title="切换到中文">中文</button>
+        <a class="lang-toggle" href="/zh/models/" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
   </header>
@@ -129,7 +131,7 @@
 
     <section class="section container">
       <div class="models-toolbar">
-        <input type="search" id="models-filter" class="models-filter" placeholder="Filter models…" aria-label="Filter models" />
+        <input type="search" id="models-filter" class="models-filter" placeholder="Filter models…" aria-label="Filter models" >
         <select id="models-type-filter" aria-label="Filter by type">
           <option value="all">All types</option>
           <option value="open">Open weights</option>
@@ -490,9 +492,7 @@
     </div>
   </footer>
   <script src="/assets/js/main.js"></script>
-  <script src="/assets/js/i18n/models-index.js"></script>
   <script src="/assets/js/models-index.js"></script>
-  <script src="/assets/js/i18n/shared.js"></script>
   <script src="/assets/js/i18n.js"></script>
 </body>
 </html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-locale="zh" data-prerendered="zh">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <title>Jina Reranker v3：listwise 长上下文 + 浏览器 tiny | reranker.uk</title>
+  <meta name="description" content="Jina Reranker 2026 评测：v3 listwise 长上下文旗舰、v2 多语言、v1-tiny 浏览器 Demo、价格与 Python 用法。" >
+  <link rel="canonical" href="https://reranker.uk/zh/models/jina-reranker.html" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/models/jina-reranker.html" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/jina-reranker.html" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/jina-reranker.html" >
+  <meta name="theme-color" content="#0b0d17" >
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
+  <meta name="author" content="reranker.uk" >
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
+  <link rel="manifest" href="/site.webmanifest" >
+  <meta property="og:type" content="article" >
+  <meta property="og:title" content="Jina Reranker v3：listwise 长上下文 + 浏览器 tiny | reranker.uk" >
+  <meta property="og:description" content="Jina Reranker 2026 评测：v3 listwise 长上下文旗舰、v2 多语言、v1-tiny 浏览器 Demo、价格与 Python 用法。" >
+  <meta property="og:url" content="https://reranker.uk/zh/models/jina-reranker.html" >
+  <meta property="og:site_name" content="reranker.uk" >
+  <meta property="og:locale" content="zh_CN" >
+  <meta property="og:locale:alternate" content="en_GB" >
+  <meta name="twitter:card" content="summary_large_image" >
+  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <meta property="og:image:width" content="1200" >
+  <meta property="og:image:height" content="630" >
+  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
+  <link rel="preload" href="/assets/css/style.css" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css" >
+  <!-- seo:jsonld -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://reranker.uk/zh/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Models",
+            "item": "https://reranker.uk/zh/models/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Jina Reranker",
+            "item": "https://reranker.uk/zh/models/jina-reranker.html"
+          }
+        ]
+      },
+      {
+        "@type": "Article",
+        "headline": "Jina Reranker — open weights + hosted API",
+        "description": "Jina Reranker review: open-weight cross-encoders with a hosted API. Covers jina-reranker-v2-base-multilingual, jina-reranker-v1-tiny-en (browser-runnable), benchmarks, pricing, and Python usage.",
+        "image": "https://reranker.uk/assets/img/og-cover.png",
+        "inLanguage": "en",
+        "datePublished": "2026-06-20",
+        "dateModified": "2026-06-21",
+        "author": {
+          "@type": "Organization",
+          "name": "reranker.uk",
+          "url": "https://reranker.uk/zh/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "reranker.uk",
+          "url": "https://reranker.uk/zh/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://reranker.uk/assets/img/icon-512.png"
+          }
+        },
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "reranker.uk",
+          "url": "https://reranker.uk/zh/"
+        },
+        "mainEntityOfPage": "https://reranker.uk/zh/models/jina-reranker.html",
+        "about": {
+          "@type": "Thing",
+          "name": "Jina Reranker reranker model"
+        }
+      }
+    ]
+  }
+  </script>
+
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="shared.skip">跳到正文</a>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
+        <li><a href="/zh/guides/" data-i18n="shared.nav.guides">指南</a></li>
+        <li><a href="/zh/models/" data-i18n="shared.nav.models" aria-current="page" class="active">模型对比</a></li>
+        <li><a class="nav-cta" href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
+      </ul>
+      <div class="nav-right">
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+        <a class="lang-toggle" href="/models/jina-reranker.html" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
+      </div>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>Jina Reranker</div>
+      <h1>Jina Reranker</h1>
+      <p class="meta">开源权重 + 托管 API · Jina AI · <time datetime="2026-06-25">更新于 2026 年 6 月 25 日</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">开源权重</span><span class="pill">托管 API</span><span class="pill info">v3 listwise</span><span class="pill">浏览器 tiny</span></div>
+      <p class="lead">Jina 2026 旗舰是 <strong>jina-reranker-v3</strong>：对多候选做 <em>listwise</em> 排序，上下文极长（报道称可一次看几十段）。旧版 <strong>v2</strong> 成对模型仍可用；<strong>v1-tiny</strong> 仍是 <a href="/zh/demo.html">本站 Demo</a> 所用模型。</p>
+
+      <div class="toc">
+        <strong>本页目录</strong>
+        <ol>
+          <li><a href="#models">模型变体</a></li>
+          <li><a href="#v3">Listwise v3 改了什么</a></li>
+          <li><a href="#pricing">价格</a></li>
+          <li><a href="#usage">快速上手</a></li>
+          <li><a href="#browser">浏览器 / 边缘端使用</a></li>
+          <li><a href="#pros-cons">优缺点</a></li>
+        </ol>
+      </div>
+
+      <h2 id="models">模型变体</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>模型</th><th>体积</th><th>语言</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>jina-reranker-v3</code></td><td>large</td><td>100+ 种语言</td><td><strong>2026 旗舰</strong> —— listwise、长上下文（约 64 段）</td></tr>
+            <tr><td><code>jina-reranker-v2-base-multilingual</code></td><td>~278 MB</td><td>100+ 种语言</td><td>上一代多语言成对旗舰</td></tr>
+            <tr><td><code>jina-reranker-v1-base-en</code></td><td>~278 MB</td><td>英文</td><td>英文基线</td></tr>
+            <tr><td><code>jina-reranker-v1-tiny-en</code></td><td>~33 MB</td><td>英文</td><td>浏览器 / 边缘；驱动本站 Demo</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="v3">Listwise v3 改了什么</h2>
+      <p>经典 cross-encoder 对每个 <code>(query, doc)</code> 独立打分。<strong>Listwise</strong> 模型一次看到整批候选，在多段共享词汇时有助于相对排序。代价是更高显存，以及与 MiniLM 成对打分不同的服务路径。</p>
+      <p>v3 的 BEIR nDCG@10 常被报为约 <strong>~61.9</strong> —— 与成熟托管 API 同档，真正差异在 listwise / 长上下文。模型 ID 与上下文上限请以 <a href="https://jina.ai/reranker" rel="noopener noreferrer">jina.ai/reranker</a> 为准。</p>
+
+      <h2 id="pricing">价格</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>档位</th><th>价格</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>免费额度</td><td>每月 100 万 token 免费 —— 无需信用卡</td></tr>
+            <tr><td>按量付费</td><td>约 $0.018 / 百万 token</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">相比按次计费，按 token 计费对长文档更友好。当前费率请查阅 Jina AI 官网。</p>
+
+      <h2 id="usage">快速上手</h2>
+      <h3>托管 API（Python）</h3>
+      <pre><code>import requests
+
+def rerank(query: str, documents: list[str], top_n: int = 5) -> list[str]:
+    resp = requests.post(
+        "https://api.jina.ai/v1/rerank",
+        headers={"Authorization": "Bearer YOUR_KEY", "Content-Type": "application/json"},
+        json={
+            "model": "jina-reranker-v3",  # or jina-reranker-v2-base-multilingual
+            "query": query,
+            "documents": documents,
+            "top_n": top_n,
+        },
+    ).json()
+    return [documents[r["index"]] for r in resp["results"]]</code></pre>
+
+      <h3>自建部署（sentence-transformers）</h3>
+      <pre><code>from sentence_transformers import CrossEncoder
+
+# Open weights — same model, self-hosted
+model = CrossEncoder("jinaai/jina-reranker-v2-base-multilingual",
+                     trust_remote_code=True, max_length=1024)
+
+scores = model.predict([(query, doc) for doc in documents])
+ranked = sorted(zip(scores, documents), reverse=True)</code></pre>
+
+      <h2 id="browser">浏览器 / 边缘端使用</h2>
+      <p><code>v1-tiny</code> 模型（量化后 33 MB）在普通宽带下可通过 transformers.js 在 10 秒内加载，对 10 个候选的批次打分约需 200 ms。这正是驱动我们 Demo 的模型：</p>
+      <pre><code>// transformers.js (ES module in the browser)
+import { AutoTokenizer, AutoModelForSequenceClassification }
+  from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3";
+
+const tokenizer = await AutoTokenizer.from_pretrained(
+  "jinaai/jina-reranker-v1-tiny-en", { dtype: "q8" }
+);
+const model = await AutoModelForSequenceClassification.from_pretrained(
+  "jinaai/jina-reranker-v1-tiny-en", { dtype: "q8" }
+);
+
+const inputs = tokenizer([query, query], {
+  text_pair: [doc1, doc2],
+  padding: true, truncation: true,
+});
+const { logits } = await model(inputs);
+const scores = logits.sigmoid().tolist();</code></pre>
+
+      <h2 id="pros-cons">优缺点</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 style="color:var(--good);margin-top:0">优点</h3>
+          <ul class="feature-list">
+            <li>v3 listwise 长上下文，适合多文档排序</li>
+            <li>双模式：托管 API + 开源权重</li>
+            <li>tiny 变体仍可在浏览器运行（本站 Demo）</li>
+            <li>慷慨的免费额度（每月 100 万 token，无需信用卡）</li>
+            <li>按 token 计费适合长文档</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--danger);margin-top:0">缺点</h3>
+          <ul style="padding-left:1.2rem;color:var(--text-soft)">
+            <li>v1-tiny 仅支持英文，质量较低</li>
+            <li>公司规模小于 Cohere —— 生态工具较少</li>
+            <li>自建部署需要 <code>trust_remote_code=True</code></li>
+            <li>对短段落而言，按 token 计费可能不够直观</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta-band" style="margin-top:2rem">
+        <h2 style="margin-top:0">jina-reranker-v1-tiny 驱动了这个 Demo</h2>
+        <p class="soft">在浏览器里实时看它为你自己的段落打分 —— 无 API 密钥，数据不离开页面。</p>
+        <a class="btn btn-primary" href="/zh/demo.html">打开 Demo →</a>
+      </div>
+
+      <h2>其他模型</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/zh/models/qwen-reranker.html"><h3>Qwen3-Reranker</h3><p>2026 开源 SOTA 家族（需 GPU）。</p></a>
+        <a class="card" href="/zh/models/bge-reranker.html"><h3>bge-reranker</h3><p>免费的开源权重替代品。</p></a>
+        <a class="card" href="/zh/models/cohere-rerank.html"><h3>Cohere Rerank</h3><p>成熟的托管 API。</p></a>
+        <a class="card" href="/zh/models/mxbai-rerank.html"><h3>mxbai-rerank</h3><p>Apache 2.0 开源权重，浏览器可跑 xsmall。</p></a>
+        <a class="card" href="/zh/models/voyage-rerank.html"><h3>Voyage Rerank</h3><p>高精度托管 API。</p></a>
+      </div>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch" data-i18n="shared.footer.blurb">一个关于检索与 RAG 重排序（reranker）的开放学习资源，外加一个在浏览器里零成本运行的实时 Demo。</p>
+          <p style="margin-top:.6rem"><a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer" data-i18n="shared.footer.github">在 GitHub 上查看源码</a></p>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.guides">指南</h4>
+          <ul>
+            <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog.html" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
+            <li><a href="/zh/privacy.html" data-i18n="shared.footer.privacy">隐私说明</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.models">模型</h4>
+          <ul>
+            <li><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker.html">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank.html">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker.html">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank.html">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank.html">Voyage Rerank</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> reranker.uk</span>
+        <span class="footer-legal muted">
+          <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
+          · <a href="/zh/privacy.html" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog.html" data-i18n="shared.footer.changelogShort">更新日志</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+  
+  <script src="/assets/js/i18n.js"></script>
+</body>
+</html>

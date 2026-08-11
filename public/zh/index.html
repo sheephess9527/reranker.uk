@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-locale="zh" data-prerendered="zh">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <title>Reranker 是什么？浏览器内免费体验重排序模型 | reranker.uk</title>
+  <meta name="description" content="免费在浏览器里体验 Reranker（重排序模型）。纯客户端运行，无需 API Key，保护隐私。学习 reranker 原理，并通过交互式 Demo 理解它如何提升 RAG 检索效果。" >
+  <link rel="canonical" href="https://reranker.uk/zh/" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/" >
+  <meta name="theme-color" content="#0b0d17" >
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
+  <meta name="author" content="reranker.uk" >
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
+  <link rel="manifest" href="/site.webmanifest" >
+  <meta property="og:type" content="website" >
+  <meta property="og:title" content="Reranker 是什么？浏览器内免费体验重排序模型 | reranker.uk" >
+  <meta property="og:description" content="免费在浏览器里体验 Reranker（重排序模型）。纯客户端运行，无需 API Key，保护隐私。学习 reranker 原理，并通过交互式 Demo 理解它如何提升 RAG 检索效果。" >
+  <meta property="og:url" content="https://reranker.uk/zh/" >
+  <meta property="og:site_name" content="reranker.uk" >
+  <meta property="og:locale" content="zh_CN" >
+  <meta property="og:locale:alternate" content="en_GB" >
+  <meta name="twitter:card" content="summary_large_image" >
+  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <meta property="og:image:width" content="1200" >
+  <meta property="og:image:height" content="630" >
+  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
+  <link rel="preload" href="/assets/css/style.css" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css" >
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://reranker.uk/zh/#org",
+        "name": "reranker.uk",
+        "url": "https://reranker.uk/zh/",
+        "logo": { "@type": "ImageObject", "url": "https://reranker.uk/assets/img/icon-512.png" }
+      },
+      {
+        "@type": "WebSite",
+        "name": "reranker.uk",
+        "url": "https://reranker.uk/zh/",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://reranker.uk/zh/#org" },
+        "description": "A resource on rerankers for retrieval and RAG, plus a browser-based reranking demo."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a reranker?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A reranker is a model that takes a query and a set of candidate documents and reorders them by relevance. It usually runs as a second stage after fast retrieval, scoring each query–document pair jointly with a cross-encoder for higher precision." }
+          },
+          {
+            "@type": "Question",
+            "name": "Why use a rerank model in RAG?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Vector search returns roughly relevant chunks, but the order is often imperfect. A rerank model re-scores the top candidates so the most relevant passages land at the top of the prompt, improving answer quality and letting you send fewer tokens to the LLM." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="shared.skip">跳到正文</a>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="/zh/" data-i18n="shared.nav.home" aria-current="page" class="active">首页</a></li>
+        <li><a href="/zh/guides/" data-i18n="shared.nav.guides">指南</a></li>
+        <li><a href="/zh/models/" data-i18n="shared.nav.models">模型对比</a></li>
+        <li><a class="nav-cta" href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
+      </ul>
+      <div class="nav-right">
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+        <a class="lang-toggle" href="/" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
+      </div>
+    </nav>
+  </header>
+<main id="main">
+    <section class="hero container">
+      <span class="eyebrow">Reranker · rerank 模型 · 为 RAG 重排序</span>
+      <h1>读懂 reranker，再亲眼看它在你的浏览器里运行。</h1>
+      <p class="lead">重排序器（reranker）会对检索得到的候选重新打分，让最相关的段落浮到最前面。在这里了解它的原理、对比主流模型，并实时体验一个 cross-encoder —— 零 API 成本，数据全程不离开你的设备。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/zh/demo.html">▶ 试试在线 Demo</a>
+        <a class="btn btn-ghost" href="/zh/guides/what-is-a-reranker.html">从基础概念开始</a>
+      </div>
+      <p class="muted" style="margin-top:1.4rem;font-size:.88rem">基于 transformers.js · 100% 在客户端运行 · 无需密钥</p>
+    </section>
+
+    <section class="section container">
+      <div class="section-head">
+        <h2>从这里开始</h2>
+        <p>三篇短指南，带你从“什么是 reranker？”一路走到在 RAG 流水线中真正可用的重排序环节。</p>
+      </div>
+      <div class="grid grid-3">
+        <a class="card" href="/zh/guides/what-is-a-reranker.html">
+          <span class="ico">🧭</span>
+          <h3>什么是 reranker？</h3>
+          <p>两阶段检索范式、排序为何重要，以及重排序在其中的位置。</p>
+          <p class="card-takeaway">reranker 联合对 (query, document) 对打分 —— 远比单独做余弦相似度准确。</p>
+          <div class="tag-row"><span class="pill info">基础</span></div>
+        </a>
+        <a class="card" href="/zh/guides/cross-encoder-vs-bi-encoder.html">
+          <span class="ico">⚖️</span>
+          <h3>Cross-encoder vs bi-encoder</h3>
+          <p>为什么 bi-encoder 快、cross-encoder 准，以及如何把两者结合使用。</p>
+          <p class="card-takeaway">bi-encoder 负责大规模召回，cross-encoder 负责精准排序。把它们组合成两个阶段来使用。</p>
+          <div class="tag-row"><span class="pill info">架构</span></div>
+        </a>
+        <a class="card" href="/zh/guides/rerank-rag.html">
+          <span class="ico">🔧</span>
+          <h3>如何为 RAG 加重排序</h3>
+          <p>宽召回、重排序、保留最优。含代码、top-k 取值建议与延迟取舍。</p>
+          <p class="card-takeaway">召回 50+ 个候选，重排序，保留 5 个 —— 更好的答案，更少的 token 送进 LLM。</p>
+          <div class="tag-row"><span class="pill info">实战</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="cta-band">
+        <span class="eyebrow">最有意思的部分</span>
+        <h2>现在就在你的浏览器里重排序</h2>
+        <p class="soft" style="max-width:620px;margin:0 auto 1.4rem">粘贴一个查询和几段候选文本。一个真实的 cross-encoder 只需下载一次并缓存，之后在本地对每一对打分 —— 你能看到排名在毫秒间重新洗牌。没有服务器、没有 API 密钥，数据不离开页面。</p>
+        <ul class="feature-list" style="display:inline-block;text-align:left;margin:0 auto 1.5rem">
+          <li>通过 transformers.js + ONNX Runtime Web 加载真实模型权重</li>
+          <li>零 API 成本、零滥用风险 —— 一切都在你的设备上完成</li>
+          <li>直观看到分数如何重新排列你的检索结果</li>
+        </ul>
+        <div><a class="btn btn-primary" href="/zh/demo.html">打开 Demo →</a></div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="section-head">
+        <h2>对比主流重排序模型</h2>
+        <p>2026 开源 SOTA 候选（<a href="/zh/models/qwen-reranker.html">Qwen3-Reranker</a>）、Jina v3 listwise、经典 bge/mxbai、托管 Cohere/Voyage —— 以及 late-interaction 与指令 API。</p>
+      </div>
+      <div class="grid grid-2">
+        <a class="card" href="/zh/models/qwen-reranker.html"><h3>Qwen3-Reranker</h3><p>0.6B / 4B / 8B 开源家族 —— 2026 质量优先时默认 GPU 自建选择。</p><div class="tag-row"><span class="pill good">开源权重</span><span class="pill info">2026 SOTA*</span></div></a>
+        <a class="card" href="/zh/models/bge-reranker.html"><h3>bge-reranker</h3><p>智源（BAAI）开源权重。仍是 CPU 友好的多语言默认。</p><div class="tag-row"><span class="pill good">开源权重</span><span class="pill">自建部署</span></div></a>
+        <a class="card" href="/zh/models/cohere-rerank.html"><h3>Cohere Rerank</h3><p>成熟的托管重排序 API，多语言质量强、接入简单。</p><div class="tag-row"><span class="pill">托管 API</span><span class="pill">多语言</span></div></a>
+        <a class="card" href="/zh/models/jina-reranker.html"><h3>Jina Reranker v3</h3><p>Listwise 长上下文旗舰；v1-tiny 仍驱动浏览器 Demo。</p><div class="tag-row"><span class="pill good">Open + Hosted</span><span class="pill info">Listwise</span></div></a>
+        <a class="card" href="/zh/models/voyage-rerank.html"><h3>Voyage Rerank</h3><p>为检索质量调优的托管重排序器，并提供面向特定领域的变体。</p><div class="tag-row"><span class="pill">托管 API</span><span class="pill">高质量</span></div></a>
+        <a class="card" href="/zh/models/mxbai-rerank.html"><h3>mxbai-rerank</h3><p>Apache 2.0 开源权重，含可在浏览器运行的 xsmall 变体 —— 本表中 BEIR 分数最高。</p><div class="tag-row"><span class="pill good">开源权重</span><span class="pill">浏览器 ✓</span></div></a>
+      </div>
+      <p class="center muted" style="margin-top:1.1rem;font-size:.9rem">另见：<a href="/zh/guides/late-interaction-rerank.html">ColBERT / late-interaction</a> · <a href="/zh/guides/instruction-reranker.html">指令跟随 rerank</a></p>
+      <p class="center" style="margin-top:1rem"><a class="btn btn-ghost" href="/zh/models/">查看完整对比 →</a></p>
+    </section>
+
+    <section class="section container narrow">
+      <h2 class="center">一张图看懂重排序</h2>
+      <figure class="pipeline-figure no-i18n" style="margin-top:1.2rem">
+        <svg viewBox="0 0 620 100" role="img" aria-label="Query flows through a retriever to get 50-100 candidates, then a reranker scores each pair to keep the top 5, then the LLM generates an answer." xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" class="pipe-arrowhead" ></path>
+            </marker>
+          </defs>
+          <style>
+            .pb { fill: var(--bg-elev); stroke: var(--border); stroke-width: 1.5; }
+            .pb.focus { stroke: var(--primary); stroke-width: 2; }
+            .pt { fill: var(--text); font: 600 13px var(--sans); }
+            .ps { fill: var(--text-soft); font: 12px var(--sans); }
+            .pm { fill: var(--text-mut); font: 11px var(--sans); }
+            .pl { stroke: var(--text-mut); stroke-width: 1.8; fill: none; }
+            .pipe-arrowhead { fill: var(--text-mut); }
+          </style>
+          <!-- query -->
+          <rect class="pb" x="2" y="28" width="80" height="44" rx="10" ></rect>
+          <text class="pt" x="42" y="52" text-anchor="middle">Query</text>
+          <!-- arrow 1 -->
+          <line class="pl" x1="82" y1="50" x2="138" y2="50" marker-end="url(#arr)" ></line>
+          <text class="pm" x="110" y="44" text-anchor="middle">top 50–100</text>
+          <!-- retriever -->
+          <rect class="pb" x="140" y="14" width="130" height="72" rx="10" ></rect>
+          <text class="pt" x="205" y="44" text-anchor="middle">Retriever</text>
+          <text class="ps" x="205" y="61" text-anchor="middle">bi-encoder / BM25</text>
+          <text class="pm" x="205" y="77" text-anchor="middle">fast · recall</text>
+          <!-- arrow 2 -->
+          <line class="pl" x1="270" y1="50" x2="326" y2="50" marker-end="url(#arr)" ></line>
+          <text class="pm" x="298" y="44" text-anchor="middle">top 5–10</text>
+          <!-- reranker (focus) -->
+          <rect class="pb focus" x="328" y="14" width="140" height="72" rx="10" ></rect>
+          <text class="pt" x="398" y="44" text-anchor="middle">Reranker</text>
+          <text class="ps" x="398" y="61" text-anchor="middle">cross-encoder scores</text>
+          <text class="pm" x="398" y="77" text-anchor="middle">slow · precise</text>
+          <!-- arrow 3 -->
+          <line class="pl" x1="468" y1="50" x2="524" y2="50" marker-end="url(#arr)" ></line>
+          <!-- llm -->
+          <rect class="pb" x="526" y="28" width="90" height="44" rx="10" ></rect>
+          <text class="pt" x="571" y="48" text-anchor="middle">LLM</text>
+          <text class="ps" x="571" y="64" text-anchor="middle">generate</text>
+        </svg>
+        <figcaption>Retrieve wide for recall, rerank for precision, send only the best to the model.</figcaption>
+      </figure>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch" data-i18n="shared.footer.blurb">一个关于检索与 RAG 重排序（reranker）的开放学习资源，外加一个在浏览器里零成本运行的实时 Demo。</p>
+          <p style="margin-top:.6rem"><a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer" data-i18n="shared.footer.github">在 GitHub 上查看源码</a></p>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.guides">指南</h4>
+          <ul>
+            <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog.html" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
+            <li><a href="/zh/privacy.html" data-i18n="shared.footer.privacy">隐私说明</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.models">模型</h4>
+          <ul>
+            <li><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker.html">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank.html">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker.html">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank.html">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank.html">Voyage Rerank</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> reranker.uk</span>
+        <span class="footer-legal muted">
+          <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
+          · <a href="/zh/privacy.html" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog.html" data-i18n="shared.footer.changelogShort">更新日志</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+  
+  <script src="/assets/js/i18n.js"></script>
+</body>
+</html>

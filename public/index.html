@@ -1,35 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-locale="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>Reranker — what it is, how it works, and a live in-browser demo | reranker.uk</title>
-  <meta name="description" content="A practical guide to rerankers for search and RAG: what a rerank model is, cross-encoder vs bi-encoder, how to add reranking to RAG, model comparisons (bge, Cohere, Jina, Voyage), and a free demo that runs entirely in your browser." />
-  <link rel="canonical" href="https://reranker.uk/" />
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/" />
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/" />
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/" />
-  <meta name="theme-color" content="#0b0d17" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="author" content="reranker.uk" />
-  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Reranker — the resource + a live in-browser rerank demo" />
-  <meta property="og:description" content="Learn rerankers for RAG and search, compare rerank models, and try a cross-encoder reranking demo that runs 100% in your browser — no API, no cost." />
-  <meta property="og:url" content="https://reranker.uk/" />
-  <meta property="og:site_name" content="reranker.uk" />
-  <meta property="og:locale" content="en_GB" />
-  <meta property="og:locale:alternate" content="zh_CN" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" />
-  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" />
+  <meta name="description" content="A practical guide to rerankers for search and RAG: what a rerank model is, cross-encoder vs bi-encoder, how to add reranking to RAG, model comparisons (bge, Cohere, Jina, Voyage), and a free demo that runs entirely in your browser." >
+  <link rel="canonical" href="https://reranker.uk/" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/" >
+  <meta name="theme-color" content="#0b0d17" >
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
+  <meta name="author" content="reranker.uk" >
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
+  <link rel="manifest" href="/site.webmanifest" >
+  <meta property="og:type" content="website" >
+  <meta property="og:title" content="Reranker — the resource + a live in-browser rerank demo" >
+  <meta property="og:description" content="Learn rerankers for RAG and search, compare rerank models, and try a cross-encoder reranking demo that runs 100% in your browser — no API, no cost." >
+  <meta property="og:url" content="https://reranker.uk/" >
+  <meta property="og:site_name" content="reranker.uk" >
+  <meta property="og:locale" content="en_GB" >
+  <meta property="og:locale:alternate" content="zh_CN" >
+  <meta name="twitter:card" content="summary_large_image" >
+  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <meta property="og:image:width" content="1200" >
+  <meta property="og:image:height" content="630" >
+  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" >
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
-  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="preload" href="/assets/css/style.css" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css" >
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -67,6 +68,7 @@
     ]
   }
   </script>
+
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="shared.skip">Skip to content</a>
@@ -75,14 +77,14 @@
       <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       <ul class="nav-links">
-        <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
+        <li><a href="/" data-i18n="shared.nav.home" aria-current="page" class="active">Home</a></li>
         <li><a href="/guides/" data-i18n="shared.nav.guides">Guides</a></li>
         <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
         <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <button class="lang-toggle" aria-label="切换到中文" title="切换到中文">中文</button>
+        <a class="lang-toggle" href="/zh/" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
   </header>
@@ -165,7 +167,7 @@
         <svg viewBox="0 0 620 100" role="img" aria-label="Query flows through a retriever to get 50-100 candidates, then a reranker scores each pair to keep the top 5, then the LLM generates an answer." xmlns="http://www.w3.org/2000/svg">
           <defs>
             <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 z" class="pipe-arrowhead" />
+              <path d="M0,0 L10,5 L0,10 z" class="pipe-arrowhead" ></path>
             </marker>
           </defs>
           <style>
@@ -178,28 +180,28 @@
             .pipe-arrowhead { fill: var(--text-mut); }
           </style>
           <!-- query -->
-          <rect class="pb" x="2" y="28" width="80" height="44" rx="10" />
+          <rect class="pb" x="2" y="28" width="80" height="44" rx="10" ></rect>
           <text class="pt" x="42" y="52" text-anchor="middle">Query</text>
           <!-- arrow 1 -->
-          <line class="pl" x1="82" y1="50" x2="138" y2="50" marker-end="url(#arr)" />
+          <line class="pl" x1="82" y1="50" x2="138" y2="50" marker-end="url(#arr)" ></line>
           <text class="pm" x="110" y="44" text-anchor="middle">top 50–100</text>
           <!-- retriever -->
-          <rect class="pb" x="140" y="14" width="130" height="72" rx="10" />
+          <rect class="pb" x="140" y="14" width="130" height="72" rx="10" ></rect>
           <text class="pt" x="205" y="44" text-anchor="middle">Retriever</text>
           <text class="ps" x="205" y="61" text-anchor="middle">bi-encoder / BM25</text>
           <text class="pm" x="205" y="77" text-anchor="middle">fast · recall</text>
           <!-- arrow 2 -->
-          <line class="pl" x1="270" y1="50" x2="326" y2="50" marker-end="url(#arr)" />
+          <line class="pl" x1="270" y1="50" x2="326" y2="50" marker-end="url(#arr)" ></line>
           <text class="pm" x="298" y="44" text-anchor="middle">top 5–10</text>
           <!-- reranker (focus) -->
-          <rect class="pb focus" x="328" y="14" width="140" height="72" rx="10" />
+          <rect class="pb focus" x="328" y="14" width="140" height="72" rx="10" ></rect>
           <text class="pt" x="398" y="44" text-anchor="middle">Reranker</text>
           <text class="ps" x="398" y="61" text-anchor="middle">cross-encoder scores</text>
           <text class="pm" x="398" y="77" text-anchor="middle">slow · precise</text>
           <!-- arrow 3 -->
-          <line class="pl" x1="468" y1="50" x2="524" y2="50" marker-end="url(#arr)" />
+          <line class="pl" x1="468" y1="50" x2="524" y2="50" marker-end="url(#arr)" ></line>
           <!-- llm -->
-          <rect class="pb" x="526" y="28" width="90" height="44" rx="10" />
+          <rect class="pb" x="526" y="28" width="90" height="44" rx="10" ></rect>
           <text class="pt" x="571" y="48" text-anchor="middle">LLM</text>
           <text class="ps" x="571" y="64" text-anchor="middle">generate</text>
         </svg>
@@ -257,8 +259,7 @@
     </div>
   </footer>
   <script src="/assets/js/main.js"></script>
-  <script src="/assets/js/i18n/home.js"></script>
-  <script src="/assets/js/i18n/shared.js"></script>
+  
   <script src="/assets/js/i18n.js"></script>
 </body>
 </html>

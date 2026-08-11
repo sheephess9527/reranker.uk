@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-locale="zh" data-prerendered="zh">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <title>更新日志 — reranker.uk 版本记录 | reranker.uk</title>
+  <meta name="description" content="reranker.uk 发布说明：Demo 功能、新指南、模型对比更新与站点改进。" >
+  <link rel="canonical" href="https://reranker.uk/zh/changelog.html" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/changelog.html" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/changelog.html" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/changelog.html" >
+  <meta name="theme-color" content="#0b0d17" >
+  <meta name="robots" content="index, follow" >
+  <meta name="author" content="reranker.uk" >
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
+  <link rel="manifest" href="/site.webmanifest" >
+  <meta property="og:type" content="website" >
+  <meta property="og:title" content="更新日志 — reranker.uk 版本记录 | reranker.uk" >
+  <meta property="og:description" content="reranker.uk 发布说明：Demo 功能、新指南、模型对比更新与站点改进。" >
+  <meta property="og:url" content="https://reranker.uk/zh/changelog.html" >
+  <meta property="og:site_name" content="reranker.uk" >
+  <meta property="og:locale" content="zh_CN" >
+  <meta property="og:locale:alternate" content="en_GB" >
+  <meta name="twitter:card" content="summary_large_image" >
+  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <meta property="og:image:width" content="1200" >
+  <meta property="og:image:height" content="630" >
+  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
+  <link rel="preload" href="/assets/css/style.css" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css" >
+  <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"更新日志","item":"https://reranker.uk/zh/changelog.html"}]}</script>
+
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="shared.skip">跳到正文</a>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
+        <li><a href="/zh/guides/" data-i18n="shared.nav.guides">指南</a></li>
+        <li><a href="/zh/models/" data-i18n="shared.nav.models">模型对比</a></li>
+        <li><a class="nav-cta" href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
+      </ul>
+      <div class="nav-right">
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+        <a class="lang-toggle" href="/changelog.html" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
+      </div>
+    </nav>
+  </header>
+<main id="main">
+    <section class="hero container" style="padding-bottom:1.5rem">
+      <h1>更新日志</h1>
+      <p class="lead">reranker.uk 已上线内容 —— Demo 改进、新指南与站点基础设施。</p>
+    </section>
+
+    <section class="section container narrow">
+      <article class="changelog-entry">
+        <h2 id="2026-06-25e">2026 年 6 月 25 日 — 模型版图刷新</h2>
+        <ul class="feature-list">
+          <li><strong>Qwen3-Reranker</strong> —— 0.6B / 4B / 8B 行 + <a href="/zh/models/qwen-reranker.html">深评页</a></li>
+          <li><strong>Jina v3</strong> —— listwise 旗舰；tiny 保留给浏览器 Demo</li>
+          <li><strong>表新增</strong> —— gte-reranker-modernbert-base、NVIDIA nv-rerankqa / Nemotron</li>
+          <li><strong>自托管 / 首页 / 选型</strong> —— GPU 默认 Qwen3-4B；bge 仍为 CPU 路径</li>
+          <li><strong>分数脚注</strong> —— MTEB-R* vs 经典 BEIR；下次复核 2026 年 10 月</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
+        <h2 id="2026-06-25d">2026 年 6 月 25 日 — 最小打磨包</h2>
+        <ul class="feature-list">
+          <li><strong>诚实基准</strong> —— 新兴行用 ≈ / n/a；下次复核 2026 年 9 月；价格滞后说明</li>
+          <li><strong>Demo max_length</strong> —— 256 / 384 / 512 token；字符警告随选择变化</li>
+          <li><strong>按需加载 transformers.js</strong> —— 首次点重排序才加载</li>
+          <li><strong>指令 rerank 指南</strong> —— <a href="/zh/guides/instruction-reranker.html">任务导向排序</a></li>
+          <li><strong>首页</strong> —— 不止五大家 + ColBERT / 指令指南链接</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
+        <h2 id="2026-06-25c">2026 年 6 月 25 日 — 内容扩展与打磨</h2>
+        <ul class="feature-list">
+          <li><strong>模型表</strong> —— 架构列；Qwen3-Reranker、Contextual AI、ColBERTv2、ms-marco 浏览器行</li>
+          <li><strong>Late-interaction 指南</strong> —— <a href="/zh/guides/late-interaction-rerank.html">ColBERT 与何时跳过 cross-encoder rerank</a></li>
+          <li><strong>Demo 预设</strong> —— 电商 + 多语言（7 个场景）；模型表 ms-marco <code>?m=</code></li>
+          <li><strong>JSON-LD</strong> —— <code>inLanguage</code> 随中/英切换</li>
+          <li><strong>更新日志 RSS</strong> —— <a href="/changelog.rss">/changelog.rss</a> 订阅</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
+        <h2 id="2026-06-25b">2026 年 6 月 25 日 — i18n 与 SEO 补全</h2>
+        <ul class="feature-list">
+          <li><strong>模型页 i18n</strong> —— 五个模型家族的标签、目录、日期、优缺点、其他模型</li>
+          <li><strong>更新日志 + 隐私 i18n</strong> —— 两页全文中文</li>
+          <li><strong>hreflang</strong> —— 全站 <code>en</code>、<code>zh-Hans</code>、<code>x-default</code>（同 URL，客户端切换）</li>
+          <li><strong>og:locale:alternate</strong> —— 随语言切换与主 locale 对调</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
+        <h2 id="2026-06-25">2026 年 6 月 25 日 — 低优先级打磨</h2>
+        <ul class="feature-list">
+          <li><strong>指南 i18n</strong> —— 自托管、场景选型、混合检索、评测指南全文中文</li>
+          <li><strong>压缩分享链接</strong> —— Demo URL 超约 1600 字符时用 <code>?z=</code> gzip</li>
+          <li><strong>预设移动端布局</strong> —— 窄屏 2 列网格</li>
+          <li><strong>og:locale</strong> —— 语言切换为中文时设为 <code>zh_CN</code></li>
+          <li><strong>双模型差异 a11y</strong> —— 表格 caption、行表头、空状态、<code>aria-labelledby</code></li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
+        <h2 id="2026-06-23c">2026 年 6 月 23 日 — 中优先级体验与内容</h2>
+        <ul class="feature-list">
+          <li><strong>自托管指南</strong> —— <a href="/zh/guides/self-host-reranker.html">sentence-transformers、服务化、运维</a></li>
+          <li><strong>场景指南</strong> —— <a href="/zh/guides/choose-reranker-scenario.html">RAG / 客服 / 法律 / 代码</a></li>
+          <li><strong>段落字符统计</strong> —— 列表统计 + 超 512 字警告</li>
+          <li><strong>新预设</strong> —— 技术文档、代码检索</li>
+          <li><strong>CSV 导出</strong> —— 与 JSON、Markdown 并列的复制 CSV</li>
+          <li><strong>浅色主题</strong> —— 导航栏切换，<code>localStorage</code> 持久化</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
+        <h2 id="2026-06-23b">2026 年 6 月 23 日 — Demo 体验第二轮</h2>
+        <ul class="feature-list">
+          <li><strong>模型加载面板</strong> —— 进度 %、ETA、文件名、缓存状态</li>
+          <li><strong>JSON 段落</strong> —— 粘贴 JSON 数组或 <code>{ "passages": [...] }</code> 对象</li>
+          <li><strong>双模型差异视图</strong> —— 对齐表格，含分数与名次差</li>
+          <li><strong>模型表</strong> —— 排序、筛选，<code>?m=</code> 跳转 Demo</li>
+          <li><strong>移动端段落编辑</strong> —— 小屏增删列表</li>
+          <li><strong>错误提示</strong> —— 网络、WebGPU、内存、限制等分类消息</li>
+          <li><strong>更新日志 + 隐私</strong> —— 本页与简短隐私说明</li>
+          <li><strong>导航</strong> —— 顶栏首页与指南链接</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
+        <h2 id="2026-06-23">2026 年 6 月 23 日 — 完整发布（计划项 1–5、7–10）</h2>
+        <ul class="feature-list">
+          <li>构建系统：<code>src/partials</code> + <code>src/pages</code> → <code>scripts/build.mjs</code></li>
+          <li>Demo：三列结果、bi-encoder 代理、双模型对比、WebGPU、URL 分享</li>
+          <li>指南索引、混合检索、评测 reranker</li>
+          <li>模型：2026 年 6 月核验、选型卡片、首页 mxbai</li>
+          <li>i18n：<code>data-i18n</code> 键 + 共享词典；EN/中文 切换</li>
+          <li>页脚 GitHub 链接；粘性导航；aria-live 状态</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
+        <h2 id="2026-06-21">2026 年 6 月 21 日 — 首次上线</h2>
+        <ul class="feature-list">
+          <li>reranker、cross- vs bi-encoder、RAG 教育指南</li>
+          <li>bge、Cohere、Jina、Voyage、mxbai 模型对比页</li>
+          <li>基于 transformers.js 的浏览器内 cross-encoder Demo</li>
+          <li>部署于 Cloudflare Workers（静态资源）</li>
+        </ul>
+      </article>
+
+      <p class="center" style="margin-top:2.5rem"><a class="btn btn-primary" href="/zh/demo.html">试用 Demo →</a></p>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch" data-i18n="shared.footer.blurb">一个关于检索与 RAG 重排序（reranker）的开放学习资源，外加一个在浏览器里零成本运行的实时 Demo。</p>
+          <p style="margin-top:.6rem"><a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer" data-i18n="shared.footer.github">在 GitHub 上查看源码</a></p>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.guides">指南</h4>
+          <ul>
+            <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog.html" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
+            <li><a href="/zh/privacy.html" data-i18n="shared.footer.privacy">隐私说明</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.models">模型</h4>
+          <ul>
+            <li><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker.html">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank.html">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker.html">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank.html">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank.html">Voyage Rerank</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> reranker.uk</span>
+        <span class="footer-legal muted">
+          <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
+          · <a href="/zh/privacy.html" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog.html" data-i18n="shared.footer.changelogShort">更新日志</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+  
+  <script src="/assets/js/i18n.js"></script>
+</body>
+</html>
