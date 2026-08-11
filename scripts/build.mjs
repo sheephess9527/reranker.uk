@@ -234,10 +234,14 @@ function translate(root, pageDict) {
 
 const isNeutral = (href) => LOCALE_NEUTRAL.some((p) => href === p || href.startsWith(p));
 
-/** `/guides/` → `/zh/guides/`; leaves assets, anchors and absolute URLs alone. */
+/**
+ * `/guides/` → `/zh/guides/`; leaves assets, anchors and absolute URLs alone.
+ * Idempotent, so a link a page already wrote as `/zh/…` is not double-prefixed.
+ */
 function zhPath(p) {
   if (!p.startsWith("/") || p.startsWith("//")) return p;
   if (isNeutral(p)) return p;
+  if (p === ZH_PREFIX || p.startsWith(ZH_PREFIX + "/")) return p;
   return p === "/" ? ZH_PREFIX + "/" : ZH_PREFIX + p;
 }
 
@@ -255,6 +259,7 @@ function localiseHeadExtra(html) {
   return html.replace(/https:\/\/reranker\.uk(\/[^"'\s<>]*)?/g, (full, p) => {
     if (!p || p === "/") return SITE + ZH_PREFIX + "/";
     if (isNeutral(p)) return full;
+    if (p === ZH_PREFIX || p.startsWith(ZH_PREFIX + "/")) return full;
     return SITE + ZH_PREFIX + p;
   });
 }

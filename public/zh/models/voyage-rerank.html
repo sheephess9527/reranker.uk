@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-  <title>Voyage Rerank：高精度重排序 API 评测 | reranker.uk</title>
-  <meta name="description" content="Voyage Rerank 评测：voyage-rerank-2 及面向代码、金融的领域变体。基准、价格、Python 用法，以及为 RAG 加高质量重排序的优缺点。" >
+  <title>Voyage rerank-2.5：指令跟随重排序 API 评测 | reranker.uk</title>
+  <meta name="description" content="Voyage rerank-2.5 评测：对比 rerank-2.5 与 rerank-2.5-lite —— 32k 上下文、指令跟随、按 token 计费，含 Python 用法及为 RAG 加重排序的优缺点。" >
   <link rel="canonical" href="https://reranker.uk/zh/models/voyage-rerank.html" >
   <link rel="alternate" hreflang="en" href="https://reranker.uk/models/voyage-rerank.html" >
   <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/voyage-rerank.html" >
@@ -16,8 +16,8 @@
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
   <link rel="manifest" href="/site.webmanifest" >
   <meta property="og:type" content="article" >
-  <meta property="og:title" content="Voyage Rerank：高精度重排序 API 评测 | reranker.uk" >
-  <meta property="og:description" content="Voyage Rerank 评测：voyage-rerank-2 及面向代码、金融的领域变体。基准、价格、Python 用法，以及为 RAG 加高质量重排序的优缺点。" >
+  <meta property="og:title" content="Voyage rerank-2.5：指令跟随重排序 API 评测 | reranker.uk" >
+  <meta property="og:description" content="Voyage rerank-2.5 评测：对比 rerank-2.5 与 rerank-2.5-lite —— 32k 上下文、指令跟随、按 token 计费，含 Python 用法及为 RAG 加重排序的优缺点。" >
   <meta property="og:url" content="https://reranker.uk/zh/models/voyage-rerank.html" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="zh_CN" >
@@ -118,10 +118,10 @@
 <main id="main">
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>Voyage Rerank</div>
-      <h1>Voyage Rerank</h1>
-      <p class="meta">托管 API · Voyage AI · <time datetime="2026-06-21">更新于 2026 年 6 月 21 日</time></p>
-      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">托管 API</span><span class="pill info">高精度</span><span class="pill">领域专用变体</span></div>
-      <p class="lead">Voyage AI 打造重排序器只有一个目标：把检索精度做到极致。<code>voyage-rerank-2</code> 在 BEIR 和 MTEB 检索任务上始终名列前茅，公司还为代码和金融文档提供面向特定领域的变体 —— 当通用质量不够用时，它是个强力选择。</p>
+      <h1>Voyage rerank-2.5</h1>
+      <p class="meta">托管 API · Voyage AI · <time datetime="2026-08-11">更新于 2026 年 8 月 11 日</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">托管 API</span><span class="pill info">高精度</span><span class="pill info">Instruction-following</span></div>
+      <p class="lead">Voyage AI 做重排序器只有一个目标：把检索精度做到最高。当前一代 <code>rerank-2.5</code> 与 <code>rerank-2.5-lite</code> 把上下文窗口翻倍到 32,000 token，并加入了<strong>指令跟随</strong> —— 你可以用一句自然语言来定义什么算「相关」，而不必微调。计费按 token，段落较短时相当便宜。</p>
 
       <div class="toc">
         <strong>本页目录</strong>
@@ -140,13 +140,13 @@
             <tr><th>模型</th><th>上下文</th><th>最适合</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>rerank-2</code></td><td>16K token</td><td>通用旗舰；顶级 BEIR 成绩</td></tr>
-            <tr><td><code>rerank-2-lite</code></td><td>16K token</td><td>更快、更省；质量不错</td></tr>
-            <tr><td><code>rerank-lite-1</code></td><td>4K token</td><td>旧版轻量模型</td></tr>
+            <tr><td><code>rerank-2.5</code></td><td>32K tokens</td><td>当前旗舰；支持指令跟随</td></tr>
+            <tr><td><code>rerank-2.5-lite</code></td><td>32K tokens</td><td>上下文与指令能力相同，成本更低</td></tr>
+            <tr><td><code>rerank-2</code> / <code>rerank-2-lite</code></td><td>16K token</td><td>上一代，仍在提供服务</td></tr>
           </tbody>
         </table>
       </div>
-      <p><code>rerank-2</code> 的 16K 上下文窗口相当大 —— 适合在不分块的情况下重排长篇法律、医疗或金融文档。</p>
+      <p>2.5 系列的 32K 上下文足以直接重排长篇法律、医疗或金融文档，无需先切块。更有意思的变化是指令跟随：一句 <em>「优先引用了法条的段落」</em> 就能重塑排序，完全不需要训练数据。</p>
 
       <h2 id="pricing">价格</h2>
       <div class="table-wrap">
@@ -155,9 +155,10 @@
             <tr><th>模型</th><th>价格</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>rerank-2</code></td><td>约 $0.05 / 百万 token</td></tr>
-            <tr><td><code>rerank-2-lite</code></td><td>约 $0.02 / 百万 token</td></tr>
-            <tr><td>免费试用</td><td>注册即赠 2 亿 token</td></tr>
+            <tr><td><code>rerank-2.5</code></td><td>$0.05 / 1M tokens</td></tr>
+            <tr><td><code>rerank-2.5-lite</code></td><td>$0.02 / 1M tokens</td></tr>
+            <tr><td>免费额度</td><td>每个账号前 2 亿 token</td></tr>
+            <tr><td>Batch API</td><td>打 67 折</td></tr>
           </tbody>
         </table>
       </div>
@@ -181,7 +182,7 @@ documents = [
 result = vo.rerank(
     query=query,
     documents=documents,
-    model="rerank-2",
+    model="rerank-2.5",
     top_k=3,
 )
 
@@ -193,7 +194,7 @@ for r in result.results:
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "rerank-2",
+    "model": "rerank-2.5",
     "query": "How do I add reranking to my RAG pipeline?",
     "documents": ["Rerankers score...", "BM25 is..."],
     "top_k": 3
@@ -208,7 +209,7 @@ def rag_answer(query: str, vector_db, llm) -> str:
     # Stage 1: retrieve wide
     candidates = vector_db.search(query, top_k=50)
     # Stage 2: rerank tight
-    result = vo.rerank(query=query, documents=candidates, model="rerank-2", top_k=5)
+    result = vo.rerank(query=query, documents=candidates, model="rerank-2.5", top_k=5)
     top5 = [candidates[r.index] for r in result.results]
     # Stage 3: generate
     return llm.complete(f"Context:\n" + "\n\n".join(top5) + f"\n\nQ: {query}")</code></pre>
@@ -219,7 +220,7 @@ def rag_answer(query: str, vector_db, llm) -> str:
           <h3 style="color:var(--good);margin-top:0">优点</h3>
           <ul class="feature-list">
             <li>顶级的 BEIR 检索精度成绩</li>
-            <li>16K token 上下文 —— 非常适合长文档</li>
+            <li>32K token 上下文 —— 很适合长文档</li>
             <li>有竞争力的按 token 计费</li>
             <li>注册赠送 2 亿免费 token</li>
             <li>与 Voyage 的 embedding 无缝配合</li>

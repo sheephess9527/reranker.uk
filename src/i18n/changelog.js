@@ -1,4 +1,22 @@
 window.I18N_PAGE = { zh: {
+  "11 Aug 2026 — Real Chinese URLs, and a 2026 model refresh":
+    "2026 年 8 月 11 日 —— 中文有了独立 URL，模型数据刷新到 2026",
+  "<strong>Chinese lives at <a href=\"/zh/\">/zh/</a></strong> — every page is now pre-rendered in Chinese at its own URL with a self-referencing canonical, instead of a client-side toggle that left all three hreflang tags pointing at one page":
+    "<strong>中文页面迁到 <a href=\"/zh/\">/zh/</a></strong> —— 每个页面都在构建期预渲染成中文并拥有自己的 URL 与自指 canonical，不再是三个 hreflang 全指向同一页的前端切换",
+  "<strong>Lighter pages</strong> — translation moved to build time, so ~200 KB of dictionaries no longer ship to the browser":
+    "<strong>页面更轻</strong> —— 翻译改在构建期完成，约 200 KB 的词典不再下发到浏览器",
+  "<strong>Sitemap is generated</strong> — built from the page tree with hreflang alternates and <code>lastmod</code> from git, replacing a hand-maintained file that had drifted":
+    "<strong>Sitemap 改为自动生成</strong> —— 从页面树生成，带 hreflang 备选链接，<code>lastmod</code> 取自 git，替代此前已经失准的手工维护文件",
+  "<strong>Cohere Rerank 4</strong> — <code>rerank-v4.0-pro</code> and <code>rerank-v4.0-fast</code> replace v3.5; 32k context, billed per search":
+    "<strong>Cohere Rerank 4</strong> —— <code>rerank-v4.0-pro</code> 与 <code>rerank-v4.0-fast</code> 取代 v3.5；32k 上下文，按次检索计费",
+  "<strong>Voyage rerank-2.5</strong> — 32k context and instruction following; the index table's per-doc pricing was wrong and is now per token":
+    "<strong>Voyage rerank-2.5</strong> —— 32k 上下文并支持指令跟随；对比表此前按文档计价有误，现已改为按 token",
+  "<strong>Jina v3 numbers firmed up</strong> — 0.6B, 61.94 BEIR nDCG@10, 64 docs in a 131K context":
+    "<strong>Jina v3 数据落实</strong> —— 0.6B，BEIR nDCG@10 61.94，131K 上下文内 64 篇文档",
+  "<strong>Honest Qwen3 rows</strong> — dropped an unverifiable \"~75+\" figure for the 8B; reports put the 4B slightly ahead of it":
+    "<strong>Qwen3 行如实修正</strong> —— 移除 8B 无法核实的「~75+」数字；有报告显示 4B 反而略优于它",
+  "<strong>Design refresh</strong> — fluid type scale, a real elevation ramp, and one focus-visible treatment site-wide":
+    "<strong>视觉改版</strong> —— 流体字号阶梯、成体系的层次阴影，以及全站统一的键盘聚焦样式",
   "_title": "更新日志 — reranker.uk 版本记录 | reranker.uk",
   "_desc": "reranker.uk 发布说明：Demo 功能、新指南、模型对比更新与站点改进。",
 

@@ -1,6 +1,30 @@
 window.I18N_PAGE = { zh: {
-  "_title": "Voyage Rerank：高精度重排序 API 评测 | reranker.uk",
-  "_desc": "Voyage Rerank 评测：voyage-rerank-2 及面向代码、金融的领域变体。基准、价格、Python 用法，以及为 RAG 加高质量重排序的优缺点。",
+  "Voyage rerank-2.5":
+    "Voyage rerank-2.5",
+  "Hosted API · Voyage AI · <time datetime=\"2026-08-11\">Updated 11 Aug 2026</time>":
+    "托管 API · Voyage AI · <time datetime=\"2026-08-11\">更新于 2026 年 8 月 11 日</time>",
+  "Voyage AI built their rerankers with a single goal: maximise retrieval precision. The current generation, <code>rerank-2.5</code> and <code>rerank-2.5-lite</code>, doubles the context window to 32,000 tokens and adds <strong>instruction following</strong> — you can shape what counts as relevant with a natural-language prompt instead of fine-tuning. Pricing is per token, which stays cheap when your passages are short.":
+    "Voyage AI 做重排序器只有一个目标：把检索精度做到最高。当前一代 <code>rerank-2.5</code> 与 <code>rerank-2.5-lite</code> 把上下文窗口翻倍到 32,000 token，并加入了<strong>指令跟随</strong> —— 你可以用一句自然语言来定义什么算「相关」，而不必微调。计费按 token，段落较短时相当便宜。",
+  "The 32K context window on the 2.5 models is large enough to rerank long legal, medical or financial documents without chunking them first. Instruction following is the more interesting change: a prompt such as <em>“prefer passages that cite a statute”</em> reshapes the ranking without any training data.":
+    "2.5 系列的 32K 上下文足以直接重排长篇法律、医疗或金融文档，无需先切块。更有意思的变化是指令跟随：一句 <em>「优先引用了法条的段落」</em> 就能重塑排序，完全不需要训练数据。",
+  "Current flagship; instruction following":
+    "当前旗舰；支持指令跟随",
+  "Same context and instructions, lower cost":
+    "上下文与指令能力相同，成本更低",
+  "Previous generation, still served":
+    "上一代，仍在提供服务",
+  "Free allowance":
+    "免费额度",
+  "First 200M tokens per account":
+    "每个账号前 2 亿 token",
+  "Batch API":
+    "Batch API",
+  "33% discount":
+    "打 67 折",
+  "32K token context — great for long documents":
+    "32K token 上下文 —— 很适合长文档",
+  "_title": "Voyage rerank-2.5：指令跟随重排序 API 评测 | reranker.uk",
+  "_desc": "Voyage rerank-2.5 评测：对比 rerank-2.5 与 rerank-2.5-lite —— 32k 上下文、指令跟随、按 token 计费，含 Python 用法及为 RAG 加重排序的优缺点。",
 
   "<a href=\"/\">Home</a><span>/</span><a href=\"/models/\">Models</a><span>/</span>Voyage Rerank": "<a href=\"/\">首页</a><span>/</span><a href=\"/models/\">模型对比</a><span>/</span>Voyage Rerank",
   "Voyage Rerank": "Voyage Rerank",

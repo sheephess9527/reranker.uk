@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-  <title>Cohere Rerank：托管重排序 API 评测 | reranker.uk</title>
-  <meta name="description" content="Cohere Rerank 评测：对比 rerank-v3.5 与 rerank-english-v3.0。基准、价格、Python 与 Node SDK 用法，以及为 RAG 加重排序的优缺点。" >
+  <title>Cohere Rerank 4：托管重排序 API 评测 | reranker.uk</title>
+  <meta name="description" content="Cohere Rerank 4 评测：对比 rerank-v4.0-pro 与 rerank-v4.0-fast —— 32k 上下文、100+ 语言、按次检索计费，含 Python 与 Node SDK 用法及为 RAG 加重排序的优缺点。" >
   <link rel="canonical" href="https://reranker.uk/zh/models/cohere-rerank.html" >
   <link rel="alternate" hreflang="en" href="https://reranker.uk/models/cohere-rerank.html" >
   <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/cohere-rerank.html" >
@@ -16,8 +16,8 @@
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
   <link rel="manifest" href="/site.webmanifest" >
   <meta property="og:type" content="article" >
-  <meta property="og:title" content="Cohere Rerank：托管重排序 API 评测 | reranker.uk" >
-  <meta property="og:description" content="Cohere Rerank 评测：对比 rerank-v3.5 与 rerank-english-v3.0。基准、价格、Python 与 Node SDK 用法，以及为 RAG 加重排序的优缺点。" >
+  <meta property="og:title" content="Cohere Rerank 4：托管重排序 API 评测 | reranker.uk" >
+  <meta property="og:description" content="Cohere Rerank 4 评测：对比 rerank-v4.0-pro 与 rerank-v4.0-fast —— 32k 上下文、100+ 语言、按次检索计费，含 Python 与 Node SDK 用法及为 RAG 加重排序的优缺点。" >
   <meta property="og:url" content="https://reranker.uk/zh/models/cohere-rerank.html" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="zh_CN" >
@@ -118,10 +118,10 @@
 <main id="main">
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>Cohere Rerank</div>
-      <h1>Cohere Rerank</h1>
-      <p class="meta">托管 API · Cohere · <time datetime="2026-06-21">更新于 2026 年 6 月 21 日</time></p>
+      <h1>Cohere Rerank 4</h1>
+      <p class="meta">托管 API · Cohere · <time datetime="2026-08-11">更新于 2026 年 8 月 11 日</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">托管 API</span><span class="pill">多语言</span><span class="pill info">免费档</span></div>
-      <p class="lead">Cohere Rerank 是最早的商业重排序 API 之一，至今仍是部署最广泛的产品之一。当前这一代 —— <code>rerank-v3.5</code> —— 在 BEIR 基准上有很强的多语言精度，提供简洁的 REST + SDK 接口，免费额度也足够开发和低流量生产使用。</p>
+      <p class="lead">Cohere Rerank 是最早的商用重排序 API 之一，至今仍是部署最广泛的产品之一。当前一代 <strong>Rerank 4</strong>（2026 年 4 月发布）提供两个版本 —— 偏精度的 <code>rerank-v4.0-pro</code> 与偏吞吐的 <code>rerank-v4.0-fast</code> —— 两者都是 32,000 token 上下文、支持 100+ 语言，接口为简洁的 REST + SDK。</p>
 
       <div class="toc">
         <strong>本页目录</strong>
@@ -140,13 +140,13 @@
             <tr><th>模型 ID</th><th>语言</th><th>上下文</th><th>说明</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>rerank-v3.5</code></td><td>100+ 种语言</td><td>4096 tokens/doc</td><td>当前最佳；多语言旗舰</td></tr>
-            <tr><td><code>rerank-english-v3.0</code></td><td>英文</td><td>4096 tokens/doc</td><td>略快，仅英文</td></tr>
-            <tr><td><code>rerank-multilingual-v3.0</code></td><td>100+ 种语言</td><td>4096 tokens/doc</td><td>上一代多语言模型</td></tr>
+            <tr><td><code>rerank-v4.0-pro</code></td><td>100+ 种语言</td><td>32,000 tokens</td><td>当前旗舰；更高精度的重排序</td></tr>
+            <tr><td><code>rerank-v4.0-fast</code></td><td>100+ 种语言</td><td>32,000 tokens</td><td>更低延迟、更高吞吐</td></tr>
+            <tr><td><code>rerank-v3.5</code></td><td>100+ 种语言</td><td>4096 tokens/doc</td><td>上一代多语言旗舰</td></tr>
           </tbody>
         </table>
       </div>
-      <p>默认使用 <code>rerank-v3.5</code>。只有当你纯英文、且每一毫秒都很关键时，才降级到 <code>rerank-english-v3.0</code>。</p>
+      <p>默认用 <code>rerank-v4.0-pro</code>。当吞吐或尾延迟比最后一点精度更重要时再换 <code>rerank-v4.0-fast</code> —— 两者价格相差很小（每次检索 $0.0025 对 $0.002），所以该由质量而非成本来决定选型。</p>
 
       <h2 id="pricing">价格</h2>
       <div class="table-wrap">
@@ -156,7 +156,8 @@
           </thead>
           <tbody>
             <tr><td>免费</td><td>$0</td><td>每月 1,000 次 API 调用</td></tr>
-            <tr><td>按量付费</td><td>约 $2 / 1,000 次搜索</td><td>无上限</td></tr>
+            <tr><td><code>rerank-v4.0-pro</code></td><td>$0.0025 / search</td><td>一次检索 = 1 个 query + 最多 100 篇文档</td></tr>
+            <tr><td><code>rerank-v4.0-fast</code></td><td>$0.002 / search</td><td>计费单位相同</td></tr>
             <tr><td>企业版</td><td>定制</td><td>SLA、私有部署选项</td></tr>
           </tbody>
         </table>
@@ -168,7 +169,7 @@
       <pre><code>pip install cohere</code></pre>
       <pre><code>import cohere
 
-co = cohere.Client("YOUR_API_KEY")
+co = cohere.ClientV2("YOUR_API_KEY")
 
 query = "How do I add reranking to my RAG pipeline?"
 documents = [
@@ -179,7 +180,7 @@ documents = [
 ]
 
 results = co.rerank(
-    model="rerank-v3.5",
+    model="rerank-v4.0-pro",
     query=query,
     documents=documents,
     top_n=3,
@@ -193,7 +194,7 @@ for r in results.results:
 const co = new Cohere.Client({ token: "YOUR_API_KEY" });
 
 const result = await co.rerank({
-  model: "rerank-v3.5",
+  model: "rerank-v4.0-pro",
   query: "How do I add reranking to my RAG pipeline?",
   documents: ["...", "..."],
   topN: 3,
@@ -206,7 +207,7 @@ result.results.forEach((r) => console.log(r.relevanceScore, documents[r.index]))
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "rerank-v3.5",
+    "model": "rerank-v4.0-pro",
     "query": "How do I add reranking to my RAG pipeline?",
     "documents": ["Rerankers score query-passage pairs...", "BM25 is..."],
     "top_n": 3
@@ -218,10 +219,10 @@ result.results.forEach((r) => console.log(r.relevanceScore, documents[r.index]))
           <h3 style="color:var(--good);margin-top:0">优点</h3>
           <ul class="feature-list">
             <li>成熟的生产级 API，带 SLA</li>
-            <li>顶级的多语言 BEIR 成绩</li>
+            <li>在 100+ 语言上质量稳定</li>
             <li>SDK 支持：Python、Node、Java、Go、curl</li>
             <li>适合原型开发的慷慨免费额度</li>
-            <li>4096 token 的文档上下文窗口</li>
+            <li>32,000 token 上下文窗口</li>
             <li>简单、可预期的定价</li>
           </ul>
         </div>

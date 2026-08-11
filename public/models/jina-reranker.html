@@ -4,7 +4,7 @@
   <meta charset="UTF-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>Jina Reranker: open weights + hosted API review | reranker.uk</title>
-  <meta name="description" content="Jina Reranker review for 2026: jina-reranker-v3 listwise long-context, v2 multilingual, v1-tiny browser demo, pricing, and Python usage." >
+  <meta name="description" content="Jina Reranker review for 2026: jina-reranker-v3 is a 0.6B listwise model scoring 61.94 nDCG@10 on BEIR with 64 documents in a 131K context. Plus v2 multilingual, v1-tiny browser demo, pricing and Python usage." >
   <link rel="canonical" href="https://reranker.uk/models/jina-reranker.html" >
   <link rel="alternate" hreflang="en" href="https://reranker.uk/models/jina-reranker.html" >
   <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/jina-reranker.html" >
@@ -17,7 +17,7 @@
   <link rel="manifest" href="/site.webmanifest" >
   <meta property="og:type" content="article" >
   <meta property="og:title" content="Jina Reranker v3 — listwise + browser tiny" >
-  <meta property="og:description" content="v3 listwise long-context flagship; open weights + hosted API; v1-tiny for the browser demo." >
+  <meta property="og:description" content="0.6B listwise reranker at 61.94 BEIR nDCG@10 — ahead of Qwen3-Reranker-4B. Open weights plus hosted API." >
   <meta property="og:url" content="https://reranker.uk/models/jina-reranker.html" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="en_GB" >
@@ -119,9 +119,9 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Jina Reranker</div>
       <h1>Jina Reranker</h1>
-      <p class="meta">Open weights + Hosted API · Jina AI · <time datetime="2026-06-25">Updated 25 Jun 2026</time></p>
+      <p class="meta">Open weights + Hosted API · Jina AI · <time datetime="2026-08-11">Updated 11 Aug 2026</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Open weights</span><span class="pill">Hosted API</span><span class="pill info">v3 listwise</span><span class="pill">Browser tiny</span></div>
-      <p class="lead">Jina’s 2026 flagship is <strong>jina-reranker-v3</strong>: <em>listwise</em> ranking over many candidates with a very long context window (reports cite scoring dozens of docs together). Older <strong>v2</strong> pairwise models remain useful; <strong>v1-tiny</strong> is still what runs in <a href="/demo.html">our browser demo</a>.</p>
+      <p class="lead">Jina’s 2026 flagship is <strong>jina-reranker-v3</strong>: a <strong>0.6B</strong> <em>listwise</em> reranker built on Qwen3-0.6B that scores up to <strong>64 documents inside one 131K-token context</strong> and reaches <strong>61.94 nDCG@10 on BEIR</strong> — ahead of Qwen3-Reranker-4B at roughly a sixth of the size. Older <strong>v2</strong> pairwise models remain useful; <strong>v1-tiny</strong> is still what runs in <a href="/demo.html">our browser demo</a>.</p>
 
       <div class="toc">
         <strong>On this page</strong>
@@ -142,7 +142,7 @@
             <tr><th>Model</th><th>Size</th><th>Languages</th><th>Notes</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>jina-reranker-v3</code></td><td>large</td><td>100+ langs</td><td><strong>Flagship 2026</strong> — listwise, long context (~64 docs)</td></tr>
+            <tr><td><code>jina-reranker-v3</code></td><td>0.6B</td><td>100+ langs</td><td><strong>Flagship 2026</strong> — listwise, 64 docs in 131K ctx, 61.94 BEIR</td></tr>
             <tr><td><code>jina-reranker-v2-base-multilingual</code></td><td>~278 MB</td><td>100+ langs</td><td>Prior multilingual pair-wise flagship</td></tr>
             <tr><td><code>jina-reranker-v1-base-en</code></td><td>~278 MB</td><td>English</td><td>English baseline</td></tr>
             <tr><td><code>jina-reranker-v1-tiny-en</code></td><td>~33 MB</td><td>English</td><td>Browser / edge; powers our demo</td></tr>
@@ -152,7 +152,7 @@
 
       <h2 id="v3">What listwise v3 changes</h2>
       <p>Classic cross-encoders score each <code>(query, doc)</code> independently. <strong>Listwise</strong> models see a slate of candidates at once, which can improve relative ordering when many passages share vocabulary. The trade-off is higher memory and a different serving path than MiniLM-style pair scoring.</p>
-      <p>Published BEIR nDCG@10 for v3 is often cited around <strong>~61.9</strong> — in the same ballpark as mature hosted APIs, with the listwise / long-context story as the real differentiator. Confirm model IDs and context limits on <a href="https://jina.ai/reranker" rel="noopener noreferrer">jina.ai/reranker</a>.</p>
+      <p>v3 reports <strong>61.94 nDCG@10 on BEIR</strong> — level with the strongest cross-encoders in <a href="/models/">our table</a> while being small enough to serve on a single GPU, and ahead of Qwen3-Reranker-4B despite being 6× smaller. Architecturally it takes contextual embeddings from each document’s final token after causal attention across the whole slate, rather than scoring pairs late. Details in the <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">v3 paper</a>; confirm model IDs and limits on <a href="https://jina.ai/reranker" rel="noopener noreferrer">jina.ai/reranker</a>.</p>
 
       <h2 id="pricing">Pricing</h2>
       <div class="table-wrap">
@@ -220,7 +220,7 @@ const scores = logits.sigmoid().tolist();</code></pre>
         <div class="card">
           <h3 style="color:var(--good);margin-top:0">Pros</h3>
           <ul class="feature-list">
-            <li>v3 listwise long-context for multi-doc ranking</li>
+            <li>61.94 BEIR nDCG@10 from only 0.6B parameters</li>
             <li>Dual-mode: hosted API + open weights</li>
             <li>Tiny variant still runs in the browser (our demo)</li>
             <li>Generous free tier (1M tokens/month, no card needed)</li>

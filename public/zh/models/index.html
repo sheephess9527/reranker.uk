@@ -126,7 +126,7 @@
 <main id="main">
     <section class="hero container" style="padding-bottom:1.5rem">
       <h1>重排序模型对比</h1>
-      <p class="lead">生产栈混合 <strong>cross-encoder</strong>、<strong>listwise</strong>、<strong>late-interaction</strong> 与指令 API。本表把 <strong>2026 开源 SOTA 候选（Qwen3）</strong> 与成熟家族（bge、mxbai、Cohere、Jina v3）并列 —— 架构、延迟、语言、成本；分数协议不同时脚注标明。</p>
+      <p class="lead">生产环境往往混用 <strong>cross-encoder</strong>、<strong>listwise</strong> 模型、<strong>late-interaction</strong> 以及指令式 API。2026 年最值得注意的一点是：<strong>参数量不再预测质量</strong> —— 0.6B 的 listwise 模型（Jina v3）在 BEIR 上超过 Qwen3-Reranker-4B，149M 的 cross-encoder 在 Hit@1 上与 1.2B 打平，而 Qwen3 自己的 4B 也略胜 8B。下表对比架构、延迟、语言与成本，凡评测协议不一致处均如实标注。</p>
     </section>
 
     <section class="section container">
@@ -162,37 +162,37 @@
             </tr>
           </thead>
           <tbody>
-            <tr data-name="qwen3-reranker-4b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="70">
+            <tr data-name="qwen3-reranker-4b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="">
               <td><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker-4B</a></td>
               <td><span class="pill">Cross-encoder</span></td>
-              <td><span class="pill good">Open weights</span><span class="pill info">2026 SOTA*</span></td>
-              <td>2026 开源自建默认（GPU）</td>
-              <td>100+ langs · long ctx</td>
+              <td><span class="pill good">Apache 2.0</span><span class="pill info">Qwen3 最佳档位</span></td>
+              <td>多语言开源自托管最强（需 GPU）</td>
+              <td>100+ langs · 32K ctx</td>
               <td>GPU required</td>
               <td>免费（自建）</td>
-              <td class="muted" title="MTEB-R / vendor protocol — not same as classic BEIR column avg">MTEB-R ~70+*</td>
+              <td class="muted" title="Vendor reports MTEB-R over top-100 candidates from Qwen3-Embedding-0.6B — not the classic BEIR 18-dataset average">MTEB-R*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="qwen3-reranker-8b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="72">
+            <tr data-name="qwen3-reranker-8b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="">
               <td><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker-8B</a></td>
               <td><span class="pill">Cross-encoder</span></td>
-              <td><span class="pill good">Open weights</span></td>
-              <td>开源质量顶配；最大 Qwen3</td>
-              <td>100+ 种语言</td>
+              <td><span class="pill good">Apache 2.0</span></td>
+              <td>Qwen3 最大档 —— 但 BEIR 上 4B 更好</td>
+              <td>100+ langs · 32K ctx</td>
               <td>GPU / multi-GPU</td>
               <td>免费（自建）</td>
-              <td class="muted" title="Open-weight leaderboard reports; protocol differs">BEIR 类 ~75+*</td>
+              <td class="muted" title="Reported ~0.48 points behind Qwen3-Reranker-4B on BEIR tasks — bigger is not better here">MTEB-R*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="qwen3-reranker-0.6b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="65">
+            <tr data-name="qwen3-reranker-0.6b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="">
               <td><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker-0.6B</a></td>
               <td><span class="pill">Cross-encoder</span></td>
-              <td><span class="pill good">Open weights</span></td>
+              <td><span class="pill good">Apache 2.0</span></td>
               <td>最轻 Qwen3；舒适运行仍需 GPU</td>
-              <td>100+ 种语言</td>
+              <td>100+ langs · 32K ctx</td>
               <td>建议 GPU</td>
               <td>免费（自建）</td>
-              <td class="muted" title="Smaller sibling; not browser-sized">MTEB-R 有竞争力*</td>
+              <td class="muted" title="Smaller sibling; not browser-sized">MTEB-R*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="bge-reranker-v2-m3" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="60.1">
@@ -217,15 +217,15 @@
               <td>~62.1</td>
               <td class="demo-link-cell"></td>
             </tr>
-            <tr data-name="jina-reranker-v3" data-type="open api" data-arch="listwise" data-langs="100+" data-pricing="freemium" data-beir="61.9">
+            <tr data-name="jina-reranker-v3" data-type="open api" data-arch="listwise" data-langs="100+" data-pricing="freemium" data-beir="61.94">
               <td><a href="/zh/models/jina-reranker.html">Jina Reranker v3</a></td>
               <td><span class="pill info">Listwise</span></td>
-              <td><span class="pill good">Open + Hosted</span></td>
-              <td>Listwise 长上下文（最多约 64 段）</td>
+              <td><span class="pill good">开源 + 托管</span><span class="pill info">优于 Qwen3-4B</span></td>
+              <td>0.6B listwise；64 篇文档共享 131K 上下文</td>
               <td>100+ 种语言</td>
               <td>API or GPU self-host</td>
               <td>免费额度 + 按量付费</td>
-              <td>~61.9</td>
+              <td>61.94</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="jina-reranker-tiny" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="55" data-demo="jina-reranker">
@@ -239,48 +239,70 @@
               <td class="muted">旧版 tiny</td>
               <td class="demo-link-cell"></td>
             </tr>
-            <tr data-name="cohere-rerank-v3.5" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="61.2">
-              <td><a href="/zh/models/cohere-rerank.html">Cohere Rerank v3.5</a></td>
+            <tr data-name="cohere-rerank-4-pro" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
+              <td><a href="/zh/models/cohere-rerank.html">Cohere Rerank 4 Pro</a></td>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Hosted API</span></td>
-              <td>成熟多语言 API</td>
+              <td>成熟的多语言 API；32k 上下文</td>
               <td>100+ 种语言</td>
-              <td>80–200 ms API</td>
-              <td>~$0.002/1k docs†</td>
-              <td>~61.2</td>
+              <td>API</td>
+              <td>$0.0025/search†</td>
+              <td class="muted" title="Cohere does not publish a classic BEIR 18-dataset average for Rerank 4">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="voyage-rerank-2" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="61.0">
-              <td><a href="/zh/models/voyage-rerank.html">Voyage Rerank 2</a></td>
+            <tr data-name="cohere-rerank-4-fast" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
+              <td><a href="/zh/models/cohere-rerank.html">Cohere Rerank 4 Fast</a></td>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Hosted API</span></td>
-              <td>高精度；领域变体</td>
+              <td>面向吞吐与延迟调优的同系版本</td>
+              <td>100+ 种语言</td>
+              <td>API</td>
+              <td>$0.002/search†</td>
+              <td class="muted" title="Vendor does not publish a classic BEIR average">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr data-name="voyage-rerank-2.5" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+              <td><a href="/zh/models/voyage-rerank.html">Voyage rerank-2.5</a></td>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill">Hosted API</span><span class="pill info">Instruction</span></td>
+              <td>支持指令跟随；32k 上下文</td>
               <td>多语言</td>
-              <td>100–250 ms API</td>
-              <td>~$0.0005/1k docs†</td>
-              <td>~61.0</td>
+              <td>API</td>
+              <td>$0.05/M tokens†</td>
+              <td class="muted" title="Voyage publishes its own retrieval evals, not a classic BEIR average">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr data-name="voyage-rerank-2.5-lite" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+              <td><a href="/zh/models/voyage-rerank.html">Voyage rerank-2.5-lite</a></td>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill">Hosted API</span></td>
+              <td>更便宜的档位；同样 32k 上下文</td>
+              <td>多语言</td>
+              <td>API</td>
+              <td>$0.02/M tokens†</td>
+              <td class="muted" title="Voyage publishes its own retrieval evals, not a classic BEIR average">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="gte-reranker-modernbert" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="">
               <td><a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">gte-reranker-modernbert-base</a></td>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><span class="pill info">Compact</span></td>
-              <td>~149M；2026 英文 hit-rate 强</td>
+              <td>仅约 149M，Hit@1 却与 nemotron-1b 打平</td>
               <td>英文</td>
               <td>Fast GPU / CPU-friendly</td>
               <td>免费（自建）</td>
-              <td class="muted" title="Task-specific benches; not classic BEIR avg">任务基准*</td>
+              <td class="muted" title="Task-specific benches; not classic BEIR avg">Hit@1 ≈ nemotron*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="nvidia-nv-rerank" data-type="open api" data-arch="cross-encoder" data-langs="en" data-pricing="freemium" data-beir="">
-              <td><a href="https://build.nvidia.com/nvidia/nv-rerankqa-mistral-4b-v3" rel="noopener noreferrer">NVIDIA nv-rerankqa / Nemotron</a></td>
+            <tr data-name="llama-nemotron-rerank-1b-v2" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="">
+              <td><a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">llama-nemotron-rerank-1b-v2</a></td>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Open + NIM API</span></td>
-              <td>企业 / NVIDIA 栈；偏 QA</td>
-              <td>英文</td>
+              <td>1.2B；在不计延迟时精度居首</td>
+              <td>多语言（MIRACL / MLQA 评测）</td>
               <td>GPU / NIM</td>
               <td>NIM / self-host</td>
-              <td class="muted">产品指标*</td>
+              <td class="muted" title="Vendor QA protocol across BEIR/TextQA, TechQA, MIRACL, MLQA, MLDR — not a classic BEIR average">Hit@1 83.0*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="ms-marco-minilm" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="55.0" data-demo="ms-marco">
@@ -320,15 +342,15 @@
         </table>
       </div>
       <div class="benchmark-meta callout" style="margin-top:.8rem;padding:.85rem 1rem">
-        <p class="muted" style="font-size:.82rem;margin:0"><strong>最近核验：</strong>2026 年 6 月（为 Qwen3 / Jina v3 刷新）· <strong>下次复核：</strong>2026 年 10 月。标 <strong>*</strong> 的列为 MTEB-R / 厂商 / 任务协议 —— <em>并非</em> bge/Cohere/mxbai 行的经典 BEIR 18 均值。<strong>†</strong> 价格可能滞后。可进 Demo：mxbai xsmall、Jina tiny、ms-marco MiniLM。</p>
-        <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">Sources: <a href="https://huggingface.co/Qwen" rel="noopener noreferrer">Qwen3-Reranker</a> · <a href="https://jina.ai/reranker" rel="noopener noreferrer">Jina</a> · <a href="https://huggingface.co/spaces/mteb/leaderboard" rel="noopener noreferrer">MTEB</a> · <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR</a> · <a href="https://huggingface.co/BAAI/bge-reranker-v2-m3" rel="noopener noreferrer">BAAI</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">GTE ModernBERT</a> · <a href="https://build.nvidia.com/" rel="noopener noreferrer">NVIDIA NIM</a> · <a href="/zh/models/qwen-reranker.html">Qwen guide</a> · <a href="/zh/guides/instruction-reranker.html">instruction</a> · <a href="/zh/guides/late-interaction-rerank.html">ColBERT</a></p>
+        <p class="muted" style="font-size:.82rem;margin:0"><strong>最近核对：</strong>2026 年 8 月（Cohere Rerank 4、Voyage rerank-2.5、Jina v3 的 BEIR、nemotron-1b）· <strong>下次复核：</strong>2026 年 11 月。标 <strong>*</strong> 的列使用 MTEB-R、厂商或任务特定协议，<em>不同于</em> bge / mxbai / Jina 行所用的经典 BEIR 18 数据集均值。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档）计费，Voyage 按 <em>token</em> 计费。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。</p>
+        <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">资料来源： <a href="https://huggingface.co/Qwen" rel="noopener noreferrer">Qwen3-Reranker</a> · <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">jina-reranker-v3 论文</a> · <a href="https://docs.voyageai.com/docs/reranker" rel="noopener noreferrer">Voyage 重排序器</a> · <a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">nemotron-rerank</a> · <a href="https://huggingface.co/spaces/mteb/leaderboard" rel="noopener noreferrer">MTEB</a> · <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR</a> · <a href="https://huggingface.co/BAAI/bge-reranker-v2-m3" rel="noopener noreferrer">BAAI</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">GTE ModernBERT</a> · <a href="/zh/models/qwen-reranker.html">Qwen 指南</a> · <a href="/zh/guides/instruction-reranker.html">指令跟随</a> · <a href="/zh/guides/late-interaction-rerank.html">ColBERT</a></p>
       </div>
 
       <div class="grid grid-2" style="margin-top:2.5rem">
         <a class="card" href="/zh/models/qwen-reranker.html">
           <h3>Qwen3-Reranker</h3>
-          <div class="tag-row" style="margin-bottom:.8rem"><span class="pill good">Open weights</span><span class="pill info">2026 SOTA*</span></div>
-          <p>0.6B / 4B / 8B 家族 —— 2026 多语言 GPU 自建开源主线。质量优先从 4B 起。</p>
+          <div class="tag-row" style="margin-bottom:.8rem"><span class="pill good">Apache 2.0</span><span class="pill info">多语言</span></div>
+          <p>0.6B / 4B / 8B，32K 上下文。从 4B 开始 —— 据报告它在 BEIR 上略胜 8B，所以「越大越好」在这里并不成立。</p>
         </a>
         <a class="card" href="/zh/models/bge-reranker.html">
           <h3>bge-reranker</h3>
@@ -336,19 +358,19 @@
           <p>智源开源权重。仍是 CPU 友好默认（v2-m3）。有 GPU 余量时与 Qwen3 对比。</p>
         </a>
         <a class="card" href="/zh/models/cohere-rerank.html">
-          <h3>Cohere Rerank</h3>
+          <h3>Cohere Rerank 4</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill">Hosted API</span><span class="pill">多语言</span></div>
-          <p>最成熟的托管重排序 API，多语言质量稳定，免费额度慷慨，并提供 Python、Node、Java、Go 的 SDK。</p>
+          <p>Pro 与 Fast 两个版本，32k 上下文，100+ 语言。按「次检索」计费 —— 一个 query 加最多 100 篇文档 —— 而不是按文档数。</p>
         </a>
         <a class="card" href="/zh/models/jina-reranker.html">
-          <h3>Jina Reranker</h3>
-          <div class="tag-row" style="margin-bottom:.8rem"><span class="pill good">Open + Hosted</span><span class="pill info">v3 listwise</span></div>
-          <p>v3 listwise 长上下文旗舰；v1-tiny 仍驱动 Demo。开源 + 托管 API。</p>
+          <h3>Jina Reranker v3</h3>
+          <div class="tag-row" style="margin-bottom:.8rem"><span class="pill good">Open + Hosted</span><span class="pill info">Listwise</span></div>
+          <p>0.6B 的 listwise 模型，BEIR 得分 61.94 —— 以约六分之一的体量超过 Qwen3-Reranker-4B。v1-tiny 仍在驱动我们的 Demo。</p>
         </a>
         <a class="card" href="/zh/models/voyage-rerank.html">
-          <h3>Voyage Rerank</h3>
-          <div class="tag-row" style="margin-bottom:.8rem"><span class="pill">Hosted API</span><span class="pill">Domain-specific</span></div>
-          <p>Voyage AI 的重排序器专门为检索精度优化，并为代码和金融提供领域调优的变体。</p>
+          <h3>Voyage rerank-2.5</h3>
+          <div class="tag-row" style="margin-bottom:.8rem"><span class="pill">Hosted API</span><span class="pill info">Instruction</span></div>
+          <p>rerank-2.5 与 -lite，均为 32k 上下文并支持指令跟随，可以用自然语言引导相关性判断。按 token 计费。</p>
         </a>
         <a class="card" href="/zh/models/mxbai-rerank.html">
           <h3>mxbai-rerank</h3>
@@ -374,11 +396,11 @@
         <div class="chooser-card">
           <div class="chooser-badge chooser-open">Open · GPU</div>
           <h3><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker</a></h3>
-          <p class="chooser-tagline">2026 开源 SOTA 候选 —— 从 4B 起步</p>
+          <p class="chooser-tagline">多语言开源权重最优 —— 从 4B 起步</p>
           <ul class="feature-list">
-            <li>0.6B / 4B / 8B —— 按 GPU 在体量与延迟间取舍</li>
-            <li>多语言 + 长上下文（MTEB-R 报道）</li>
-            <li>Apache 2.0 家族；用自有标注验证</li>
+            <li>0.6B / 4B / 8B，全部 Apache 2.0，全部 32K 上下文</li>
+            <li>4B 是甜点档 —— 8B 更贵，分数却不更高</li>
+            <li>厂商给的是 MTEB-R 数字，请在你自己的标注集上复核</li>
           </ul>
         </div>
         <div class="chooser-card">
@@ -393,32 +415,32 @@
         </div>
         <div class="chooser-card">
           <div class="chooser-badge chooser-api">API</div>
-          <h3><a href="/zh/models/cohere-rerank.html">Cohere Rerank</a></h3>
-          <p class="chooser-tagline">最简单的托管 API，顶级多语言质量</p>
+          <h3><a href="/zh/models/cohere-rerank.html">Cohere Rerank 4</a></h3>
+          <p class="chooser-tagline">最省事的托管 API；在 Pro 与 Fast 间二选一</p>
           <ul class="feature-list">
             <li>Python、Node、Java、Go 官方 SDK —— 一行代码接入</li>
-            <li>100+ 语言的稳定多语言质量</li>
-            <li>慷慨的免费额度；成熟、久经生产验证的 API</li>
+            <li>两个版本都是 32k 上下文、100+ 语言</li>
+            <li>Pro 重精度，Fast 重吞吐 —— 每次检索 $0.0025 对 $0.002</li>
           </ul>
         </div>
         <div class="chooser-card">
           <div class="chooser-badge chooser-both">Open + API</div>
-          <h3><a href="/zh/models/jina-reranker.html">Jina Reranker</a></h3>
-          <p class="chooser-tagline">v3 listwise + 浏览器 tiny</p>
+          <h3><a href="/zh/models/jina-reranker.html">Jina Reranker v3</a></h3>
+          <p class="chooser-tagline">单卡就能跑，BEIR 却在第一梯队</p>
           <ul class="feature-list">
-            <li>v3 listwise 长上下文，适合生产排序</li>
+            <li>0.6B 拿到 61.94 BEIR nDCG@10 —— 胜过体量 6 倍的 Qwen3-Reranker-4B</li>
+            <li>Listwise：64 篇文档共享同一个 131K token 的上下文</li>
             <li>v1-tiny 仍可在浏览器跑（本站 Demo）</li>
-            <li>免费档；开源权重 + 托管 API</li>
           </ul>
         </div>
         <div class="chooser-card">
           <div class="chooser-badge chooser-api">API</div>
-          <h3><a href="/zh/models/voyage-rerank.html">Voyage Rerank</a></h3>
-          <p class="chooser-tagline">顶级检索精度，领域专用变体</p>
+          <h3><a href="/zh/models/voyage-rerank.html">Voyage rerank-2.5</a></h3>
+          <p class="chooser-tagline">可用指令引导相关性，按 token 计费</p>
           <ul class="feature-list">
-            <li>专门为检索质量调优，而非仅面向分类任务</li>
-            <li>面向代码搜索和金融的领域专属模型</li>
-            <li>托管 API 中按千条计费最低价</li>
+            <li>用自然语言指令引导打分，无需微调</li>
+            <li>rerank-2.5 与更便宜的 -lite 都是 32k 上下文</li>
+            <li>每个账号前 2 亿 token 免费；走 Batch API 再打 67 折</li>
           </ul>
         </div>
         <div class="chooser-card">

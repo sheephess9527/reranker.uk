@@ -4,7 +4,7 @@
   <meta charset="UTF-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>Jina Reranker v3：listwise 长上下文 + 浏览器 tiny | reranker.uk</title>
-  <meta name="description" content="Jina Reranker 2026 评测：v3 listwise 长上下文旗舰、v2 多语言、v1-tiny 浏览器 Demo、价格与 Python 用法。" >
+  <meta name="description" content="Jina Reranker 2026 评测：jina-reranker-v3 是 0.6B 的 listwise 模型，BEIR nDCG@10 达 61.94，可在 131K 上下文内处理 64 篇文档。另含 v2 多语言、v1-tiny 浏览器 Demo、价格与 Python 用法。" >
   <link rel="canonical" href="https://reranker.uk/zh/models/jina-reranker.html" >
   <link rel="alternate" hreflang="en" href="https://reranker.uk/models/jina-reranker.html" >
   <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/jina-reranker.html" >
@@ -17,7 +17,7 @@
   <link rel="manifest" href="/site.webmanifest" >
   <meta property="og:type" content="article" >
   <meta property="og:title" content="Jina Reranker v3：listwise 长上下文 + 浏览器 tiny | reranker.uk" >
-  <meta property="og:description" content="Jina Reranker 2026 评测：v3 listwise 长上下文旗舰、v2 多语言、v1-tiny 浏览器 Demo、价格与 Python 用法。" >
+  <meta property="og:description" content="Jina Reranker 2026 评测：jina-reranker-v3 是 0.6B 的 listwise 模型，BEIR nDCG@10 达 61.94，可在 131K 上下文内处理 64 篇文档。另含 v2 多语言、v1-tiny 浏览器 Demo、价格与 Python 用法。" >
   <meta property="og:url" content="https://reranker.uk/zh/models/jina-reranker.html" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="zh_CN" >
@@ -119,9 +119,9 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>Jina Reranker</div>
       <h1>Jina Reranker</h1>
-      <p class="meta">开源权重 + 托管 API · Jina AI · <time datetime="2026-06-25">更新于 2026 年 6 月 25 日</time></p>
+      <p class="meta">开源权重 + 托管 API · Jina AI · <time datetime="2026-08-11">更新于 2026 年 8 月 11 日</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">开源权重</span><span class="pill">托管 API</span><span class="pill info">v3 listwise</span><span class="pill">浏览器 tiny</span></div>
-      <p class="lead">Jina 2026 旗舰是 <strong>jina-reranker-v3</strong>：对多候选做 <em>listwise</em> 排序，上下文极长（报道称可一次看几十段）。旧版 <strong>v2</strong> 成对模型仍可用；<strong>v1-tiny</strong> 仍是 <a href="/zh/demo.html">本站 Demo</a> 所用模型。</p>
+      <p class="lead">Jina 的 2026 旗舰是 <strong>jina-reranker-v3</strong>：一个基于 Qwen3-0.6B 的 <strong>0.6B</strong> <em>listwise</em> 重排序器，可在<strong>同一个 131K token 上下文里一次性给最多 64 篇文档打分</strong>，BEIR nDCG@10 达到 <strong>61.94</strong> —— 以约六分之一的体量超过 Qwen3-Reranker-4B。较早的 <strong>v2</strong> 成对模型依然有用；<strong>v1-tiny</strong> 仍是 <a href="/zh/demo.html">我们浏览器 Demo</a> 里跑的那个。</p>
 
       <div class="toc">
         <strong>本页目录</strong>
@@ -142,7 +142,7 @@
             <tr><th>模型</th><th>体积</th><th>语言</th><th>说明</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>jina-reranker-v3</code></td><td>large</td><td>100+ 种语言</td><td><strong>2026 旗舰</strong> —— listwise、长上下文（约 64 段）</td></tr>
+            <tr><td><code>jina-reranker-v3</code></td><td>0.6B</td><td>100+ 种语言</td><td><strong>2026 旗舰</strong> —— listwise，131K 上下文内 64 篇文档，BEIR 61.94</td></tr>
             <tr><td><code>jina-reranker-v2-base-multilingual</code></td><td>~278 MB</td><td>100+ 种语言</td><td>上一代多语言成对旗舰</td></tr>
             <tr><td><code>jina-reranker-v1-base-en</code></td><td>~278 MB</td><td>英文</td><td>英文基线</td></tr>
             <tr><td><code>jina-reranker-v1-tiny-en</code></td><td>~33 MB</td><td>英文</td><td>浏览器 / 边缘；驱动本站 Demo</td></tr>
@@ -152,7 +152,7 @@
 
       <h2 id="v3">Listwise v3 改了什么</h2>
       <p>经典 cross-encoder 对每个 <code>(query, doc)</code> 独立打分。<strong>Listwise</strong> 模型一次看到整批候选，在多段共享词汇时有助于相对排序。代价是更高显存，以及与 MiniLM 成对打分不同的服务路径。</p>
-      <p>v3 的 BEIR nDCG@10 常被报为约 <strong>~61.9</strong> —— 与成熟托管 API 同档，真正差异在 listwise / 长上下文。模型 ID 与上下文上限请以 <a href="https://jina.ai/reranker" rel="noopener noreferrer">jina.ai/reranker</a> 为准。</p>
+      <p>v3 公布的 BEIR nDCG@10 为 <strong>61.94</strong> —— 与<a href="/zh/models/">我们表中</a>最强的 cross-encoder 持平，却小到单卡即可部署，并且在体量只有 6 分之 1 的情况下超过 Qwen3-Reranker-4B。架构上，它先对整个候选列表做因果注意力，再从每篇文档的最后一个 token 取上下文向量，而不是在末端逐对打分。细节见 <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">v3 论文</a>；模型 ID 与各项限制请以 <a href="https://jina.ai/reranker" rel="noopener noreferrer">jina.ai/reranker</a> 为准。</p>
 
       <h2 id="pricing">价格</h2>
       <div class="table-wrap">
@@ -220,7 +220,7 @@ const scores = logits.sigmoid().tolist();</code></pre>
         <div class="card">
           <h3 style="color:var(--good);margin-top:0">优点</h3>
           <ul class="feature-list">
-            <li>v3 listwise 长上下文，适合多文档排序</li>
+            <li>仅 0.6B 参数就拿到 61.94 BEIR nDCG@10</li>
             <li>双模式：托管 API + 开源权重</li>
             <li>tiny 变体仍可在浏览器运行（本站 Demo）</li>
             <li>慷慨的免费额度（每月 100 万 token，无需信用卡）</li>

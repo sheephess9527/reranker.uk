@@ -1,10 +1,10 @@
 <main id="main">
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Cohere Rerank</div>
-      <h1>Cohere Rerank</h1>
-      <p class="meta">Hosted API · Cohere · <time datetime="2026-06-21">Updated 21 Jun 2026</time></p>
+      <h1>Cohere Rerank 4</h1>
+      <p class="meta">Hosted API · Cohere · <time datetime="2026-08-11">Updated 11 Aug 2026</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">Hosted API</span><span class="pill">Multilingual</span><span class="pill info">Free tier</span></div>
-      <p class="lead">Cohere Rerank was one of the first commercial reranking APIs and remains among the most widely deployed. The current generation — <code>rerank-v3.5</code> — delivers strong multilingual precision on BEIR benchmarks, a clean REST + SDK interface, and a free tier generous enough for development and low-volume production.</p>
+      <p class="lead">Cohere Rerank was one of the first commercial reranking APIs and remains among the most widely deployed. The current generation, <strong>Rerank 4</strong> (released April 2026), ships as two variants — <code>rerank-v4.0-pro</code> for precision and <code>rerank-v4.0-fast</code> for throughput — both with a 32,000-token context window and 100+ languages, behind a clean REST + SDK interface.</p>
 
       <div class="toc">
         <strong>On this page</strong>
@@ -23,13 +23,13 @@
             <tr><th>Model ID</th><th>Languages</th><th>Context</th><th>Notes</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>rerank-v3.5</code></td><td>100+ langs</td><td>4096 tokens/doc</td><td>Current best; multilingual flagship</td></tr>
-            <tr><td><code>rerank-english-v3.0</code></td><td>English</td><td>4096 tokens/doc</td><td>Slightly faster, English-only</td></tr>
-            <tr><td><code>rerank-multilingual-v3.0</code></td><td>100+ langs</td><td>4096 tokens/doc</td><td>Previous multilingual generation</td></tr>
+            <tr><td><code>rerank-v4.0-pro</code></td><td>100+ langs</td><td>32,000 tokens</td><td>Current flagship; higher-precision reranking</td></tr>
+            <tr><td><code>rerank-v4.0-fast</code></td><td>100+ langs</td><td>32,000 tokens</td><td>Lower latency, higher throughput</td></tr>
+            <tr><td><code>rerank-v3.5</code></td><td>100+ langs</td><td>4096 tokens/doc</td><td>Previous multilingual flagship</td></tr>
           </tbody>
         </table>
       </div>
-      <p>Use <code>rerank-v3.5</code> by default. Downgrade to <code>rerank-english-v3.0</code> only if you're English-only and every millisecond matters.</p>
+      <p>Use <code>rerank-v4.0-pro</code> by default. Switch to <code>rerank-v4.0-fast</code> when throughput or tail latency matters more than the last point of precision — the two are priced close enough ($0.0025 vs $0.002 a search) that quality, not cost, should drive the choice.</p>
 
       <h2 id="pricing">Pricing</h2>
       <div class="table-wrap">
@@ -39,7 +39,8 @@
           </thead>
           <tbody>
             <tr><td>Free</td><td>$0</td><td>1,000 API calls/month</td></tr>
-            <tr><td>Pay-as-you-go</td><td>~$2 / 1,000 searches</td><td>No limit</td></tr>
+            <tr><td><code>rerank-v4.0-pro</code></td><td>$0.0025 / search</td><td>A search = 1 query + up to 100 documents</td></tr>
+            <tr><td><code>rerank-v4.0-fast</code></td><td>$0.002 / search</td><td>Same billing unit</td></tr>
             <tr><td>Enterprise</td><td>Custom</td><td>SLA, private deployment options</td></tr>
           </tbody>
         </table>
@@ -51,7 +52,7 @@
       <pre><code>pip install cohere</code></pre>
       <pre><code>import cohere
 
-co = cohere.Client("YOUR_API_KEY")
+co = cohere.ClientV2("YOUR_API_KEY")
 
 query = "How do I add reranking to my RAG pipeline?"
 documents = [
@@ -62,7 +63,7 @@ documents = [
 ]
 
 results = co.rerank(
-    model="rerank-v3.5",
+    model="rerank-v4.0-pro",
     query=query,
     documents=documents,
     top_n=3,
@@ -76,7 +77,7 @@ for r in results.results:
 const co = new Cohere.Client({ token: "YOUR_API_KEY" });
 
 const result = await co.rerank({
-  model: "rerank-v3.5",
+  model: "rerank-v4.0-pro",
   query: "How do I add reranking to my RAG pipeline?",
   documents: ["...", "..."],
   topN: 3,
@@ -89,7 +90,7 @@ result.results.forEach((r) => console.log(r.relevanceScore, documents[r.index]))
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "rerank-v3.5",
+    "model": "rerank-v4.0-pro",
     "query": "How do I add reranking to my RAG pipeline?",
     "documents": ["Rerankers score query-passage pairs...", "BM25 is..."],
     "top_n": 3
@@ -101,10 +102,10 @@ result.results.forEach((r) => console.log(r.relevanceScore, documents[r.index]))
           <h3 style="color:var(--good);margin-top:0">Pros</h3>
           <ul class="feature-list">
             <li>Mature, production-grade API with an SLA</li>
-            <li>Top multilingual BEIR scores</li>
+            <li>Consistent quality across 100+ languages</li>
             <li>SDK support: Python, Node, Java, Go, curl</li>
             <li>Generous free tier for prototyping</li>
-            <li>4096-token document context window</li>
+            <li>32,000-token context window</li>
             <li>Simple, predictable pricing</li>
           </ul>
         </div>

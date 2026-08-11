@@ -61,6 +61,20 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-08-11">2026 年 8 月 11 日 —— 中文有了独立 URL，模型数据刷新到 2026</h2>
+        <ul class="feature-list">
+          <li><strong>中文页面迁到 <a href="/zh/">/zh/</a></strong> —— 每个页面都在构建期预渲染成中文并拥有自己的 URL 与自指 canonical，不再是三个 hreflang 全指向同一页的前端切换</li>
+          <li><strong>页面更轻</strong> —— 翻译改在构建期完成，约 200 KB 的词典不再下发到浏览器</li>
+          <li><strong>Sitemap 改为自动生成</strong> —— 从页面树生成，带 hreflang 备选链接，<code>lastmod</code> 取自 git，替代此前已经失准的手工维护文件</li>
+          <li><strong>Cohere Rerank 4</strong> —— <code>rerank-v4.0-pro</code> 与 <code>rerank-v4.0-fast</code> 取代 v3.5；32k 上下文，按次检索计费</li>
+          <li><strong>Voyage rerank-2.5</strong> —— 32k 上下文并支持指令跟随；对比表此前按文档计价有误，现已改为按 token</li>
+          <li><strong>Jina v3 数据落实</strong> —— 0.6B，BEIR nDCG@10 61.94，131K 上下文内 64 篇文档</li>
+          <li><strong>Qwen3 行如实修正</strong> —— 移除 8B 无法核实的「~75+」数字；有报告显示 4B 反而略优于它</li>
+          <li><strong>视觉改版</strong> —— 流体字号阶梯、成体系的层次阴影，以及全站统一的键盘聚焦样式</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-06-25e">2026 年 6 月 25 日 — 模型版图刷新</h2>
         <ul class="feature-list">
           <li><strong>Qwen3-Reranker</strong> —— 0.6B / 4B / 8B 行 + <a href="/zh/models/qwen-reranker.html">深评页</a></li>

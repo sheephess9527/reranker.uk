@@ -1,4 +1,12 @@
 window.I18N_PAGE = { zh: {
+  "0.6B / 4B / 8B Apache 2.0 family — the multilingual GPU self-host pick. Start at 4B, not 8B.":
+    "0.6B / 4B / 8B 的 Apache 2.0 家族 —— 多语言 GPU 自托管首选。从 4B 起步，而不是 8B。",
+  "Mature hosted API in Pro and Fast variants — 32k context, 100+ languages, billed per search.":
+    "成熟的托管 API，分 Pro 与 Fast 两档 —— 32k 上下文、100+ 语言，按「次检索」计费。",
+  "0.6B listwise model at 61.94 BEIR — ahead of Qwen3-Reranker-4B. v1-tiny powers our demo.":
+    "0.6B 的 listwise 模型，BEIR 达 61.94 —— 优于 Qwen3-Reranker-4B。v1-tiny 仍在驱动我们的 Demo。",
+  "Hosted rerankers you steer with a natural-language instruction. 32k context, per-token pricing.":
+    "可以用自然语言指令来引导的托管重排序器。32k 上下文，按 token 计费。",
   "_title": "Reranker 是什么？浏览器内免费体验重排序模型 | reranker.uk",
   "_desc": "免费在浏览器里体验 Reranker（重排序模型）。纯客户端运行，无需 API Key，保护隐私。学习 reranker 原理，并通过交互式 Demo 理解它如何提升 RAG 检索效果。",
 

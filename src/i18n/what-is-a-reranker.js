@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "Fundamentals · ~7 min read · <time datetime=\"2026-06-21\">Updated 21 Jun 2026</time>":
+    "基础 · 约 7 分钟阅读 · <time datetime=\"2026-06-21\">更新于 2026 年 6 月 21 日</time>",
   "_title": "什么是 reranker？rerank 模型通俗指南 | reranker.uk",
   "_desc": "什么是 reranker？重排序器（rerank 模型）会按相关性对检索到的候选重新打分，通常作为快速检索之后的第二阶段。了解 reranker 的工作原理、它如何提升搜索与 RAG 质量，以及何时该用它。",
 
