@@ -1,36 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-locale="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>Changelog — reranker.uk updates | reranker.uk</title>
-  <meta name="description" content="Release notes for reranker.uk: demo features, new guides, model comparison updates, and site improvements." />
-  <link rel="canonical" href="https://reranker.uk/changelog.html" />
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/changelog.html" />
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/changelog.html" />
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/changelog.html" />
-  <meta name="theme-color" content="#0b0d17" />
-  <meta name="robots" content="index, follow" />
-  <meta name="author" content="reranker.uk" />
-  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="reranker.uk changelog" />
-  <meta property="og:description" content="What shipped on reranker.uk — demo UX, guides, and infrastructure." />
-  <meta property="og:url" content="https://reranker.uk/changelog.html" />
-  <meta property="og:site_name" content="reranker.uk" />
-  <meta property="og:locale" content="en_GB" />
-  <meta property="og:locale:alternate" content="zh_CN" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" />
-  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" />
+  <meta name="description" content="Release notes for reranker.uk: demo features, new guides, model comparison updates, and site improvements." >
+  <link rel="canonical" href="https://reranker.uk/changelog.html" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/changelog.html" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/changelog.html" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/changelog.html" >
+  <meta name="theme-color" content="#0b0d17" >
+  <meta name="robots" content="index, follow" >
+  <meta name="author" content="reranker.uk" >
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
+  <link rel="manifest" href="/site.webmanifest" >
+  <meta property="og:type" content="website" >
+  <meta property="og:title" content="reranker.uk changelog" >
+  <meta property="og:description" content="What shipped on reranker.uk — demo UX, guides, and infrastructure." >
+  <meta property="og:url" content="https://reranker.uk/changelog.html" >
+  <meta property="og:site_name" content="reranker.uk" >
+  <meta property="og:locale" content="en_GB" >
+  <meta property="og:locale:alternate" content="zh_CN" >
+  <meta name="twitter:card" content="summary_large_image" >
+  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <meta property="og:image:width" content="1200" >
+  <meta property="og:image:height" content="630" >
+  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" >
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
-  <link rel="stylesheet" href="/assets/css/style.css" />
-  <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" />
+  <link rel="preload" href="/assets/css/style.css" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css" >
+  <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://reranker.uk/changelog.html"}]}</script>
+
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="shared.skip">Skip to content</a>
@@ -46,7 +49,7 @@
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <button class="lang-toggle" aria-label="切换到中文" title="切换到中文">中文</button>
+        <a class="lang-toggle" href="/zh/changelog.html" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
   </header>
@@ -57,6 +60,20 @@
     </section>
 
     <section class="section container narrow">
+      <article class="changelog-entry">
+        <h2 id="2026-08-11">11 Aug 2026 — Real Chinese URLs, and a 2026 model refresh</h2>
+        <ul class="feature-list">
+          <li><strong>Chinese lives at <a href="/zh/">/zh/</a></strong> — every page is now pre-rendered in Chinese at its own URL with a self-referencing canonical, instead of a client-side toggle that left all three hreflang tags pointing at one page</li>
+          <li><strong>Lighter pages</strong> — translation moved to build time, so ~200 KB of dictionaries no longer ship to the browser</li>
+          <li><strong>Sitemap is generated</strong> — built from the page tree with hreflang alternates and <code>lastmod</code> from git, replacing a hand-maintained file that had drifted</li>
+          <li><strong>Cohere Rerank 4</strong> — <code>rerank-v4.0-pro</code> and <code>rerank-v4.0-fast</code> replace v3.5; 32k context, billed per search</li>
+          <li><strong>Voyage rerank-2.5</strong> — 32k context and instruction following; the index table's per-doc pricing was wrong and is now per token</li>
+          <li><strong>Jina v3 numbers firmed up</strong> — 0.6B, 61.94 BEIR nDCG@10, 64 docs in a 131K context</li>
+          <li><strong>Honest Qwen3 rows</strong> — dropped an unverifiable "~75+" figure for the 8B; reports put the 4B slightly ahead of it</li>
+          <li><strong>Design refresh</strong> — fluid type scale, a real elevation ramp, and one focus-visible treatment site-wide</li>
+        </ul>
+      </article>
+
       <article class="changelog-entry">
         <h2 id="2026-06-25e">25 Jun 2026 — Model landscape refresh</h2>
         <ul class="feature-list">
@@ -212,8 +229,7 @@
     </div>
   </footer>
   <script src="/assets/js/main.js"></script>
-  <script src="/assets/js/i18n/changelog.js"></script>
-  <script src="/assets/js/i18n/shared.js"></script>
+  
   <script src="/assets/js/i18n.js"></script>
 </body>
 </html>

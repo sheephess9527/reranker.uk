@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog.html</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Wed, 25 Jun 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 11 Aug 2026 12:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>11 Aug 2026 — Real Chinese URLs, and a 2026 model refresh</title>
+      <link>https://reranker.uk/changelog.html#2026-08-11</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog.html#2026-08-11</guid>
+      <pubDate>Tue, 11 Aug 2026 12:00:00 GMT</pubDate>
+      <description>Chinese pre-rendered at /zh/ with real hreflang; generated sitemap; Cohere Rerank 4, Voyage rerank-2.5, Jina v3 BEIR 61.94; design refresh.</description>
+    </item>
     <item>
       <title>25 Jun 2026 — Model landscape refresh</title>
       <link>https://reranker.uk/changelog.html#2026-06-25e</link>

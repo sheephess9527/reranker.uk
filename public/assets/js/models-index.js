@@ -48,15 +48,23 @@
   }
 
   function sortBy(key, dir) {
+    const sign = dir === "desc" ? -1 : 1;
     const sorted = rows.slice().sort((a, b) => {
       const av = a.dataset[key] || "";
       const bv = b.dataset[key] || "";
       if (key === "beir") {
-        return (parseFloat(av) || 0) - (parseFloat(bv) || 0);
+        // Several models publish no comparable BEIR average. Those rows sink to
+        // the bottom either way — treating a blank as 0 would float them to the
+        // top of a descending sort, as if they had ranked worst.
+        const an = parseFloat(av);
+        const bn = parseFloat(bv);
+        const aMissing = !isFinite(an);
+        const bMissing = !isFinite(bn);
+        if (aMissing || bMissing) return aMissing && bMissing ? 0 : aMissing ? 1 : -1;
+        return (an - bn) * sign;
       }
-      return av.localeCompare(bv, undefined, { numeric: true, sensitivity: "base" });
+      return av.localeCompare(bv, undefined, { numeric: true, sensitivity: "base" }) * sign;
     });
-    if (dir === "desc") sorted.reverse();
     sorted.forEach((r) => tbody.appendChild(r));
   }
 

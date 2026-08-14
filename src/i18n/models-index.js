@@ -1,4 +1,76 @@
 window.I18N_PAGE = { zh: {
+  "Sources: <a href=\"https://huggingface.co/Qwen\" rel=\"noopener noreferrer\">Qwen3-Reranker</a> · <a href=\"https://arxiv.org/abs/2509.25085\" rel=\"noopener noreferrer\">jina-reranker-v3 paper</a> · <a href=\"https://docs.voyageai.com/docs/reranker\" rel=\"noopener noreferrer\">Voyage rerankers</a> · <a href=\"https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2\" rel=\"noopener noreferrer\">nemotron-rerank</a> · <a href=\"https://huggingface.co/spaces/mteb/leaderboard\" rel=\"noopener noreferrer\">MTEB</a> · <a href=\"https://github.com/beir-cellar/beir\" rel=\"noopener noreferrer\">BEIR</a> · <a href=\"https://huggingface.co/BAAI/bge-reranker-v2-m3\" rel=\"noopener noreferrer\">BAAI</a> · <a href=\"https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base\" rel=\"noopener noreferrer\">GTE ModernBERT</a> · <a href=\"/models/qwen-reranker.html\">Qwen guide</a> · <a href=\"/guides/instruction-reranker.html\">instruction</a> · <a href=\"/guides/late-interaction-rerank.html\">ColBERT</a>":
+    "资料来源： <a href=\"https://huggingface.co/Qwen\" rel=\"noopener noreferrer\">Qwen3-Reranker</a> · <a href=\"https://arxiv.org/abs/2509.25085\" rel=\"noopener noreferrer\">jina-reranker-v3 论文</a> · <a href=\"https://docs.voyageai.com/docs/reranker\" rel=\"noopener noreferrer\">Voyage 重排序器</a> · <a href=\"https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2\" rel=\"noopener noreferrer\">nemotron-rerank</a> · <a href=\"https://huggingface.co/spaces/mteb/leaderboard\" rel=\"noopener noreferrer\">MTEB</a> · <a href=\"https://github.com/beir-cellar/beir\" rel=\"noopener noreferrer\">BEIR</a> · <a href=\"https://huggingface.co/BAAI/bge-reranker-v2-m3\" rel=\"noopener noreferrer\">BAAI</a> · <a href=\"https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base\" rel=\"noopener noreferrer\">GTE ModernBERT</a> · <a href=\"/models/qwen-reranker.html\">Qwen 指南</a> · <a href=\"/guides/instruction-reranker.html\">指令跟随</a> · <a href=\"/guides/late-interaction-rerank.html\">ColBERT</a>",
+  "Production stacks mix <strong>cross-encoders</strong>, <strong>listwise</strong> models, <strong>late-interaction</strong>, and instruction APIs. The headline of 2026 is that <strong>size stopped predicting quality</strong>: a 0.6B listwise model (Jina v3) outscores Qwen3-Reranker-4B on BEIR, a 149M cross-encoder ties a 1.2B one on Hit@1, and Qwen3's own 4B edges its 8B. Architecture, latency, languages and cost below — with honest footnotes wherever score protocols differ.":
+    "生产环境往往混用 <strong>cross-encoder</strong>、<strong>listwise</strong> 模型、<strong>late-interaction</strong> 以及指令式 API。2026 年最值得注意的一点是：<strong>参数量不再预测质量</strong> —— 0.6B 的 listwise 模型（Jina v3）在 BEIR 上超过 Qwen3-Reranker-4B，149M 的 cross-encoder 在 Hit@1 上与 1.2B 打平，而 Qwen3 自己的 4B 也略胜 8B。下表对比架构、延迟、语言与成本，凡评测协议不一致处均如实标注。",
+  "<span class=\"pill good\">Apache 2.0</span><span class=\"pill info\">Best Qwen3 size</span>":
+    "<span class=\"pill good\">Apache 2.0</span><span class=\"pill info\">Qwen3 最佳档位</span>",
+  "Strongest multilingual open self-host (GPU)":
+    "多语言开源自托管最强（需 GPU）",
+  "Largest Qwen3 — but 4B edges it on BEIR":
+    "Qwen3 最大档 —— 但 BEIR 上 4B 更好",
+  "<span class=\"pill good\">Open + Hosted</span><span class=\"pill info\">Beats Qwen3-4B</span>":
+    "<span class=\"pill good\">开源 + 托管</span><span class=\"pill info\">优于 Qwen3-4B</span>",
+  "0.6B listwise; 64 docs in one 131K ctx":
+    "0.6B listwise；64 篇文档共享 131K 上下文",
+  "Mature multilingual API; 32k ctx":
+    "成熟的多语言 API；32k 上下文",
+  "Throughput / latency-tuned sibling":
+    "面向吞吐与延迟调优的同系版本",
+  "Instruction-following; 32k ctx":
+    "支持指令跟随；32k 上下文",
+  "Cheaper tier; same 32k ctx":
+    "更便宜的档位；同样 32k 上下文",
+  "~149M, yet ties nemotron-1b on Hit@1":
+    "仅约 149M，Hit@1 却与 nemotron-1b 打平",
+  "1.2B; top accuracy when latency is free":
+    "1.2B；在不计延迟时精度居首",
+  "Multilingual (MIRACL / MLQA evals)":
+    "多语言（MIRACL / MLQA 评测）",
+  "<strong>Last verified:</strong> August 2026 (Cohere Rerank 4, Voyage rerank-2.5, Jina v3 BEIR, nemotron-1b) · <strong>Next review:</strong> Nov 2026. Columns marked <strong>*</strong> use MTEB-R, vendor, or task-specific protocols — <em>not</em> the same classic BEIR 18-dataset avg as the bge/mxbai/Jina rows. Where a vendor publishes no comparable number we say <em>not published</em> rather than guess. <strong>†</strong> Note the differing units: Cohere bills per <em>search</em> (one query + up to 100 docs), Voyage per <em>token</em>. Demo-capable models only: mxbai xsmall, Jina tiny, ms-marco MiniLM.":
+    "<strong>最近核对：</strong>2026 年 8 月（Cohere Rerank 4、Voyage rerank-2.5、Jina v3 的 BEIR、nemotron-1b）· <strong>下次复核：</strong>2026 年 11 月。标 <strong>*</strong> 的列使用 MTEB-R、厂商或任务特定协议，<em>不同于</em> bge / mxbai / Jina 行所用的经典 BEIR 18 数据集均值。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档）计费，Voyage 按 <em>token</em> 计费。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。",
+  "0.6B / 4B / 8B, 32K context. Start at 4B — it reportedly edges the 8B on BEIR, so the largest size is not the automatic answer.":
+    "0.6B / 4B / 8B，32K 上下文。从 4B 开始 —— 据报告它在 BEIR 上略胜 8B，所以「越大越好」在这里并不成立。",
+  "Pro and Fast variants, 32k context, 100+ languages. Billed per search — one query plus up to 100 documents — not per document.":
+    "Pro 与 Fast 两个版本，32k 上下文，100+ 语言。按「次检索」计费 —— 一个 query 加最多 100 篇文档 —— 而不是按文档数。",
+  "0.6B listwise model scoring 61.94 on BEIR — ahead of Qwen3-Reranker-4B at a sixth of the size. v1-tiny still powers our demo.":
+    "0.6B 的 listwise 模型，BEIR 得分 61.94 —— 以约六分之一的体量超过 Qwen3-Reranker-4B。v1-tiny 仍在驱动我们的 Demo。",
+  "rerank-2.5 and -lite, both 32k context with instruction following, so you can steer relevance in natural language. Priced per token.":
+    "rerank-2.5 与 -lite，均为 32k 上下文并支持指令跟随，可以用自然语言引导相关性判断。按 token 计费。",
+  "Best multilingual open weights — start at 4B":
+    "多语言开源权重最优 —— 从 4B 起步",
+  "0.6B / 4B / 8B, all Apache 2.0, all 32K context":
+    "0.6B / 4B / 8B，全部 Apache 2.0，全部 32K 上下文",
+  "4B is the sweet spot — the 8B costs more and scores no better":
+    "4B 是甜点档 —— 8B 更贵，分数却不更高",
+  "Vendor numbers are MTEB-R, so verify on your own labelled set":
+    "厂商给的是 MTEB-R 数字，请在你自己的标注集上复核",
+  "Easiest hosted API; pick Pro or Fast":
+    "最省事的托管 API；在 Pro 与 Fast 间二选一",
+  "32k context and 100+ languages on both variants":
+    "两个版本都是 32k 上下文、100+ 语言",
+  "Pro for precision, Fast for throughput — $0.0025 vs $0.002 a search":
+    "Pro 重精度，Fast 重吞吐 —— 每次检索 $0.0025 对 $0.002",
+  "Top-tier BEIR from a model that fits on one GPU":
+    "单卡就能跑，BEIR 却在第一梯队",
+  "61.94 BEIR nDCG@10 from 0.6B — beats Qwen3-Reranker-4B, 6× its size":
+    "0.6B 拿到 61.94 BEIR nDCG@10 —— 胜过体量 6 倍的 Qwen3-Reranker-4B",
+  "Listwise: 64 documents share one 131K-token context":
+    "Listwise：64 篇文档共享同一个 131K token 的上下文",
+  "Instruction-following relevance, priced per token":
+    "可用指令引导相关性，按 token 计费",
+  "Steer scoring with a natural-language instruction, no fine-tune":
+    "用自然语言指令引导打分，无需微调",
+  "32k context on both rerank-2.5 and the cheaper -lite tier":
+    "rerank-2.5 与更便宜的 -lite 都是 32k 上下文",
+  "First 200M tokens free per account; 33% off via the Batch API":
+    "每个账号前 2 亿 token 免费；走 Batch API 再打 67 折",
+  "Cohere Rerank 4":
+    "Cohere Rerank 4",
+  "Jina Reranker v3":
+    "Jina Reranker v3",
+  "Voyage rerank-2.5":
+    "Voyage rerank-2.5",
   "_title": "重排序模型对比：cross-encoder、ColBERT、Qwen3 等 | reranker.uk",
   "_desc": "rerank 模型横向对比：五大成熟家族 + Qwen3-Reranker、Contextual AI、ColBERTv2 等 2026 方向。架构、质量、延迟、语言与成本一览。",
 

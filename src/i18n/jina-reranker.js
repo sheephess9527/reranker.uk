@@ -1,6 +1,16 @@
 window.I18N_PAGE = { zh: {
+  "Open weights + Hosted API · Jina AI · <time datetime=\"2026-08-11\">Updated 11 Aug 2026</time>":
+    "开源权重 + 托管 API · Jina AI · <time datetime=\"2026-08-11\">更新于 2026 年 8 月 11 日</time>",
+  "Jina’s 2026 flagship is <strong>jina-reranker-v3</strong>: a <strong>0.6B</strong> <em>listwise</em> reranker built on Qwen3-0.6B that scores up to <strong>64 documents inside one 131K-token context</strong> and reaches <strong>61.94 nDCG@10 on BEIR</strong> — ahead of Qwen3-Reranker-4B at roughly a sixth of the size. Older <strong>v2</strong> pairwise models remain useful; <strong>v1-tiny</strong> is still what runs in <a href=\"/demo.html\">our browser demo</a>.":
+    "Jina 的 2026 旗舰是 <strong>jina-reranker-v3</strong>：一个基于 Qwen3-0.6B 的 <strong>0.6B</strong> <em>listwise</em> 重排序器，可在<strong>同一个 131K token 上下文里一次性给最多 64 篇文档打分</strong>，BEIR nDCG@10 达到 <strong>61.94</strong> —— 以约六分之一的体量超过 Qwen3-Reranker-4B。较早的 <strong>v2</strong> 成对模型依然有用；<strong>v1-tiny</strong> 仍是 <a href=\"/demo.html\">我们浏览器 Demo</a> 里跑的那个。",
+  "<strong>Flagship 2026</strong> — listwise, 64 docs in 131K ctx, 61.94 BEIR":
+    "<strong>2026 旗舰</strong> —— listwise，131K 上下文内 64 篇文档，BEIR 61.94",
+  "v3 reports <strong>61.94 nDCG@10 on BEIR</strong> — level with the strongest cross-encoders in <a href=\"/models/\">our table</a> while being small enough to serve on a single GPU, and ahead of Qwen3-Reranker-4B despite being 6× smaller. Architecturally it takes contextual embeddings from each document’s final token after causal attention across the whole slate, rather than scoring pairs late. Details in the <a href=\"https://arxiv.org/abs/2509.25085\" rel=\"noopener noreferrer\">v3 paper</a>; confirm model IDs and limits on <a href=\"https://jina.ai/reranker\" rel=\"noopener noreferrer\">jina.ai/reranker</a>.":
+    "v3 公布的 BEIR nDCG@10 为 <strong>61.94</strong> —— 与<a href=\"/models/\">我们表中</a>最强的 cross-encoder 持平，却小到单卡即可部署，并且在体量只有 6 分之 1 的情况下超过 Qwen3-Reranker-4B。架构上，它先对整个候选列表做因果注意力，再从每篇文档的最后一个 token 取上下文向量，而不是在末端逐对打分。细节见 <a href=\"https://arxiv.org/abs/2509.25085\" rel=\"noopener noreferrer\">v3 论文</a>；模型 ID 与各项限制请以 <a href=\"https://jina.ai/reranker\" rel=\"noopener noreferrer\">jina.ai/reranker</a> 为准。",
+  "61.94 BEIR nDCG@10 from only 0.6B parameters":
+    "仅 0.6B 参数就拿到 61.94 BEIR nDCG@10",
   "_title": "Jina Reranker v3：listwise 长上下文 + 浏览器 tiny | reranker.uk",
-  "_desc": "Jina Reranker 2026 评测：v3 listwise 长上下文旗舰、v2 多语言、v1-tiny 浏览器 Demo、价格与 Python 用法。",
+  "_desc": "Jina Reranker 2026 评测：jina-reranker-v3 是 0.6B 的 listwise 模型，BEIR nDCG@10 达 61.94，可在 131K 上下文内处理 64 篇文档。另含 v2 多语言、v1-tiny 浏览器 Demo、价格与 Python 用法。",
 
   "<a href=\"/\">Home</a><span>/</span><a href=\"/models/\">Models</a><span>/</span>Jina Reranker": "<a href=\"/\">首页</a><span>/</span><a href=\"/models/\">模型对比</a><span>/</span>Jina Reranker",
   "Jina Reranker": "Jina Reranker",

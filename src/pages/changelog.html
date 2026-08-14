@@ -6,6 +6,20 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-08-11">11 Aug 2026 — Real Chinese URLs, and a 2026 model refresh</h2>
+        <ul class="feature-list">
+          <li><strong>Chinese lives at <a href="/zh/">/zh/</a></strong> — every page is now pre-rendered in Chinese at its own URL with a self-referencing canonical, instead of a client-side toggle that left all three hreflang tags pointing at one page</li>
+          <li><strong>Lighter pages</strong> — translation moved to build time, so ~200 KB of dictionaries no longer ship to the browser</li>
+          <li><strong>Sitemap is generated</strong> — built from the page tree with hreflang alternates and <code>lastmod</code> from git, replacing a hand-maintained file that had drifted</li>
+          <li><strong>Cohere Rerank 4</strong> — <code>rerank-v4.0-pro</code> and <code>rerank-v4.0-fast</code> replace v3.5; 32k context, billed per search</li>
+          <li><strong>Voyage rerank-2.5</strong> — 32k context and instruction following; the index table's per-doc pricing was wrong and is now per token</li>
+          <li><strong>Jina v3 numbers firmed up</strong> — 0.6B, 61.94 BEIR nDCG@10, 64 docs in a 131K context</li>
+          <li><strong>Honest Qwen3 rows</strong> — dropped an unverifiable "~75+" figure for the 8B; reports put the 4B slightly ahead of it</li>
+          <li><strong>Design refresh</strong> — fluid type scale, a real elevation ramp, and one focus-visible treatment site-wide</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-06-25e">25 Jun 2026 — Model landscape refresh</h2>
         <ul class="feature-list">
           <li><strong>Qwen3-Reranker</strong> — 0.6B / 4B / 8B rows + <a href="/models/qwen-reranker.html">deep review page</a></li>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-locale="zh" data-prerendered="zh">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <title>如何自托管 reranker — sentence-transformers、GPU、部署 | reranker.uk</title>
+  <meta name="description" content="自托管 cross-encoder reranker 实战指南：模型选择（bge、mxbai、Jina）、sentence-transformers 快速上手、FastAPI 服务化与运维清单。" >
+  <link rel="canonical" href="https://reranker.uk/zh/guides/self-host-reranker.html" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/self-host-reranker.html" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/self-host-reranker.html" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/self-host-reranker.html" >
+  <meta name="theme-color" content="#0b0d17" >
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
+  <meta name="author" content="reranker.uk" >
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
+  <link rel="manifest" href="/site.webmanifest" >
+  <meta property="og:type" content="article" >
+  <meta property="og:title" content="如何自托管 reranker — sentence-transformers、GPU、部署 | reranker.uk" >
+  <meta property="og:description" content="自托管 cross-encoder reranker 实战指南：模型选择（bge、mxbai、Jina）、sentence-transformers 快速上手、FastAPI 服务化与运维清单。" >
+  <meta property="og:url" content="https://reranker.uk/zh/guides/self-host-reranker.html" >
+  <meta property="og:site_name" content="reranker.uk" >
+  <meta property="og:locale" content="zh_CN" >
+  <meta property="og:locale:alternate" content="en_GB" >
+  <meta name="twitter:card" content="summary_large_image" >
+  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <meta property="og:image:width" content="1200" >
+  <meta property="og:image:height" content="630" >
+  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
+  <link rel="preload" href="/assets/css/style.css" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css" >
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"How to self-host a reranker","datePublished":"2026-06-23","dateModified":"2026-06-23","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/self-host-reranker.html"}
+  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://reranker.uk/zh/guides/"},{"@type":"ListItem","position":3,"name":"如何自托管 reranker","item":"https://reranker.uk/zh/guides/self-host-reranker.html"}]}</script>
+
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="shared.skip">跳到正文</a>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
+        <li><a href="/zh/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">指南</a></li>
+        <li><a href="/zh/models/" data-i18n="shared.nav.models">模型对比</a></li>
+        <li><a class="nav-cta" href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
+      </ul>
+      <div class="nav-right">
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+        <a class="lang-toggle" href="/guides/self-host-reranker.html" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
+      </div>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/guides/">指南</a><span>/</span>自托管 reranker</div>
+      <h1>如何自托管 reranker</h1>
+      <p class="meta">生产实践 · 约 10 分钟阅读 · <time datetime="2026-06-23">更新于 2026 年 6 月 23 日</time></p>
+      <p class="lead">托管 rerank API 很方便，但<strong>自托管</strong>能带来零按次成本、数据完全可控，以及在自己 GPU/CPU 集群上的可预测延迟。本文从第一次 <code>CrossEncoder</code> 调用，到生产级微服务的实操路径。</p>
+
+      <div class="toc">
+        <strong>本页目录</strong>
+        <ol>
+          <li><a href="#when">何时值得自托管</a></li>
+          <li><a href="#models">选择模型</a></li>
+          <li><a href="#quickstart">sentence-transformers 快速上手</a></li>
+          <li><a href="#serve">服务化方案</a></li>
+          <li><a href="#ops">运维清单</a></li>
+        </ol>
+      </div>
+
+      <h2 id="when">何时值得自托管</h2>
+      <ul>
+        <li><strong>调用量大。</strong>每个查询对 50–100 个 chunk 重排序，按千条文档计费的 API 成本会迅速累积。</li>
+        <li><strong>数据驻留。</strong>查询与文档不出你的 VPC。</li>
+        <li><strong>自定义微调。</strong>可随时换上领域微调 checkpoint，无需等厂商。</li>
+      </ul>
+      <p>若你需要多语言质量且运维要极简，<a href="/zh/models/cohere-rerank.html">Cohere Rerank</a> 或 <a href="/zh/models/jina-reranker.html">Jina</a> 等托管 API 的综合成本可能更低 —— 见<a href="/zh/guides/choose-reranker-scenario.html">按场景选型</a>。</p>
+
+      <h2 id="models">选择模型</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>模型</th><th>规模</th><th>最适合</th></tr></thead>
+          <tbody>
+            <tr><td><a href="/zh/models/bge-reranker.html">bge-reranker-base</a></td><td>~278M</td><td>CPU 友好的英文默认</td></tr>
+            <tr><td><a href="/zh/models/bge-reranker.html">bge-reranker-v2-m3</a></td><td>~568M</td><td>GPU 有限时的多语言选择</td></tr>
+            <tr><td><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker-4B</a></td><td>~4B</td><td><strong>2026 开源 SOTA 首选</strong>（需 GPU）</td></tr>
+            <tr><td><a href="/zh/models/mxbai-rerank.html">mxbai-rerank-large-v1</a></td><td>~435M</td><td>经典 BEIR 强，Apache 2.0</td></tr>
+            <tr><td><a href="/zh/models/jina-reranker.html">jina-reranker-v3</a></td><td>large</td><td>Listwise 长上下文；或 v2 成对</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>原型阶段用 CPU 跑 <strong>bge-reranker-base</strong>。有 GPU 时在标注集上 A/B <strong>Qwen3-Reranker-4B</strong> 与 <strong>bge-v2-m3</strong> 或 <strong>mxbai-large</strong> —— 不要假设榜单顺序会迁移。</p>
+
+      <h2 id="quickstart">sentence-transformers 快速上手</h2>
+      <pre><code>pip install sentence-transformers torch
+
+from sentence_transformers import CrossEncoder
+
+model = CrossEncoder("BAAI/bge-reranker-base", max_length=512)
+
+query = "How do I add reranking to RAG?"
+docs = [
+    "Retrieve 50–100 candidates, rerank with a cross-encoder, keep top 5.",
+    "London is the capital of the United Kingdom.",
+]
+
+pairs = [(query, d) for d in docs]
+scores = model.predict(pairs)  # higher = more relevant
+ranked = sorted(zip(scores, docs), reverse=True)</code></pre>
+      <p>批量打分 —— 一次 <code>predict()</code> 处理 50 段远比 50 次单独前向快。单段长度建议不超过 512 token（模型默认），避免静默截断。</p>
+
+      <h2 id="serve">服务化方案</h2>
+      <div class="grid grid-2" style="margin:1.2rem 0">
+        <div class="card">
+          <h3>嵌入应用进程</h3>
+          <p>在 FastAPI / Flask RAG 服务内加载模型。低 QPS 最简单；水平扩展副本即可。</p>
+        </div>
+        <div class="card">
+          <h3>独立 rerank 微服务</h3>
+          <p>暴露 <code>POST /rerank</code>，请求体 <code>{ query, documents[] }</code>。多个应用 Pod 共享一块 GPU。</p>
+        </div>
+      </div>
+      <pre><code># Minimal FastAPI sketch
+from fastapi import FastAPI
+from sentence_transformers import CrossEncoder
+
+app = FastAPI()
+model = CrossEncoder("BAAI/bge-reranker-base")
+
+@app.post("/rerank")
+def rerank(body: dict):
+    q, docs = body["query"], body["documents"]
+    scores = model.predict([(q, d) for d in docs])
+    order = sorted(range(len(docs)), key=lambda i: -scores[i])
+    return {"results": [{"index": i, "score": float(scores[i])} for i in order]}</code></pre>
+      <p>ONNX 导出与 C++ 运行时见 Hugging Face 模型卡。仅浏览器实验可用我们的 <a href="/zh/demo.html">在线 Demo</a>（xsmall ONNX 构建）。</p>
+
+      <h2 id="ops">运维清单</h2>
+      <ul>
+        <li><strong>GPU：</strong>单张 T4 跑 bge-base 对 50 段约 30–80 ms；CPU 慢 5–10 倍。</li>
+        <li><strong>内存：</strong>base 模型预留约 1–2 GB VRAM；大模型需更多。</li>
+        <li><strong>预热：</strong>启动时跑一次 dummy predict，避免冷启动延迟尖峰。</li>
+        <li><strong>监控：</strong>在标注子集上跟踪 p95 延迟与 NDCG —— <a href="/zh/guides/evaluate-reranker.html">评测 reranker</a>。</li>
+        <li><strong>降级：</strong>rerank 服务不可用时，透传向量 top-k，不要让整条 RAG 请求失败。</li>
+      </ul>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">部署前先原型验证</h2>
+        <p class="soft">在浏览器 Demo 粘贴自己的查询与段落 —— 无需服务器。</p>
+        <a class="btn btn-primary" href="/zh/demo.html">打开 Demo →</a>
+      </div>
+
+      <h2>继续阅读</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/zh/guides/choose-reranker-scenario.html"><h3>按场景选型</h3><p>RAG / 客服 / 代码 —— 哪种栈更合适。</p></a>
+        <a class="card" href="/zh/guides/rerank-rag.html"><h3>为 RAG 加重排序</h3><p>流水线集成模式。</p></a>
+      </div>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch" data-i18n="shared.footer.blurb">一个关于检索与 RAG 重排序（reranker）的开放学习资源，外加一个在浏览器里零成本运行的实时 Demo。</p>
+          <p style="margin-top:.6rem"><a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer" data-i18n="shared.footer.github">在 GitHub 上查看源码</a></p>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.guides">指南</h4>
+          <ul>
+            <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog.html" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
+            <li><a href="/zh/privacy.html" data-i18n="shared.footer.privacy">隐私说明</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.models">模型</h4>
+          <ul>
+            <li><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker.html">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank.html">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker.html">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank.html">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank.html">Voyage Rerank</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> reranker.uk</span>
+        <span class="footer-legal muted">
+          <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
+          · <a href="/zh/privacy.html" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog.html" data-i18n="shared.footer.changelogShort">更新日志</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+  
+  <script src="/assets/js/i18n.js"></script>
+</body>
+</html>

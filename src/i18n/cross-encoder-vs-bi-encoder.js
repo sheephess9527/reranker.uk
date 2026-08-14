@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "Architecture · ~8 min read · <time datetime=\"2026-06-21\">Updated 21 Jun 2026</time>":
+    "架构 · 约 8 分钟阅读 · <time datetime=\"2026-06-21\">更新于 2026 年 6 月 21 日</time>",
   "_title": "Cross-encoder vs bi-encoder：区别与实例 | reranker.uk",
   "_desc": "通俗讲清 cross-encoder 与 bi-encoder 的区别：bi-encoder 分别嵌入查询和文档（快、可扩展，适合一阶段检索）；cross-encoder 把一对一起打分（准，适合重排序）。何时用哪一个，以及如何在两阶段流水线中结合。",
 

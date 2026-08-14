@@ -1,35 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-locale="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>How to add reranking to your RAG pipeline — practical guide | reranker.uk</title>
-  <meta name="description" content="Step-by-step guide to adding a rerank model to RAG: retrieve 50–100 candidates with vector search, rerank with a cross-encoder, keep the top 5 for the prompt. Includes Python code, top-k tips, latency trade-offs, and model choices." />
-  <link rel="canonical" href="https://reranker.uk/guides/rerank-rag.html" />
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/rerank-rag.html" />
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/guides/rerank-rag.html" />
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/rerank-rag.html" />
-  <meta name="theme-color" content="#0b0d17" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="author" content="reranker.uk" />
-  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="How to add reranking to your RAG pipeline" />
-  <meta property="og:description" content="Retrieve wide, rerank for precision, send fewer tokens to the LLM. A practical walkthrough with code." />
-  <meta property="og:url" content="https://reranker.uk/guides/rerank-rag.html" />
-  <meta property="og:site_name" content="reranker.uk" />
-  <meta property="og:locale" content="en_GB" />
-  <meta property="og:locale:alternate" content="zh_CN" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" />
-  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" />
+  <meta name="description" content="Step-by-step guide to adding a rerank model to RAG: retrieve 50–100 candidates with vector search, rerank with a cross-encoder, keep the top 5 for the prompt. Includes Python code, top-k tips, latency trade-offs, and model choices." >
+  <link rel="canonical" href="https://reranker.uk/guides/rerank-rag.html" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/rerank-rag.html" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/rerank-rag.html" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/rerank-rag.html" >
+  <meta name="theme-color" content="#0b0d17" >
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
+  <meta name="author" content="reranker.uk" >
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
+  <link rel="manifest" href="/site.webmanifest" >
+  <meta property="og:type" content="article" >
+  <meta property="og:title" content="How to add reranking to your RAG pipeline" >
+  <meta property="og:description" content="Retrieve wide, rerank for precision, send fewer tokens to the LLM. A practical walkthrough with code." >
+  <meta property="og:url" content="https://reranker.uk/guides/rerank-rag.html" >
+  <meta property="og:site_name" content="reranker.uk" >
+  <meta property="og:locale" content="en_GB" >
+  <meta property="og:locale:alternate" content="zh_CN" >
+  <meta name="twitter:card" content="summary_large_image" >
+  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <meta property="og:image:width" content="1200" >
+  <meta property="og:image:height" content="630" >
+  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" >
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
-  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="preload" href="/assets/css/style.css" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css" >
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -68,6 +69,7 @@
     ]
   }
   </script>
+
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="shared.skip">Skip to content</a>
@@ -77,13 +79,13 @@
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       <ul class="nav-links">
         <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
-        <li><a href="/guides/" data-i18n="shared.nav.guides">Guides</a></li>
+        <li><a href="/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">Guides</a></li>
         <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
         <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <button class="lang-toggle" aria-label="切换到中文" title="切换到中文">中文</button>
+        <a class="lang-toggle" href="/zh/guides/rerank-rag.html" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
   </header>
@@ -118,7 +120,7 @@
           <desc id="pipe-desc">A query flows through three stages: retrieve 50–100 candidates with vector search, rerank them with a cross-encoder to keep the top 5–10, then generate a grounded answer with the LLM.</desc>
           <defs>
             <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 z" class="pipe-arrowhead" />
+              <path d="M0,0 L10,5 L0,10 z" class="pipe-arrowhead" ></path>
             </marker>
           </defs>
           <style>
@@ -140,42 +142,42 @@
           </style>
 
           <!-- top: user query -->
-          <rect class="pipe-pill" x="245" y="8" width="150" height="34" rx="17" />
+          <rect class="pipe-pill" x="245" y="8" width="150" height="34" rx="17" ></rect>
           <text class="pipe-pill-txt" x="320" y="30" text-anchor="middle">User query</text>
-          <line class="pipe-line" x1="320" y1="42" x2="320" y2="70" marker-end="url(#arrow)" />
+          <line class="pipe-line" x1="320" y1="42" x2="320" y2="70" marker-end="url(#arrow)" ></line>
 
           <!-- stage 1: retrieve -->
-          <rect class="pipe-stage" x="60" y="74" width="520" height="104" rx="14" />
-          <circle class="pipe-badge" cx="98" cy="126" r="18" />
+          <rect class="pipe-stage" x="60" y="74" width="520" height="104" rx="14" ></rect>
+          <circle class="pipe-badge" cx="98" cy="126" r="18" ></circle>
           <text class="pipe-badge-txt" x="98" y="131" text-anchor="middle">1</text>
           <text class="pipe-title" x="128" y="112">Retrieve</text>
           <text class="pipe-sub" x="128" y="135">Embed query → vector search / BM25</text>
           <text class="pipe-sub" x="128" y="156">top 50–100 candidate chunks</text>
           <text class="pipe-tag recall" x="560" y="112" text-anchor="end">fast · recall</text>
-          <line class="pipe-line" x1="320" y1="178" x2="320" y2="206" marker-end="url(#arrow)" />
+          <line class="pipe-line" x1="320" y1="178" x2="320" y2="206" marker-end="url(#arrow)" ></line>
 
           <!-- stage 2: rerank (focus) -->
-          <rect class="pipe-stage focus" x="60" y="210" width="520" height="104" rx="14" />
-          <circle class="pipe-badge accent" cx="98" cy="262" r="18" />
+          <rect class="pipe-stage focus" x="60" y="210" width="520" height="104" rx="14" ></rect>
+          <circle class="pipe-badge accent" cx="98" cy="262" r="18" ></circle>
           <text class="pipe-badge-txt" x="98" y="267" text-anchor="middle">2</text>
           <text class="pipe-title" x="128" y="248">Rerank</text>
           <text class="pipe-sub" x="128" y="271">Score each (query, chunk) pair — cross-encoder</text>
           <text class="pipe-sub" x="128" y="292">sort by score → keep top 5–10</text>
           <text class="pipe-tag precise" x="560" y="248" text-anchor="end">slow · precise</text>
-          <line class="pipe-line" x1="320" y1="314" x2="320" y2="342" marker-end="url(#arrow)" />
+          <line class="pipe-line" x1="320" y1="314" x2="320" y2="342" marker-end="url(#arrow)" ></line>
 
           <!-- stage 3: generate -->
-          <rect class="pipe-stage" x="60" y="346" width="520" height="104" rx="14" />
-          <circle class="pipe-badge" cx="98" cy="398" r="18" />
+          <rect class="pipe-stage" x="60" y="346" width="520" height="104" rx="14" ></rect>
+          <circle class="pipe-badge" cx="98" cy="398" r="18" ></circle>
           <text class="pipe-badge-txt" x="98" y="403" text-anchor="middle">3</text>
           <text class="pipe-title" x="128" y="384">Generate</text>
           <text class="pipe-sub" x="128" y="407">Top-k reranked chunks + query → LLM</text>
           <text class="pipe-sub" x="128" y="428">synthesise the answer</text>
           <text class="pipe-tag gen" x="560" y="384" text-anchor="end">synthesis</text>
-          <line class="pipe-line" x1="320" y1="450" x2="320" y2="478" marker-end="url(#arrow)" />
+          <line class="pipe-line" x1="320" y1="450" x2="320" y2="478" marker-end="url(#arrow)" ></line>
 
           <!-- bottom: grounded answer -->
-          <rect class="pipe-pill" x="222" y="482" width="196" height="34" rx="17" />
+          <rect class="pipe-pill" x="222" y="482" width="196" height="34" rx="17" ></rect>
           <text class="pipe-pill-txt" x="320" y="504" text-anchor="middle">Grounded answer</text>
         </svg>
         <figcaption>The reranker (stage 2) is the precision step between fast retrieval and the LLM.</figcaption>
@@ -421,8 +423,7 @@ print(base, reranked)   # expect MRR and nDCG to rise after reranking</code></pr
     </div>
   </footer>
   <script src="/assets/js/main.js"></script>
-  <script src="/assets/js/i18n/rerank-rag.js"></script>
-  <script src="/assets/js/i18n/shared.js"></script>
+  
   <script src="/assets/js/i18n.js"></script>
 </body>
 </html>

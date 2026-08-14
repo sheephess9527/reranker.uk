@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "Practical · ~10 min read · <time datetime=\"2026-06-21\">Updated 21 Jun 2026</time>":
+    "实践 · 约 10 分钟阅读 · <time datetime=\"2026-06-21\">更新于 2026 年 6 月 21 日</time>",
   "_title": "如何为 RAG 流水线加重排序 —— 实操指南 | reranker.uk",
   "_desc": "为 RAG 加 rerank 模型的分步指南：用向量搜索召回 50–100 个候选，用 cross-encoder 重排序，保留前 5 个进 prompt。含 Python 代码、top-k 建议、延迟取舍与模型选择。",
 

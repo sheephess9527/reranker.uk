@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-locale="zh" data-prerendered="zh">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <title>按场景选择 reranker — RAG、客服、法律、代码 | reranker.uk</title>
+  <meta name="description" content="决策指南：RAG 流水线、客服工单、法律检索、代码搜索分别适合哪种 rerank 模型。含场景矩阵、模型推荐与 Demo 预设对照。" >
+  <link rel="canonical" href="https://reranker.uk/zh/guides/choose-reranker-scenario.html" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/choose-reranker-scenario.html" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/choose-reranker-scenario.html" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/choose-reranker-scenario.html" >
+  <meta name="theme-color" content="#0b0d17" >
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
+  <meta name="author" content="reranker.uk" >
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
+  <link rel="manifest" href="/site.webmanifest" >
+  <meta property="og:type" content="article" >
+  <meta property="og:title" content="按场景选择 reranker — RAG、客服、法律、代码 | reranker.uk" >
+  <meta property="og:description" content="决策指南：RAG 流水线、客服工单、法律检索、代码搜索分别适合哪种 rerank 模型。含场景矩阵、模型推荐与 Demo 预设对照。" >
+  <meta property="og:url" content="https://reranker.uk/zh/guides/choose-reranker-scenario.html" >
+  <meta property="og:site_name" content="reranker.uk" >
+  <meta property="og:locale" content="zh_CN" >
+  <meta property="og:locale:alternate" content="en_GB" >
+  <meta name="twitter:card" content="summary_large_image" >
+  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <meta property="og:image:width" content="1200" >
+  <meta property="og:image:height" content="630" >
+  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
+  <link rel="preload" href="/assets/css/style.css" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css" >
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Which reranker fits your scenario?","datePublished":"2026-06-23","dateModified":"2026-06-23","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/choose-reranker-scenario.html"}
+  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://reranker.uk/zh/guides/"},{"@type":"ListItem","position":3,"name":"按场景选择 reranker","item":"https://reranker.uk/zh/guides/choose-reranker-scenario.html"}]}</script>
+
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="shared.skip">跳到正文</a>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
+        <li><a href="/zh/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">指南</a></li>
+        <li><a href="/zh/models/" data-i18n="shared.nav.models">模型对比</a></li>
+        <li><a class="nav-cta" href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
+      </ul>
+      <div class="nav-right">
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+        <a class="lang-toggle" href="/guides/choose-reranker-scenario.html" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
+      </div>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/guides/">指南</a><span>/</span>按场景选型</div>
+      <h1>哪种 reranker 适合你的场景？</h1>
+      <p class="meta">决策指南 · 约 8 分钟阅读 · <time datetime="2026-06-23">更新于 2026 年 6 月 23 日</time></p>
+      <p class="lead">reranker 并非一刀切。正确选择取决于<strong>语言覆盖</strong>、<strong>延迟预算</strong>、<strong>数据敏感度</strong>，以及你的查询更像<em>客服工单</em>、<em>法律条款</em>、<em>代码检索</em>还是<em>RAG 分块</em>。</p>
+
+      <div class="toc">
+        <strong>本页目录</strong>
+        <ol>
+          <li><a href="#matrix">场景矩阵</a></li>
+          <li><a href="#rag">RAG 与知识库</a></li>
+          <li><a href="#support">客服工单</a></li>
+          <li><a href="#legal">法律与合规</a></li>
+          <li><a href="#code">代码与技术文档</a></li>
+          <li><a href="#try">在 Demo 中试用</a></li>
+        </ol>
+      </div>
+
+      <h2 id="matrix">场景矩阵</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>场景</th><th>典型难点</th><th>起步推荐</th><th>运行位置</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>RAG 流水线</td>
+              <td>向量召回噪声大，需要 top-5 精度</td>
+              <td><a href="/zh/models/bge-reranker.html">bge-reranker-v2-m3</a>（自托管）或 <a href="/zh/models/cohere-rerank.html">Cohere Rerank</a>（API）</td>
+              <td>你的 GPU / 托管 API</td>
+            </tr>
+            <tr>
+              <td>客服工单</td>
+              <td>大量相似 FAQ，要求快速响应</td>
+              <td><a href="/zh/models/jina-reranker.html">jina-reranker tiny</a> 或 <a href="/zh/models/cohere-rerank.html">Cohere</a> 免费档</td>
+              <td>API 或浏览器 Demo</td>
+            </tr>
+            <tr>
+              <td>法律 / 合同</td>
+              <td>措辞细微，干扰项共享词汇</td>
+              <td><a href="/zh/models/mxbai-rerank.html">mxbai-rerank-large</a> 或 <a href="/zh/models/voyage-rerank.html">Voyage</a> 法律微调</td>
+              <td>自托管 / API</td>
+            </tr>
+            <tr>
+              <td>代码与 API 文档</td>
+              <td>精确标识符与语法很重要</td>
+              <td><a href="/zh/models/voyage-rerank.html">Voyage code</a> 或混合 BM25 + <a href="/zh/models/bge-reranker.html">bge</a></td>
+              <td>混合检索 + 重排序</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="rag">RAG 与知识库</h2>
+      <p>召回 50–100 个 chunk，重排至 5–10 条再进 prompt。多语言知识库倾向 <strong>bge-v2-m3</strong> 或 <strong>Cohere v3.5</strong>；仅英文且质量要求高常选 <strong>mxbai-large</strong>。词面匹配重要时见 <a href="/zh/guides/rerank-rag.html">为 RAG 加重排序</a> 与 <a href="/zh/guides/hybrid-retrieval-rerank.html">混合检索</a>。</p>
+      <blockquote>经验法则：bi-encoder 召回已经够好，中等 reranker 即可；召回很乱时，先加宽检索。</blockquote>
+
+      <h2 id="support">客服工单</h2>
+      <p>查询短、段落 FAQ 体量、延迟主导体验。<strong>tiny</strong> cross-encoder（Jina tiny、ms-marco MiniLM）往往够用 —— 你是在若干相似答案里选，不是读百页 PDF。可在 <a href="/zh/demo.html">Demo</a> 试 <strong>客服工单</strong> 预设。</p>
+
+      <h2 id="legal">法律与合规</h2>
+      <p>干扰项共享词汇（「终止」「通知期」「违约」）。bi-encoder 易混淆；cross-encoder 能区分细微差别。为大模型预留额外延迟，段落保持单条款粒度。Demo 预设：<strong>法律条款</strong>。</p>
+
+      <h2 id="code">代码与技术文档</h2>
+      <p>纯向量检索会漏精确函数名；纯 BM25 会漏「我该如何…」类改写。用<strong>混合检索</strong>再 rerank。领域 reranker（Voyage code）有帮助；否则 bge-base + 合理分块也行。Demo 预设：<strong>技术文档</strong>、<strong>代码检索</strong>。</p>
+
+      <h2 id="try">在 Demo 中试用</h2>
+      <p>下列场景对应内置预设 —— 载入后点重排序，看 bi-encoder 代理列先排错，再由 cross-encoder 纠正。</p>
+      <div class="grid grid-2" style="margin:1.2rem 0">
+        <a class="card" href="/zh/demo.html"><h3>RAG 流水线</h3><p>切题与跑题 chunk 混合。</p></a>
+        <a class="card" href="/zh/demo.html"><h3>客服工单</h3><p>物流 vs 退款 vs 密码。</p></a>
+        <a class="card" href="/zh/demo.html"><h3>法律条款</h3><p>多条「终止」干扰项。</p></a>
+        <a class="card" href="/zh/demo.html"><h3>技术文档</h3><p>API 限流 vs 无关端点。</p></a>
+      </div>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">还在犹豫？</h2>
+        <p class="soft">并排对比五大模型家族，一键跳进 Demo。</p>
+        <a class="btn btn-primary" href="/zh/models/">对比模型 →</a>
+      </div>
+
+      <h2>继续阅读</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/zh/guides/self-host-reranker.html"><h3>自托管 reranker</h3><p>sentence-transformers 与服务化。</p></a>
+        <a class="card" href="/zh/guides/evaluate-reranker.html"><h3>评测 reranker</h3><p>用你的数据验证选择。</p></a>
+      </div>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch" data-i18n="shared.footer.blurb">一个关于检索与 RAG 重排序（reranker）的开放学习资源，外加一个在浏览器里零成本运行的实时 Demo。</p>
+          <p style="margin-top:.6rem"><a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer" data-i18n="shared.footer.github">在 GitHub 上查看源码</a></p>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.guides">指南</h4>
+          <ul>
+            <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog.html" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
+            <li><a href="/zh/privacy.html" data-i18n="shared.footer.privacy">隐私说明</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.models">模型</h4>
+          <ul>
+            <li><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker.html">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank.html">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker.html">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank.html">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank.html">Voyage Rerank</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> reranker.uk</span>
+        <span class="footer-legal muted">
+          <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
+          · <a href="/zh/privacy.html" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog.html" data-i18n="shared.footer.changelogShort">更新日志</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+  
+  <script src="/assets/js/i18n.js"></script>
+</body>
+</html>

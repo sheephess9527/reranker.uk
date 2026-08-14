@@ -1,35 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-locale="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Voyage Rerank: high-precision rerank API review | reranker.uk</title>
-  <meta name="description" content="Voyage Rerank review: voyage-rerank-2 and domain-specific variants (code, finance). Benchmarks, pricing, Python usage, pros and cons for adding high-quality reranking to RAG." />
-  <link rel="canonical" href="https://reranker.uk/models/voyage-rerank.html" />
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/models/voyage-rerank.html" />
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/models/voyage-rerank.html" />
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/voyage-rerank.html" />
-  <meta name="theme-color" content="#0b0d17" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="author" content="reranker.uk" />
-  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="Voyage Rerank — high-precision rerank API" />
-  <meta property="og:description" content="Voyage AI's rerankers are optimised for retrieval precision with domain-specific variants for code and finance." />
-  <meta property="og:url" content="https://reranker.uk/models/voyage-rerank.html" />
-  <meta property="og:site_name" content="reranker.uk" />
-  <meta property="og:locale" content="en_GB" />
-  <meta property="og:locale:alternate" content="zh_CN" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" />
-  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" />
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <title>Voyage rerank-2.5: instruction-following rerank API review | reranker.uk</title>
+  <meta name="description" content="Voyage rerank-2.5 review: rerank-2.5 and rerank-2.5-lite compared — 32k context, instruction following, per-token pricing, Python usage, pros and cons for RAG." >
+  <link rel="canonical" href="https://reranker.uk/models/voyage-rerank.html" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/models/voyage-rerank.html" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/voyage-rerank.html" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/voyage-rerank.html" >
+  <meta name="theme-color" content="#0b0d17" >
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
+  <meta name="author" content="reranker.uk" >
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
+  <link rel="manifest" href="/site.webmanifest" >
+  <meta property="og:type" content="article" >
+  <meta property="og:title" content="Voyage rerank-2.5 — instruction-following rerank API" >
+  <meta property="og:description" content="32k context and natural-language instructions that reshape relevance without fine-tuning. Priced per token." >
+  <meta property="og:url" content="https://reranker.uk/models/voyage-rerank.html" >
+  <meta property="og:site_name" content="reranker.uk" >
+  <meta property="og:locale" content="en_GB" >
+  <meta property="og:locale:alternate" content="zh_CN" >
+  <meta name="twitter:card" content="summary_large_image" >
+  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <meta property="og:image:width" content="1200" >
+  <meta property="og:image:height" content="630" >
+  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" >
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
-  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="preload" href="/assets/css/style.css" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css" >
   <!-- seo:jsonld -->
   <script type="application/ld+json">
   {
@@ -94,6 +95,7 @@
     ]
   }
   </script>
+
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="shared.skip">Skip to content</a>
@@ -104,22 +106,22 @@
       <ul class="nav-links">
         <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
         <li><a href="/guides/" data-i18n="shared.nav.guides">Guides</a></li>
-        <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
+        <li><a href="/models/" data-i18n="shared.nav.models" aria-current="page" class="active">Models</a></li>
         <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <button class="lang-toggle" aria-label="切换到中文" title="切换到中文">中文</button>
+        <a class="lang-toggle" href="/zh/models/voyage-rerank.html" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
   </header>
 <main id="main">
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Voyage Rerank</div>
-      <h1>Voyage Rerank</h1>
-      <p class="meta">Hosted API · Voyage AI · <time datetime="2026-06-21">Updated 21 Jun 2026</time></p>
-      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">Hosted API</span><span class="pill info">High precision</span><span class="pill">Domain-specific variants</span></div>
-      <p class="lead">Voyage AI built their rerankers with a single goal: maximise retrieval precision. <code>voyage-rerank-2</code> consistently ranks among the highest on BEIR and MTEB retrieval tasks, and the company offers domain-specific variants for code and financial documents — a strong choice when generic quality isn't enough.</p>
+      <h1>Voyage rerank-2.5</h1>
+      <p class="meta">Hosted API · Voyage AI · <time datetime="2026-08-11">Updated 11 Aug 2026</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">Hosted API</span><span class="pill info">High precision</span><span class="pill info">Instruction-following</span></div>
+      <p class="lead">Voyage AI built their rerankers with a single goal: maximise retrieval precision. The current generation, <code>rerank-2.5</code> and <code>rerank-2.5-lite</code>, doubles the context window to 32,000 tokens and adds <strong>instruction following</strong> — you can shape what counts as relevant with a natural-language prompt instead of fine-tuning. Pricing is per token, which stays cheap when your passages are short.</p>
 
       <div class="toc">
         <strong>On this page</strong>
@@ -138,13 +140,13 @@
             <tr><th>Model</th><th>Context</th><th>Best for</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>rerank-2</code></td><td>16K tokens</td><td>General-purpose flagship; top BEIR scores</td></tr>
-            <tr><td><code>rerank-2-lite</code></td><td>16K tokens</td><td>Faster, lower cost; good quality</td></tr>
-            <tr><td><code>rerank-lite-1</code></td><td>4K tokens</td><td>Legacy lite model</td></tr>
+            <tr><td><code>rerank-2.5</code></td><td>32K tokens</td><td>Current flagship; instruction following</td></tr>
+            <tr><td><code>rerank-2.5-lite</code></td><td>32K tokens</td><td>Same context and instructions, lower cost</td></tr>
+            <tr><td><code>rerank-2</code> / <code>rerank-2-lite</code></td><td>16K tokens</td><td>Previous generation, still served</td></tr>
           </tbody>
         </table>
       </div>
-      <p>The 16K context window on <code>rerank-2</code> is notably large — useful for reranking long legal, medical or financial documents without chunking.</p>
+      <p>The 32K context window on the 2.5 models is large enough to rerank long legal, medical or financial documents without chunking them first. Instruction following is the more interesting change: a prompt such as <em>“prefer passages that cite a statute”</em> reshapes the ranking without any training data.</p>
 
       <h2 id="pricing">Pricing</h2>
       <div class="table-wrap">
@@ -153,9 +155,10 @@
             <tr><th>Model</th><th>Price</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>rerank-2</code></td><td>~$0.05 / 1M tokens</td></tr>
-            <tr><td><code>rerank-2-lite</code></td><td>~$0.02 / 1M tokens</td></tr>
-            <tr><td>Free trial</td><td>200M tokens included on sign-up</td></tr>
+            <tr><td><code>rerank-2.5</code></td><td>$0.05 / 1M tokens</td></tr>
+            <tr><td><code>rerank-2.5-lite</code></td><td>$0.02 / 1M tokens</td></tr>
+            <tr><td>Free allowance</td><td>First 200M tokens per account</td></tr>
+            <tr><td>Batch API</td><td>33% discount</td></tr>
           </tbody>
         </table>
       </div>
@@ -179,7 +182,7 @@ documents = [
 result = vo.rerank(
     query=query,
     documents=documents,
-    model="rerank-2",
+    model="rerank-2.5",
     top_k=3,
 )
 
@@ -191,7 +194,7 @@ for r in result.results:
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "rerank-2",
+    "model": "rerank-2.5",
     "query": "How do I add reranking to my RAG pipeline?",
     "documents": ["Rerankers score...", "BM25 is..."],
     "top_k": 3
@@ -206,7 +209,7 @@ def rag_answer(query: str, vector_db, llm) -> str:
     # Stage 1: retrieve wide
     candidates = vector_db.search(query, top_k=50)
     # Stage 2: rerank tight
-    result = vo.rerank(query=query, documents=candidates, model="rerank-2", top_k=5)
+    result = vo.rerank(query=query, documents=candidates, model="rerank-2.5", top_k=5)
     top5 = [candidates[r.index] for r in result.results]
     # Stage 3: generate
     return llm.complete(f"Context:\n" + "\n\n".join(top5) + f"\n\nQ: {query}")</code></pre>
@@ -217,7 +220,7 @@ def rag_answer(query: str, vector_db, llm) -> str:
           <h3 style="color:var(--good);margin-top:0">Pros</h3>
           <ul class="feature-list">
             <li>Top-tier BEIR retrieval precision scores</li>
-            <li>16K token context — great for long documents</li>
+            <li>32K token context — great for long documents</li>
             <li>Competitive token-based pricing</li>
             <li>200M free tokens on sign-up</li>
             <li>Works seamlessly with Voyage embeddings</li>
@@ -300,8 +303,7 @@ def rag_answer(query: str, vector_db, llm) -> str:
     </div>
   </footer>
   <script src="/assets/js/main.js"></script>
-  <script src="/assets/js/i18n/voyage-rerank.js"></script>
-  <script src="/assets/js/i18n/shared.js"></script>
+  
   <script src="/assets/js/i18n.js"></script>
 </body>
 </html>

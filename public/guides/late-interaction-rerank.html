@@ -1,38 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-locale="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>Late-interaction reranking — ColBERTv2 & when to skip cross-encoders | reranker.uk</title>
-  <meta name="description" content="Guide to late-interaction rerankers (ColBERTv2): how they differ from cross-encoders and bi-encoders, when to skip reranking, and how to combine architectures in 2026 stacks." />
-  <link rel="canonical" href="https://reranker.uk/guides/late-interaction-rerank.html" />
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/late-interaction-rerank.html" />
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/guides/late-interaction-rerank.html" />
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/late-interaction-rerank.html" />
-  <meta name="theme-color" content="#0b0d17" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="author" content="reranker.uk" />
-  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="Late-interaction reranking — ColBERT & beyond" />
-  <meta property="og:description" content="ColBERTv2 vs cross-encoder rerankers: when late-interaction is enough and when you still need stage-2 reranking." />
-  <meta property="og:url" content="https://reranker.uk/guides/late-interaction-rerank.html" />
-  <meta property="og:site_name" content="reranker.uk" />
-  <meta property="og:locale" content="en_GB" />
-  <meta property="og:locale:alternate" content="zh_CN" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" />
-  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" />
+  <meta name="description" content="Guide to late-interaction rerankers (ColBERTv2): how they differ from cross-encoders and bi-encoders, when to skip reranking, and how to combine architectures in 2026 stacks." >
+  <link rel="canonical" href="https://reranker.uk/guides/late-interaction-rerank.html" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/late-interaction-rerank.html" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/late-interaction-rerank.html" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/late-interaction-rerank.html" >
+  <meta name="theme-color" content="#0b0d17" >
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
+  <meta name="author" content="reranker.uk" >
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
+  <link rel="manifest" href="/site.webmanifest" >
+  <meta property="og:type" content="article" >
+  <meta property="og:title" content="Late-interaction reranking — ColBERT & beyond" >
+  <meta property="og:description" content="ColBERTv2 vs cross-encoder rerankers: when late-interaction is enough and when you still need stage-2 reranking." >
+  <meta property="og:url" content="https://reranker.uk/guides/late-interaction-rerank.html" >
+  <meta property="og:site_name" content="reranker.uk" >
+  <meta property="og:locale" content="en_GB" >
+  <meta property="og:locale:alternate" content="zh_CN" >
+  <meta name="twitter:card" content="summary_large_image" >
+  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <meta property="og:image:width" content="1200" >
+  <meta property="og:image:height" content="630" >
+  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" >
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
-  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="preload" href="/assets/css/style.css" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css" >
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Article","headline":"Late-interaction reranking (ColBERT & beyond)","datePublished":"2026-06-25","dateModified":"2026-06-25","inLanguage":"en","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/late-interaction-rerank.html"}
   </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://reranker.uk/guides/"},{"@type":"ListItem","position":3,"name":"Late-interaction reranking","item":"https://reranker.uk/guides/late-interaction-rerank.html"}]}</script>
+
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="shared.skip">Skip to content</a>
@@ -42,13 +45,13 @@
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
       <ul class="nav-links">
         <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
-        <li><a href="/guides/" data-i18n="shared.nav.guides">Guides</a></li>
+        <li><a href="/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">Guides</a></li>
         <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
         <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <button class="lang-toggle" aria-label="切换到中文" title="切换到中文">中文</button>
+        <a class="lang-toggle" href="/zh/guides/late-interaction-rerank.html" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
   </header>
@@ -195,8 +198,7 @@ Unsure?
     </div>
   </footer>
   <script src="/assets/js/main.js"></script>
-  <script src="/assets/js/i18n/late-interaction-rerank.js"></script>
-  <script src="/assets/js/i18n/shared.js"></script>
+  
   <script src="/assets/js/i18n.js"></script>
 </body>
 </html>
