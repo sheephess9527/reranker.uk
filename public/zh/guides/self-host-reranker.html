@@ -138,7 +138,7 @@ def rerank(body: dict):
     scores = model.predict([(q, d) for d in docs])
     order = sorted(range(len(docs)), key=lambda i: -scores[i])
     return {"results": [{"index": i, "score": float(scores[i])} for i in order]}</code></pre>
-      <p>For ONNX export and C++ runtimes, see the model cards on Hugging Face. For browser-only experiments, try our <a href="/zh/demo.html?s=techdocs">in-browser demo</a> with the xsmall ONNX builds.</p>
+      <p>ONNX 导出与 C++ 运行时见 Hugging Face 模型卡。仅浏览器实验可用我们的 <a href="/zh/demo.html?s=techdocs">在线 Demo</a>（xsmall ONNX 构建）。</p>
 
       <h2 id="ops">运维清单</h2>
       <ul>

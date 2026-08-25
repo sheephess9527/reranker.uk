@@ -93,7 +93,7 @@
   </header>
 <main id="main">
     <article class="article container narrow">
-      <div class="breadcrumb"><a href="/zh/">Home</a><span>/</span><a href="/zh/guides/">Guides</a><span>/</span>What is a reranker</div>
+      <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/guides/">指南</a><span>/</span>什么是 reranker</div>
       <h1>什么是 reranker？</h1>
       <p class="meta">基础 · 约 7 分钟阅读 · <time datetime="2026-06-21">更新于 2026 年 6 月 21 日</time></p>
       <p class="lead"><strong>重排序器（reranker）</strong>是一个模型：它接收一个查询和一组候选文档，并根据每个文档与查询的真实相关性重新排序。它几乎总是作为<em>第二阶段</em>运行：先由某种快速方法召回一大批候选，再由 reranker 仔细地对这批候选的头部重新打分。</p>
@@ -148,7 +148,7 @@ Stage 2 — Rerank (slow per item, but only on the shortlist)
       </ul>
 
       <h2 id="try">亲自上手试试</h2>
-      <p>The fastest way to build intuition is to watch a reranker work. Our <a href="/zh/demo.html?s=rag">in-browser demo</a> loads a real cross-encoder and scores your own query against passages you paste — entirely on your device, no API key, no cost. Drop in a couple of off-topic lines and watch them sink.</p>
+      <p>建立直觉最快的方式，就是亲眼看 reranker 工作。我们的<a href="/zh/demo.html?s=rag">浏览器内 Demo</a> 会加载一个真实的 cross-encoder，对你粘贴的段落按你的查询打分 —— 全程在你的设备上，无需 API 密钥、零成本。放进几段跑题的文字，看它们沉下去。</p>
       <div class="cta-band">
         <h2 style="margin-top:0">实时看 reranker 重新排列文本</h2>
         <p class="soft">无需任何配置。一个 cross-encoder 在你的浏览器里运行，毫秒间为段落重新打分。</p>

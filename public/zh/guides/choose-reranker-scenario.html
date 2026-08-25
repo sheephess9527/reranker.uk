@@ -114,7 +114,7 @@
       <blockquote>经验法则：bi-encoder 召回已经够好，中等 reranker 即可；召回很乱时，先加宽检索。</blockquote>
 
       <h2 id="support">客服工单</h2>
-      <p>Queries are short, passages are FAQ-sized, and latency dominates UX. A <strong>tiny</strong> cross-encoder (Jina tiny, ms-marco MiniLM) often suffices — you are choosing among a handful of similar answers, not reading 100-page PDFs. Try the <strong>Customer support</strong> preset in our <a href="/zh/demo.html?s=support">demo</a>.</p>
+      <p>查询短、段落 FAQ 体量、延迟主导体验。<strong>tiny</strong> cross-encoder（Jina tiny、ms-marco MiniLM）往往够用 —— 你是在若干相似答案里选，不是读百页 PDF。可在 <a href="/zh/demo.html?s=support">Demo</a> 试 <strong>客服工单</strong> 预设。</p>
 
       <h2 id="legal">法律与合规</h2>
       <p>干扰项共享词汇（「终止」「通知期」「违约」）。bi-encoder 易混淆；cross-encoder 能区分细微差别。为大模型预留额外延迟，段落保持单条款粒度。Demo 预设：<strong>法律条款</strong>。</p>
