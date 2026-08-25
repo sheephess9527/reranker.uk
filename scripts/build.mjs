@@ -169,6 +169,23 @@ function stripDictScripts(pageScripts) {
 
 const norm = (s) => (s || "").replace(/\s+/g, " ").trim();
 
+/** Key shape that ignores link targets, so retargeting a link keeps its translation. */
+const hrefBlind = (s) => s.replace(/href="[^"]*"/g, 'href=""');
+
+/**
+ * Point the links inside a translated string at wherever the English source
+ * now links, positionally. Bails out unless the two agree on link count, so a
+ * genuinely restructured paragraph falls through to the untranslated report
+ * rather than silently acquiring the wrong hrefs.
+ */
+function retargetLinks(translated, source) {
+  const targets = [...source.matchAll(/href="([^"]*)"/g)].map((m) => m[1]);
+  const found = translated.match(/href="[^"]*"/g) || [];
+  if (found.length !== targets.length) return translated;
+  let i = 0;
+  return translated.replace(/href="[^"]*"/g, () => `href="${targets[i++]}"`);
+}
+
 /** Selectors the legacy innerHTML dictionaries are keyed against (mirrors i18n.js). */
 const LEGACY_SEL = [
   "main h1", "main h2", "main h3", "main h4",
@@ -211,13 +228,25 @@ function translate(root, pageDict) {
   }
 
   if (Object.keys(legacy).length) {
+    // Secondary index used when a link target changed but the prose did not.
+    const byShape = new Map();
+    for (const [k, v] of Object.entries(legacy)) {
+      const shape = hrefBlind(k);
+      if (shape !== k && !byShape.has(shape)) byShape.set(shape, v);
+    }
+
     for (const el of root.querySelectorAll(LEGACY_SEL)) {
       if (el.closest("pre")) continue;
       if (el.classList.contains("no-i18n")) continue;
       if (el.hasAttribute("data-i18n") || el.hasAttribute("data-i18n-html")) continue;
       if (hasAncestor(el, (n) => n.hasAttribute("data-i18n") || n.hasAttribute("data-i18n-html")))
         continue;
-      const hit = legacy[norm(el.innerHTML)];
+      const source = norm(el.innerHTML);
+      let hit = legacy[source];
+      if (hit == null) {
+        const shaped = byShape.get(hrefBlind(source));
+        if (shaped != null) hit = retargetLinks(shaped, source);
+      }
       if (hit != null) {
         el.set_content(hit);
         prose++;

@@ -58,6 +58,15 @@ at `/zh/x` — and per page it:
 5. marks the active nav item and points the locale toggle at the counterpart URL;
 6. records a sitemap entry, with `lastmod` read from the file's last commit.
 
+### Interactive pages
+
+Two pages carry their own logic and are not just prose:
+
+| Page | Script | Notes |
+|------|--------|-------|
+| `/demo.html` | `public/assets/js/demo.js` | Cross-encoder in the browser. Deep links: `?s=<preset>` for a built-in scenario, `?q=&docs=` for literal contents, `?m=`/`?m2=` for models, `?z=` for gzipped state. An untouched preset shares as the short `?s=` form. |
+| `/rerank-cost-calculator.html` | `public/assets/js/cost-calculator.js` | Cohere per-search vs Voyage per-token pricing. Rates are hard-coded constants — update them alongside the models table each quarter. |
+
 ### Bilingual (EN / 中文)
 
 Language is decided by the **URL**, not by `localStorage`. `/x` is English,
@@ -69,6 +78,12 @@ browser. When you change an English string you orphan its translation — run
 `node scripts/check-zh-coverage.mjs` after content edits and add the missing
 key to the relevant `src/i18n/<page>.js`. The dictionary key is the element's
 **normalised inner HTML** from the English build.
+
+Changing only a link *target* is handled for you: the build retries the lookup
+with hrefs blanked out and repoints the links inside the translation. It gives
+up if the two sides carry a different number of links, so a restructured
+paragraph still shows up in the coverage report rather than silently acquiring
+the wrong targets.
 
 ---
 

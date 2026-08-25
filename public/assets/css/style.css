@@ -704,3 +704,15 @@ select { font-family: var(--mono); font-size: 0.85rem; }
   .result-item { animation: none; }
   a.card:hover, .btn-primary:hover, .btn-ghost:hover { transform: none; }
 }
+
+/* ---------- Cost calculator ---------- */
+.calc-summary {
+  margin-top: 0.4rem; padding-top: 0.9rem; border-top: 1px solid var(--border-soft);
+  font-size: 0.88rem; color: var(--text-soft); font-family: var(--mono);
+}
+#calc-table td:last-child, #calc-table th:last-child { text-align: right; }
+#calc-table .mono { font-size: 0.88rem; }
+input[type="number"] {
+  width: 100%; background: var(--bg-soft); border: 1px solid var(--border); color: var(--text);
+  border-radius: var(--radius-sm); padding: 0.7rem 0.85rem; font-family: var(--mono); font-size: 0.95rem;
+}

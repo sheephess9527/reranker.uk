@@ -121,7 +121,7 @@
       <h1>Jina Reranker</h1>
       <p class="meta">Open weights + Hosted API · Jina AI · <time datetime="2026-08-11">Updated 11 Aug 2026</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Open weights</span><span class="pill">Hosted API</span><span class="pill info">v3 listwise</span><span class="pill">Browser tiny</span></div>
-      <p class="lead">Jina’s 2026 flagship is <strong>jina-reranker-v3</strong>: a <strong>0.6B</strong> <em>listwise</em> reranker built on Qwen3-0.6B that scores up to <strong>64 documents inside one 131K-token context</strong> and reaches <strong>61.94 nDCG@10 on BEIR</strong> — ahead of Qwen3-Reranker-4B at roughly a sixth of the size. Older <strong>v2</strong> pairwise models remain useful; <strong>v1-tiny</strong> is still what runs in <a href="/demo.html">our browser demo</a>.</p>
+      <p class="lead">Jina’s 2026 flagship is <strong>jina-reranker-v3</strong>: a <strong>0.6B</strong> <em>listwise</em> reranker built on Qwen3-0.6B that scores up to <strong>64 documents inside one 131K-token context</strong> and reaches <strong>61.94 nDCG@10 on BEIR</strong> — ahead of Qwen3-Reranker-4B at roughly a sixth of the size. Older <strong>v2</strong> pairwise models remain useful; <strong>v1-tiny</strong> is still what runs in <a href="/demo.html?m=jinaai/jina-reranker-v1-tiny-en">our browser demo</a>.</p>
 
       <div class="toc">
         <strong>On this page</strong>
@@ -241,7 +241,7 @@ const scores = logits.sigmoid().tolist();</code></pre>
       <div class="cta-band" style="margin-top:2rem">
         <h2 style="margin-top:0">jina-reranker-v1-tiny powers this demo</h2>
         <p class="soft">See it score your own passages live in the browser — no API key, no data leaving the page.</p>
-        <a class="btn btn-primary" href="/demo.html">Open the demo →</a>
+        <a class="btn btn-primary" href="/demo.html?m=jinaai/jina-reranker-v1-tiny-en">Open the demo →</a>
       </div>
 
       <h2>Other models</h2>
@@ -275,6 +275,7 @@ const scores = logits.sigmoid().tolist();</code></pre>
             <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
             <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
             <li><a href="/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
+            <li><a href="/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
             <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
             <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>

@@ -114,7 +114,7 @@
       <blockquote>Rule of thumb: if bi-encoder recall is already good, a mid-size reranker is enough. If recall is messy, fix retrieval width first.</blockquote>
 
       <h2 id="support">Customer support</h2>
-      <p>Queries are short, passages are FAQ-sized, and latency dominates UX. A <strong>tiny</strong> cross-encoder (Jina tiny, ms-marco MiniLM) often suffices — you are choosing among a handful of similar answers, not reading 100-page PDFs. Try the <strong>Customer support</strong> preset in our <a href="/demo.html">demo</a>.</p>
+      <p>Queries are short, passages are FAQ-sized, and latency dominates UX. A <strong>tiny</strong> cross-encoder (Jina tiny, ms-marco MiniLM) often suffices — you are choosing among a handful of similar answers, not reading 100-page PDFs. Try the <strong>Customer support</strong> preset in our <a href="/demo.html?s=support">demo</a>.</p>
 
       <h2 id="legal">Legal &amp; compliance</h2>
       <p>Distractors share vocabulary (“termination”, “notice period”, “breach”). Bi-encoders confuse them; cross-encoders separate nuance. Budget extra latency for a larger model and keep passages to single clauses. Demo preset: <strong>Legal clause</strong>.</p>
@@ -125,10 +125,10 @@
       <h2 id="try">Try it in the demo</h2>
       <p>Each scenario below maps to a built-in preset — load it, hit Rerank, and watch the bi-encoder proxy column mis-order before the cross-encoder fixes it.</p>
       <div class="grid grid-2" style="margin:1.2rem 0">
-        <a class="card" href="/demo.html"><h3>RAG pipeline</h3><p>Mixed on-topic + off-topic chunks.</p></a>
-        <a class="card" href="/demo.html"><h3>Customer support</h3><p>Tracking vs refunds vs passwords.</p></a>
-        <a class="card" href="/demo.html"><h3>Legal clause</h3><p>Several “termination” distractors.</p></a>
-        <a class="card" href="/demo.html"><h3>Technical docs</h3><p>API rate limits vs unrelated endpoints.</p></a>
+        <a class="card" href="/demo.html?s=rag"><h3>RAG pipeline</h3><p>Mixed on-topic + off-topic chunks.</p></a>
+        <a class="card" href="/demo.html?s=support"><h3>Customer support</h3><p>Tracking vs refunds vs passwords.</p></a>
+        <a class="card" href="/demo.html?s=legal"><h3>Legal clause</h3><p>Several “termination” distractors.</p></a>
+        <a class="card" href="/demo.html?s=techdocs"><h3>Technical docs</h3><p>API rate limits vs unrelated endpoints.</p></a>
       </div>
 
       <div class="cta-band">
@@ -165,6 +165,7 @@
             <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
             <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
             <li><a href="/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
+            <li><a href="/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
             <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
             <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>

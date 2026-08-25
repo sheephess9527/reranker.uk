@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "Rerank cost calculator": "重排序成本计算器",
+  "Per-search or per-token? Which rerank API is cheaper at your volume.":
+    "按次计费还是按 token 计费？在你的量级下哪个 rerank API 更便宜。",
+  "Tool": "工具",
   "_title": "Reranker 指南 — 从入门到生产 | reranker.uk",
   "_desc": "reranker.uk 全部指南：什么是 reranker、cross-encoder vs bi-encoder、RAG 集成、混合检索、自托管、场景选型，以及如何评测重排序模型。",
   "Guides": "指南",

@@ -114,7 +114,7 @@
       <blockquote>经验法则：bi-encoder 召回已经够好，中等 reranker 即可；召回很乱时，先加宽检索。</blockquote>
 
       <h2 id="support">客服工单</h2>
-      <p>查询短、段落 FAQ 体量、延迟主导体验。<strong>tiny</strong> cross-encoder（Jina tiny、ms-marco MiniLM）往往够用 —— 你是在若干相似答案里选，不是读百页 PDF。可在 <a href="/zh/demo.html">Demo</a> 试 <strong>客服工单</strong> 预设。</p>
+      <p>查询短、段落 FAQ 体量、延迟主导体验。<strong>tiny</strong> cross-encoder（Jina tiny、ms-marco MiniLM）往往够用 —— 你是在若干相似答案里选，不是读百页 PDF。可在 <a href="/zh/demo.html?s=support">Demo</a> 试 <strong>客服工单</strong> 预设。</p>
 
       <h2 id="legal">法律与合规</h2>
       <p>干扰项共享词汇（「终止」「通知期」「违约」）。bi-encoder 易混淆；cross-encoder 能区分细微差别。为大模型预留额外延迟，段落保持单条款粒度。Demo 预设：<strong>法律条款</strong>。</p>
@@ -125,10 +125,10 @@
       <h2 id="try">在 Demo 中试用</h2>
       <p>下列场景对应内置预设 —— 载入后点重排序，看 bi-encoder 代理列先排错，再由 cross-encoder 纠正。</p>
       <div class="grid grid-2" style="margin:1.2rem 0">
-        <a class="card" href="/zh/demo.html"><h3>RAG 流水线</h3><p>切题与跑题 chunk 混合。</p></a>
-        <a class="card" href="/zh/demo.html"><h3>客服工单</h3><p>物流 vs 退款 vs 密码。</p></a>
-        <a class="card" href="/zh/demo.html"><h3>法律条款</h3><p>多条「终止」干扰项。</p></a>
-        <a class="card" href="/zh/demo.html"><h3>技术文档</h3><p>API 限流 vs 无关端点。</p></a>
+        <a class="card" href="/zh/demo.html?s=rag"><h3>RAG 流水线</h3><p>切题与跑题 chunk 混合。</p></a>
+        <a class="card" href="/zh/demo.html?s=support"><h3>客服工单</h3><p>物流 vs 退款 vs 密码。</p></a>
+        <a class="card" href="/zh/demo.html?s=legal"><h3>法律条款</h3><p>多条「终止」干扰项。</p></a>
+        <a class="card" href="/zh/demo.html?s=techdocs"><h3>技术文档</h3><p>API 限流 vs 无关端点。</p></a>
       </div>
 
       <div class="cta-band">
@@ -165,6 +165,7 @@
             <li><a href="/zh/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">按场景选型</a></li>
             <li><a href="/zh/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
             <li><a href="/zh/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
             <li><a href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
             <li><a href="/zh/changelog.html" data-i18n="shared.footer.changelog">更新日志</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
