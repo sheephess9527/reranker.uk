@@ -20,6 +20,7 @@ window.I18N_SHARED = {
     "shared.footer.lateInteraction": "Late-interaction（ColBERT）",
     "shared.footer.instructionRerank": "指令跟随 rerank",
     "shared.footer.models": "模型",
+    "shared.footer.costCalc": "重排序成本计算器",
     "shared.footer.changelogRss": "更新日志 RSS",
     "shared.footer.changelog": "更新日志",
     "shared.footer.changelogShort": "更新日志",

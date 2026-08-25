@@ -6,6 +6,16 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-08-14">14 Aug 2026 — Cost calculator, and demo links that land somewhere</h2>
+        <ul class="feature-list">
+          <li><strong><a href="/rerank-cost-calculator.html">Rerank cost calculator</a></strong> — Cohere bills per search, Voyage per token, so the cheaper vendor flips with passage length and top-k. Put your own volume in and see where the line sits</li>
+          <li><strong>Scenario deep links</strong> — all 25 demo links across the guides and model pages now open the scenario the page is actually about, via a new <code>?s=</code> parameter</li>
+          <li><strong>Shorter share links</strong> — an untouched built-in scenario shares as <code>?s=rag</code> instead of a 900-character URL</li>
+          <li><strong>Translations survive link edits</strong> — the build now retargets links inside a translation instead of dropping it back to English</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-08-11">11 Aug 2026 — Real Chinese URLs, and a 2026 model refresh</h2>
         <ul class="feature-list">
           <li><strong>Chinese lives at <a href="/zh/">/zh/</a></strong> — every page is now pre-rendered in Chinese at its own URL with a self-referencing canonical, instead of a client-side toggle that left all three hreflang tags pointing at one page</li>

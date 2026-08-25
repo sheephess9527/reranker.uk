@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog.html</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Tue, 11 Aug 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 14 Aug 2026 12:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>14 Aug 2026 — Cost calculator, and demo links that land somewhere</title>
+      <link>https://reranker.uk/changelog.html#2026-08-14</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog.html#2026-08-14</guid>
+      <pubDate>Fri, 14 Aug 2026 12:00:00 GMT</pubDate>
+      <description>New rerank cost calculator comparing Cohere per-search and Voyage per-token billing; demo links across every guide now open the relevant scenario via ?s=.</description>
+    </item>
     <item>
       <title>11 Aug 2026 — Real Chinese URLs, and a 2026 model refresh</title>
       <link>https://reranker.uk/changelog.html#2026-08-11</link>

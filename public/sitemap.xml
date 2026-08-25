@@ -378,4 +378,22 @@
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/privacy.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/privacy.html" />
   </url>
+  <url>
+    <loc>https://reranker.uk/rerank-cost-calculator.html</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/rerank-cost-calculator.html" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/rerank-cost-calculator.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/rerank-cost-calculator.html" />
+  </url>
+  <url>
+    <loc>https://reranker.uk/zh/rerank-cost-calculator.html</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/rerank-cost-calculator.html" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/rerank-cost-calculator.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/rerank-cost-calculator.html" />
+  </url>
 </urlset>

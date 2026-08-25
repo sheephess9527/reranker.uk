@@ -1,4 +1,14 @@
 window.I18N_PAGE = { zh: {
+  "14 Aug 2026 — Cost calculator, and demo links that land somewhere":
+    "2026 年 8 月 14 日 —— 成本计算器，以及不再落空的 Demo 链接",
+  "<strong><a href=\"/rerank-cost-calculator.html\">Rerank cost calculator</a></strong> — Cohere bills per search, Voyage per token, so the cheaper vendor flips with passage length and top-k. Put your own volume in and see where the line sits":
+    "<strong><a href=\"/rerank-cost-calculator.html\">重排序成本计算器</a></strong> —— Cohere 按次检索计费、Voyage 按 token 计费，因此哪家更便宜会随段落长度和 top-k 翻转。填入你自己的量级，看看分界线在哪",
+  "<strong>Scenario deep links</strong> — all 25 demo links across the guides and model pages now open the scenario the page is actually about, via a new <code>?s=</code> parameter":
+    "<strong>场景深度链接</strong> —— 指南与模型页上全部 25 个 Demo 链接，现在都会通过新的 <code>?s=</code> 参数打开该页真正讲的那个场景",
+  "<strong>Shorter share links</strong> — an untouched built-in scenario shares as <code>?s=rag</code> instead of a 900-character URL":
+    "<strong>分享链接变短</strong> —— 未经修改的内置场景现在分享为 <code>?s=rag</code>，而不是 900 字符的长链接",
+  "<strong>Translations survive link edits</strong> — the build now retargets links inside a translation instead of dropping it back to English":
+    "<strong>改链接不再丢翻译</strong> —— 构建会把译文里的链接指向新目标，而不是让整段退回英文",
   "11 Aug 2026 — Real Chinese URLs, and a 2026 model refresh":
     "2026 年 8 月 11 日 —— 中文有了独立 URL，模型数据刷新到 2026",
   "<strong>Chinese lives at <a href=\"/zh/\">/zh/</a></strong> — every page is now pre-rendered in Chinese at its own URL with a self-referencing canonical, instead of a client-side toggle that left all three hreflang tags pointing at one page":

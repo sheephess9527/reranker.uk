@@ -1,0 +1,11 @@
+{
+  "title": "Rerank cost calculator — Cohere vs Voyage pricing | reranker.uk",
+  "description": "Estimate what reranking costs per month. Cohere Rerank 4 bills per search, Voyage rerank-2.5 bills per token, so the cheaper option flips with passage length and top-k. Enter your own volume and compare.",
+  "canonical": "https://reranker.uk/rerank-cost-calculator.html",
+  "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  "og_type": "website",
+  "og_title": "Rerank cost calculator — Cohere vs Voyage",
+  "og_description": "Per-search or per-token? Which rerank API is cheaper depends on your passage length and top-k. Put your numbers in.",
+  "head_extra": "<script type=\"application/ld+json\">\n  {\n    \"@context\": \"https://schema.org\",\n    \"@type\": \"WebApplication\",\n    \"name\": \"Rerank cost calculator\",\n    \"url\": \"https://reranker.uk/rerank-cost-calculator.html\",\n    \"applicationCategory\": \"BusinessApplication\",\n    \"operatingSystem\": \"Any browser\",\n    \"offers\": { \"@type\": \"Offer\", \"price\": \"0\", \"priceCurrency\": \"GBP\" },\n    \"description\": \"Estimate monthly reranking cost across Cohere Rerank 4 per-search pricing and Voyage rerank-2.5 per-token pricing.\"\n  }\n  </script>",
+  "page_scripts": "<script src=\"/assets/js/i18n/rerank-cost-calculator.js\"></script>\n  <script src=\"/assets/js/cost-calculator.js\"></script>"
+}

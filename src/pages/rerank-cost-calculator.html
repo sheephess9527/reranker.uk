@@ -1,0 +1,88 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span>Rerank cost calculator</div>
+      <h1>Rerank cost calculator</h1>
+      <p class="meta">Tool · <time datetime="2026-08-14">Updated 14 Aug 2026</time></p>
+      <p class="lead">Hosted rerankers do not bill the same way. Cohere charges per <strong>search</strong> — one query plus up to 100 documents, whatever their length. Voyage charges per <strong>token</strong>. So the cheaper vendor flips depending on how long your passages are and how many you rerank. Put your own numbers in.</p>
+
+      <section class="demo-panel" aria-labelledby="calc-head">
+        <h2 id="calc-head" class="mt-0" style="margin-bottom:1rem">Your workload</h2>
+        <div class="demo-input-grid">
+          <div>
+            <div class="field">
+              <label for="calc-queries">Queries per month <span class="hint">how many searches your app runs</span></label>
+              <input type="number" id="calc-queries" value="100000" min="0" step="1000" inputmode="numeric" />
+            </div>
+            <div class="field">
+              <label for="calc-topk">Candidates reranked per query <span class="hint">the top-k you send to the reranker</span></label>
+              <input type="number" id="calc-topk" value="50" min="1" step="1" inputmode="numeric" />
+            </div>
+          </div>
+          <div>
+            <div class="field">
+              <label for="calc-passage">Average tokens per passage <span class="hint">a 400-word chunk is roughly 550 tokens</span></label>
+              <input type="number" id="calc-passage" value="200" min="1" step="10" inputmode="numeric" />
+            </div>
+            <div class="field">
+              <label for="calc-query-tokens">Average tokens per query</label>
+              <input type="number" id="calc-query-tokens" value="15" min="1" step="1" inputmode="numeric" />
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-summary" id="calc-summary" aria-live="polite"></div>
+      </section>
+
+      <h2 id="results">Monthly cost</h2>
+      <div class="table-wrap">
+        <table id="calc-table">
+          <caption class="sr-only">Estimated monthly rerank cost by vendor for the workload entered above</caption>
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Billing unit</th>
+              <th>Billable volume</th>
+              <th>Monthly cost</th>
+            </tr>
+          </thead>
+          <tbody id="calc-rows"></tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem" id="calc-note"></p>
+
+      <h2 id="why">Why the ranking changes</h2>
+      <p>Per-search pricing is indifferent to passage length: reranking 50 chunks of 80 tokens costs exactly what 50 chunks of 800 tokens costs. Per-token pricing scales with everything you send. That gives a simple rule of thumb:</p>
+      <ul>
+        <li><strong>Short passages, large top-k</strong> — per-token billing tends to win, because you are paying for very little text.</li>
+        <li><strong>Long passages</strong> — per-search billing tends to win, and its advantage grows with every extra token in the chunk.</li>
+        <li><strong>Top-k above 100</strong> — Cohere starts a second billable search per query, so cost steps up rather than sliding.</li>
+      </ul>
+      <div class="callout accent">
+        <p><strong>Breakeven:</strong> <span id="calc-breakeven">—</span></p>
+      </div>
+
+      <h2 id="self-host">What about self-hosting?</h2>
+      <p>Self-hosting has no per-call price, so it does not belong in the table above — you trade a usage bill for a GPU bill plus operations. The comparison only becomes meaningful at your own volume: divide your monthly GPU cost by the number of queries above and compare that to the per-query figures in the table. Below a few hundred thousand queries a month an API is usually cheaper than a dedicated GPU; well above that, self-hosting a <a href="/models/qwen-reranker.html">Qwen3-Reranker</a> or <a href="/models/bge-reranker.html">bge-reranker-v2-m3</a> starts to pay off. Our <a href="/guides/self-host-reranker.html">self-hosting guide</a> covers the serving side.</p>
+      <p class="muted" style="font-size:.9rem">Note that a smaller model is not automatically a worse one — <a href="/models/jina-reranker.html">Jina Reranker v3</a> reaches 61.94 BEIR nDCG@10 at 0.6B, so the cheapest thing to serve may also be the most accurate.</p>
+
+      <h2 id="assumptions">Assumptions and sources</h2>
+      <ul>
+        <li><strong>Cohere Rerank 4</strong> — $0.0025 per search (Pro) and $0.002 per search (Fast), where a search is one query plus up to 100 documents. More than 100 candidates bills as multiple searches.</li>
+        <li><strong>Voyage rerank-2.5</strong> — $0.05 per 1M tokens, and $0.02 per 1M tokens for <code>rerank-2.5-lite</code>. Billable tokens are the query plus every document you send. The first 200M tokens per account are free and the Batch API is discounted 33%; neither is applied above.</li>
+        <li>Token counts are approximate — every vendor tokenises differently, and this page multiplies your averages rather than tokenising real text.</li>
+        <li>Rates verified August 2026. Check <a href="https://docs.cohere.com/docs/rerank-overview" rel="noopener noreferrer">Cohere</a> and <a href="https://docs.voyageai.com/docs/pricing" rel="noopener noreferrer">Voyage</a> for current pricing before committing to a budget.</li>
+      </ul>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">Cost is only half the decision</h2>
+        <p class="soft">Quality is the other half. Run a cross-encoder against your own passages in the browser — no key, no spend.</p>
+        <a class="btn btn-primary" href="/demo.html?s=rag">Open the live demo →</a>
+      </div>
+
+      <h2>Keep reading</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/models/"><h3>Compare rerank models</h3><p>Architecture, latency, languages and cost across 16 models.</p></a>
+        <a class="card" href="/guides/choose-reranker-scenario.html"><h3>Choose by scenario</h3><p>Which reranker suits support, legal, code or multilingual search.</p></a>
+      </div>
+    </article>
+  </main>
