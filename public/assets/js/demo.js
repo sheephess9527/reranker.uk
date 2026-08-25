@@ -465,7 +465,12 @@ function renderPresets() {
   });
 }
 
-function loadPreset(id) {
+/**
+ * @param {string} id       preset id
+ * @param {boolean} [fromUrl] true when the preset came from ?s=, in which case
+ *   the address bar already names it and must not be expanded to ?q=&docs=
+ */
+function loadPreset(id, fromUrl) {
   const s = sampleById(id);
   if (!s) return;
   const t = sampleText(s);
@@ -476,7 +481,7 @@ function loadPreset(id) {
   renderPresets();
   updateDocWarning();
   if (MOBILE_MQ.matches) renderDocsList();
-  void syncUrl();
+  if (!fromUrl) void syncUrl();
   setStatus(
     L("Scenario loaded — hit “Rerank” to score it.", "示例已载入 —— 点击“重排序”为它打分。"),
     false
@@ -1042,8 +1047,15 @@ function buildShareParams() {
   const docs = els.docs?.value || "";
   if (!query && !docs) return null;
   const p = new URLSearchParams();
-  if (query) p.set("q", query);
-  if (docs) p.set("docs", docs);
+  // An untouched built-in scenario is named by its id rather than spelled out.
+  // Keeps ?s= links from articles intact and makes share links short; the
+  // moment anything is edited we fall back to the literal contents.
+  if (currentPreset && !userEdited) {
+    p.set("s", currentPreset);
+  } else {
+    if (query) p.set("q", query);
+    if (docs) p.set("docs", docs);
+  }
   if (els.model?.value) p.set("m", els.model.value);
   if (els.compareToggle?.checked && els.modelB?.value) p.set("m2", els.modelB.value);
   return p;
@@ -1105,6 +1117,18 @@ async function loadFromUrl() {
       console.warn("Failed to decompress share URL", e);
     }
   }
+  // ?s=<preset id> lets an article link straight into a named scenario without
+  // pushing the whole passage set through the query string. An explicit ?q/?docs
+  // still wins, so a share link keeps its exact contents.
+  if (p.has("s") && !p.has("q") && !p.has("docs")) {
+    const preset = sampleById(p.get("s"));
+    if (preset) {
+      loadPreset(preset.id, true);
+      if (p.has("m") && MODELS[p.get("m")] && els.model) els.model.value = p.get("m");
+      return;
+    }
+  }
+
   const state = {};
   if (p.has("q")) state.q = p.get("q");
   if (p.has("docs")) state.docs = p.get("docs");

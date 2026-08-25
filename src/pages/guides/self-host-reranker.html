@@ -81,7 +81,7 @@ def rerank(body: dict):
     scores = model.predict([(q, d) for d in docs])
     order = sorted(range(len(docs)), key=lambda i: -scores[i])
     return {"results": [{"index": i, "score": float(scores[i])} for i in order]}</code></pre>
-      <p>For ONNX export and C++ runtimes, see the model cards on Hugging Face. For browser-only experiments, try our <a href="/demo.html">in-browser demo</a> with the xsmall ONNX builds.</p>
+      <p>For ONNX export and C++ runtimes, see the model cards on Hugging Face. For browser-only experiments, try our <a href="/demo.html?s=techdocs">in-browser demo</a> with the xsmall ONNX builds.</p>
 
       <h2 id="ops">Ops checklist</h2>
       <ul>
@@ -95,7 +95,7 @@ def rerank(body: dict):
       <div class="cta-band">
         <h2 style="margin-top:0">Prototype before you deploy</h2>
         <p class="soft">Paste your own query and passages in the browser demo — no server required.</p>
-        <a class="btn btn-primary" href="/demo.html">Open the demo →</a>
+        <a class="btn btn-primary" href="/demo.html?s=techdocs">Open the demo →</a>
       </div>
 
       <h2>Keep reading</h2>

@@ -121,7 +121,7 @@
       <h1>Jina Reranker</h1>
       <p class="meta">开源权重 + 托管 API · Jina AI · <time datetime="2026-08-11">更新于 2026 年 8 月 11 日</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">开源权重</span><span class="pill">托管 API</span><span class="pill info">v3 listwise</span><span class="pill">浏览器 tiny</span></div>
-      <p class="lead">Jina 的 2026 旗舰是 <strong>jina-reranker-v3</strong>：一个基于 Qwen3-0.6B 的 <strong>0.6B</strong> <em>listwise</em> 重排序器，可在<strong>同一个 131K token 上下文里一次性给最多 64 篇文档打分</strong>，BEIR nDCG@10 达到 <strong>61.94</strong> —— 以约六分之一的体量超过 Qwen3-Reranker-4B。较早的 <strong>v2</strong> 成对模型依然有用；<strong>v1-tiny</strong> 仍是 <a href="/zh/demo.html">我们浏览器 Demo</a> 里跑的那个。</p>
+      <p class="lead">Jina’s 2026 flagship is <strong>jina-reranker-v3</strong>: a <strong>0.6B</strong> <em>listwise</em> reranker built on Qwen3-0.6B that scores up to <strong>64 documents inside one 131K-token context</strong> and reaches <strong>61.94 nDCG@10 on BEIR</strong> — ahead of Qwen3-Reranker-4B at roughly a sixth of the size. Older <strong>v2</strong> pairwise models remain useful; <strong>v1-tiny</strong> is still what runs in <a href="/zh/demo.html?m=jinaai/jina-reranker-v1-tiny-en">our browser demo</a>.</p>
 
       <div class="toc">
         <strong>本页目录</strong>
@@ -241,7 +241,7 @@ const scores = logits.sigmoid().tolist();</code></pre>
       <div class="cta-band" style="margin-top:2rem">
         <h2 style="margin-top:0">jina-reranker-v1-tiny 驱动了这个 Demo</h2>
         <p class="soft">在浏览器里实时看它为你自己的段落打分 —— 无 API 密钥，数据不离开页面。</p>
-        <a class="btn btn-primary" href="/zh/demo.html">打开 Demo →</a>
+        <a class="btn btn-primary" href="/zh/demo.html?m=jinaai/jina-reranker-v1-tiny-en">打开 Demo →</a>
       </div>
 
       <h2>其他模型</h2>
