@@ -15,6 +15,7 @@
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
   <link rel="manifest" href="/site.webmanifest" >
+  <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
   <meta property="og:type" content="website" >
   <meta property="og:title" content="reranker.uk changelog" >
   <meta property="og:description" content="What shipped on reranker.uk — demo UX, guides, and infrastructure." >
@@ -31,7 +32,7 @@
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
-  <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
+  
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://reranker.uk/changelog.html"}]}</script>
 
 </head>
@@ -60,6 +61,16 @@
     </section>
 
     <section class="section container narrow">
+      <article class="changelog-entry">
+        <h2 id="2026-08-25">25 Aug 2026 — Two guides for the questions people actually ask</h2>
+        <ul class="feature-list">
+          <li><strong><a href="/guides/reranking-not-working.html">Reranking didn't help</a></strong> — a diagnostic walkthrough of the seven reasons a rerank stage shows no lift, starting with the one that explains most of them: retrieval never returned the right document</li>
+          <li><strong><a href="/guides/rerank-vector-database.html">Rerank on a vector database</a></strong> — the retrieve-wide-then-rerank pattern with code for pgvector, Qdrant and Elasticsearch, including the HNSW <code>ef_search</code> trap that makes a wider limit return padding instead of candidates</li>
+          <li><strong><a href="/llms.txt">/llms.txt</a></strong> — a generated map of the site for assistants that read one before citing a source, including how to read our benchmark footnotes</li>
+          <li><strong>Feed autodiscovery</strong> — the changelog RSS is now advertised from every page, not just the changelog</li>
+        </ul>
+      </article>
+
       <article class="changelog-entry">
         <h2 id="2026-08-14">14 Aug 2026 — Cost calculator, and demo links that land somewhere</h2>
         <ul class="feature-list">
@@ -210,6 +221,8 @@
             <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
             <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
             <li><a href="/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
+            <li><a href="/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
+            <li><a href="/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
             <li><a href="/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
             <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
             <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>

@@ -15,6 +15,7 @@
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
   <link rel="manifest" href="/site.webmanifest" >
+  <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
   <meta property="og:type" content="website" >
   <meta property="og:title" content="更新日志 — reranker.uk 版本记录 | reranker.uk" >
   <meta property="og:description" content="reranker.uk 发布说明：Demo 功能、新指南、模型对比更新与站点改进。" >
@@ -31,7 +32,7 @@
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
-  <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
+  
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"更新日志","item":"https://reranker.uk/zh/changelog.html"}]}</script>
 
 </head>
@@ -60,6 +61,16 @@
     </section>
 
     <section class="section container narrow">
+      <article class="changelog-entry">
+        <h2 id="2026-08-25">2026 年 8 月 25 日 —— 两篇针对真实提问的指南</h2>
+        <ul class="feature-list">
+          <li><strong><a href="/zh/guides/reranking-not-working.html">重排序没起作用</a></strong> —— 逐条排查重排序看不到提升的七个原因，从最能解释问题的那条开始：检索压根没返回正确的文档</li>
+          <li><strong><a href="/zh/guides/rerank-vector-database.html">在向量数据库上做重排序</a></strong> —— 「宽召回后重排」模式，含 pgvector、Qdrant 与 Elasticsearch 的代码，也包括 HNSW 的 <code>ef_search</code> 陷阱：limit 放大了，返回的却是凑数而非候选</li>
+          <li><strong><a href="/llms.txt">/llms.txt</a></strong> —— 自动生成的站点地图，供引用前会读它的 AI 助手使用，其中也说明了我们的基准脚注该怎么读</li>
+          <li><strong>订阅源自动发现</strong> —— 更新日志 RSS 现在在每一页都会声明，而不只是更新日志页</li>
+        </ul>
+      </article>
+
       <article class="changelog-entry">
         <h2 id="2026-08-14">2026 年 8 月 14 日 —— 成本计算器，以及不再落空的 Demo 链接</h2>
         <ul class="feature-list">
@@ -210,6 +221,8 @@
             <li><a href="/zh/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">按场景选型</a></li>
             <li><a href="/zh/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
             <li><a href="/zh/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
+            <li><a href="/zh/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
             <li><a href="/zh/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
             <li><a href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
             <li><a href="/zh/changelog.html" data-i18n="shared.footer.changelog">更新日志</a></li>

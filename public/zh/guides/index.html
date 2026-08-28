@@ -15,6 +15,7 @@
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
   <link rel="manifest" href="/site.webmanifest" >
+  <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
   <meta property="og:type" content="website" >
   <meta property="og:title" content="Reranker 指南 — 从入门到生产 | reranker.uk" >
   <meta property="og:description" content="reranker.uk 全部指南：什么是 reranker、cross-encoder vs bi-encoder、RAG 集成、混合检索、自托管、场景选型，以及如何评测重排序模型。" >
@@ -115,6 +116,18 @@
           <p>改变「相关」含义的任务指令 —— 对比经典 cross-encoder。</p>
           <div class="tag-row"><span class="pill info">新兴</span><span class="pill">约 7 分钟</span></div>
         </a>
+        <a class="card" href="/zh/guides/reranking-not-working.html">
+          <span class="ico" aria-hidden="true">🩺</span>
+          <h3>重排序没起作用</h3>
+          <p>看不到提升的七个原因 —— 召回、候选池大小、截断 —— 以及如何判断你属于哪一种。</p>
+          <div class="tag-row"><span class="pill info">排障</span><span class="pill">约 9 分钟</span></div>
+        </a>
+        <a class="card" href="/zh/guides/rerank-vector-database.html">
+          <span class="ico" aria-hidden="true">🗄️</span>
+          <h3>在向量数据库上做重排序</h3>
+          <p>把重排序这一步接到 pgvector、Qdrant 或 Elasticsearch 上，含代码。</p>
+          <div class="tag-row"><span class="pill info">实战</span><span class="pill">约 10 分钟</span></div>
+        </a>
         <a class="card" href="/zh/rerank-cost-calculator.html">
           <span class="ico" aria-hidden="true">🧮</span>
           <h3>重排序成本计算器</h3>
@@ -151,6 +164,8 @@
             <li><a href="/zh/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">按场景选型</a></li>
             <li><a href="/zh/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
             <li><a href="/zh/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
+            <li><a href="/zh/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
             <li><a href="/zh/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
             <li><a href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
             <li><a href="/zh/changelog.html" data-i18n="shared.footer.changelog">更新日志</a></li>

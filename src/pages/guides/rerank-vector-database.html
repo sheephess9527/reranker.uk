@@ -1,0 +1,129 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Rerank on a vector database</div>
+      <h1>Adding a reranker to your vector database</h1>
+      <p class="meta">Practical · ~10 min read · <time datetime="2026-08-25">Updated 25 Aug 2026</time></p>
+      <p class="lead">Vector databases return neighbours, not answers. The rerank stage sits between the database and your prompt, and the integration is the same three lines everywhere: <strong>raise the limit, score the candidates, truncate</strong>. What changes per database is only how you ask for more rows and how you carry the payload back.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#pattern">The pattern</a></li>
+          <li><a href="#pgvector">pgvector (Postgres)</a></li>
+          <li><a href="#qdrant">Qdrant</a></li>
+          <li><a href="#elasticsearch">Elasticsearch</a></li>
+          <li><a href="#builtin">When the database reranks for you</a></li>
+          <li><a href="#pitfalls">Pitfalls</a></li>
+        </ol>
+      </div>
+
+      <h2 id="pattern">The pattern</h2>
+      <p>Whatever the store, reranking changes your retrieval call in exactly one way — you ask for more rows than you intend to use:</p>
+      <pre><code>CANDIDATES = 50   # what you ask the database for
+KEEP = 5          # what reaches the prompt
+
+rows = store.search(query_vector, limit=CANDIDATES)
+scores = reranker.predict([(query, r.text) for r in rows])
+top = [r for _, r in sorted(zip(scores, rows), key=lambda p: -p[0])][:KEEP]</code></pre>
+      <p>Two details matter more than the database choice. First, keep the <strong>original row objects</strong> through the rerank so you still have ids, metadata and permissions on the other side — reranking text alone and then trying to match it back by string is a reliable way to lose your primary keys. Second, the reranker sees only the text you hand it, so if your stored text is a heading-plus-body blob, that is what gets scored.</p>
+
+      <h2 id="pgvector">pgvector (Postgres)</h2>
+      <p>pgvector returns rows ordered by distance. You raise the <code>LIMIT</code>, keep the ids, and rank in the application layer:</p>
+      <pre><code>import psycopg
+from sentence_transformers import CrossEncoder
+
+reranker = CrossEncoder("BAAI/bge-reranker-v2-m3", max_length=512)
+
+def search(conn, query: str, query_vec, keep: int = 5):
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT id, content
+            FROM documents
+            ORDER BY embedding &lt;=&gt; %s
+            LIMIT 50
+            """,
+            (query_vec,),
+        )
+        rows = cur.fetchall()
+
+    pairs = [(query, content) for _id, content in rows]
+    scores = reranker.predict(pairs)
+    ranked = sorted(zip(scores, rows), key=lambda p: -p[0])
+    return [row for _score, row in ranked[:keep]]</code></pre>
+      <p><code>&lt;=&gt;</code> is cosine distance; use <code>&lt;-&gt;</code> for L2 or <code>&lt;#&gt;</code> for inner product, matching whatever your index was built with. Note that raising the limit from 5 to 50 interacts with your index settings — with HNSW you may need <code>SET LOCAL hnsw.ef_search</code> above the default so the index actually considers enough neighbours to return 50 good ones. A limit larger than <code>ef_search</code> silently gives you padding rather than candidates, which looks exactly like <a href="/guides/reranking-not-working.html">a reranker that does not help</a>.</p>
+
+      <h2 id="qdrant">Qdrant</h2>
+      <p>Same shape, with the payload carried along so you do not lose metadata:</p>
+      <pre><code>from qdrant_client import QdrantClient
+
+client = QdrantClient(url="http://localhost:6333")
+
+def search(query: str, query_vec, keep: int = 5):
+    hits = client.query_points(
+        collection_name="documents",
+        query=query_vec,
+        limit=50,
+        with_payload=True,
+    ).points
+
+    scores = reranker.predict([(query, h.payload["text"]) for h in hits])
+    ranked = sorted(zip(scores, hits), key=lambda p: -p[0])
+    return [h for _s, h in ranked[:keep]]</code></pre>
+      <p>If you filter by tenant, permission or date, apply that filter in the <code>query_points</code> call rather than after reranking. Filtering afterwards means you paid to score rows you then threw away, and your 50 candidates might collapse to 3.</p>
+
+      <h2 id="elasticsearch">Elasticsearch</h2>
+      <p>Elasticsearch is where reranking pays off most visibly, because you can feed it a <a href="/guides/hybrid-retrieval-rerank.html">hybrid</a> candidate set — BM25 and vectors fail on different queries, and the cross-encoder sorts out the union:</p>
+      <pre><code>resp = es.search(
+    index="documents",
+    size=50,
+    query={"bool": {"should": [
+        {"match": {"content": query}},
+        {"knn": {"field": "embedding", "query_vector": query_vec, "k": 50}},
+    ]}},
+)
+
+hits = resp["hits"]["hits"]
+scores = reranker.predict([(query, h["_source"]["content"]) for h in hits])
+ranked = sorted(zip(scores, hits), key=lambda p: -p[0])
+top = [h for _s, h in ranked[:5]]</code></pre>
+      <p>The BM25 and kNN scores are on different scales and are not meaningfully comparable, which is the usual argument for reciprocal rank fusion. A cross-encoder sidesteps that problem entirely: it re-scores every candidate on one scale of its own, so how the candidate got into the pool stops mattering.</p>
+
+      <h2 id="builtin">When the database reranks for you</h2>
+      <p>Several stores now offer a rerank step inside the query — as a managed integration with a hosted model, or as a native second stage. Using it is a reasonable default, and it saves you a network hop and a chunk of glue code.</p>
+      <p>What you trade away is worth knowing before you commit:</p>
+      <ul>
+        <li><strong>Model choice</strong> narrows to what the vendor integrates, which may not include the model that wins on your domain.</li>
+        <li><strong>Evaluation gets harder</strong> — it is more work to A/B two rerankers when one of them lives inside the query engine.</li>
+        <li><strong>Your API key</strong> and your passages now flow through the database vendor as well as the model vendor.</li>
+      </ul>
+      <p>The application-layer pattern above stays portable across all of them, so it is a sound place to start even if you later move the stage into the database. Check your store's current documentation for what it supports — this area moves quickly, and we deliberately do not maintain a per-vendor feature matrix we cannot keep accurate.</p>
+
+      <h2 id="pitfalls">Pitfalls</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr></thead>
+          <tbody>
+            <tr><td>No quality change</td><td>Candidate pool as small as the kept set</td><td>Retrieve 5–10× what you keep</td></tr>
+            <tr><td>Latency spike at high k</td><td>Cross-encoder cost is linear in candidates</td><td>Lower k, or batch and cap concurrency</td></tr>
+            <tr><td>Results miss recent docs</td><td>Filters applied after reranking</td><td>Filter in the database query</td></tr>
+            <tr><td>Scores look random</td><td>Passages truncated at the token limit</td><td>Smaller chunks, or a long-context model</td></tr>
+            <tr><td>Lost ids or permissions</td><td>Reranked bare strings</td><td>Carry row objects through the sort</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Cross-encoder cost scales linearly with the candidate count, so going from 50 to 200 roughly quadruples the rerank latency and, on a hosted API, the bill. The <a href="/rerank-cost-calculator.html">cost calculator</a> puts numbers on the second half of that.</p>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">See the reordering before you wire it up</h2>
+        <p class="soft">Paste candidates straight out of your store and watch a cross-encoder re-score them in the browser.</p>
+        <a class="btn btn-primary" href="/demo.html?s=techdocs">Open the live demo →</a>
+      </div>
+
+      <h2>Keep reading</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/guides/rerank-rag.html"><h3>How to add reranking to RAG</h3><p>The full pipeline, with top-k tips and latency trade-offs.</p></a>
+        <a class="card" href="/guides/reranking-not-working.html"><h3>Reranking didn't help</h3><p>Seven reasons you see no lift, and how to tell which one you have.</p></a>
+      </div>
+    </article>
+  </main>

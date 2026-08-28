@@ -15,6 +15,7 @@
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
   <link rel="manifest" href="/site.webmanifest" >
+  <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
   <meta property="og:type" content="article" >
   <meta property="og:title" content="Jina Reranker v3：listwise 长上下文 + 浏览器 tiny | reranker.uk" >
   <meta property="og:description" content="Jina Reranker 2026 评测：jina-reranker-v3 是 0.6B 的 listwise 模型，BEIR nDCG@10 达 61.94，可在 131K 上下文内处理 64 篇文档。另含 v2 多语言、v1-tiny 浏览器 Demo、价格与 Python 用法。" >
@@ -275,6 +276,8 @@ const scores = logits.sigmoid().tolist();</code></pre>
             <li><a href="/zh/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">按场景选型</a></li>
             <li><a href="/zh/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
             <li><a href="/zh/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
+            <li><a href="/zh/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
             <li><a href="/zh/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
             <li><a href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
             <li><a href="/zh/changelog.html" data-i18n="shared.footer.changelog">更新日志</a></li>

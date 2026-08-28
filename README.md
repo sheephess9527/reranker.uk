@@ -20,9 +20,10 @@ npm run check:i18n              # legacy: report untranslated model-page strings
 node scripts/check-zh-coverage.mjs   # report English prose left on /zh/ pages
 ```
 
-**Rule:** edit `src/` only. Everything in `public/*.html` and `public/sitemap.xml`
-is generated — hand edits are overwritten on the next build. Static assets under
-`public/assets/` are the exception and are edited directly.
+**Rule:** edit `src/` only. Everything in `public/*.html`, `public/sitemap.xml`
+and `public/llms.txt` is generated — hand edits are overwritten on the next
+build. Static assets under `public/assets/`, plus `robots.txt` and
+`changelog.rss`, are the exception and are edited directly.
 
 ### How a page is assembled
 
@@ -57,6 +58,15 @@ at `/zh/x` — and per page it:
 4. injects a `BreadcrumbList` when the page's meta doesn't already declare one;
 5. marks the active nav item and points the locale toggle at the counterpart URL;
 6. records a sitemap entry, with `lastmod` read from the file's last commit.
+
+The run also emits `public/llms.txt`, a plain-text map of the site for
+assistants that read one before citing a source. It is generated from the same
+page tree, so it cannot drift; adding a page to `src/pages/` is enough.
+
+A file that exists once for the whole site rather than per locale — `sitemap.xml`,
+`robots.txt`, `changelog.rss`, `llms.txt`, anything under `/assets/` — must be
+listed in `LOCALE_NEUTRAL` in `scripts/build.mjs`, or links to it from a Chinese
+page get rewritten to a `/zh/` path that does not exist.
 
 ### Interactive pages
 

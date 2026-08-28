@@ -1,0 +1,11 @@
+{
+  "title": "Add a reranker to pgvector, Qdrant or Elasticsearch | reranker.uk",
+  "description": "How to add a rerank stage on top of a vector database. The retrieve-wide-then-rerank pattern with working code for pgvector, Qdrant and Elasticsearch, plus HNSW ef_search, filtering order, and the pitfalls that make reranking look useless.",
+  "canonical": "https://reranker.uk/guides/rerank-vector-database.html",
+  "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  "og_type": "article",
+  "og_title": "Adding a reranker to your vector database",
+  "og_description": "Raise the limit, score the candidates, truncate — with code for pgvector, Qdrant and Elasticsearch.",
+  "head_extra": "<script type=\"application/ld+json\">\n  {\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"headline\":\"Adding a reranker to your vector database\",\"datePublished\":\"2026-08-25\",\"dateModified\":\"2026-08-25\",\"author\":{\"@type\":\"Organization\",\"name\":\"reranker.uk\"},\"mainEntityOfPage\":\"https://reranker.uk/guides/rerank-vector-database.html\"}\n  </script>",
+  "page_scripts": "<script src=\"/assets/js/i18n/rerank-vector-database.js\"></script>"
+}
