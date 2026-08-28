@@ -39,6 +39,7 @@ const LOCALE_NEUTRAL = [
   "/robots.txt",
   "/site.webmanifest",
   "/changelog.rss",
+  "/llms.txt",
 ];
 
 const DEFAULT_META = {
@@ -401,7 +402,7 @@ function assemble({ meta, body, relPath, locale, lastmod }) {
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, "<!DOCTYPE html>\n" + root.toString().replace(/^<!DOCTYPE html>\s*/i, ""), "utf8");
 
-  return { urlPath, enUrl, zhUrl, lastmod, stats, outPath };
+  return { urlPath, enUrl, zhUrl, lastmod, stats, outPath, title, description };
 }
 
 /**
@@ -437,6 +438,63 @@ function markActiveNav(root, urlPath) {
 /* ------------------------------------------------------------------ *
  * Sitemap
  * ------------------------------------------------------------------ */
+
+/**
+ * /llms.txt — a plain-text map of the site for assistants that read it before
+ * citing a source. Generated from the same page tree as the sitemap so it
+ * cannot drift, and English-only: it exists to describe what lives where, and
+ * the Chinese mirror is the same set of pages.
+ */
+function writeLlmsTxt(entries) {
+  const SECTIONS = [
+    ["Guides", (e) => e.urlPath.startsWith("/guides/") && e.urlPath !== "/guides/"],
+    ["Model reviews", (e) => e.urlPath.startsWith("/models/") && e.urlPath !== "/models/"],
+    ["Tools", (e) => e.urlPath === "/demo.html" || e.urlPath === "/rerank-cost-calculator.html"],
+    ["Index pages", (e) => ["/", "/guides/", "/models/"].includes(e.urlPath)],
+    ["About", (e) => ["/changelog.html", "/privacy.html"].includes(e.urlPath)],
+  ];
+
+  // Enough leading sentences to be informative, capped so each line stays
+  // scannable. Descriptions that open with a question ("What is a reranker?")
+  // need the sentence after it to say anything, hence the minimum rather than
+  // a plain first-sentence split.
+  const summarise = (d) => {
+    let out = "";
+    for (const s of String(d || "").split(/(?<=[.?!])\s+/)) {
+      out = out ? out + " " + s : s;
+      if (out.length >= 90) break;
+    }
+    return out.length > 200 ? out.slice(0, 197).trimEnd() + "…" : out;
+  };
+  const cleanTitle = (t) => String(t || "").split("|")[0].trim();
+
+  const out = [
+    "# reranker.uk",
+    "",
+    "> An open educational resource on rerankers for retrieval and RAG, with a cross-encoder demo that runs entirely in the browser. Not affiliated with any model vendor.",
+    "",
+    "Every page also exists in Chinese under /zh/ — for example https://reranker.uk/zh/guides/what-is-a-reranker.html.",
+    "",
+    "Benchmark figures carry their protocol: rows marked with an asterisk on /models/ use MTEB-R or vendor-specific protocols rather than the classic BEIR 18-dataset average, and where a vendor publishes no comparable number the table says so rather than estimating one.",
+    "",
+  ];
+
+  const used = new Set();
+  for (const [heading, match] of SECTIONS) {
+    const rows = entries.filter((e) => !used.has(e.urlPath) && match(e));
+    if (!rows.length) continue;
+    rows.forEach((e) => used.add(e.urlPath));
+    out.push(`## ${heading}`, "");
+    for (const e of rows) {
+      out.push(`- [${cleanTitle(e.title)}](${e.enUrl}): ${summarise(e.description)}`);
+    }
+    out.push("");
+  }
+
+  out.push("## Also", "", "- [Changelog feed](https://reranker.uk/changelog.rss): RSS of site updates.", "");
+  fs.writeFileSync(path.join(PUBLIC, "llms.txt"), out.join("\n"), "utf8");
+  return used.size;
+}
 
 function writeSitemap(entries) {
   const lines = [
@@ -496,9 +554,11 @@ function buildAll() {
   }
 
   const urls = writeSitemap(sitemap);
+  const listed = writeLlmsTxt(sitemap);
 
   console.log(`Built ${written} pages → public/ (${pages.length} en + ${pages.length} zh)`);
   console.log(`Sitemap: ${urls} URLs with hreflang alternates`);
+  console.log(`llms.txt: ${listed} pages listed`);
   if (gaps.length) {
     console.warn(`\nUntranslated i18n keys in ${gaps.length} page(s):`);
     for (const g of gaps) console.warn("  " + g);

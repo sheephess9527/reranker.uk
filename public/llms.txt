@@ -1,0 +1,50 @@
+# reranker.uk
+
+> An open educational resource on rerankers for retrieval and RAG, with a cross-encoder demo that runs entirely in the browser. Not affiliated with any model vendor.
+
+Every page also exists in Chinese under /zh/ — for example https://reranker.uk/zh/guides/what-is-a-reranker.html.
+
+Benchmark figures carry their protocol: rows marked with an asterisk on /models/ use MTEB-R or vendor-specific protocols rather than the classic BEIR 18-dataset average, and where a vendor publishes no comparable number the table says so rather than estimating one.
+
+## Guides
+
+- [Choose a reranker by scenario — RAG, support, legal, code](https://reranker.uk/guides/choose-reranker-scenario.html): Decision guide: which rerank model fits RAG pipelines, customer support, legal search, or code retrieval.
+- [Cross-encoder vs bi-encoder: the difference, with examples](https://reranker.uk/guides/cross-encoder-vs-bi-encoder.html): Cross-encoder vs bi-encoder explained: bi-encoders embed query and document separately (fast, scalable retrieval); cross-encoders score the pair together (accurate reranking).
+- [How to evaluate rerankers — NDCG, MRR, and labelled queries](https://reranker.uk/guides/evaluate-reranker.html): Practical guide to evaluating rerank models: build a labelled query set, measure NDCG@k and MRR, compare before/after reranking, and regression-test pipeline changes.
+- [Hybrid retrieval + reranking — BM25, vectors, then rerank](https://reranker.uk/guides/hybrid-retrieval-rerank.html): How to combine BM25 and vector search for better recall, then use a cross-encoder reranker to fix ordering.
+- [Instruction-following rerankers — Contextual AI & task-shaped ranking](https://reranker.uk/guides/instruction-reranker.html): What instruction-following rerankers add over classic cross-encoders: task instructions, when to use Contextual AI-style APIs, and how to evaluate them on your own labels.
+- [Late-interaction reranking — ColBERTv2 & when to skip cross-encoders](https://reranker.uk/guides/late-interaction-rerank.html): Guide to late-interaction rerankers (ColBERTv2): how they differ from cross-encoders and bi-encoders, when to skip reranking, and how to combine architectures in 2026 stacks.
+- [How to add reranking to your RAG pipeline — practical guide](https://reranker.uk/guides/rerank-rag.html): Step-by-step guide to adding a rerank model to RAG: retrieve 50–100 candidates with vector search, rerank with a cross-encoder, keep the top 5 for the prompt.
+- [Add a reranker to pgvector, Qdrant or Elasticsearch](https://reranker.uk/guides/rerank-vector-database.html): How to add a rerank stage on top of a vector database. The retrieve-wide-then-rerank pattern with working code for pgvector, Qdrant and Elasticsearch, plus HNSW ef_search, filtering order, and the…
+- [Reranking didn't improve results — 7 reasons why](https://reranker.uk/guides/reranking-not-working.html): Added a reranker and saw no improvement? The usual causes are retrieval recall, too small a candidate pool, silent truncation at the model's token limit, oversized chunks, language mismatch, and mi…
+- [How to self-host a reranker — sentence-transformers, GPU, serving](https://reranker.uk/guides/self-host-reranker.html): Practical guide to self-hosting cross-encoder rerankers: model choice (bge, mxbai, Jina), sentence-transformers quick start, FastAPI serving, and production ops.
+- [What is a reranker? A plain-English guide to rerank models](https://reranker.uk/guides/what-is-a-reranker.html): What is a reranker? A reranker (rerank model) re-scores retrieved candidates by relevance, usually as a second stage after fast retrieval.
+
+## Model reviews
+
+- [bge-reranker: BAAI open-weight rerank models review](https://reranker.uk/models/bge-reranker.html): bge-reranker review: BAAI's open-weight cross-encoder rerankers. Covers bge-reranker-base, bge-reranker-large, and the multilingual bge-reranker-v2-m3.
+- [Cohere Rerank 4: hosted rerank API review](https://reranker.uk/models/cohere-rerank.html): Cohere Rerank 4 review: rerank-v4.0-pro and rerank-v4.0-fast compared — 32k context, 100+ languages, per-search pricing, Python and Node SDK usage, pros and cons for RAG.
+- [Jina Reranker: open weights + hosted API review](https://reranker.uk/models/jina-reranker.html): Jina Reranker review for 2026: jina-reranker-v3 is a 0.6B listwise model scoring 61.94 nDCG@10 on BEIR with 64 documents in a 131K context.
+- [mxbai-rerank: open-weight DeBERTa rerankers review](https://reranker.uk/models/mxbai-rerank.html): mxbai-rerank review: mixedbread-ai's open-weight cross-encoder rerankers (xsmall, base, large) built on DeBERTa-v3.
+- [Qwen3-Reranker: 0.6B / 4B / 8B open-weight review](https://reranker.uk/models/qwen-reranker.html): Qwen3-Reranker family review for 2026: when to use 0.6B, 4B, or 8B, how scores compare to classic BEIR rows, self-host tips, and trade-offs vs bge and hosted APIs.
+- [Voyage rerank-2.5: instruction-following rerank API review](https://reranker.uk/models/voyage-rerank.html): Voyage rerank-2.5 review: rerank-2.5 and rerank-2.5-lite compared — 32k context, instruction following, per-token pricing, Python usage, pros and cons for RAG.
+
+## Tools
+
+- [Live reranker demo — cross-encoder reranking in your browser](https://reranker.uk/demo.html): Try a rerank model live in your browser. Paste a query and candidate passages and a cross-encoder scores and reorders them in real time — 100% client-side with transformers.js, no API key and no cost.
+- [Rerank cost calculator — Cohere vs Voyage pricing](https://reranker.uk/rerank-cost-calculator.html): Estimate what reranking costs per month. Cohere Rerank 4 bills per search, Voyage rerank-2.5 bills per token, so the cheaper option flips with passage length and top-k.
+
+## Index pages
+
+- [Reranker guides — fundamentals to production](https://reranker.uk/guides/): All reranker.uk guides: what is a reranker, cross-encoder vs bi-encoder, RAG integration, hybrid retrieval, and how to evaluate rerank models.
+- [Reranker — what it is, how it works, and a live in-browser demo](https://reranker.uk/): A practical guide to rerankers for search and RAG: what a rerank model is, cross-encoder vs bi-encoder, how to add reranking to RAG, model comparisons (bge, Cohere, Jina, Voyage), and a free demo t…
+- [Rerank model comparison 2026: Qwen3, Jina v3, bge, mxbai](https://reranker.uk/models/): 2026 reranker comparison: Qwen3-Reranker 0.6B/4B/8B, Jina v3 listwise, bge, mxbai, Cohere, Voyage, GTE ModernBERT, NVIDIA, ColBERT, instruction APIs.
+
+## About
+
+- [Changelog — reranker.uk updates](https://reranker.uk/changelog.html): Release notes for reranker.uk: demo features, new guides, model comparison updates, and site improvements.
+- [Privacy — reranker.uk](https://reranker.uk/privacy.html): How reranker.uk handles your data: static pages, in-browser demo processing, third-party CDNs, and share links.
+
+## Also
+
+- [Changelog feed](https://reranker.uk/changelog.rss): RSS of site updates.

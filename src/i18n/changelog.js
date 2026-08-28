@@ -1,4 +1,14 @@
 window.I18N_PAGE = { zh: {
+  "25 Aug 2026 — Two guides for the questions people actually ask":
+    "2026 年 8 月 25 日 —— 两篇针对真实提问的指南",
+  "<strong><a href=\"/guides/reranking-not-working.html\">Reranking didn't help</a></strong> — a diagnostic walkthrough of the seven reasons a rerank stage shows no lift, starting with the one that explains most of them: retrieval never returned the right document":
+    "<strong><a href=\"/guides/reranking-not-working.html\">重排序没起作用</a></strong> —— 逐条排查重排序看不到提升的七个原因，从最能解释问题的那条开始：检索压根没返回正确的文档",
+  "<strong><a href=\"/guides/rerank-vector-database.html\">Rerank on a vector database</a></strong> — the retrieve-wide-then-rerank pattern with code for pgvector, Qdrant and Elasticsearch, including the HNSW <code>ef_search</code> trap that makes a wider limit return padding instead of candidates":
+    "<strong><a href=\"/guides/rerank-vector-database.html\">在向量数据库上做重排序</a></strong> —— 「宽召回后重排」模式，含 pgvector、Qdrant 与 Elasticsearch 的代码，也包括 HNSW 的 <code>ef_search</code> 陷阱：limit 放大了，返回的却是凑数而非候选",
+  "<strong><a href=\"/llms.txt\">/llms.txt</a></strong> — a generated map of the site for assistants that read one before citing a source, including how to read our benchmark footnotes":
+    "<strong><a href=\"/llms.txt\">/llms.txt</a></strong> —— 自动生成的站点地图，供引用前会读它的 AI 助手使用，其中也说明了我们的基准脚注该怎么读",
+  "<strong>Feed autodiscovery</strong> — the changelog RSS is now advertised from every page, not just the changelog":
+    "<strong>订阅源自动发现</strong> —— 更新日志 RSS 现在在每一页都会声明，而不只是更新日志页",
   "14 Aug 2026 — Cost calculator, and demo links that land somewhere":
     "2026 年 8 月 14 日 —— 成本计算器，以及不再落空的 Demo 链接",
   "<strong><a href=\"/rerank-cost-calculator.html\">Rerank cost calculator</a></strong> — Cohere bills per search, Voyage per token, so the cheaper vendor flips with passage length and top-k. Put your own volume in and see where the line sits":

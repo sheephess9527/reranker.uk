@@ -20,6 +20,8 @@ window.I18N_SHARED = {
     "shared.footer.lateInteraction": "Late-interaction（ColBERT）",
     "shared.footer.instructionRerank": "指令跟随 rerank",
     "shared.footer.models": "模型",
+    "shared.footer.notWorking": "重排序没起作用",
+    "shared.footer.vectorDb": "在向量数据库上重排序",
     "shared.footer.costCalc": "重排序成本计算器",
     "shared.footer.changelogRss": "更新日志 RSS",
     "shared.footer.changelog": "更新日志",

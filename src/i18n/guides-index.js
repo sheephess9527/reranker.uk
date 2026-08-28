@@ -1,4 +1,14 @@
 window.I18N_PAGE = { zh: {
+  "Reranking didn't help":
+    "重排序没起作用",
+  "Seven reasons you see no lift — recall, pool size, truncation — and how to tell which one you have.":
+    "看不到提升的七个原因 —— 召回、候选池大小、截断 —— 以及如何判断你属于哪一种。",
+  "Troubleshooting":
+    "排障",
+  "Rerank on a vector database":
+    "在向量数据库上做重排序",
+  "Wiring a rerank stage onto pgvector, Qdrant or Elasticsearch, with code.":
+    "把重排序这一步接到 pgvector、Qdrant 或 Elasticsearch 上，含代码。",
   "Rerank cost calculator": "重排序成本计算器",
   "Per-search or per-token? Which rerank API is cheaper at your volume.":
     "按次计费还是按 token 计费？在你的量级下哪个 rerank API 更便宜。",

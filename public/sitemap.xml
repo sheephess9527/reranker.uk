@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://reranker.uk/changelog.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/changelog.html" />
@@ -11,7 +11,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/changelog.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/changelog.html" />
@@ -179,6 +179,42 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/rerank-rag.html" />
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/rerank-rag.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/rerank-rag.html" />
+  </url>
+  <url>
+    <loc>https://reranker.uk/guides/rerank-vector-database.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/rerank-vector-database.html" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/rerank-vector-database.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/rerank-vector-database.html" />
+  </url>
+  <url>
+    <loc>https://reranker.uk/zh/guides/rerank-vector-database.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/rerank-vector-database.html" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/rerank-vector-database.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/rerank-vector-database.html" />
+  </url>
+  <url>
+    <loc>https://reranker.uk/guides/reranking-not-working.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/reranking-not-working.html" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/reranking-not-working.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/reranking-not-working.html" />
+  </url>
+  <url>
+    <loc>https://reranker.uk/zh/guides/reranking-not-working.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/reranking-not-working.html" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/reranking-not-working.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/reranking-not-working.html" />
   </url>
   <url>
     <loc>https://reranker.uk/guides/self-host-reranker.html</loc>

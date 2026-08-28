@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog.html</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 14 Aug 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 25 Aug 2026 12:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>25 Aug 2026 — Two guides for the questions people actually ask</title>
+      <link>https://reranker.uk/changelog.html#2026-08-25</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog.html#2026-08-25</guid>
+      <pubDate>Tue, 25 Aug 2026 12:00:00 GMT</pubDate>
+      <description>New troubleshooting guide for rerankers that show no lift, and a guide to wiring a rerank stage onto pgvector, Qdrant or Elasticsearch. Plus a generated /llms.txt and sitewide RSS autodiscovery.</description>
+    </item>
     <item>
       <title>14 Aug 2026 — Cost calculator, and demo links that land somewhere</title>
       <link>https://reranker.uk/changelog.html#2026-08-14</link>

@@ -15,6 +15,7 @@
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
   <link rel="manifest" href="/site.webmanifest" >
+  <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
   <meta property="og:type" content="article" >
   <meta property="og:title" content="Cohere Rerank 4：托管重排序 API 评测 | reranker.uk" >
   <meta property="og:description" content="Cohere Rerank 4 评测：对比 rerank-v4.0-pro 与 rerank-v4.0-fast —— 32k 上下文、100+ 语言、按次检索计费，含 Python 与 Node SDK 用法及为 RAG 加重排序的优缺点。" >
@@ -273,6 +274,8 @@ result.results.forEach((r) => console.log(r.relevanceScore, documents[r.index]))
             <li><a href="/zh/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">按场景选型</a></li>
             <li><a href="/zh/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
             <li><a href="/zh/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
+            <li><a href="/zh/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
             <li><a href="/zh/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
             <li><a href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
             <li><a href="/zh/changelog.html" data-i18n="shared.footer.changelog">更新日志</a></li>
