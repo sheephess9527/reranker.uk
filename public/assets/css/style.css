@@ -91,6 +91,12 @@ html[data-theme="light"] {
 
 * { box-sizing: border-box; }
 
+/* Any class that sets its own `display` (`.btn`, flex/grid utilities, …) beats
+   the UA stylesheet's `[hidden] { display: none }` at equal specificity once
+   it's declared in an author stylesheet — so a hidden button with .btn on it
+   silently stays visible. Force the attribute to win unconditionally. */
+[hidden] { display: none !important; }
+
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 78px; }
 
 body {
@@ -521,11 +527,18 @@ select { font-family: var(--mono); font-size: 0.85rem; }
 .load-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.55rem; }
 .load-label { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-mut); }
 .load-model { font-weight: 700; font-size: 0.9rem; color: var(--text); }
-.load-meta { display: flex; flex-wrap: wrap; gap: 0.65rem 1rem; margin-top: 0.45rem; font-size: 0.8rem; font-family: var(--mono); color: var(--text-soft); }
+.load-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.65rem 1rem; margin-top: 0.45rem; font-size: 0.8rem; font-family: var(--mono); color: var(--text-soft); }
 .load-file { font-family: var(--sans); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.load-cancel { margin-left: auto; font-family: var(--sans); }
 
 .progress-bar { height: 6px; background: var(--bg-elev); border-radius: 999px; overflow: hidden; margin-top: 0.4rem; }
 .progress-bar > i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--primary-strong), var(--accent)); transition: width 0.25s; }
+
+.load-fail {
+  margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border-soft);
+}
+.load-fail-msg { margin: 0 0 0.6rem; color: var(--warn); font-size: 0.88rem; font-weight: 600; }
+.load-fail-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
 .docs-editor textarea { display: block; }
 @media (max-width: 760px) {
