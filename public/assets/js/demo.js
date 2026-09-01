@@ -2,42 +2,93 @@
  * transformers.js is loaded on first Rerank (dynamic import) to keep initial page light.
  */
 const TF_CDN = "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.1";
+const HF_HOST = "https://huggingface.co";
+const HF_MIRROR_HOST = "https://hf-mirror.com";
+const HOST_PROBE_TIMEOUT_MS = 2500;
 let tfModule = null;
+
+/**
+ * Times out and reports success/failure without needing CORS on the target —
+ * a no-cors HEAD still resolves once the connection completes, which is all
+ * we need to compare "is this host reachable right now" between two hosts.
+ */
+async function probeHost(url) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), HOST_PROBE_TIMEOUT_MS);
+  const t0 = performance.now();
+  try {
+    await fetch(url, { method: "HEAD", mode: "no-cors", cache: "no-store", signal: ctrl.signal });
+    return performance.now() - t0;
+  } catch (e) {
+    return Infinity;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+let resolvedHostPromise = null;
+let resolvedHostValue = null;
+/**
+ * huggingface.co is frequently slow or unreachable from mainland China, which
+ * makes the demo unusable for exactly the visitors the /zh/ pages are aimed
+ * at. Race it against hf-mirror.com (a path-compatible community mirror) and
+ * use whichever answers first; if both hang, fall back to the HF default.
+ * Resolved once per page load and cached, so the ~2.5s worst case is paid
+ * only before the very first download, never on a cache hit.
+ */
+function resolveModelHost() {
+  if (!resolvedHostPromise) {
+    resolvedHostPromise = Promise.all([
+      probeHost(HF_HOST + "/api/models"),
+      probeHost(HF_MIRROR_HOST),
+    ]).then(([hf, mirror]) => {
+      resolvedHostValue = mirror < hf ? HF_MIRROR_HOST : HF_HOST;
+      return resolvedHostValue;
+    });
+  }
+  return resolvedHostPromise;
+}
 
 async function loadTransformers() {
   if (tfModule) return tfModule;
-  tfModule = await import(TF_CDN);
+  const [mod, host] = await Promise.all([import(TF_CDN), resolveModelHost()]);
+  tfModule = mod;
   tfModule.env.allowLocalModels = false;
   tfModule.env.useBrowserCache = true;
+  tfModule.env.remoteHost = host;
   return tfModule;
 }
 
 const MAX_DOCS = 30;
 const URL_COMPRESS_THRESHOLD = 1600;
 const MAX_LENGTH_OPTIONS = [256, 384, 512];
+// Object key order sets the dropdown order and, via fillModelSelect's
+// "first key wins" rule below, the default model — smallest download first,
+// so a first-time visitor pays the least bandwidth by default.
 const MODELS = {
-  "Xenova/ms-marco-MiniLM-L-6-v2": {
-    name: "ms-marco MiniLM-L6",
-    sizeMB: 90,
-    noteEn: "sturdy default",
-    noteZh: "稳健默认",
-    sigmoid: true,
-  },
   "jinaai/jina-reranker-v1-tiny-en": {
     name: "jina-reranker v1 tiny",
     sizeMB: 33,
-    noteEn: "fastest",
-    noteZh: "最快",
+    noteEn: "smallest download",
+    noteZh: "下载量最小",
     sigmoid: true,
   },
   "mixedbread-ai/mxbai-rerank-xsmall-v1": {
     name: "mxbai-rerank xsmall",
     sizeMB: 70,
-    noteEn: "strong quality",
-    noteZh: "质量强",
+    noteEn: "balanced",
+    noteZh: "均衡",
+    sigmoid: true,
+  },
+  "Xenova/ms-marco-MiniLM-L-6-v2": {
+    name: "ms-marco MiniLM-L6",
+    sizeMB: 90,
+    noteEn: "larger, strong quality",
+    noteZh: "更大，质量强",
     sigmoid: true,
   },
 };
+const SMALLEST_MODEL_ID = "jinaai/jina-reranker-v1-tiny-en";
 
 const cache = new Map();
 let webgpuAvailable = null;
@@ -346,6 +397,12 @@ const els = {
   loadPct: document.getElementById("load-pct"),
   loadEta: document.getElementById("load-eta"),
   loadFile: document.getElementById("load-file"),
+  loadCancel: document.getElementById("load-cancel"),
+  loadFail: document.getElementById("load-fail"),
+  loadFailMsg: document.getElementById("load-fail-msg"),
+  loadFailRetry: document.getElementById("load-fail-retry"),
+  loadFailSmaller: document.getElementById("load-fail-smaller"),
+  loadFailExample: document.getElementById("load-fail-example"),
   progressWrap: document.getElementById("progress-wrap"),
   progressBar: document.getElementById("progress-bar"),
   region: document.getElementById("results-region"),
@@ -370,7 +427,7 @@ const els = {
 };
 
 const MOBILE_MQ = window.matchMedia("(max-width: 760px)");
-let loadTrack = { start: 0, lastLoaded: 0, lastTime: 0 };
+let loadTrack = { start: 0, lastLoaded: 0, lastTime: 0, eta: "" };
 
 function sampleById(id) {
   return SAMPLES.find((s) => s.id === id) || null;
@@ -393,7 +450,7 @@ function fillModelSelect(sel, selectedId) {
 
 if (els.model) {
   fillModelSelect(els.model);
-  fillModelSelect(els.modelB, "jinaai/jina-reranker-v1-tiny-en");
+  fillModelSelect(els.modelB, SMALLEST_MODEL_ID);
   els.model.addEventListener("change", () => {
     renderModelMeta();
     void syncUrl();
@@ -495,20 +552,36 @@ function setStatus(text, spinning) {
     : esc(text);
 }
 
+// Per-file totals can be briefly 0 (Content-Length withheld by the CDN for
+// that file) before a later progress event fills them in, which makes the
+// aggregate percentage swing backward for an instant. A visible progress bar
+// jumping 60% -> 12% reads as broken even though the download is fine, so we
+// clamp to the high-water mark rather than showing the raw computed value.
+let progressFloor = 0;
+
 function showProgress(pct) {
-  if (pct != null && els.progressBar) els.progressBar.style.width = pct + "%";
+  if (pct == null || !els.progressBar) return;
+  progressFloor = Math.max(progressFloor, pct);
+  els.progressBar.style.width = progressFloor + "%";
+}
+
+function resetProgress() {
+  progressFloor = 0;
+  if (els.progressBar) els.progressBar.style.width = "0%";
 }
 
 function showLoadPanel(modelId, cachedInTab) {
   if (!els.loadPanel) return;
   const m = MODELS[modelId];
   els.loadPanel.hidden = false;
+  if (els.loadFail) els.loadFail.hidden = true;
+  if (els.loadCancel) els.loadCancel.hidden = false;
   if (els.loadLabel)
     els.loadLabel.textContent = L("Loading model", "正在加载模型");
   if (els.loadModelName)
-    els.loadModelName.textContent = m
-      ? `${m.name} · ~${m.sizeMB} MB`
-      : modelId;
+    els.loadModelName.textContent =
+      (m ? `${m.name} · ~${m.sizeMB} MB` : modelId) +
+      (resolvedHostValue === HF_MIRROR_HOST ? " · hf-mirror.com" : "");
   if (els.loadCacheStatus) {
     els.loadCacheStatus.textContent = cachedInTab
       ? L("In tab memory", "已在标签页内存")
@@ -517,13 +590,16 @@ function showLoadPanel(modelId, cachedInTab) {
   if (els.loadPct) els.loadPct.textContent = "0%";
   if (els.loadEta) els.loadEta.textContent = "";
   if (els.loadFile) els.loadFile.textContent = "";
-  showProgress(0);
-  loadTrack = { start: performance.now(), lastLoaded: 0, lastTime: performance.now() };
+  resetProgress();
+  loadTrack = { start: performance.now(), lastLoaded: 0, lastTime: performance.now(), eta: "" };
+  loadSession++;
+  armStallWatch();
 }
 
 function hideLoadPanel() {
   if (els.loadPanel) els.loadPanel.hidden = true;
-  showProgress(0);
+  disarmStallWatch();
+  resetProgress();
 }
 
 function formatEta(seconds) {
@@ -537,41 +613,111 @@ function updateLoadProgress(modelId, files, currentFile, cachedInTab) {
   const vals = Object.values(files);
   const loaded = vals.reduce((a, b) => a + b.loaded, 0);
   const total = vals.reduce((a, b) => a + b.total, 0);
-  const pct = total ? Math.min(99, Math.round((loaded / total) * 100)) : 0;
-  showProgress(pct);
+  // Some CDN responses omit Content-Length on this cross-origin fetch, which
+  // leaves an individual file's `total` at 0 while its `loaded` keeps
+  // growing. Folding that 0 into the denominator would make loaded/total
+  // exceed 1 and get clamped to a false "99%" that then sits there doing
+  // nothing until the untotalled file finishes — worse than just admitting
+  // the total is unknown and showing bytes transferred instead.
+  const totalKnown = total > 0 && !vals.some((v) => v.loaded > 0 && !v.total);
+  const pct = totalKnown ? Math.min(99, Math.round((loaded / total) * 100)) : null;
+  if (pct != null) showProgress(pct);
 
   const now = performance.now();
-  const dt = (now - loadTrack.lastTime) / 1000;
-  let eta = "";
-  if (dt > 0.2 && loaded > loadTrack.lastLoaded && total > loaded) {
-    const speed = (loaded - loadTrack.lastLoaded) / dt;
-    if (speed > 0) eta = formatEta((total - loaded) / speed);
+  if (loaded > loadTrack.lastLoaded) {
+    const dt = (now - loadTrack.lastTime) / 1000;
+    if (dt > 0.2 && totalKnown && total > loaded) {
+      const speed = (loaded - loadTrack.lastLoaded) / dt;
+      if (speed > 0) loadTrack.eta = formatEta((total - loaded) / speed);
+    }
     loadTrack.lastLoaded = loaded;
+    // Any byte growth resets the stall clock, whether or not the total (and
+    // therefore pct/eta) is known yet for this response.
     loadTrack.lastTime = now;
   }
 
   if (els.loadPct)
-    els.loadPct.textContent = total
+    els.loadPct.textContent = totalKnown
       ? `${pct}% · ${mb(loaded)}/${mb(total)} MB`
-      : L("Preparing…", "准备中…");
-  if (els.loadEta) els.loadEta.textContent = eta;
+      : loaded
+        ? `${mb(loaded)} MB ${L("downloaded", "已下载")}`
+        : L("Preparing…", "准备中…");
+  if (els.loadEta) els.loadEta.textContent = totalKnown ? loadTrack.eta || "" : "";
   if (els.loadFile && currentFile) {
     const short = currentFile.split("/").pop() || currentFile;
     els.loadFile.textContent = short;
   }
   if (els.loadCacheStatus && !cachedInTab) {
     els.loadCacheStatus.textContent =
-      loaded > 0 && total > 0 && loaded < total
+      loaded > 0 && (!totalKnown || loaded < total)
         ? L("Downloading", "正在下载")
         : L("Checking browser cache…", "正在检查浏览器缓存…");
   }
   setStatus(
-    L(
-      `Downloading ${MODELS[modelId]?.name || modelId}… ${pct}%`,
-      `正在下载 ${MODELS[modelId]?.name || modelId}…… ${pct}%`
-    ),
+    pct != null
+      ? L(
+          `Downloading ${MODELS[modelId]?.name || modelId}… ${pct}%`,
+          `正在下载 ${MODELS[modelId]?.name || modelId}…… ${pct}%`
+        )
+      : L(
+          `Downloading ${MODELS[modelId]?.name || modelId}…`,
+          `正在下载 ${MODELS[modelId]?.name || modelId}……`
+        ),
     true
   );
+}
+
+/* ---------- Stall detection + soft cancel ----------
+ * transformers.js exposes no public way to abort an in-flight
+ * from_pretrained() call, so "cancel" cannot kill the underlying transfer —
+ * it can only stop making the visitor wait on it. We invalidate a session
+ * token so a load that resolves after the user has moved on is discarded
+ * rather than rendered, and let the fetch finish quietly in the background
+ * (harmlessly populating the browser cache for next time).
+ */
+const STALL_MS = 60000;
+let loadSession = 0;
+let stallTimer = null;
+
+function armStallWatch() {
+  disarmStallWatch();
+  const mySession = loadSession;
+  stallTimer = setInterval(() => {
+    if (loadSession !== mySession) return disarmStallWatch();
+    if (performance.now() - loadTrack.lastTime > STALL_MS) {
+      disarmStallWatch();
+      failLoad(
+        L(
+          "No data received for a while — the connection may have stalled.",
+          "较长时间没有收到数据 —— 连接可能已经卡住。"
+        )
+      );
+    }
+  }, 2000);
+}
+
+function disarmStallWatch() {
+  if (stallTimer) {
+    clearInterval(stallTimer);
+    stallTimer = null;
+  }
+}
+
+/** Ends the current load session and shows the failure panel with next steps. */
+function failLoad(message) {
+  loadSession++;
+  disarmStallWatch();
+  if (els.loadCancel) els.loadCancel.hidden = true;
+  if (els.loadFail) {
+    els.loadFail.hidden = false;
+    if (els.loadFailMsg) els.loadFailMsg.textContent = message;
+  }
+  setStatus(message, false);
+  if (els.run) els.run.disabled = false;
+}
+
+function cancelLoad() {
+  failLoad(L("Canceled.", "已取消。"));
 }
 
 function parseDocs(raw) {
@@ -1226,11 +1372,17 @@ async function copyText(text, btn) {
   }, 1400);
 }
 
+/**
+ * Returns null if the load was cancelled or timed out while in flight — the
+ * caller should treat that as "already handled" (failLoad already updated
+ * the UI) and quietly stop, not render a result or show a second error.
+ */
 async function scoreWithModel(modelId, query, docs, useWebgpu) {
   const device = useWebgpu ? "webgpu" : "wasm";
   const cacheKey = modelId + ":" + device;
   const cachedInTab = cache.has(cacheKey);
   showLoadPanel(modelId, cachedInTab);
+  const mySession = loadSession;
   if (cachedInTab && els.loadCacheStatus) {
     els.loadCacheStatus.textContent = L("In tab memory", "已在标签页内存");
     if (els.loadPct) els.loadPct.textContent = L("Ready", "就绪");
@@ -1250,7 +1402,14 @@ async function scoreWithModel(modelId, query, docs, useWebgpu) {
       els.loadCacheStatus.textContent = L("Browser cache hit", "浏览器缓存命中");
     }
   };
-  const reranker = await getReranker(modelId, onProgress, useWebgpu);
+  let reranker;
+  try {
+    reranker = await getReranker(modelId, onProgress, useWebgpu);
+  } catch (err) {
+    if (mySession !== loadSession) return null; // already shown as cancelled/stalled
+    throw err;
+  }
+  if (mySession !== loadSession) return null; // user cancelled or it stalled out mid-load
   const t0 = performance.now();
   const scores = await reranker.score(query, docs, getMaxLength());
   const ms = Math.round(performance.now() - t0);
@@ -1290,6 +1449,7 @@ async function run() {
     setStatus(L("Loading model…", "正在加载模型……"), true);
     const biScores = biEncoderProxyScores(query, docs);
     const primary = await scoreWithModel(modelId, query, docs, useWebgpu);
+    if (!primary) return; // cancelled or stalled — failLoad() already updated the UI
     hideLoadPanel();
 
     const items = docs.map((text, origIndex) => ({
@@ -1307,6 +1467,7 @@ async function run() {
     if (compareOn && modelB && modelB !== modelId) {
       setStatus(L("Scoring with second model…", "正在为第二个模型打分……"), true);
       const second = await scoreWithModel(modelB, query, docs, useWebgpu);
+      if (!second) return; // cancelled or stalled loading the comparison model
       compareRun = {
         modelA: modelId,
         modelB,
@@ -1332,10 +1493,13 @@ async function run() {
     });
     renderModelMeta();
     void syncUrl();
+    const cachedNote = primary.didDownload
+      ? L(" The model is now cached — it will load instantly next time.", " 模型现已缓存 —— 下次打开会秒开。")
+      : "";
     setStatus(
       L(
-        `Done — ${docs.length} passages in ${primary.ms} ms (cross-encoder) + bi-encoder proxy shown for comparison.`,
-        `完成 —— ${docs.length} 段文本 cross-encoder 耗时 ${primary.ms} ms，并已展示 bi-encoder 代理对比。`
+        `Done — ${docs.length} passages in ${primary.ms} ms (cross-encoder) + bi-encoder proxy shown for comparison.${cachedNote}`,
+        `完成 —— ${docs.length} 段文本 cross-encoder 耗时 ${primary.ms} ms，并已展示 bi-encoder 代理对比。${cachedNote}`
       ),
       false
     );
@@ -1369,6 +1533,23 @@ function clearAll() {
 if (els.run) els.run.addEventListener("click", run);
 if (els.clear) els.clear.addEventListener("click", clearAll);
 if (els.share) els.share.addEventListener("click", shareLink);
+if (els.loadCancel) els.loadCancel.addEventListener("click", cancelLoad);
+if (els.loadFailRetry)
+  els.loadFailRetry.addEventListener("click", () => {
+    if (els.loadFail) els.loadFail.hidden = true;
+    run();
+  });
+if (els.loadFailSmaller)
+  els.loadFailSmaller.addEventListener("click", () => {
+    if (els.loadFail) els.loadFail.hidden = true;
+    if (els.model) els.model.value = SMALLEST_MODEL_ID;
+    renderModelMeta();
+    run();
+  });
+if (els.loadFailExample)
+  els.loadFailExample.addEventListener("click", () => {
+    document.getElementById("static-example")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 if (els.query) {
   els.query.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.shiftKey && !e.ctrlKey && !e.metaKey) {

@@ -104,6 +104,9 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which reranker should I use in 2026?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on your constraint. Qwen3-Reranker (start at 4B) is the strongest open-weight pick for multilingual GPU self-hosting. bge-reranker-v2-m3 is the best CPU-friendly open option. Cohere Rerank 4 is the easiest hosted API. Jina Reranker v3 gets the highest BEIR score in this table from a model small enough to run on one GPU. Voyage rerank-2.5 adds instruction-following relevance."}}, {"@type": "Question", "name": "Does a bigger reranker always score higher?", "acceptedAnswer": {"@type": "Answer", "text": "No. A 0.6B listwise model, Jina Reranker v3, outscores the larger Qwen3-Reranker-4B on BEIR, a 149M cross-encoder ties a 1.2B one on Hit@1, and Qwen3's own 4B edges out its larger 8B sibling. Parameter count stopped reliably predicting quality in 2026."}}, {"@type": "Question", "name": "Why do some rows say 'not published' instead of a BEIR score?", "acceptedAnswer": {"@type": "Answer", "text": "Several vendors, including Cohere and Voyage, do not publish a classic BEIR 18-dataset average for their current models. Rather than substitute a number from a different evaluation protocol, the table marks those rows 'not published'; columns marked with an asterisk use MTEB-R or another vendor-specific protocol instead."}}, {"@type": "Question", "name": "How do Cohere and Voyage pricing compare?", "acceptedAnswer": {"@type": "Answer", "text": "They bill in different units, so the cheaper one depends on your workload: Cohere Rerank 4 charges per search (one query plus up to 100 documents, regardless of length), while Voyage rerank-2.5 charges per token across the query and every document sent. The rerank cost calculator works out which is cheaper for a given passage length and query volume."}}, {"@type": "Question", "name": "Which rerankers can I try without an API key?", "acceptedAnswer": {"@type": "Answer", "text": "Three models in this table are small enough to run entirely in the browser: mxbai-rerank-xsmall, Jina's v1-tiny, and ms-marco MiniLM. The live demo loads one of these client-side with no server, API key, or per-call cost."}}]}
+  </script>
 
 </head>
 <body>
@@ -310,7 +313,7 @@
               <td>ms-marco MiniLM-L6 <span class="muted">(browser)</span></td>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><br><span class="pill info">Browser ✓</span></td>
-              <td>经典基线；Demo 默认</td>
+              <td>经典基线；三个 Demo 模型里体积最大</td>
               <td>英文</td>
               <td>50–150 ms browser WASM</td>
               <td>免费（自建）</td>

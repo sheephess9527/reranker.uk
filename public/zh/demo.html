@@ -87,7 +87,121 @@
       <p class="lead">粘贴查询和候选段落。cross-encoder 对每一对打分；bi-encoder 代理（词元重叠）展示独立嵌入为何会排错序。可对比两个模型、分享链接，或开启 WebGPU 加速推理。</p>
     </section>
 
-    <section class="demo-wrap container">
+    <section class="section container narrow" id="static-example">
+      <div class="section-head">
+        <h2>下载任何东西之前，先看看效果</h2>
+        <p>这个例子不需要任何模型 —— 左列是本页其他地方也在用的词元重叠算法的真实输出。下方的交互式 Demo 会用真正的 cross-encoder 为你自己的文本打分。</p>
+      </div>
+      <div class="callout" style="margin-bottom:1.1rem">
+        <p style="margin:0"><strong>查询：</strong>“我该如何在 RAG 流水线里加入重排序（rerank）这一步？”</p>
+      </div>
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-head" data-i18n-html="demoStatic.beforeHead">重排前 —— bi-encoder 代理（词元重叠）</div>
+          <div class="results">
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">1</span></div>
+                <div class="result-score lvl-low">0.0500</div>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docOptions">Cohere Rerank、Jina Reranker 和 bge-reranker 都是重排序阶段常见的托管或开源选项。</div>
+              <div class="score-track lvl-low"><i style="width:100%"></i></div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">2</span></div>
+                <div class="result-score lvl-low">0.0400</div>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docDirect">把 cross-encoder 接入 RAG 的做法：先用向量检索召回 50–100 个候选，再用 cross-encoder 重排序，最后只保留前 5 条放进 prompt。</div>
+              <div class="score-track lvl-low"><i style="width:80%"></i></div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">3</span></div>
+                <div class="result-score lvl-low">0.0000</div>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docSupport">reranker 会把查询和每个召回的片段一起送入模型，输出一个精确的相关性分数，从而在交给大模型之前对 top-k 重新排序。</div>
+              <div class="score-track lvl-low"><i style="width:0%"></i></div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">4</span></div>
+                <div class="result-score lvl-low">0.0000</div>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docBiencoder">bi-encoder 会分别对查询和文档做嵌入，这在第一阶段检索时很快，但在细粒度排序上较弱。</div>
+              <div class="score-track lvl-low"><i style="width:0%"></i></div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">5</span></div>
+                <div class="result-score lvl-low">0.0000</div>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docChunking">把分块大小设为 200–400 个 token 并留一点重叠，通常比直接索引整篇文档检索效果更好。</div>
+              <div class="score-track lvl-low"><i style="width:0%"></i></div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">6</span></div>
+                <div class="result-score lvl-low">0.0000</div>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docLondon">伦敦是英国的首都，也是欧洲人口最多的城市之一。</div>
+              <div class="score-track lvl-low"><i style="width:0%"></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="compare-col">
+          <div class="compare-head" data-i18n-html="demoStatic.afterHead">重排后 —— reranker 修正的结果</div>
+          <div class="results">
+            <div class="result-item top">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">1</span></div>
+                <span class="pill good" data-i18n="demoStatic.direct">直接命中</span>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docDirect">把 cross-encoder 接入 RAG 的做法：先用向量检索召回 50–100 个候选，再用 cross-encoder 重排序，最后只保留前 5 条放进 prompt。</div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">2</span></div>
+                <span class="pill info" data-i18n="demoStatic.supporting">有支撑作用</span>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docSupport">reranker 会把查询和每个召回的片段一起送入模型，输出一个精确的相关性分数，从而在交给大模型之前对 top-k 重新排序。</div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">3</span></div>
+                <span class="pill info" data-i18n="demoStatic.supporting">有支撑作用</span>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docOptions">Cohere Rerank、Jina Reranker 和 bge-reranker 都是重排序阶段常见的托管或开源选项。</div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">4</span></div>
+                <span class="pill" data-i18n="demoStatic.related">相关</span>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docChunking">把分块大小设为 200–400 个 token 并留一点重叠，通常比直接索引整篇文档检索效果更好。</div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">5</span></div>
+                <span class="pill" data-i18n="demoStatic.related">相关</span>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docBiencoder">bi-encoder 会分别对查询和文档做嵌入，这在第一阶段检索时很快，但在细粒度排序上较弱。</div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">6</span></div>
+                <span class="pill warn" data-i18n="demoStatic.offtopic">跑题</span>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docLondon">伦敦是英国的首都，也是欧洲人口最多的城市之一。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="muted" style="font-size:.85rem;margin-top:1.1rem">左列此刻就在你的浏览器里真实运行 —— 零下载、确定性的词元重叠算法，和交互式 Demo 中间列用的是同一段代码。右列是一个正常工作的 cross-encoder 对这个查询「应该」给出的顺序，这是靠人工阅读核实的，并非在本页上运行模型截取的结果；在下方加载模型即可看到它对这个例子给出的真实分数。</p>
+      <p class="center" style="margin-top:1.3rem"><a class="btn btn-primary" href="#live-demo">加载真实模型（33 MB），试试你自己的文本 ↓</a></p>
+    </section>
+
+    <section class="demo-wrap container" id="live-demo">
       <div class="demo-panel">
         <div class="demo-input-grid">
           <div>
@@ -153,13 +267,22 @@
               <span class="load-label" id="load-label">Loading model</span>
               <span class="load-model" id="load-model-name"></span>
             </div>
-            <span class="load-cache chip" id="load-cache-status"></span>
+            <span class="load-cache chip" id="load-cache-status" aria-live="polite"></span>
           </div>
           <div class="progress-bar" id="progress-wrap"><i id="progress-bar"></i></div>
           <div class="load-meta">
             <span id="load-pct"></span>
             <span id="load-eta"></span>
             <span class="load-file muted" id="load-file"></span>
+            <button type="button" class="btn btn-ghost btn-sm load-cancel" id="load-cancel">取消</button>
+          </div>
+          <div class="load-fail" id="load-fail" hidden role="alert">
+            <p class="load-fail-msg" id="load-fail-msg"></p>
+            <div class="load-fail-actions">
+              <button type="button" class="btn btn-ghost btn-sm" id="load-fail-retry">重试</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="load-fail-smaller">换成最小的模型（33 MB）</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="load-fail-example">查看无需下载的结果</button>
+            </div>
           </div>
         </div>
       </div>

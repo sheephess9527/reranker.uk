@@ -5,7 +5,121 @@
       <p class="lead">Paste a query and candidate passages. A cross-encoder scores every pair; a bi-encoder proxy (token overlap) shows why independent embeddings mis-order. Compare two models, share a link, or enable WebGPU for faster inference.</p>
     </section>
 
-    <section class="demo-wrap container">
+    <section class="section container narrow" id="static-example">
+      <div class="section-head">
+        <h2>See the effect before you download anything</h2>
+        <p>This example needs no model — the left column is the real output of the token-overlap heuristic used elsewhere on this page. The interactive demo below scores your own text with an actual cross-encoder.</p>
+      </div>
+      <div class="callout" style="margin-bottom:1.1rem">
+        <p style="margin:0"><strong>Query:</strong> “How do I add a reranking step to my RAG pipeline?”</p>
+      </div>
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-head" data-i18n-html="demoStatic.beforeHead">Before — bi-encoder proxy (token overlap)</div>
+          <div class="results">
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">1</span></div>
+                <div class="result-score lvl-low">0.0500</div>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docOptions">Cohere Rerank, Jina Reranker and bge-reranker are common hosted or open options for the reranking stage.</div>
+              <div class="score-track lvl-low"><i style="width:100%"></i></div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">2</span></div>
+                <div class="result-score lvl-low">0.0400</div>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docDirect">To wire a cross-encoder into RAG: retrieve 50–100 candidates with vector search, rerank them with a cross-encoder, then keep only the top 5 for the prompt.</div>
+              <div class="score-track lvl-low"><i style="width:80%"></i></div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">3</span></div>
+                <div class="result-score lvl-low">0.0000</div>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docSupport">A reranker takes the query and each retrieved chunk together and outputs a precise relevance score, so you can reorder the top-k before sending them to the LLM.</div>
+              <div class="score-track lvl-low"><i style="width:0%"></i></div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">4</span></div>
+                <div class="result-score lvl-low">0.0000</div>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docBiencoder">Bi-encoders embed the query and documents separately, which is fast for first-stage retrieval but weaker at fine-grained ranking.</div>
+              <div class="score-track lvl-low"><i style="width:0%"></i></div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">5</span></div>
+                <div class="result-score lvl-low">0.0000</div>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docChunking">Picking a chunk size of 200–400 tokens with some overlap usually retrieves better than indexing whole documents.</div>
+              <div class="score-track lvl-low"><i style="width:0%"></i></div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">6</span></div>
+                <div class="result-score lvl-low">0.0000</div>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docLondon">London is the capital of the United Kingdom and one of the most populous cities in Europe.</div>
+              <div class="score-track lvl-low"><i style="width:0%"></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="compare-col">
+          <div class="compare-head" data-i18n-html="demoStatic.afterHead">After — what a reranker fixes</div>
+          <div class="results">
+            <div class="result-item top">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">1</span></div>
+                <span class="pill good" data-i18n="demoStatic.direct">Direct answer</span>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docDirect">To wire a cross-encoder into RAG: retrieve 50–100 candidates with vector search, rerank them with a cross-encoder, then keep only the top 5 for the prompt.</div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">2</span></div>
+                <span class="pill info" data-i18n="demoStatic.supporting">Supporting</span>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docSupport">A reranker takes the query and each retrieved chunk together and outputs a precise relevance score, so you can reorder the top-k before sending them to the LLM.</div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">3</span></div>
+                <span class="pill info" data-i18n="demoStatic.supporting">Supporting</span>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docOptions">Cohere Rerank, Jina Reranker and bge-reranker are common hosted or open options for the reranking stage.</div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">4</span></div>
+                <span class="pill" data-i18n="demoStatic.related">Related</span>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docChunking">Picking a chunk size of 200–400 tokens with some overlap usually retrieves better than indexing whole documents.</div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">5</span></div>
+                <span class="pill" data-i18n="demoStatic.related">Related</span>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docBiencoder">Bi-encoders embed the query and documents separately, which is fast for first-stage retrieval but weaker at fine-grained ranking.</div>
+            </div>
+            <div class="result-item">
+              <div class="result-head">
+                <div class="result-rankline"><span class="rank">6</span></div>
+                <span class="pill warn" data-i18n="demoStatic.offtopic">Off-topic</span>
+              </div>
+              <div class="result-text" data-i18n-html="demoStatic.docLondon">London is the capital of the United Kingdom and one of the most populous cities in Europe.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="muted" style="font-size:.85rem;margin-top:1.1rem">The left column runs live in your browser right now — zero downloads, deterministic token-overlap math, the same code the interactive demo uses for its middle column. The right column is the order a working cross-encoder is expected to produce for this query, checked by reading rather than captured from a model run on this page; load the model below to see its own scores on this exact example.</p>
+      <p class="center" style="margin-top:1.3rem"><a class="btn btn-primary" href="#live-demo">Load a real model (33 MB) and try your own text ↓</a></p>
+    </section>
+
+    <section class="demo-wrap container" id="live-demo">
       <div class="demo-panel">
         <div class="demo-input-grid">
           <div>
@@ -71,13 +185,22 @@
               <span class="load-label" id="load-label">Loading model</span>
               <span class="load-model" id="load-model-name"></span>
             </div>
-            <span class="load-cache chip" id="load-cache-status"></span>
+            <span class="load-cache chip" id="load-cache-status" aria-live="polite"></span>
           </div>
           <div class="progress-bar" id="progress-wrap"><i id="progress-bar"></i></div>
           <div class="load-meta">
             <span id="load-pct"></span>
             <span id="load-eta"></span>
             <span class="load-file muted" id="load-file"></span>
+            <button type="button" class="btn btn-ghost btn-sm load-cancel" id="load-cancel">Cancel</button>
+          </div>
+          <div class="load-fail" id="load-fail" hidden role="alert">
+            <p class="load-fail-msg" id="load-fail-msg"></p>
+            <div class="load-fail-actions">
+              <button type="button" class="btn btn-ghost btn-sm" id="load-fail-retry">Retry</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="load-fail-smaller">Try the smallest model (33 MB)</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="load-fail-example">See a result with no download</button>
+            </div>
           </div>
         </div>
       </div>
