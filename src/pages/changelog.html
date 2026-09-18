@@ -6,6 +6,18 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-09-18">18 Sep 2026 — URLs without the .html, and two pricing corrections</h2>
+        <ul class="feature-list">
+          <li><strong>URLs dropped their <code>.html</code></strong> — every internal link, the sitemap, hreflang tags and JSON-LD now point straight at the extensionless URL Cloudflare was already redirecting to, cutting a 307 round-trip off every internal navigation</li>
+          <li><strong>Voyage's free-tier grant moved on</strong> — the 200M free-token allowance is no longer on <code>rerank-2.5</code>; it now ships with the <code>rerank-3</code> preview, added to the model table and cost calculator alongside <code>rerank-3-lite</code></li>
+          <li><strong>Cost calculator token formula fixed</strong> — Voyage bills the query once per document reranked, not once per query; the calculator undercounted tokens (and cost) on any workload with more than one candidate per query</li>
+          <li><strong>Cohere chunking, clarified</strong> — an outside audit suggested Cohere silently splits passages over 500 tokens into extra billable chunks; that isn't how it works (context is 32,768 tokens and chunking is opt-in), so the calculator page now says so directly instead of adopting the wrong model</li>
+          <li><strong>Homepage diagram, now bilingual</strong> — the "Reranking in one diagram" figure was inline SVG the translation pass couldn't see; its labels and caption now render in Chinese on <a href="/zh/">/zh/</a></li>
+          <li><strong>Model table accessibility</strong> — the comparison table gets a caption, column/row headers, and a scrollable, keyboard-focusable region for screen readers and narrow viewports</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-08-25">25 Aug 2026 — Two guides for the questions people actually ask</h2>
         <ul class="feature-list">
           <li><strong><a href="/guides/reranking-not-working.html">Reranking didn't help</a></strong> — a diagnostic walkthrough of the seven reasons a rerank stage shows no lift, starting with the one that explains most of them: retrieval never returned the right document</li>

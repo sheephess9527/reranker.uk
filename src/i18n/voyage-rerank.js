@@ -1,4 +1,18 @@
 window.I18N_PAGE = { zh: {
+  "Hosted API · Voyage AI · <time datetime=\"2026-09-18\">Updated 18 Sep 2026</time>":
+    "托管 API · Voyage AI · <time datetime=\"2026-09-18\">更新于 2026 年 9 月 18 日</time>",
+  "<code>rerank-3</code> / <code>rerank-3-lite</code>":
+    "<code>rerank-3</code> / <code>rerank-3-lite</code>",
+  "Preview; same context and price, carries the free-token grant":
+    "预览版；上下文与价格相同，带免费 token 额度",
+  "<code>rerank-3</code> / <code>rerank-3-lite</code> (preview)":
+    "<code>rerank-3</code> / <code>rerank-3-lite</code>（预览版）",
+  "Same rate; first 200M tokens per account free":
+    "价格相同；每个账号前 2 亿 token 免费",
+  "Voyage uses token-based pricing, which is cost-effective at high volume. The 200M free-token grant moved to the <code>rerank-3</code> preview generation — <code>rerank-2.5</code> and <code>rerank-2.5-lite</code> no longer include it. Check the Voyage AI website for current rates.":
+    "Voyage 按 token 计费，用量越大越划算。2 亿免费 token 的额度已经转移到了 <code>rerank-3</code> 预览版这一代 —— <code>rerank-2.5</code> 与 <code>rerank-2.5-lite</code> 不再享有这个额度。请以 Voyage AI 官网当前费率为准。",
+  "Preview <code>rerank-3</code> carries a 200M free-token grant":
+    "预览版 <code>rerank-3</code> 带有 2 亿免费 token 额度",
   "Voyage rerank-2.5":
     "Voyage rerank-2.5",
   "Hosted API · Voyage AI · <time datetime=\"2026-08-11\">Updated 11 Aug 2026</time>":

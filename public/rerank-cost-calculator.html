@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>Rerank cost calculator — Cohere vs Voyage pricing | reranker.uk</title>
   <meta name="description" content="Estimate what reranking costs per month. Cohere Rerank 4 bills per search, Voyage rerank-2.5 bills per token, so the cheaper option flips with passage length and top-k. Enter your own volume and compare." >
-  <link rel="canonical" href="https://reranker.uk/rerank-cost-calculator.html" >
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/rerank-cost-calculator.html" >
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/rerank-cost-calculator.html" >
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/rerank-cost-calculator.html" >
+  <link rel="canonical" href="https://reranker.uk/rerank-cost-calculator" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/rerank-cost-calculator" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/rerank-cost-calculator" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/rerank-cost-calculator" >
   <meta name="theme-color" content="#0b0d17" >
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
   <meta name="author" content="reranker.uk" >
@@ -19,7 +19,7 @@
   <meta property="og:type" content="website" >
   <meta property="og:title" content="Rerank cost calculator — Cohere vs Voyage" >
   <meta property="og:description" content="Per-search or per-token? Which rerank API is cheaper depends on your passage length and top-k. Put your numbers in." >
-  <meta property="og:url" content="https://reranker.uk/rerank-cost-calculator.html" >
+  <meta property="og:url" content="https://reranker.uk/rerank-cost-calculator" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="en_GB" >
   <meta property="og:locale:alternate" content="zh_CN" >
@@ -37,14 +37,14 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Rerank cost calculator",
-    "url": "https://reranker.uk/rerank-cost-calculator.html",
+    "url": "https://reranker.uk/rerank-cost-calculator",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Any browser",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" },
     "description": "Estimate monthly reranking cost across Cohere Rerank 4 per-search pricing and Voyage rerank-2.5 per-token pricing."
   }
   </script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Rerank cost calculator","item":"https://reranker.uk/rerank-cost-calculator.html"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Rerank cost calculator","item":"https://reranker.uk/rerank-cost-calculator"}]}</script>
 
 </head>
 <body>
@@ -57,11 +57,11 @@
         <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
         <li><a href="/guides/" data-i18n="shared.nav.guides">Guides</a></li>
         <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
-        <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
+        <li><a class="nav-cta" href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <a class="lang-toggle" href="/zh/rerank-cost-calculator.html" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
+        <a class="lang-toggle" href="/zh/rerank-cost-calculator" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
   </header>
@@ -69,7 +69,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span>Rerank cost calculator</div>
       <h1>Rerank cost calculator</h1>
-      <p class="meta">Tool · <time datetime="2026-08-14">Updated 14 Aug 2026</time></p>
+      <p class="meta">Tool · <time datetime="2026-09-18">Updated 18 Sep 2026</time></p>
       <p class="lead">Hosted rerankers do not bill the same way. Cohere charges per <strong>search</strong> — one query plus up to 100 documents, whatever their length. Voyage charges per <strong>token</strong>. So the cheaper vendor flips depending on how long your passages are and how many you rerank. Put your own numbers in.</p>
 
       <section class="demo-panel" aria-labelledby="calc-head">
@@ -124,32 +124,35 @@
         <li><strong>Long passages</strong> — per-search billing tends to win, and its advantage grows with every extra token in the chunk.</li>
         <li><strong>Top-k above 100</strong> — Cohere starts a second billable search per query, so cost steps up rather than sliding.</li>
       </ul>
+      <div class="callout">
+        <p><strong>A note on "chunking":</strong> some pricing write-ups claim Cohere splits any document over 500 tokens into multiple billable chunks. That is not correct for Rerank 4 — its context window is 32,768 tokens per document, and <code>max_chunks_per_doc</code> defaults to 1, so a normal RAG passage (a few hundred tokens) is never split. Chunking only kicks in for documents that individually exceed roughly 32.7K tokens, and only if you opt into it.</p>
+      </div>
       <div class="callout accent">
         <p><strong>Breakeven:</strong> <span id="calc-breakeven">—</span></p>
       </div>
 
       <h2 id="self-host">What about self-hosting?</h2>
-      <p>Self-hosting has no per-call price, so it does not belong in the table above — you trade a usage bill for a GPU bill plus operations. The comparison only becomes meaningful at your own volume: divide your monthly GPU cost by the number of queries above and compare that to the per-query figures in the table. Below a few hundred thousand queries a month an API is usually cheaper than a dedicated GPU; well above that, self-hosting a <a href="/models/qwen-reranker.html">Qwen3-Reranker</a> or <a href="/models/bge-reranker.html">bge-reranker-v2-m3</a> starts to pay off. Our <a href="/guides/self-host-reranker.html">self-hosting guide</a> covers the serving side.</p>
-      <p class="muted" style="font-size:.9rem">Note that a smaller model is not automatically a worse one — <a href="/models/jina-reranker.html">Jina Reranker v3</a> reaches 61.94 BEIR nDCG@10 at 0.6B, so the cheapest thing to serve may also be the most accurate.</p>
+      <p>Self-hosting has no per-call price, so it does not belong in the table above — you trade a usage bill for a GPU bill plus operations. The comparison only becomes meaningful at your own volume: divide your monthly GPU cost by the number of queries above and compare that to the per-query figures in the table. Below a few hundred thousand queries a month an API is usually cheaper than a dedicated GPU; well above that, self-hosting a <a href="/models/qwen-reranker">Qwen3-Reranker</a> or <a href="/models/bge-reranker">bge-reranker-v2-m3</a> starts to pay off. Our <a href="/guides/self-host-reranker">self-hosting guide</a> covers the serving side.</p>
+      <p class="muted" style="font-size:.9rem">Note that a smaller model is not automatically a worse one — <a href="/models/jina-reranker">Jina Reranker v3</a> reaches 61.94 BEIR nDCG@10 at 0.6B, so the cheapest thing to serve may also be the most accurate.</p>
 
       <h2 id="assumptions">Assumptions and sources</h2>
       <ul>
-        <li><strong>Cohere Rerank 4</strong> — $0.0025 per search (Pro) and $0.002 per search (Fast), where a search is one query plus up to 100 documents. More than 100 candidates bills as multiple searches.</li>
-        <li><strong>Voyage rerank-2.5</strong> — $0.05 per 1M tokens, and $0.02 per 1M tokens for <code>rerank-2.5-lite</code>. Billable tokens are the query plus every document you send. The first 200M tokens per account are free and the Batch API is discounted 33%; neither is applied above.</li>
+        <li><strong>Cohere Rerank 4</strong> — $0.0025 per search (Pro) and $0.002 per search (Fast), where a search is one query plus up to 100 documents. More than 100 candidates bills as multiple searches; so does a single document beyond the 32,768-token context window, though that is not a realistic case for RAG-sized passages.</li>
+        <li><strong>Voyage rerank-2.5</strong> — $0.05 per 1M tokens, and $0.02 per 1M tokens for <code>rerank-2.5-lite</code>. Billable tokens are the query counted once per document, plus every document token you send — so 50 candidates means the query is billed 50 times, not once. The 200M-free-token grant that rerank-2.5 launched with has since moved to the newer <code>rerank-3</code> preview generation; rerank-2.5/2.5-lite are no longer free for the first tokens. The Batch API is discounted 33%, not applied above.</li>
         <li>Token counts are approximate — every vendor tokenises differently, and this page multiplies your averages rather than tokenising real text.</li>
-        <li>Rates verified August 2026. Check <a href="https://docs.cohere.com/docs/rerank-overview" rel="noopener noreferrer">Cohere</a> and <a href="https://docs.voyageai.com/docs/pricing" rel="noopener noreferrer">Voyage</a> for current pricing before committing to a budget.</li>
+        <li>Rates verified September 2026. Check <a href="https://docs.cohere.com/docs/rerank-overview" rel="noopener noreferrer">Cohere</a> and <a href="https://docs.voyageai.com/docs/pricing" rel="noopener noreferrer">Voyage</a> for current pricing before committing to a budget.</li>
       </ul>
 
       <div class="cta-band">
         <h2 style="margin-top:0">Cost is only half the decision</h2>
         <p class="soft">Quality is the other half. Run a cross-encoder against your own passages in the browser — no key, no spend.</p>
-        <a class="btn btn-primary" href="/demo.html?s=rag">Open the live demo →</a>
+        <a class="btn btn-primary" href="/demo?s=rag">Open the live demo →</a>
       </div>
 
       <h2>Keep reading</h2>
       <div class="grid grid-2">
         <a class="card" href="/models/"><h3>Compare rerank models</h3><p>Architecture, latency, languages and cost across 16 models.</p></a>
-        <a class="card" href="/guides/choose-reranker-scenario.html"><h3>Choose by scenario</h3><p>Which reranker suits support, legal, code or multilingual search.</p></a>
+        <a class="card" href="/guides/choose-reranker-scenario"><h3>Choose by scenario</h3><p>Which reranker suits support, legal, code or multilingual search.</p></a>
       </div>
     </article>
   </main>
@@ -165,33 +168,33 @@
           <h4 data-i18n="shared.footer.guides">Guides</h4>
           <ul>
             <li><a href="/guides/" data-i18n="shared.footer.allGuides">All guides</a></li>
-            <li><a href="/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
-            <li><a href="/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
-            <li><a href="/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
-            <li><a href="/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
-            <li><a href="/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
-            <li><a href="/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
-            <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
-            <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
-            <li><a href="/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
-            <li><a href="/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
-            <li><a href="/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
-            <li><a href="/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
-            <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
-            <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
+            <li><a href="/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
+            <li><a href="/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
+            <li><a href="/guides/rerank-rag" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
+            <li><a href="/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
+            <li><a href="/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
+            <li><a href="/guides/self-host-reranker" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
+            <li><a href="/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
+            <li><a href="/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
+            <li><a href="/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
+            <li><a href="/guides/reranking-not-working" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
+            <li><a href="/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
+            <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
+            <li><a href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
+            <li><a href="/changelog" data-i18n="shared.footer.changelog">Changelog</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>
-            <li><a href="/privacy.html" data-i18n="shared.footer.privacy">Privacy</a></li>
+            <li><a href="/privacy" data-i18n="shared.footer.privacy">Privacy</a></li>
           </ul>
         </div>
         <div>
           <h4 data-i18n="shared.footer.models">Models</h4>
           <ul>
-            <li><a href="/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/models/voyage-rerank">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
@@ -199,8 +202,8 @@
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
           <span data-i18n="shared.footer.disclaimer">Open educational resource · not affiliated with any model vendor</span>
-          · <a href="/privacy.html" data-i18n="shared.footer.privacyShort">Privacy</a>
-          · <a href="/changelog.html" data-i18n="shared.footer.changelogShort">Changelog</a>
+          · <a href="/privacy" data-i18n="shared.footer.privacyShort">Privacy</a>
+          · <a href="/changelog" data-i18n="shared.footer.changelogShort">Changelog</a>
         </span>
       </div>
     </div>

@@ -1,4 +1,14 @@
 window.I18N_PAGE = { zh: {
+  "Tool · <time datetime=\"2026-09-18\">Updated 18 Sep 2026</time>":
+    "工具 · <time datetime=\"2026-09-18\">更新于 2026 年 9 月 18 日</time>",
+  "<strong>A note on \"chunking\":</strong> some pricing write-ups claim Cohere splits any document over 500 tokens into multiple billable chunks. That is not correct for Rerank 4 — its context window is 32,768 tokens per document, and <code>max_chunks_per_doc</code> defaults to 1, so a normal RAG passage (a few hundred tokens) is never split. Chunking only kicks in for documents that individually exceed roughly 32.7K tokens, and only if you opt into it.":
+    "<strong>关于「分块」的说明：</strong>有些价格分析文章声称 Cohere 会把超过 500 token 的文档拆成多个计费单元。这个说法对 Rerank 4 并不成立 —— 它每篇文档的上下文窗口是 32,768 token，且 <code>max_chunks_per_doc</code> 默认值为 1，所以一段普通的 RAG 段落（几百 token）根本不会被拆分。只有单篇文档本身超过约 32.7K token、且你主动开启该选项时，分块才会发生。",
+  "<strong>Cohere Rerank 4</strong> — $0.0025 per search (Pro) and $0.002 per search (Fast), where a search is one query plus up to 100 documents. More than 100 candidates bills as multiple searches; so does a single document beyond the 32,768-token context window, though that is not a realistic case for RAG-sized passages.":
+    "<strong>Cohere Rerank 4</strong> —— Pro 每次检索 $0.0025，Fast 每次检索 $0.002；一次检索指一个 query 加最多 100 篇文档。候选超过 100 篇会按多次检索计费；单篇文档超过 32,768 token 的上下文窗口同样会触发多次计费，不过对 RAG 场景的段落长度而言这基本不会发生。",
+  "<strong>Voyage rerank-2.5</strong> — $0.05 per 1M tokens, and $0.02 per 1M tokens for <code>rerank-2.5-lite</code>. Billable tokens are the query counted once per document, plus every document token you send — so 50 candidates means the query is billed 50 times, not once. The 200M-free-token grant that rerank-2.5 launched with has since moved to the newer <code>rerank-3</code> preview generation; rerank-2.5/2.5-lite are no longer free for the first tokens. The Batch API is discounted 33%, not applied above.":
+    "<strong>Voyage rerank-2.5</strong> —— 每 100 万 token $0.05，<code>rerank-2.5-lite</code> 每 100 万 token $0.02。计费 token 是「查询按每篇文档各计一次」再加上你发送的每篇文档本身的 token —— 也就是说 50 个候选意味着查询被计费 50 次，而不是 1 次。rerank-2.5 发布时带的那 2 亿免费 token 额度，后来已经转移到了更新的 <code>rerank-3</code> 预览版；rerank-2.5/2.5-lite 现在不再享有首批免费额度。Batch API 有 33% 折扣，上表未计入。",
+  "Rates verified September 2026. Check <a href=\"https://docs.cohere.com/docs/rerank-overview\" rel=\"noopener noreferrer\">Cohere</a> and <a href=\"https://docs.voyageai.com/docs/pricing\" rel=\"noopener noreferrer\">Voyage</a> for current pricing before committing to a budget.":
+    "价格核对于 2026 年 9 月。做预算前请以 <a href=\"https://docs.cohere.com/docs/rerank-overview\" rel=\"noopener noreferrer\">Cohere</a> 与 <a href=\"https://docs.voyageai.com/docs/pricing\" rel=\"noopener noreferrer\">Voyage</a> 的最新价格为准。",
   "_title": "重排序成本计算器 —— Cohere 与 Voyage 价格对比 | reranker.uk",
   "_desc": "估算重排序每月要花多少钱。Cohere Rerank 4 按次检索计费，Voyage rerank-2.5 按 token 计费，所以哪家更便宜会随段落长度和 top-k 翻转。输入你自己的量级来对比。",
 

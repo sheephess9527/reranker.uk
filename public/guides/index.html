@@ -46,7 +46,7 @@
         <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
         <li><a href="/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">Guides</a></li>
         <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
-        <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
+        <li><a class="nav-cta" href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
@@ -62,79 +62,79 @@
 
     <section class="section container">
       <div class="grid grid-2">
-        <a class="card" href="/guides/what-is-a-reranker.html">
+        <a class="card" href="/guides/what-is-a-reranker">
           <span class="ico" aria-hidden="true">🧭</span>
           <h3>What is a reranker?</h3>
           <p>Two-stage retrieval, why order matters, when reranking pays off.</p>
           <div class="tag-row"><span class="pill info">Fundamentals</span><span class="pill">~7 min</span></div>
         </a>
-        <a class="card" href="/guides/cross-encoder-vs-bi-encoder.html">
+        <a class="card" href="/guides/cross-encoder-vs-bi-encoder">
           <span class="ico" aria-hidden="true">⚖️</span>
           <h3>Cross-encoder vs bi-encoder</h3>
           <p>Speed vs accuracy — and why production stacks use both.</p>
           <div class="tag-row"><span class="pill info">Architecture</span><span class="pill">~8 min</span></div>
         </a>
-        <a class="card" href="/guides/rerank-rag.html">
+        <a class="card" href="/guides/rerank-rag">
           <span class="ico" aria-hidden="true">🔧</span>
           <h3>How to add reranking to RAG</h3>
           <p>Retrieve wide, rerank tight — with Python, LangChain, and latency tips.</p>
           <div class="tag-row"><span class="pill info">Practical</span><span class="pill">~10 min</span></div>
         </a>
-        <a class="card" href="/guides/hybrid-retrieval-rerank.html">
+        <a class="card" href="/guides/hybrid-retrieval-rerank">
           <span class="ico" aria-hidden="true">🔀</span>
           <h3>Hybrid retrieval + rerank</h3>
           <p>Combine BM25 and vector search, then let the reranker fix the merge.</p>
           <div class="tag-row"><span class="pill info">Production</span><span class="pill">~9 min</span></div>
         </a>
-        <a class="card" href="/guides/evaluate-reranker.html">
+        <a class="card" href="/guides/evaluate-reranker">
           <span class="ico" aria-hidden="true">📊</span>
           <h3>How to evaluate rerankers</h3>
           <p>NDCG, MRR, labelled queries, and regression tests for your domain.</p>
           <div class="tag-row"><span class="pill info">Evaluation</span><span class="pill">~8 min</span></div>
         </a>
-        <a class="card" href="/guides/self-host-reranker.html">
+        <a class="card" href="/guides/self-host-reranker">
           <span class="ico" aria-hidden="true">🖥️</span>
           <h3>Self-host a reranker</h3>
           <p>sentence-transformers, GPU sizing, and a minimal FastAPI service.</p>
           <div class="tag-row"><span class="pill info">Production</span><span class="pill">~10 min</span></div>
         </a>
-        <a class="card" href="/guides/choose-reranker-scenario.html">
+        <a class="card" href="/guides/choose-reranker-scenario">
           <span class="ico" aria-hidden="true">🎯</span>
           <h3>Choose by scenario</h3>
           <p>RAG vs support vs legal vs code — which model fits your use case.</p>
           <div class="tag-row"><span class="pill info">Decision</span><span class="pill">~8 min</span></div>
         </a>
-        <a class="card" href="/guides/late-interaction-rerank.html">
+        <a class="card" href="/guides/late-interaction-rerank">
           <span class="ico" aria-hidden="true">🔗</span>
           <h3>Late-interaction (ColBERT)</h3>
           <p>When ColBERT beats bi-encoders and when you still need cross-encoder rerank.</p>
           <div class="tag-row"><span class="pill info">Architecture</span><span class="pill">~9 min</span></div>
         </a>
-        <a class="card" href="/guides/instruction-reranker.html">
+        <a class="card" href="/guides/instruction-reranker">
           <span class="ico" aria-hidden="true">📋</span>
           <h3>Instruction-following rerank</h3>
           <p>Task instructions that change what “relevant” means — vs plain cross-encoders.</p>
           <div class="tag-row"><span class="pill info">Emerging</span><span class="pill">~7 min</span></div>
         </a>
-        <a class="card" href="/guides/reranking-not-working.html">
+        <a class="card" href="/guides/reranking-not-working">
           <span class="ico" aria-hidden="true">🩺</span>
           <h3>Reranking didn't help</h3>
           <p>Seven reasons you see no lift — recall, pool size, truncation — and how to tell which one you have.</p>
           <div class="tag-row"><span class="pill info">Troubleshooting</span><span class="pill">~9 min</span></div>
         </a>
-        <a class="card" href="/guides/rerank-vector-database.html">
+        <a class="card" href="/guides/rerank-vector-database">
           <span class="ico" aria-hidden="true">🗄️</span>
           <h3>Rerank on a vector database</h3>
           <p>Wiring a rerank stage onto pgvector, Qdrant or Elasticsearch, with code.</p>
           <div class="tag-row"><span class="pill info">Practical</span><span class="pill">~10 min</span></div>
         </a>
-        <a class="card" href="/rerank-cost-calculator.html">
+        <a class="card" href="/rerank-cost-calculator">
           <span class="ico" aria-hidden="true">🧮</span>
           <h3>Rerank cost calculator</h3>
           <p>Per-search or per-token? Which rerank API is cheaper at your volume.</p>
           <div class="tag-row"><span class="pill good">Interactive</span><span class="pill">Tool</span></div>
         </a>
-        <a class="card" href="/demo.html?s=rag">
+        <a class="card" href="/demo?s=rag">
           <span class="ico" aria-hidden="true">▶️</span>
           <h3>Live in-browser demo</h3>
           <p>Watch a cross-encoder reorder passages — bi-encoder proxy included.</p>
@@ -155,33 +155,33 @@
           <h4 data-i18n="shared.footer.guides">Guides</h4>
           <ul>
             <li><a href="/guides/" data-i18n="shared.footer.allGuides">All guides</a></li>
-            <li><a href="/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
-            <li><a href="/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
-            <li><a href="/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
-            <li><a href="/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
-            <li><a href="/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
-            <li><a href="/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
-            <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
-            <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
-            <li><a href="/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
-            <li><a href="/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
-            <li><a href="/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
-            <li><a href="/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
-            <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
-            <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
+            <li><a href="/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
+            <li><a href="/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
+            <li><a href="/guides/rerank-rag" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
+            <li><a href="/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
+            <li><a href="/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
+            <li><a href="/guides/self-host-reranker" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
+            <li><a href="/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
+            <li><a href="/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
+            <li><a href="/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
+            <li><a href="/guides/reranking-not-working" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
+            <li><a href="/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
+            <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
+            <li><a href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
+            <li><a href="/changelog" data-i18n="shared.footer.changelog">Changelog</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>
-            <li><a href="/privacy.html" data-i18n="shared.footer.privacy">Privacy</a></li>
+            <li><a href="/privacy" data-i18n="shared.footer.privacy">Privacy</a></li>
           </ul>
         </div>
         <div>
           <h4 data-i18n="shared.footer.models">Models</h4>
           <ul>
-            <li><a href="/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/models/voyage-rerank">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
@@ -189,8 +189,8 @@
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
           <span data-i18n="shared.footer.disclaimer">Open educational resource · not affiliated with any model vendor</span>
-          · <a href="/privacy.html" data-i18n="shared.footer.privacyShort">Privacy</a>
-          · <a href="/changelog.html" data-i18n="shared.footer.changelogShort">Changelog</a>
+          · <a href="/privacy" data-i18n="shared.footer.privacyShort">Privacy</a>
+          · <a href="/changelog" data-i18n="shared.footer.changelogShort">Changelog</a>
         </span>
       </div>
     </div>

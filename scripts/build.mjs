@@ -57,11 +57,11 @@ const NO_SITEMAP = new Set(["404.html"]);
 /** changefreq / priority by URL shape — keeps sitemap tuning out of every meta file. */
 function sitemapHints(urlPath) {
   if (urlPath === "/") return { changefreq: "weekly", priority: "1.0" };
-  if (urlPath === "/demo.html") return { changefreq: "weekly", priority: "0.9" };
+  if (urlPath === "/demo") return { changefreq: "weekly", priority: "0.9" };
   if (urlPath === "/guides/" || urlPath === "/models/")
     return { changefreq: "monthly", priority: "0.9" };
-  if (urlPath === "/privacy.html") return { changefreq: "yearly", priority: "0.3" };
-  if (urlPath === "/changelog.html") return { changefreq: "monthly", priority: "0.5" };
+  if (urlPath === "/privacy") return { changefreq: "yearly", priority: "0.3" };
+  if (urlPath === "/changelog") return { changefreq: "monthly", priority: "0.5" };
   if (urlPath.startsWith("/guides/")) return { changefreq: "monthly", priority: "0.8" };
   if (urlPath.startsWith("/models/")) return { changefreq: "monthly", priority: "0.7" };
   return { changefreq: "monthly", priority: "0.6" };
@@ -111,9 +111,15 @@ function parsePage(filePath) {
   return { meta, body };
 }
 
-/** `guides/index.html` → `/guides/`, `demo.html` → `/demo.html`. */
+/** `guides/index.html` → `/guides/`, `demo.html` → `/demo`. Cloudflare's
+ * `auto-trailing-slash` html_handling 307-redirects a request for
+ * `/page.html` to `/page` (confirmed empirically against production: a
+ * manual-redirect fetch of `/demo.html` returns an opaque redirect, while
+ * `/demo` returns 200 directly), so every URL this build emits — canonical,
+ * hreflang, sitemap, internal links, JSON-LD — targets the post-redirect
+ * form rather than bouncing through it once per click. */
 function urlPathFor(relPath) {
-  const clean = relPath.replace(/index\.html$/, "");
+  const clean = relPath.replace(/index\.html$/, "").replace(/\.html$/, "");
   return "/" + clean;
 }
 
@@ -228,6 +234,19 @@ function translate(root, pageDict) {
     keyed++;
   }
 
+  // Attribute-only counterpart, for text a screen reader announces (aria-label)
+  // that has no visible child content for the loop above to replace.
+  for (const el of root.querySelectorAll("[data-i18n-aria-label]")) {
+    const key = el.getAttribute("data-i18n-aria-label");
+    const value = pageKeys[key] != null ? pageKeys[key] : SHARED_KEYS[key];
+    if (value == null) {
+      missingKeys.push(key);
+      continue;
+    }
+    el.setAttribute("aria-label", value);
+    keyed++;
+  }
+
   if (Object.keys(legacy).length) {
     // Secondary index used when a link target changed but the prose did not.
     const byShape = new Map();
@@ -263,6 +282,31 @@ function translate(root, pageDict) {
  * ------------------------------------------------------------------ */
 
 const isNeutral = (href) => LOCALE_NEUTRAL.some((p) => href === p || href.startsWith(p));
+
+/** Strip the redirect-triggering `.html` from an internal path, preserving
+ * any query string or fragment. Leaves external/protocol URLs untouched. */
+function stripHtmlExt(p) {
+  if (!p.startsWith("/") || p.startsWith("//")) return p;
+  if (isNeutral(p)) return p;
+  return p.replace(/\.html($|[?#])/, "$1");
+}
+
+/**
+ * Retargets every internal `<a href>` at the extensionless URL, and does the
+ * same inside JSON-LD blocks (BreadcrumbList items, Article.mainEntityOfPage,
+ * FAQPage, ItemList, …), which reference absolute reranker.uk URLs rather
+ * than hrefs and would otherwise keep pointing structured data at a page
+ * that 307s.
+ */
+function stripExtensionLinks(root) {
+  for (const a of root.querySelectorAll("a[href]")) {
+    const href = a.getAttribute("href");
+    if (href) a.setAttribute("href", stripHtmlExt(href));
+  }
+  for (const s of root.querySelectorAll('script[type="application/ld+json"]')) {
+    s.set_content(s.text.replace(/(https:\/\/reranker\.uk\/[^"'\s]*?)\.html(["'\s]|$)/g, "$1$2"));
+  }
+}
 
 /**
  * `/guides/` → `/zh/guides/`; leaves assets, anchors and absolute URLs alone.
@@ -393,6 +437,7 @@ function assemble({ meta, body, relPath, locale, lastmod }) {
     localiseLinks(root);
     root.querySelector("html")?.setAttribute("data-prerendered", "zh");
   }
+  stripExtensionLinks(root);
   // After localiseLinks: the toggle points at the *other* locale, so it must
   // not be swept up by the /zh prefixing pass.
   setLocaleToggle(root, urlPath, zh ? "zh" : "en");
@@ -449,9 +494,9 @@ function writeLlmsTxt(entries) {
   const SECTIONS = [
     ["Guides", (e) => e.urlPath.startsWith("/guides/") && e.urlPath !== "/guides/"],
     ["Model reviews", (e) => e.urlPath.startsWith("/models/") && e.urlPath !== "/models/"],
-    ["Tools", (e) => e.urlPath === "/demo.html" || e.urlPath === "/rerank-cost-calculator.html"],
+    ["Tools", (e) => e.urlPath === "/demo" || e.urlPath === "/rerank-cost-calculator"],
     ["Index pages", (e) => ["/", "/guides/", "/models/"].includes(e.urlPath)],
-    ["About", (e) => ["/changelog.html", "/privacy.html"].includes(e.urlPath)],
+    ["About", (e) => ["/changelog", "/privacy"].includes(e.urlPath)],
   ];
 
   // Enough leading sentences to be informative, capped so each line stays
@@ -473,7 +518,7 @@ function writeLlmsTxt(entries) {
     "",
     "> An open educational resource on rerankers for retrieval and RAG, with a cross-encoder demo that runs entirely in the browser. Not affiliated with any model vendor.",
     "",
-    "Every page also exists in Chinese under /zh/ — for example https://reranker.uk/zh/guides/what-is-a-reranker.html.",
+    "Every page also exists in Chinese under /zh/ — for example https://reranker.uk/zh/guides/what-is-a-reranker.",
     "",
     "Benchmark figures carry their protocol: rows marked with an asterisk on /models/ use MTEB-R or vendor-specific protocols rather than the classic BEIR 18-dataset average, and where a vendor publishes no comparable number the table says so rather than estimating one.",
     "",

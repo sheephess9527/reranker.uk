@@ -46,7 +46,7 @@
         <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
         <li><a href="/zh/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">指南</a></li>
         <li><a href="/zh/models/" data-i18n="shared.nav.models">模型对比</a></li>
-        <li><a class="nav-cta" href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
+        <li><a class="nav-cta" href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
@@ -62,79 +62,79 @@
 
     <section class="section container">
       <div class="grid grid-2">
-        <a class="card" href="/zh/guides/what-is-a-reranker.html">
+        <a class="card" href="/zh/guides/what-is-a-reranker">
           <span class="ico" aria-hidden="true">🧭</span>
           <h3>什么是 reranker？</h3>
           <p>两阶段检索、排序为何重要、何时值得加重排序。</p>
           <div class="tag-row"><span class="pill info">基础</span><span class="pill">约 7 分钟</span></div>
         </a>
-        <a class="card" href="/zh/guides/cross-encoder-vs-bi-encoder.html">
+        <a class="card" href="/zh/guides/cross-encoder-vs-bi-encoder">
           <span class="ico" aria-hidden="true">⚖️</span>
           <h3>Cross-encoder vs bi-encoder</h3>
           <p>速度 vs 精度 —— 生产环境为何两者都用。</p>
           <div class="tag-row"><span class="pill info">架构</span><span class="pill">约 8 分钟</span></div>
         </a>
-        <a class="card" href="/zh/guides/rerank-rag.html">
+        <a class="card" href="/zh/guides/rerank-rag">
           <span class="ico" aria-hidden="true">🔧</span>
           <h3>如何为 RAG 加重排序</h3>
           <p>宽召回、紧重排 —— 含 Python、LangChain 与延迟建议。</p>
           <div class="tag-row"><span class="pill info">实战</span><span class="pill">约 10 分钟</span></div>
         </a>
-        <a class="card" href="/zh/guides/hybrid-retrieval-rerank.html">
+        <a class="card" href="/zh/guides/hybrid-retrieval-rerank">
           <span class="ico" aria-hidden="true">🔀</span>
           <h3>混合检索 + 重排序</h3>
           <p>结合 BM25 与向量检索，再由 reranker 修正合并结果。</p>
           <div class="tag-row"><span class="pill info">生产</span><span class="pill">约 9 分钟</span></div>
         </a>
-        <a class="card" href="/zh/guides/evaluate-reranker.html">
+        <a class="card" href="/zh/guides/evaluate-reranker">
           <span class="ico" aria-hidden="true">📊</span>
           <h3>如何评测 reranker</h3>
           <p>NDCG、MRR、标注查询与领域回归测试。</p>
           <div class="tag-row"><span class="pill info">评测</span><span class="pill">约 8 分钟</span></div>
         </a>
-        <a class="card" href="/zh/guides/self-host-reranker.html">
+        <a class="card" href="/zh/guides/self-host-reranker">
           <span class="ico" aria-hidden="true">🖥️</span>
           <h3>自托管 reranker</h3>
           <p>sentence-transformers、GPU 选型与最小 FastAPI 服务。</p>
           <div class="tag-row"><span class="pill info">生产</span><span class="pill">约 10 分钟</span></div>
         </a>
-        <a class="card" href="/zh/guides/choose-reranker-scenario.html">
+        <a class="card" href="/zh/guides/choose-reranker-scenario">
           <span class="ico" aria-hidden="true">🎯</span>
           <h3>按场景选型</h3>
           <p>RAG / 客服 / 法律 / 代码 —— 哪种模型适合你的场景。</p>
           <div class="tag-row"><span class="pill info">决策</span><span class="pill">约 8 分钟</span></div>
         </a>
-        <a class="card" href="/zh/guides/late-interaction-rerank.html">
+        <a class="card" href="/zh/guides/late-interaction-rerank">
           <span class="ico" aria-hidden="true">🔗</span>
           <h3>Late-interaction（ColBERT）</h3>
           <p>ColBERT 何时胜过 bi-encoder，何时仍需要 cross-encoder rerank。</p>
           <div class="tag-row"><span class="pill info">架构</span><span class="pill">约 9 分钟</span></div>
         </a>
-        <a class="card" href="/zh/guides/instruction-reranker.html">
+        <a class="card" href="/zh/guides/instruction-reranker">
           <span class="ico" aria-hidden="true">📋</span>
           <h3>指令跟随 rerank</h3>
           <p>改变「相关」含义的任务指令 —— 对比经典 cross-encoder。</p>
           <div class="tag-row"><span class="pill info">新兴</span><span class="pill">约 7 分钟</span></div>
         </a>
-        <a class="card" href="/zh/guides/reranking-not-working.html">
+        <a class="card" href="/zh/guides/reranking-not-working">
           <span class="ico" aria-hidden="true">🩺</span>
           <h3>重排序没起作用</h3>
           <p>看不到提升的七个原因 —— 召回、候选池大小、截断 —— 以及如何判断你属于哪一种。</p>
           <div class="tag-row"><span class="pill info">排障</span><span class="pill">约 9 分钟</span></div>
         </a>
-        <a class="card" href="/zh/guides/rerank-vector-database.html">
+        <a class="card" href="/zh/guides/rerank-vector-database">
           <span class="ico" aria-hidden="true">🗄️</span>
           <h3>在向量数据库上做重排序</h3>
           <p>把重排序这一步接到 pgvector、Qdrant 或 Elasticsearch 上，含代码。</p>
           <div class="tag-row"><span class="pill info">实战</span><span class="pill">约 10 分钟</span></div>
         </a>
-        <a class="card" href="/zh/rerank-cost-calculator.html">
+        <a class="card" href="/zh/rerank-cost-calculator">
           <span class="ico" aria-hidden="true">🧮</span>
           <h3>重排序成本计算器</h3>
           <p>按次计费还是按 token 计费？在你的量级下哪个 rerank API 更便宜。</p>
           <div class="tag-row"><span class="pill good">交互</span><span class="pill">工具</span></div>
         </a>
-        <a class="card" href="/zh/demo.html?s=rag">
+        <a class="card" href="/zh/demo?s=rag">
           <span class="ico" aria-hidden="true">▶️</span>
           <h3>浏览器在线 Demo</h3>
           <p>观看 cross-encoder 重排段落 —— 含 bi-encoder 代理对比。</p>
@@ -155,33 +155,33 @@
           <h4 data-i18n="shared.footer.guides">指南</h4>
           <ul>
             <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
-            <li><a href="/zh/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
-            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
-            <li><a href="/zh/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
-            <li><a href="/zh/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
-            <li><a href="/zh/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
-            <li><a href="/zh/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
-            <li><a href="/zh/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">按场景选型</a></li>
-            <li><a href="/zh/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
-            <li><a href="/zh/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
-            <li><a href="/zh/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
-            <li><a href="/zh/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
-            <li><a href="/zh/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
-            <li><a href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
-            <li><a href="/zh/changelog.html" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/guides/reranking-not-working" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
+            <li><a href="/zh/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
+            <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
+            <li><a href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog" data-i18n="shared.footer.changelog">更新日志</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
-            <li><a href="/zh/privacy.html" data-i18n="shared.footer.privacy">隐私说明</a></li>
+            <li><a href="/zh/privacy" data-i18n="shared.footer.privacy">隐私说明</a></li>
           </ul>
         </div>
         <div>
           <h4 data-i18n="shared.footer.models">模型</h4>
           <ul>
-            <li><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/zh/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/zh/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/zh/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/zh/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/zh/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/zh/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
@@ -189,8 +189,8 @@
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
           <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
-          · <a href="/zh/privacy.html" data-i18n="shared.footer.privacyShort">隐私</a>
-          · <a href="/zh/changelog.html" data-i18n="shared.footer.changelogShort">更新日志</a>
+          · <a href="/zh/privacy" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog" data-i18n="shared.footer.changelogShort">更新日志</a>
         </span>
       </div>
     </div>

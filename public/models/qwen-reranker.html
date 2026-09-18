@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>Qwen3-Reranker: 0.6B / 4B / 8B open-weight review | reranker.uk</title>
   <meta name="description" content="Qwen3-Reranker family review for 2026: when to use 0.6B, 4B, or 8B, how scores compare to classic BEIR rows, self-host tips, and trade-offs vs bge and hosted APIs." >
-  <link rel="canonical" href="https://reranker.uk/models/qwen-reranker.html" >
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/models/qwen-reranker.html" >
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/qwen-reranker.html" >
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/qwen-reranker.html" >
+  <link rel="canonical" href="https://reranker.uk/models/qwen-reranker" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/models/qwen-reranker" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/qwen-reranker" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/qwen-reranker" >
   <meta name="theme-color" content="#0b0d17" >
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
   <meta name="author" content="reranker.uk" >
@@ -19,7 +19,7 @@
   <meta property="og:type" content="article" >
   <meta property="og:title" content="Qwen3-Reranker — 2026 open-weight SOTA candidate" >
   <meta property="og:description" content="0.6B / 4B / 8B open rerankers. Start with 4B on GPU; validate on your labels." >
-  <meta property="og:url" content="https://reranker.uk/models/qwen-reranker.html" >
+  <meta property="og:url" content="https://reranker.uk/models/qwen-reranker" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="en_GB" >
   <meta property="og:locale:alternate" content="zh_CN" >
@@ -33,9 +33,9 @@
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Article","headline":"Qwen3-Reranker","datePublished":"2026-06-25","dateModified":"2026-06-25","inLanguage":"en","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/models/qwen-reranker.html"}
+  {"@context":"https://schema.org","@type":"Article","headline":"Qwen3-Reranker","datePublished":"2026-06-25","dateModified":"2026-06-25","inLanguage":"en","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/models/qwen-reranker"}
   </script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://reranker.uk/models/"},{"@type":"ListItem","position":3,"name":"Qwen3-Reranker: 0.6B / 4B / 8B open-weight review","item":"https://reranker.uk/models/qwen-reranker.html"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://reranker.uk/models/"},{"@type":"ListItem","position":3,"name":"Qwen3-Reranker: 0.6B / 4B / 8B open-weight review","item":"https://reranker.uk/models/qwen-reranker"}]}</script>
 
 </head>
 <body>
@@ -48,11 +48,11 @@
         <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
         <li><a href="/guides/" data-i18n="shared.nav.guides">Guides</a></li>
         <li><a href="/models/" data-i18n="shared.nav.models" aria-current="page" class="active">Models</a></li>
-        <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
+        <li><a class="nav-cta" href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <a class="lang-toggle" href="/zh/models/qwen-reranker.html" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
+        <a class="lang-toggle" href="/zh/models/qwen-reranker" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
   </header>
@@ -126,8 +126,8 @@ answer = llm.complete(context=top, query=query)</code></pre>
       <ul>
         <li><strong>Yes:</strong> you have GPU, need multilingual quality, and want open weights without per-call API cost.</li>
         <li><strong>Yes:</strong> long passages / long context matter and you can afford 4B–8B memory.</li>
-        <li><strong>Maybe not:</strong> CPU-only or edge — prefer <a href="/models/bge-reranker.html">bge-v2-m3</a>, mxbai, or Jina tiny for demos.</li>
-        <li><strong>Maybe not:</strong> instruction-shaped policies — see <a href="/guides/instruction-reranker.html">instruction-following rerank</a>.</li>
+        <li><strong>Maybe not:</strong> CPU-only or edge — prefer <a href="/models/bge-reranker">bge-v2-m3</a>, mxbai, or Jina tiny for demos.</li>
+        <li><strong>Maybe not:</strong> instruction-shaped policies — see <a href="/guides/instruction-reranker">instruction-following rerank</a>.</li>
       </ul>
 
       <h2 id="pros-cons">Pros and cons</h2>
@@ -155,16 +155,16 @@ answer = llm.complete(context=top, query=query)</code></pre>
       <div class="cta-band">
         <h2 style="margin-top:0">Compare on your data first</h2>
         <p class="soft">Use a tiny browser model to learn the UX of reranking, then A/B Qwen3-4B vs bge-v2-m3 on 30 labelled queries.</p>
-        <a class="btn btn-primary" href="/demo.html?s=multilingual">Open the demo →</a>
-        <a class="btn btn-ghost" href="/guides/evaluate-reranker.html" style="margin-left:.5rem">Evaluate guide →</a>
+        <a class="btn btn-primary" href="/demo?s=multilingual">Open the demo →</a>
+        <a class="btn btn-ghost" href="/guides/evaluate-reranker" style="margin-left:.5rem">Evaluate guide →</a>
       </div>
 
       <h2>Other models</h2>
       <div class="grid grid-2">
-        <a class="card" href="/models/bge-reranker.html"><h3>bge-reranker</h3><p>CPU-friendly open default.</p></a>
-        <a class="card" href="/models/jina-reranker.html"><h3>Jina Reranker v3</h3><p>Listwise long-context + tiny demo.</p></a>
-        <a class="card" href="/models/mxbai-rerank.html"><h3>mxbai-rerank</h3><p>Classic BEIR + browser xsmall.</p></a>
-        <a class="card" href="/guides/self-host-reranker.html"><h3>Self-host guide</h3><p>Serving and ops checklist.</p></a>
+        <a class="card" href="/models/bge-reranker"><h3>bge-reranker</h3><p>CPU-friendly open default.</p></a>
+        <a class="card" href="/models/jina-reranker"><h3>Jina Reranker v3</h3><p>Listwise long-context + tiny demo.</p></a>
+        <a class="card" href="/models/mxbai-rerank"><h3>mxbai-rerank</h3><p>Classic BEIR + browser xsmall.</p></a>
+        <a class="card" href="/guides/self-host-reranker"><h3>Self-host guide</h3><p>Serving and ops checklist.</p></a>
       </div>
     </article>
   </main>
@@ -180,33 +180,33 @@ answer = llm.complete(context=top, query=query)</code></pre>
           <h4 data-i18n="shared.footer.guides">Guides</h4>
           <ul>
             <li><a href="/guides/" data-i18n="shared.footer.allGuides">All guides</a></li>
-            <li><a href="/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
-            <li><a href="/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
-            <li><a href="/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
-            <li><a href="/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
-            <li><a href="/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
-            <li><a href="/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
-            <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
-            <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
-            <li><a href="/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
-            <li><a href="/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
-            <li><a href="/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
-            <li><a href="/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
-            <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
-            <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
+            <li><a href="/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
+            <li><a href="/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
+            <li><a href="/guides/rerank-rag" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
+            <li><a href="/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
+            <li><a href="/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
+            <li><a href="/guides/self-host-reranker" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
+            <li><a href="/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
+            <li><a href="/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
+            <li><a href="/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
+            <li><a href="/guides/reranking-not-working" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
+            <li><a href="/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
+            <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
+            <li><a href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
+            <li><a href="/changelog" data-i18n="shared.footer.changelog">Changelog</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>
-            <li><a href="/privacy.html" data-i18n="shared.footer.privacy">Privacy</a></li>
+            <li><a href="/privacy" data-i18n="shared.footer.privacy">Privacy</a></li>
           </ul>
         </div>
         <div>
           <h4 data-i18n="shared.footer.models">Models</h4>
           <ul>
-            <li><a href="/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/models/voyage-rerank">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
@@ -214,8 +214,8 @@ answer = llm.complete(context=top, query=query)</code></pre>
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
           <span data-i18n="shared.footer.disclaimer">Open educational resource · not affiliated with any model vendor</span>
-          · <a href="/privacy.html" data-i18n="shared.footer.privacyShort">Privacy</a>
-          · <a href="/changelog.html" data-i18n="shared.footer.changelogShort">Changelog</a>
+          · <a href="/privacy" data-i18n="shared.footer.privacyShort">Privacy</a>
+          · <a href="/changelog" data-i18n="shared.footer.changelogShort">Changelog</a>
         </span>
       </div>
     </div>

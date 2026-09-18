@@ -20,7 +20,15 @@ function resolveHref(href) {
   let h = href.split("#")[0].split("?")[0];
   if (h === "/") return path.join(PUBLIC, "index.html");
   if (h.endsWith("/")) return path.join(PUBLIC, h.slice(1), "index.html");
-  return path.join(PUBLIC, h.replace(/^\//, ""));
+  const direct = path.join(PUBLIC, h.replace(/^\//, ""));
+  // Cloudflare's auto-trailing-slash html_handling serves /page from the
+  // page.html asset on disk (and 307s /page.html -> /page), so an
+  // extensionless internal link is expected — not a broken one.
+  if (!fs.existsSync(direct) && !path.extname(direct)) {
+    const withExt = direct + ".html";
+    if (fs.existsSync(withExt)) return withExt;
+  }
+  return direct;
 }
 
 const pages = walk(PUBLIC);

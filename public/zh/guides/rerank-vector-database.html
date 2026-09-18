@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>为 pgvector、Qdrant、Elasticsearch 加上重排序 | reranker.uk</title>
   <meta name="description" content="如何在向量数据库之上加一层重排序。「宽召回—打分—截断」模式，含 pgvector、Qdrant 与 Elasticsearch 的可用代码，以及 HNSW ef_search、过滤顺序等让重排序看起来没用的坑。" >
-  <link rel="canonical" href="https://reranker.uk/zh/guides/rerank-vector-database.html" >
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/rerank-vector-database.html" >
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/rerank-vector-database.html" >
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/rerank-vector-database.html" >
+  <link rel="canonical" href="https://reranker.uk/zh/guides/rerank-vector-database" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/rerank-vector-database" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/rerank-vector-database" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/rerank-vector-database" >
   <meta name="theme-color" content="#0b0d17" >
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
   <meta name="author" content="reranker.uk" >
@@ -19,7 +19,7 @@
   <meta property="og:type" content="article" >
   <meta property="og:title" content="为 pgvector、Qdrant、Elasticsearch 加上重排序 | reranker.uk" >
   <meta property="og:description" content="如何在向量数据库之上加一层重排序。「宽召回—打分—截断」模式，含 pgvector、Qdrant 与 Elasticsearch 的可用代码，以及 HNSW ef_search、过滤顺序等让重排序看起来没用的坑。" >
-  <meta property="og:url" content="https://reranker.uk/zh/guides/rerank-vector-database.html" >
+  <meta property="og:url" content="https://reranker.uk/zh/guides/rerank-vector-database" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="zh_CN" >
   <meta property="og:locale:alternate" content="en_GB" >
@@ -33,9 +33,9 @@
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Article","headline":"Adding a reranker to your vector database","datePublished":"2026-08-25","dateModified":"2026-08-25","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/rerank-vector-database.html"}
+  {"@context":"https://schema.org","@type":"Article","headline":"Adding a reranker to your vector database","datePublished":"2026-08-25","dateModified":"2026-08-25","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/rerank-vector-database"}
   </script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://reranker.uk/zh/guides/"},{"@type":"ListItem","position":3,"name":"为 pgvector、Qdrant、Elasticsearch 加上重排序","item":"https://reranker.uk/zh/guides/rerank-vector-database.html"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://reranker.uk/zh/guides/"},{"@type":"ListItem","position":3,"name":"为 pgvector、Qdrant、Elasticsearch 加上重排序","item":"https://reranker.uk/zh/guides/rerank-vector-database"}]}</script>
 
 </head>
 <body>
@@ -48,11 +48,11 @@
         <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
         <li><a href="/zh/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">指南</a></li>
         <li><a href="/zh/models/" data-i18n="shared.nav.models">模型对比</a></li>
-        <li><a class="nav-cta" href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
+        <li><a class="nav-cta" href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <a class="lang-toggle" href="/guides/rerank-vector-database.html" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
+        <a class="lang-toggle" href="/guides/rerank-vector-database" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
       </div>
     </nav>
   </header>
@@ -109,7 +109,7 @@ def search(conn, query: str, query_vec, keep: int = 5):
     scores = reranker.predict(pairs)
     ranked = sorted(zip(scores, rows), key=lambda p: -p[0])
     return [row for _score, row in ranked[:keep]]</code></pre>
-      <p><code>&lt;=&gt;</code> 是余弦距离；L2 用 <code>&lt;-&gt;</code>，内积用 <code>&lt;#&gt;</code>，与建索引时用的保持一致。注意把 limit 从 5 提到 50 会和索引配置相互影响 —— 用 HNSW 时可能需要把 <code>SET LOCAL hnsw.ef_search</code> 调到默认值以上，索引才会真的考察足够多的邻居、返回 50 条像样的候选。limit 大于 <code>ef_search</code> 时，你拿到的会是凑数而非候选，而这看起来和<a href="/zh/guides/reranking-not-working.html">「reranker 没起作用」</a>一模一样。</p>
+      <p><code>&lt;=&gt;</code> 是余弦距离；L2 用 <code>&lt;-&gt;</code>，内积用 <code>&lt;#&gt;</code>，与建索引时用的保持一致。注意把 limit 从 5 提到 50 会和索引配置相互影响 —— 用 HNSW 时可能需要把 <code>SET LOCAL hnsw.ef_search</code> 调到默认值以上，索引才会真的考察足够多的邻居、返回 50 条像样的候选。limit 大于 <code>ef_search</code> 时，你拿到的会是凑数而非候选，而这看起来和<a href="/zh/guides/reranking-not-working">「reranker 没起作用」</a>一模一样。</p>
 
       <h2 id="qdrant">Qdrant</h2>
       <p>结构一样，把 payload 一起带上，避免丢元数据：</p>
@@ -131,7 +131,7 @@ def search(query: str, query_vec, keep: int = 5):
       <p>如果你按租户、权限或日期过滤，请把过滤放进 <code>query_points</code> 调用里，而不是重排之后再过滤。放在后面意味着你花钱给一批马上要丢掉的行打了分，而且 50 个候选可能塌缩到只剩 3 个。</p>
 
       <h2 id="elasticsearch">Elasticsearch</h2>
-      <p>Elasticsearch 上重排序的收益最直观，因为你可以喂给它一个<a href="/zh/guides/hybrid-retrieval-rerank.html">混合</a>候选集 —— BM25 和向量在不同查询上各自失手，而 cross-encoder 负责把两者的并集理顺：</p>
+      <p>Elasticsearch 上重排序的收益最直观，因为你可以喂给它一个<a href="/zh/guides/hybrid-retrieval-rerank">混合</a>候选集 —— BM25 和向量在不同查询上各自失手，而 cross-encoder 负责把两者的并集理顺：</p>
       <pre><code>resp = es.search(
     index="documents",
     size=50,
@@ -170,18 +170,18 @@ top = [h for _s, h in ranked[:5]]</code></pre>
           </tbody>
         </table>
       </div>
-      <p>cross-encoder 的开销与候选数量线性相关，所以从 50 提到 200，重排延迟大致翻两番，用托管 API 的话账单也一样。后半句的具体数字可以用<a href="/zh/rerank-cost-calculator.html">成本计算器</a>算出来。</p>
+      <p>cross-encoder 的开销与候选数量线性相关，所以从 50 提到 200，重排延迟大致翻两番，用托管 API 的话账单也一样。后半句的具体数字可以用<a href="/zh/rerank-cost-calculator">成本计算器</a>算出来。</p>
 
       <div class="cta-band">
         <h2 style="margin-top:0">接进去之前，先看看它是怎么重排的</h2>
         <p class="soft">直接从你的存储里粘出候选，在浏览器里看 cross-encoder 给它们重新打分。</p>
-        <a class="btn btn-primary" href="/zh/demo.html?s=techdocs">打开在线 Demo →</a>
+        <a class="btn btn-primary" href="/zh/demo?s=techdocs">打开在线 Demo →</a>
       </div>
 
       <h2>继续阅读</h2>
       <div class="grid grid-2">
-        <a class="card" href="/zh/guides/rerank-rag.html"><h3>如何为 RAG 加上重排序</h3><p>完整流水线，含 top-k 取值建议与延迟取舍。</p></a>
-        <a class="card" href="/zh/guides/reranking-not-working.html"><h3>重排序没起作用</h3><p>看不到提升的七个原因，以及如何判断你属于哪一种。</p></a>
+        <a class="card" href="/zh/guides/rerank-rag"><h3>如何为 RAG 加上重排序</h3><p>完整流水线，含 top-k 取值建议与延迟取舍。</p></a>
+        <a class="card" href="/zh/guides/reranking-not-working"><h3>重排序没起作用</h3><p>看不到提升的七个原因，以及如何判断你属于哪一种。</p></a>
       </div>
     </article>
   </main>
@@ -197,33 +197,33 @@ top = [h for _s, h in ranked[:5]]</code></pre>
           <h4 data-i18n="shared.footer.guides">指南</h4>
           <ul>
             <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
-            <li><a href="/zh/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
-            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
-            <li><a href="/zh/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
-            <li><a href="/zh/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
-            <li><a href="/zh/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
-            <li><a href="/zh/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
-            <li><a href="/zh/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">按场景选型</a></li>
-            <li><a href="/zh/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
-            <li><a href="/zh/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
-            <li><a href="/zh/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
-            <li><a href="/zh/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
-            <li><a href="/zh/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
-            <li><a href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
-            <li><a href="/zh/changelog.html" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/guides/reranking-not-working" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
+            <li><a href="/zh/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
+            <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
+            <li><a href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog" data-i18n="shared.footer.changelog">更新日志</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
-            <li><a href="/zh/privacy.html" data-i18n="shared.footer.privacy">隐私说明</a></li>
+            <li><a href="/zh/privacy" data-i18n="shared.footer.privacy">隐私说明</a></li>
           </ul>
         </div>
         <div>
           <h4 data-i18n="shared.footer.models">模型</h4>
           <ul>
-            <li><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/zh/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/zh/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/zh/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/zh/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/zh/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/zh/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
@@ -231,8 +231,8 @@ top = [h for _s, h in ranked[:5]]</code></pre>
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
           <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
-          · <a href="/zh/privacy.html" data-i18n="shared.footer.privacyShort">隐私</a>
-          · <a href="/zh/changelog.html" data-i18n="shared.footer.changelogShort">更新日志</a>
+          · <a href="/zh/privacy" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog" data-i18n="shared.footer.changelogShort">更新日志</a>
         </span>
       </div>
     </div>
