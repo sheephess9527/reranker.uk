@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>更新日志 — reranker.uk 版本记录 | reranker.uk</title>
   <meta name="description" content="reranker.uk 发布说明：Demo 功能、新指南、模型对比更新与站点改进。" >
-  <link rel="canonical" href="https://reranker.uk/zh/changelog.html" >
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/changelog.html" >
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/changelog.html" >
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/changelog.html" >
+  <link rel="canonical" href="https://reranker.uk/zh/changelog" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/changelog" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/changelog" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/changelog" >
   <meta name="theme-color" content="#0b0d17" >
   <meta name="robots" content="index, follow" >
   <meta name="author" content="reranker.uk" >
@@ -19,7 +19,7 @@
   <meta property="og:type" content="website" >
   <meta property="og:title" content="更新日志 — reranker.uk 版本记录 | reranker.uk" >
   <meta property="og:description" content="reranker.uk 发布说明：Demo 功能、新指南、模型对比更新与站点改进。" >
-  <meta property="og:url" content="https://reranker.uk/zh/changelog.html" >
+  <meta property="og:url" content="https://reranker.uk/zh/changelog" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="zh_CN" >
   <meta property="og:locale:alternate" content="en_GB" >
@@ -33,7 +33,7 @@
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"更新日志","item":"https://reranker.uk/zh/changelog.html"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"更新日志","item":"https://reranker.uk/zh/changelog"}]}</script>
 
 </head>
 <body>
@@ -46,11 +46,11 @@
         <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
         <li><a href="/zh/guides/" data-i18n="shared.nav.guides">指南</a></li>
         <li><a href="/zh/models/" data-i18n="shared.nav.models">模型对比</a></li>
-        <li><a class="nav-cta" href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
+        <li><a class="nav-cta" href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <a class="lang-toggle" href="/changelog.html" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
+        <a class="lang-toggle" href="/changelog" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
       </div>
     </nav>
   </header>
@@ -62,10 +62,22 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-09-18">2026 年 9 月 18 日 —— URL 去掉了 .html，外加两处计价修正</h2>
+        <ul class="feature-list">
+          <li><strong>URL 去掉了 <code>.html</code></strong> —— 站内所有链接、sitemap、hreflang 标签与 JSON-LD 现在都直接指向 Cloudflare 本就会跳转到的无扩展名 URL，省掉了每次站内跳转多余的一次 307</li>
+          <li><strong>Voyage 的免费额度换代了</strong> —— 2 亿免费 token 的额度已不在 <code>rerank-2.5</code> 上；现在随 <code>rerank-3</code> 预览版发放，已连同 <code>rerank-3-lite</code> 一并加入模型表与成本计算器</li>
+          <li><strong>成本计算器的 token 公式修正了</strong> —— Voyage 是按「每个被重排的文档都计一次 query」计费，而不是每次查询只计一次；只要每次查询的候选数大于一，计算器此前都会低估 token 数（和成本）</li>
+          <li><strong>Cohere 分块问题说清楚</strong> —— 一份外部审计认为 Cohere 会把超过 500 token 的段落静默拆分成额外的计费分块；实际并非如此（上下文长度是 32,768 token，分块是可选项），因此计算器页面直接说明了这一点，而不是照搬这个错误的计费模型</li>
+          <li><strong>首页示意图现在也有中文</strong> —— 「一张图看懂重排序」是一段翻译流程看不到的内联 SVG；现在它的标签与图注在 <a href="/zh/">/zh/</a> 上会显示为中文</li>
+          <li><strong>模型对比表的可访问性</strong> —— 对比表新增了标题说明、列/行表头，并做成了可滚动、可用键盘聚焦的区域，方便屏幕阅读器与窄屏使用</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-08-25">2026 年 8 月 25 日 —— 两篇针对真实提问的指南</h2>
         <ul class="feature-list">
-          <li><strong><a href="/zh/guides/reranking-not-working.html">重排序没起作用</a></strong> —— 逐条排查重排序看不到提升的七个原因，从最能解释问题的那条开始：检索压根没返回正确的文档</li>
-          <li><strong><a href="/zh/guides/rerank-vector-database.html">在向量数据库上做重排序</a></strong> —— 「宽召回后重排」模式，含 pgvector、Qdrant 与 Elasticsearch 的代码，也包括 HNSW 的 <code>ef_search</code> 陷阱：limit 放大了，返回的却是凑数而非候选</li>
+          <li><strong><a href="/zh/guides/reranking-not-working">重排序没起作用</a></strong> —— 逐条排查重排序看不到提升的七个原因，从最能解释问题的那条开始：检索压根没返回正确的文档</li>
+          <li><strong><a href="/zh/guides/rerank-vector-database">在向量数据库上做重排序</a></strong> —— 「宽召回后重排」模式，含 pgvector、Qdrant 与 Elasticsearch 的代码，也包括 HNSW 的 <code>ef_search</code> 陷阱：limit 放大了，返回的却是凑数而非候选</li>
           <li><strong><a href="/llms.txt">/llms.txt</a></strong> —— 自动生成的站点地图，供引用前会读它的 AI 助手使用，其中也说明了我们的基准脚注该怎么读</li>
           <li><strong>订阅源自动发现</strong> —— 更新日志 RSS 现在在每一页都会声明，而不只是更新日志页</li>
         </ul>
@@ -74,7 +86,7 @@
       <article class="changelog-entry">
         <h2 id="2026-08-14">2026 年 8 月 14 日 —— 成本计算器，以及不再落空的 Demo 链接</h2>
         <ul class="feature-list">
-          <li><strong><a href="/zh/rerank-cost-calculator.html">重排序成本计算器</a></strong> —— Cohere 按次检索计费、Voyage 按 token 计费，因此哪家更便宜会随段落长度和 top-k 翻转。填入你自己的量级，看看分界线在哪</li>
+          <li><strong><a href="/zh/rerank-cost-calculator">重排序成本计算器</a></strong> —— Cohere 按次检索计费、Voyage 按 token 计费，因此哪家更便宜会随段落长度和 top-k 翻转。填入你自己的量级，看看分界线在哪</li>
           <li><strong>场景深度链接</strong> —— 指南与模型页上全部 25 个 Demo 链接，现在都会通过新的 <code>?s=</code> 参数打开该页真正讲的那个场景</li>
           <li><strong>分享链接变短</strong> —— 未经修改的内置场景现在分享为 <code>?s=rag</code>，而不是 900 字符的长链接</li>
           <li><strong>改链接不再丢翻译</strong> —— 构建会把译文里的链接指向新目标，而不是让整段退回英文</li>
@@ -98,7 +110,7 @@
       <article class="changelog-entry">
         <h2 id="2026-06-25e">2026 年 6 月 25 日 — 模型版图刷新</h2>
         <ul class="feature-list">
-          <li><strong>Qwen3-Reranker</strong> —— 0.6B / 4B / 8B 行 + <a href="/zh/models/qwen-reranker.html">深评页</a></li>
+          <li><strong>Qwen3-Reranker</strong> —— 0.6B / 4B / 8B 行 + <a href="/zh/models/qwen-reranker">深评页</a></li>
           <li><strong>Jina v3</strong> —— listwise 旗舰；tiny 保留给浏览器 Demo</li>
           <li><strong>表新增</strong> —— gte-reranker-modernbert-base、NVIDIA nv-rerankqa / Nemotron</li>
           <li><strong>自托管 / 首页 / 选型</strong> —— GPU 默认 Qwen3-4B；bge 仍为 CPU 路径</li>
@@ -112,7 +124,7 @@
           <li><strong>诚实基准</strong> —— 新兴行用 ≈ / n/a；下次复核 2026 年 9 月；价格滞后说明</li>
           <li><strong>Demo max_length</strong> —— 256 / 384 / 512 token；字符警告随选择变化</li>
           <li><strong>按需加载 transformers.js</strong> —— 首次点重排序才加载</li>
-          <li><strong>指令 rerank 指南</strong> —— <a href="/zh/guides/instruction-reranker.html">任务导向排序</a></li>
+          <li><strong>指令 rerank 指南</strong> —— <a href="/zh/guides/instruction-reranker">任务导向排序</a></li>
           <li><strong>首页</strong> —— 不止五大家 + ColBERT / 指令指南链接</li>
         </ul>
       </article>
@@ -121,7 +133,7 @@
         <h2 id="2026-06-25c">2026 年 6 月 25 日 — 内容扩展与打磨</h2>
         <ul class="feature-list">
           <li><strong>模型表</strong> —— 架构列；Qwen3-Reranker、Contextual AI、ColBERTv2、ms-marco 浏览器行</li>
-          <li><strong>Late-interaction 指南</strong> —— <a href="/zh/guides/late-interaction-rerank.html">ColBERT 与何时跳过 cross-encoder rerank</a></li>
+          <li><strong>Late-interaction 指南</strong> —— <a href="/zh/guides/late-interaction-rerank">ColBERT 与何时跳过 cross-encoder rerank</a></li>
           <li><strong>Demo 预设</strong> —— 电商 + 多语言（7 个场景）；模型表 ms-marco <code>?m=</code></li>
           <li><strong>JSON-LD</strong> —— <code>inLanguage</code> 随中/英切换</li>
           <li><strong>更新日志 RSS</strong> —— <a href="/changelog.rss">/changelog.rss</a> 订阅</li>
@@ -152,8 +164,8 @@
       <article class="changelog-entry">
         <h2 id="2026-06-23c">2026 年 6 月 23 日 — 中优先级体验与内容</h2>
         <ul class="feature-list">
-          <li><strong>自托管指南</strong> —— <a href="/zh/guides/self-host-reranker.html">sentence-transformers、服务化、运维</a></li>
-          <li><strong>场景指南</strong> —— <a href="/zh/guides/choose-reranker-scenario.html">RAG / 客服 / 法律 / 代码</a></li>
+          <li><strong>自托管指南</strong> —— <a href="/zh/guides/self-host-reranker">sentence-transformers、服务化、运维</a></li>
+          <li><strong>场景指南</strong> —— <a href="/zh/guides/choose-reranker-scenario">RAG / 客服 / 法律 / 代码</a></li>
           <li><strong>段落字符统计</strong> —— 列表统计 + 超 512 字警告</li>
           <li><strong>新预设</strong> —— 技术文档、代码检索</li>
           <li><strong>CSV 导出</strong> —— 与 JSON、Markdown 并列的复制 CSV</li>
@@ -197,7 +209,7 @@
         </ul>
       </article>
 
-      <p class="center" style="margin-top:2.5rem"><a class="btn btn-primary" href="/zh/demo.html">试用 Demo →</a></p>
+      <p class="center" style="margin-top:2.5rem"><a class="btn btn-primary" href="/zh/demo">试用 Demo →</a></p>
     </section>
   </main>
   <footer class="site-footer">
@@ -212,33 +224,33 @@
           <h4 data-i18n="shared.footer.guides">指南</h4>
           <ul>
             <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
-            <li><a href="/zh/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
-            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
-            <li><a href="/zh/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
-            <li><a href="/zh/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
-            <li><a href="/zh/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
-            <li><a href="/zh/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
-            <li><a href="/zh/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">按场景选型</a></li>
-            <li><a href="/zh/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
-            <li><a href="/zh/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
-            <li><a href="/zh/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
-            <li><a href="/zh/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
-            <li><a href="/zh/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
-            <li><a href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
-            <li><a href="/zh/changelog.html" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/guides/reranking-not-working" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
+            <li><a href="/zh/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
+            <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
+            <li><a href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog" data-i18n="shared.footer.changelog">更新日志</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
-            <li><a href="/zh/privacy.html" data-i18n="shared.footer.privacy">隐私说明</a></li>
+            <li><a href="/zh/privacy" data-i18n="shared.footer.privacy">隐私说明</a></li>
           </ul>
         </div>
         <div>
           <h4 data-i18n="shared.footer.models">模型</h4>
           <ul>
-            <li><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/zh/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/zh/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/zh/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/zh/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/zh/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/zh/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
@@ -246,8 +258,8 @@
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
           <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
-          · <a href="/zh/privacy.html" data-i18n="shared.footer.privacyShort">隐私</a>
-          · <a href="/zh/changelog.html" data-i18n="shared.footer.changelogShort">更新日志</a>
+          · <a href="/zh/privacy" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog" data-i18n="shared.footer.changelogShort">更新日志</a>
         </span>
       </div>
     </div>

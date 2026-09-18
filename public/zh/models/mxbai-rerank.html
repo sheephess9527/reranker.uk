@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>mxbai-rerank：mixedbread-ai 开源 DeBERTa 重排序模型评测 | reranker.uk</title>
   <meta name="description" content="mxbai-rerank 评测：mixedbread-ai 基于 DeBERTa-v3 的开源权重 cross-encoder 重排序器（xsmall、base、large）。基准、Python 用法、托管 API，以及可在浏览器中运行的 xsmall 模型。" >
-  <link rel="canonical" href="https://reranker.uk/zh/models/mxbai-rerank.html" >
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/models/mxbai-rerank.html" >
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/mxbai-rerank.html" >
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/mxbai-rerank.html" >
+  <link rel="canonical" href="https://reranker.uk/zh/models/mxbai-rerank" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/models/mxbai-rerank" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/mxbai-rerank" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/mxbai-rerank" >
   <meta name="theme-color" content="#0b0d17" >
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
   <meta name="author" content="reranker.uk" >
@@ -19,7 +19,7 @@
   <meta property="og:type" content="article" >
   <meta property="og:title" content="mxbai-rerank：mixedbread-ai 开源 DeBERTa 重排序模型评测 | reranker.uk" >
   <meta property="og:description" content="mxbai-rerank 评测：mixedbread-ai 基于 DeBERTa-v3 的开源权重 cross-encoder 重排序器（xsmall、base、large）。基准、Python 用法、托管 API，以及可在浏览器中运行的 xsmall 模型。" >
-  <meta property="og:url" content="https://reranker.uk/zh/models/mxbai-rerank.html" >
+  <meta property="og:url" content="https://reranker.uk/zh/models/mxbai-rerank" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="zh_CN" >
   <meta property="og:locale:alternate" content="en_GB" >
@@ -56,7 +56,7 @@
             "@type": "ListItem",
             "position": 3,
             "name": "mxbai-rerank",
-            "item": "https://reranker.uk/zh/models/mxbai-rerank.html"
+            "item": "https://reranker.uk/zh/models/mxbai-rerank"
           }
         ]
       },
@@ -87,7 +87,7 @@
           "name": "reranker.uk",
           "url": "https://reranker.uk/zh/"
         },
-        "mainEntityOfPage": "https://reranker.uk/zh/models/mxbai-rerank.html",
+        "mainEntityOfPage": "https://reranker.uk/zh/models/mxbai-rerank",
         "about": {
           "@type": "Thing",
           "name": "mxbai-rerank reranker model"
@@ -108,11 +108,11 @@
         <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
         <li><a href="/zh/guides/" data-i18n="shared.nav.guides">指南</a></li>
         <li><a href="/zh/models/" data-i18n="shared.nav.models" aria-current="page" class="active">模型对比</a></li>
-        <li><a class="nav-cta" href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
+        <li><a class="nav-cta" href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <a class="lang-toggle" href="/models/mxbai-rerank.html" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
+        <a class="lang-toggle" href="/models/mxbai-rerank" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
       </div>
     </nav>
   </header>
@@ -122,7 +122,7 @@
       <h1>mxbai-rerank</h1>
       <p class="meta">开源权重 · mixedbread-ai · <time datetime="2026-06-21">更新于 2026 年 6 月 21 日</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">开源权重</span><span class="pill">托管 API</span><span class="pill info">Apache 2.0</span><span class="pill">浏览器可跑 xsmall</span></div>
-      <p class="lead">mixedbread-ai 的重排序器系列基于 DeBERTa-v3 —— 一种采用解耦注意力机制的架构，能带来出色的 cross-encoder 精度。三个变体均采用 Apache 2.0 协议，可自由自建部署。<code>xsmall</code> 模型足够轻量，可以在浏览器中运行，这也是它成为<a href="/zh/demo.html?m=mixedbread-ai/mxbai-rerank-xsmall-v1">本站在线 Demo</a> 选项之一的原因。</p>
+      <p class="lead">mixedbread-ai 的重排序器系列基于 DeBERTa-v3 —— 一种采用解耦注意力机制的架构，能带来出色的 cross-encoder 精度。三个变体均采用 Apache 2.0 协议，可自由自建部署。<code>xsmall</code> 模型足够轻量，可以在浏览器中运行，这也是它成为<a href="/zh/demo?m=mixedbread-ai/mxbai-rerank-xsmall-v1">本站在线 Demo</a> 选项之一的原因。</p>
 
       <div class="toc">
         <strong>本页目录</strong>
@@ -272,15 +272,15 @@ const scores = logits.sigmoid().tolist();</code></pre>
       <div class="cta-band" style="margin-top:2rem">
         <h2 style="margin-top:0">mxbai-rerank-xsmall 驱动本站 Demo</h2>
         <p class="soft">在模型选择器中选中它，实时看到它对你的段落打分 —— 首次使用后无需重新下载。</p>
-        <a class="btn btn-primary" href="/zh/demo.html?m=mixedbread-ai/mxbai-rerank-xsmall-v1">打开 Demo →</a>
+        <a class="btn btn-primary" href="/zh/demo?m=mixedbread-ai/mxbai-rerank-xsmall-v1">打开 Demo →</a>
       </div>
 
       <h2>其他模型</h2>
       <div class="grid grid-2">
-        <a class="card" href="/zh/models/bge-reranker.html"><h3>bge-reranker</h3><p>开源权重重排序器，多语言支持出色。</p></a>
-        <a class="card" href="/zh/models/jina-reranker.html"><h3>Jina Reranker</h3><p>开源权重 + 托管 API，包含可在浏览器运行的微型模型。</p></a>
-        <a class="card" href="/zh/models/cohere-rerank.html"><h3>Cohere Rerank</h3><p>成熟的托管 API，多语言质量领先。</p></a>
-        <a class="card" href="/zh/models/voyage-rerank.html"><h3>Voyage Rerank</h3><p>高精度托管 API，提供特定领域变体。</p></a>
+        <a class="card" href="/zh/models/bge-reranker"><h3>bge-reranker</h3><p>开源权重重排序器，多语言支持出色。</p></a>
+        <a class="card" href="/zh/models/jina-reranker"><h3>Jina Reranker</h3><p>开源权重 + 托管 API，包含可在浏览器运行的微型模型。</p></a>
+        <a class="card" href="/zh/models/cohere-rerank"><h3>Cohere Rerank</h3><p>成熟的托管 API，多语言质量领先。</p></a>
+        <a class="card" href="/zh/models/voyage-rerank"><h3>Voyage Rerank</h3><p>高精度托管 API，提供特定领域变体。</p></a>
       </div>
     </article>
   </main>
@@ -296,33 +296,33 @@ const scores = logits.sigmoid().tolist();</code></pre>
           <h4 data-i18n="shared.footer.guides">指南</h4>
           <ul>
             <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
-            <li><a href="/zh/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
-            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
-            <li><a href="/zh/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
-            <li><a href="/zh/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
-            <li><a href="/zh/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
-            <li><a href="/zh/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
-            <li><a href="/zh/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">按场景选型</a></li>
-            <li><a href="/zh/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
-            <li><a href="/zh/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
-            <li><a href="/zh/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
-            <li><a href="/zh/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
-            <li><a href="/zh/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
-            <li><a href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
-            <li><a href="/zh/changelog.html" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/guides/reranking-not-working" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
+            <li><a href="/zh/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
+            <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
+            <li><a href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog" data-i18n="shared.footer.changelog">更新日志</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
-            <li><a href="/zh/privacy.html" data-i18n="shared.footer.privacy">隐私说明</a></li>
+            <li><a href="/zh/privacy" data-i18n="shared.footer.privacy">隐私说明</a></li>
           </ul>
         </div>
         <div>
           <h4 data-i18n="shared.footer.models">模型</h4>
           <ul>
-            <li><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/zh/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/zh/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/zh/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/zh/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/zh/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/zh/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
@@ -330,8 +330,8 @@ const scores = logits.sigmoid().tolist();</code></pre>
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
           <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
-          · <a href="/zh/privacy.html" data-i18n="shared.footer.privacyShort">隐私</a>
-          · <a href="/zh/changelog.html" data-i18n="shared.footer.changelogShort">更新日志</a>
+          · <a href="/zh/privacy" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog" data-i18n="shared.footer.changelogShort">更新日志</a>
         </span>
       </div>
     </div>

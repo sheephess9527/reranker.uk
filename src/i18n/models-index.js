@@ -1,4 +1,29 @@
-window.I18N_PAGE = { zh: {
+window.I18N_PAGE = {
+  keys: {
+    "models.tableAriaLabel": "重排序模型对比表",
+    "models.tableCaption": "重排序模型对比：架构、类型、适用场景、语言、延迟、价格与 BEIR 分数",
+  },
+  zh: {
+  "<a href=\"/models/voyage-rerank\">Voyage rerank-3</a>":
+    "<a href=\"/models/voyage-rerank\">Voyage rerank-3</a>",
+  "<span class=\"pill\">Hosted API</span><span class=\"pill warn\">Preview</span>":
+    "<span class=\"pill\">托管 API</span><span class=\"pill warn\">预览版</span>",
+  "Preview":
+    "预览版",
+  "Preview successor to 2.5; carries the free-token grant":
+    "2.5 的预览版继任者；带免费 token 额度",
+  "$0.05/M tokens† <span class=\"muted\">(200M free)</span>":
+    "$0.05/M token† <span class=\"muted\">（前 2 亿免费）</span>",
+  "<a href=\"/models/voyage-rerank\">Voyage rerank-3-lite</a>":
+    "<a href=\"/models/voyage-rerank\">Voyage rerank-3-lite</a>",
+  "Cheaper preview tier; same 32k ctx":
+    "更便宜的预览档位；同样 32k 上下文",
+  "$0.02/M tokens† <span class=\"muted\">(200M free)</span>":
+    "$0.02/M token† <span class=\"muted\">（前 2 亿免费）</span>",
+  "<strong>Last verified:</strong> September 2026 (added Voyage rerank-3 preview; corrected Voyage free-tier and Cohere chunking claims) · <strong>Next review:</strong> Nov 2026. Columns marked <strong>*</strong> use MTEB-R, vendor, or task-specific protocols — <em>not</em> the same classic BEIR 18-dataset avg as the bge/mxbai/Jina rows. Where a vendor publishes no comparable number we say <em>not published</em> rather than guess. <strong>†</strong> Note the differing units: Cohere bills per <em>search</em> (one query + up to 100 docs), Voyage per <em>token</em>. Our <a href=\"/rerank-cost-calculator\">cost calculator</a> works out which is cheaper for your volume. Demo-capable models only: mxbai xsmall, Jina tiny, ms-marco MiniLM.":
+    "<strong>最近核对：</strong>2026 年 9 月（新增 Voyage rerank-3 预览版；修正了 Voyage 免费额度与 Cohere 分块两处说法）· <strong>下次复核：</strong>2026 年 11 月。标 <strong>*</strong> 的列使用 MTEB-R、厂商或任务特定协议，<em>不同于</em> bge / mxbai / Jina 行所用的经典 BEIR 18 数据集均值。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档）计费，Voyage 按 <em>token</em> 计费。我们的<a href=\"/rerank-cost-calculator\">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。",
+  "The preview <code>rerank-3</code> tier now carries the 200M free-token grant that 2.5 launched with; 33% off via the Batch API":
+    "预览版 <code>rerank-3</code> 现在带着 2.5 当初发布时的那份 2 亿免费 token 额度；走 Batch API 还能再打 67 折",
   "Classic baseline; largest of the three demo models": "经典基线；三个 Demo 模型里体积最大",
   "<strong>Last verified:</strong> August 2026 (Cohere Rerank 4, Voyage rerank-2.5, Jina v3 BEIR, nemotron-1b) · <strong>Next review:</strong> Nov 2026. Columns marked <strong>*</strong> use MTEB-R, vendor, or task-specific protocols — <em>not</em> the same classic BEIR 18-dataset avg as the bge/mxbai/Jina rows. Where a vendor publishes no comparable number we say <em>not published</em> rather than guess. <strong>†</strong> Note the differing units: Cohere bills per <em>search</em> (one query + up to 100 docs), Voyage per <em>token</em>. Our <a href=\"/rerank-cost-calculator.html\">cost calculator</a> works out which is cheaper for your volume. Demo-capable models only: mxbai xsmall, Jina tiny, ms-marco MiniLM.":
     "<strong>最近核对：</strong>2026 年 8 月（Cohere Rerank 4、Voyage rerank-2.5、Jina v3 的 BEIR、nemotron-1b）· <strong>下次复核：</strong>2026 年 11 月。标 <strong>*</strong> 的列使用 MTEB-R、厂商或任务特定协议，<em>不同于</em> bge / mxbai / Jina 行所用的经典 BEIR 18 数据集均值。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档）计费，Voyage 按 <em>token</em> 计费。我们的<a href=\"/rerank-cost-calculator.html\">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。",

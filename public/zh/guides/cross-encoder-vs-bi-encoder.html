@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>Cross-encoder vs bi-encoder：区别与实例 | reranker.uk</title>
   <meta name="description" content="通俗讲清 cross-encoder 与 bi-encoder 的区别：bi-encoder 分别嵌入查询和文档（快、可扩展，适合一阶段检索）；cross-encoder 把一对一起打分（准，适合重排序）。何时用哪一个，以及如何在两阶段流水线中结合。" >
-  <link rel="canonical" href="https://reranker.uk/zh/guides/cross-encoder-vs-bi-encoder.html" >
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/cross-encoder-vs-bi-encoder.html" >
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/cross-encoder-vs-bi-encoder.html" >
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/cross-encoder-vs-bi-encoder.html" >
+  <link rel="canonical" href="https://reranker.uk/zh/guides/cross-encoder-vs-bi-encoder" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/cross-encoder-vs-bi-encoder" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/cross-encoder-vs-bi-encoder" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/cross-encoder-vs-bi-encoder" >
   <meta name="theme-color" content="#0b0d17" >
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
   <meta name="author" content="reranker.uk" >
@@ -19,7 +19,7 @@
   <meta property="og:type" content="article" >
   <meta property="og:title" content="Cross-encoder vs bi-encoder：区别与实例 | reranker.uk" >
   <meta property="og:description" content="通俗讲清 cross-encoder 与 bi-encoder 的区别：bi-encoder 分别嵌入查询和文档（快、可扩展，适合一阶段检索）；cross-encoder 把一对一起打分（准，适合重排序）。何时用哪一个，以及如何在两阶段流水线中结合。" >
-  <meta property="og:url" content="https://reranker.uk/zh/guides/cross-encoder-vs-bi-encoder.html" >
+  <meta property="og:url" content="https://reranker.uk/zh/guides/cross-encoder-vs-bi-encoder" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="zh_CN" >
   <meta property="og:locale:alternate" content="en_GB" >
@@ -44,7 +44,7 @@
     "dateModified": "2026-06-21",
     "author": { "@type": "Organization", "name": "reranker.uk", "url": "https://reranker.uk/zh/" },
     "publisher": { "@type": "Organization", "name": "reranker.uk", "logo": { "@type": "ImageObject", "url": "https://reranker.uk/assets/img/icon-512.png" } },
-    "mainEntityOfPage": "https://reranker.uk/zh/guides/cross-encoder-vs-bi-encoder.html"
+    "mainEntityOfPage": "https://reranker.uk/zh/guides/cross-encoder-vs-bi-encoder"
   }
   </script>
   <!-- seo:jsonld -->
@@ -65,7 +65,7 @@
             "@type": "ListItem",
             "position": 2,
             "name": "Cross-encoder vs bi-encoder",
-            "item": "https://reranker.uk/zh/guides/cross-encoder-vs-bi-encoder.html"
+            "item": "https://reranker.uk/zh/guides/cross-encoder-vs-bi-encoder"
           }
         ]
       }
@@ -87,11 +87,11 @@
         <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
         <li><a href="/zh/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">指南</a></li>
         <li><a href="/zh/models/" data-i18n="shared.nav.models">模型对比</a></li>
-        <li><a class="nav-cta" href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
+        <li><a class="nav-cta" href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <a class="lang-toggle" href="/guides/cross-encoder-vs-bi-encoder.html" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
+        <a class="lang-toggle" href="/guides/cross-encoder-vs-bi-encoder" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
       </div>
     </nav>
   </header>
@@ -150,7 +150,7 @@ doc   ───▶ [encoder] ───▶ d⃗  ┘</code></pre>
       <h2 id="together">为什么两者都要用</h2>
       <p>它们是互补而非竞争。bi-encoder 的职责是 <strong>recall（召回）</strong>：低成本地拉出几十个很可能包含答案的候选。cross-encoder 的职责是 <strong>precision（精度）</strong>：仔细重排这个短名单，让最好的候选明确地排在最前。</p>
       <blockquote>bi-encoder 找到草垛中最有希望的那个角落，cross-encoder 则在那里找到那根针。</blockquote>
-      <p>只用其中一个通常是个错误：单靠 cross-encoder 无法及时扫描百万文档，单靠 bi-encoder 又把质量白白浪费。标准答案是<a href="/zh/guides/rerank-rag.html">两阶段流水线</a> —— 用 bi-encoder 检索，用 cross-encoder 重排序。</p>
+      <p>只用其中一个通常是个错误：单靠 cross-encoder 无法及时扫描百万文档，单靠 bi-encoder 又把质量白白浪费。标准答案是<a href="/zh/guides/rerank-rag">两阶段流水线</a> —— 用 bi-encoder 检索，用 cross-encoder 重排序。</p>
 
       <h2 id="example">一个具体例子</h2>
       <p>以查询 <em>“免费套餐包含 API 访问吗？”</em> 和两个候选为例：</p>
@@ -163,13 +163,13 @@ doc   ───▶ [encoder] ───▶ d⃗  ┘</code></pre>
       <div class="cta-band">
         <h2 style="margin-top:0">亲自感受这种差别</h2>
         <p class="soft">我们的 Demo 在你的浏览器里运行一个 cross-encoder。粘贴一个刁钻的查询，看它把哪段文本顶上去。</p>
-        <a class="btn btn-primary" href="/zh/demo.html?s=legal">打开在线 Demo →</a>
+        <a class="btn btn-primary" href="/zh/demo?s=legal">打开在线 Demo →</a>
       </div>
 
       <h2>Keep reading</h2>
       <div class="grid grid-2">
-        <a class="card" href="/zh/guides/what-is-a-reranker.html"><h3>什么是 reranker？</h3><p>从基础概念开始。</p></a>
-        <a class="card" href="/zh/guides/rerank-rag.html"><h3>如何为 RAG 加重排序</h3><p>让两种编码器在流水线中各司其职。</p></a>
+        <a class="card" href="/zh/guides/what-is-a-reranker"><h3>什么是 reranker？</h3><p>从基础概念开始。</p></a>
+        <a class="card" href="/zh/guides/rerank-rag"><h3>如何为 RAG 加重排序</h3><p>让两种编码器在流水线中各司其职。</p></a>
       </div>
     </article>
   </main>
@@ -185,33 +185,33 @@ doc   ───▶ [encoder] ───▶ d⃗  ┘</code></pre>
           <h4 data-i18n="shared.footer.guides">指南</h4>
           <ul>
             <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
-            <li><a href="/zh/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
-            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
-            <li><a href="/zh/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
-            <li><a href="/zh/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
-            <li><a href="/zh/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
-            <li><a href="/zh/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
-            <li><a href="/zh/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">按场景选型</a></li>
-            <li><a href="/zh/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
-            <li><a href="/zh/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
-            <li><a href="/zh/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
-            <li><a href="/zh/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
-            <li><a href="/zh/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
-            <li><a href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
-            <li><a href="/zh/changelog.html" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/guides/reranking-not-working" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
+            <li><a href="/zh/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
+            <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
+            <li><a href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog" data-i18n="shared.footer.changelog">更新日志</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
-            <li><a href="/zh/privacy.html" data-i18n="shared.footer.privacy">隐私说明</a></li>
+            <li><a href="/zh/privacy" data-i18n="shared.footer.privacy">隐私说明</a></li>
           </ul>
         </div>
         <div>
           <h4 data-i18n="shared.footer.models">模型</h4>
           <ul>
-            <li><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/zh/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/zh/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/zh/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/zh/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/zh/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/zh/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
@@ -219,8 +219,8 @@ doc   ───▶ [encoder] ───▶ d⃗  ┘</code></pre>
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
           <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
-          · <a href="/zh/privacy.html" data-i18n="shared.footer.privacyShort">隐私</a>
-          · <a href="/zh/changelog.html" data-i18n="shared.footer.changelogShort">更新日志</a>
+          · <a href="/zh/privacy" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog" data-i18n="shared.footer.changelogShort">更新日志</a>
         </span>
       </div>
     </div>

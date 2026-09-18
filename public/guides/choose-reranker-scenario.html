@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>Choose a reranker by scenario — RAG, support, legal, code | reranker.uk</title>
   <meta name="description" content="Decision guide: which rerank model fits RAG pipelines, customer support, legal search, or code retrieval. Scenario matrix with model recommendations and demo presets." >
-  <link rel="canonical" href="https://reranker.uk/guides/choose-reranker-scenario.html" >
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/choose-reranker-scenario.html" >
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/choose-reranker-scenario.html" >
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/choose-reranker-scenario.html" >
+  <link rel="canonical" href="https://reranker.uk/guides/choose-reranker-scenario" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/choose-reranker-scenario" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/choose-reranker-scenario" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/choose-reranker-scenario" >
   <meta name="theme-color" content="#0b0d17" >
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
   <meta name="author" content="reranker.uk" >
@@ -19,7 +19,7 @@
   <meta property="og:type" content="article" >
   <meta property="og:title" content="Which reranker fits your scenario?" >
   <meta property="og:description" content="RAG vs support vs legal vs code — pick the right rerank stack." >
-  <meta property="og:url" content="https://reranker.uk/guides/choose-reranker-scenario.html" >
+  <meta property="og:url" content="https://reranker.uk/guides/choose-reranker-scenario" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="en_GB" >
   <meta property="og:locale:alternate" content="zh_CN" >
@@ -33,9 +33,9 @@
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Article","headline":"Which reranker fits your scenario?","datePublished":"2026-06-23","dateModified":"2026-06-23","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/choose-reranker-scenario.html"}
+  {"@context":"https://schema.org","@type":"Article","headline":"Which reranker fits your scenario?","datePublished":"2026-06-23","dateModified":"2026-06-23","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/choose-reranker-scenario"}
   </script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://reranker.uk/guides/"},{"@type":"ListItem","position":3,"name":"Choose a reranker by scenario","item":"https://reranker.uk/guides/choose-reranker-scenario.html"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://reranker.uk/guides/"},{"@type":"ListItem","position":3,"name":"Choose a reranker by scenario","item":"https://reranker.uk/guides/choose-reranker-scenario"}]}</script>
 
 </head>
 <body>
@@ -48,11 +48,11 @@
         <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
         <li><a href="/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">Guides</a></li>
         <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
-        <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
+        <li><a class="nav-cta" href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <a class="lang-toggle" href="/zh/guides/choose-reranker-scenario.html" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
+        <a class="lang-toggle" href="/zh/guides/choose-reranker-scenario" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
   </header>
@@ -85,25 +85,25 @@
             <tr>
               <td>RAG pipeline</td>
               <td>Noisy vector recall, need top-5 precision</td>
-              <td><a href="/models/bge-reranker.html">bge-reranker-v2-m3</a> (self-host) or <a href="/models/cohere-rerank.html">Cohere Rerank</a> (API)</td>
+              <td><a href="/models/bge-reranker">bge-reranker-v2-m3</a> (self-host) or <a href="/models/cohere-rerank">Cohere Rerank</a> (API)</td>
               <td>Your GPU / hosted API</td>
             </tr>
             <tr>
               <td>Customer support</td>
               <td>Many similar FAQ lines, fast response</td>
-              <td><a href="/models/jina-reranker.html">jina-reranker tiny</a> or <a href="/models/cohere-rerank.html">Cohere</a> free tier</td>
+              <td><a href="/models/jina-reranker">jina-reranker tiny</a> or <a href="/models/cohere-rerank">Cohere</a> free tier</td>
               <td>API or browser demo</td>
             </tr>
             <tr>
               <td>Legal / contracts</td>
               <td>Subtle wording, distractors share vocabulary</td>
-              <td><a href="/models/mxbai-rerank.html">mxbai-rerank-large</a> or <a href="/models/voyage-rerank.html">Voyage</a> legal-tuned</td>
+              <td><a href="/models/mxbai-rerank">mxbai-rerank-large</a> or <a href="/models/voyage-rerank">Voyage</a> legal-tuned</td>
               <td>Self-host / API</td>
             </tr>
             <tr>
               <td>Code &amp; API docs</td>
               <td>Exact identifiers, syntax matters</td>
-              <td><a href="/models/voyage-rerank.html">Voyage code</a> or hybrid BM25 + <a href="/models/bge-reranker.html">bge</a></td>
+              <td><a href="/models/voyage-rerank">Voyage code</a> or hybrid BM25 + <a href="/models/bge-reranker">bge</a></td>
               <td>Hybrid retrieve + rerank</td>
             </tr>
           </tbody>
@@ -111,11 +111,11 @@
       </div>
 
       <h2 id="rag">RAG &amp; knowledge bases</h2>
-      <p>Retrieve 50–100 chunks, rerank to 5–10, then prompt. Multilingual knowledge bases favour <strong>bge-v2-m3</strong> or <strong>Cohere v3.5</strong>. English-only stacks with tight quality targets often pick <strong>mxbai-large</strong>. See <a href="/guides/rerank-rag.html">rerank for RAG</a> and <a href="/guides/hybrid-retrieval-rerank.html">hybrid retrieval</a> when lexical matches matter.</p>
+      <p>Retrieve 50–100 chunks, rerank to 5–10, then prompt. Multilingual knowledge bases favour <strong>bge-v2-m3</strong> or <strong>Cohere v3.5</strong>. English-only stacks with tight quality targets often pick <strong>mxbai-large</strong>. See <a href="/guides/rerank-rag">rerank for RAG</a> and <a href="/guides/hybrid-retrieval-rerank">hybrid retrieval</a> when lexical matches matter.</p>
       <blockquote>Rule of thumb: if bi-encoder recall is already good, a mid-size reranker is enough. If recall is messy, fix retrieval width first.</blockquote>
 
       <h2 id="support">Customer support</h2>
-      <p>Queries are short, passages are FAQ-sized, and latency dominates UX. A <strong>tiny</strong> cross-encoder (Jina tiny, ms-marco MiniLM) often suffices — you are choosing among a handful of similar answers, not reading 100-page PDFs. Try the <strong>Customer support</strong> preset in our <a href="/demo.html?s=support">demo</a>.</p>
+      <p>Queries are short, passages are FAQ-sized, and latency dominates UX. A <strong>tiny</strong> cross-encoder (Jina tiny, ms-marco MiniLM) often suffices — you are choosing among a handful of similar answers, not reading 100-page PDFs. Try the <strong>Customer support</strong> preset in our <a href="/demo?s=support">demo</a>.</p>
 
       <h2 id="legal">Legal &amp; compliance</h2>
       <p>Distractors share vocabulary (“termination”, “notice period”, “breach”). Bi-encoders confuse them; cross-encoders separate nuance. Budget extra latency for a larger model and keep passages to single clauses. Demo preset: <strong>Legal clause</strong>.</p>
@@ -126,10 +126,10 @@
       <h2 id="try">Try it in the demo</h2>
       <p>Each scenario below maps to a built-in preset — load it, hit Rerank, and watch the bi-encoder proxy column mis-order before the cross-encoder fixes it.</p>
       <div class="grid grid-2" style="margin:1.2rem 0">
-        <a class="card" href="/demo.html?s=rag"><h3>RAG pipeline</h3><p>Mixed on-topic + off-topic chunks.</p></a>
-        <a class="card" href="/demo.html?s=support"><h3>Customer support</h3><p>Tracking vs refunds vs passwords.</p></a>
-        <a class="card" href="/demo.html?s=legal"><h3>Legal clause</h3><p>Several “termination” distractors.</p></a>
-        <a class="card" href="/demo.html?s=techdocs"><h3>Technical docs</h3><p>API rate limits vs unrelated endpoints.</p></a>
+        <a class="card" href="/demo?s=rag"><h3>RAG pipeline</h3><p>Mixed on-topic + off-topic chunks.</p></a>
+        <a class="card" href="/demo?s=support"><h3>Customer support</h3><p>Tracking vs refunds vs passwords.</p></a>
+        <a class="card" href="/demo?s=legal"><h3>Legal clause</h3><p>Several “termination” distractors.</p></a>
+        <a class="card" href="/demo?s=techdocs"><h3>Technical docs</h3><p>API rate limits vs unrelated endpoints.</p></a>
       </div>
 
       <div class="cta-band">
@@ -140,8 +140,8 @@
 
       <h2>Keep reading</h2>
       <div class="grid grid-2">
-        <a class="card" href="/guides/self-host-reranker.html"><h3>Self-host a reranker</h3><p>sentence-transformers + serving.</p></a>
-        <a class="card" href="/guides/evaluate-reranker.html"><h3>Evaluate rerankers</h3><p>Prove the choice on your data.</p></a>
+        <a class="card" href="/guides/self-host-reranker"><h3>Self-host a reranker</h3><p>sentence-transformers + serving.</p></a>
+        <a class="card" href="/guides/evaluate-reranker"><h3>Evaluate rerankers</h3><p>Prove the choice on your data.</p></a>
       </div>
     </article>
   </main>
@@ -157,33 +157,33 @@
           <h4 data-i18n="shared.footer.guides">Guides</h4>
           <ul>
             <li><a href="/guides/" data-i18n="shared.footer.allGuides">All guides</a></li>
-            <li><a href="/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
-            <li><a href="/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
-            <li><a href="/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
-            <li><a href="/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
-            <li><a href="/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
-            <li><a href="/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
-            <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
-            <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
-            <li><a href="/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
-            <li><a href="/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
-            <li><a href="/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
-            <li><a href="/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
-            <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
-            <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
+            <li><a href="/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
+            <li><a href="/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
+            <li><a href="/guides/rerank-rag" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
+            <li><a href="/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
+            <li><a href="/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
+            <li><a href="/guides/self-host-reranker" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
+            <li><a href="/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
+            <li><a href="/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
+            <li><a href="/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
+            <li><a href="/guides/reranking-not-working" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
+            <li><a href="/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
+            <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
+            <li><a href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
+            <li><a href="/changelog" data-i18n="shared.footer.changelog">Changelog</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>
-            <li><a href="/privacy.html" data-i18n="shared.footer.privacy">Privacy</a></li>
+            <li><a href="/privacy" data-i18n="shared.footer.privacy">Privacy</a></li>
           </ul>
         </div>
         <div>
           <h4 data-i18n="shared.footer.models">Models</h4>
           <ul>
-            <li><a href="/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/models/voyage-rerank">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
@@ -191,8 +191,8 @@
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
           <span data-i18n="shared.footer.disclaimer">Open educational resource · not affiliated with any model vendor</span>
-          · <a href="/privacy.html" data-i18n="shared.footer.privacyShort">Privacy</a>
-          · <a href="/changelog.html" data-i18n="shared.footer.changelogShort">Changelog</a>
+          · <a href="/privacy" data-i18n="shared.footer.privacyShort">Privacy</a>
+          · <a href="/changelog" data-i18n="shared.footer.changelogShort">Changelog</a>
         </span>
       </div>
     </div>

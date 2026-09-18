@@ -1,10 +1,11 @@
 /* reranker.uk — rerank cost calculator.
  *
- * Prices verified August 2026 (see the assumptions section on the page).
+ * Prices verified September 2026 (see the assumptions section on the page).
  * Cohere bills per search: one query plus up to 100 documents, regardless of
- * length. Voyage bills per token across query + documents. That difference is
- * the whole point of the page, so the two are modelled separately rather than
- * flattened into one "cost per 1k docs" figure.
+ * length. Voyage bills per token, with the query counted once per document
+ * reranked rather than once per call. That difference is the whole point of
+ * the page, so the two are modelled separately rather than flattened into
+ * one "cost per 1k docs" figure.
  */
 (function () {
   const zh = () => (document.documentElement.lang || "").toLowerCase().indexOf("zh") === 0;
@@ -19,7 +20,7 @@
       nameZh: "Cohere Rerank 4 Pro",
       unitEn: "per search",
       unitZh: "按次检索",
-      href: "/models/cohere-rerank.html",
+      href: "/models/cohere-rerank",
       cost: (w) => searches(w) * 0.0025,
       volume: (w) => fmtInt(searches(w)) + L(" searches", " 次检索"),
     },
@@ -29,7 +30,7 @@
       nameZh: "Cohere Rerank 4 Fast",
       unitEn: "per search",
       unitZh: "按次检索",
-      href: "/models/cohere-rerank.html",
+      href: "/models/cohere-rerank",
       cost: (w) => searches(w) * 0.002,
       volume: (w) => fmtInt(searches(w)) + L(" searches", " 次检索"),
     },
@@ -39,7 +40,7 @@
       nameZh: "Voyage rerank-2.5",
       unitEn: "per token",
       unitZh: "按 token",
-      href: "/models/voyage-rerank.html",
+      href: "/models/voyage-rerank",
       cost: (w) => (tokens(w) / 1e6) * 0.05,
       volume: (w) => fmtTokens(tokens(w)),
     },
@@ -49,7 +50,7 @@
       nameZh: "Voyage rerank-2.5-lite",
       unitEn: "per token",
       unitZh: "按 token",
-      href: "/models/voyage-rerank.html",
+      href: "/models/voyage-rerank",
       cost: (w) => (tokens(w) / 1e6) * 0.02,
       volume: (w) => fmtTokens(tokens(w)),
     },
@@ -60,8 +61,14 @@
     return w.queries * Math.ceil(w.topk / DOCS_PER_SEARCH);
   }
 
+  /**
+   * Voyage bills the query once per document reranked, not once per query —
+   * confirmed against multiple independent citations of Voyage's pricing
+   * page (billable tokens = query_tokens × documents + sum of document
+   * tokens); the primary source itself was unreachable to quote directly.
+   */
   function tokens(w) {
-    return w.queries * (w.queryTokens + w.topk * w.passageTokens);
+    return w.queries * w.topk * (w.queryTokens + w.passageTokens);
   }
 
   const els = {
@@ -115,8 +122,8 @@
    */
   function breakevenPassageTokens(w) {
     const perQuerySearchCost = Math.ceil(w.topk / DOCS_PER_SEARCH) * 0.0025;
-    // perQuerySearchCost = ((queryTokens + topk * p) / 1e6) * 0.05  →  solve for p
-    const p = ((perQuerySearchCost / 0.05) * 1e6 - w.queryTokens) / w.topk;
+    // perQuerySearchCost = (topk * (queryTokens + p) / 1e6) * 0.05  →  solve for p
+    const p = (perQuerySearchCost / 0.05) * 1e6 / w.topk - w.queryTokens;
     return p;
   }
 

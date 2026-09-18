@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>How to self-host a reranker — sentence-transformers, GPU, serving | reranker.uk</title>
   <meta name="description" content="Practical guide to self-hosting cross-encoder rerankers: model choice (bge, mxbai, Jina), sentence-transformers quick start, FastAPI serving, and production ops." >
-  <link rel="canonical" href="https://reranker.uk/guides/self-host-reranker.html" >
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/self-host-reranker.html" >
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/self-host-reranker.html" >
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/self-host-reranker.html" >
+  <link rel="canonical" href="https://reranker.uk/guides/self-host-reranker" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/self-host-reranker" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/self-host-reranker" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/self-host-reranker" >
   <meta name="theme-color" content="#0b0d17" >
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
   <meta name="author" content="reranker.uk" >
@@ -19,7 +19,7 @@
   <meta property="og:type" content="article" >
   <meta property="og:title" content="How to self-host a reranker" >
   <meta property="og:description" content="Zero per-call cost reranking on your own infra — from CrossEncoder to a production microservice." >
-  <meta property="og:url" content="https://reranker.uk/guides/self-host-reranker.html" >
+  <meta property="og:url" content="https://reranker.uk/guides/self-host-reranker" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="en_GB" >
   <meta property="og:locale:alternate" content="zh_CN" >
@@ -33,9 +33,9 @@
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Article","headline":"How to self-host a reranker","datePublished":"2026-06-23","dateModified":"2026-06-23","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/self-host-reranker.html"}
+  {"@context":"https://schema.org","@type":"Article","headline":"How to self-host a reranker","datePublished":"2026-06-23","dateModified":"2026-06-23","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/self-host-reranker"}
   </script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://reranker.uk/guides/"},{"@type":"ListItem","position":3,"name":"How to self-host a reranker","item":"https://reranker.uk/guides/self-host-reranker.html"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://reranker.uk/guides/"},{"@type":"ListItem","position":3,"name":"How to self-host a reranker","item":"https://reranker.uk/guides/self-host-reranker"}]}</script>
 
 </head>
 <body>
@@ -48,11 +48,11 @@
         <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
         <li><a href="/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">Guides</a></li>
         <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
-        <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
+        <li><a class="nav-cta" href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <a class="lang-toggle" href="/zh/guides/self-host-reranker.html" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
+        <a class="lang-toggle" href="/zh/guides/self-host-reranker" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
   </header>
@@ -80,18 +80,18 @@
         <li><strong>Data residency.</strong> Queries and documents never leave your VPC.</li>
         <li><strong>Custom fine-tuning.</strong> You can swap in a domain-tuned checkpoint without waiting on a vendor.</li>
       </ul>
-      <p>When you need multilingual quality with minimal ops, a hosted API like <a href="/models/cohere-rerank.html">Cohere Rerank</a> or <a href="/models/jina-reranker.html">Jina</a> may still be cheaper all-in — see <a href="/guides/choose-reranker-scenario.html">choose by scenario</a>.</p>
+      <p>When you need multilingual quality with minimal ops, a hosted API like <a href="/models/cohere-rerank">Cohere Rerank</a> or <a href="/models/jina-reranker">Jina</a> may still be cheaper all-in — see <a href="/guides/choose-reranker-scenario">choose by scenario</a>.</p>
 
       <h2 id="models">Pick a model</h2>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Model</th><th>Size</th><th>Best for</th></tr></thead>
           <tbody>
-            <tr><td><a href="/models/bge-reranker.html">bge-reranker-base</a></td><td>~278M</td><td>CPU-friendly English default</td></tr>
-            <tr><td><a href="/models/bge-reranker.html">bge-reranker-v2-m3</a></td><td>~568M</td><td>Multilingual when GPU is limited</td></tr>
-            <tr><td><a href="/models/qwen-reranker.html">Qwen3-Reranker-4B</a></td><td>~4B</td><td><strong>2026 open SOTA pick</strong> (needs GPU)</td></tr>
-            <tr><td><a href="/models/mxbai-rerank.html">mxbai-rerank-large-v1</a></td><td>~435M</td><td>Strong classic BEIR, Apache 2.0</td></tr>
-            <tr><td><a href="/models/jina-reranker.html">jina-reranker-v3</a></td><td>large</td><td>Listwise long-context; or v2 pair-wise</td></tr>
+            <tr><td><a href="/models/bge-reranker">bge-reranker-base</a></td><td>~278M</td><td>CPU-friendly English default</td></tr>
+            <tr><td><a href="/models/bge-reranker">bge-reranker-v2-m3</a></td><td>~568M</td><td>Multilingual when GPU is limited</td></tr>
+            <tr><td><a href="/models/qwen-reranker">Qwen3-Reranker-4B</a></td><td>~4B</td><td><strong>2026 open SOTA pick</strong> (needs GPU)</td></tr>
+            <tr><td><a href="/models/mxbai-rerank">mxbai-rerank-large-v1</a></td><td>~435M</td><td>Strong classic BEIR, Apache 2.0</td></tr>
+            <tr><td><a href="/models/jina-reranker">jina-reranker-v3</a></td><td>large</td><td>Listwise long-context; or v2 pair-wise</td></tr>
           </tbody>
         </table>
       </div>
@@ -139,27 +139,27 @@ def rerank(body: dict):
     scores = model.predict([(q, d) for d in docs])
     order = sorted(range(len(docs)), key=lambda i: -scores[i])
     return {"results": [{"index": i, "score": float(scores[i])} for i in order]}</code></pre>
-      <p>For ONNX export and C++ runtimes, see the model cards on Hugging Face. For browser-only experiments, try our <a href="/demo.html?s=techdocs">in-browser demo</a> with the xsmall ONNX builds.</p>
+      <p>For ONNX export and C++ runtimes, see the model cards on Hugging Face. For browser-only experiments, try our <a href="/demo?s=techdocs">in-browser demo</a> with the xsmall ONNX builds.</p>
 
       <h2 id="ops">Ops checklist</h2>
       <ul>
         <li><strong>GPU:</strong> a single T4 handles ~30–80 ms for 50 docs with bge-base; CPU is 5–10× slower.</li>
         <li><strong>Memory:</strong> budget ~1–2 GB VRAM for base models; large variants need more.</li>
         <li><strong>Warm-up:</strong> run a dummy predict on startup to avoid cold-start latency spikes.</li>
-        <li><strong>Monitoring:</strong> track p95 latency and NDCG on a labelled slice — <a href="/guides/evaluate-reranker.html">evaluate rerankers</a>.</li>
+        <li><strong>Monitoring:</strong> track p95 latency and NDCG on a labelled slice — <a href="/guides/evaluate-reranker">evaluate rerankers</a>.</li>
         <li><strong>Fallback:</strong> if the rerank service is down, pass through vector top-k rather than failing the whole RAG request.</li>
       </ul>
 
       <div class="cta-band">
         <h2 style="margin-top:0">Prototype before you deploy</h2>
         <p class="soft">Paste your own query and passages in the browser demo — no server required.</p>
-        <a class="btn btn-primary" href="/demo.html?s=techdocs">Open the demo →</a>
+        <a class="btn btn-primary" href="/demo?s=techdocs">Open the demo →</a>
       </div>
 
       <h2>Keep reading</h2>
       <div class="grid grid-2">
-        <a class="card" href="/guides/choose-reranker-scenario.html"><h3>Choose by scenario</h3><p>RAG vs support vs code — which stack fits.</p></a>
-        <a class="card" href="/guides/rerank-rag.html"><h3>Rerank for RAG</h3><p>Pipeline integration patterns.</p></a>
+        <a class="card" href="/guides/choose-reranker-scenario"><h3>Choose by scenario</h3><p>RAG vs support vs code — which stack fits.</p></a>
+        <a class="card" href="/guides/rerank-rag"><h3>Rerank for RAG</h3><p>Pipeline integration patterns.</p></a>
       </div>
     </article>
   </main>
@@ -175,33 +175,33 @@ def rerank(body: dict):
           <h4 data-i18n="shared.footer.guides">Guides</h4>
           <ul>
             <li><a href="/guides/" data-i18n="shared.footer.allGuides">All guides</a></li>
-            <li><a href="/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
-            <li><a href="/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
-            <li><a href="/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
-            <li><a href="/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
-            <li><a href="/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
-            <li><a href="/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
-            <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
-            <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
-            <li><a href="/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
-            <li><a href="/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
-            <li><a href="/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
-            <li><a href="/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
-            <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
-            <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
+            <li><a href="/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
+            <li><a href="/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
+            <li><a href="/guides/rerank-rag" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
+            <li><a href="/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
+            <li><a href="/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
+            <li><a href="/guides/self-host-reranker" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
+            <li><a href="/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
+            <li><a href="/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
+            <li><a href="/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
+            <li><a href="/guides/reranking-not-working" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
+            <li><a href="/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
+            <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
+            <li><a href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
+            <li><a href="/changelog" data-i18n="shared.footer.changelog">Changelog</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>
-            <li><a href="/privacy.html" data-i18n="shared.footer.privacy">Privacy</a></li>
+            <li><a href="/privacy" data-i18n="shared.footer.privacy">Privacy</a></li>
           </ul>
         </div>
         <div>
           <h4 data-i18n="shared.footer.models">Models</h4>
           <ul>
-            <li><a href="/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/models/voyage-rerank">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
@@ -209,8 +209,8 @@ def rerank(body: dict):
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
           <span data-i18n="shared.footer.disclaimer">Open educational resource · not affiliated with any model vendor</span>
-          · <a href="/privacy.html" data-i18n="shared.footer.privacyShort">Privacy</a>
-          · <a href="/changelog.html" data-i18n="shared.footer.changelogShort">Changelog</a>
+          · <a href="/privacy" data-i18n="shared.footer.privacyShort">Privacy</a>
+          · <a href="/changelog" data-i18n="shared.footer.changelogShort">Changelog</a>
         </span>
       </div>
     </div>

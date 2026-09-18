@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>Hybrid retrieval + reranking — BM25, vectors, then rerank | reranker.uk</title>
   <meta name="description" content="How to combine BM25 and vector search for better recall, then use a cross-encoder reranker to fix ordering. Fusion strategies, top-k tuning, and when hybrid beats vectors alone." >
-  <link rel="canonical" href="https://reranker.uk/guides/hybrid-retrieval-rerank.html" >
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/hybrid-retrieval-rerank.html" >
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/hybrid-retrieval-rerank.html" >
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/hybrid-retrieval-rerank.html" >
+  <link rel="canonical" href="https://reranker.uk/guides/hybrid-retrieval-rerank" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/hybrid-retrieval-rerank" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/hybrid-retrieval-rerank" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/hybrid-retrieval-rerank" >
   <meta name="theme-color" content="#0b0d17" >
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
   <meta name="author" content="reranker.uk" >
@@ -19,7 +19,7 @@
   <meta property="og:type" content="article" >
   <meta property="og:title" content="Hybrid retrieval + reranking" >
   <meta property="og:description" content="BM25 + vectors for recall, cross-encoder for precision." >
-  <meta property="og:url" content="https://reranker.uk/guides/hybrid-retrieval-rerank.html" >
+  <meta property="og:url" content="https://reranker.uk/guides/hybrid-retrieval-rerank" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="en_GB" >
   <meta property="og:locale:alternate" content="zh_CN" >
@@ -33,9 +33,9 @@
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Article","headline":"Hybrid retrieval + reranking","datePublished":"2026-06-23","dateModified":"2026-06-23","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/hybrid-retrieval-rerank.html"}
+  {"@context":"https://schema.org","@type":"Article","headline":"Hybrid retrieval + reranking","datePublished":"2026-06-23","dateModified":"2026-06-23","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/hybrid-retrieval-rerank"}
   </script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://reranker.uk/guides/"},{"@type":"ListItem","position":3,"name":"Hybrid retrieval + reranking","item":"https://reranker.uk/guides/hybrid-retrieval-rerank.html"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://reranker.uk/guides/"},{"@type":"ListItem","position":3,"name":"Hybrid retrieval + reranking","item":"https://reranker.uk/guides/hybrid-retrieval-rerank"}]}</script>
 
 </head>
 <body>
@@ -48,11 +48,11 @@
         <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
         <li><a href="/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">Guides</a></li>
         <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
-        <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
+        <li><a class="nav-cta" href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <a class="lang-toggle" href="/zh/guides/hybrid-retrieval-rerank.html" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
+        <a class="lang-toggle" href="/zh/guides/hybrid-retrieval-rerank" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
   </header>
@@ -85,7 +85,7 @@
 2. Vector top 50      ─┘
 3. Cross-encoder rerank on merged list ─▶ top 5–10 for LLM</code></pre>
       </div>
-      <p>Retrieve wider than you would with a single channel — each list might return 40–60 items. After deduplication you still want 50–100 unique chunks going into the reranker. See <a href="/guides/rerank-rag.html">rerank for RAG</a> for top-k defaults.</p>
+      <p>Retrieve wider than you would with a single channel — each list might return 40–60 items. After deduplication you still want 50–100 unique chunks going into the reranker. See <a href="/guides/rerank-rag">rerank for RAG</a> for top-k defaults.</p>
 
       <h2 id="fusion">Fusion strategies</h2>
       <div class="table-wrap">
@@ -122,19 +122,19 @@ def hybrid_rerank(query, corpus_chunks, vector_hits, bm25_hits, top_n=5):
       <ul>
         <li><strong>Over-retrieve each channel.</strong> If BM25 returns 30 and vectors return 30, overlap means fewer than 60 unique — aim higher per channel.</li>
         <li><strong>Reranker is the equaliser.</strong> Fusion order matters less once a good cross-encoder sees every candidate.</li>
-        <li><strong>Measure on your data.</strong> Hybrid helps most when your eval set has both lexical and semantic queries — see <a href="/guides/evaluate-reranker.html">evaluate rerankers</a>.</li>
+        <li><strong>Measure on your data.</strong> Hybrid helps most when your eval set has both lexical and semantic queries — see <a href="/guides/evaluate-reranker">evaluate rerankers</a>.</li>
       </ul>
 
       <div class="cta-band">
         <h2 style="margin-top:0">See reranking fix a messy shortlist</h2>
         <p class="soft">Our demo includes a bi-encoder proxy column — paste distractors and watch the cross-encoder recover.</p>
-        <a class="btn btn-primary" href="/demo.html?s=techdocs">Open the demo →</a>
+        <a class="btn btn-primary" href="/demo?s=techdocs">Open the demo →</a>
       </div>
 
       <h2>Keep reading</h2>
       <div class="grid grid-2">
-        <a class="card" href="/guides/rerank-rag.html"><h3>Rerank for RAG</h3><p>End-to-end pipeline code.</p></a>
-        <a class="card" href="/guides/evaluate-reranker.html"><h3>Evaluate rerankers</h3><p>Metrics and labelled test sets.</p></a>
+        <a class="card" href="/guides/rerank-rag"><h3>Rerank for RAG</h3><p>End-to-end pipeline code.</p></a>
+        <a class="card" href="/guides/evaluate-reranker"><h3>Evaluate rerankers</h3><p>Metrics and labelled test sets.</p></a>
       </div>
     </article>
   </main>
@@ -150,33 +150,33 @@ def hybrid_rerank(query, corpus_chunks, vector_hits, bm25_hits, top_n=5):
           <h4 data-i18n="shared.footer.guides">Guides</h4>
           <ul>
             <li><a href="/guides/" data-i18n="shared.footer.allGuides">All guides</a></li>
-            <li><a href="/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
-            <li><a href="/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
-            <li><a href="/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
-            <li><a href="/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
-            <li><a href="/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
-            <li><a href="/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
-            <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
-            <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
-            <li><a href="/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
-            <li><a href="/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
-            <li><a href="/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
-            <li><a href="/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
-            <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
-            <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
+            <li><a href="/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
+            <li><a href="/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
+            <li><a href="/guides/rerank-rag" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
+            <li><a href="/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
+            <li><a href="/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
+            <li><a href="/guides/self-host-reranker" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
+            <li><a href="/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
+            <li><a href="/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
+            <li><a href="/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
+            <li><a href="/guides/reranking-not-working" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
+            <li><a href="/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
+            <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
+            <li><a href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
+            <li><a href="/changelog" data-i18n="shared.footer.changelog">Changelog</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>
-            <li><a href="/privacy.html" data-i18n="shared.footer.privacy">Privacy</a></li>
+            <li><a href="/privacy" data-i18n="shared.footer.privacy">Privacy</a></li>
           </ul>
         </div>
         <div>
           <h4 data-i18n="shared.footer.models">Models</h4>
           <ul>
-            <li><a href="/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/models/voyage-rerank">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
@@ -184,8 +184,8 @@ def hybrid_rerank(query, corpus_chunks, vector_hits, bm25_hits, top_n=5):
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
           <span data-i18n="shared.footer.disclaimer">Open educational resource · not affiliated with any model vendor</span>
-          · <a href="/privacy.html" data-i18n="shared.footer.privacyShort">Privacy</a>
-          · <a href="/changelog.html" data-i18n="shared.footer.changelogShort">Changelog</a>
+          · <a href="/privacy" data-i18n="shared.footer.privacyShort">Privacy</a>
+          · <a href="/changelog" data-i18n="shared.footer.changelogShort">Changelog</a>
         </span>
       </div>
     </div>

@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>重排序成本计算器 —— Cohere 与 Voyage 价格对比 | reranker.uk</title>
   <meta name="description" content="估算重排序每月要花多少钱。Cohere Rerank 4 按次检索计费，Voyage rerank-2.5 按 token 计费，所以哪家更便宜会随段落长度和 top-k 翻转。输入你自己的量级来对比。" >
-  <link rel="canonical" href="https://reranker.uk/zh/rerank-cost-calculator.html" >
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/rerank-cost-calculator.html" >
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/rerank-cost-calculator.html" >
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/rerank-cost-calculator.html" >
+  <link rel="canonical" href="https://reranker.uk/zh/rerank-cost-calculator" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/rerank-cost-calculator" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/rerank-cost-calculator" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/rerank-cost-calculator" >
   <meta name="theme-color" content="#0b0d17" >
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
   <meta name="author" content="reranker.uk" >
@@ -19,7 +19,7 @@
   <meta property="og:type" content="website" >
   <meta property="og:title" content="重排序成本计算器 —— Cohere 与 Voyage 价格对比 | reranker.uk" >
   <meta property="og:description" content="估算重排序每月要花多少钱。Cohere Rerank 4 按次检索计费，Voyage rerank-2.5 按 token 计费，所以哪家更便宜会随段落长度和 top-k 翻转。输入你自己的量级来对比。" >
-  <meta property="og:url" content="https://reranker.uk/zh/rerank-cost-calculator.html" >
+  <meta property="og:url" content="https://reranker.uk/zh/rerank-cost-calculator" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="zh_CN" >
   <meta property="og:locale:alternate" content="en_GB" >
@@ -37,14 +37,14 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Rerank cost calculator",
-    "url": "https://reranker.uk/zh/rerank-cost-calculator.html",
+    "url": "https://reranker.uk/zh/rerank-cost-calculator",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Any browser",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" },
     "description": "Estimate monthly reranking cost across Cohere Rerank 4 per-search pricing and Voyage rerank-2.5 per-token pricing."
   }
   </script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"重排序成本计算器","item":"https://reranker.uk/zh/rerank-cost-calculator.html"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"重排序成本计算器","item":"https://reranker.uk/zh/rerank-cost-calculator"}]}</script>
 
 </head>
 <body>
@@ -57,11 +57,11 @@
         <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
         <li><a href="/zh/guides/" data-i18n="shared.nav.guides">指南</a></li>
         <li><a href="/zh/models/" data-i18n="shared.nav.models">模型对比</a></li>
-        <li><a class="nav-cta" href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
+        <li><a class="nav-cta" href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <a class="lang-toggle" href="/rerank-cost-calculator.html" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
+        <a class="lang-toggle" href="/rerank-cost-calculator" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
       </div>
     </nav>
   </header>
@@ -69,7 +69,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span>重排序成本计算器</div>
       <h1>重排序成本计算器</h1>
-      <p class="meta">工具 · <time datetime="2026-08-14">更新于 2026 年 8 月 14 日</time></p>
+      <p class="meta">工具 · <time datetime="2026-09-18">更新于 2026 年 9 月 18 日</time></p>
       <p class="lead">托管重排序服务的计费方式并不相同。Cohere 按<strong>次检索</strong>收费 —— 一个 query 加最多 100 篇文档，与长度无关；Voyage 则按 <strong>token</strong> 收费。因此哪家更便宜，取决于你的段落有多长、一次重排多少条。把你自己的数字填进去看看。</p>
 
       <section class="demo-panel" aria-labelledby="calc-head">
@@ -124,32 +124,35 @@
         <li><strong>段落长</strong> —— 按次计费通常更划算，而且分块每多一个 token，这个优势就更大一分。</li>
         <li><strong>top-k 超过 100</strong> —— Cohere 每次查询会多计一次检索，成本是阶梯式跳升而非平滑上升。</li>
       </ul>
+      <div class="callout">
+        <p><strong>关于「分块」的说明：</strong>有些价格分析文章声称 Cohere 会把超过 500 token 的文档拆成多个计费单元。这个说法对 Rerank 4 并不成立 —— 它每篇文档的上下文窗口是 32,768 token，且 <code>max_chunks_per_doc</code> 默认值为 1，所以一段普通的 RAG 段落（几百 token）根本不会被拆分。只有单篇文档本身超过约 32.7K token、且你主动开启该选项时，分块才会发生。</p>
+      </div>
       <div class="callout accent">
         <p><strong>盈亏平衡点：</strong><span id="calc-breakeven">—</span></p>
       </div>
 
       <h2 id="self-host">那自托管呢？</h2>
-      <p>自托管没有按调用计的价格，所以它不适合放进上面的表里 —— 你是用 GPU 账单加运维成本换掉了用量账单。只有放到你自己的量级上比较才有意义：把每月 GPU 成本除以上面的查询次数，再和表中的每次查询成本对比。每月几十万次查询以下，API 通常比一块专属 GPU 便宜；远高于这个量级后，自托管 <a href="/zh/models/qwen-reranker.html">Qwen3-Reranker</a> 或 <a href="/zh/models/bge-reranker.html">bge-reranker-v2-m3</a> 才开始划算。服务端怎么搭见我们的<a href="/zh/guides/self-host-reranker.html">自托管指南</a>。</p>
-      <p class="muted" style="font-size:.9rem">另外，模型小并不等于差 —— <a href="/zh/models/jina-reranker.html">Jina Reranker v3</a> 以 0.6B 的体量拿到 61.94 的 BEIR nDCG@10，所以最省资源的那个，可能同时也是最准的那个。</p>
+      <p>自托管没有按调用计的价格，所以它不适合放进上面的表里 —— 你是用 GPU 账单加运维成本换掉了用量账单。只有放到你自己的量级上比较才有意义：把每月 GPU 成本除以上面的查询次数，再和表中的每次查询成本对比。每月几十万次查询以下，API 通常比一块专属 GPU 便宜；远高于这个量级后，自托管 <a href="/zh/models/qwen-reranker">Qwen3-Reranker</a> 或 <a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a> 才开始划算。服务端怎么搭见我们的<a href="/zh/guides/self-host-reranker">自托管指南</a>。</p>
+      <p class="muted" style="font-size:.9rem">另外，模型小并不等于差 —— <a href="/zh/models/jina-reranker">Jina Reranker v3</a> 以 0.6B 的体量拿到 61.94 的 BEIR nDCG@10，所以最省资源的那个，可能同时也是最准的那个。</p>
 
       <h2 id="assumptions">假设与来源</h2>
       <ul>
-        <li><strong>Cohere Rerank 4</strong> —— Pro 每次检索 $0.0025，Fast 每次检索 $0.002；一次检索指一个 query 加最多 100 篇文档。候选超过 100 会按多次检索计费。</li>
-        <li><strong>Voyage rerank-2.5</strong> —— 每 100 万 token $0.05，<code>rerank-2.5-lite</code> 每 100 万 token $0.02。计费 token 包括 query 和你发送的每一篇文档。每个账号前 2 亿 token 免费，Batch API 另有 33% 折扣；上表两者均未计入。</li>
+        <li><strong>Cohere Rerank 4</strong> —— Pro 每次检索 $0.0025，Fast 每次检索 $0.002；一次检索指一个 query 加最多 100 篇文档。候选超过 100 篇会按多次检索计费；单篇文档超过 32,768 token 的上下文窗口同样会触发多次计费，不过对 RAG 场景的段落长度而言这基本不会发生。</li>
+        <li><strong>Voyage rerank-2.5</strong> —— 每 100 万 token $0.05，<code>rerank-2.5-lite</code> 每 100 万 token $0.02。计费 token 是「查询按每篇文档各计一次」再加上你发送的每篇文档本身的 token —— 也就是说 50 个候选意味着查询被计费 50 次，而不是 1 次。rerank-2.5 发布时带的那 2 亿免费 token 额度，后来已经转移到了更新的 <code>rerank-3</code> 预览版；rerank-2.5/2.5-lite 现在不再享有首批免费额度。Batch API 有 33% 折扣，上表未计入。</li>
         <li>token 数为近似值 —— 各家分词方式不同，本页是用你填的平均值相乘，而非对真实文本做分词。</li>
-        <li>价格核对于 2026 年 8 月。做预算前请以 <a href="https://docs.cohere.com/docs/rerank-overview" rel="noopener noreferrer">Cohere</a> 与 <a href="https://docs.voyageai.com/docs/pricing" rel="noopener noreferrer">Voyage</a> 的最新价格为准。</li>
+        <li>价格核对于 2026 年 9 月。做预算前请以 <a href="https://docs.cohere.com/docs/rerank-overview" rel="noopener noreferrer">Cohere</a> 与 <a href="https://docs.voyageai.com/docs/pricing" rel="noopener noreferrer">Voyage</a> 的最新价格为准。</li>
       </ul>
 
       <div class="cta-band">
         <h2 style="margin-top:0">成本只是决策的一半</h2>
         <p class="soft">另一半是质量。在浏览器里拿你自己的段落跑一个 cross-encoder —— 无需密钥，零成本。</p>
-        <a class="btn btn-primary" href="/zh/demo.html?s=rag">打开在线 Demo →</a>
+        <a class="btn btn-primary" href="/zh/demo?s=rag">打开在线 Demo →</a>
       </div>
 
       <h2>继续阅读</h2>
       <div class="grid grid-2">
         <a class="card" href="/zh/models/"><h3>对比重排序模型</h3><p>16 个模型的架构、延迟、语言与成本对比。</p></a>
-        <a class="card" href="/zh/guides/choose-reranker-scenario.html"><h3>按场景选型</h3><p>客服、法律、代码或多语言检索各自适合哪种重排序器。</p></a>
+        <a class="card" href="/zh/guides/choose-reranker-scenario"><h3>按场景选型</h3><p>客服、法律、代码或多语言检索各自适合哪种重排序器。</p></a>
       </div>
     </article>
   </main>
@@ -165,33 +168,33 @@
           <h4 data-i18n="shared.footer.guides">指南</h4>
           <ul>
             <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
-            <li><a href="/zh/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
-            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
-            <li><a href="/zh/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
-            <li><a href="/zh/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
-            <li><a href="/zh/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
-            <li><a href="/zh/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
-            <li><a href="/zh/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">按场景选型</a></li>
-            <li><a href="/zh/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
-            <li><a href="/zh/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
-            <li><a href="/zh/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
-            <li><a href="/zh/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
-            <li><a href="/zh/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
-            <li><a href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
-            <li><a href="/zh/changelog.html" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/guides/reranking-not-working" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
+            <li><a href="/zh/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
+            <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
+            <li><a href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog" data-i18n="shared.footer.changelog">更新日志</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
-            <li><a href="/zh/privacy.html" data-i18n="shared.footer.privacy">隐私说明</a></li>
+            <li><a href="/zh/privacy" data-i18n="shared.footer.privacy">隐私说明</a></li>
           </ul>
         </div>
         <div>
           <h4 data-i18n="shared.footer.models">模型</h4>
           <ul>
-            <li><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/zh/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/zh/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/zh/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/zh/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/zh/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/zh/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
@@ -199,8 +202,8 @@
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
           <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
-          · <a href="/zh/privacy.html" data-i18n="shared.footer.privacyShort">隐私</a>
-          · <a href="/zh/changelog.html" data-i18n="shared.footer.changelogShort">更新日志</a>
+          · <a href="/zh/privacy" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog" data-i18n="shared.footer.changelogShort">更新日志</a>
         </span>
       </div>
     </div>
