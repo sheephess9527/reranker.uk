@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>Add a reranker to pgvector, Qdrant or Elasticsearch | reranker.uk</title>
   <meta name="description" content="How to add a rerank stage on top of a vector database. The retrieve-wide-then-rerank pattern with working code for pgvector, Qdrant and Elasticsearch, plus HNSW ef_search, filtering order, and the pitfalls that make reranking look useless." >
-  <link rel="canonical" href="https://reranker.uk/guides/rerank-vector-database.html" >
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/rerank-vector-database.html" >
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/rerank-vector-database.html" >
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/rerank-vector-database.html" >
+  <link rel="canonical" href="https://reranker.uk/guides/rerank-vector-database" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/rerank-vector-database" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/rerank-vector-database" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/rerank-vector-database" >
   <meta name="theme-color" content="#0b0d17" >
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
   <meta name="author" content="reranker.uk" >
@@ -19,7 +19,7 @@
   <meta property="og:type" content="article" >
   <meta property="og:title" content="Adding a reranker to your vector database" >
   <meta property="og:description" content="Raise the limit, score the candidates, truncate — with code for pgvector, Qdrant and Elasticsearch." >
-  <meta property="og:url" content="https://reranker.uk/guides/rerank-vector-database.html" >
+  <meta property="og:url" content="https://reranker.uk/guides/rerank-vector-database" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="en_GB" >
   <meta property="og:locale:alternate" content="zh_CN" >
@@ -33,9 +33,9 @@
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Article","headline":"Adding a reranker to your vector database","datePublished":"2026-08-25","dateModified":"2026-08-25","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/rerank-vector-database.html"}
+  {"@context":"https://schema.org","@type":"Article","headline":"Adding a reranker to your vector database","datePublished":"2026-08-25","dateModified":"2026-08-25","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/rerank-vector-database"}
   </script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://reranker.uk/guides/"},{"@type":"ListItem","position":3,"name":"Add a reranker to pgvector, Qdrant or Elasticsearch","item":"https://reranker.uk/guides/rerank-vector-database.html"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://reranker.uk/guides/"},{"@type":"ListItem","position":3,"name":"Add a reranker to pgvector, Qdrant or Elasticsearch","item":"https://reranker.uk/guides/rerank-vector-database"}]}</script>
 
 </head>
 <body>
@@ -48,11 +48,11 @@
         <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
         <li><a href="/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">Guides</a></li>
         <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
-        <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
+        <li><a class="nav-cta" href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <a class="lang-toggle" href="/zh/guides/rerank-vector-database.html" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
+        <a class="lang-toggle" href="/zh/guides/rerank-vector-database" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
   </header>
@@ -109,7 +109,7 @@ def search(conn, query: str, query_vec, keep: int = 5):
     scores = reranker.predict(pairs)
     ranked = sorted(zip(scores, rows), key=lambda p: -p[0])
     return [row for _score, row in ranked[:keep]]</code></pre>
-      <p><code>&lt;=&gt;</code> is cosine distance; use <code>&lt;-&gt;</code> for L2 or <code>&lt;#&gt;</code> for inner product, matching whatever your index was built with. Note that raising the limit from 5 to 50 interacts with your index settings — with HNSW you may need <code>SET LOCAL hnsw.ef_search</code> above the default so the index actually considers enough neighbours to return 50 good ones. A limit larger than <code>ef_search</code> silently gives you padding rather than candidates, which looks exactly like <a href="/guides/reranking-not-working.html">a reranker that does not help</a>.</p>
+      <p><code>&lt;=&gt;</code> is cosine distance; use <code>&lt;-&gt;</code> for L2 or <code>&lt;#&gt;</code> for inner product, matching whatever your index was built with. Note that raising the limit from 5 to 50 interacts with your index settings — with HNSW you may need <code>SET LOCAL hnsw.ef_search</code> above the default so the index actually considers enough neighbours to return 50 good ones. A limit larger than <code>ef_search</code> silently gives you padding rather than candidates, which looks exactly like <a href="/guides/reranking-not-working">a reranker that does not help</a>.</p>
 
       <h2 id="qdrant">Qdrant</h2>
       <p>Same shape, with the payload carried along so you do not lose metadata:</p>
@@ -131,7 +131,7 @@ def search(query: str, query_vec, keep: int = 5):
       <p>If you filter by tenant, permission or date, apply that filter in the <code>query_points</code> call rather than after reranking. Filtering afterwards means you paid to score rows you then threw away, and your 50 candidates might collapse to 3.</p>
 
       <h2 id="elasticsearch">Elasticsearch</h2>
-      <p>Elasticsearch is where reranking pays off most visibly, because you can feed it a <a href="/guides/hybrid-retrieval-rerank.html">hybrid</a> candidate set — BM25 and vectors fail on different queries, and the cross-encoder sorts out the union:</p>
+      <p>Elasticsearch is where reranking pays off most visibly, because you can feed it a <a href="/guides/hybrid-retrieval-rerank">hybrid</a> candidate set — BM25 and vectors fail on different queries, and the cross-encoder sorts out the union:</p>
       <pre><code>resp = es.search(
     index="documents",
     size=50,
@@ -170,18 +170,18 @@ top = [h for _s, h in ranked[:5]]</code></pre>
           </tbody>
         </table>
       </div>
-      <p>Cross-encoder cost scales linearly with the candidate count, so going from 50 to 200 roughly quadruples the rerank latency and, on a hosted API, the bill. The <a href="/rerank-cost-calculator.html">cost calculator</a> puts numbers on the second half of that.</p>
+      <p>Cross-encoder cost scales linearly with the candidate count, so going from 50 to 200 roughly quadruples the rerank latency and, on a hosted API, the bill. The <a href="/rerank-cost-calculator">cost calculator</a> puts numbers on the second half of that.</p>
 
       <div class="cta-band">
         <h2 style="margin-top:0">See the reordering before you wire it up</h2>
         <p class="soft">Paste candidates straight out of your store and watch a cross-encoder re-score them in the browser.</p>
-        <a class="btn btn-primary" href="/demo.html?s=techdocs">Open the live demo →</a>
+        <a class="btn btn-primary" href="/demo?s=techdocs">Open the live demo →</a>
       </div>
 
       <h2>Keep reading</h2>
       <div class="grid grid-2">
-        <a class="card" href="/guides/rerank-rag.html"><h3>How to add reranking to RAG</h3><p>The full pipeline, with top-k tips and latency trade-offs.</p></a>
-        <a class="card" href="/guides/reranking-not-working.html"><h3>Reranking didn't help</h3><p>Seven reasons you see no lift, and how to tell which one you have.</p></a>
+        <a class="card" href="/guides/rerank-rag"><h3>How to add reranking to RAG</h3><p>The full pipeline, with top-k tips and latency trade-offs.</p></a>
+        <a class="card" href="/guides/reranking-not-working"><h3>Reranking didn't help</h3><p>Seven reasons you see no lift, and how to tell which one you have.</p></a>
       </div>
     </article>
   </main>
@@ -197,33 +197,33 @@ top = [h for _s, h in ranked[:5]]</code></pre>
           <h4 data-i18n="shared.footer.guides">Guides</h4>
           <ul>
             <li><a href="/guides/" data-i18n="shared.footer.allGuides">All guides</a></li>
-            <li><a href="/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
-            <li><a href="/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
-            <li><a href="/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
-            <li><a href="/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
-            <li><a href="/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
-            <li><a href="/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
-            <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
-            <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
-            <li><a href="/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
-            <li><a href="/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
-            <li><a href="/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
-            <li><a href="/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
-            <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
-            <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
+            <li><a href="/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
+            <li><a href="/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
+            <li><a href="/guides/rerank-rag" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
+            <li><a href="/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
+            <li><a href="/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
+            <li><a href="/guides/self-host-reranker" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
+            <li><a href="/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
+            <li><a href="/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
+            <li><a href="/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
+            <li><a href="/guides/reranking-not-working" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
+            <li><a href="/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
+            <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
+            <li><a href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
+            <li><a href="/changelog" data-i18n="shared.footer.changelog">Changelog</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>
-            <li><a href="/privacy.html" data-i18n="shared.footer.privacy">Privacy</a></li>
+            <li><a href="/privacy" data-i18n="shared.footer.privacy">Privacy</a></li>
           </ul>
         </div>
         <div>
           <h4 data-i18n="shared.footer.models">Models</h4>
           <ul>
-            <li><a href="/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/models/voyage-rerank">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
@@ -231,8 +231,8 @@ top = [h for _s, h in ranked[:5]]</code></pre>
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
           <span data-i18n="shared.footer.disclaimer">Open educational resource · not affiliated with any model vendor</span>
-          · <a href="/privacy.html" data-i18n="shared.footer.privacyShort">Privacy</a>
-          · <a href="/changelog.html" data-i18n="shared.footer.changelogShort">Changelog</a>
+          · <a href="/privacy" data-i18n="shared.footer.privacyShort">Privacy</a>
+          · <a href="/changelog" data-i18n="shared.footer.changelogShort">Changelog</a>
         </span>
       </div>
     </div>

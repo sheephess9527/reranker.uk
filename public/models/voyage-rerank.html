@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>Voyage rerank-2.5: instruction-following rerank API review | reranker.uk</title>
   <meta name="description" content="Voyage rerank-2.5 review: rerank-2.5 and rerank-2.5-lite compared — 32k context, instruction following, per-token pricing, Python usage, pros and cons for RAG." >
-  <link rel="canonical" href="https://reranker.uk/models/voyage-rerank.html" >
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/models/voyage-rerank.html" >
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/voyage-rerank.html" >
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/voyage-rerank.html" >
+  <link rel="canonical" href="https://reranker.uk/models/voyage-rerank" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/models/voyage-rerank" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/voyage-rerank" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/voyage-rerank" >
   <meta name="theme-color" content="#0b0d17" >
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
   <meta name="author" content="reranker.uk" >
@@ -19,7 +19,7 @@
   <meta property="og:type" content="article" >
   <meta property="og:title" content="Voyage rerank-2.5 — instruction-following rerank API" >
   <meta property="og:description" content="32k context and natural-language instructions that reshape relevance without fine-tuning. Priced per token." >
-  <meta property="og:url" content="https://reranker.uk/models/voyage-rerank.html" >
+  <meta property="og:url" content="https://reranker.uk/models/voyage-rerank" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="en_GB" >
   <meta property="og:locale:alternate" content="zh_CN" >
@@ -56,7 +56,7 @@
             "@type": "ListItem",
             "position": 3,
             "name": "Voyage Rerank",
-            "item": "https://reranker.uk/models/voyage-rerank.html"
+            "item": "https://reranker.uk/models/voyage-rerank"
           }
         ]
       },
@@ -87,7 +87,7 @@
           "name": "reranker.uk",
           "url": "https://reranker.uk/"
         },
-        "mainEntityOfPage": "https://reranker.uk/models/voyage-rerank.html",
+        "mainEntityOfPage": "https://reranker.uk/models/voyage-rerank",
         "about": {
           "@type": "Thing",
           "name": "Voyage Rerank reranker model"
@@ -108,11 +108,11 @@
         <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
         <li><a href="/guides/" data-i18n="shared.nav.guides">Guides</a></li>
         <li><a href="/models/" data-i18n="shared.nav.models" aria-current="page" class="active">Models</a></li>
-        <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
+        <li><a class="nav-cta" href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <a class="lang-toggle" href="/zh/models/voyage-rerank.html" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
+        <a class="lang-toggle" href="/zh/models/voyage-rerank" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
   </header>
@@ -120,7 +120,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Voyage Rerank</div>
       <h1>Voyage rerank-2.5</h1>
-      <p class="meta">Hosted API · Voyage AI · <time datetime="2026-08-11">Updated 11 Aug 2026</time></p>
+      <p class="meta">Hosted API · Voyage AI · <time datetime="2026-09-18">Updated 18 Sep 2026</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">Hosted API</span><span class="pill info">High precision</span><span class="pill info">Instruction-following</span></div>
       <p class="lead">Voyage AI built their rerankers with a single goal: maximise retrieval precision. The current generation, <code>rerank-2.5</code> and <code>rerank-2.5-lite</code>, doubles the context window to 32,000 tokens and adds <strong>instruction following</strong> — you can shape what counts as relevant with a natural-language prompt instead of fine-tuning. Pricing is per token, which stays cheap when your passages are short.</p>
 
@@ -143,6 +143,7 @@
           <tbody>
             <tr><td><code>rerank-2.5</code></td><td>32K tokens</td><td>Current flagship; instruction following</td></tr>
             <tr><td><code>rerank-2.5-lite</code></td><td>32K tokens</td><td>Same context and instructions, lower cost</td></tr>
+            <tr><td><code>rerank-3</code> / <code>rerank-3-lite</code></td><td>32K tokens</td><td>Preview; same context and price, carries the free-token grant</td></tr>
             <tr><td><code>rerank-2</code> / <code>rerank-2-lite</code></td><td>16K tokens</td><td>Previous generation, still served</td></tr>
           </tbody>
         </table>
@@ -158,12 +159,12 @@
           <tbody>
             <tr><td><code>rerank-2.5</code></td><td>$0.05 / 1M tokens</td></tr>
             <tr><td><code>rerank-2.5-lite</code></td><td>$0.02 / 1M tokens</td></tr>
-            <tr><td>Free allowance</td><td>First 200M tokens per account</td></tr>
+            <tr><td><code>rerank-3</code> / <code>rerank-3-lite</code> (preview)</td><td>Same rate; first 200M tokens per account free</td></tr>
             <tr><td>Batch API</td><td>33% discount</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="muted" style="font-size:.85rem">Voyage uses token-based pricing, which is cost-effective at high volume. Check the Voyage AI website for current rates.</p>
+      <p class="muted" style="font-size:.85rem">Voyage uses token-based pricing, which is cost-effective at high volume. The 200M free-token grant moved to the <code>rerank-3</code> preview generation — <code>rerank-2.5</code> and <code>rerank-2.5-lite</code> no longer include it. Check the Voyage AI website for current rates.</p>
 
       <h2 id="usage">Quick start</h2>
       <h3>Python</h3>
@@ -223,7 +224,7 @@ def rag_answer(query: str, vector_db, llm) -> str:
             <li>Top-tier BEIR retrieval precision scores</li>
             <li>32K token context — great for long documents</li>
             <li>Competitive token-based pricing</li>
-            <li>200M free tokens on sign-up</li>
+            <li>Preview <code>rerank-3</code> carries a 200M free-token grant</li>
             <li>Works seamlessly with Voyage embeddings</li>
             <li>Clean Python SDK</li>
           </ul>
@@ -242,15 +243,15 @@ def rag_answer(query: str, vector_db, llm) -> str:
       <div class="cta-band" style="margin-top:2rem">
         <h2 style="margin-top:0">See reranking in action</h2>
         <p class="soft">Our demo runs a cross-encoder in your browser — no API key, no cost, same reranking logic.</p>
-        <a class="btn btn-primary" href="/demo.html?s=legal">Open the demo →</a>
+        <a class="btn btn-primary" href="/demo?s=legal">Open the demo →</a>
       </div>
 
       <h2>Other models</h2>
       <div class="grid grid-2">
-        <a class="card" href="/models/bge-reranker.html"><h3>bge-reranker</h3><p>Free, open-weight alternative.</p></a>
-        <a class="card" href="/models/cohere-rerank.html"><h3>Cohere Rerank</h3><p>Mature hosted API.</p></a>
-        <a class="card" href="/models/jina-reranker.html"><h3>Jina Reranker</h3><p>Open weights + hosted API.</p></a>
-        <a class="card" href="/models/mxbai-rerank.html"><h3>mxbai-rerank</h3><p>Apache 2.0 open weights, browser xsmall.</p></a>
+        <a class="card" href="/models/bge-reranker"><h3>bge-reranker</h3><p>Free, open-weight alternative.</p></a>
+        <a class="card" href="/models/cohere-rerank"><h3>Cohere Rerank</h3><p>Mature hosted API.</p></a>
+        <a class="card" href="/models/jina-reranker"><h3>Jina Reranker</h3><p>Open weights + hosted API.</p></a>
+        <a class="card" href="/models/mxbai-rerank"><h3>mxbai-rerank</h3><p>Apache 2.0 open weights, browser xsmall.</p></a>
       </div>
     </article>
   </main>
@@ -266,33 +267,33 @@ def rag_answer(query: str, vector_db, llm) -> str:
           <h4 data-i18n="shared.footer.guides">Guides</h4>
           <ul>
             <li><a href="/guides/" data-i18n="shared.footer.allGuides">All guides</a></li>
-            <li><a href="/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
-            <li><a href="/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
-            <li><a href="/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
-            <li><a href="/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
-            <li><a href="/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
-            <li><a href="/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
-            <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
-            <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
-            <li><a href="/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
-            <li><a href="/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
-            <li><a href="/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
-            <li><a href="/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
-            <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
-            <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
+            <li><a href="/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
+            <li><a href="/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
+            <li><a href="/guides/rerank-rag" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
+            <li><a href="/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
+            <li><a href="/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
+            <li><a href="/guides/self-host-reranker" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
+            <li><a href="/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
+            <li><a href="/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
+            <li><a href="/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
+            <li><a href="/guides/reranking-not-working" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
+            <li><a href="/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
+            <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
+            <li><a href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
+            <li><a href="/changelog" data-i18n="shared.footer.changelog">Changelog</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>
-            <li><a href="/privacy.html" data-i18n="shared.footer.privacy">Privacy</a></li>
+            <li><a href="/privacy" data-i18n="shared.footer.privacy">Privacy</a></li>
           </ul>
         </div>
         <div>
           <h4 data-i18n="shared.footer.models">Models</h4>
           <ul>
-            <li><a href="/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/models/voyage-rerank">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
@@ -300,8 +301,8 @@ def rag_answer(query: str, vector_db, llm) -> str:
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
           <span data-i18n="shared.footer.disclaimer">Open educational resource · not affiliated with any model vendor</span>
-          · <a href="/privacy.html" data-i18n="shared.footer.privacyShort">Privacy</a>
-          · <a href="/changelog.html" data-i18n="shared.footer.changelogShort">Changelog</a>
+          · <a href="/privacy" data-i18n="shared.footer.privacyShort">Privacy</a>
+          · <a href="/changelog" data-i18n="shared.footer.changelogShort">Changelog</a>
         </span>
       </div>
     </div>

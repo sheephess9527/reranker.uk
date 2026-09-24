@@ -111,7 +111,7 @@
     if (!cell) return;
     const m = DEMO_MODELS[slug];
     const a = document.createElement("a");
-    a.href = `/demo.html?m=${encodeURIComponent(m)}`;
+    a.href = `/demo?m=${encodeURIComponent(m)}`;
     a.className = "btn btn-ghost btn-sm";
     a.textContent = L("Try in demo", "在 Demo 中试用");
     cell.appendChild(a);

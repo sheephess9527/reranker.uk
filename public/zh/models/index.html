@@ -73,31 +73,31 @@
             "@type": "ListItem",
             "position": 1,
             "name": "bge-reranker",
-            "url": "https://reranker.uk/zh/models/bge-reranker.html"
+            "url": "https://reranker.uk/zh/models/bge-reranker"
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "Cohere Rerank",
-            "url": "https://reranker.uk/zh/models/cohere-rerank.html"
+            "url": "https://reranker.uk/zh/models/cohere-rerank"
           },
           {
             "@type": "ListItem",
             "position": 3,
             "name": "Jina Reranker",
-            "url": "https://reranker.uk/zh/models/jina-reranker.html"
+            "url": "https://reranker.uk/zh/models/jina-reranker"
           },
           {
             "@type": "ListItem",
             "position": 4,
             "name": "Voyage Rerank",
-            "url": "https://reranker.uk/zh/models/voyage-rerank.html"
+            "url": "https://reranker.uk/zh/models/voyage-rerank"
           },
           {
             "@type": "ListItem",
             "position": 5,
             "name": "mxbai-rerank",
-            "url": "https://reranker.uk/zh/models/mxbai-rerank.html"
+            "url": "https://reranker.uk/zh/models/mxbai-rerank"
           }
         ]
       }
@@ -119,7 +119,7 @@
         <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
         <li><a href="/zh/guides/" data-i18n="shared.nav.guides">指南</a></li>
         <li><a href="/zh/models/" data-i18n="shared.nav.models" aria-current="page" class="active">模型对比</a></li>
-        <li><a class="nav-cta" href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
+        <li><a class="nav-cta" href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
@@ -150,24 +150,25 @@
         </select>
         <span class="muted models-count" id="models-count"></span>
       </div>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" data-i18n-aria-label="models.tableAriaLabel" aria-label="重排序模型对比表">
         <table id="models-table">
+          <caption class="sr-only" data-i18n-html="models.tableCaption">重排序模型对比：架构、类型、适用场景、语言、延迟、价格与 BEIR 分数</caption>
           <thead>
             <tr>
-              <th data-sort="name">模型</th>
-              <th data-sort="arch">架构</th>
-              <th data-sort="type">类型</th>
-              <th>最适合</th>
-              <th data-sort="langs">语言</th>
-              <th>典型延迟 <span class="th-hint">50 条文档</span></th>
-              <th data-sort="pricing">价格</th>
-              <th data-sort="beir">BEIR NDCG@10</th>
-              <th>试用</th>
+              <th scope="col" data-sort="name">模型</th>
+              <th scope="col" data-sort="arch">架构</th>
+              <th scope="col" data-sort="type">类型</th>
+              <th scope="col">最适合</th>
+              <th scope="col" data-sort="langs">语言</th>
+              <th scope="col">典型延迟 <span class="th-hint">50 条文档</span></th>
+              <th scope="col" data-sort="pricing">价格</th>
+              <th scope="col" data-sort="beir">BEIR NDCG@10</th>
+              <th scope="col">试用</th>
             </tr>
           </thead>
           <tbody>
             <tr data-name="qwen3-reranker-4b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="">
-              <td><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker-4B</a></td>
+              <th scope="row"><a href="/zh/models/qwen-reranker">Qwen3-Reranker-4B</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Apache 2.0</span><span class="pill info">Qwen3 最佳档位</span></td>
               <td>多语言开源自托管最强（需 GPU）</td>
@@ -178,7 +179,7 @@
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="qwen3-reranker-8b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="">
-              <td><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker-8B</a></td>
+              <th scope="row"><a href="/zh/models/qwen-reranker">Qwen3-Reranker-8B</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Apache 2.0</span></td>
               <td>Qwen3 最大档 —— 但 BEIR 上 4B 更好</td>
@@ -189,7 +190,7 @@
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="qwen3-reranker-0.6b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="">
-              <td><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker-0.6B</a></td>
+              <th scope="row"><a href="/zh/models/qwen-reranker">Qwen3-Reranker-0.6B</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Apache 2.0</span></td>
               <td>最轻 Qwen3；舒适运行仍需 GPU</td>
@@ -200,7 +201,7 @@
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="bge-reranker-v2-m3" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="60.1">
-              <td><a href="/zh/models/bge-reranker.html">bge-reranker-v2-m3</a></td>
+              <th scope="row"><a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span></td>
               <td>经过验证的自建默认；CPU 友好</td>
@@ -211,7 +212,7 @@
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="mxbai-rerank-large-v1" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="62.1" data-demo="mxbai-rerank">
-              <td><a href="/zh/models/mxbai-rerank.html">mxbai-rerank-large-v1</a></td>
+              <th scope="row"><a href="/zh/models/mxbai-rerank">mxbai-rerank-large-v1</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><br><span class="pill info">Browser ✓</span></td>
               <td>经典 BEIR 强；Demo 用 xsmall</td>
@@ -222,7 +223,7 @@
               <td class="demo-link-cell"></td>
             </tr>
             <tr data-name="jina-reranker-v3" data-type="open api" data-arch="listwise" data-langs="100+" data-pricing="freemium" data-beir="61.94">
-              <td><a href="/zh/models/jina-reranker.html">Jina Reranker v3</a></td>
+              <th scope="row"><a href="/zh/models/jina-reranker">Jina Reranker v3</a></th>
               <td><span class="pill info">Listwise</span></td>
               <td><span class="pill good">开源 + 托管</span><span class="pill info">优于 Qwen3-4B</span></td>
               <td>0.6B listwise；64 篇文档共享 131K 上下文</td>
@@ -233,7 +234,7 @@
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="jina-reranker-tiny" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="55" data-demo="jina-reranker">
-              <td><a href="/zh/models/jina-reranker.html">jina-reranker v1 tiny</a></td>
+              <th scope="row"><a href="/zh/models/jina-reranker">jina-reranker v1 tiny</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><br><span class="pill info">Browser ✓</span></td>
               <td>浏览器 / 边缘；驱动本站 Demo</td>
@@ -244,7 +245,7 @@
               <td class="demo-link-cell"></td>
             </tr>
             <tr data-name="cohere-rerank-4-pro" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
-              <td><a href="/zh/models/cohere-rerank.html">Cohere Rerank 4 Pro</a></td>
+              <th scope="row"><a href="/zh/models/cohere-rerank">Cohere Rerank 4 Pro</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Hosted API</span></td>
               <td>成熟的多语言 API；32k 上下文</td>
@@ -255,7 +256,7 @@
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="cohere-rerank-4-fast" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
-              <td><a href="/zh/models/cohere-rerank.html">Cohere Rerank 4 Fast</a></td>
+              <th scope="row"><a href="/zh/models/cohere-rerank">Cohere Rerank 4 Fast</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Hosted API</span></td>
               <td>面向吞吐与延迟调优的同系版本</td>
@@ -266,7 +267,7 @@
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="voyage-rerank-2.5" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
-              <td><a href="/zh/models/voyage-rerank.html">Voyage rerank-2.5</a></td>
+              <th scope="row"><a href="/zh/models/voyage-rerank">Voyage rerank-2.5</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Hosted API</span><span class="pill info">Instruction</span></td>
               <td>支持指令跟随；32k 上下文</td>
@@ -277,7 +278,7 @@
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="voyage-rerank-2.5-lite" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
-              <td><a href="/zh/models/voyage-rerank.html">Voyage rerank-2.5-lite</a></td>
+              <th scope="row"><a href="/zh/models/voyage-rerank">Voyage rerank-2.5-lite</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Hosted API</span></td>
               <td>更便宜的档位；同样 32k 上下文</td>
@@ -287,8 +288,30 @@
               <td class="muted" title="Voyage publishes its own retrieval evals, not a classic BEIR average">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
+            <tr data-name="voyage-rerank-3" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+              <th scope="row"><a href="/zh/models/voyage-rerank">Voyage rerank-3</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill">托管 API</span><span class="pill warn">预览版</span></td>
+              <td>2.5 的预览版继任者；带免费 token 额度</td>
+              <td>多语言</td>
+              <td>API</td>
+              <td>$0.05/M token† <span class="muted">（前 2 亿免费）</span></td>
+              <td class="muted" title="Voyage publishes its own retrieval evals, not a classic BEIR average">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr data-name="voyage-rerank-3-lite" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+              <th scope="row"><a href="/zh/models/voyage-rerank">Voyage rerank-3-lite</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill">托管 API</span><span class="pill warn">预览版</span></td>
+              <td>更便宜的预览档位；同样 32k 上下文</td>
+              <td>多语言</td>
+              <td>API</td>
+              <td>$0.02/M token† <span class="muted">（前 2 亿免费）</span></td>
+              <td class="muted" title="Voyage publishes its own retrieval evals, not a classic BEIR average">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
             <tr data-name="gte-reranker-modernbert" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="">
-              <td><a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">gte-reranker-modernbert-base</a></td>
+              <th scope="row"><a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">gte-reranker-modernbert-base</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><span class="pill info">Compact</span></td>
               <td>仅约 149M，Hit@1 却与 nemotron-1b 打平</td>
@@ -299,7 +322,7 @@
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="llama-nemotron-rerank-1b-v2" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="">
-              <td><a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">llama-nemotron-rerank-1b-v2</a></td>
+              <th scope="row"><a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">llama-nemotron-rerank-1b-v2</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Open + NIM API</span></td>
               <td>1.2B；在不计延迟时精度居首</td>
@@ -310,7 +333,7 @@
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="ms-marco-minilm" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="55.0" data-demo="ms-marco">
-              <td>ms-marco MiniLM-L6 <span class="muted">(browser)</span></td>
+              <th scope="row">ms-marco MiniLM-L6 <span class="muted">(browser)</span></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><br><span class="pill info">Browser ✓</span></td>
               <td>经典基线；三个 Demo 模型里体积最大</td>
@@ -321,7 +344,7 @@
               <td class="demo-link-cell"></td>
             </tr>
             <tr data-name="contextual-rerank-v2" data-type="api" data-arch="cross-encoder" data-langs="en" data-pricing="paid" data-beir="">
-              <td><a href="/zh/guides/instruction-reranker.html">Contextual AI Rerank v2</a></td>
+              <th scope="row"><a href="/zh/guides/instruction-reranker">Contextual AI Rerank v2</a></th>
               <td><span class="pill">Instruction</span></td>
               <td><span class="pill">Hosted API</span></td>
               <td>指令跟随 / 策略型相关性</td>
@@ -332,7 +355,7 @@
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="colbertv2" data-type="open" data-arch="late-interaction" data-langs="en" data-pricing="free" data-beir="">
-              <td><a href="/zh/guides/late-interaction-rerank.html">ColBERTv2</a></td>
+              <th scope="row"><a href="/zh/guides/late-interaction-rerank">ColBERTv2</a></th>
               <td><span class="pill info">Late-interaction</span></td>
               <td><span class="pill good">Open weights</span></td>
               <td>Token MaxSim；1.5 阶段而非完整 CE</td>
@@ -346,47 +369,47 @@
         </table>
       </div>
       <div class="benchmark-meta callout" style="margin-top:.8rem;padding:.85rem 1rem">
-        <p class="muted" style="font-size:.82rem;margin:0"><strong>最近核对：</strong>2026 年 8 月（Cohere Rerank 4、Voyage rerank-2.5、Jina v3 的 BEIR、nemotron-1b）· <strong>下次复核：</strong>2026 年 11 月。标 <strong>*</strong> 的列使用 MTEB-R、厂商或任务特定协议，<em>不同于</em> bge / mxbai / Jina 行所用的经典 BEIR 18 数据集均值。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档）计费，Voyage 按 <em>token</em> 计费。我们的<a href="/zh/rerank-cost-calculator.html">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。</p>
-        <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">资料来源： <a href="https://huggingface.co/Qwen" rel="noopener noreferrer">Qwen3-Reranker</a> · <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">jina-reranker-v3 论文</a> · <a href="https://docs.voyageai.com/docs/reranker" rel="noopener noreferrer">Voyage 重排序器</a> · <a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">nemotron-rerank</a> · <a href="https://huggingface.co/spaces/mteb/leaderboard" rel="noopener noreferrer">MTEB</a> · <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR</a> · <a href="https://huggingface.co/BAAI/bge-reranker-v2-m3" rel="noopener noreferrer">BAAI</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">GTE ModernBERT</a> · <a href="/zh/models/qwen-reranker.html">Qwen 指南</a> · <a href="/zh/guides/instruction-reranker.html">指令跟随</a> · <a href="/zh/guides/late-interaction-rerank.html">ColBERT</a></p>
+        <p class="muted" style="font-size:.82rem;margin:0"><strong>最近核对：</strong>2026 年 9 月（新增 Voyage rerank-3 预览版；修正了 Voyage 免费额度与 Cohere 分块两处说法）· <strong>下次复核：</strong>2026 年 11 月。标 <strong>*</strong> 的列使用 MTEB-R、厂商或任务特定协议，<em>不同于</em> bge / mxbai / Jina 行所用的经典 BEIR 18 数据集均值。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档）计费，Voyage 按 <em>token</em> 计费。我们的<a href="/zh/rerank-cost-calculator">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。</p>
+        <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">资料来源： <a href="https://huggingface.co/Qwen" rel="noopener noreferrer">Qwen3-Reranker</a> · <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">jina-reranker-v3 论文</a> · <a href="https://docs.voyageai.com/docs/reranker" rel="noopener noreferrer">Voyage 重排序器</a> · <a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">nemotron-rerank</a> · <a href="https://huggingface.co/spaces/mteb/leaderboard" rel="noopener noreferrer">MTEB</a> · <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR</a> · <a href="https://huggingface.co/BAAI/bge-reranker-v2-m3" rel="noopener noreferrer">BAAI</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">GTE ModernBERT</a> · <a href="/zh/models/qwen-reranker">Qwen 指南</a> · <a href="/zh/guides/instruction-reranker">指令跟随</a> · <a href="/zh/guides/late-interaction-rerank">ColBERT</a></p>
       </div>
 
       <div class="grid grid-2" style="margin-top:2.5rem">
-        <a class="card" href="/zh/models/qwen-reranker.html">
+        <a class="card" href="/zh/models/qwen-reranker">
           <h3>Qwen3-Reranker</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill good">Apache 2.0</span><span class="pill info">多语言</span></div>
           <p>0.6B / 4B / 8B，32K 上下文。从 4B 开始 —— 据报告它在 BEIR 上略胜 8B，所以「越大越好」在这里并不成立。</p>
         </a>
-        <a class="card" href="/zh/models/bge-reranker.html">
+        <a class="card" href="/zh/models/bge-reranker">
           <h3>bge-reranker</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill good">Open weights</span><span class="pill">Self-host</span></div>
           <p>智源开源权重。仍是 CPU 友好默认（v2-m3）。有 GPU 余量时与 Qwen3 对比。</p>
         </a>
-        <a class="card" href="/zh/models/cohere-rerank.html">
+        <a class="card" href="/zh/models/cohere-rerank">
           <h3>Cohere Rerank 4</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill">Hosted API</span><span class="pill">多语言</span></div>
           <p>Pro 与 Fast 两个版本，32k 上下文，100+ 语言。按「次检索」计费 —— 一个 query 加最多 100 篇文档 —— 而不是按文档数。</p>
         </a>
-        <a class="card" href="/zh/models/jina-reranker.html">
+        <a class="card" href="/zh/models/jina-reranker">
           <h3>Jina Reranker v3</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill good">Open + Hosted</span><span class="pill info">Listwise</span></div>
           <p>0.6B 的 listwise 模型，BEIR 得分 61.94 —— 以约六分之一的体量超过 Qwen3-Reranker-4B。v1-tiny 仍在驱动我们的 Demo。</p>
         </a>
-        <a class="card" href="/zh/models/voyage-rerank.html">
+        <a class="card" href="/zh/models/voyage-rerank">
           <h3>Voyage rerank-2.5</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill">Hosted API</span><span class="pill info">Instruction</span></div>
           <p>rerank-2.5 与 -lite，均为 32k 上下文并支持指令跟随，可以用自然语言引导相关性判断。按 token 计费。</p>
         </a>
-        <a class="card" href="/zh/models/mxbai-rerank.html">
+        <a class="card" href="/zh/models/mxbai-rerank">
           <h3>mxbai-rerank</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill good">Open weights</span><span class="pill">Browser xsmall</span></div>
           <p>Apache 2.0 DeBERTa-v3 rerankers from mixedbread-ai. The xsmall variant runs in the browser and powers our demo.</p>
         </a>
-        <a class="card" href="/zh/guides/late-interaction-rerank.html">
+        <a class="card" href="/zh/guides/late-interaction-rerank">
           <h3>Late-interaction（ColBERT）</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill info">架构</span><span class="pill">新兴</span></div>
           <p>ColBERTv2 何时胜过 bi-encoder、何时仍要 cross-encoder —— 2026 栈决策指南。</p>
         </a>
-        <a class="card" href="/zh/guides/instruction-reranker.html">
+        <a class="card" href="/zh/guides/instruction-reranker">
           <h3>指令跟随 rerank</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill info">新兴</span><span class="pill">API</span></div>
           <p>任务指令如何改变相关性 —— Contextual AI 类 vs 经典 cross-encoder。</p>
@@ -399,7 +422,7 @@
       <div class="chooser-grid">
         <div class="chooser-card">
           <div class="chooser-badge chooser-open">Open · GPU</div>
-          <h3><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker</a></h3>
+          <h3><a href="/zh/models/qwen-reranker">Qwen3-Reranker</a></h3>
           <p class="chooser-tagline">多语言开源权重最优 —— 从 4B 起步</p>
           <ul class="feature-list">
             <li>0.6B / 4B / 8B，全部 Apache 2.0，全部 32K 上下文</li>
@@ -409,7 +432,7 @@
         </div>
         <div class="chooser-card">
           <div class="chooser-badge chooser-open">Open · CPU</div>
-          <h3><a href="/zh/models/bge-reranker.html">bge-reranker</a></h3>
+          <h3><a href="/zh/models/bge-reranker">bge-reranker</a></h3>
           <p class="chooser-tagline">GPU 有限时的最佳免费自建</p>
           <ul class="feature-list">
             <li>零按次成本 —— 跑在你自己的基础设施上</li>
@@ -419,7 +442,7 @@
         </div>
         <div class="chooser-card">
           <div class="chooser-badge chooser-api">API</div>
-          <h3><a href="/zh/models/cohere-rerank.html">Cohere Rerank 4</a></h3>
+          <h3><a href="/zh/models/cohere-rerank">Cohere Rerank 4</a></h3>
           <p class="chooser-tagline">最省事的托管 API；在 Pro 与 Fast 间二选一</p>
           <ul class="feature-list">
             <li>Python、Node、Java、Go 官方 SDK —— 一行代码接入</li>
@@ -429,7 +452,7 @@
         </div>
         <div class="chooser-card">
           <div class="chooser-badge chooser-both">Open + API</div>
-          <h3><a href="/zh/models/jina-reranker.html">Jina Reranker v3</a></h3>
+          <h3><a href="/zh/models/jina-reranker">Jina Reranker v3</a></h3>
           <p class="chooser-tagline">单卡就能跑，BEIR 却在第一梯队</p>
           <ul class="feature-list">
             <li>0.6B 拿到 61.94 BEIR nDCG@10 —— 胜过体量 6 倍的 Qwen3-Reranker-4B</li>
@@ -439,17 +462,17 @@
         </div>
         <div class="chooser-card">
           <div class="chooser-badge chooser-api">API</div>
-          <h3><a href="/zh/models/voyage-rerank.html">Voyage rerank-2.5</a></h3>
+          <h3><a href="/zh/models/voyage-rerank">Voyage rerank-2.5</a></h3>
           <p class="chooser-tagline">可用指令引导相关性，按 token 计费</p>
           <ul class="feature-list">
             <li>用自然语言指令引导打分，无需微调</li>
             <li>rerank-2.5 与更便宜的 -lite 都是 32k 上下文</li>
-            <li>每个账号前 2 亿 token 免费；走 Batch API 再打 67 折</li>
+            <li>预览版 <code>rerank-3</code> 现在带着 2.5 当初发布时的那份 2 亿免费 token 额度；走 Batch API 还能再打 67 折</li>
           </ul>
         </div>
         <div class="chooser-card">
           <div class="chooser-badge chooser-open">Open</div>
-          <h3><a href="/zh/models/mxbai-rerank.html">mxbai-rerank</a></h3>
+          <h3><a href="/zh/models/mxbai-rerank">mxbai-rerank</a></h3>
           <p class="chooser-tagline">Apache 2.0 开源权重，浏览器可运行的 xsmall</p>
           <ul class="feature-list">
             <li>宽松的 Apache 2.0 协议 —— 可商用、无限制</li>
@@ -464,7 +487,7 @@
       <div class="cta-band">
         <h2 style="margin-top:0">实时体验一个 cross-encoder</h2>
         <p class="soft">看看这些模型会如何重排你的检索结果 —— Demo 在你的浏览器里运行。</p>
-        <a class="btn btn-primary" href="/zh/demo.html?s=rag">打开 Demo →</a>
+        <a class="btn btn-primary" href="/zh/demo?s=rag">打开 Demo →</a>
       </div>
     </section>
   </main>
@@ -480,33 +503,33 @@
           <h4 data-i18n="shared.footer.guides">指南</h4>
           <ul>
             <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
-            <li><a href="/zh/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
-            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
-            <li><a href="/zh/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
-            <li><a href="/zh/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
-            <li><a href="/zh/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
-            <li><a href="/zh/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
-            <li><a href="/zh/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">按场景选型</a></li>
-            <li><a href="/zh/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
-            <li><a href="/zh/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
-            <li><a href="/zh/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
-            <li><a href="/zh/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
-            <li><a href="/zh/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
-            <li><a href="/zh/demo.html" data-i18n="shared.nav.demo">在线 Demo</a></li>
-            <li><a href="/zh/changelog.html" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/guides/reranking-not-working" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
+            <li><a href="/zh/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
+            <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
+            <li><a href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog" data-i18n="shared.footer.changelog">更新日志</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
-            <li><a href="/zh/privacy.html" data-i18n="shared.footer.privacy">隐私说明</a></li>
+            <li><a href="/zh/privacy" data-i18n="shared.footer.privacy">隐私说明</a></li>
           </ul>
         </div>
         <div>
           <h4 data-i18n="shared.footer.models">模型</h4>
           <ul>
-            <li><a href="/zh/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/zh/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/zh/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/zh/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/zh/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/zh/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/zh/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
@@ -514,8 +537,8 @@
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
           <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
-          · <a href="/zh/privacy.html" data-i18n="shared.footer.privacyShort">隐私</a>
-          · <a href="/zh/changelog.html" data-i18n="shared.footer.changelogShort">更新日志</a>
+          · <a href="/zh/privacy" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog" data-i18n="shared.footer.changelogShort">更新日志</a>
         </span>
       </div>
     </div>

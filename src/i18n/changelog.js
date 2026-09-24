@@ -1,4 +1,18 @@
 window.I18N_PAGE = { zh: {
+  "18 Sep 2026 — URLs without the .html, and two pricing corrections":
+    "2026 年 9 月 18 日 —— URL 去掉了 .html，外加两处计价修正",
+  "<strong>URLs dropped their <code>.html</code></strong> — every internal link, the sitemap, hreflang tags and JSON-LD now point straight at the extensionless URL Cloudflare was already redirecting to, cutting a 307 round-trip off every internal navigation":
+    "<strong>URL 去掉了 <code>.html</code></strong> —— 站内所有链接、sitemap、hreflang 标签与 JSON-LD 现在都直接指向 Cloudflare 本就会跳转到的无扩展名 URL，省掉了每次站内跳转多余的一次 307",
+  "<strong>Voyage's free-tier grant moved on</strong> — the 200M free-token allowance is no longer on <code>rerank-2.5</code>; it now ships with the <code>rerank-3</code> preview, added to the model table and cost calculator alongside <code>rerank-3-lite</code>":
+    "<strong>Voyage 的免费额度换代了</strong> —— 2 亿免费 token 的额度已不在 <code>rerank-2.5</code> 上；现在随 <code>rerank-3</code> 预览版发放，已连同 <code>rerank-3-lite</code> 一并加入模型表与成本计算器",
+  "<strong>Cost calculator token formula fixed</strong> — Voyage bills the query once per document reranked, not once per query; the calculator undercounted tokens (and cost) on any workload with more than one candidate per query":
+    "<strong>成本计算器的 token 公式修正了</strong> —— Voyage 是按「每个被重排的文档都计一次 query」计费，而不是每次查询只计一次；只要每次查询的候选数大于一，计算器此前都会低估 token 数（和成本）",
+  "<strong>Cohere chunking, clarified</strong> — an outside audit suggested Cohere silently splits passages over 500 tokens into extra billable chunks; that isn't how it works (context is 32,768 tokens and chunking is opt-in), so the calculator page now says so directly instead of adopting the wrong model":
+    "<strong>Cohere 分块问题说清楚</strong> —— 一份外部审计认为 Cohere 会把超过 500 token 的段落静默拆分成额外的计费分块；实际并非如此（上下文长度是 32,768 token，分块是可选项），因此计算器页面直接说明了这一点，而不是照搬这个错误的计费模型",
+  "<strong>Homepage diagram, now bilingual</strong> — the \"Reranking in one diagram\" figure was inline SVG the translation pass couldn't see; its labels and caption now render in Chinese on <a href=\"/zh/\">/zh/</a>":
+    "<strong>首页示意图现在也有中文</strong> —— 「一张图看懂重排序」是一段翻译流程看不到的内联 SVG；现在它的标签与图注在 <a href=\"/zh/\">/zh/</a> 上会显示为中文",
+  "<strong>Model table accessibility</strong> — the comparison table gets a caption, column/row headers, and a scrollable, keyboard-focusable region for screen readers and narrow viewports":
+    "<strong>模型对比表的可访问性</strong> —— 对比表新增了标题说明、列/行表头，并做成了可滚动、可用键盘聚焦的区域，方便屏幕阅读器与窄屏使用",
   "25 Aug 2026 — Two guides for the questions people actually ask":
     "2026 年 8 月 25 日 —— 两篇针对真实提问的指南",
   "<strong><a href=\"/guides/reranking-not-working.html\">Reranking didn't help</a></strong> — a diagnostic walkthrough of the seven reasons a rerank stage shows no lift, starting with the one that explains most of them: retrieval never returned the right document":

@@ -1,4 +1,20 @@
-window.I18N_PAGE = { zh: {
+window.I18N_PAGE = {
+  keys: {
+    "pipeline.ariaLabel": "查询流经检索器得到 50–100 个候选，再由重排序器逐对打分，保留前 5 个，最后由 LLM 生成答案。",
+    "pipeline.query": "查询",
+    "pipeline.top1": "召回 50–100",
+    "pipeline.retriever": "检索器",
+    "pipeline.retrieverSub": "bi-encoder / BM25",
+    "pipeline.fastRecall": "快 · 召回",
+    "pipeline.top2": "精选 5–10",
+    "pipeline.reranker": "Reranker",
+    "pipeline.rerankerSub": "cross-encoder 打分",
+    "pipeline.slowPrecise": "慢 · 精确",
+    "pipeline.llm": "LLM",
+    "pipeline.generate": "生成",
+    "pipeline.caption": "宽召回保证 recall，重排序保证 precision，只把最优结果送进模型。",
+  },
+  zh: {
   "0.6B / 4B / 8B Apache 2.0 family — the multilingual GPU self-host pick. Start at 4B, not 8B.":
     "0.6B / 4B / 8B 的 Apache 2.0 家族 —— 多语言 GPU 自托管首选。从 4B 起步，而不是 8B。",
   "Mature hosted API in Pro and Fast variants — 32k context, 100+ languages, billed per search.":

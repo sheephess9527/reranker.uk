@@ -2,11 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>reranker.uk changelog</title>
-    <link>https://reranker.uk/changelog.html</link>
+    <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Tue, 25 Aug 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 18 Sep 2026 12:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>18 Sep 2026 — URLs without the .html, and two pricing corrections</title>
+      <link>https://reranker.uk/changelog#2026-09-18</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-09-18</guid>
+      <pubDate>Fri, 18 Sep 2026 12:00:00 GMT</pubDate>
+      <description>Internal URLs dropped .html; Voyage's free-token grant moved to rerank-3, added to the table and calculator; a token-formula bug and a Cohere chunking myth both corrected; homepage diagram translated; model table made screen-reader friendly.</description>
+    </item>
     <item>
       <title>25 Aug 2026 — Two guides for the questions people actually ask</title>
       <link>https://reranker.uk/changelog.html#2026-08-25</link>

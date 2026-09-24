@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>Cross-encoder vs bi-encoder: the difference, with examples | reranker.uk</title>
   <meta name="description" content="Cross-encoder vs bi-encoder explained: bi-encoders embed query and document separately (fast, scalable retrieval); cross-encoders score the pair together (accurate reranking). When to use each, and how they combine in a two-stage pipeline." >
-  <link rel="canonical" href="https://reranker.uk/guides/cross-encoder-vs-bi-encoder.html" >
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/cross-encoder-vs-bi-encoder.html" >
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/cross-encoder-vs-bi-encoder.html" >
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/cross-encoder-vs-bi-encoder.html" >
+  <link rel="canonical" href="https://reranker.uk/guides/cross-encoder-vs-bi-encoder" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/cross-encoder-vs-bi-encoder" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/cross-encoder-vs-bi-encoder" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/cross-encoder-vs-bi-encoder" >
   <meta name="theme-color" content="#0b0d17" >
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
   <meta name="author" content="reranker.uk" >
@@ -19,7 +19,7 @@
   <meta property="og:type" content="article" >
   <meta property="og:title" content="Cross-encoder vs bi-encoder" >
   <meta property="og:description" content="The architecture behind fast retrieval and accurate reranking — and how to use both." >
-  <meta property="og:url" content="https://reranker.uk/guides/cross-encoder-vs-bi-encoder.html" >
+  <meta property="og:url" content="https://reranker.uk/guides/cross-encoder-vs-bi-encoder" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="en_GB" >
   <meta property="og:locale:alternate" content="zh_CN" >
@@ -44,7 +44,7 @@
     "dateModified": "2026-06-21",
     "author": { "@type": "Organization", "name": "reranker.uk", "url": "https://reranker.uk/" },
     "publisher": { "@type": "Organization", "name": "reranker.uk", "logo": { "@type": "ImageObject", "url": "https://reranker.uk/assets/img/icon-512.png" } },
-    "mainEntityOfPage": "https://reranker.uk/guides/cross-encoder-vs-bi-encoder.html"
+    "mainEntityOfPage": "https://reranker.uk/guides/cross-encoder-vs-bi-encoder"
   }
   </script>
   <!-- seo:jsonld -->
@@ -65,7 +65,7 @@
             "@type": "ListItem",
             "position": 2,
             "name": "Cross-encoder vs bi-encoder",
-            "item": "https://reranker.uk/guides/cross-encoder-vs-bi-encoder.html"
+            "item": "https://reranker.uk/guides/cross-encoder-vs-bi-encoder"
           }
         ]
       }
@@ -87,11 +87,11 @@
         <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
         <li><a href="/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">Guides</a></li>
         <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
-        <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
+        <li><a class="nav-cta" href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <a class="lang-toggle" href="/zh/guides/cross-encoder-vs-bi-encoder.html" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
+        <a class="lang-toggle" href="/zh/guides/cross-encoder-vs-bi-encoder" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
   </header>
@@ -150,7 +150,7 @@ doc   ───▶ [encoder] ───▶ d⃗  ┘</code></pre>
       <h2 id="together">Why you use both</h2>
       <p>They’re complementary, not competing. The bi-encoder’s job is <strong>recall</strong>: cheaply pull a few dozen candidates that probably contain the answer. The cross-encoder’s job is <strong>precision</strong>: carefully reorder that shortlist so the best candidates are unambiguously on top.</p>
       <blockquote>Bi-encoder finds the haystack’s promising corner. Cross-encoder finds the needle in it.</blockquote>
-      <p>Trying to use only one is usually a mistake: a cross-encoder alone can’t scan a million documents in time, and a bi-encoder alone leaves quality on the table. The standard answer is the <a href="/guides/rerank-rag.html">two-stage pipeline</a> — retrieve with the bi-encoder, rerank with the cross-encoder.</p>
+      <p>Trying to use only one is usually a mistake: a cross-encoder alone can’t scan a million documents in time, and a bi-encoder alone leaves quality on the table. The standard answer is the <a href="/guides/rerank-rag">two-stage pipeline</a> — retrieve with the bi-encoder, rerank with the cross-encoder.</p>
 
       <h2 id="example">A concrete example</h2>
       <p>Take the query <em>“Does the free plan include API access?”</em> and two candidates:</p>
@@ -163,13 +163,13 @@ doc   ───▶ [encoder] ───▶ d⃗  ┘</code></pre>
       <div class="cta-band">
         <h2 style="margin-top:0">Feel the difference yourself</h2>
         <p class="soft">Our demo runs a cross-encoder in your browser. Paste a tricky query and watch which passage it promotes.</p>
-        <a class="btn btn-primary" href="/demo.html?s=legal">Open the live demo →</a>
+        <a class="btn btn-primary" href="/demo?s=legal">Open the live demo →</a>
       </div>
 
       <h2>Keep reading</h2>
       <div class="grid grid-2">
-        <a class="card" href="/guides/what-is-a-reranker.html"><h3>What is a reranker?</h3><p>Start with the fundamentals.</p></a>
-        <a class="card" href="/guides/rerank-rag.html"><h3>How to add reranking to RAG</h3><p>Put both encoders to work in a pipeline.</p></a>
+        <a class="card" href="/guides/what-is-a-reranker"><h3>What is a reranker?</h3><p>Start with the fundamentals.</p></a>
+        <a class="card" href="/guides/rerank-rag"><h3>How to add reranking to RAG</h3><p>Put both encoders to work in a pipeline.</p></a>
       </div>
     </article>
   </main>
@@ -185,33 +185,33 @@ doc   ───▶ [encoder] ───▶ d⃗  ┘</code></pre>
           <h4 data-i18n="shared.footer.guides">Guides</h4>
           <ul>
             <li><a href="/guides/" data-i18n="shared.footer.allGuides">All guides</a></li>
-            <li><a href="/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
-            <li><a href="/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
-            <li><a href="/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
-            <li><a href="/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
-            <li><a href="/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
-            <li><a href="/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
-            <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
-            <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
-            <li><a href="/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
-            <li><a href="/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
-            <li><a href="/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
-            <li><a href="/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
-            <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
-            <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
+            <li><a href="/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
+            <li><a href="/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
+            <li><a href="/guides/rerank-rag" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
+            <li><a href="/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
+            <li><a href="/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
+            <li><a href="/guides/self-host-reranker" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
+            <li><a href="/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
+            <li><a href="/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
+            <li><a href="/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
+            <li><a href="/guides/reranking-not-working" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
+            <li><a href="/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
+            <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
+            <li><a href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
+            <li><a href="/changelog" data-i18n="shared.footer.changelog">Changelog</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>
-            <li><a href="/privacy.html" data-i18n="shared.footer.privacy">Privacy</a></li>
+            <li><a href="/privacy" data-i18n="shared.footer.privacy">Privacy</a></li>
           </ul>
         </div>
         <div>
           <h4 data-i18n="shared.footer.models">Models</h4>
           <ul>
-            <li><a href="/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/models/voyage-rerank">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
@@ -219,8 +219,8 @@ doc   ───▶ [encoder] ───▶ d⃗  ┘</code></pre>
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
           <span data-i18n="shared.footer.disclaimer">Open educational resource · not affiliated with any model vendor</span>
-          · <a href="/privacy.html" data-i18n="shared.footer.privacyShort">Privacy</a>
-          · <a href="/changelog.html" data-i18n="shared.footer.changelogShort">Changelog</a>
+          · <a href="/privacy" data-i18n="shared.footer.privacyShort">Privacy</a>
+          · <a href="/changelog" data-i18n="shared.footer.changelogShort">Changelog</a>
         </span>
       </div>
     </div>

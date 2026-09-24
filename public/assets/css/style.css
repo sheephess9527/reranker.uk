@@ -624,7 +624,8 @@ select { font-family: var(--mono); font-size: 0.85rem; }
 .models-count { font-size: 0.82rem; margin-left: auto; }
 /* Nine columns need real room; the wrapper scrolls when the viewport can't give it. */
 #models-table { min-width: 900px; }
-#models-table td:first-child { white-space: nowrap; }
+#models-table td:first-child, #models-table tbody th:first-child { white-space: nowrap; }
+#models-table tbody th { font-weight: 400; text-align: left; }
 #models-table th[data-sort] { cursor: pointer; user-select: none; }
 #models-table th[data-sort]::after { content: " ⇅"; opacity: 0.35; font-size: 0.75em; }
 #models-table th.sort-asc::after { content: " ↑"; opacity: 1; }

@@ -81,7 +81,7 @@
         <li><a href="/" data-i18n="shared.nav.home" aria-current="page" class="active">Home</a></li>
         <li><a href="/guides/" data-i18n="shared.nav.guides">Guides</a></li>
         <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
-        <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
+        <li><a class="nav-cta" href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
@@ -95,8 +95,8 @@
       <h1>Understand rerankers. Then watch one run in your browser.</h1>
       <p class="lead">A reranker re-scores your retrieved candidates so the most relevant passages rise to the top. Learn how it works, compare the popular models, and try a cross-encoder live — with zero API cost and nothing leaving your machine.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="/demo.html">▶ Try the live demo</a>
-        <a class="btn btn-ghost" href="/guides/what-is-a-reranker.html">Start with the basics</a>
+        <a class="btn btn-primary" href="/demo">▶ Try the live demo</a>
+        <a class="btn btn-ghost" href="/guides/what-is-a-reranker">Start with the basics</a>
       </div>
       <p class="muted" style="margin-top:1.4rem;font-size:.88rem">Runs on transformers.js · 100% client-side · no key required</p>
     </section>
@@ -107,21 +107,21 @@
         <p>Three short guides take you from “what is a reranker?” to a working reranking stage in your RAG pipeline.</p>
       </div>
       <div class="grid grid-3">
-        <a class="card" href="/guides/what-is-a-reranker.html">
+        <a class="card" href="/guides/what-is-a-reranker">
           <span class="ico">🧭</span>
           <h3>What is a reranker?</h3>
           <p>The two-stage retrieval pattern, why order matters, and where reranking fits.</p>
           <p class="card-takeaway">A reranker scores (query, document) pairs jointly — far more accurate than cosine similarity alone.</p>
           <div class="tag-row"><span class="pill info">Fundamentals</span></div>
         </a>
-        <a class="card" href="/guides/cross-encoder-vs-bi-encoder.html">
+        <a class="card" href="/guides/cross-encoder-vs-bi-encoder">
           <span class="ico">⚖️</span>
           <h3>Cross-encoder vs bi-encoder</h3>
           <p>Why bi-encoders are fast and cross-encoders are accurate — and how to use both.</p>
           <p class="card-takeaway">Bi-encoders retrieve at scale; cross-encoders rank with precision. Use them in two stages.</p>
           <div class="tag-row"><span class="pill info">Architecture</span></div>
         </a>
-        <a class="card" href="/guides/rerank-rag.html">
+        <a class="card" href="/guides/rerank-rag">
           <span class="ico">🔧</span>
           <h3>How to add reranking to RAG</h3>
           <p>Retrieve wide, rerank, keep the best. With code, top-k tips and latency trade-offs.</p>
@@ -141,31 +141,31 @@
           <li>Zero API cost and zero abuse risk — it’s all on your device</li>
           <li>See exactly how scores reorder your retrieval results</li>
         </ul>
-        <div><a class="btn btn-primary" href="/demo.html">Open the demo →</a></div>
+        <div><a class="btn btn-primary" href="/demo">Open the demo →</a></div>
       </div>
     </section>
 
     <section class="section container">
       <div class="section-head">
         <h2>Compare the rerank models</h2>
-        <p>2026 open SOTA candidates (<a href="/models/qwen-reranker.html">Qwen3-Reranker</a>), Jina v3 listwise, classic bge/mxbai, hosted Cohere/Voyage — plus late-interaction and instruction APIs.</p>
+        <p>2026 open SOTA candidates (<a href="/models/qwen-reranker">Qwen3-Reranker</a>), Jina v3 listwise, classic bge/mxbai, hosted Cohere/Voyage — plus late-interaction and instruction APIs.</p>
       </div>
       <div class="grid grid-2">
-        <a class="card" href="/models/qwen-reranker.html"><h3>Qwen3-Reranker</h3><p>0.6B / 4B / 8B Apache 2.0 family — the multilingual GPU self-host pick. Start at 4B, not 8B.</p><div class="tag-row"><span class="pill good">Open weights</span><span class="pill info">Multilingual</span></div></a>
-        <a class="card" href="/models/bge-reranker.html"><h3>bge-reranker</h3><p>Open-weight rerankers from BAAI. Still the best CPU-friendly multilingual default.</p><div class="tag-row"><span class="pill good">Open weights</span><span class="pill">Self-host</span></div></a>
-        <a class="card" href="/models/cohere-rerank.html"><h3>Cohere Rerank 4</h3><p>Mature hosted API in Pro and Fast variants — 32k context, 100+ languages, billed per search.</p><div class="tag-row"><span class="pill">Hosted API</span><span class="pill">Multilingual</span></div></a>
-        <a class="card" href="/models/jina-reranker.html"><h3>Jina Reranker v3</h3><p>0.6B listwise model at 61.94 BEIR — ahead of Qwen3-Reranker-4B. v1-tiny powers our demo.</p><div class="tag-row"><span class="pill good">Open + Hosted</span><span class="pill info">Listwise</span></div></a>
-        <a class="card" href="/models/voyage-rerank.html"><h3>Voyage rerank-2.5</h3><p>Hosted rerankers you steer with a natural-language instruction. 32k context, per-token pricing.</p><div class="tag-row"><span class="pill">Hosted API</span><span class="pill info">Instruction</span></div></a>
-        <a class="card" href="/models/mxbai-rerank.html"><h3>mxbai-rerank</h3><p>Apache 2.0 open weights with a browser-runnable xsmall variant — highest BEIR score in our table.</p><div class="tag-row"><span class="pill good">Open weights</span><span class="pill">Browser ✓</span></div></a>
+        <a class="card" href="/models/qwen-reranker"><h3>Qwen3-Reranker</h3><p>0.6B / 4B / 8B Apache 2.0 family — the multilingual GPU self-host pick. Start at 4B, not 8B.</p><div class="tag-row"><span class="pill good">Open weights</span><span class="pill info">Multilingual</span></div></a>
+        <a class="card" href="/models/bge-reranker"><h3>bge-reranker</h3><p>Open-weight rerankers from BAAI. Still the best CPU-friendly multilingual default.</p><div class="tag-row"><span class="pill good">Open weights</span><span class="pill">Self-host</span></div></a>
+        <a class="card" href="/models/cohere-rerank"><h3>Cohere Rerank 4</h3><p>Mature hosted API in Pro and Fast variants — 32k context, 100+ languages, billed per search.</p><div class="tag-row"><span class="pill">Hosted API</span><span class="pill">Multilingual</span></div></a>
+        <a class="card" href="/models/jina-reranker"><h3>Jina Reranker v3</h3><p>0.6B listwise model at 61.94 BEIR — ahead of Qwen3-Reranker-4B. v1-tiny powers our demo.</p><div class="tag-row"><span class="pill good">Open + Hosted</span><span class="pill info">Listwise</span></div></a>
+        <a class="card" href="/models/voyage-rerank"><h3>Voyage rerank-2.5</h3><p>Hosted rerankers you steer with a natural-language instruction. 32k context, per-token pricing.</p><div class="tag-row"><span class="pill">Hosted API</span><span class="pill info">Instruction</span></div></a>
+        <a class="card" href="/models/mxbai-rerank"><h3>mxbai-rerank</h3><p>Apache 2.0 open weights with a browser-runnable xsmall variant — highest BEIR score in our table.</p><div class="tag-row"><span class="pill good">Open weights</span><span class="pill">Browser ✓</span></div></a>
       </div>
-      <p class="center muted" style="margin-top:1.1rem;font-size:.9rem">Also: <a href="/guides/late-interaction-rerank.html">ColBERT / late-interaction</a> · <a href="/guides/instruction-reranker.html">instruction-following rerank</a></p>
+      <p class="center muted" style="margin-top:1.1rem;font-size:.9rem">Also: <a href="/guides/late-interaction-rerank">ColBERT / late-interaction</a> · <a href="/guides/instruction-reranker">instruction-following rerank</a></p>
       <p class="center" style="margin-top:1rem"><a class="btn btn-ghost" href="/models/">See the full comparison →</a></p>
     </section>
 
     <section class="section container narrow">
       <h2 class="center">Reranking in one diagram</h2>
       <figure class="pipeline-figure no-i18n" style="margin-top:1.2rem">
-        <svg viewBox="0 0 620 100" role="img" aria-label="Query flows through a retriever to get 50-100 candidates, then a reranker scores each pair to keep the top 5, then the LLM generates an answer." xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 620 100" role="img" data-i18n-aria-label="pipeline.ariaLabel" aria-label="Query flows through a retriever to get 50-100 candidates, then a reranker scores each pair to keep the top 5, then the LLM generates an answer." xmlns="http://www.w3.org/2000/svg">
           <defs>
             <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
               <path d="M0,0 L10,5 L0,10 z" class="pipe-arrowhead" ></path>
@@ -182,31 +182,31 @@
           </style>
           <!-- query -->
           <rect class="pb" x="2" y="28" width="80" height="44" rx="10" ></rect>
-          <text class="pt" x="42" y="52" text-anchor="middle">Query</text>
+          <text class="pt" x="42" y="52" text-anchor="middle" data-i18n-html="pipeline.query">Query</text>
           <!-- arrow 1 -->
           <line class="pl" x1="82" y1="50" x2="138" y2="50" marker-end="url(#arr)" ></line>
-          <text class="pm" x="110" y="44" text-anchor="middle">top 50–100</text>
+          <text class="pm" x="110" y="44" text-anchor="middle" data-i18n-html="pipeline.top1">top 50–100</text>
           <!-- retriever -->
           <rect class="pb" x="140" y="14" width="130" height="72" rx="10" ></rect>
-          <text class="pt" x="205" y="44" text-anchor="middle">Retriever</text>
-          <text class="ps" x="205" y="61" text-anchor="middle">bi-encoder / BM25</text>
-          <text class="pm" x="205" y="77" text-anchor="middle">fast · recall</text>
+          <text class="pt" x="205" y="44" text-anchor="middle" data-i18n-html="pipeline.retriever">Retriever</text>
+          <text class="ps" x="205" y="61" text-anchor="middle" data-i18n-html="pipeline.retrieverSub">bi-encoder / BM25</text>
+          <text class="pm" x="205" y="77" text-anchor="middle" data-i18n-html="pipeline.fastRecall">fast · recall</text>
           <!-- arrow 2 -->
           <line class="pl" x1="270" y1="50" x2="326" y2="50" marker-end="url(#arr)" ></line>
-          <text class="pm" x="298" y="44" text-anchor="middle">top 5–10</text>
+          <text class="pm" x="298" y="44" text-anchor="middle" data-i18n-html="pipeline.top2">top 5–10</text>
           <!-- reranker (focus) -->
           <rect class="pb focus" x="328" y="14" width="140" height="72" rx="10" ></rect>
-          <text class="pt" x="398" y="44" text-anchor="middle">Reranker</text>
-          <text class="ps" x="398" y="61" text-anchor="middle">cross-encoder scores</text>
-          <text class="pm" x="398" y="77" text-anchor="middle">slow · precise</text>
+          <text class="pt" x="398" y="44" text-anchor="middle" data-i18n-html="pipeline.reranker">Reranker</text>
+          <text class="ps" x="398" y="61" text-anchor="middle" data-i18n-html="pipeline.rerankerSub">cross-encoder scores</text>
+          <text class="pm" x="398" y="77" text-anchor="middle" data-i18n-html="pipeline.slowPrecise">slow · precise</text>
           <!-- arrow 3 -->
           <line class="pl" x1="468" y1="50" x2="524" y2="50" marker-end="url(#arr)" ></line>
           <!-- llm -->
           <rect class="pb" x="526" y="28" width="90" height="44" rx="10" ></rect>
-          <text class="pt" x="571" y="48" text-anchor="middle">LLM</text>
-          <text class="ps" x="571" y="64" text-anchor="middle">generate</text>
+          <text class="pt" x="571" y="48" text-anchor="middle" data-i18n-html="pipeline.llm">LLM</text>
+          <text class="ps" x="571" y="64" text-anchor="middle" data-i18n-html="pipeline.generate">generate</text>
         </svg>
-        <figcaption>Retrieve wide for recall, rerank for precision, send only the best to the model.</figcaption>
+        <figcaption data-i18n-html="pipeline.caption">Retrieve wide for recall, rerank for precision, send only the best to the model.</figcaption>
       </figure>
     </section>
   </main>
@@ -222,33 +222,33 @@
           <h4 data-i18n="shared.footer.guides">Guides</h4>
           <ul>
             <li><a href="/guides/" data-i18n="shared.footer.allGuides">All guides</a></li>
-            <li><a href="/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
-            <li><a href="/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
-            <li><a href="/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
-            <li><a href="/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
-            <li><a href="/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
-            <li><a href="/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
-            <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
-            <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
-            <li><a href="/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
-            <li><a href="/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
-            <li><a href="/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
-            <li><a href="/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
-            <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
-            <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
+            <li><a href="/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
+            <li><a href="/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
+            <li><a href="/guides/rerank-rag" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
+            <li><a href="/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
+            <li><a href="/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
+            <li><a href="/guides/self-host-reranker" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
+            <li><a href="/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
+            <li><a href="/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
+            <li><a href="/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
+            <li><a href="/guides/reranking-not-working" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
+            <li><a href="/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
+            <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
+            <li><a href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
+            <li><a href="/changelog" data-i18n="shared.footer.changelog">Changelog</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>
-            <li><a href="/privacy.html" data-i18n="shared.footer.privacy">Privacy</a></li>
+            <li><a href="/privacy" data-i18n="shared.footer.privacy">Privacy</a></li>
           </ul>
         </div>
         <div>
           <h4 data-i18n="shared.footer.models">Models</h4>
           <ul>
-            <li><a href="/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/models/voyage-rerank">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
@@ -256,8 +256,8 @@
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
           <span data-i18n="shared.footer.disclaimer">Open educational resource · not affiliated with any model vendor</span>
-          · <a href="/privacy.html" data-i18n="shared.footer.privacyShort">Privacy</a>
-          · <a href="/changelog.html" data-i18n="shared.footer.changelogShort">Changelog</a>
+          · <a href="/privacy" data-i18n="shared.footer.privacyShort">Privacy</a>
+          · <a href="/changelog" data-i18n="shared.footer.changelogShort">Changelog</a>
         </span>
       </div>
     </div>

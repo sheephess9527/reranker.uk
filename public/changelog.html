@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>Changelog — reranker.uk updates | reranker.uk</title>
   <meta name="description" content="Release notes for reranker.uk: demo features, new guides, model comparison updates, and site improvements." >
-  <link rel="canonical" href="https://reranker.uk/changelog.html" >
-  <link rel="alternate" hreflang="en" href="https://reranker.uk/changelog.html" >
-  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/changelog.html" >
-  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/changelog.html" >
+  <link rel="canonical" href="https://reranker.uk/changelog" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/changelog" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/changelog" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/changelog" >
   <meta name="theme-color" content="#0b0d17" >
   <meta name="robots" content="index, follow" >
   <meta name="author" content="reranker.uk" >
@@ -19,7 +19,7 @@
   <meta property="og:type" content="website" >
   <meta property="og:title" content="reranker.uk changelog" >
   <meta property="og:description" content="What shipped on reranker.uk — demo UX, guides, and infrastructure." >
-  <meta property="og:url" content="https://reranker.uk/changelog.html" >
+  <meta property="og:url" content="https://reranker.uk/changelog" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="en_GB" >
   <meta property="og:locale:alternate" content="zh_CN" >
@@ -33,7 +33,7 @@
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://reranker.uk/changelog.html"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://reranker.uk/changelog"}]}</script>
 
 </head>
 <body>
@@ -46,11 +46,11 @@
         <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
         <li><a href="/guides/" data-i18n="shared.nav.guides">Guides</a></li>
         <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
-        <li><a class="nav-cta" href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
+        <li><a class="nav-cta" href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <div class="nav-right">
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
-        <a class="lang-toggle" href="/zh/changelog.html" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
+        <a class="lang-toggle" href="/zh/changelog" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
   </header>
@@ -62,10 +62,22 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-09-18">18 Sep 2026 — URLs without the .html, and two pricing corrections</h2>
+        <ul class="feature-list">
+          <li><strong>URLs dropped their <code>.html</code></strong> — every internal link, the sitemap, hreflang tags and JSON-LD now point straight at the extensionless URL Cloudflare was already redirecting to, cutting a 307 round-trip off every internal navigation</li>
+          <li><strong>Voyage's free-tier grant moved on</strong> — the 200M free-token allowance is no longer on <code>rerank-2.5</code>; it now ships with the <code>rerank-3</code> preview, added to the model table and cost calculator alongside <code>rerank-3-lite</code></li>
+          <li><strong>Cost calculator token formula fixed</strong> — Voyage bills the query once per document reranked, not once per query; the calculator undercounted tokens (and cost) on any workload with more than one candidate per query</li>
+          <li><strong>Cohere chunking, clarified</strong> — an outside audit suggested Cohere silently splits passages over 500 tokens into extra billable chunks; that isn't how it works (context is 32,768 tokens and chunking is opt-in), so the calculator page now says so directly instead of adopting the wrong model</li>
+          <li><strong>Homepage diagram, now bilingual</strong> — the "Reranking in one diagram" figure was inline SVG the translation pass couldn't see; its labels and caption now render in Chinese on <a href="/zh/">/zh/</a></li>
+          <li><strong>Model table accessibility</strong> — the comparison table gets a caption, column/row headers, and a scrollable, keyboard-focusable region for screen readers and narrow viewports</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-08-25">25 Aug 2026 — Two guides for the questions people actually ask</h2>
         <ul class="feature-list">
-          <li><strong><a href="/guides/reranking-not-working.html">Reranking didn't help</a></strong> — a diagnostic walkthrough of the seven reasons a rerank stage shows no lift, starting with the one that explains most of them: retrieval never returned the right document</li>
-          <li><strong><a href="/guides/rerank-vector-database.html">Rerank on a vector database</a></strong> — the retrieve-wide-then-rerank pattern with code for pgvector, Qdrant and Elasticsearch, including the HNSW <code>ef_search</code> trap that makes a wider limit return padding instead of candidates</li>
+          <li><strong><a href="/guides/reranking-not-working">Reranking didn't help</a></strong> — a diagnostic walkthrough of the seven reasons a rerank stage shows no lift, starting with the one that explains most of them: retrieval never returned the right document</li>
+          <li><strong><a href="/guides/rerank-vector-database">Rerank on a vector database</a></strong> — the retrieve-wide-then-rerank pattern with code for pgvector, Qdrant and Elasticsearch, including the HNSW <code>ef_search</code> trap that makes a wider limit return padding instead of candidates</li>
           <li><strong><a href="/llms.txt">/llms.txt</a></strong> — a generated map of the site for assistants that read one before citing a source, including how to read our benchmark footnotes</li>
           <li><strong>Feed autodiscovery</strong> — the changelog RSS is now advertised from every page, not just the changelog</li>
         </ul>
@@ -74,7 +86,7 @@
       <article class="changelog-entry">
         <h2 id="2026-08-14">14 Aug 2026 — Cost calculator, and demo links that land somewhere</h2>
         <ul class="feature-list">
-          <li><strong><a href="/rerank-cost-calculator.html">Rerank cost calculator</a></strong> — Cohere bills per search, Voyage per token, so the cheaper vendor flips with passage length and top-k. Put your own volume in and see where the line sits</li>
+          <li><strong><a href="/rerank-cost-calculator">Rerank cost calculator</a></strong> — Cohere bills per search, Voyage per token, so the cheaper vendor flips with passage length and top-k. Put your own volume in and see where the line sits</li>
           <li><strong>Scenario deep links</strong> — all 25 demo links across the guides and model pages now open the scenario the page is actually about, via a new <code>?s=</code> parameter</li>
           <li><strong>Shorter share links</strong> — an untouched built-in scenario shares as <code>?s=rag</code> instead of a 900-character URL</li>
           <li><strong>Translations survive link edits</strong> — the build now retargets links inside a translation instead of dropping it back to English</li>
@@ -98,7 +110,7 @@
       <article class="changelog-entry">
         <h2 id="2026-06-25e">25 Jun 2026 — Model landscape refresh</h2>
         <ul class="feature-list">
-          <li><strong>Qwen3-Reranker</strong> — 0.6B / 4B / 8B rows + <a href="/models/qwen-reranker.html">deep review page</a></li>
+          <li><strong>Qwen3-Reranker</strong> — 0.6B / 4B / 8B rows + <a href="/models/qwen-reranker">deep review page</a></li>
           <li><strong>Jina v3</strong> — listwise flagship; tiny kept for browser demo</li>
           <li><strong>Table adds</strong> — gte-reranker-modernbert-base, NVIDIA nv-rerankqa / Nemotron</li>
           <li><strong>Self-host / homepage / chooser</strong> — GPU default Qwen3-4B; bge remains CPU path</li>
@@ -112,7 +124,7 @@
           <li><strong>Honest benchmarks</strong> — emerging rows use ≈ / n/a; next review Sep 2026; pricing lag disclaimer</li>
           <li><strong>Demo max_length</strong> — 256 / 384 / 512 tokens; char warnings follow selection</li>
           <li><strong>Lazy transformers.js</strong> — loaded on first Rerank only</li>
-          <li><strong>Instruction-rerank guide</strong> — <a href="/guides/instruction-reranker.html">task-shaped ranking</a></li>
+          <li><strong>Instruction-rerank guide</strong> — <a href="/guides/instruction-reranker">task-shaped ranking</a></li>
           <li><strong>Homepage</strong> — beyond five families + links to ColBERT / instruction guides</li>
         </ul>
       </article>
@@ -121,7 +133,7 @@
         <h2 id="2026-06-25c">25 Jun 2026 — Content expansion &amp; polish</h2>
         <ul class="feature-list">
           <li><strong>Models table</strong> — architecture column; Qwen3-Reranker, Contextual AI, ColBERTv2, ms-marco browser rows</li>
-          <li><strong>Late-interaction guide</strong> — <a href="/guides/late-interaction-rerank.html">ColBERT &amp; when to skip cross-encoder rerank</a></li>
+          <li><strong>Late-interaction guide</strong> — <a href="/guides/late-interaction-rerank">ColBERT &amp; when to skip cross-encoder rerank</a></li>
           <li><strong>Demo presets</strong> — E-commerce + Multilingual (7 scenarios); ms-marco <code>?m=</code> on models table</li>
           <li><strong>JSON-LD</strong> — <code>inLanguage</code> follows zh/en toggle</li>
           <li><strong>Changelog RSS</strong> — <a href="/changelog.rss">/changelog.rss</a> feed</li>
@@ -152,8 +164,8 @@
       <article class="changelog-entry">
         <h2 id="2026-06-23c">23 Jun 2026 — Medium-priority UX &amp; content</h2>
         <ul class="feature-list">
-          <li><strong>Self-host guide</strong> — <a href="/guides/self-host-reranker.html">sentence-transformers, serving, ops</a></li>
-          <li><strong>Scenario guide</strong> — <a href="/guides/choose-reranker-scenario.html">RAG vs support vs legal vs code</a></li>
+          <li><strong>Self-host guide</strong> — <a href="/guides/self-host-reranker">sentence-transformers, serving, ops</a></li>
+          <li><strong>Scenario guide</strong> — <a href="/guides/choose-reranker-scenario">RAG vs support vs legal vs code</a></li>
           <li><strong>Passage char counts</strong> — per-list stats + 512-char truncation warning</li>
           <li><strong>New presets</strong> — Technical docs, Code search</li>
           <li><strong>CSV export</strong> — Copy CSV alongside JSON and Markdown</li>
@@ -197,7 +209,7 @@
         </ul>
       </article>
 
-      <p class="center" style="margin-top:2.5rem"><a class="btn btn-primary" href="/demo.html">Try the demo →</a></p>
+      <p class="center" style="margin-top:2.5rem"><a class="btn btn-primary" href="/demo">Try the demo →</a></p>
     </section>
   </main>
   <footer class="site-footer">
@@ -212,33 +224,33 @@
           <h4 data-i18n="shared.footer.guides">Guides</h4>
           <ul>
             <li><a href="/guides/" data-i18n="shared.footer.allGuides">All guides</a></li>
-            <li><a href="/guides/what-is-a-reranker.html" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
-            <li><a href="/guides/cross-encoder-vs-bi-encoder.html" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
-            <li><a href="/guides/rerank-rag.html" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
-            <li><a href="/guides/hybrid-retrieval-rerank.html" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
-            <li><a href="/guides/evaluate-reranker.html" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
-            <li><a href="/guides/self-host-reranker.html" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
-            <li><a href="/guides/choose-reranker-scenario.html" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
-            <li><a href="/guides/late-interaction-rerank.html" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
-            <li><a href="/guides/instruction-reranker.html" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
-            <li><a href="/guides/reranking-not-working.html" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
-            <li><a href="/guides/rerank-vector-database.html" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
-            <li><a href="/rerank-cost-calculator.html" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
-            <li><a href="/demo.html" data-i18n="shared.nav.demo">Live demo</a></li>
-            <li><a href="/changelog.html" data-i18n="shared.footer.changelog">Changelog</a></li>
+            <li><a href="/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
+            <li><a href="/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
+            <li><a href="/guides/rerank-rag" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
+            <li><a href="/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
+            <li><a href="/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
+            <li><a href="/guides/self-host-reranker" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
+            <li><a href="/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
+            <li><a href="/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
+            <li><a href="/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
+            <li><a href="/guides/reranking-not-working" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
+            <li><a href="/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
+            <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
+            <li><a href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
+            <li><a href="/changelog" data-i18n="shared.footer.changelog">Changelog</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>
-            <li><a href="/privacy.html" data-i18n="shared.footer.privacy">Privacy</a></li>
+            <li><a href="/privacy" data-i18n="shared.footer.privacy">Privacy</a></li>
           </ul>
         </div>
         <div>
           <h4 data-i18n="shared.footer.models">Models</h4>
           <ul>
-            <li><a href="/models/qwen-reranker.html">Qwen3-Reranker</a></li>
-            <li><a href="/models/bge-reranker.html">bge-reranker</a></li>
-            <li><a href="/models/cohere-rerank.html">Cohere Rerank</a></li>
-            <li><a href="/models/jina-reranker.html">Jina Reranker</a></li>
-            <li><a href="/models/mxbai-rerank.html">mxbai-rerank</a></li>
-            <li><a href="/models/voyage-rerank.html">Voyage Rerank</a></li>
+            <li><a href="/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/models/voyage-rerank">Voyage Rerank</a></li>
           </ul>
         </div>
       </div>
@@ -246,8 +258,8 @@
         <span>© <span id="year"></span> reranker.uk</span>
         <span class="footer-legal muted">
           <span data-i18n="shared.footer.disclaimer">Open educational resource · not affiliated with any model vendor</span>
-          · <a href="/privacy.html" data-i18n="shared.footer.privacyShort">Privacy</a>
-          · <a href="/changelog.html" data-i18n="shared.footer.changelogShort">Changelog</a>
+          · <a href="/privacy" data-i18n="shared.footer.privacyShort">Privacy</a>
+          · <a href="/changelog" data-i18n="shared.footer.changelogShort">Changelog</a>
         </span>
       </div>
     </div>

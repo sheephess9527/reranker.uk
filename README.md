@@ -74,8 +74,8 @@ Two pages carry their own logic and are not just prose:
 
 | Page | Script | Notes |
 |------|--------|-------|
-| `/demo.html` | `public/assets/js/demo.js` | Cross-encoder in the browser. Deep links: `?s=<preset>` for a built-in scenario, `?q=&docs=` for literal contents, `?m=`/`?m2=` for models, `?z=` for gzipped state. An untouched preset shares as the short `?s=` form. |
-| `/rerank-cost-calculator.html` | `public/assets/js/cost-calculator.js` | Cohere per-search vs Voyage per-token pricing. Rates are hard-coded constants — update them alongside the models table each quarter. |
+| `/demo` | `public/assets/js/demo.js` | Cross-encoder in the browser. Deep links: `?s=<preset>` for a built-in scenario, `?q=&docs=` for literal contents, `?m=`/`?m2=` for models, `?z=` for gzipped state. An untouched preset shares as the short `?s=` form. |
+| `/rerank-cost-calculator` | `public/assets/js/cost-calculator.js` | Cohere per-search vs Voyage per-token pricing. Rates are hard-coded constants — update them alongside the models table each quarter. |
 
 ### Bilingual (EN / 中文)
 
@@ -164,7 +164,7 @@ transformers.js 3.5.1, ONNX q8, browser cache.
 
 ## Changelog
 
-Release notes live on [/changelog.html](https://reranker.uk/changelog.html) and
+Release notes live on [/changelog](https://reranker.uk/changelog) and
 in [`src/pages/changelog.html`](src/pages/changelog.html). Older entries that
 used to be duplicated here were removed in favour of that single source.
 
