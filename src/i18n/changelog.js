@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "26 Sep 2026 — ms-marco MiniLM's BEIR figure was never published":
+    "2026 年 9 月 26 日 —— ms-marco MiniLM 的 BEIR 数字其实从没被公布过",
+  "<strong>ms-marco MiniLM-L6 now reads \"not published\"</strong> — this table carried it at an unsourced ~55.0; sentence-transformers' own docs report NDCG@10 on TREC DL 19 (74.30) and MRR@10 on MS MARCO Dev (39.01) for this model, not a BEIR average. Found while checking the rest of the table after the mxbai correction below — same failure shape, different model":
+    "<strong>ms-marco MiniLM-L6 现在写「未公布」</strong> —— 本表此前挂着一个没有来源的 ~55.0；sentence-transformers 自己的文档给这个模型报的是 TREC DL 19 上的 NDCG@10（74.30）和 MS MARCO Dev 上的 MRR@10（39.01），并不是 BEIR 均值。是在下面这条 mxbai 修正之后顺手检查表里其他数字时发现的 —— 同样的问题，换了个模型",
   "26 Sep 2026 — mxbai-rerank-v2, a corrected BEIR figure, and a demo smoke test":
     "2026 年 9 月 26 日 —— mxbai-rerank-v2、一处 BEIR 数字修正，以及一个 Demo 冒烟测试",
   "<strong>mxbai-rerank-large-v1's BEIR score corrected</strong> — this table carried an unsourced ~62.1 for months; mixedbread's own comparison table puts it at 49.32*. A reader flagged the gap between that number and mixedbread's own figures for their newer models, which is what surfaced it":

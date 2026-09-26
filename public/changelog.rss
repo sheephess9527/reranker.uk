@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Sat, 26 Sep 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 26 Sep 2026 13:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>26 Sep 2026 — ms-marco MiniLM's BEIR figure was never published</title>
+      <link>https://reranker.uk/changelog#2026-09-26b</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-09-26b</guid>
+      <pubDate>Sat, 26 Sep 2026 13:00:00 GMT</pubDate>
+      <description>ms-marco MiniLM-L6 now reads "not published" in the model comparison table — sentence-transformers' own docs report TREC DL 19 NDCG@10, not a BEIR average, so the ~55.0 this table carried had no source.</description>
+    </item>
     <item>
       <title>26 Sep 2026 — mxbai-rerank-v2, a corrected BEIR figure, and a demo smoke test</title>
       <link>https://reranker.uk/changelog#2026-09-26</link>

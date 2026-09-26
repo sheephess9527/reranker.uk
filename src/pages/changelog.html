@@ -6,6 +6,13 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-09-26b">26 Sep 2026 — ms-marco MiniLM's BEIR figure was never published</h2>
+        <ul class="feature-list">
+          <li><strong>ms-marco MiniLM-L6 now reads "not published"</strong> — this table carried it at an unsourced ~55.0; sentence-transformers' own docs report NDCG@10 on TREC DL 19 (74.30) and MRR@10 on MS MARCO Dev (39.01) for this model, not a BEIR average. Found while checking the rest of the table after the mxbai correction below — same failure shape, different model</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-09-26">26 Sep 2026 — mxbai-rerank-v2, a corrected BEIR figure, and a demo smoke test</h2>
         <ul class="feature-list">
           <li><strong>mxbai-rerank-large-v1's BEIR score corrected</strong> — this table carried an unsourced ~62.1 for months; mixedbread's own comparison table puts it at 49.32*. A reader flagged the gap between that number and mixedbread's own figures for their newer models, which is what surfaced it</li>
