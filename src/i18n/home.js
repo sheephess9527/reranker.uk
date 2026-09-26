@@ -62,7 +62,7 @@ window.I18N_PAGE = {
   "Listwise long-context flagship; v1-tiny still powers the browser demo.": "Listwise 长上下文旗舰；v1-tiny 仍驱动浏览器 Demo。",
   "A mature hosted rerank API with strong multilingual quality and simple integration.": "成熟的托管重排序 API，多语言质量强、接入简单。",
   "Hosted rerankers tuned for retrieval quality, with domain-specific variants.": "为检索质量调优的托管重排序器，并提供面向特定领域的变体。",
-  "Apache 2.0 open weights with a browser-runnable xsmall variant — highest BEIR score in our table.": "Apache 2.0 开源权重，含可在浏览器运行的 xsmall 变体 —— 本表中 BEIR 分数最高。",
+  "Apache 2.0 open weights. v1's xsmall runs in the browser; v2 adds 100+ languages, including Chinese.": "Apache 2.0 开源权重。v1 的 xsmall 可在浏览器运行；v2 新增 100+ 种语言支持，包括中文。",
   "See the full comparison →": "查看完整对比 →",
 
   "Fundamentals": "基础",

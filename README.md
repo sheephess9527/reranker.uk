@@ -109,6 +109,37 @@ Review the models table each quarter (target: **Nov 2026**, then Feb/May/Aug):
 4. Bump **Last verified** / **Next review** in `/models/`, add a changelog entry
    and an item in `public/changelog.rss`.
 
+### `data/models.json` — sourced numbers, not hand-typed ones
+
+A benchmark number that's typed directly into a page drifts silently: a model
+gets superseded, the page doesn't, and nothing notices (this happened —
+`mxbai-rerank-large-v1`'s BEIR figure sat at an unsourced ~62.1 for months;
+mixedbread's own numbers put it at 49.32). Any number that's been through this
+once goes in `data/models.json` instead — `{value, source_url, protocol_note?,
+verified_on}` per fact — and pages reference it with a `{{fact:<model
+id>.<field>}}` token that `scripts/build.mjs` resolves at build time:
+
+- No `source_url` → the build throws. A number with nowhere to point doesn't
+  ship.
+- `verified_on` older than 6 months → a build-time console warning (not a
+  failure — it's a nudge for the next quarterly review, not a gate).
+- `protocol_note` present → the rendered number always gets a trailing `*`,
+  so a reader can't miss that it isn't the same protocol as its neighbours.
+
+This is only wired up for the numbers that have actually been re-verified so
+far (the mxbai family, as of Sep 2026) — everything else in the table is
+still a hand-typed literal following the quarterly-review process above.
+Migrating a row: add its facts to `data/models.json`, replace the literal in
+`src/pages/` with the token, rebuild, and confirm the number renders
+unchanged (or corrects, if that's why you're touching it).
+
+### Verified September 2026
+
+| Model | What was confirmed |
+|-------|--------------------|
+| mxbai-rerank-large-v1 | BEIR figure corrected from an unsourced ~62.1 to mixedbread's own 49.32 (their cross-generation comparison table); confirmed English-only |
+| mxbai-rerank-base-v2 / large-v2 | New generation, Qwen2.5-based, Apache 2.0, 0.5B/1.5B, 100+ languages incl. Chinese, BEIR 55.57/57.49 — added to the table, which previously carried only the v1 family |
+
 ### Verified August 2026
 
 | Model | What was confirmed |
@@ -119,6 +150,26 @@ Review the models table each quarter (target: **Nov 2026**, then Feb/May/Aug):
 | llama-nemotron-rerank-1b-v2 | 1.2B, 83.0 Hit@1 / 88.3 Hit@10 on NVIDIA's QA protocol |
 | gte-reranker-modernbert-base | ~149M, ties nemotron-1b on Hit@1 |
 | Qwen3-Reranker | Apache 2.0, 0.6B/4B/8B, 32K context; 4B reported ~0.48 ahead of 8B on BEIR |
+
+---
+
+## Testing
+
+`npm test` runs a Playwright smoke test of the live demo (`tests/demo.smoke.spec.js`)
+against a fake `transformers.js` module — no real download, so it runs in every
+PR (see `.github/workflows/ci.yml`) and only proves the demo's own load →
+score → render wiring still works.
+
+`npm run test:real` (`tests/demo.smoke.real.spec.js`) runs the same
+interaction against the real jsDelivr / HuggingFace / hf-mirror.com chain,
+with a real (small) model download and real ONNX Runtime Web inference. This
+is what would actually catch one of those three dependencies breaking, which
+the mocked test cannot — it's the site's answer to "the demo could go dark
+and nobody would know." It's slow and depends on infrastructure this repo
+doesn't control, so it isn't run on every PR: `.github/workflows/demo-smoke-daily.yml`
+runs it once a day on a schedule instead. Both need `npx playwright install
+--with-deps chromium` first if you don't already have a Chromium Playwright
+can drive.
 
 ---
 

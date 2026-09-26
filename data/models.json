@@ -1,0 +1,63 @@
+{
+  "_comment": "Single source of truth for benchmark numbers rendered via {{fact:<model-id>.<field>}} tokens in src/pages/. Every value must carry a source_url — scripts/build.mjs refuses to render a fact without one. protocol_note forces a '*' footnote suffix (see the /models/ comparison table's footnote convention). verified_on drives a build-time staleness warning; it does not gate the build.",
+
+  "mxbai-rerank-large-v1": {
+    "beir": {
+      "value": 49.32,
+      "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
+      "protocol_note": "mixedbread's own cross-generation comparison table (mxbai-rerank-v2 README), evaluated for a fair v1-vs-v2 comparison rather than the classic BEIR 18-dataset suite other open-weight rows in this table use. Their original 2024 launch blog reported ~48.8 NDCG@10 on 11 BEIR datasets via Pyserini — in the same range, not the ~62.1 this site carried before Sep 2026.",
+      "verified_on": "2026-09-25"
+    },
+    "chinese": {
+      "value": 72.53,
+      "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
+      "verified_on": "2026-09-25"
+    },
+    "multilingual": {
+      "value": 21.88,
+      "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
+      "protocol_note": "Mr.TyDi multilingual average, mixedbread's own comparison table",
+      "verified_on": "2026-09-25"
+    }
+  },
+
+  "mxbai-rerank-base-v2": {
+    "beir": {
+      "value": 55.57,
+      "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
+      "protocol_note": "mixedbread's own comparison table, not confirmed against the classic BEIR 18-dataset suite other open-weight rows in this table use",
+      "verified_on": "2026-09-25"
+    },
+    "chinese": {
+      "value": "83.70",
+      "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
+      "verified_on": "2026-09-25"
+    },
+    "multilingual": {
+      "value": 28.56,
+      "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
+      "protocol_note": "Mr.TyDi multilingual average, mixedbread's own comparison table",
+      "verified_on": "2026-09-25"
+    }
+  },
+
+  "mxbai-rerank-large-v2": {
+    "beir": {
+      "value": 57.49,
+      "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
+      "protocol_note": "mixedbread's own comparison table, not confirmed against the classic BEIR 18-dataset suite other open-weight rows in this table use",
+      "verified_on": "2026-09-25"
+    },
+    "chinese": {
+      "value": 84.16,
+      "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
+      "verified_on": "2026-09-25"
+    },
+    "multilingual": {
+      "value": 29.79,
+      "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
+      "protocol_note": "Mr.TyDi multilingual average, mixedbread's own comparison table",
+      "verified_on": "2026-09-25"
+    }
+  }
+}

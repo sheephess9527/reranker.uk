@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 18 Sep 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 26 Sep 2026 12:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>26 Sep 2026 — mxbai-rerank-v2, a corrected BEIR figure, and a demo smoke test</title>
+      <link>https://reranker.uk/changelog#2026-09-26</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-09-26</guid>
+      <pubDate>Sat, 26 Sep 2026 12:00:00 GMT</pubDate>
+      <description>mxbai-rerank-large-v1's BEIR figure corrected from an unsourced ~62.1 to mixedbread's own 49.32; mxbai-rerank-v2 (multilingual, incl. Chinese) added to the table; benchmark facts now live in a sourced data/models.json; a Playwright smoke test now covers the live demo.</description>
+    </item>
     <item>
       <title>18 Sep 2026 — URLs without the .html, and two pricing corrections</title>
       <link>https://reranker.uk/changelog#2026-09-18</link>
