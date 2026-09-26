@@ -62,6 +62,16 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-09-26">2026 年 9 月 26 日 —— mxbai-rerank-v2、一处 BEIR 数字修正，以及一个 Demo 冒烟测试</h2>
+        <ul class="feature-list">
+          <li><strong>mxbai-rerank-large-v1 的 BEIR 分数已修正</strong> —— 本表此前挂着一个没有来源的 ~62.1，挂了好几个月；mixedbread 自己的对比表给出的是 49.32*。是一位读者发现这个数字跟 mixedbread 自己给新模型报的分数对不上，才让这个问题浮出水面</li>
+          <li><strong>新增 <code>mxbai-rerank-v2</code></strong> —— 基于 Qwen2.5、经强化学习训练的新一代（<code>base-v2</code> 0.5B、<code>large-v2</code> 1.5B），新增 100+ 种语言支持，包括中文；v1 其实只支持英文，之前的表没把这点说清楚</li>
+          <li><strong><code>data/models.json</code></strong> —— 经历过上面这种修正的基准数字，现在统一放进一个带来源的文件，而不是散落在每个提到它的页面里手写一遍；没有来源的数字构建会直接拒绝渲染，超过 6 个月没复核过也会有构建期提醒</li>
+          <li><strong>为在线 Demo 加了冒烟测试</strong> —— 每个 PR 都会用 <code>npm test</code> 对着一个假模型跑一遍「加载 → 打分 → 渲染」流程；另有一个每日任务对着真实的 jsDelivr / HuggingFace 链路跑，真出问题时才靠这个发现</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-09-18">2026 年 9 月 18 日 —— URL 去掉了 .html，外加两处计价修正</h2>
         <ul class="feature-list">
           <li><strong>URL 去掉了 <code>.html</code></strong> —— 站内所有链接、sitemap、hreflang 标签与 JSON-LD 现在都直接指向 Cloudflare 本就会跳转到的无扩展名 URL，省掉了每次站内跳转多余的一次 307</li>

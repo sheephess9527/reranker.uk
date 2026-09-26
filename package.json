@@ -6,11 +6,15 @@
     "build": "node scripts/build.mjs",
     "dev": "node scripts/build.mjs --watch",
     "check:links": "node scripts/check-links.mjs",
+    "check:zh": "node scripts/check-zh-coverage.mjs",
     "check:i18n": "node scripts/check-i18n-gaps.mjs",
     "check": "npm run build && npm run check:links",
+    "test": "playwright test tests/demo.smoke.spec.js",
+    "test:real": "playwright test tests/demo.smoke.real.spec.js",
     "deploy": "npm run build && npx wrangler deploy"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "node-html-parser": "^9.0.1"
   }
 }

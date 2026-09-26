@@ -1,0 +1,46 @@
+name: Demo smoke test (real network)
+
+# Runs against real jsDelivr, HuggingFace, and hf-mirror.com infrastructure —
+# no mocking. This is the one that would catch the demo silently breaking
+# because a CDN moved, a model was renamed or pulled, or WASM init started
+# failing — none of which the PR-time mocked test in ci.yml can see, since
+# it fakes all three of those dependencies away.
+#
+# A failure here shows red in the Actions tab and GitHub emails the person
+# who last edited this file by default (its built-in behavior for failed
+# scheduled workflows) — no extra notification wiring in this workflow.
+
+on:
+  schedule:
+    - cron: "17 3 * * *" # once daily; the odd minute avoids the top-of-hour GitHub Actions crowd
+  workflow_dispatch:
+
+jobs:
+  demo-smoke-real:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Install Playwright's Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build the site
+        run: npm run build
+
+      - name: Demo smoke test (real network)
+        run: npm run test:real
+
+      - name: Upload trace on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-trace
+          path: test-results/
+          retention-days: 7

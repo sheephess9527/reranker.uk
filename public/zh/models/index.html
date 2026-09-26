@@ -211,16 +211,38 @@
               <td>~60.1</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="mxbai-rerank-large-v1" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="62.1" data-demo="mxbai-rerank">
+            <tr data-name="mxbai-rerank-large-v1" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="49.32*" data-demo="mxbai-rerank">
               <th scope="row"><a href="/zh/models/mxbai-rerank">mxbai-rerank-large-v1</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><br><span class="pill info">Browser ✓</span></td>
-              <td>经典 BEIR 强；Demo 用 xsmall</td>
+              <td>上一代；xsmall 仍驱动浏览器 Demo</td>
               <td>英文</td>
               <td>150–400 ms CPU<br><span class="muted">~30 ms GPU</span></td>
               <td>免费（自建）</td>
-              <td>~62.1</td>
+              <td title="mixedbread's own cross-generation comparison table, not the classic BEIR 18-dataset average other open-weight rows use">49.32*</td>
               <td class="demo-link-cell"></td>
+            </tr>
+            <tr data-name="mxbai-rerank-large-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="57.49*">
+              <th scope="row"><a href="/zh/models/mxbai-rerank">mxbai-rerank-large-v2</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill good">Open weights</span><span class="pill info">多语言</span></td>
+              <td>mxbai 最强一代；支持多语言，含中文</td>
+              <td>100+ 种语言</td>
+              <td>建议 GPU</td>
+              <td>免费（自建）</td>
+              <td title="mixedbread's own comparison table, not the classic BEIR 18-dataset average other open-weight rows use">57.49*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr data-name="mxbai-rerank-base-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="55.57*">
+              <th scope="row"><a href="/zh/models/mxbai-rerank">mxbai-rerank-base-v2</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill good">Open weights</span><span class="pill info">多语言</span></td>
+              <td>v2 代中体积与质量的最佳平衡</td>
+              <td>100+ 种语言</td>
+              <td>CPU 可运行；GPU 更快</td>
+              <td>免费（自建）</td>
+              <td title="mixedbread's own comparison table, not the classic BEIR 18-dataset average other open-weight rows use">55.57*</td>
+              <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="jina-reranker-v3" data-type="open api" data-arch="listwise" data-langs="100+" data-pricing="freemium" data-beir="61.94">
               <th scope="row"><a href="/zh/models/jina-reranker">Jina Reranker v3</a></th>
@@ -369,8 +391,8 @@
         </table>
       </div>
       <div class="benchmark-meta callout" style="margin-top:.8rem;padding:.85rem 1rem">
-        <p class="muted" style="font-size:.82rem;margin:0"><strong>最近核对：</strong>2026 年 9 月（新增 Voyage rerank-3 预览版；修正了 Voyage 免费额度与 Cohere 分块两处说法）· <strong>下次复核：</strong>2026 年 11 月。标 <strong>*</strong> 的列使用 MTEB-R、厂商或任务特定协议，<em>不同于</em> bge / mxbai / Jina 行所用的经典 BEIR 18 数据集均值。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档）计费，Voyage 按 <em>token</em> 计费。我们的<a href="/zh/rerank-cost-calculator">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。</p>
-        <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">资料来源： <a href="https://huggingface.co/Qwen" rel="noopener noreferrer">Qwen3-Reranker</a> · <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">jina-reranker-v3 论文</a> · <a href="https://docs.voyageai.com/docs/reranker" rel="noopener noreferrer">Voyage 重排序器</a> · <a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">nemotron-rerank</a> · <a href="https://huggingface.co/spaces/mteb/leaderboard" rel="noopener noreferrer">MTEB</a> · <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR</a> · <a href="https://huggingface.co/BAAI/bge-reranker-v2-m3" rel="noopener noreferrer">BAAI</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">GTE ModernBERT</a> · <a href="/zh/models/qwen-reranker">Qwen 指南</a> · <a href="/zh/guides/instruction-reranker">指令跟随</a> · <a href="/zh/guides/late-interaction-rerank">ColBERT</a></p>
+        <p class="muted" style="font-size:.82rem;margin:0"><strong>最近核对：</strong>2026 年 9 月（新增 mxbai-rerank-v2；修正了 mxbai-rerank-large-v1 的 BEIR 数字 —— 本表此前挂着一个没有来源的 ~62.1，而 mixedbread 自己的对比表给出的是 49.32*）· <strong>下次复核：</strong>2026 年 11 月。标 <strong>*</strong> 的列使用 MTEB-R、厂商或任务特定协议，<em>不同于</em> bge / Jina 行所用的经典 BEIR 18 数据集均值。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档）计费，Voyage 按 <em>token</em> 计费。我们的<a href="/zh/rerank-cost-calculator">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。</p>
+        <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">资料来源： <a href="https://huggingface.co/Qwen" rel="noopener noreferrer">Qwen3-Reranker</a> · <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">jina-reranker-v3 论文</a> · <a href="https://docs.voyageai.com/docs/reranker" rel="noopener noreferrer">Voyage 重排序器</a> · <a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">mxbai-rerank</a> · <a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">nemotron-rerank</a> · <a href="https://huggingface.co/spaces/mteb/leaderboard" rel="noopener noreferrer">MTEB</a> · <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR</a> · <a href="https://huggingface.co/BAAI/bge-reranker-v2-m3" rel="noopener noreferrer">BAAI</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">GTE ModernBERT</a> · <a href="/zh/models/qwen-reranker">Qwen 指南</a> · <a href="/zh/guides/instruction-reranker">指令跟随</a> · <a href="/zh/guides/late-interaction-rerank">ColBERT</a></p>
       </div>
 
       <div class="grid grid-2" style="margin-top:2.5rem">
@@ -402,7 +424,7 @@
         <a class="card" href="/zh/models/mxbai-rerank">
           <h3>mxbai-rerank</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill good">Open weights</span><span class="pill">Browser xsmall</span></div>
-          <p>Apache 2.0 DeBERTa-v3 rerankers from mixedbread-ai. The xsmall variant runs in the browser and powers our demo.</p>
+          <p>mixedbread-ai 出品的 Apache 2.0 重排序器。v1（DeBERTa-v3）体积最小的 xsmall 仍驱动本站 Demo；v2（基于 Qwen2.5）新增 100+ 种语言支持。</p>
         </a>
         <a class="card" href="/zh/guides/late-interaction-rerank">
           <h3>Late-interaction（ColBERT）</h3>
@@ -473,11 +495,11 @@
         <div class="chooser-card">
           <div class="chooser-badge chooser-open">Open</div>
           <h3><a href="/zh/models/mxbai-rerank">mxbai-rerank</a></h3>
-          <p class="chooser-tagline">Apache 2.0 开源权重，浏览器可运行的 xsmall</p>
+          <p class="chooser-tagline">Apache 2.0 开源权重；v2 新增 100+ 种语言支持</p>
           <ul class="feature-list">
             <li>宽松的 Apache 2.0 协议 —— 可商用、无限制</li>
-            <li>xsmall 变体可在浏览器中运行（驱动本站实时 Demo）</li>
-            <li>大参数版本在本表中 BEIR 分数最高</li>
+            <li>v1 的 xsmall 变体可在浏览器中运行（驱动本站实时 Demo）</li>
+            <li>v2（base/large）支持多语言，包括中文 —— v1 仅支持英文</li>
           </ul>
         </div>
       </div>

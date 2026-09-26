@@ -1,4 +1,14 @@
 window.I18N_PAGE = { zh: {
+  "26 Sep 2026 — mxbai-rerank-v2, a corrected BEIR figure, and a demo smoke test":
+    "2026 年 9 月 26 日 —— mxbai-rerank-v2、一处 BEIR 数字修正，以及一个 Demo 冒烟测试",
+  "<strong>mxbai-rerank-large-v1's BEIR score corrected</strong> — this table carried an unsourced ~62.1 for months; mixedbread's own comparison table puts it at 49.32*. A reader flagged the gap between that number and mixedbread's own figures for their newer models, which is what surfaced it":
+    "<strong>mxbai-rerank-large-v1 的 BEIR 分数已修正</strong> —— 本表此前挂着一个没有来源的 ~62.1，挂了好几个月；mixedbread 自己的对比表给出的是 49.32*。是一位读者发现这个数字跟 mixedbread 自己给新模型报的分数对不上，才让这个问题浮出水面",
+  "<strong><code>mxbai-rerank-v2</code> added</strong> — a newer, Qwen2.5-based, RL-trained generation (<code>base-v2</code> 0.5B, <code>large-v2</code> 1.5B) that adds 100+ languages including Chinese; v1 was English-only, which the table didn't make clear":
+    "<strong>新增 <code>mxbai-rerank-v2</code></strong> —— 基于 Qwen2.5、经强化学习训练的新一代（<code>base-v2</code> 0.5B、<code>large-v2</code> 1.5B），新增 100+ 种语言支持，包括中文；v1 其实只支持英文，之前的表没把这点说清楚",
+  "<strong><code>data/models.json</code></strong> — benchmark numbers that have been through a correction like the one above now live in one sourced file instead of a hand-typed literal in every page that mentions them; the build refuses to render one with no source and warns when one hasn't been re-checked in 6 months":
+    "<strong><code>data/models.json</code></strong> —— 经历过上面这种修正的基准数字，现在统一放进一个带来源的文件，而不是散落在每个提到它的页面里手写一遍；没有来源的数字构建会直接拒绝渲染，超过 6 个月没复核过也会有构建期提醒",
+  "<strong>A smoke test for the live demo</strong> — <code>npm test</code> runs the demo's load → score → render pipeline against a fake model on every PR; a separate daily job runs it against the real jsDelivr / HuggingFace chain, which is what would actually catch one of those going dark":
+    "<strong>为在线 Demo 加了冒烟测试</strong> —— 每个 PR 都会用 <code>npm test</code> 对着一个假模型跑一遍「加载 → 打分 → 渲染」流程；另有一个每日任务对着真实的 jsDelivr / HuggingFace 链路跑，真出问题时才靠这个发现",
   "18 Sep 2026 — URLs without the .html, and two pricing corrections":
     "2026 年 9 月 18 日 —— URL 去掉了 .html，外加两处计价修正",
   "<strong>URLs dropped their <code>.html</code></strong> — every internal link, the sitemap, hreflang tags and JSON-LD now point straight at the extensionless URL Cloudflare was already redirecting to, cutting a 307 round-trip off every internal navigation":

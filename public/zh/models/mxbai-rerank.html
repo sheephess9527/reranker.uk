@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-  <title>mxbai-rerank：mixedbread-ai 开源 DeBERTa 重排序模型评测 | reranker.uk</title>
-  <meta name="description" content="mxbai-rerank 评测：mixedbread-ai 基于 DeBERTa-v3 的开源权重 cross-encoder 重排序器（xsmall、base、large）。基准、Python 用法、托管 API，以及可在浏览器中运行的 xsmall 模型。" >
+  <title>mxbai-rerank：mixedbread-ai 开源重排序模型评测（v1 与 v2）| reranker.uk</title>
+  <meta name="description" content="mxbai-rerank 评测：mixedbread-ai 的开源权重重排序器，两代都覆盖。v1（DeBERTa-v3，仅英文，浏览器可跑 xsmall）与 v2（基于 Qwen2.5，支持 100+ 种语言含中文）。基准、Python 用法、托管 API。" >
   <link rel="canonical" href="https://reranker.uk/zh/models/mxbai-rerank" >
   <link rel="alternate" hreflang="en" href="https://reranker.uk/models/mxbai-rerank" >
   <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/mxbai-rerank" >
@@ -17,8 +17,8 @@
   <link rel="manifest" href="/site.webmanifest" >
   <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
   <meta property="og:type" content="article" >
-  <meta property="og:title" content="mxbai-rerank：mixedbread-ai 开源 DeBERTa 重排序模型评测 | reranker.uk" >
-  <meta property="og:description" content="mxbai-rerank 评测：mixedbread-ai 基于 DeBERTa-v3 的开源权重 cross-encoder 重排序器（xsmall、base、large）。基准、Python 用法、托管 API，以及可在浏览器中运行的 xsmall 模型。" >
+  <meta property="og:title" content="mxbai-rerank：mixedbread-ai 开源重排序模型评测（v1 与 v2）| reranker.uk" >
+  <meta property="og:description" content="mxbai-rerank 评测：mixedbread-ai 的开源权重重排序器，两代都覆盖。v1（DeBERTa-v3，仅英文，浏览器可跑 xsmall）与 v2（基于 Qwen2.5，支持 100+ 种语言含中文）。基准、Python 用法、托管 API。" >
   <meta property="og:url" content="https://reranker.uk/zh/models/mxbai-rerank" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="zh_CN" >
@@ -62,12 +62,12 @@
       },
       {
         "@type": "Article",
-        "headline": "mxbai-rerank — open-weight DeBERTa rerankers",
-        "description": "mxbai-rerank review: mixedbread-ai's open-weight cross-encoder rerankers (xsmall, base, large) built on DeBERTa-v3. Benchmarks, Python usage, hosted API, and the xsmall model that runs in the browser.",
+        "headline": "mxbai-rerank — mixedbread-ai's open-weight rerankers, v1 and v2",
+        "description": "mxbai-rerank review: mixedbread-ai's open-weight rerankers, both generations. v1 (DeBERTa-v3, English-only, browser-runnable xsmall) and v2 (Qwen2.5-based, 100+ languages incl. Chinese). Benchmarks, Python usage, hosted API.",
         "image": "https://reranker.uk/assets/img/og-cover.png",
         "inLanguage": "en",
         "datePublished": "2026-06-20",
-        "dateModified": "2026-06-21",
+        "dateModified": "2026-09-26",
         "author": {
           "@type": "Organization",
           "name": "reranker.uk",
@@ -120,9 +120,9 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>mxbai-rerank</div>
       <h1>mxbai-rerank</h1>
-      <p class="meta">开源权重 · mixedbread-ai · <time datetime="2026-06-21">更新于 2026 年 6 月 21 日</time></p>
-      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">开源权重</span><span class="pill">托管 API</span><span class="pill info">Apache 2.0</span><span class="pill">浏览器可跑 xsmall</span></div>
-      <p class="lead">mixedbread-ai 的重排序器系列基于 DeBERTa-v3 —— 一种采用解耦注意力机制的架构，能带来出色的 cross-encoder 精度。三个变体均采用 Apache 2.0 协议，可自由自建部署。<code>xsmall</code> 模型足够轻量，可以在浏览器中运行，这也是它成为<a href="/zh/demo?m=mixedbread-ai/mxbai-rerank-xsmall-v1">本站在线 Demo</a> 选项之一的原因。</p>
+      <p class="meta">开源权重 · mixedbread-ai · <time datetime="2026-09-26">更新于 2026 年 9 月 26 日</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">开源权重</span><span class="pill">托管 API</span><span class="pill info">Apache 2.0</span><span class="pill info">v2：100+ 种语言</span><span class="pill">浏览器可跑 xsmall</span></div>
+      <p class="lead">mixedbread-ai 目前有两代重排序器。<strong>v1</strong>（<code>xsmall</code>/<code>base</code>/<code>large</code>）是基于 DeBERTa-v3 的 cross-encoder 系列，仅支持英文，其中 <code>xsmall</code> 足够轻量、可在浏览器中运行 —— 这也是它成为<a href="/zh/demo?m=mixedbread-ai/mxbai-rerank-xsmall-v1">本站在线 Demo</a> 选项之一的原因。<strong>v2</strong>（<code>base</code>/<code>large</code>）是更新的一代，基于 Qwen2.5、经强化学习训练，新增了 100+ 种语言支持，包括中文。两代均采用 Apache 2.0 协议。</p>
 
       <div class="toc">
         <strong>本页目录</strong>
@@ -140,16 +140,18 @@
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>模型</th><th>体积</th><th>上下文长度</th><th>最适合</th></tr>
+            <tr><th>模型</th><th>体积</th><th>上下文长度</th><th>语言</th><th>最适合</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>mxbai-rerank-xsmall-v1</code></td><td>~70 MB</td><td>512 tokens</td><td>浏览器 / 边缘端；延迟最低</td></tr>
-            <tr><td><code>mxbai-rerank-base-v1</code></td><td>~278 MB</td><td>512 tokens</td><td>速度与质量的良好平衡</td></tr>
-            <tr><td><code>mxbai-rerank-large-v1</code></td><td>~560 MB</td><td>512 tokens</td><td>精度最高；建议使用 GPU</td></tr>
+            <tr><td><code>mxbai-rerank-xsmall-v1</code></td><td>~70 MB (0.1B)</td><td>512 tokens</td><td>英文</td><td>浏览器 / 边缘端；延迟最低</td></tr>
+            <tr><td><code>mxbai-rerank-base-v1</code></td><td>~278 MB (0.2B)</td><td>512 tokens</td><td>英文</td><td>速度与质量的良好平衡</td></tr>
+            <tr><td><code>mxbai-rerank-large-v1</code></td><td>~560 MB (1.5B)</td><td>512 tokens</td><td>英文</td><td>上一代旗舰；已被下方的 v2 取代</td></tr>
+            <tr><td><code>mxbai-rerank-base-v2</code></td><td>0.5B</td><td>默认 8k，最高可达 32k</td><td>100+ 种，含中文</td><td>体积与质量的最佳平衡；生产环境默认选择</td></tr>
+            <tr><td><code>mxbai-rerank-large-v2</code></td><td>1.5B</td><td>默认 8k，最高可达 32k</td><td>100+ 种，含中文</td><td>精度最高；建议使用 GPU</td></tr>
           </tbody>
         </table>
       </div>
-      <p>三个变体均为在 MS MARCO 段落排序任务上训练的 DeBERTa-v3 cross-encoder。生产环境<strong>建议从 <code>mxbai-rerank-base-v1</code> 开始</strong>；若有 GPU 余量且需要更高精度，则切换到 <code>large</code>。在浏览器或边缘端部署且模型体积受限时，使用 <code>xsmall</code>。</p>
+      <p>v1 系列是在 MS MARCO 段落排序任务上训练的 DeBERTa-v3 cross-encoder；v2 是基于 Qwen2.5 的新一代，采用三步强化学习训练（GRPO、对比学习、偏好学习）。新的生产环境<strong>建议从 <code>mxbai-rerank-base-v2</code> 开始</strong>，尤其是涉及非英文内容时 —— 它在下方所有公开基准上都优于 v1 的 <code>large</code>。仅在浏览器或边缘端部署时才保留 <code>xsmall-v1</code>，因为 v2 没有同等体积的小型变体。</p>
 
       <h2 id="benchmarks">基准测试</h2>
       <div class="table-wrap">
@@ -160,14 +162,49 @@
           <tbody>
             <tr><td>mxbai-rerank-xsmall-v1</td><td>~55.5</td><td>~38.0</td></tr>
             <tr><td>mxbai-rerank-base-v1</td><td>~59.8</td><td>~40.6</td></tr>
-            <tr><td>mxbai-rerank-large-v1</td><td>~62.1</td><td>~42.3</td></tr>
+            <tr><td>mxbai-rerank-large-v1</td><td>49.32*</td><td>~42.3</td></tr>
+            <tr><td>mxbai-rerank-base-v2</td><td>55.57*</td><td class="muted">未公布</td></tr>
+            <tr><td>mxbai-rerank-large-v2</td><td>57.49*</td><td class="muted">未公布</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="muted" style="font-size:.85rem">分数为 18 个 BEIR 数据集上的近似平均值。请查阅 mixedbread-ai 在 HuggingFace 上的模型卡片以获取各数据集结果。</p>
+      <p class="muted" style="font-size:.85rem">标 <strong>*</strong> 的行来自 mixedbread 自己的跨代对比表（<a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">mxbai-rerank GitHub 仓库</a>），并非经典的 BEIR 18 数据集协议。在 2026 年 9 月之前，本页给 large-v1 挂的是一个没有来源的 ~62.1 —— 而 mixedbread 自己的发布博客当时报的是 11 个 BEIR 数据集上 ~48.8 的 NDCG@10，他们 2026 年的对比表给出的是 49.32*；两者都远低于本页此前的数字，现已更正。xsmall-v1/base-v1 两行以及 MS MARCO 一列仍是我们尚未独立复核的近似数字 —— 请查阅 mixedbread-ai 在 HuggingFace 上的模型卡片以获取权威的分数据集结果。</p>
+
+      <h3>多语言（v2 存在的原因）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>模型</th><th>Mr.TyDi 多语言均值</th><th>中文</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>mxbai-rerank-large-v1（仅英文）</td><td>21.88*</td><td>72.53</td></tr>
+            <tr><td>mxbai-rerank-base-v2</td><td>28.56*</td><td>83.70</td></tr>
+            <tr><td>mxbai-rerank-large-v2</td><td>29.79*</td><td>84.16</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">v1 从来都不是多语言模型 —— 只是在 mixedbread 自己 2026 年的回顾评测之前，它一直没有在非英文数据上被测过。如果你的文档不全是英文，应该用 v2 这一代；v1 不能替代它。</p>
 
       <h2 id="usage">快速上手</h2>
-      <h3>自建部署（sentence-transformers）</h3>
+      <h3>v2，自建部署</h3>
+      <pre><code>pip install -U mxbai-rerank</code></pre>
+      <pre><code>from mxbai_rerank import MxbaiRerankV2
+
+reranker = MxbaiRerankV2("mixedbread-ai/mxbai-rerank-base-v2")  # or large-v2
+
+query = "How do I add reranking to my RAG pipeline?"
+documents = [
+    "Rerankers score each query-passage pair with a cross-encoder.",
+    "BM25 is a classical keyword-based retrieval method.",
+    "London is the capital of the United Kingdom.",
+    "Two-stage retrieval: retrieve 50 candidates, rerank to top 5.",
+]
+
+results = reranker.rank(query=query, documents=documents)
+for r in results:
+    print(f"{r.score:.4f}  {r.document[:80]}")</code></pre>
+
+      <h3>v1，自建部署（sentence-transformers）</h3>
       <pre><code>pip install sentence-transformers</code></pre>
       <pre><code>from sentence_transformers import CrossEncoder
 
@@ -187,29 +224,29 @@ ranked = sorted(zip(scores, passages), reverse=True)
 for score, text in ranked:
     print(f"{score:.4f}  {text[:80]}")</code></pre>
 
-      <h3>在 RAG 流水线中</h3>
-      <pre><code>from sentence_transformers import CrossEncoder
+      <h3>在 RAG 流水线中（v2）</h3>
+      <pre><code>from mxbai_rerank import MxbaiRerankV2
 
-reranker = CrossEncoder("mixedbread-ai/mxbai-rerank-large-v1")
+reranker = MxbaiRerankV2("mixedbread-ai/mxbai-rerank-large-v2")
 
 def rag_answer(query: str, vector_db, llm) -> str:
     # Stage 1: retrieve wide
     candidates = vector_db.search(query, top_k=50)
     # Stage 2: rerank tight
-    scores = reranker.predict([(query, c) for c in candidates])
-    top5 = [c for _, c in sorted(zip(scores, candidates), reverse=True)[:5]]
+    results = reranker.rank(query=query, documents=candidates, top_k=5)
+    top5 = [r.document for r in results]
     # Stage 3: generate
     return llm.complete(f"Context:\n" + "\n\n".join(top5) + f"\n\nQ: {query}")</code></pre>
 
       <h2 id="api">托管 API</h2>
-      <p>mixedbread-ai 提供基于相同模型权重的托管重排序端点。如果你不想在自有基础设施上运行推理，这是个不错的选择。</p>
-      <pre><code>pip install mixedbread-ai</code></pre>
-      <pre><code>from mixedbread_ai import MixedbreadAI
+      <p>mixedbread-ai 提供基于相同模型权重的托管重排序端点。如果你不想在自有基础设施上运行推理，这是个不错的选择。目前使用的 SDK 是 <code>mixedbread</code>（较早的 <code>mixedbread_ai</code> 包是 v1 时代的）：</p>
+      <pre><code>pip install mixedbread</code></pre>
+      <pre><code>from mixedbread import Mixedbread
 
-mxbai = MixedbreadAI(api_key="YOUR_API_KEY")
+mxbai = Mixedbread(api_key="YOUR_API_KEY")
 
-result = mxbai.reranking(
-    model="mixedbread-ai/mxbai-rerank-large-v1",
+result = mxbai.rerank(
+    model="mixedbread-ai/mxbai-rerank-large-v2",
     query="How do I add reranking to my RAG pipeline?",
     input=[
         "Rerankers score each query-passage pair jointly.",
@@ -218,14 +255,13 @@ result = mxbai.reranking(
         "Two-stage retrieval: retrieve wide, rerank tight.",
     ],
     top_k=3,
-    return_input=False,
 )
 
 for item in result.data:
     print(f"{item.score:.4f}  rank {item.index + 1}")</code></pre>
 
       <h2 id="browser">浏览器使用</h2>
-      <p><code>xsmall</code> 变体足够轻量，可以通过 transformers.js 在浏览器中运行 —— 这正是我们 Demo 所使用的方式：</p>
+      <p>v1 的 <code>xsmall</code> 变体足够轻量，可以通过 transformers.js 在浏览器中运行 —— 这正是我们 Demo 所使用的方式。v2 最小的变体（0.5B）目前还没有对应的浏览器体积版本：</p>
       <pre><code>// transformers.js (ES module)
 import { AutoTokenizer, AutoModelForSequenceClassification }
   from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3";
@@ -250,21 +286,22 @@ const scores = logits.sigmoid().tolist();</code></pre>
         <div class="card">
           <h3 style="color:var(--good);margin-top:0">优点</h3>
           <ul class="feature-list">
-            <li>Apache 2.0 —— 完全开放，允许商业使用</li>
-            <li>xsmall 变体可通过 transformers.js 在浏览器中运行</li>
-            <li>DeBERTa-v3 架构：cross-encoder 精度出色</li>
-            <li>large 变体可与顶级商业 API 一较高下</li>
-            <li>可轻松集成到 sentence-transformers</li>
+            <li>Apache 2.0 —— 完全开放，允许商业使用，两代都是</li>
+            <li>v2 支持 100+ 种语言，包括中文</li>
+            <li>v1 的 xsmall 变体可通过 transformers.js 在浏览器中运行</li>
+            <li>v2 在所有已公开的基准上都优于 v1 的 large</li>
+            <li>可通过 <code>mxbai-rerank</code> / sentence-transformers 包轻松集成</li>
             <li>提供托管 API 选项，无需自行管理推理</li>
           </ul>
         </div>
         <div class="card">
           <h3 style="color:var(--danger);margin-top:0">缺点</h3>
           <ul style="padding-left:1.2rem;color:var(--text-soft)">
-            <li>主要面向英文 —— 多语言支持有限</li>
-            <li>512 token 上下文对长文档而言较短</li>
+            <li>v1 仅支持英文；多语言的是 v2 这一代，不是 v1</li>
+            <li>v2 没有浏览器 / 边缘端体积的变体 —— 最小的是 0.5B</li>
+            <li>v1 的 512 token 上下文对长文档而言较短</li>
             <li>社区规模小于 bge 或 Cohere</li>
-            <li>large 变体需要 GPU 才能达到实用速度</li>
+            <li>v2 的 large 需要 GPU 才能达到实用速度</li>
           </ul>
         </div>
       </div>

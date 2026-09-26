@@ -70,6 +70,50 @@ function sitemapHints(urlPath) {
 const read = (p) => fs.readFileSync(p, "utf8");
 const partial = (name) => read(path.join(PARTIALS, name));
 
+/**
+ * Benchmark/pricing facts a page can pull in via a {{fact:<model-id>.<field>}}
+ * token instead of a hand-typed literal — the mechanism that would have
+ * caught mxbai-rerank-large-v1's BEIR figure drifting to an unsourced 62.1
+ * (real figure, per mixedbread's own comparison table: 49.32). A fact with no
+ * source_url is a build error, not a silent placeholder; a stale verified_on
+ * is a warning, not a build blocker, since re-checking every number on every
+ * build isn't realistic — it just needs to surface for the next review pass.
+ */
+const MODELS_DATA = JSON.parse(read(path.join(ROOT, "data", "models.json")));
+const FACT_STALE_MONTHS = 6;
+const FACT_TOKEN = /\{\{fact:([a-zA-Z0-9_.-]+)\}\}/g;
+
+function monthsSince(dateStr) {
+  const then = new Date(dateStr + "T00:00:00Z").getTime();
+  return (Date.now() - then) / (1000 * 60 * 60 * 24 * 30.44);
+}
+
+function resolveFacts(html, srcRelPath) {
+  return html.replace(FACT_TOKEN, (match, key) => {
+    const dot = key.indexOf(".");
+    const id = key.slice(0, dot);
+    const field = key.slice(dot + 1);
+    const fact = MODELS_DATA[id] && MODELS_DATA[id][field];
+    if (!fact || fact.value == null || !fact.source_url) {
+      throw new Error(
+        `data/models.json has no sourced value for "${key}" (referenced in ${srcRelPath}). ` +
+          `Add {"value": ..., "source_url": ...} before this can render — an unsourced number doesn't ship.`
+      );
+    }
+    const age = monthsSince(fact.verified_on);
+    if (age > FACT_STALE_MONTHS) {
+      console.warn(
+        `⚠ ${key}: verified_on ${fact.verified_on} is ${age.toFixed(1)} months old (${srcRelPath}) — due for a re-check.`
+      );
+    }
+    // A protocol_note means this number isn't directly comparable to the
+    // classic BEIR 18-dataset average other rows use — the footnote marker
+    // is mandatory, not optional, so it can't be typo'd away like the number
+    // it's replacing was.
+    return String(fact.value) + (fact.protocol_note ? "*" : "");
+  });
+}
+
 function fill(tpl, vars) {
   return tpl.replace(/\{\{(\w+)\}\}/g, (_, key) => {
     const k = key.toLowerCase();
@@ -444,8 +488,9 @@ function assemble({ meta, body, relPath, locale, lastmod }) {
 
   const outRel = zh ? path.join("zh", relPath) : relPath;
   const outPath = path.join(PUBLIC, outRel);
+  const finalHtml = resolveFacts(root.toString(), outRel);
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
-  fs.writeFileSync(outPath, "<!DOCTYPE html>\n" + root.toString().replace(/^<!DOCTYPE html>\s*/i, ""), "utf8");
+  fs.writeFileSync(outPath, "<!DOCTYPE html>\n" + finalHtml.replace(/^<!DOCTYPE html>\s*/i, ""), "utf8");
 
   return { urlPath, enUrl, zhUrl, lastmod, stats, outPath, title, description };
 }

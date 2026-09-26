@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-  <title>mxbai-rerank: open-weight DeBERTa rerankers review | reranker.uk</title>
-  <meta name="description" content="mxbai-rerank review: mixedbread-ai's open-weight cross-encoder rerankers (xsmall, base, large) built on DeBERTa-v3. Benchmarks, Python usage, hosted API, and the xsmall model that runs in the browser." >
+  <title>mxbai-rerank: mixedbread-ai open-weight rerankers, v1 and v2 | reranker.uk</title>
+  <meta name="description" content="mxbai-rerank review: mixedbread-ai's open-weight rerankers, both generations. v1 (DeBERTa-v3, English-only, browser-runnable xsmall) and v2 (Qwen2.5-based, 100+ languages incl. Chinese). Benchmarks, Python usage, hosted API." >
   <link rel="canonical" href="https://reranker.uk/models/mxbai-rerank" >
   <link rel="alternate" hreflang="en" href="https://reranker.uk/models/mxbai-rerank" >
   <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/mxbai-rerank" >
@@ -17,8 +17,8 @@
   <link rel="manifest" href="/site.webmanifest" >
   <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
   <meta property="og:type" content="article" >
-  <meta property="og:title" content="mxbai-rerank — open-weight DeBERTa rerankers" >
-  <meta property="og:description" content="mixedbread-ai's reranker family: Apache 2.0 open weights, a hosted API, and an xsmall variant that runs entirely in the browser." >
+  <meta property="og:title" content="mxbai-rerank — mixedbread-ai's open-weight rerankers, v1 and v2" >
+  <meta property="og:description" content="v1: DeBERTa-v3, English-only, browser-runnable xsmall. v2: Qwen2.5-based, 100+ languages incl. Chinese. Both Apache 2.0, both with a hosted API option." >
   <meta property="og:url" content="https://reranker.uk/models/mxbai-rerank" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="en_GB" >
@@ -62,12 +62,12 @@
       },
       {
         "@type": "Article",
-        "headline": "mxbai-rerank — open-weight DeBERTa rerankers",
-        "description": "mxbai-rerank review: mixedbread-ai's open-weight cross-encoder rerankers (xsmall, base, large) built on DeBERTa-v3. Benchmarks, Python usage, hosted API, and the xsmall model that runs in the browser.",
+        "headline": "mxbai-rerank — mixedbread-ai's open-weight rerankers, v1 and v2",
+        "description": "mxbai-rerank review: mixedbread-ai's open-weight rerankers, both generations. v1 (DeBERTa-v3, English-only, browser-runnable xsmall) and v2 (Qwen2.5-based, 100+ languages incl. Chinese). Benchmarks, Python usage, hosted API.",
         "image": "https://reranker.uk/assets/img/og-cover.png",
         "inLanguage": "en",
         "datePublished": "2026-06-20",
-        "dateModified": "2026-06-21",
+        "dateModified": "2026-09-26",
         "author": {
           "@type": "Organization",
           "name": "reranker.uk",
@@ -120,9 +120,9 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>mxbai-rerank</div>
       <h1>mxbai-rerank</h1>
-      <p class="meta">Open weights · mixedbread-ai · <time datetime="2026-06-21">Updated 21 Jun 2026</time></p>
-      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Open weights</span><span class="pill">Hosted API</span><span class="pill info">Apache 2.0</span><span class="pill">Browser-runnable xsmall</span></div>
-      <p class="lead">mixedbread-ai's reranker family is built on DeBERTa-v3 — an architecture with disentangled attention that delivers strong cross-encoder precision. All three variants ship under Apache 2.0, so you can self-host freely. The <code>xsmall</code> model is compact enough to run in the browser, which is why it's one of the options in <a href="/demo?m=mixedbread-ai/mxbai-rerank-xsmall-v1">this site's live demo</a>.</p>
+      <p class="meta">Open weights · mixedbread-ai · <time datetime="2026-09-26">Updated 26 Sep 2026</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Open weights</span><span class="pill">Hosted API</span><span class="pill info">Apache 2.0</span><span class="pill info">v2: 100+ languages</span><span class="pill">Browser-runnable xsmall</span></div>
+      <p class="lead">mixedbread-ai ships two generations of reranker. <strong>v1</strong> (<code>xsmall</code>/<code>base</code>/<code>large</code>) is a DeBERTa-v3 cross-encoder family, English-only, and its <code>xsmall</code> variant is compact enough to run in the browser — which is why it's one of the options in <a href="/demo?m=mixedbread-ai/mxbai-rerank-xsmall-v1">this site's live demo</a>. <strong>v2</strong> (<code>base</code>/<code>large</code>) is a newer, Qwen2.5-based, RL-trained generation that adds support for 100+ languages, including Chinese. Both generations ship under Apache 2.0.</p>
 
       <div class="toc">
         <strong>On this page</strong>
@@ -140,16 +140,18 @@
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Model</th><th>Size</th><th>Context</th><th>Best for</th></tr>
+            <tr><th>Model</th><th>Size</th><th>Context</th><th>Languages</th><th>Best for</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>mxbai-rerank-xsmall-v1</code></td><td>~70 MB</td><td>512 tokens</td><td>Browser / edge; lowest latency</td></tr>
-            <tr><td><code>mxbai-rerank-base-v1</code></td><td>~278 MB</td><td>512 tokens</td><td>Good balance of speed and quality</td></tr>
-            <tr><td><code>mxbai-rerank-large-v1</code></td><td>~560 MB</td><td>512 tokens</td><td>Highest precision; GPU recommended</td></tr>
+            <tr><td><code>mxbai-rerank-xsmall-v1</code></td><td>~70 MB (0.1B)</td><td>512 tokens</td><td>English</td><td>Browser / edge; lowest latency</td></tr>
+            <tr><td><code>mxbai-rerank-base-v1</code></td><td>~278 MB (0.2B)</td><td>512 tokens</td><td>English</td><td>Good balance of speed and quality</td></tr>
+            <tr><td><code>mxbai-rerank-large-v1</code></td><td>~560 MB (1.5B)</td><td>512 tokens</td><td>English</td><td>Legacy flagship; superseded by v2 below</td></tr>
+            <tr><td><code>mxbai-rerank-base-v2</code></td><td>0.5B</td><td>8k default, up to 32k</td><td>100+, incl. Chinese</td><td>Best size/quality balance; production default</td></tr>
+            <tr><td><code>mxbai-rerank-large-v2</code></td><td>1.5B</td><td>8k default, up to 32k</td><td>100+, incl. Chinese</td><td>Highest accuracy; GPU recommended</td></tr>
           </tbody>
         </table>
       </div>
-      <p>All three are DeBERTa-v3 cross-encoders trained on MS MARCO passage ranking. <strong>Start with <code>mxbai-rerank-base-v1</code></strong> for production use; switch to <code>large</code> if you have GPU headroom and need the extra precision. Use <code>xsmall</code> for browser or edge deployments where model size is the constraint.</p>
+      <p>The v1 family are DeBERTa-v3 cross-encoders trained on MS MARCO passage ranking; v2 is a Qwen2.5-based generation trained with a three-step reinforcement-learning process (GRPO, contrastive learning, preference learning). <strong>Start with <code>mxbai-rerank-base-v2</code></strong> for new production use, especially with any non-English content — it beats v1's <code>large</code> on every published benchmark below. Keep <code>xsmall-v1</code> only for browser or edge deployments, since v2 has no comparably small variant.</p>
 
       <h2 id="benchmarks">Benchmarks</h2>
       <div class="table-wrap">
@@ -160,14 +162,49 @@
           <tbody>
             <tr><td>mxbai-rerank-xsmall-v1</td><td>~55.5</td><td>~38.0</td></tr>
             <tr><td>mxbai-rerank-base-v1</td><td>~59.8</td><td>~40.6</td></tr>
-            <tr><td>mxbai-rerank-large-v1</td><td>~62.1</td><td>~42.3</td></tr>
+            <tr><td>mxbai-rerank-large-v1</td><td>49.32*</td><td>~42.3</td></tr>
+            <tr><td>mxbai-rerank-base-v2</td><td>55.57*</td><td class="muted">not published</td></tr>
+            <tr><td>mxbai-rerank-large-v2</td><td>57.49*</td><td class="muted">not published</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="muted" style="font-size:.85rem">Scores are approximate averages across the 18 BEIR datasets. Check the mixedbread-ai HuggingFace model cards for per-dataset results.</p>
+      <p class="muted" style="font-size:.85rem">Rows marked <strong>*</strong> are from mixedbread's own cross-generation comparison table (<a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">mxbai-rerank on GitHub</a>), not the classic BEIR 18-dataset suite. Until September 2026 this page carried large-v1 at an unsourced ~62.1 — mixedbread's own launch blog reported ~48.8 NDCG@10 on 11 BEIR datasets, and their 2026 comparison table reports 49.32*; both are far below the number this page previously carried, so it's now corrected. The xsmall-v1/base-v1 rows and the MS MARCO column remain approximate figures we haven't independently re-verified — check the mixedbread-ai HuggingFace model cards for authoritative per-dataset results.</p>
+
+      <h3>Multilingual (why v2 exists)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Mr.TyDi multilingual avg</th><th>Chinese</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>mxbai-rerank-large-v1 (English-only)</td><td>21.88*</td><td>72.53</td></tr>
+            <tr><td>mxbai-rerank-base-v2</td><td>28.56*</td><td>83.70</td></tr>
+            <tr><td>mxbai-rerank-large-v2</td><td>29.79*</td><td>84.16</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">v1 was never a multilingual model — it just hadn't been benchmarked on non-English data until mixedbread's own 2026 retrospective. If your documents aren't all English, v2 is the generation to use; v1 is not a substitute.</p>
 
       <h2 id="usage">Quick start</h2>
-      <h3>Self-hosted (sentence-transformers)</h3>
+      <h3>v2, self-hosted</h3>
+      <pre><code>pip install -U mxbai-rerank</code></pre>
+      <pre><code>from mxbai_rerank import MxbaiRerankV2
+
+reranker = MxbaiRerankV2("mixedbread-ai/mxbai-rerank-base-v2")  # or large-v2
+
+query = "How do I add reranking to my RAG pipeline?"
+documents = [
+    "Rerankers score each query-passage pair with a cross-encoder.",
+    "BM25 is a classical keyword-based retrieval method.",
+    "London is the capital of the United Kingdom.",
+    "Two-stage retrieval: retrieve 50 candidates, rerank to top 5.",
+]
+
+results = reranker.rank(query=query, documents=documents)
+for r in results:
+    print(f"{r.score:.4f}  {r.document[:80]}")</code></pre>
+
+      <h3>v1, self-hosted (sentence-transformers)</h3>
       <pre><code>pip install sentence-transformers</code></pre>
       <pre><code>from sentence_transformers import CrossEncoder
 
@@ -187,29 +224,29 @@ ranked = sorted(zip(scores, passages), reverse=True)
 for score, text in ranked:
     print(f"{score:.4f}  {text[:80]}")</code></pre>
 
-      <h3>In a RAG pipeline</h3>
-      <pre><code>from sentence_transformers import CrossEncoder
+      <h3>In a RAG pipeline (v2)</h3>
+      <pre><code>from mxbai_rerank import MxbaiRerankV2
 
-reranker = CrossEncoder("mixedbread-ai/mxbai-rerank-large-v1")
+reranker = MxbaiRerankV2("mixedbread-ai/mxbai-rerank-large-v2")
 
 def rag_answer(query: str, vector_db, llm) -> str:
     # Stage 1: retrieve wide
     candidates = vector_db.search(query, top_k=50)
     # Stage 2: rerank tight
-    scores = reranker.predict([(query, c) for c in candidates])
-    top5 = [c for _, c in sorted(zip(scores, candidates), reverse=True)[:5]]
+    results = reranker.rank(query=query, documents=candidates, top_k=5)
+    top5 = [r.document for r in results]
     # Stage 3: generate
     return llm.complete(f"Context:\n" + "\n\n".join(top5) + f"\n\nQ: {query}")</code></pre>
 
       <h2 id="api">Hosted API</h2>
-      <p>mixedbread-ai offers a hosted rerank endpoint backed by the same model weights. Useful if you want to avoid running inference on your own infrastructure.</p>
-      <pre><code>pip install mixedbread-ai</code></pre>
-      <pre><code>from mixedbread_ai import MixedbreadAI
+      <p>mixedbread-ai offers a hosted rerank endpoint backed by the same model weights. Useful if you want to avoid running inference on your own infrastructure. The current SDK is <code>mixedbread</code> (the older <code>mixedbread_ai</code> package was v1-era):</p>
+      <pre><code>pip install mixedbread</code></pre>
+      <pre><code>from mixedbread import Mixedbread
 
-mxbai = MixedbreadAI(api_key="YOUR_API_KEY")
+mxbai = Mixedbread(api_key="YOUR_API_KEY")
 
-result = mxbai.reranking(
-    model="mixedbread-ai/mxbai-rerank-large-v1",
+result = mxbai.rerank(
+    model="mixedbread-ai/mxbai-rerank-large-v2",
     query="How do I add reranking to my RAG pipeline?",
     input=[
         "Rerankers score each query-passage pair jointly.",
@@ -218,14 +255,13 @@ result = mxbai.reranking(
         "Two-stage retrieval: retrieve wide, rerank tight.",
     ],
     top_k=3,
-    return_input=False,
 )
 
 for item in result.data:
     print(f"{item.score:.4f}  rank {item.index + 1}")</code></pre>
 
       <h2 id="browser">Browser use</h2>
-      <p>The <code>xsmall</code> variant is compact enough to run in the browser via transformers.js — this is exactly what our demo uses:</p>
+      <p>The v1 <code>xsmall</code> variant is compact enough to run in the browser via transformers.js — this is exactly what our demo uses. v2's smallest variant (0.5B) has no equivalent browser-sized build yet:</p>
       <pre><code>// transformers.js (ES module)
 import { AutoTokenizer, AutoModelForSequenceClassification }
   from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3";
@@ -250,21 +286,22 @@ const scores = logits.sigmoid().tolist();</code></pre>
         <div class="card">
           <h3 style="color:var(--good);margin-top:0">Pros</h3>
           <ul class="feature-list">
-            <li>Apache 2.0 — fully open, commercial use allowed</li>
-            <li>xsmall variant runs in-browser via transformers.js</li>
-            <li>DeBERTa-v3 architecture: strong cross-encoder precision</li>
-            <li>Large variant competitive with top commercial APIs</li>
-            <li>Easy drop-in with sentence-transformers</li>
+            <li>Apache 2.0 — fully open, commercial use allowed, both generations</li>
+            <li>v2 supports 100+ languages, including Chinese</li>
+            <li>v1 xsmall variant runs in-browser via transformers.js</li>
+            <li>v2 beats v1's large on every published benchmark</li>
+            <li>Easy drop-in with the <code>mxbai-rerank</code>/sentence-transformers packages</li>
             <li>Hosted API option for managed inference</li>
           </ul>
         </div>
         <div class="card">
           <h3 style="color:var(--danger);margin-top:0">Cons</h3>
           <ul style="padding-left:1.2rem;color:var(--text-soft)">
-            <li>Primarily English — limited multilingual support</li>
-            <li>512-token context is short for long documents</li>
+            <li>v1 is English-only; v2 is the multilingual generation, not v1</li>
+            <li>v2 has no browser/edge-sized variant — smallest is 0.5B</li>
+            <li>v1's 512-token context is short for long documents</li>
             <li>Smaller community than bge or Cohere</li>
-            <li>Large variant needs GPU for practical speed</li>
+            <li>v2 large needs GPU for practical speed</li>
           </ul>
         </div>
       </div>

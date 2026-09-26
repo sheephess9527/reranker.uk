@@ -6,6 +6,16 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-09-26">26 Sep 2026 — mxbai-rerank-v2, a corrected BEIR figure, and a demo smoke test</h2>
+        <ul class="feature-list">
+          <li><strong>mxbai-rerank-large-v1's BEIR score corrected</strong> — this table carried an unsourced ~62.1 for months; mixedbread's own comparison table puts it at 49.32*. A reader flagged the gap between that number and mixedbread's own figures for their newer models, which is what surfaced it</li>
+          <li><strong><code>mxbai-rerank-v2</code> added</strong> — a newer, Qwen2.5-based, RL-trained generation (<code>base-v2</code> 0.5B, <code>large-v2</code> 1.5B) that adds 100+ languages including Chinese; v1 was English-only, which the table didn't make clear</li>
+          <li><strong><code>data/models.json</code></strong> — benchmark numbers that have been through a correction like the one above now live in one sourced file instead of a hand-typed literal in every page that mentions them; the build refuses to render one with no source and warns when one hasn't been re-checked in 6 months</li>
+          <li><strong>A smoke test for the live demo</strong> — <code>npm test</code> runs the demo's load → score → render pipeline against a fake model on every PR; a separate daily job runs it against the real jsDelivr / HuggingFace chain, which is what would actually catch one of those going dark</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-09-18">18 Sep 2026 — URLs without the .html, and two pricing corrections</h2>
         <ul class="feature-list">
           <li><strong>URLs dropped their <code>.html</code></strong> — every internal link, the sitemap, hreflang tags and JSON-LD now point straight at the extensionless URL Cloudflare was already redirecting to, cutting a 307 round-trip off every internal navigation</li>
