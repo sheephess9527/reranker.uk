@@ -17,6 +17,7 @@
 import fs from "fs";
 import path from "path";
 import vm from "vm";
+import crypto from "crypto";
 import { execFileSync } from "child_process";
 import { fileURLToPath } from "url";
 import { parse } from "node-html-parser";
@@ -614,6 +615,54 @@ function writeSitemap(entries) {
   return entries.length * 2;
 }
 
+/**
+ * Generates public/_headers (Cloudflare Workers Static Assets' header
+ * mechanism, same syntax as Cloudflare Pages). The one inline <script> the
+ * site ships — early theme detection in head-open.html, to avoid a flash of
+ * the wrong theme — needs a CSP script-src hash to run under a strict
+ * policy without falling back to 'unsafe-inline'. That hash is computed
+ * here from the partial's actual current content, not hand-copied, so it
+ * can't drift out of sync the way the mxbai BEIR figure did.
+ *
+ * The policy is Content-Security-Policy-Report-Only, not enforcing: this
+ * session can't load the demo against real jsDelivr/HuggingFace/hf-mirror
+ * traffic to confirm a stricter policy wouldn't break WASM model loading in
+ * practice (the sandboxed Playwright tests run against a local static
+ * server that doesn't apply _headers at all, so they can't validate this
+ * either). Report-only surfaces violations in any tester's browser console
+ * without risking breaking the live demo — promote to enforcing once that's
+ * been confirmed clean.
+ */
+function writeHeadersFile() {
+  const themeScript = partial("head-open.html").match(/<script>([\s\S]*?)<\/script>/)[1];
+  const scriptHash = crypto.createHash("sha256").update(themeScript, "utf8").digest("base64");
+
+  const csp = [
+    "default-src 'self'",
+    `script-src 'self' https://cdn.jsdelivr.net 'wasm-unsafe-eval' 'sha256-${scriptHash}'`,
+    "style-src 'self' 'unsafe-inline'", // the site uses inline style="" attributes throughout
+    "img-src 'self' data:",
+    "font-src 'self'",
+    "connect-src 'self' https://cdn.jsdelivr.net https://huggingface.co https://hf-mirror.com",
+    "worker-src 'self' blob:", // ONNX Runtime Web may run inference off the main thread
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "frame-ancestors 'none'",
+  ].join("; ");
+
+  const lines = [
+    "/*",
+    "  X-Content-Type-Options: nosniff",
+    "  X-Frame-Options: DENY",
+    "  Referrer-Policy: strict-origin-when-cross-origin",
+    "  Permissions-Policy: camera=(), microphone=(), geolocation=()",
+    `  Content-Security-Policy-Report-Only: ${csp}`,
+    "",
+  ];
+  fs.writeFileSync(path.join(PUBLIC, "_headers"), lines.join("\n"), "utf8");
+}
+
 /* ------------------------------------------------------------------ *
  * Entry point
  * ------------------------------------------------------------------ */
@@ -645,6 +694,7 @@ function buildAll() {
 
   const urls = writeSitemap(sitemap);
   const listed = writeLlmsTxt(sitemap);
+  writeHeadersFile();
 
   console.log(`Built ${written} pages → public/ (${pages.length} en + ${pages.length} zh)`);
   console.log(`Sitemap: ${urls} URLs with hreflang alternates`);

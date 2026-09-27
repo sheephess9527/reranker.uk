@@ -62,6 +62,16 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-09-27">2026 年 9 月 27 日 —— 加了安全响应头，先以只报告模式跑</h2>
+        <ul class="feature-list">
+          <li><strong>新增 <code>public/_headers</code></strong> —— <code>X-Content-Type-Options</code>、<code>X-Frame-Options</code>、<code>Referrer-Policy</code>、<code>Permissions-Policy</code>，外加一条 Content-Security-Policy，在构建期生成，而不是手工维护</li>
+          <li><strong>CSP 目前是「只报告」模式</strong> —— 这个仓库的沙盒开发环境连不上真实的 jsDelivr / HuggingFace / hf-mirror.com 流量，也跑不了真实的 WASM 实例化，没法确认更严格的策略实际会不会弄坏 Demo，所以现在只记录违规，等对着真实环境验证过之后再改成强制拦截</li>
+          <li><strong>没有手抄的哈希值</strong> —— CSP 的 <code>script-src</code> 通过一个在构建期从脚本实际内容算出的 <code>sha256-</code> 哈希，放行站内唯一的内联脚本（早期主题检测），而不是手工填一个可能跑偏的值</li>
+          <li><strong>两个冒烟测试现在都会盯着 CSP 违规</strong> —— <code>tests/helpers/csp.mjs</code>，在 mock 版和真实网络版的 Demo 测试里都有断言；特意在本地弄坏了一次 <code>style-src</code> 看着测试真的红了，确认这套机制真能抓到问题</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-09-26b">2026 年 9 月 26 日 —— ms-marco MiniLM 的 BEIR 数字其实从没被公布过</h2>
         <ul class="feature-list">
           <li><strong>ms-marco MiniLM-L6 现在写「未公布」</strong> —— 本表此前挂着一个没有来源的 ~55.0；sentence-transformers 自己的文档给这个模型报的是 TREC DL 19 上的 NDCG@10（74.30）和 MS MARCO Dev 上的 MRR@10（39.01），并不是 BEIR 均值。是在下面这条 mxbai 修正之后顺手检查表里其他数字时发现的 —— 同样的问题，换了个模型</li>

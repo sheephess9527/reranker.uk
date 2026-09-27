@@ -1,6 +1,7 @@
 // @ts-check
 import { test, expect } from "@playwright/test";
 import { runRerank, afterColumnTexts } from "./helpers/demoActions.mjs";
+import { watchCspViolations, cspViolations } from "./helpers/csp.mjs";
 
 /**
  * Real-network smoke test: no mocking. Actually downloads the smallest
@@ -18,6 +19,7 @@ test.setTimeout(120_000);
 test("real model loads and reranks candidates against live infrastructure", async ({ page }) => {
   const failures = [];
   page.on("pageerror", (err) => failures.push(String(err)));
+  await watchCspViolations(page);
 
   const docs = ["a completely unrelated sentence about weather", "a passage that closely answers the query"];
   await runRerank(page, { query: "how does reranking improve RAG retrieval", docs }, { timeout: 90_000 });
@@ -28,4 +30,9 @@ test("real model loads and reranks candidates against live infrastructure", asyn
   const after = await afterColumnTexts(page);
   expect(after).toHaveLength(docs.length);
   expect(failures).toEqual([]);
+
+  // This run uses the real transformers.js + ONNX Runtime Web WASM build —
+  // the one path that could actually expose a wasm-unsafe-eval gap in the
+  // report-only CSP that the mocked test structurally cannot reach.
+  expect(await cspViolations(page)).toEqual([]);
 });
