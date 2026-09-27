@@ -354,7 +354,7 @@
               <td class="muted" title="Vendor QA protocol across BEIR/TextQA, TechQA, MIRACL, MLQA, MLDR — not a classic BEIR average">Hit@1 83.0*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="ms-marco-minilm" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="55.0" data-demo="ms-marco">
+            <tr data-name="ms-marco-minilm" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="" data-demo="ms-marco">
               <th scope="row">ms-marco MiniLM-L6 <span class="muted">(browser)</span></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><br><span class="pill info">Browser ✓</span></td>
@@ -362,7 +362,7 @@
               <td>英文</td>
               <td>50–150 ms browser WASM</td>
               <td>免费（自建）</td>
-              <td>~55.0</td>
+              <td class="muted" title="sentence-transformers publishes NDCG@10 on TREC DL 19 (74.30) and MRR@10 on MS MARCO Dev (39.01) for this model — no classic BEIR 18-dataset average. This table carried an unsourced ~55.0 here until Sep 2026">not published*</td>
               <td class="demo-link-cell"></td>
             </tr>
             <tr data-name="contextual-rerank-v2" data-type="api" data-arch="cross-encoder" data-langs="en" data-pricing="paid" data-beir="">
@@ -391,7 +391,7 @@
         </table>
       </div>
       <div class="benchmark-meta callout" style="margin-top:.8rem;padding:.85rem 1rem">
-        <p class="muted" style="font-size:.82rem;margin:0"><strong>最近核对：</strong>2026 年 9 月（新增 mxbai-rerank-v2；修正了 mxbai-rerank-large-v1 的 BEIR 数字 —— 本表此前挂着一个没有来源的 ~62.1，而 mixedbread 自己的对比表给出的是 49.32*）· <strong>下次复核：</strong>2026 年 11 月。标 <strong>*</strong> 的列使用 MTEB-R、厂商或任务特定协议，<em>不同于</em> bge / Jina 行所用的经典 BEIR 18 数据集均值。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档）计费，Voyage 按 <em>token</em> 计费。我们的<a href="/zh/rerank-cost-calculator">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。</p>
+        <p class="muted" style="font-size:.82rem;margin:0"><strong>最近核对：</strong>2026 年 9 月（新增 mxbai-rerank-v2；修正了 mxbai-rerank-large-v1 的 BEIR 数字 —— 本表此前挂着一个没有来源的 ~62.1，而 mixedbread 自己的对比表给出的是 49.32*；ms-marco MiniLM-L6 现在写「未公布」—— sentence-transformers 自己的文档给的是 TREC DL 19 上的 NDCG@10，并不是 BEIR 均值，所以本表此前挂着的 ~55.0 根本无处可查）· <strong>下次复核：</strong>2026 年 11 月。标 <strong>*</strong> 的列使用 MTEB-R、厂商或任务特定协议，<em>不同于</em> bge / Jina 行所用的经典 BEIR 18 数据集均值。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档）计费，Voyage 按 <em>token</em> 计费。我们的<a href="/zh/rerank-cost-calculator">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。</p>
         <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">资料来源： <a href="https://huggingface.co/Qwen" rel="noopener noreferrer">Qwen3-Reranker</a> · <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">jina-reranker-v3 论文</a> · <a href="https://docs.voyageai.com/docs/reranker" rel="noopener noreferrer">Voyage 重排序器</a> · <a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">mxbai-rerank</a> · <a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">nemotron-rerank</a> · <a href="https://huggingface.co/spaces/mteb/leaderboard" rel="noopener noreferrer">MTEB</a> · <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR</a> · <a href="https://huggingface.co/BAAI/bge-reranker-v2-m3" rel="noopener noreferrer">BAAI</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">GTE ModernBERT</a> · <a href="/zh/models/qwen-reranker">Qwen 指南</a> · <a href="/zh/guides/instruction-reranker">指令跟随</a> · <a href="/zh/guides/late-interaction-rerank">ColBERT</a></p>
       </div>
 

@@ -2,6 +2,7 @@
 import { test, expect } from "@playwright/test";
 import { mockTransformersOnPage } from "./helpers/mockTransformers.mjs";
 import { runRerank, afterColumnTexts, beforeColumnTexts } from "./helpers/demoActions.mjs";
+import { watchCspViolations, cspViolations } from "./helpers/csp.mjs";
 
 /**
  * Mocked smoke test: no real network reaches jsDelivr, HuggingFace, or
@@ -11,6 +12,7 @@ import { runRerank, afterColumnTexts, beforeColumnTexts } from "./helpers/demoAc
  * dependencies. That's what tests/demo.smoke.real.spec.js is for.
  */
 test("reranks candidates end-to-end and renders them in score order", async ({ page }) => {
+  await watchCspViolations(page);
   await mockTransformersOnPage(page);
 
   const docs = ["first candidate, lowest score", "second candidate, middle score", "third candidate, highest score"];
@@ -26,4 +28,11 @@ test("reranks candidates end-to-end and renders them in score order", async ({ p
   // fail if scoring or sorting silently broke.
   expect(after[0]).toBe(docs[2]);
   expect(after[2]).toBe(docs[0]);
+
+  // public/_headers ships a report-only CSP; this is the one signal this
+  // sandbox has that it doesn't block the demo's own script/style/connect
+  // needs (it can't see WASM-specific violations — the mocked model never
+  // touches real WASM — but a script-src hash mismatch or a missing
+  // connect-src origin shows up here).
+  expect(await cspViolations(page)).toEqual([]);
 });

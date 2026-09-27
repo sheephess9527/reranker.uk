@@ -1,4 +1,18 @@
 window.I18N_PAGE = { zh: {
+  "27 Sep 2026 — Security headers, report-only for now":
+    "2026 年 9 月 27 日 —— 加了安全响应头，先以只报告模式跑",
+  "<strong><code>public/_headers</code> added</strong> — <code>X-Content-Type-Options</code>, <code>X-Frame-Options</code>, <code>Referrer-Policy</code>, <code>Permissions-Policy</code>, and a Content-Security-Policy, generated at build time rather than hand-maintained":
+    "<strong>新增 <code>public/_headers</code></strong> —— <code>X-Content-Type-Options</code>、<code>X-Frame-Options</code>、<code>Referrer-Policy</code>、<code>Permissions-Policy</code>，外加一条 Content-Security-Policy，在构建期生成，而不是手工维护",
+  "<strong>CSP ships report-only</strong> — this repo's sandboxed dev environment can't reach real jsDelivr/HuggingFace/hf-mirror.com traffic or real WASM instantiation to confirm a stricter policy wouldn't break the demo in practice, so it logs violations instead of blocking anything until that's been checked against the real thing":
+    "<strong>CSP 目前是「只报告」模式</strong> —— 这个仓库的沙盒开发环境连不上真实的 jsDelivr / HuggingFace / hf-mirror.com 流量，也跑不了真实的 WASM 实例化，没法确认更严格的策略实际会不会弄坏 Demo，所以现在只记录违规，等对着真实环境验证过之后再改成强制拦截",
+  "<strong>No hand-copied hash</strong> — the CSP's <code>script-src</code> allows the site's one inline script (early theme detection) via a <code>sha256-</code> hash computed from its actual content at build time, not typed in by hand where it could drift":
+    "<strong>没有手抄的哈希值</strong> —— CSP 的 <code>script-src</code> 通过一个在构建期从脚本实际内容算出的 <code>sha256-</code> 哈希，放行站内唯一的内联脚本（早期主题检测），而不是手工填一个可能跑偏的值",
+  "<strong>Both smoke tests now watch for CSP violations</strong> — <code>tests/helpers/csp.mjs</code>, asserted in both the mocked and real-network demo tests; verified the mechanism actually catches something by deliberately breaking <code>style-src</code> locally and watching the test fail":
+    "<strong>两个冒烟测试现在都会盯着 CSP 违规</strong> —— <code>tests/helpers/csp.mjs</code>，在 mock 版和真实网络版的 Demo 测试里都有断言；特意在本地弄坏了一次 <code>style-src</code> 看着测试真的红了，确认这套机制真能抓到问题",
+  "26 Sep 2026 — ms-marco MiniLM's BEIR figure was never published":
+    "2026 年 9 月 26 日 —— ms-marco MiniLM 的 BEIR 数字其实从没被公布过",
+  "<strong>ms-marco MiniLM-L6 now reads \"not published\"</strong> — this table carried it at an unsourced ~55.0; sentence-transformers' own docs report NDCG@10 on TREC DL 19 (74.30) and MRR@10 on MS MARCO Dev (39.01) for this model, not a BEIR average. Found while checking the rest of the table after the mxbai correction below — same failure shape, different model":
+    "<strong>ms-marco MiniLM-L6 现在写「未公布」</strong> —— 本表此前挂着一个没有来源的 ~55.0；sentence-transformers 自己的文档给这个模型报的是 TREC DL 19 上的 NDCG@10（74.30）和 MS MARCO Dev 上的 MRR@10（39.01），并不是 BEIR 均值。是在下面这条 mxbai 修正之后顺手检查表里其他数字时发现的 —— 同样的问题，换了个模型",
   "26 Sep 2026 — mxbai-rerank-v2, a corrected BEIR figure, and a demo smoke test":
     "2026 年 9 月 26 日 —— mxbai-rerank-v2、一处 BEIR 数字修正，以及一个 Demo 冒烟测试",
   "<strong>mxbai-rerank-large-v1's BEIR score corrected</strong> — this table carried an unsourced ~62.1 for months; mixedbread's own comparison table puts it at 49.32*. A reader flagged the gap between that number and mixedbread's own figures for their newer models, which is what surfaced it":
