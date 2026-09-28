@@ -21,6 +21,18 @@ test("real model loads and reranks candidates against live infrastructure", asyn
   page.on("pageerror", (err) => failures.push(String(err)));
   await watchCspViolations(page);
 
+  // A CSP violation on a redirected request reports the *pre-redirect* URL
+  // (the spec hides cross-origin redirect targets), so the assertion alone
+  // names the wrong host to allowlist. Record where each redirect actually
+  // went so a failure says what to add.
+  const redirects = [];
+  page.on("response", (res) => {
+    const location = res.headers()["location"];
+    if (res.status() >= 300 && res.status() < 400 && location) {
+      redirects.push(`${new URL(res.url()).host} → ${new URL(location, res.url()).host}`);
+    }
+  });
+
   const docs = ["a completely unrelated sentence about weather", "a passage that closely answers the query"];
   await runRerank(page, { query: "how does reranking improve RAG retrieval", docs }, { timeout: 90_000 });
 
@@ -34,5 +46,7 @@ test("real model loads and reranks candidates against live infrastructure", asyn
   // This run uses the real transformers.js + ONNX Runtime Web WASM build —
   // the one path that could actually expose a wasm-unsafe-eval gap in the
   // report-only CSP that the mocked test structurally cannot reach.
-  expect(await cspViolations(page)).toEqual([]);
+  console.log(`redirects seen: ${[...new Set(redirects)].join(", ") || "none"}`);
+  const violations = await cspViolations(page);
+  expect(violations, `redirects seen: ${[...new Set(redirects)].join(", ") || "none"}`).toEqual([]);
 });

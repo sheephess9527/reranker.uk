@@ -643,7 +643,14 @@ function writeHeadersFile() {
     "style-src 'self' 'unsafe-inline'", // the site uses inline style="" attributes throughout
     "img-src 'self' data:",
     "font-src 'self'",
-    "connect-src 'self' https://cdn.jsdelivr.net https://huggingface.co https://hf-mirror.com",
+    // HuggingFace serves small files (config, tokenizer) from huggingface.co
+    // but 302s large LFS files like model_quantized.onnx to a separate CDN
+    // host, and CSP checks the redirect target. The daily real-network smoke
+    // test caught this: connect-src listed huggingface.co, yet the .onnx
+    // download still violated. The *.hf-mirror.com entry is defensive — its
+    // redirect behaviour is unverified, since CI runs from the US and always
+    // wins the race to huggingface.co.
+    "connect-src 'self' https://cdn.jsdelivr.net https://huggingface.co https://*.huggingface.co https://*.hf.co https://hf-mirror.com https://*.hf-mirror.com",
     "worker-src 'self' blob:", // ONNX Runtime Web may run inference off the main thread
     "object-src 'none'",
     "base-uri 'self'",
