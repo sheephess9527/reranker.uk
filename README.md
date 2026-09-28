@@ -239,7 +239,7 @@ in-browser (WASM or WebGPU). No server, API key, or outbound query data.
 
 Demo models: `Xenova/ms-marco-MiniLM-L-6-v2`,
 `jinaai/jina-reranker-v1-tiny-en`, `mixedbread-ai/mxbai-rerank-xsmall-v1` —
-transformers.js 3.5.1, ONNX q8, browser cache.
+transformers.js 4.3.0, ONNX q8, browser cache.
 
 ---
 

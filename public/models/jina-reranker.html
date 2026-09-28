@@ -200,7 +200,7 @@ ranked = sorted(zip(scores, documents), reverse=True)</code></pre>
       <p>The <code>v1-tiny</code> model (33 MB quantised) loads via transformers.js in under 10 seconds on a typical broadband connection and runs scoring at ~200 ms for a 10-candidate batch. This is what powers our demo:</p>
       <pre><code>// transformers.js (ES module in the browser)
 import { AutoTokenizer, AutoModelForSequenceClassification }
-  from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3";
+  from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4";
 
 const tokenizer = await AutoTokenizer.from_pretrained(
   "jinaai/jina-reranker-v1-tiny-en", { dtype: "q8" }

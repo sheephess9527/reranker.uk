@@ -1,7 +1,7 @@
 /* reranker.uk — in-browser cross-encoder reranking demo.
  * transformers.js is loaded on first Rerank (dynamic import) to keep initial page light.
  */
-const TF_CDN = "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.1";
+const TF_CDN = "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0";
 const HF_HOST = "https://huggingface.co";
 const HF_MIRROR_HOST = "https://hf-mirror.com";
 const HOST_PROBE_TIMEOUT_MS = 2500;
