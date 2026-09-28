@@ -1,4 +1,14 @@
 window.I18N_PAGE = { zh: {
+  "28 Sep 2026 — transformers.js 4.3.0, and what report-only caught":
+    "2026 年 9 月 28 日 —— transformers.js 4.3.0，以及「只报告」模式抓到了什么",
+  "<strong>The demo runs on transformers.js 4.3.0</strong> — up from 3.5.1, with ONNX Runtime Web 1.22 → 1.31. Verified against live jsDelivr and HuggingFace on all three demo models before merging, not just checked against the source":
+    "<strong>Demo 升级到 transformers.js 4.3.0</strong> —— 从 3.5.1 升上来，ONNX Runtime Web 也从 1.22 升到 1.31。合并前在真实的 jsDelivr 和 HuggingFace 上把三个 Demo 模型都跑过一遍，不只是对着源码看了看",
+  "<strong>The report-only CSP earned its keep</strong> — its first run against real traffic flagged that HuggingFace redirects model weights to separate CDN hosts the policy didn't list. Enforcing, that would have blocked every model download in the demo. Fixed before it was ever enforced":
+    "<strong>「只报告」模式的 CSP 立了功</strong> —— 第一次对着真实流量跑，就发现 HuggingFace 会把模型权重重定向到策略里没列出的 CDN 域名。如果当时是强制模式，Demo 里的每一次模型下载都会被拦掉。在真正强制之前就已经修好了",
+  "<strong>…and caught the upgrade too</strong> — transformers.js 4 loads part of ONNX Runtime from a <code>blob:</code> URL by default. The demo now switches that cache off instead of loosening the policy for every page":
+    "<strong>……升级时也抓到了问题</strong> —— transformers.js 4 默认会从 <code>blob:</code> URL 加载 ONNX Runtime 的一部分代码。现在 Demo 直接关掉了这个缓存，而不是为此放宽全站每一页的策略",
+  "<strong>A stricter real-network test</strong> — the daily check now runs every model in the demo's picker, not just the default, and fails if an obviously relevant passage doesn't outrank an unrelated one, so a model that loads but ranks wrong no longer passes":
+    "<strong>更严格的真实网络测试</strong> —— 每日检查现在会跑 Demo 里可选的每一个模型，而不只是默认那个；如果一段明显相关的文本没能排在无关文本前面，测试就会失败，所以「能加载但排错了」的模型不会再蒙混过关",
   "27 Sep 2026 — Security headers, report-only for now":
     "2026 年 9 月 27 日 —— 加了安全响应头，先以只报告模式跑",
   "<strong><code>public/_headers</code> added</strong> — <code>X-Content-Type-Options</code>, <code>X-Frame-Options</code>, <code>Referrer-Policy</code>, <code>Permissions-Policy</code>, and a Content-Security-Policy, generated at build time rather than hand-maintained":

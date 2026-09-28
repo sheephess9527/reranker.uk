@@ -264,7 +264,7 @@ for item in result.data:
       <p>The v1 <code>xsmall</code> variant is compact enough to run in the browser via transformers.js — this is exactly what our demo uses. v2's smallest variant (0.5B) has no equivalent browser-sized build yet:</p>
       <pre><code>// transformers.js (ES module)
 import { AutoTokenizer, AutoModelForSequenceClassification }
-  from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3";
+  from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4";
 
 const tokenizer = await AutoTokenizer.from_pretrained(
   "mixedbread-ai/mxbai-rerank-xsmall-v1", { dtype: "q8" }

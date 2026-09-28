@@ -162,14 +162,24 @@ score → render wiring still works.
 
 `npm run test:real` (`tests/demo.smoke.real.spec.js`) runs the same
 interaction against the real jsDelivr / HuggingFace / hf-mirror.com chain,
-with a real (small) model download and real ONNX Runtime Web inference. This
-is what would actually catch one of those three dependencies breaking, which
-the mocked test cannot — it's the site's answer to "the demo could go dark
-and nobody would know." It's slow and depends on infrastructure this repo
+once per model in the demo's picker, with real model downloads and real ONNX
+Runtime Web inference, and asserts a relevant passage outranks an unrelated
+one. This is what would actually catch one of those three dependencies
+breaking, which the mocked test cannot — it's the site's answer to "the demo
+could go dark and nobody would know." It also logs every redirect it sees
+(HF 302s model weights to CDN hosts), since a CSP violation on a redirect
+names the wrong host. It's slow and depends on infrastructure this repo
 doesn't control, so it isn't run on every PR: `.github/workflows/demo-smoke-daily.yml`
 runs it once a day on a schedule instead. Both need `npx playwright install
 --with-deps chromium` first if you don't already have a Chromium Playwright
 can drive.
+
+**Before merging anything that touches the demo's dependencies** (a
+transformers.js bump, a CSP change), run the daily workflow on the branch
+from the Actions tab ("Run workflow", `workflow_dispatch`) — that's the only
+check in this repo that exercises real model loading. The Sep 2026
+transformers.js 3.5.1 → 4.3.0 upgrade was verified that way, and the run
+found a CSP break the mocked test couldn't have seen.
 
 Both tests also assert zero `securitypolicyviolation` events (see
 `tests/helpers/csp.mjs`) — the one way this repo can check the CSP below
@@ -186,16 +196,26 @@ overwritten on the next build. It sets `X-Content-Type-Options`,
 `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, and a
 **report-only** Content-Security-Policy.
 
-Report-only, not enforcing: `scripts/serve.mjs` (what the Playwright tests
-run against) applies `_headers` and both smoke tests assert no violations,
-but neither can reach real jsDelivr/HuggingFace/hf-mirror.com traffic or
-real WASM instantiation from this repo's sandboxed dev environment, and a
-CSP that's wrong in a WASM-specific way is exactly the kind of thing that
-would only show up against the real thing. Before promoting it to enforcing
-(`Content-Security-Policy` instead of `-Report-Only`), check the browser
-console on the deployed site for violations, or wait for a few days of the
-report-only header running against real traffic and confirm the daily
-smoke test's CSP assertions have stayed green throughout.
+Report-only, not enforcing. `scripts/serve.mjs` (what the Playwright tests
+run against) applies `_headers`, and both smoke tests assert no violations;
+the daily real-network one is the check that matters, since it loads real
+models through real WASM. It has already caught two gaps that would have
+broken every model download had the policy been enforcing:
+
+- HuggingFace 302s model weights from `huggingface.co` to CDN hosts
+  (`cas-bridge.xethub-eu.hf.co`, `us.aws.cdn.hf.co` — region-dependent),
+  hence the `*.hf.co` wildcard in `connect-src`.
+- transformers.js 4 imports ONNX Runtime's WASM factory from a `blob:` URL
+  by default; the demo sets `env.useWasmCache = false` so `script-src`
+  doesn't need `blob:`.
+
+What's still unverified is the **hf-mirror.com** path: CI runs from the US
+and always wins the host race to huggingface.co, so the mirror (what
+visitors in mainland China get) is never exercised. Before promoting to
+enforcing (`Content-Security-Policy` instead of `-Report-Only`), load the
+demo once from a network where the mirror wins and check the browser
+console for violations, and confirm the daily run has stayed green for a
+few days.
 
 The CSP's `script-src` includes a `sha256-...` hash instead of
 `'unsafe-inline'`, computed at build time from the literal content of the
@@ -239,7 +259,7 @@ in-browser (WASM or WebGPU). No server, API key, or outbound query data.
 
 Demo models: `Xenova/ms-marco-MiniLM-L-6-v2`,
 `jinaai/jina-reranker-v1-tiny-en`, `mixedbread-ai/mxbai-rerank-xsmall-v1` —
-transformers.js 3.5.1, ONNX q8, browser cache.
+transformers.js 4.3.0, ONNX q8, browser cache.
 
 ---
 

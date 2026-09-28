@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 27 Sep 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 28 Sep 2026 12:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>28 Sep 2026 — transformers.js 4.3.0, and what report-only caught</title>
+      <link>https://reranker.uk/changelog#2026-09-28</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-09-28</guid>
+      <pubDate>Mon, 28 Sep 2026 12:00:00 GMT</pubDate>
+      <description>The demo moves to transformers.js 4.3.0, verified on all three demo models against live infrastructure. The report-only CSP's first real run caught HuggingFace's CDN redirects and transformers.js 4's blob: import, both fixed before the policy is ever enforced.</description>
+    </item>
     <item>
       <title>27 Sep 2026 — Security headers, report-only for now</title>
       <link>https://reranker.uk/changelog#2026-09-27</link>

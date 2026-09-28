@@ -264,7 +264,7 @@ for item in result.data:
       <p>v1 的 <code>xsmall</code> 变体足够轻量，可以通过 transformers.js 在浏览器中运行 —— 这正是我们 Demo 所使用的方式。v2 最小的变体（0.5B）目前还没有对应的浏览器体积版本：</p>
       <pre><code>// transformers.js (ES module)
 import { AutoTokenizer, AutoModelForSequenceClassification }
-  from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3";
+  from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4";
 
 const tokenizer = await AutoTokenizer.from_pretrained(
   "mixedbread-ai/mxbai-rerank-xsmall-v1", { dtype: "q8" }

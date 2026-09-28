@@ -200,7 +200,7 @@ ranked = sorted(zip(scores, documents), reverse=True)</code></pre>
       <p><code>v1-tiny</code> 模型（量化后 33 MB）在普通宽带下可通过 transformers.js 在 10 秒内加载，对 10 个候选的批次打分约需 200 ms。这正是驱动我们 Demo 的模型：</p>
       <pre><code>// transformers.js (ES module in the browser)
 import { AutoTokenizer, AutoModelForSequenceClassification }
-  from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3";
+  from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4";
 
 const tokenizer = await AutoTokenizer.from_pretrained(
   "jinaai/jina-reranker-v1-tiny-en", { dtype: "q8" }

@@ -1,8 +1,9 @@
 /** Shared interaction steps for the demo page, used by both the mocked
  * (PR-time) and real-network (daily) smoke tests, so they exercise
  * identical UI steps and only differ in whether the network is faked. */
-export async function runRerank(page, { query, docs }, { timeout } = {}) {
+export async function runRerank(page, { query, docs, model }, { timeout } = {}) {
   await page.goto("/demo");
+  if (model) await page.selectOption("#model-select", model);
   await page.fill("#query-input", query);
   await page.fill("#docs-input", docs.join("\n"));
   await page.click("#run-btn");

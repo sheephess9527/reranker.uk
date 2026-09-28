@@ -1,7 +1,7 @@
 /* reranker.uk — in-browser cross-encoder reranking demo.
  * transformers.js is loaded on first Rerank (dynamic import) to keep initial page light.
  */
-const TF_CDN = "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.1";
+const TF_CDN = "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0";
 const HF_HOST = "https://huggingface.co";
 const HF_MIRROR_HOST = "https://hf-mirror.com";
 const HOST_PROBE_TIMEOUT_MS = 2500;
@@ -56,6 +56,13 @@ async function loadTransformers() {
   tfModule.env.allowLocalModels = false;
   tfModule.env.useBrowserCache = true;
   tfModule.env.remoteHost = host;
+  // transformers.js 4.x defaults this on: it copies ONNX Runtime's WASM
+  // factory into Cache Storage and imports it back from a blob: URL, which
+  // the site's CSP script-src doesn't (and shouldn't) allow. Off, ORT
+  // imports the factory straight from its versioned jsDelivr URL — still
+  // cached by the browser's HTTP cache, just not a second time in Cache
+  // Storage. Same caching behaviour the demo had on 3.x.
+  tfModule.env.useWasmCache = false;
   return tfModule;
 }
 
