@@ -44,3 +44,15 @@ jobs:
           name: playwright-trace
           path: test-results/
           retention-days: 7
+
+  # www.reranker.uk is a Cloudflare dashboard setting (a proxied DNS record +
+  # a redirect rule), not code, so nothing in this repo would notice if it
+  # were deleted — the site sat NXDOMAIN on www for months before Sep 2026.
+  www-redirect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: www.reranker.uk 301s to the apex, keeping path and query
+        run: |
+          got=$(curl -sS -o /dev/null -w '%{http_code} %{redirect_url}' 'https://www.reranker.uk/models/?x=1')
+          echo "got: $got"
+          test "$got" = '301 https://reranker.uk/models/?x=1'
