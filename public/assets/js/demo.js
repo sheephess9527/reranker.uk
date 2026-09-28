@@ -56,6 +56,13 @@ async function loadTransformers() {
   tfModule.env.allowLocalModels = false;
   tfModule.env.useBrowserCache = true;
   tfModule.env.remoteHost = host;
+  // transformers.js 4.x defaults this on: it copies ONNX Runtime's WASM
+  // factory into Cache Storage and imports it back from a blob: URL, which
+  // the site's CSP script-src doesn't (and shouldn't) allow. Off, ORT
+  // imports the factory straight from its versioned jsDelivr URL — still
+  // cached by the browser's HTTP cache, just not a second time in Cache
+  // Storage. Same caching behaviour the demo had on 3.x.
+  tfModule.env.useWasmCache = false;
   return tfModule;
 }
 
