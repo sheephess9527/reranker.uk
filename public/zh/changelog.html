@@ -62,6 +62,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-01g">2026 年 10 月 1 日 —— Demo 打分速度快了约一倍</h2>
+        <ul class="feature-list">
+          <li><strong>Demo 改为多线程推理</strong> —— Demo 页面现在开启了跨源隔离，ONNX Runtime Web 可以用多个线程打分。在同一台 4 核机器上做 A/B 实测：三个模型都快了约 1.9 倍（Jina v1 tiny 打分 10 段从 424 ms 降到 229 ms）。不支持隔离响应头的浏览器会保持单线程，不受影响</li>
+          <li><strong>只在需要的地方开启</strong> —— 跨源隔离和允许 blob: 脚本的 CSP（多线程运行时需要这样加载）只用于 Demo 页面；其他页面仍保持更严格的策略。新增的每日检查会在线上确认这两点</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-01f">2026 年 10 月 1 日 —— 延迟数字：要么实测，要么有出处，要么删掉</h2>
         <ul class="feature-list">
           <li><strong>浏览器 Demo 有了实测数字</strong> —— 新写了一个脚本，在 4 核的 GitHub Actions 机器上用 Chromium 跑在线 Demo。给 10 段打分：Jina v1 tiny 约 430 ms，ms-marco MiniLM 约 515 ms，mxbai xsmall 约 1.4 秒。网站原先写的是 30–80 ms 和 50–150 ms</li>

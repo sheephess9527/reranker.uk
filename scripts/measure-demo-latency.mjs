@@ -84,16 +84,31 @@ const browser = await chromium.launch(
 );
 const results = [];
 try {
+  // ISOLATION=both runs every model twice on the same machine: once as
+  // served, once with COOP/COEP stripped from the page response, so the
+  // multi-threading gain is measured without a hardware difference in it.
+  const modes = process.env.ISOLATION === "both" ? ["as-served", "stripped"] : ["as-served"];
+  for (const mode of modes)
   for (const model of MODELS) {
     const ctx = await browser.newContext(); // fresh context: nothing cached
+    if (mode === "stripped") {
+      await ctx.route(/\/(zh\/)?demo(\?.*)?$/, async (route) => {
+        const res = await route.fetch();
+        const headers = { ...res.headers() };
+        delete headers["cross-origin-opener-policy"];
+        delete headers["cross-origin-embedder-policy"];
+        await route.fulfill({ response: res, headers });
+      });
+    }
     const page = await ctx.newPage();
     await page.goto(`${BASE}/demo`);
     await page.selectOption("#model-select", model);
+    const isolated = await page.evaluate(() => self.crossOriginIsolated);
     const cold = await runOnce(page, 10);
     const w10 = [], w30 = [];
     for (let i = 0; i < RUNS; i++) w10.push((await runOnce(page, 10)).ms);
     for (let i = 0; i < RUNS; i++) w30.push((await runOnce(page, 30)).ms);
-    const row = { model, coldMs: cold.wall, downloadMB: cold.mb, median10: median(w10), median30: median(w30), runs10: w10, runs30: w30 };
+    const row = { mode, model, isolated, coldMs: cold.wall, downloadMB: cold.mb, median10: median(w10), median30: median(w30), runs10: w10, runs30: w30 };
     results.push(row);
     console.log(JSON.stringify(row));
     await ctx.close();
@@ -103,7 +118,7 @@ try {
   server.kill();
 }
 
-console.log("\nmodel | download | cold (download + 10) | 10 passages | 30 passages");
+console.log("\nmode | model | isolated | download | cold (download + 10) | 10 passages | 30 passages");
 for (const r of results) {
-  console.log(`${r.model} | ${r.downloadMB} MB | ${(r.coldMs / 1000).toFixed(1)} s | ${r.median10} ms | ${r.median30} ms`);
+  console.log(`${r.mode} | ${r.model} | ${r.isolated} | ${r.downloadMB} MB | ${(r.coldMs / 1000).toFixed(1)} s | ${r.median10} ms | ${r.median30} ms`);
 }

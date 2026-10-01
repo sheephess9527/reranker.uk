@@ -142,31 +142,31 @@
       "verified_on": "2026-10-01"
     },
     "browser_ms_10": {
-      "value": "429",
-      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "value": "229",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36857991698",
       "check": "manual",
-      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "check_note": "Our own measurement with ISOLATION=both node scripts/measure-demo-latency.mjs: the live demo in Chromium on a GitHub Actions ubuntu-latest runner (4 vCPU AMD EPYC 7763), cross-origin isolated so ONNX Runtime Web runs multi-threaded; median of 5 warm runs, ~60-word passages; download size as the demo reports it. Same run with isolation stripped (single-threaded, what a browser without COEP credentialless gets): 424 / 1,359 / 516 ms for 10 passages. A phone or older laptop will be slower",
       "verified_on": "2026-10-01"
     },
     "browser_ms_30": {
-      "value": "1,283",
-      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "value": "672",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36857991698",
       "check": "manual",
-      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "check_note": "Our own measurement with ISOLATION=both node scripts/measure-demo-latency.mjs: the live demo in Chromium on a GitHub Actions ubuntu-latest runner (4 vCPU AMD EPYC 7763), cross-origin isolated so ONNX Runtime Web runs multi-threaded; median of 5 warm runs, ~60-word passages; download size as the demo reports it. Same run with isolation stripped (single-threaded, what a browser without COEP credentialless gets): 424 / 1,359 / 516 ms for 10 passages. A phone or older laptop will be slower",
       "verified_on": "2026-10-01"
     },
     "browser_cold_s": {
-      "value": "4.4",
-      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "value": "4.6",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36857991698",
       "check": "manual",
-      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "check_note": "Our own measurement with ISOLATION=both node scripts/measure-demo-latency.mjs: the live demo in Chromium on a GitHub Actions ubuntu-latest runner (4 vCPU AMD EPYC 7763), cross-origin isolated so ONNX Runtime Web runs multi-threaded; median of 5 warm runs, ~60-word passages; download size as the demo reports it. Same run with isolation stripped (single-threaded, what a browser without COEP credentialless gets): 424 / 1,359 / 516 ms for 10 passages. A phone or older laptop will be slower",
       "verified_on": "2026-10-01"
     },
     "browser_download_mb": {
       "value": "33.8",
-      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36857991698",
       "check": "manual",
-      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "check_note": "Our own measurement with ISOLATION=both node scripts/measure-demo-latency.mjs: the live demo in Chromium on a GitHub Actions ubuntu-latest runner (4 vCPU AMD EPYC 7763), cross-origin isolated so ONNX Runtime Web runs multi-threaded; median of 5 warm runs, ~60-word passages; download size as the demo reports it. Same run with isolation stripped (single-threaded, what a browser without COEP credentialless gets): 424 / 1,359 / 516 ms for 10 passages. A phone or older laptop will be slower",
       "verified_on": "2026-10-01"
     }
   },
@@ -178,31 +178,31 @@
       "verified_on": "2026-10-01"
     },
     "browser_ms_10": {
-      "value": "515",
-      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "value": "276",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36857991698",
       "check": "manual",
-      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "check_note": "Our own measurement with ISOLATION=both node scripts/measure-demo-latency.mjs: the live demo in Chromium on a GitHub Actions ubuntu-latest runner (4 vCPU AMD EPYC 7763), cross-origin isolated so ONNX Runtime Web runs multi-threaded; median of 5 warm runs, ~60-word passages; download size as the demo reports it. Same run with isolation stripped (single-threaded, what a browser without COEP credentialless gets): 424 / 1,359 / 516 ms for 10 passages. A phone or older laptop will be slower",
       "verified_on": "2026-10-01"
     },
     "browser_ms_30": {
-      "value": "1,550",
-      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "value": "799",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36857991698",
       "check": "manual",
-      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "check_note": "Our own measurement with ISOLATION=both node scripts/measure-demo-latency.mjs: the live demo in Chromium on a GitHub Actions ubuntu-latest runner (4 vCPU AMD EPYC 7763), cross-origin isolated so ONNX Runtime Web runs multi-threaded; median of 5 warm runs, ~60-word passages; download size as the demo reports it. Same run with isolation stripped (single-threaded, what a browser without COEP credentialless gets): 424 / 1,359 / 516 ms for 10 passages. A phone or older laptop will be slower",
       "verified_on": "2026-10-01"
     },
     "browser_cold_s": {
       "value": "4.6",
-      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36857991698",
       "check": "manual",
-      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "check_note": "Our own measurement with ISOLATION=both node scripts/measure-demo-latency.mjs: the live demo in Chromium on a GitHub Actions ubuntu-latest runner (4 vCPU AMD EPYC 7763), cross-origin isolated so ONNX Runtime Web runs multi-threaded; median of 5 warm runs, ~60-word passages; download size as the demo reports it. Same run with isolation stripped (single-threaded, what a browser without COEP credentialless gets): 424 / 1,359 / 516 ms for 10 passages. A phone or older laptop will be slower",
       "verified_on": "2026-10-01"
     },
     "browser_download_mb": {
       "value": "22.8",
-      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36857991698",
       "check": "manual",
-      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "check_note": "Our own measurement with ISOLATION=both node scripts/measure-demo-latency.mjs: the live demo in Chromium on a GitHub Actions ubuntu-latest runner (4 vCPU AMD EPYC 7763), cross-origin isolated so ONNX Runtime Web runs multi-threaded; median of 5 warm runs, ~60-word passages; download size as the demo reports it. Same run with isolation stripped (single-threaded, what a browser without COEP credentialless gets): 424 / 1,359 / 516 ms for 10 passages. A phone or older laptop will be slower",
       "verified_on": "2026-10-01"
     }
   },
@@ -371,31 +371,31 @@
   },
   "mxbai-rerank-xsmall-v1": {
     "browser_ms_10": {
-      "value": "1,370",
-      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "value": "728",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36857991698",
       "check": "manual",
-      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "check_note": "Our own measurement with ISOLATION=both node scripts/measure-demo-latency.mjs: the live demo in Chromium on a GitHub Actions ubuntu-latest runner (4 vCPU AMD EPYC 7763), cross-origin isolated so ONNX Runtime Web runs multi-threaded; median of 5 warm runs, ~60-word passages; download size as the demo reports it. Same run with isolation stripped (single-threaded, what a browser without COEP credentialless gets): 424 / 1,359 / 516 ms for 10 passages. A phone or older laptop will be slower",
       "verified_on": "2026-10-01"
     },
     "browser_ms_30": {
-      "value": "4,110",
-      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "value": "2,186",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36857991698",
       "check": "manual",
-      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "check_note": "Our own measurement with ISOLATION=both node scripts/measure-demo-latency.mjs: the live demo in Chromium on a GitHub Actions ubuntu-latest runner (4 vCPU AMD EPYC 7763), cross-origin isolated so ONNX Runtime Web runs multi-threaded; median of 5 warm runs, ~60-word passages; download size as the demo reports it. Same run with isolation stripped (single-threaded, what a browser without COEP credentialless gets): 424 / 1,359 / 516 ms for 10 passages. A phone or older laptop will be slower",
       "verified_on": "2026-10-01"
     },
     "browser_cold_s": {
-      "value": "6.8",
-      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "value": "5.4",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36857991698",
       "check": "manual",
-      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "check_note": "Our own measurement with ISOLATION=both node scripts/measure-demo-latency.mjs: the live demo in Chromium on a GitHub Actions ubuntu-latest runner (4 vCPU AMD EPYC 7763), cross-origin isolated so ONNX Runtime Web runs multi-threaded; median of 5 warm runs, ~60-word passages; download size as the demo reports it. Same run with isolation stripped (single-threaded, what a browser without COEP credentialless gets): 424 / 1,359 / 516 ms for 10 passages. A phone or older laptop will be slower",
       "verified_on": "2026-10-01"
     },
     "browser_download_mb": {
       "value": "91.5",
-      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36857991698",
       "check": "manual",
-      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "check_note": "Our own measurement with ISOLATION=both node scripts/measure-demo-latency.mjs: the live demo in Chromium on a GitHub Actions ubuntu-latest runner (4 vCPU AMD EPYC 7763), cross-origin isolated so ONNX Runtime Web runs multi-threaded; median of 5 warm runs, ~60-word passages; download size as the demo reports it. Same run with isolation stripped (single-threaded, what a browser without COEP credentialless gets): 424 / 1,359 / 516 ms for 10 passages. A phone or older laptop will be slower",
       "verified_on": "2026-10-01"
     }
   }

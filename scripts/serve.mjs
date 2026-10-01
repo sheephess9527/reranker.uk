@@ -34,6 +34,12 @@ function loadHeaderRules() {
       current = { pattern: line.trim(), headers: {} };
       rules.push(current);
     } else if (current) {
+      const t = line.trim();
+      // "! Name" drops a header that a broader rule set (Cloudflare syntax).
+      if (t.startsWith("!")) {
+        (current.detach ||= []).push(t.slice(1).trim());
+        continue;
+      }
       const idx = line.indexOf(":");
       if (idx === -1) continue;
       current.headers[line.slice(0, idx).trim()] = line.slice(idx + 1).trim();
@@ -46,7 +52,9 @@ function headersFor(urlPath, rules) {
   const out = {};
   for (const rule of rules) {
     const matches = rule.pattern === "/*" || rule.pattern === urlPath;
-    if (matches) Object.assign(out, rule.headers);
+    if (!matches) continue;
+    for (const name of rule.detach || []) delete out[name];
+    Object.assign(out, rule.headers);
   }
   return out;
 }
