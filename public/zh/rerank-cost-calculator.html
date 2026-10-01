@@ -133,7 +133,7 @@
 
       <h2 id="self-host">那自托管呢？</h2>
       <p>自托管没有按调用计的价格，所以它不适合放进上面的表里 —— 你是用 GPU 账单加运维成本换掉了用量账单。只有放到你自己的量级上比较才有意义：把每月 GPU 成本除以上面的查询次数，再和表中的每次查询成本对比。每月几十万次查询以下，API 通常比一块专属 GPU 便宜；远高于这个量级后，自托管 <a href="/zh/models/qwen-reranker">Qwen3-Reranker</a> 或 <a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a> 才开始划算。服务端怎么搭见我们的<a href="/zh/guides/self-host-reranker">自托管指南</a>。</p>
-      <p class="muted" style="font-size:.9rem">另外，模型小并不等于差 —— <a href="/zh/models/jina-reranker">Jina Reranker v3</a> 以 0.6B 的体量拿到 61.94 的 BEIR nDCG@10，所以最省资源的那个，可能同时也是最准的那个。</p>
+      <p class="muted" style="font-size:.9rem">另外，模型小并不等于差 —— <a href="/zh/models/jina-reranker">Jina Reranker v3.5</a> 以 0.6B 的体量，在 Jina 自己的测试里拿到 63.20 的 BEIR nDCG@10，与 4B 模型持平，所以最省资源的那个，也可能是最准的之一。</p>
 
       <h2 id="assumptions">假设与来源</h2>
       <ul>

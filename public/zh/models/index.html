@@ -130,7 +130,7 @@
 <main id="main">
     <section class="hero container" style="padding-bottom:1.5rem">
       <h1>重排序模型对比</h1>
-      <p class="lead">生产环境往往混用 <strong>cross-encoder</strong>、<strong>listwise</strong> 模型、<strong>late-interaction</strong> 以及指令式 API。2026 年最值得注意的一点是：<strong>参数量不再预测质量</strong> —— 0.6B 的 listwise 模型（Jina v3）在 BEIR 上超过 Qwen3-Reranker-4B，149M 的 cross-encoder 在 Hit@1 上与 1.2B 打平，而 Qwen3 自己的 4B 也略胜 8B。下表对比架构、延迟、语言与成本，凡评测协议不一致处均如实标注。</p>
+      <p class="lead">生产环境往往混用 <strong>cross-encoder</strong>、<strong>listwise</strong> 模型、<strong>late-interaction</strong> 以及指令式 API。2026 年最值得注意的一点是：<strong>参数量不再预测质量</strong> —— 0.6B 的 listwise 模型（Jina v3.5）在 Jina 自己的测试里，BEIR 略高于 Qwen3-Reranker-4B，149M 的 cross-encoder 在 Hit@1 上与 1.2B 打平，而 Qwen3 自己的 4B 也略胜 8B。下表对比架构、延迟、语言与成本，凡评测协议不一致处均如实标注。</p>
     </section>
 
     <section class="section container">
@@ -244,15 +244,26 @@
               <td title="mixedbread's own comparison table, not the classic BEIR 18-dataset average other open-weight rows use">55.57*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="jina-reranker-v3" data-type="open api" data-arch="listwise" data-langs="100+" data-pricing="freemium" data-beir="61.94*">
-              <th scope="row"><a href="/zh/models/jina-reranker">Jina Reranker v3</a></th>
+            <tr data-name="jina-reranker-v3.5" data-type="open api" data-arch="listwise" data-langs="100+" data-pricing="freemium" data-beir="63.20*">
+              <th scope="row"><a href="/zh/models/jina-reranker">Jina Reranker v3.5</a></th>
               <td><span class="pill info">Listwise</span></td>
-              <td><span class="pill good">开源 + 托管</span><span class="pill info">优于 Qwen3-4B</span></td>
-              <td>0.6B listwise；64 篇文档共享 131K 上下文</td>
+              <td><span class="pill">Hosted API</span><span class="pill warn">权重：仅限非商用</span></td>
+              <td>Jina 2026 旗舰；可直接替换 v3，速度快 1.22–1.56 倍</td>
               <td>100+ 种语言</td>
               <td>API or GPU self-host</td>
-              <td>免费额度 + 按量付费</td>
-              <td title="Jina's own run: 13 BEIR datasets, reranking the top 100 from jina-embeddings-v3">61.94*</td>
+              <td>送试用 token，之后购买 token 包</td>
+              <td title="Jina's own 2026 run: 13 BEIR datasets, reranking the top 100 from jina-embeddings-v5-text-small. Same run: Qwen3-Reranker-4B 62.28, mxbai-rerank-large-v2 62.45">63.20*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr data-name="jina-reranker-v3" data-type="open api" data-arch="listwise" data-langs="100+" data-pricing="freemium" data-beir="62.10*">
+              <th scope="row"><a href="/zh/models/jina-reranker">Jina Reranker v3</a></th>
+              <td><span class="pill info">Listwise</span></td>
+              <td><span class="pill">Hosted API</span><span class="pill warn">权重：仅限非商用</span></td>
+              <td>0.6B listwise；131K 上下文内 64 篇文档；已被 v3.5 取代</td>
+              <td>100+ 种语言</td>
+              <td>API or GPU self-host</td>
+              <td>送试用 token，之后购买 token 包</td>
+              <td title="Jina's own 2026 run, same as the v3.5 row: 13 BEIR datasets over jina-embeddings-v5-text-small's top 100. The v3 paper's 2025 run, over jina-embeddings-v3, reported 61.94">62.10*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="jina-reranker-tiny" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="48.54*" data-demo="jina-reranker">
@@ -391,8 +402,8 @@
         </table>
       </div>
       <div class="benchmark-meta callout" style="margin-top:.8rem;padding:.85rem 1rem">
-        <p class="muted" style="font-size:.82rem;margin:0"><strong>最近核对：</strong>2026 年 10 月（bge-reranker-v2-m3 由查不到出处的 ~60.1 改为 BAAI 自己公布的 55.36*；Jina v1 tiny 与 ms-marco MiniLM-L6 现在显示 Jina 为它们公布的 BEIR 分数；9 月已将 mxbai-rerank-large-v1 由没有来源的 ~62.1 修正）· <strong>下次复核：</strong>2026 年 11 月。<strong>*</strong> 各家跑 BEIR 的方式都不一样 —— BAAI 用 15 个数据集、对 bge-large-en-v1.5 召回的前 100 条重排，Jina 用 13 个数据集、对 jina-embeddings-v3 的前 100 条重排，mixedbread 用自己选的一套 —— 所以本列每个 BEIR 数字都带 *，鼠标悬停可见其评测方法。差距并不小：Jina 的评测里 bge-reranker-v2-m3 是 56.51，BAAI 自己测的是 55.36；mxbai-rerank-large-v2 在 Jina 那边是 61.44，mixedbread 自己测的是 57.49。请把这一列当作大致的档位，而不是精确到小数的排名。其余带 * 的格子用的是 MTEB-R 或任务特定指标。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档）计费，Voyage 按 <em>token</em> 计费。我们的<a href="/zh/rerank-cost-calculator">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。</p>
-        <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">资料来源： <a href="https://huggingface.co/Qwen" rel="noopener noreferrer">Qwen3-Reranker</a> · <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">jina-reranker-v3 论文</a> · <a href="https://huggingface.co/jinaai/jina-reranker-v1-tiny-en" rel="noopener noreferrer">jina-reranker-v1</a> · <a href="https://docs.voyageai.com/docs/reranker" rel="noopener noreferrer">Voyage 重排序器</a> · <a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">mxbai-rerank</a> · <a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">nemotron-rerank</a> · <a href="https://huggingface.co/spaces/mteb/leaderboard" rel="noopener noreferrer">MTEB</a> · <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR</a> · <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker" rel="noopener noreferrer">BAAI 评测</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">GTE ModernBERT</a> · <a href="/zh/models/qwen-reranker">Qwen 指南</a> · <a href="/zh/guides/instruction-reranker">指令跟随</a> · <a href="/zh/guides/late-interaction-rerank">ColBERT</a></p>
+        <p class="muted" style="font-size:.82rem;margin:0"><strong>最近核对：</strong>2026 年 10 月（新增 jina-reranker-v3.5；Jina 各行改用同一套 2026 年评测；bge-reranker-v2-m3 由查不到出处的 ~60.1 改为 BAAI 自己公布的 55.36*；Jina v1 tiny 与 ms-marco MiniLM-L6 现在显示 Jina 为它们公布的 BEIR 分数；9 月已将 mxbai-rerank-large-v1 由没有来源的 ~62.1 修正）· <strong>下次复核：</strong>2026 年 11 月。<strong>*</strong> 各家跑 BEIR 的方式都不一样 —— BAAI 用 15 个数据集、对 bge-large-en-v1.5 召回的前 100 条重排，Jina 用 13 个数据集、对 jina-embeddings-v5-text-small 的前 100 条重排，mixedbread 用自己选的一套 —— 所以本列每个 BEIR 数字都带 *，鼠标悬停可见其评测方法。差距并不小：Jina 的评测里 bge-reranker-v2-m3 是 56.51，BAAI 自己测的是 55.36；mxbai-rerank-large-v2 在 Jina 那边是 61.44，mixedbread 自己测的是 57.49。请把这一列当作大致的档位，而不是精确到小数的排名。其余带 * 的格子用的是 MTEB-R 或任务特定指标。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档）计费，Voyage 按 <em>token</em> 计费。我们的<a href="/zh/rerank-cost-calculator">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。</p>
+        <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">资料来源： <a href="https://huggingface.co/Qwen" rel="noopener noreferrer">Qwen3-Reranker</a> · <a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">jina-reranker-v3.5</a> · <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">jina-reranker-v3 论文</a> · <a href="https://huggingface.co/jinaai/jina-reranker-v1-tiny-en" rel="noopener noreferrer">jina-reranker-v1</a> · <a href="https://docs.voyageai.com/docs/reranker" rel="noopener noreferrer">Voyage 重排序器</a> · <a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">mxbai-rerank</a> · <a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">nemotron-rerank</a> · <a href="https://huggingface.co/spaces/mteb/leaderboard" rel="noopener noreferrer">MTEB</a> · <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR</a> · <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker" rel="noopener noreferrer">BAAI 评测</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">GTE ModernBERT</a> · <a href="/zh/models/qwen-reranker">Qwen 指南</a> · <a href="/zh/guides/instruction-reranker">指令跟随</a> · <a href="/zh/guides/late-interaction-rerank">ColBERT</a></p>
       </div>
 
       <div class="grid grid-2" style="margin-top:2.5rem">
@@ -412,9 +423,9 @@
           <p>Pro 与 Fast 两个版本，32k 上下文，100+ 语言。按「次检索」计费 —— 一个 query 加最多 100 篇文档 —— 而不是按文档数。</p>
         </a>
         <a class="card" href="/zh/models/jina-reranker">
-          <h3>Jina Reranker v3</h3>
-          <div class="tag-row" style="margin-bottom:.8rem"><span class="pill good">Open + Hosted</span><span class="pill info">Listwise</span></div>
-          <p>0.6B 的 listwise 模型，BEIR 得分 61.94 —— 以约六分之一的体量超过 Qwen3-Reranker-4B。v1-tiny 仍在驱动我们的 Demo。</p>
+          <h3>Jina Reranker v3.5</h3>
+          <div class="tag-row" style="margin-bottom:.8rem"><span class="pill">Hosted API</span><span class="pill info">Listwise</span><span class="pill warn">权重：仅限非商用</span></div>
+          <p>0.6B 的 listwise 模型，在 Jina 自己的测试里 BEIR 为 63.20，略高于同一测试中 Qwen3-Reranker-4B 的 62.28 —— 不过在多语言和法律 / 医疗检索上仍是 4B 领先。商用自建部署需要另购许可。v1-tiny（Apache 2.0）仍在驱动我们的 Demo。</p>
         </a>
         <a class="card" href="/zh/models/voyage-rerank">
           <h3>Voyage rerank-2.5</h3>
@@ -474,12 +485,12 @@
         </div>
         <div class="chooser-card">
           <div class="chooser-badge chooser-both">Open + API</div>
-          <h3><a href="/zh/models/jina-reranker">Jina Reranker v3</a></h3>
+          <h3><a href="/zh/models/jina-reranker">Jina Reranker v3.5</a></h3>
           <p class="chooser-tagline">单卡就能跑，BEIR 却在第一梯队</p>
           <ul class="feature-list">
-            <li>0.6B 拿到 61.94 BEIR nDCG@10 —— 胜过体量 6 倍的 Qwen3-Reranker-4B</li>
-            <li>Listwise：64 篇文档共享同一个 131K token 的上下文</li>
-            <li>v1-tiny 仍可在浏览器跑（本站 Demo）</li>
+            <li>0.6B 在 Jina 自己的测试里拿到 63.20 BEIR nDCG@10 —— 与体量约 7 倍的 Qwen3-Reranker-4B 持平</li>
+            <li>Listwise：query 和全部候选文档共享同一个 131K token 上下文</li>
+            <li>权重采用 CC BY-NC 4.0：商用请走 API，或购买许可后自建部署</li>
           </ul>
         </div>
         <div class="chooser-card">

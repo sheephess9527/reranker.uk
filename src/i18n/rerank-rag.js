@@ -67,6 +67,7 @@ window.I18N_PAGE = { zh: {
   "<strong>Want to self-host, English-only, free:</strong> <a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> — strong, widely deployed.": "<strong>想自建、仅英文、免费：</strong><a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> —— 强大且广泛部署。",
   "<strong>Want a hosted API, best multilingual quality:</strong> <a href=\"/models/cohere-rerank.html\">Cohere Rerank v3.5</a>.": "<strong>想要托管 API、最佳多语言质量：</strong><a href=\"/models/cohere-rerank.html\">Cohere Rerank v3.5</a>。",
   "<strong>Want open weights + hosted API + tiny browser-runnable model:</strong> <a href=\"/models/jina-reranker.html\">Jina Reranker v2</a>.": "<strong>想要开源权重 + 托管 API + 可在浏览器运行的微型模型：</strong><a href=\"/models/jina-reranker.html\">Jina Reranker v2</a>。",
+  "<strong>Want a hosted API plus a tiny browser-runnable model:</strong> <a href=\"/models/jina-reranker.html\">Jina Reranker</a> — v3.5 by API, the Apache 2.0 v1-tiny in the browser. Its larger weights are non-commercial.": "<strong>想要托管 API 加一个能在浏览器里跑的微型模型：</strong><a href=\"/models/jina-reranker.html\">Jina Reranker</a> —— 用 API 调 v3.5，浏览器里跑 Apache 2.0 的 v1-tiny。它更大的模型权重仅限非商用。",
   "<strong>Optimising for retrieval-specific quality:</strong> <a href=\"/models/voyage-rerank.html\">Voyage Rerank 2</a>.": "<strong>专注检索专项质量：</strong><a href=\"/models/voyage-rerank.html\">Voyage Rerank 2</a>。",
   "See the full <a href=\"/models/\">model comparison →</a>": "查看完整<a href=\"/models/\">模型对比 →</a>",
 

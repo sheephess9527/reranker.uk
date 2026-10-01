@@ -158,6 +158,11 @@ reach HuggingFace or arXiv), via `check-sources.mjs --verbose`.
 | jina-reranker-v3 | 61.94 confirmed on the model card, arXiv abstract and jina.ai; the arXiv v4 full text says 61.85. Protocol: 13 BEIR datasets, top 100 from jina-embeddings-v3 |
 | jina-reranker-v1-tiny-en | 48.54 on 17 BEIR datasets (model card). The table's sort key had carried an unsourced 55 |
 | ms-marco-MiniLM-L-6-v2 | 48.64, third-party — Jina's v1 model card measured it; its own authors publish no BEIR average |
+| jina-reranker-v3.5 | Added. 0.6B (596.8M), CC BY-NC 4.0, announced Aug 2026; 63.20 BEIR on Jina's 2026 protocol (13 datasets, top 100 from jina-embeddings-v5-text-small). Same run: v3 62.10, Qwen3-Reranker-4B 62.28 — so "v3 beats Qwen3-4B" (from the 2025 run: 61.94 vs 61.16) was withdrawn |
+| Jina licences | v2-base-multilingual, v3, v3.5, m0: CC BY-NC 4.0; v1 tiny/turbo: Apache 2.0 (HF API `cardData.license` and jina.ai FAQ). `jina-reranker-v1-base-en` returns 401 on the HF API — no longer public |
+| Jina pricing | Only what jina.ai serves as text: free trial tokens on new keys, then packages; new pricing model since 6 May 2025; rate limits 100/500/5,000 RPM. Package prices render client-side, so none are quoted |
+| Other licences | bge-reranker-base/large MIT; bge v2, Qwen3-Reranker, mxbai v1/v2, gte-modernbert, ms-marco MiniLM Apache 2.0; nemotron-rerank "other" (NVIDIA licence) |
+| mxbai-rerank-large-v1 | 435M parameters per HF safetensors metadata; mixedbread's README says 1.5B |
 
 ### Verified September 2026
 
@@ -172,7 +177,7 @@ reach HuggingFace or arXiv), via `check-sources.mjs --verbose`.
 |-------|--------------------|
 | Cohere Rerank 4 | `rerank-v4.0-pro` / `rerank-v4.0-fast`, released Apr 2026, 32k context, 100+ languages, $0.0025 / $0.002 per search |
 | Voyage rerank-2.5 | `rerank-2.5` / `-lite`, 32k context, instruction following, $0.05 / $0.02 per 1M tokens, first 200M free |
-| Jina Reranker v3 | 0.6B listwise on Qwen3-0.6B, 61.94 BEIR nDCG@10, 64 docs in a 131K context |
+| Jina Reranker v3 | 0.6B listwise on Qwen3-0.6B, 61.94 BEIR nDCG@10, 64 docs in a 131K context (superseded Oct 2026 — see above) |
 | llama-nemotron-rerank-1b-v2 | 1.2B, 83.0 Hit@1 / 88.3 Hit@10 on NVIDIA's QA protocol |
 | gte-reranker-modernbert-base | ~149M, ties nemotron-1b on Hit@1 |
 | Qwen3-Reranker | Apache 2.0, 0.6B/4B/8B, 32K context; 4B reported ~0.48 ahead of 8B on BEIR |

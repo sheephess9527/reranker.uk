@@ -1,4 +1,16 @@
 window.I18N_PAGE = { zh: {
+  "1 Oct 2026 — jina-reranker-v3.5, and Jina's licences spelled out":
+    "2026 年 10 月 1 日 —— 收录 jina-reranker-v3.5，并写明 Jina 的许可证",
+  "<strong>jina-reranker-v3.5 added</strong> — Jina's August 2026 flagship: 0.6B, listwise, a drop-in replacement for v3 and 1.22–1.56× faster. 63.20 BEIR nDCG@10 in Jina's own test. It's in the models table, and the Jina page is rewritten around it":
+    "<strong>收录 jina-reranker-v3.5</strong> —— Jina 2026 年 8 月的旗舰：0.6B、listwise，可直接替换 v3，速度快 1.22–1.56 倍；在 Jina 自己的测试里 BEIR nDCG@10 为 63.20。已加入模型对比表，Jina 专页也围绕它重写",
+  "<strong>Licences stated</strong> — the v2, v3, v3.5 and m0 weights are CC BY-NC 4.0, non-commercial. This site called them \"open weights\" without saying so. The Jina page now has a licence section, and the self-hosting guide's model table a licence column":
+    "<strong>写明许可证</strong> —— v2、v3、v3.5 和 m0 的权重采用 CC BY-NC 4.0，仅限非商用。本站此前只写「开源权重」，没有提这一点。现在 Jina 专页加了许可证一节，自建部署指南的模型表也加了许可证一列",
+  "<strong>\"Jina v3 beats Qwen3-Reranker-4B\" withdrawn</strong> — true in the v3 paper's 2025 run (61.94 vs 61.16), but in Jina's own 2026 re-run v3 scores 62.10 and the 4B 62.28. The Jina rows in the models table now use that 2026 run, the same one as v3.5":
+    "<strong>撤回「Jina v3 超过 Qwen3-Reranker-4B」</strong> —— 在 v3 论文 2025 年的评测里成立（61.94 对 61.16），但在 Jina 自己 2026 年重测时，v3 是 62.10，4B 是 62.28。模型对比表里的 Jina 各行现在都用这次 2026 年的评测，与 v3.5 相同",
+  "<strong>Unsourced Jina prices removed</strong> — \"1M tokens/month free\" and \"~$0.018 / 1M tokens\" had no source we could find. Jina's own page says new keys get free trial tokens and then token packages; we now list their published rate limits instead of a price":
+    "<strong>删掉没有出处的 Jina 价格</strong> —— 「每月 100 万免费 token」和「约 $0.018 / 百万 token」都找不到出处。Jina 自己的页面只说新 key 附带免费试用 token，之后购买 token 包；现在改为列出他们公布的速率限制，不再写价格",
+  "<strong>Smaller fixes</strong> — parameter counts written as MB on the Jina and mxbai pages (mxbai-rerank-large-v1 is 435M, not the 1.5B its own README states); jina-reranker-v1-base-en, no longer on Hugging Face, removed":
+    "<strong>其他小修正</strong> —— Jina 和 mxbai 专页把参数量写成了 MB（mxbai-rerank-large-v1 实际是 4.35 亿参数，而不是它自己 README 里写的 1.5B）；已不在 Hugging Face 上的 jina-reranker-v1-base-en 已移除",
   "1 Oct 2026 — bge-reranker's BEIR figure, and a daily check on every source":
     "2026 年 10 月 1 日 —— 修正 bge-reranker 的 BEIR 分数，并每天核对所有来源",
   "<strong>bge-reranker-v2-m3 now reads 55.36</strong> — BAAI's own BEIR figure. The ~60.1 the models table carried could not be traced to anything BAAI or anyone else published":

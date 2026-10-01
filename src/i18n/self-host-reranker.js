@@ -35,7 +35,7 @@ window.I18N_PAGE = { zh: {
   "<strong>2026 open SOTA pick</strong> (needs GPU)": "<strong>2026 开源 SOTA 首选</strong>（需 GPU）",
   "Strong classic BEIR, Apache 2.0": "经典 BEIR 强，Apache 2.0",
   "Listwise long-context; or v2 pair-wise": "Listwise 长上下文；或 v2 成对",
-  "Start with <strong>bge-reranker-base</strong> on CPU for prototyping. On GPU, A/B <strong>Qwen3-Reranker-4B</strong> against <strong>bge-v2-m3</strong> or <strong>mxbai-large</strong> on your labelled set — do not assume leaderboard order transfers.": "原型阶段用 CPU 跑 <strong>bge-reranker-base</strong>。有 GPU 时在标注集上 A/B <strong>Qwen3-Reranker-4B</strong> 与 <strong>bge-v2-m3</strong> 或 <strong>mxbai-large</strong> —— 不要假设榜单顺序会迁移。",
+  "Start with <strong>bge-reranker-base</strong> on CPU for prototyping. On GPU, A/B <strong>Qwen3-Reranker-4B</strong> against <strong>bge-v2-m3</strong> or <strong>mxbai-base-v2</strong> on your labelled set — do not assume leaderboard order transfers.": "原型阶段用 CPU 跑 <strong>bge-reranker-base</strong>。有 GPU 时在标注集上 A/B <strong>Qwen3-Reranker-4B</strong> 与 <strong>bge-v2-m3</strong> 或 <strong>mxbai-base-v2</strong> —— 不要假设榜单顺序会迁移。",
 
   "Quick start with sentence-transformers": "sentence-transformers 快速上手",
   "Batch your pairs — scoring 50 documents in one <code>predict()</code> call is far faster than 50 separate forwards. Cap passage length at 512 tokens (model default) to avoid silent truncation.": "批量打分 —— 一次 <code>predict()</code> 处理 50 段远比 50 次单独前向快。单段长度建议不超过 512 token（模型默认），避免静默截断。",
@@ -63,4 +63,14 @@ window.I18N_PAGE = { zh: {
   "RAG vs support vs code — which stack fits.": "RAG / 客服 / 代码 —— 哪种栈更合适。",
   "Rerank for RAG": "为 RAG 加重排序",
   "Pipeline integration patterns.": "流水线集成模式。",
+
+  // Oct 2026: jina-reranker-v3.5, licences
+  "Licence":
+    "许可证",
+  "CPU-friendly Chinese / English default":
+    "CPU 友好的中英文默认选择",
+  "Multilingual incl. Chinese; best size/quality balance of mxbai v2":
+    "多语言（含中文）；mxbai v2 里体量与质量最均衡的一款",
+  "Listwise, long context — <strong>non-commercial</strong> unless licensed":
+    "Listwise、长上下文 —— 未获许可时<strong>仅限非商用</strong>",
 }};

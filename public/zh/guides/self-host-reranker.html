@@ -85,17 +85,17 @@
       <h2 id="models">选择模型</h2>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>模型</th><th>规模</th><th>最适合</th></tr></thead>
+          <thead><tr><th>模型</th><th>规模</th><th>许可证</th><th>最适合</th></tr></thead>
           <tbody>
-            <tr><td><a href="/zh/models/bge-reranker">bge-reranker-base</a></td><td>~278M</td><td>CPU 友好的英文默认</td></tr>
-            <tr><td><a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a></td><td>~568M</td><td>GPU 有限时的多语言选择</td></tr>
-            <tr><td><a href="/zh/models/qwen-reranker">Qwen3-Reranker-4B</a></td><td>~4B</td><td><strong>2026 开源 SOTA 首选</strong>（需 GPU）</td></tr>
-            <tr><td><a href="/zh/models/mxbai-rerank">mxbai-rerank-large-v1</a></td><td>~435M</td><td>经典 BEIR 强，Apache 2.0</td></tr>
-            <tr><td><a href="/zh/models/jina-reranker">jina-reranker-v3</a></td><td>large</td><td>Listwise 长上下文；或 v2 成对</td></tr>
+            <tr><td><a href="/zh/models/bge-reranker">bge-reranker-base</a></td><td>~278M</td><td>MIT</td><td>CPU 友好的中英文默认选择</td></tr>
+            <tr><td><a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a></td><td>~568M</td><td>Apache 2.0</td><td>GPU 有限时的多语言选择</td></tr>
+            <tr><td><a href="/zh/models/qwen-reranker">Qwen3-Reranker-4B</a></td><td>~4B</td><td>Apache 2.0</td><td><strong>2026 开源 SOTA 首选</strong>（需 GPU）</td></tr>
+            <tr><td><a href="/zh/models/mxbai-rerank">mxbai-rerank-base-v2</a></td><td>~494M</td><td>Apache 2.0</td><td>多语言（含中文）；mxbai v2 里体量与质量最均衡的一款</td></tr>
+            <tr><td><a href="/zh/models/jina-reranker">jina-reranker-v3.5</a></td><td>~0.6B</td><td>CC BY-NC 4.0</td><td>Listwise、长上下文 —— 未获许可时<strong>仅限非商用</strong></td></tr>
           </tbody>
         </table>
       </div>
-      <p>原型阶段用 CPU 跑 <strong>bge-reranker-base</strong>。有 GPU 时在标注集上 A/B <strong>Qwen3-Reranker-4B</strong> 与 <strong>bge-v2-m3</strong> 或 <strong>mxbai-large</strong> —— 不要假设榜单顺序会迁移。</p>
+      <p>原型阶段用 CPU 跑 <strong>bge-reranker-base</strong>。有 GPU 时在标注集上 A/B <strong>Qwen3-Reranker-4B</strong> 与 <strong>bge-v2-m3</strong> 或 <strong>mxbai-base-v2</strong> —— 不要假设榜单顺序会迁移。</p>
 
       <h2 id="quickstart">sentence-transformers 快速上手</h2>
       <pre tabindex="0"><code>pip install sentence-transformers torch
