@@ -36,3 +36,17 @@ test("reranks candidates end-to-end and renders them in score order", async ({ p
   // connect-src origin shows up here).
   expect(await cspViolations(page)).toEqual([]);
 });
+
+test("falls back to huggingface.co when hf-mirror.com wins the race but can't serve", async ({ page }) => {
+  await watchCspViolations(page);
+  await mockTransformersOnPage(page, { mirrorWinsButFails: true });
+  const warnings = [];
+  page.on("console", (msg) => msg.type() === "warning" && warnings.push(msg.text()));
+
+  const docs = ["first candidate, lowest score", "second candidate, highest score"];
+  await runRerank(page, { query: "does reranking work", docs });
+
+  expect(await afterColumnTexts(page)).toEqual([docs[1], docs[0]]);
+  expect(warnings.join("\n")).toContain("retrying via https://huggingface.co");
+  expect(await cspViolations(page)).toEqual([]);
+});

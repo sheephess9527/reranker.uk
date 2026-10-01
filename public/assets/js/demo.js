@@ -114,10 +114,16 @@ class Reranker {
       progress_callback: onProgress,
     };
     if (device === "webgpu") opts.device = "webgpu";
-    [this.tokenizer, this.model] = await Promise.all([
+    // allSettled, not all: when one half fails, the other's requests are
+    // still in flight to the same host, and a retry on the other host
+    // (getReranker) must not start until they're done — otherwise that
+    // late failure lands in the retry.
+    const [tok, model] = await Promise.allSettled([
       AutoTokenizer.from_pretrained(this.modelId, opts),
       AutoModelForSequenceClassification.from_pretrained(this.modelId, opts),
     ]);
+    for (const r of [tok, model]) if (r.status === "rejected") throw r.reason;
+    [this.tokenizer, this.model] = [tok.value, model.value];
     return this;
   }
   async score(query, documents, maxLength = 512) {
@@ -159,11 +165,43 @@ async function probeWebGPU() {
   return webgpuAvailable;
 }
 
+/** What fetch() throws when a request never gets a readable response — a
+ * CORS rejection, DNS failure or reset — in Chrome, Firefox and Safari. */
+function isNetworkError(err) {
+  return err instanceof TypeError && /failed to fetch|networkerror|load failed/i.test(err.message);
+}
+
+/**
+ * The host probe only shows which host answers first, not that it will serve
+ * the files: outside mainland China hf-mirror.com 308-redirects every file
+ * to huggingface.co without CORS headers, so the browser rejects it. A load
+ * that fails at the network level is retried once on the other host, and
+ * later loads in the tab stay on whichever host worked.
+ */
+function switchModelHost() {
+  if (!tfModule) return false;
+  resolvedHostValue = resolvedHostValue === HF_MIRROR_HOST ? HF_HOST : HF_MIRROR_HOST;
+  tfModule.env.remoteHost = resolvedHostValue;
+  return true;
+}
+
 async function getReranker(modelId, onProgress, useWebgpu) {
   const device = useWebgpu ? "webgpu" : "wasm";
   const cacheKey = modelId + ":" + device;
   if (cache.has(cacheKey)) return cache.get(cacheKey);
-  const r = await new Reranker(modelId).init(onProgress, useWebgpu ? "webgpu" : undefined);
+  const load = () => new Reranker(modelId).init(onProgress, useWebgpu ? "webgpu" : undefined);
+  let r;
+  try {
+    r = await load();
+  } catch (err) {
+    if (!isNetworkError(err) || !switchModelHost()) throw err;
+    console.warn(`Model load failed (${err.message}); retrying via ${resolvedHostValue}`);
+    if (els.loadModelName)
+      els.loadModelName.textContent =
+        els.loadModelName.textContent.replace(" · hf-mirror.com", "") +
+        (resolvedHostValue === HF_MIRROR_HOST ? " · hf-mirror.com" : "");
+    r = await load();
+  }
   cache.set(cacheKey, r);
   return r;
 }

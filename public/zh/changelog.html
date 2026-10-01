@@ -62,6 +62,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-01h">2026 年 10 月 1 日 —— 镜像下载失败时，Demo 会自动换回原站</h2>
+        <ul class="feature-list">
+          <li><strong>模型下载源之间自动切换</strong> —— Demo 会在 huggingface.co 和 hf-mirror.com 之间选先响应的那个。但先响应不等于能下载：在中国大陆以外，hf-mirror.com 会把每个文件重定向回 huggingface.co，而且不带浏览器需要的 CORS 响应头，所以一旦它抢先，模型就加载不出来。现在如果因为网络原因加载失败，会自动换另一个下载源重试一次</li>
+          <li><strong>对着真实下载源测过</strong> —— 每日真实网络检查新增一项：让 hf-mirror.com 抢先，逐个加载三个模型，确认自动切换后排序结果正确。另外，每次提交 PR 时，全站每个页面都会检查有没有 CSP 违规，不再只查 Demo</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-01g">2026 年 10 月 1 日 —— Demo 打分速度快了约一倍</h2>
         <ul class="feature-list">
           <li><strong>Demo 改为多线程推理</strong> —— Demo 页面现在开启了跨源隔离，ONNX Runtime Web 可以用多个线程打分。在同一台 4 核机器上做 A/B 实测：三个模型都快了约 1.9 倍（Jina v1 tiny 打分 10 段从 424 ms 降到 229 ms）。不支持隔离响应头的浏览器会保持单线程，不受影响</li>

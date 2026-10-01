@@ -258,9 +258,10 @@ One axe quirk worth knowing: its link check treats *any* differing
 `text-decoration-thickness` set but no underline drawn still passes. The
 underline on prose links in `style.css` is the actual requirement.
 
-Both smoke tests also assert zero `securitypolicyviolation` events (see
-`tests/helpers/csp.mjs`) — the one way this repo can check the CSP below
-against something other than a hand read of the policy string.
+Both smoke tests, and the a11y run on every page, also assert zero
+`securitypolicyviolation` events (see `tests/helpers/csp.mjs`) — the one
+way this repo can check the CSP below against something other than a hand
+read of the policy string.
 
 ---
 
@@ -286,13 +287,19 @@ broken every model download had the policy been enforcing:
   by default; the demo sets `env.useWasmCache = false` so `script-src`
   doesn't need `blob:`.
 
-What's still unverified is the **hf-mirror.com** path: CI runs from the US
-and always wins the host race to huggingface.co, so the mirror (what
-visitors in mainland China get) is never exercised. Before promoting to
+What's still unverified is the **hf-mirror.com** path as visitors in
+mainland China see it. From anywhere else, hf-mirror.com 308-redirects
+every file to huggingface.co *without CORS headers* (checked from a
+GitHub runner in Oct 2026), so a browser outside China can never load a
+model through it. That rules out exercising it from CI. The demo copes
+with the mirror winning the host race anyway: a load that fails at the
+network level is retried once on the other host (`getReranker` in
+`demo.js`), and the daily real-network test checks that fallback by
+failing huggingface.co's probe so the mirror wins. Before promoting to
 enforcing (`Content-Security-Policy` instead of `-Report-Only`), load the
-demo once from a network where the mirror wins and check the browser
-console for violations, and confirm the daily run has stayed green for a
-few days.
+demo once from a network in mainland China and check the browser console
+for CSP violations, and confirm the daily run has stayed green for a few
+days.
 
 The CSP's `script-src` includes a `sha256-...` hash instead of
 `'unsafe-inline'`, computed at build time from the literal content of the
