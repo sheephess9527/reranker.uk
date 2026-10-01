@@ -4,7 +4,7 @@
   <meta charset="UTF-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>Qwen3-Reranker：0.6B / 4B / 8B 开源重排序评测 | reranker.uk</title>
-  <meta name="description" content="2026 Qwen3-Reranker 家族评测：0.6B、4B、8B 如何选，分数与经典 BEIR 行如何诚实对比，自托管建议，以及相对 bge 与托管 API 的取舍。" >
+  <meta name="description" content="Qwen3-Reranker 评测（2026 年 10 月）：0.6B、4B、8B 怎么选，Qwen 自己公布的 MTEB-R 等分数及其测法，指令用法、sentence-transformers 示例，以及相对 bge 与托管 API 的取舍。" >
   <link rel="canonical" href="https://reranker.uk/zh/models/qwen-reranker" >
   <link rel="alternate" hreflang="en" href="https://reranker.uk/models/qwen-reranker" >
   <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/qwen-reranker" >
@@ -18,7 +18,7 @@
   <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
   <meta property="og:type" content="article" >
   <meta property="og:title" content="Qwen3-Reranker：0.6B / 4B / 8B 开源重排序评测 | reranker.uk" >
-  <meta property="og:description" content="2026 Qwen3-Reranker 家族评测：0.6B、4B、8B 如何选，分数与经典 BEIR 行如何诚实对比，自托管建议，以及相对 bge 与托管 API 的取舍。" >
+  <meta property="og:description" content="Qwen3-Reranker 评测（2026 年 10 月）：0.6B、4B、8B 怎么选，Qwen 自己公布的 MTEB-R 等分数及其测法，指令用法、sentence-transformers 示例，以及相对 bge 与托管 API 的取舍。" >
   <meta property="og:url" content="https://reranker.uk/zh/models/qwen-reranker" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="zh_CN" >
@@ -60,15 +60,15 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>Qwen3-Reranker</div>
       <h1>Qwen3-Reranker</h1>
-      <p class="meta">开源权重 · 通义 Qwen · <time datetime="2026-06-25">更新于 2026 年 6 月 25 日</time></p>
-      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Open weights</span><span class="pill info">2026 SOTA*</span><span class="pill">GPU recommended</span></div>
-      <p class="lead"><strong>Qwen3-Reranker</strong> 家族（0.6B / 4B / 8B）是 2026 开源重排序主线：多语言、偏长上下文，常居社区开源榜前列。公开 MTEB-R / BEIR 类数字仅作<em>方向性</em>参考 —— 替换 bge 或托管 API 前务必用自有标注验证。</p>
+      <p class="meta">开源权重 · 阿里巴巴 Qwen · <time datetime="2026-10-01">更新于 2026 年 10 月 1 日</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Apache 2.0</span><span class="pill info">支持指令</span><span class="pill">GPU recommended</span></div>
+      <p class="lead"><strong>Qwen3-Reranker</strong> 家族（0.6B / 4B / 8B）是基于 Qwen3 的 Apache 2.0 重排序模型，32K 上下文，支持 100+ 种语言，并且可以接收任务指令。在 Qwen 自己的测试里，4B 和 8B 在他们跑的每一项上都领先 bge-reranker-v2-m3 和 gte-multilingual-reranker —— 英文、中文、多语言、长文档和代码。这些是 Qwen 在自己的设置下测出的数字：替换 bge 或托管 API 之前，请先在你自己的标注数据上验证。</p>
 
       <div class="toc">
         <strong>本页目录</strong>
         <ol>
           <li><a href="#variants">模型变体</a></li>
-          <li><a href="#scores">分数与诚实说明</a></li>
+          <li><a href="#scores">分数，以及是谁测的</a></li>
           <li><a href="#usage">快速上手</a></li>
           <li><a href="#when">何时选 Qwen3</a></li>
           <li><a href="#pros-cons">优缺点</a></li>
@@ -79,41 +79,53 @@
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>模型</th><th>规模</th><th>最适合</th></tr>
+            <tr><th>模型</th><th>参数量</th><th>层数</th><th>最适合</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>Qwen/Qwen3-Reranker-0.6B</code></td><td>~0.6B</td><td>最轻量；仍建议 GPU</td></tr>
-            <tr><td><code>Qwen/Qwen3-Reranker-4B</code></td><td>~4B</td><td>质量优先时的<strong>默认自建选择</strong></td></tr>
-            <tr><td><code>Qwen/Qwen3-Reranker-8B</code></td><td>~8B</td><td>开源质量顶配；VRAM / 延迟最高</td></tr>
+            <tr><td><code>Qwen/Qwen3-Reranker-0.6B</code></td><td>0.6B</td><td>28</td><td>最轻；仍然更适合在 GPU 上跑</td></tr>
+            <tr><td><code>Qwen/Qwen3-Reranker-4B</code></td><td>4B</td><td>36</td><td><strong>自建部署首选</strong> —— 三者中英文和指令跟随得分最高</td></tr>
+            <tr><td><code>Qwen/Qwen3-Reranker-8B</code></td><td>8B</td><td>36</td><td>在中文、多语言、长文档和代码上领先 —— 最多领先 1.5 分</td></tr>
           </tbody>
         </table>
       </div>
-      <p><strong>建议：</strong>单卡现代 GPU 从 <strong>4B</strong> 起步。内存紧再降 0.6B；仅当标注评测显示明确 NDCG 收益时再上 8B。</p>
+      <p>三者均为：32K 上下文、100+ 种语言、Apache 2.0。</p>
+      <p><strong>建议：</strong>在一张现代 GPU 上从 <strong>4B</strong> 开始。只有显存吃紧时才降到 0.6B；只有在标注评测显示 NDCG 有明显、值得付出成本的提升时，才换到 8B。</p>
 
-      <h2 id="scores">分数与诚实说明</h2>
-      <p>公开文章常报中大型 Qwen3 在 MTEB-R / 多语言 rerank 套件约 <strong>~70+</strong>，8B 居开源榜前列。这些数字<strong>不能</strong>保证与表中 bge（~60）、mxbai（~62）的经典 BEIR 18 数据集均值同协议。</p>
-      <ul>
-        <li>不同套件、语言与预处理 → 不同数字。</li>
-        <li>部分纯英文产品基准上，紧凑模型（如 ModernBERT-GTE）Hit@1 可超过 4B，成本却低得多。</li>
-        <li>因此本站 <a href="/zh/models/">对比表</a> 给 Qwen 分数标了 <strong>*</strong>。</li>
-      </ul>
+      <h2 id="scores">分数，以及是谁测的</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>模型</th><th>MTEB-R</th><th>CMTEB-R</th><th>MMTEB-R</th><th>MLDR</th><th>MTEB-Code</th><th>FollowIR</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>bge-reranker-v2-m3</td><td>57.03</td><td>72.16</td><td>58.36</td><td>59.51</td><td>41.38</td><td>−0.01</td></tr>
+            <tr><td>Qwen3-Reranker-0.6B</td><td>65.80*</td><td>71.31</td><td>66.36</td><td>67.28</td><td>73.42</td><td>5.41</td></tr>
+            <tr><td>Qwen3-Reranker-4B</td><td><strong>69.76*</strong></td><td>75.94</td><td>72.74</td><td>69.97</td><td>81.20</td><td><strong>14.84</strong></td></tr>
+            <tr><td>Qwen3-Reranker-8B</td><td>69.02*</td><td><strong>77.45</strong></td><td><strong>72.94</strong></td><td><strong>70.19</strong></td><td><strong>81.22</strong></td><td>8.05</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">以上为 Qwen 自己的测试结果，取自模型卡：MTEB 的检索子集（英文 v2、中文 v1、多语言 MMTEB 和代码），长文档用 MLDR，指令跟随用 FollowIR，每项都是对 Qwen3-Embedding-0.6B 召回的前 100 个候选重排。MTEB-R 是英文 NDCG@10 均值，但不是 BEIR 套件，所以这些数字不能和其他厂商的 BEIR 分数放在同一列比较。</p>
+      <p>一个外部参照：Jina 2026 年的评测里，Qwen3-Reranker-4B 在 13 个 BEIR 数据集上为 62.28* —— 略低于 jina-reranker-v3.5，但在多语言、法律 / 医疗和结构化数据检索上领先它（见 <a href="/zh/models/jina-reranker#benchmarks">Jina 专页</a>）。2026 年 10 月之前，本页拿 Qwen 的分数去和「bge（约 60）」「mxbai（约 62）」比较；这两个数字都没有出处，<a href="/zh/models/">模型对比表</a>现在列出的是 BAAI 和 mixedbread 实际公布的数字。</p>
 
       <h2 id="usage">快速上手</h2>
-      <h3>Hugging Face / transformers</h3>
-      <pre tabindex="0"><code># Check the model card for the recommended stack (transformers / vLLM / SGLang).
-# IDs (examples):
-#   Qwen/Qwen3-Reranker-0.6B
-#   Qwen/Qwen3-Reranker-4B
-#   Qwen/Qwen3-Reranker-8B
+      <h3>sentence-transformers</h3>
+      <pre tabindex="0"><code>pip install sentence-transformers
 
-from sentence_transformers import CrossEncoder  # if card supports CE API
+from sentence_transformers import CrossEncoder
 
-# Prefer the loading recipe on the official model card — Qwen3 may use
-# a chat-style scoring template rather than a plain CrossEncoder pair.
-model_id = "Qwen/Qwen3-Reranker-4B"
-# model = CrossEncoder(model_id, max_length=8192)  # only if supported
-# scores = model.predict([(query, d) for d in docs])</code></pre>
-      <p>生产服务常见 <strong>vLLM</strong> / OpenAI 兼容 <code>/v1/rerank</code>。务必按当前 Qwen 文档使用正确 prompt 模板 —— 模板错了会静默毁掉质量。</p>
+model = CrossEncoder("Qwen/Qwen3-Reranker-4B")
+
+# Default instruction: "Given a web search query, retrieve relevant
+# passages that answer the query" — override it per task:
+model = CrossEncoder(
+    "Qwen/Qwen3-Reranker-4B",
+    prompts={"support": "Prefer official help articles with step-by-step instructions"},
+    default_prompt_name="support",
+)
+
+ranked = model.rank(query, documents)   # [{"corpus_id": i, "score": s}, ...]</code></pre>
+      <p>模型卡里的做法是直接用 sentence-transformers 的 <code>CrossEncoder</code> 加载。模型卡也给了一条直接用 <code>transformers</code>（需 ≥ 4.51）的路径，通过 Qwen 的对话模板给 yes/no 的 logits 打分 —— 模板一旦写错，质量会下降，但不会报错。</p>
 
       <h3>在 RAG 流水线中</h3>
       <pre tabindex="0"><code># Pseudocode — same two-stage pattern as any cross-encoder
@@ -122,12 +134,12 @@ scores = qwen3_rerank(query, candidates)         # official template
 top = sorted(zip(scores, candidates), reverse=True)[:8]
 answer = llm.complete(context=top, query=query)</code></pre>
 
-      <h2 id="when">何时选 Qwen3</h2>
+      <h2 id="when">什么时候选 Qwen3</h2>
       <ul>
-        <li><strong>适合：</strong>有 GPU、需要多语言质量、要开源权重且零按次 API 成本。</li>
-        <li><strong>适合：</strong>长段落 / 长上下文重要，且能负担 4B–8B 显存。</li>
-        <li><strong>不太适合：</strong>仅 CPU 或边缘 —— 优先 <a href="/zh/models/bge-reranker">bge-v2-m3</a>、mxbai，或 Demo 用 Jina tiny。</li>
-        <li><strong>不太适合：</strong>策略/指令型相关性 —— 见 <a href="/zh/guides/instruction-reranker">指令跟随 rerank</a>。</li>
+        <li><strong>适合：</strong>你有 GPU，需要多语言质量，并且想要没有按次调用成本的开源权重。</li>
+        <li><strong>适合：</strong>需要处理长段落 —— 三个尺寸都支持 32K token。</li>
+        <li><strong>适合：</strong>相关性需要按任务调整。这些模型可以接收任务指令；Qwen 建议为每个任务单独写指令（多语言数据也用英文写），并称通常能带来 1–5% 的提升。见<a href="/zh/guides/instruction-reranker">指令跟随重排序</a>。</li>
+        <li><strong>不太适合：</strong>只有 CPU 或边缘设备 —— 优先考虑 <a href="/zh/models/bge-reranker">bge-v2-m3</a>、mxbai，演示用可选 Jina tiny。</li>
       </ul>
 
       <h2 id="pros-cons">优缺点</h2>
@@ -135,19 +147,20 @@ answer = llm.complete(context=top, query=query)</code></pre>
         <div class="card">
           <h3 style="color:var(--good);margin-top:0">优点</h3>
           <ul class="feature-list">
-            <li>2026 开源叙事领先（0.6B–8B 阶梯）</li>
-            <li>多语言 + 长上下文定位强</li>
-            <li>自托管后零按次成本</li>
-            <li>生态活跃（HF、vLLM、社区方案）</li>
+            <li>从 0.6B 到 8B，每个尺寸都是 Apache 2.0</li>
+            <li>100+ 种语言，32K 上下文</li>
+            <li>可接收任务指令 —— Qwen 的表里 4B 的 FollowIR 得分最高</li>
+            <li>可直接用 sentence-transformers 的 <code>CrossEncoder</code> 加载</li>
+            <li>自建部署后没有按次调用成本</li>
           </ul>
         </div>
         <div class="card">
           <h3 style="color:var(--danger);margin-top:0">缺点</h3>
           <ul style="padding-left:1.2rem;color:var(--text-soft)">
-            <li>舒适运行需要 GPU（或强量化）</li>
-            <li>打分模板 / 服务栈比 MiniLM 更绕</li>
-            <li>公开榜数字与经典 BEIR 均值非 1:1</li>
-            <li>体量过大，无法进本站浏览器 Demo</li>
+            <li>想跑得顺畅需要 GPU（或重度量化）</li>
+            <li>直接用 <code>transformers</code> 时必须严格套用 Qwen 的提示模板</li>
+            <li>厂商公布的是 MTEB-R，不是 BEIR</li>
+            <li>体量太大，无法放进本站的浏览器 Demo</li>
           </ul>
         </div>
       </div>

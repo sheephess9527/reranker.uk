@@ -130,7 +130,7 @@
 <main id="main">
     <section class="hero container" style="padding-bottom:1.5rem">
       <h1>Rerank model comparison</h1>
-      <p class="lead">Production stacks mix <strong>cross-encoders</strong>, <strong>listwise</strong> models, <strong>late-interaction</strong>, and instruction APIs. The headline of 2026 is that <strong>size stopped predicting quality</strong>: a 0.6B listwise model (Jina v3.5) edges Qwen3-Reranker-4B on BEIR in Jina's own test, a 149M cross-encoder ties a 1.2B one on Hit@1, and Qwen3's own 4B edges its 8B. Architecture, latency, languages and cost below — with honest footnotes wherever score protocols differ.</p>
+      <p class="lead">Production stacks mix <strong>cross-encoders</strong>, <strong>listwise</strong> models, <strong>late-interaction</strong>, and instruction-following rerankers. The headline of 2026 is that <strong>size stopped predicting quality</strong>: a 0.6B listwise model (Jina v3.5) edges Qwen3-Reranker-4B on BEIR in Jina's own test, and in Qwen's own tests the 4B beats its 8B on English retrieval. Architecture, latency, languages and cost below — with honest footnotes wherever score protocols differ.</p>
     </section>
 
     <section class="section container">
@@ -171,22 +171,22 @@
               <th scope="row"><a href="/models/qwen-reranker">Qwen3-Reranker-4B</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Apache 2.0</span><span class="pill info">Best Qwen3 size</span></td>
-              <td>Strongest multilingual open self-host (GPU)</td>
+              <td>Best English score of the three; instruction-aware (GPU)</td>
               <td>100+ langs · 32K ctx</td>
               <td>GPU required</td>
               <td>Free (self-host)</td>
-              <td class="muted" title="Vendor reports MTEB-R over top-100 candidates from Qwen3-Embedding-0.6B — not the classic BEIR 18-dataset average">MTEB-R*</td>
+              <td class="muted" title="Qwen's own run: retrieval subsets of MTEB(eng, v2), reranking the top 100 from Qwen3-Embedding-0.6B — not a BEIR average. Jina's 2026 run measured the 4B at 62.28 on 13 BEIR datasets">MTEB-R 69.76*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="qwen3-reranker-8b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="">
               <th scope="row"><a href="/models/qwen-reranker">Qwen3-Reranker-8B</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Apache 2.0</span></td>
-              <td>Largest Qwen3 — but 4B edges it on BEIR</td>
+              <td>Largest Qwen3 — leads on Chinese, multilingual, long-document and code; 4B edges it on English</td>
               <td>100+ langs · 32K ctx</td>
               <td>GPU / multi-GPU</td>
               <td>Free (self-host)</td>
-              <td class="muted" title="Reported ~0.48 points behind Qwen3-Reranker-4B on BEIR tasks — bigger is not better here">MTEB-R*</td>
+              <td class="muted" title="Qwen's own run, same suite as the 4B row, where the 4B scores higher. This table said ~0.48 points behind on BEIR until Oct 2026; Qwen's card gives 0.74 on MTEB-R">MTEB-R 69.02*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="qwen3-reranker-0.6b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="">
@@ -197,7 +197,7 @@
               <td>100+ langs · 32K ctx</td>
               <td>GPU recommended</td>
               <td>Free (self-host)</td>
-              <td class="muted" title="Smaller sibling; not browser-sized">MTEB-R*</td>
+              <td class="muted" title="Qwen's own run, same suite as the 4B row">MTEB-R 65.80*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="bge-reranker-v2-m3" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="55.36*">
@@ -343,26 +343,26 @@
               <td class="muted" title="Voyage publishes its own retrieval evals, not a classic BEIR average">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="gte-reranker-modernbert" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="">
+            <tr data-name="gte-reranker-modernbert" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="56.19*">
               <th scope="row"><a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">gte-reranker-modernbert-base</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><span class="pill info">Compact</span></td>
-              <td>~149M, yet ties nemotron-1b on Hit@1</td>
+              <td>149M, 8K context; also runs in transformers.js</td>
               <td>English</td>
               <td>Fast GPU / CPU-friendly</td>
               <td>Free (self-host)</td>
-              <td class="muted" title="Task-specific benches; not classic BEIR avg">Hit@1 ≈ nemotron*</td>
+              <td title="Alibaba's own figure from the model card, which doesn't state the datasets or first stage. This table showed &quot;Hit@1 ≈ nemotron&quot; until Oct 2026, with no source we could find">56.19*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="llama-nemotron-rerank-1b-v2" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="">
               <th scope="row"><a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">llama-nemotron-rerank-1b-v2</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Open + NIM API</span></td>
-              <td>1.2B; top accuracy when latency is free</td>
-              <td>Multilingual (MIRACL / MLQA evals)</td>
+              <td>1.2B, 8K context; licensed for commercial use</td>
+              <td>Multilingual (26 langs evaluated)</td>
               <td>GPU / NIM</td>
               <td>NIM / self-host</td>
-              <td class="muted" title="Vendor QA protocol across BEIR/TextQA, TechQA, MIRACL, MLQA, MLDR — not a classic BEIR average">Hit@1 83.0*</td>
+              <td class="muted" title="NVIDIA report Recall@5 for their own embed + rerank pipeline (73.64% on NQ, HotpotQA, FiQA and TechQA), not a reranker-only BEIR NDCG. The Hit@1 83.0 this table showed until Oct 2026 has no source we could find">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="ms-marco-minilm" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="48.64*" data-demo="ms-marco">
@@ -376,15 +376,15 @@
               <td title="Third-party figure: Jina measured it alongside their v1 models (17 BEIR datasets). sentence-transformers, who trained it, publish NDCG@10 on TREC DL 19 (74.30) and MRR@10 on MS MARCO Dev (39.01) but no BEIR average. This table carried an unsourced ~55.0 here until Sep 2026">48.64*</td>
               <td class="demo-link-cell"></td>
             </tr>
-            <tr data-name="contextual-rerank-v2" data-type="api" data-arch="cross-encoder" data-langs="en" data-pricing="paid" data-beir="">
-              <th scope="row"><a href="/guides/instruction-reranker">Contextual AI Rerank v2</a></th>
+            <tr data-name="contextual-rerank-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="">
+              <th scope="row"><a href="https://huggingface.co/ContextualAI/ctxl-rerank-v2-instruct-multilingual-2b" rel="noopener noreferrer">Contextual AI Rerank v2</a></th>
               <td><span class="pill">Instruction</span></td>
-              <td><span class="pill">Hosted API</span></td>
-              <td>Instruction-following / policy-shaped relevance</td>
-              <td>English</td>
-              <td>API</td>
-              <td>Contact vendor†</td>
-              <td class="muted">n/a</td>
+              <td><span class="pill">Open weights</span><span class="pill warn">Weights: non-commercial</span></td>
+              <td>Instruction-following; 1B / 2B / 6B</td>
+              <td>100+ langs · 32K ctx</td>
+              <td>GPU</td>
+              <td>Free (non-commercial self-host)</td>
+              <td class="muted" title="Contextual AI publish BEIR results only as a chart in their blog post. Until Oct 2026 this row described the model as an English-only hosted API; the weights have been public on Hugging Face since Aug 2025">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="colbertv2" data-type="open" data-arch="late-interaction" data-langs="en" data-pricing="free" data-beir="">
@@ -410,7 +410,7 @@
         <a class="card" href="/models/qwen-reranker">
           <h3>Qwen3-Reranker</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill good">Apache 2.0</span><span class="pill info">Multilingual</span></div>
-          <p>0.6B / 4B / 8B, 32K context. Start at 4B — it reportedly edges the 8B on BEIR, so the largest size is not the automatic answer.</p>
+          <p>0.6B / 4B / 8B, 32K context, Apache 2.0. Start at 4B — in Qwen's own tests it beats the 8B on English and on instruction-following, and trails it by at most 1.5 points elsewhere.</p>
         </a>
         <a class="card" href="/models/bge-reranker">
           <h3>bge-reranker</h3>
@@ -459,7 +459,7 @@
           <p class="chooser-tagline">Best multilingual open weights — start at 4B</p>
           <ul class="feature-list">
             <li>0.6B / 4B / 8B, all Apache 2.0, all 32K context</li>
-            <li>4B is the sweet spot — the 8B costs more and scores no better</li>
+            <li>4B is the sweet spot — the 8B is twice the size for at most 1.5 points, and only outside English</li>
             <li>Vendor numbers are MTEB-R, so verify on your own labelled set</li>
           </ul>
         </div>

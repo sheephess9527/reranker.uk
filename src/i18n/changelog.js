@@ -1,4 +1,14 @@
 window.I18N_PAGE = { zh: {
+  "1 Oct 2026 — Qwen3, Contextual AI, GTE and NVIDIA rows checked against their model cards":
+    "2026 年 10 月 1 日 —— 对照官方模型卡核对 Qwen3、Contextual AI、GTE 与 NVIDIA 各行",
+  "<strong>Contextual AI Rerank v2 was described wrongly</strong> — the table called it an English-only hosted API with prices on request. It has shipped open weights on Hugging Face since August 2025 (1B, 2B and 6B), covers 100+ languages with a 32K context, and is licensed CC BY-NC-SA — non-commercial":
+    "<strong>Contextual AI Rerank v2 的描述是错的</strong> —— 表里写它是只支持英文、价格需询价的托管 API。实际上它自 2025 年 8 月起就在 Hugging Face 上提供开源权重（1B、2B、6B），支持 100+ 种语言、32K 上下文，许可证是 CC BY-NC-SA —— 仅限非商用",
+  "<strong>Two unsourced scores removed</strong> — the NVIDIA row's \"Hit@1 83.0\" and the GTE row's \"ties nemotron on Hit@1\" appear in neither model card. NVIDIA report Recall@5 for their own embed + rerank pipeline; GTE now shows Alibaba's own 56.19 BEIR":
+    "<strong>删掉两个没有出处的分数</strong> —— NVIDIA 那行的「Hit@1 83.0」和 GTE 那行的「Hit@1 与 nemotron 打平」，在两家的模型卡里都找不到。NVIDIA 公布的是自家向量模型 + 重排序整条流水线的 Recall@5；GTE 现在显示阿里自己公布的 BEIR 56.19",
+  "<strong>Qwen3 numbers now sourced</strong> — the table shows Qwen's own MTEB-R (65.80, 69.76, 69.02). \"The 4B edges the 8B by ~0.48 on BEIR\" is corrected to 0.74 on MTEB-R, with the 8B ahead on Chinese, multilingual, long-document and code. The Qwen page had still been comparing against \"bge ~60\" and \"mxbai ~62\", both withdrawn earlier; it now shows Qwen's full table":
+    "<strong>Qwen3 的分数有了出处</strong> —— 表里现在显示 Qwen 自己公布的 MTEB-R（65.80、69.76、69.02）。「4B 在 BEIR 上比 8B 高约 0.48」更正为 MTEB-R 上高 0.74，而中文、多语言、长文档和代码上是 8B 领先。Qwen 专页之前还在拿「bge 约 60」「mxbai 约 62」做对比，这两个数字早已撤回；现在改为展示 Qwen 的完整评测表",
+  "<strong>Qwen3 takes instructions</strong> — its page said \"maybe not\" for instruction-shaped relevance, but the Qwen rerankers are instruction-aware. The quick start now uses the model card's own sentence-transformers code, and the instruction-following guide lists three rerankers that take an instruction, with real usage":
+    "<strong>Qwen3 支持指令</strong> —— 它的专页原先说需要指令的场景「不太适合」，但 Qwen 重排序模型本身就支持指令。快速上手现在用的是模型卡里官方的 sentence-transformers 代码，指令跟随指南也列出了三款支持指令的重排序器及其实际用法",
   "1 Oct 2026 — Cohere's 500-token rule, and Voyage rerank-3":
     "2026 年 10 月 1 日 —— Cohere 的 500 token 规则，以及 Voyage rerank-3",
   "<strong>A correction to our own correction</strong> — in September this site called it a myth that Cohere splits documents over 500 tokens into extra billable chunks. Cohere's own pricing FAQ says it does: a document over 500 tokens, query included, counts once per 500-token chunk toward a search's 100 documents. The cost calculator now models that, and the \"long passages favour Cohere\" rule it used to give is gone":

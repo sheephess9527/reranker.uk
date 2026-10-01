@@ -2,7 +2,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Instruction-following rerank</div>
       <h1>Instruction-following rerankers</h1>
-      <p class="meta">Emerging · ~7 min read · <time datetime="2026-06-25">Updated 25 Jun 2026</time></p>
+      <p class="meta">Emerging · ~7 min read · <time datetime="2026-10-01">Updated 1 Oct 2026</time></p>
       <p class="lead">Classic cross-encoders answer one question: <em>“how relevant is this passage to this query?”</em> <strong>Instruction-following</strong> rerankers (e.g. Contextual AI Rerank v2) take an extra control signal — a short instruction that defines what “relevant” means for this task.</p>
 
       <div class="toc">
@@ -30,7 +30,7 @@
             <tr><td>Query</td><td>Yes</td><td>Yes</td></tr>
             <tr><td>Passage</td><td>Yes</td><td>Yes</td></tr>
             <tr><td>Task instruction</td><td>No (or baked into query text)</td><td>First-class field</td></tr>
-            <tr><td>Typical deploy</td><td>Self-host or API</td><td>Mostly hosted API today</td></tr>
+            <tr><td>Typical deploy</td><td>Self-host or API</td><td>Self-host or API — open weights exist</td></tr>
           </tbody>
         </table>
       </div>
@@ -40,6 +40,21 @@ results = client.rerank(
     documents=candidates,
     instruction="Prefer official help articles with step-by-step cancel steps; demote marketing and upsell pages.",
 )  # higher score = better match to query under that instruction</code></pre>
+      <h3>Three that take an instruction today</h3>
+      <ul>
+        <li><a href="/models/qwen-reranker.html">Qwen3-Reranker</a> (0.6B / 4B / 8B, Apache 2.0) — an instruction per task through sentence-transformers’ <code>prompts</code>; Qwen report typical gains of 1–5% from a tailored one.</li>
+        <li><a href="https://huggingface.co/ContextualAI/ctxl-rerank-v2-instruct-multilingual-2b" rel="noopener noreferrer">Contextual AI Rerank v2</a> (1B / 2B / 6B, CC BY-NC-SA — non-commercial) — pass the instruction as <code>prompt=</code> to <code>predict</code> or <code>rank</code>.</li>
+        <li><a href="/models/voyage-rerank.html">Voyage rerank-2.5</a> (hosted) — append or prepend the instruction to the query. Voyage’s docs describe this for 2.5, not for the newer rerank-3.</li>
+      </ul>
+      <pre><code># Contextual AI Rerank v2, from its model card
+from sentence_transformers import CrossEncoder
+
+model = CrossEncoder("ContextualAI/ctxl-rerank-v2-instruct-multilingual-2b")
+ranked = model.rank(
+    "cancel my plan",
+    candidates,
+    prompt="Prefer official help articles with step-by-step cancel steps; demote marketing and upsell pages.",
+)</code></pre>
       <p>You can approximate this with a classic model by prefixing the query (<code>"[Support KB] cancel my plan"</code>), but dedicated instruction models are trained to treat the control text as constraints rather than bag-of-words topics.</p>
 
       <h2 id="when">When to use it</h2>
@@ -52,8 +67,8 @@ results = client.rerank(
 
       <h2 id="vs">Vs classic cross-encoders</h2>
       <ul>
-        <li><strong>Classic (bge, Cohere, Jina, mxbai):</strong> best documented BEIR-style numbers; open weights or mature free tiers; great default for RAG “topical precision”.</li>
-        <li><strong>Instruction APIs (Contextual AI, etc.):</strong> stronger when relevance is policy-shaped; less portable; harder to compare on public leaderboards — our <a href="/models/">models table</a> marks BEIR as <em>n/a</em> on purpose.</li>
+        <li><strong>Classic (bge, Cohere, mxbai, Jina v1–v2):</strong> the most published BEIR-style numbers; open weights or mature hosted APIs; a good default for RAG “topical precision”.</li>
+        <li><strong>Instruction rerankers (Qwen3, Contextual AI v2, Voyage rerank-2.5):</strong> stronger when relevance is policy-shaped; harder to compare on public leaderboards, because the score depends on the instruction you write — our <a href="/models/">models table</a> shows each vendor’s own numbers where they publish any.</li>
         <li><strong>Late-interaction (ColBERT):</strong> different axis entirely (token MaxSim at scale) — see <a href="/guides/late-interaction-rerank.html">late-interaction guide</a>.</li>
       </ul>
 

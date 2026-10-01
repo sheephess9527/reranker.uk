@@ -4,7 +4,7 @@
   <meta charset="UTF-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>Qwen3-Reranker: 0.6B / 4B / 8B open-weight review | reranker.uk</title>
-  <meta name="description" content="Qwen3-Reranker family review for 2026: when to use 0.6B, 4B, or 8B, how scores compare to classic BEIR rows, self-host tips, and trade-offs vs bge and hosted APIs." >
+  <meta name="description" content="Qwen3-Reranker review (Oct 2026): when to use 0.6B, 4B or 8B, Qwen's own MTEB-R and other scores and how they were measured, task instructions, a sentence-transformers quick start, and trade-offs vs bge and hosted APIs." >
   <link rel="canonical" href="https://reranker.uk/models/qwen-reranker" >
   <link rel="alternate" hreflang="en" href="https://reranker.uk/models/qwen-reranker" >
   <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/qwen-reranker" >
@@ -17,8 +17,8 @@
   <link rel="manifest" href="/site.webmanifest" >
   <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
   <meta property="og:type" content="article" >
-  <meta property="og:title" content="Qwen3-Reranker — 2026 open-weight SOTA candidate" >
-  <meta property="og:description" content="0.6B / 4B / 8B open rerankers. Start with 4B on GPU; validate on your labels." >
+  <meta property="og:title" content="Qwen3-Reranker — Apache 2.0, 0.6B to 8B" >
+  <meta property="og:description" content="Start with 4B: in Qwen's own tests it beats the 8B on English and instruction-following. All three are Apache 2.0 with 32K context." >
   <meta property="og:url" content="https://reranker.uk/models/qwen-reranker" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="en_GB" >
@@ -60,15 +60,15 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Qwen3-Reranker</div>
       <h1>Qwen3-Reranker</h1>
-      <p class="meta">Open weights · Qwen / Tongyi · <time datetime="2026-06-25">Updated 25 Jun 2026</time></p>
-      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Open weights</span><span class="pill info">2026 SOTA*</span><span class="pill">GPU recommended</span></div>
-      <p class="lead">The <strong>Qwen3-Reranker</strong> family (0.6B / 4B / 8B) is the headline open-weight reranker story of 2026: multilingual, long-context friendly, and frequently topping community open-weight leaderboards. Treat published MTEB-R / BEIR-style numbers as <em>directionally</em> strong — always validate on your own labels before replacing bge or a hosted API.</p>
+      <p class="meta">Open weights · Qwen, Alibaba · <time datetime="2026-10-01">Updated 1 Oct 2026</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Apache 2.0</span><span class="pill info">Instruction-aware</span><span class="pill">GPU recommended</span></div>
+      <p class="lead">The <strong>Qwen3-Reranker</strong> family (0.6B / 4B / 8B) are Apache 2.0 rerankers built on Qwen3, with a 32K context, 100+ languages and support for a task instruction. In Qwen’s own tests the 4B and 8B lead bge-reranker-v2-m3 and gte-multilingual-reranker on every suite they ran — English, Chinese, multilingual, long-document and code. Those are Qwen’s numbers on Qwen’s setup: validate on your own labels before replacing bge or a hosted API.</p>
 
       <div class="toc">
         <strong>On this page</strong>
         <ol>
           <li><a href="#variants">Model variants</a></li>
-          <li><a href="#scores">Scores &amp; honesty</a></li>
+          <li><a href="#scores">Scores, and whose they are</a></li>
           <li><a href="#usage">Quick start</a></li>
           <li><a href="#when">When to pick Qwen3</a></li>
           <li><a href="#pros-cons">Pros and cons</a></li>
@@ -79,41 +79,53 @@
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Model</th><th>Size</th><th>Best for</th></tr>
+            <tr><th>Model</th><th>Parameters</th><th>Layers</th><th>Best for</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>Qwen/Qwen3-Reranker-0.6B</code></td><td>~0.6B</td><td>Lightest sibling; still prefers GPU</td></tr>
-            <tr><td><code>Qwen/Qwen3-Reranker-4B</code></td><td>~4B</td><td><strong>Default self-host pick</strong> when quality matters</td></tr>
-            <tr><td><code>Qwen/Qwen3-Reranker-8B</code></td><td>~8B</td><td>Maximum open quality; highest VRAM / latency</td></tr>
+            <tr><td><code>Qwen/Qwen3-Reranker-0.6B</code></td><td>0.6B</td><td>28</td><td>Lightest; still prefers a GPU</td></tr>
+            <tr><td><code>Qwen/Qwen3-Reranker-4B</code></td><td>4B</td><td>36</td><td><strong>Default self-host pick</strong> — best English and instruction-following scores of the three</td></tr>
+            <tr><td><code>Qwen/Qwen3-Reranker-8B</code></td><td>8B</td><td>36</td><td>Leads on Chinese, multilingual, long-document and code — by at most 1.5 points</td></tr>
           </tbody>
         </table>
       </div>
+      <p>All three: 32K context, 100+ languages, Apache 2.0.</p>
       <p><strong>Recommendation:</strong> start with <strong>4B</strong> on a single modern GPU. Drop to 0.6B only if memory is tight; move to 8B only when labelled eval shows a clear NDCG gain worth the cost.</p>
 
-      <h2 id="scores">Scores &amp; honesty</h2>
-      <p>Public write-ups often cite MTEB-R / multilingual rerank suites in the <strong>~70+</strong> range for mid/large Qwen3 sizes, with 8B at the top of open-weight tables. Those figures are <strong>not</strong> guaranteed to match the classic BEIR 18-dataset averages we list for bge (~60) or mxbai (~62).</p>
-      <ul>
-        <li>Different suites, languages, and preprocessing → different numbers.</li>
-        <li>On some English-only product benches, compact models (e.g. ModernBERT-GTE) can beat a 4B model on Hit@1 while being far cheaper.</li>
-        <li>Our <a href="/models/">comparison table</a> marks Qwen scores with <strong>*</strong> for this reason.</li>
-      </ul>
+      <h2 id="scores">Scores, and whose they are</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>MTEB-R</th><th>CMTEB-R</th><th>MMTEB-R</th><th>MLDR</th><th>MTEB-Code</th><th>FollowIR</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>bge-reranker-v2-m3</td><td>57.03</td><td>72.16</td><td>58.36</td><td>59.51</td><td>41.38</td><td>−0.01</td></tr>
+            <tr><td>Qwen3-Reranker-0.6B</td><td>65.80*</td><td>71.31</td><td>66.36</td><td>67.28</td><td>73.42</td><td>5.41</td></tr>
+            <tr><td>Qwen3-Reranker-4B</td><td><strong>69.76*</strong></td><td>75.94</td><td>72.74</td><td>69.97</td><td>81.20</td><td><strong>14.84</strong></td></tr>
+            <tr><td>Qwen3-Reranker-8B</td><td>69.02*</td><td><strong>77.45</strong></td><td><strong>72.94</strong></td><td><strong>70.19</strong></td><td><strong>81.22</strong></td><td>8.05</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">Qwen’s own runs, from the model cards: the retrieval subsets of MTEB (English v2, Chinese v1, multilingual MMTEB and Code), MLDR for long documents and FollowIR for instruction-following, each reranking the top 100 candidates from Qwen3-Embedding-0.6B. MTEB-R is an English NDCG@10 average, but it isn’t the BEIR suite, so these numbers don’t share a column with other vendors’ BEIR figures.</p>
+      <p>One outside reference: Jina’s 2026 run puts Qwen3-Reranker-4B at 62.28* on 13 BEIR datasets — just under jina-reranker-v3.5 there, and ahead of it on multilingual, legal / medical and structured retrieval (see the <a href="/models/jina-reranker#benchmarks">Jina page</a>). Until October 2026 this page compared Qwen’s scores with “bge (~60)” and “mxbai (~62)”; neither figure had a source, and the <a href="/models/">models table</a> now shows what BAAI and mixedbread actually publish.</p>
 
       <h2 id="usage">Quick start</h2>
-      <h3>Hugging Face / transformers</h3>
-      <pre tabindex="0"><code># Check the model card for the recommended stack (transformers / vLLM / SGLang).
-# IDs (examples):
-#   Qwen/Qwen3-Reranker-0.6B
-#   Qwen/Qwen3-Reranker-4B
-#   Qwen/Qwen3-Reranker-8B
+      <h3>sentence-transformers</h3>
+      <pre tabindex="0"><code>pip install sentence-transformers
 
-from sentence_transformers import CrossEncoder  # if card supports CE API
+from sentence_transformers import CrossEncoder
 
-# Prefer the loading recipe on the official model card — Qwen3 may use
-# a chat-style scoring template rather than a plain CrossEncoder pair.
-model_id = "Qwen/Qwen3-Reranker-4B"
-# model = CrossEncoder(model_id, max_length=8192)  # only if supported
-# scores = model.predict([(query, d) for d in docs])</code></pre>
-      <p>For production serving, many teams use <strong>vLLM</strong> / OpenAI-compatible <code>/v1/rerank</code> endpoints. Follow the current Qwen docs for the exact prompt format — wrong templates silently destroy quality.</p>
+model = CrossEncoder("Qwen/Qwen3-Reranker-4B")
+
+# Default instruction: "Given a web search query, retrieve relevant
+# passages that answer the query" — override it per task:
+model = CrossEncoder(
+    "Qwen/Qwen3-Reranker-4B",
+    prompts={"support": "Prefer official help articles with step-by-step instructions"},
+    default_prompt_name="support",
+)
+
+ranked = model.rank(query, documents)   # [{"corpus_id": i, "score": s}, ...]</code></pre>
+      <p>The model cards load the rerankers straight into sentence-transformers’ <code>CrossEncoder</code>. The card also shows a plain <code>transformers</code> path (transformers ≥ 4.51) that scores yes/no logits through Qwen’s chat template — get that template wrong and quality drops without an error.</p>
 
       <h3>In a RAG pipeline</h3>
       <pre tabindex="0"><code># Pseudocode — same two-stage pattern as any cross-encoder
@@ -125,9 +137,9 @@ answer = llm.complete(context=top, query=query)</code></pre>
       <h2 id="when">When to pick Qwen3</h2>
       <ul>
         <li><strong>Yes:</strong> you have GPU, need multilingual quality, and want open weights without per-call API cost.</li>
-        <li><strong>Yes:</strong> long passages / long context matter and you can afford 4B–8B memory.</li>
+        <li><strong>Yes:</strong> long passages matter — all three take 32K tokens.</li>
+        <li><strong>Yes:</strong> relevance needs steering. The rerankers take a task instruction; Qwen recommend writing one per task (in English, even for multilingual data) and report typical gains of 1–5%. See <a href="/guides/instruction-reranker">instruction-following rerank</a>.</li>
         <li><strong>Maybe not:</strong> CPU-only or edge — prefer <a href="/models/bge-reranker">bge-v2-m3</a>, mxbai, or Jina tiny for demos.</li>
-        <li><strong>Maybe not:</strong> instruction-shaped policies — see <a href="/guides/instruction-reranker">instruction-following rerank</a>.</li>
       </ul>
 
       <h2 id="pros-cons">Pros and cons</h2>
@@ -135,18 +147,19 @@ answer = llm.complete(context=top, query=query)</code></pre>
         <div class="card">
           <h3 style="color:var(--good);margin-top:0">Pros</h3>
           <ul class="feature-list">
-            <li>Leading open-weight narrative in 2026 (0.6B–8B ladder)</li>
-            <li>Strong multilingual + long-context positioning</li>
+            <li>Apache 2.0 at every size, 0.6B to 8B</li>
+            <li>100+ languages and a 32K context</li>
+            <li>Takes a task instruction — the 4B has the best FollowIR score in Qwen’s table</li>
+            <li>Loads directly with sentence-transformers’ <code>CrossEncoder</code></li>
             <li>Zero per-call cost once self-hosted</li>
-            <li>Active ecosystem (HF, vLLM, community recipes)</li>
           </ul>
         </div>
         <div class="card">
           <h3 style="color:var(--danger);margin-top:0">Cons</h3>
           <ul style="padding-left:1.2rem;color:var(--text-soft)">
             <li>GPU (or heavy quant) required for comfort</li>
-            <li>Scoring template / serving stack more fiddly than MiniLM</li>
-            <li>Public leaderboard numbers not 1:1 with classic BEIR avg</li>
+            <li>The raw <code>transformers</code> path needs Qwen’s exact prompt template</li>
+            <li>Vendor numbers are MTEB-R, not BEIR</li>
             <li>Too large for our in-browser demo</li>
           </ul>
         </div>

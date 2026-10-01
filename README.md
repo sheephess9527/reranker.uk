@@ -168,6 +168,10 @@ reach HuggingFace or arXiv), via `check-sources.mjs --verbose`.
 | mxbai-rerank-large-v1 | 435M parameters per HF safetensors metadata; mixedbread's README says 1.5B |
 | Cohere pricing | $2.50 / $2 per 1K searches (Pro / Fast), 32,768 context — from the JSON embedded in cohere.com/pricing (the price cards render client-side, hence `check_raw`). Search unit per the same page's FAQ: 1 query + up to 100 docs, docs over 500 tokens incl. query split and counted per chunk. **Reverses the Sep 2026 "chunking myth" note.** Trial keys: 1,000 calls/month, not for production (docs/rate-limits) |
 | Voyage rerankers | rerank-3 / -lite are current and recommended (docs/reranker), $0.05 / $0.02 per 1M tokens with 200M free each; rerank-2.5 / -lite are "older models", same price, no free tokens per the price table (one stale sentence on the same page still says otherwise). Batch API 33% off, listed for rerank-2.5 / -lite only; instructions documented for 2.5 only |
+| Qwen3-Reranker | MTEB-R 65.80 / 69.76 / 69.02 (0.6B / 4B / 8B), Qwen's own, top 100 from Qwen3-Embedding-0.6B; 8B leads CMTEB-R, MMTEB-R, MLDR, Code; 4B leads FollowIR. Instruction-aware; CrossEncoder-loadable. The old "~0.48 on BEIR" had no source |
+| gte-reranker-modernbert-base | 149M, 8192 context, Apache 2.0, English; BEIR 56.19 on its card (protocol unstated). "Ties nemotron on Hit@1" had no source |
+| llama-nemotron-rerank-1b-v2 | 1.2B, 8192 tokens, 26 languages evaluated, OpenMDW-1.1 + Llama 3.2 licence, commercial use allowed. Card reports pipeline Recall@5 only; the old "Hit@1 83.0" had no source |
+| Contextual AI Rerank v2 | Open weights since Aug 2025: 1B / 2B / 6B, CC BY-NC-SA 4.0, 100+ languages, 32K context, instruction-following. The table had it as an English-only hosted API |
 
 ### Verified September 2026
 
