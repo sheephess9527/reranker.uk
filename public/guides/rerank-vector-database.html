@@ -77,7 +77,7 @@
 
       <h2 id="pattern">The pattern</h2>
       <p>Whatever the store, reranking changes your retrieval call in exactly one way — you ask for more rows than you intend to use:</p>
-      <pre><code>CANDIDATES = 50   # what you ask the database for
+      <pre tabindex="0"><code>CANDIDATES = 50   # what you ask the database for
 KEEP = 5          # what reaches the prompt
 
 rows = store.search(query_vector, limit=CANDIDATES)
@@ -87,7 +87,7 @@ top = [r for _, r in sorted(zip(scores, rows), key=lambda p: -p[0])][:KEEP]</cod
 
       <h2 id="pgvector">pgvector (Postgres)</h2>
       <p>pgvector returns rows ordered by distance. You raise the <code>LIMIT</code>, keep the ids, and rank in the application layer:</p>
-      <pre><code>import psycopg
+      <pre tabindex="0"><code>import psycopg
 from sentence_transformers import CrossEncoder
 
 reranker = CrossEncoder("BAAI/bge-reranker-v2-m3", max_length=512)
@@ -113,7 +113,7 @@ def search(conn, query: str, query_vec, keep: int = 5):
 
       <h2 id="qdrant">Qdrant</h2>
       <p>Same shape, with the payload carried along so you do not lose metadata:</p>
-      <pre><code>from qdrant_client import QdrantClient
+      <pre tabindex="0"><code>from qdrant_client import QdrantClient
 
 client = QdrantClient(url="http://localhost:6333")
 
@@ -132,7 +132,7 @@ def search(query: str, query_vec, keep: int = 5):
 
       <h2 id="elasticsearch">Elasticsearch</h2>
       <p>Elasticsearch is where reranking pays off most visibly, because you can feed it a <a href="/guides/hybrid-retrieval-rerank">hybrid</a> candidate set — BM25 and vectors fail on different queries, and the cross-encoder sorts out the union:</p>
-      <pre><code>resp = es.search(
+      <pre tabindex="0"><code>resp = es.search(
     index="documents",
     size=50,
     query={"bool": {"should": [

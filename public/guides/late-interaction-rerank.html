@@ -105,7 +105,7 @@
       <blockquote>Rule of thumb: if Recall@50 is low, fix retrieval — no reranker architecture invents missing chunks.</blockquote>
 
       <h2 id="colbert">ColBERTv2 in practice</h2>
-      <pre><code># Conceptual flow with pyserini / ragatouille-style tooling
+      <pre tabindex="0"><code># Conceptual flow with pyserini / ragatouille-style tooling
 # 1. Index token embeddings offline
 # 2. At query time: MaxSim between query tokens and doc token vectors
 # 3. Take top 50 for optional cross-encoder rerank
@@ -119,7 +119,7 @@ results = colbert.search(query="reset API key", k=50)
 
       <h2 id="pick">How to pick an architecture</h2>
       <div class="card" style="margin:1.2rem 0">
-<pre><code>Millions of docs, tight latency?
+<pre tabindex="0"><code>Millions of docs, tight latency?
   → bi-encoder (+ BM25 hybrid if lexical matters)
 
 Recall OK but order noisy, 100–1000 candidates?

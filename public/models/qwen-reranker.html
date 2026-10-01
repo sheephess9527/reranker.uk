@@ -100,7 +100,7 @@
 
       <h2 id="usage">Quick start</h2>
       <h3>Hugging Face / transformers</h3>
-      <pre><code># Check the model card for the recommended stack (transformers / vLLM / SGLang).
+      <pre tabindex="0"><code># Check the model card for the recommended stack (transformers / vLLM / SGLang).
 # IDs (examples):
 #   Qwen/Qwen3-Reranker-0.6B
 #   Qwen/Qwen3-Reranker-4B
@@ -116,7 +116,7 @@ model_id = "Qwen/Qwen3-Reranker-4B"
       <p>For production serving, many teams use <strong>vLLM</strong> / OpenAI-compatible <code>/v1/rerank</code> endpoints. Follow the current Qwen docs for the exact prompt format — wrong templates silently destroy quality.</p>
 
       <h3>In a RAG pipeline</h3>
-      <pre><code># Pseudocode — same two-stage pattern as any cross-encoder
+      <pre tabindex="0"><code># Pseudocode — same two-stage pattern as any cross-encoder
 candidates = vector_db.search(query, top_k=80)   # or hybrid
 scores = qwen3_rerank(query, candidates)         # official template
 top = sorted(zip(scores, candidates), reverse=True)[:8]

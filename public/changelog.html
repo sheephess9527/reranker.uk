@@ -62,6 +62,16 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-01">1 Oct 2026 — An accessibility pass, and a check to keep it</h2>
+        <ul class="feature-list">
+          <li><strong>Links in text are underlined</strong> — they were told apart from surrounding text by colour alone; in the dark theme that was a 1.47:1 difference, well under the 3:1 a reader without full colour vision needs. Buttons, cards and navigation are unchanged</li>
+          <li><strong>Five text colours fixed</strong> — the light theme's teal and amber labels and the Chinese dark-theme page labels were 3.1–4.2:1, under the 4.5:1 minimum for body-size text</li>
+          <li><strong>Code blocks reachable by keyboard</strong> — a code sample wider than the screen scrolls sideways, and could only be scrolled with a mouse</li>
+          <li><strong>A check on every page, both themes</strong> — every build now runs axe-core's WCAG 2.1 AA rules across all 48 pages in light and dark; it found over 400 issues the first time and finds none now</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-09-28">28 Sep 2026 — transformers.js 4.3.0, and what report-only caught</h2>
         <ul class="feature-list">
           <li><strong>The demo runs on transformers.js 4.3.0</strong> — up from 3.5.1, with ONNX Runtime Web 1.22 → 1.31. Verified against live jsDelivr and HuggingFace on all three demo models before merging, not just checked against the source</li>

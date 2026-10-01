@@ -98,7 +98,7 @@
       <p>Start with <strong>bge-reranker-base</strong> on CPU for prototyping. On GPU, A/B <strong>Qwen3-Reranker-4B</strong> against <strong>bge-v2-m3</strong> or <strong>mxbai-large</strong> on your labelled set — do not assume leaderboard order transfers.</p>
 
       <h2 id="quickstart">Quick start with sentence-transformers</h2>
-      <pre><code>pip install sentence-transformers torch
+      <pre tabindex="0"><code>pip install sentence-transformers torch
 
 from sentence_transformers import CrossEncoder
 
@@ -126,7 +126,7 @@ ranked = sorted(zip(scores, docs), reverse=True)</code></pre>
           <p>Expose <code>POST /rerank</code> with <code>{ query, documents[] }</code>. Share one GPU across many app pods.</p>
         </div>
       </div>
-      <pre><code># Minimal FastAPI sketch
+      <pre tabindex="0"><code># Minimal FastAPI sketch
 from fastapi import FastAPI
 from sentence_transformers import CrossEncoder
 

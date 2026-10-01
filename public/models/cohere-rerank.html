@@ -167,8 +167,8 @@
 
       <h2 id="usage">Quick start</h2>
       <h3>Python</h3>
-      <pre><code>pip install cohere</code></pre>
-      <pre><code>import cohere
+      <pre tabindex="0"><code>pip install cohere</code></pre>
+      <pre tabindex="0"><code>import cohere
 
 co = cohere.ClientV2("YOUR_API_KEY")
 
@@ -191,7 +191,7 @@ for r in results.results:
     print(f"{r.relevance_score:.4f}  {documents[r.index][:80]}")</code></pre>
 
       <h3>Node.js</h3>
-      <pre><code>import Cohere from "cohere-ai";
+      <pre tabindex="0"><code>import Cohere from "cohere-ai";
 const co = new Cohere.Client({ token: "YOUR_API_KEY" });
 
 const result = await co.rerank({
@@ -204,7 +204,7 @@ const result = await co.rerank({
 result.results.forEach((r) => console.log(r.relevanceScore, documents[r.index]));</code></pre>
 
       <h3>REST (curl)</h3>
-      <pre><code>curl https://api.cohere.com/v2/rerank \
+      <pre tabindex="0"><code>curl https://api.cohere.com/v2/rerank \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{

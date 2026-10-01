@@ -181,7 +181,17 @@ check in this repo that exercises real model loading. The Sep 2026
 transformers.js 3.5.1 → 4.3.0 upgrade was verified that way, and the run
 found a CSP break the mocked test couldn't have seen.
 
-Both tests also assert zero `securitypolicyviolation` events (see
+`npm test` also runs `tests/a11y.spec.js`: axe-core's WCAG 2.1 A/AA rules
+against every built page in **both** themes (contrast is entirely different
+between them), with reduced motion so fading-in demo results aren't measured
+mid-fade. `npm run test:a11y` runs just that; `node tests/helpers/axeAudit.mjs`
+(with `node scripts/serve.mjs` running) prints a full report grouped by rule.
+One axe quirk worth knowing: its link check treats *any* differing
+`text-decoration-*` property as a visual cue, so a link with
+`text-decoration-thickness` set but no underline drawn still passes. The
+underline on prose links in `style.css` is the actual requirement.
+
+Both smoke tests also assert zero `securitypolicyviolation` events (see
 `tests/helpers/csp.mjs`) — the one way this repo can check the CSP below
 against something other than a hand read of the policy string.
 

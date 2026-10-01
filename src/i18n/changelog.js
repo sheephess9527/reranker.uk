@@ -1,4 +1,14 @@
 window.I18N_PAGE = { zh: {
+  "1 Oct 2026 — An accessibility pass, and a check to keep it":
+    "2026 年 10 月 1 日 —— 一轮无障碍修复，外加一道防回退的检查",
+  "<strong>Links in text are underlined</strong> — they were told apart from surrounding text by colour alone; in the dark theme that was a 1.47:1 difference, well under the 3:1 a reader without full colour vision needs. Buttons, cards and navigation are unchanged":
+    "<strong>正文里的链接加了下划线</strong> —— 以前只靠颜色和周围文字区分；深色主题下两者的对比度只有 1.47:1，远低于色觉不完全的读者需要的 3:1。按钮、卡片和导航保持不变",
+  "<strong>Five text colours fixed</strong> — the light theme's teal and amber labels and the Chinese dark-theme page labels were 3.1–4.2:1, under the 4.5:1 minimum for body-size text":
+    "<strong>修正了五处文字颜色</strong> —— 浅色主题里的青色、琥珀色标签，以及中文页面深色主题下的标签，对比度在 3.1–4.2:1 之间，低于正文字号要求的 4.5:1",
+  "<strong>Code blocks reachable by keyboard</strong> — a code sample wider than the screen scrolls sideways, and could only be scrolled with a mouse":
+    "<strong>代码块可以用键盘操作了</strong> —— 比屏幕宽的代码示例需要横向滚动，以前只能用鼠标滚",
+  "<strong>A check on every page, both themes</strong> — every build now runs axe-core's WCAG 2.1 AA rules across all 48 pages in light and dark; it found over 400 issues the first time and finds none now":
+    "<strong>每个页面、两种主题都检查</strong> —— 现在每次构建都会用 axe-core 的 WCAG 2.1 AA 规则把全部 48 个页面在浅色、深色主题下各查一遍；第一次跑查出 400 多处问题，现在为零",
   "28 Sep 2026 — transformers.js 4.3.0, and what report-only caught":
     "2026 年 9 月 28 日 —— transformers.js 4.3.0，以及「只报告」模式抓到了什么",
   "<strong>The demo runs on transformers.js 4.3.0</strong> — up from 3.5.1, with ONNX Runtime Web 1.22 → 1.31. Verified against live jsDelivr and HuggingFace on all three demo models before merging, not just checked against the source":

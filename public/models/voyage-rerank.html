@@ -168,8 +168,8 @@
 
       <h2 id="usage">Quick start</h2>
       <h3>Python</h3>
-      <pre><code>pip install voyageai</code></pre>
-      <pre><code>import voyageai
+      <pre tabindex="0"><code>pip install voyageai</code></pre>
+      <pre tabindex="0"><code>import voyageai
 
 vo = voyageai.Client(api_key="YOUR_API_KEY")
 
@@ -192,7 +192,7 @@ for r in result.results:
     print(f"{r.relevance_score:.4f}  {documents[r.index][:80]}")</code></pre>
 
       <h3>REST (curl)</h3>
-      <pre><code>curl https://api.voyageai.com/v1/rerank \
+      <pre tabindex="0"><code>curl https://api.voyageai.com/v1/rerank \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -203,7 +203,7 @@ for r in result.results:
   }'</code></pre>
 
       <h3>In a RAG pipeline</h3>
-      <pre><code>import voyageai
+      <pre tabindex="0"><code>import voyageai
 
 vo = voyageai.Client(api_key="YOUR_API_KEY")
 

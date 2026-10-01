@@ -187,8 +187,8 @@
 
       <h2 id="usage">Quick start</h2>
       <h3>v2, self-hosted</h3>
-      <pre><code>pip install -U mxbai-rerank</code></pre>
-      <pre><code>from mxbai_rerank import MxbaiRerankV2
+      <pre tabindex="0"><code>pip install -U mxbai-rerank</code></pre>
+      <pre tabindex="0"><code>from mxbai_rerank import MxbaiRerankV2
 
 reranker = MxbaiRerankV2("mixedbread-ai/mxbai-rerank-base-v2")  # or large-v2
 
@@ -205,8 +205,8 @@ for r in results:
     print(f"{r.score:.4f}  {r.document[:80]}")</code></pre>
 
       <h3>v1, self-hosted (sentence-transformers)</h3>
-      <pre><code>pip install sentence-transformers</code></pre>
-      <pre><code>from sentence_transformers import CrossEncoder
+      <pre tabindex="0"><code>pip install sentence-transformers</code></pre>
+      <pre tabindex="0"><code>from sentence_transformers import CrossEncoder
 
 model = CrossEncoder("mixedbread-ai/mxbai-rerank-base-v1")
 
@@ -225,7 +225,7 @@ for score, text in ranked:
     print(f"{score:.4f}  {text[:80]}")</code></pre>
 
       <h3>In a RAG pipeline (v2)</h3>
-      <pre><code>from mxbai_rerank import MxbaiRerankV2
+      <pre tabindex="0"><code>from mxbai_rerank import MxbaiRerankV2
 
 reranker = MxbaiRerankV2("mixedbread-ai/mxbai-rerank-large-v2")
 
@@ -240,8 +240,8 @@ def rag_answer(query: str, vector_db, llm) -> str:
 
       <h2 id="api">Hosted API</h2>
       <p>mixedbread-ai offers a hosted rerank endpoint backed by the same model weights. Useful if you want to avoid running inference on your own infrastructure. The current SDK is <code>mixedbread</code> (the older <code>mixedbread_ai</code> package was v1-era):</p>
-      <pre><code>pip install mixedbread</code></pre>
-      <pre><code>from mixedbread import Mixedbread
+      <pre tabindex="0"><code>pip install mixedbread</code></pre>
+      <pre tabindex="0"><code>from mixedbread import Mixedbread
 
 mxbai = Mixedbread(api_key="YOUR_API_KEY")
 
@@ -262,7 +262,7 @@ for item in result.data:
 
       <h2 id="browser">Browser use</h2>
       <p>The v1 <code>xsmall</code> variant is compact enough to run in the browser via transformers.js — this is exactly what our demo uses. v2's smallest variant (0.5B) has no equivalent browser-sized build yet:</p>
-      <pre><code>// transformers.js (ES module)
+      <pre tabindex="0"><code>// transformers.js (ES module)
 import { AutoTokenizer, AutoModelForSequenceClassification }
   from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4";
 

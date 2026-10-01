@@ -62,6 +62,16 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-01">2026 年 10 月 1 日 —— 一轮无障碍修复，外加一道防回退的检查</h2>
+        <ul class="feature-list">
+          <li><strong>正文里的链接加了下划线</strong> —— 以前只靠颜色和周围文字区分；深色主题下两者的对比度只有 1.47:1，远低于色觉不完全的读者需要的 3:1。按钮、卡片和导航保持不变</li>
+          <li><strong>修正了五处文字颜色</strong> —— 浅色主题里的青色、琥珀色标签，以及中文页面深色主题下的标签，对比度在 3.1–4.2:1 之间，低于正文字号要求的 4.5:1</li>
+          <li><strong>代码块可以用键盘操作了</strong> —— 比屏幕宽的代码示例需要横向滚动，以前只能用鼠标滚</li>
+          <li><strong>每个页面、两种主题都检查</strong> —— 现在每次构建都会用 axe-core 的 WCAG 2.1 AA 规则把全部 48 个页面在浅色、深色主题下各查一遍；第一次跑查出 400 多处问题，现在为零</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-09-28">2026 年 9 月 28 日 —— transformers.js 4.3.0，以及「只报告」模式抓到了什么</h2>
         <ul class="feature-list">
           <li><strong>Demo 升级到 transformers.js 4.3.0</strong> —— 从 3.5.1 升上来，ONNX Runtime Web 也从 1.22 升到 1.31。合并前在真实的 jsDelivr 和 HuggingFace 上把三个 Demo 模型都跑过一遍，不只是对着源码看了看</li>

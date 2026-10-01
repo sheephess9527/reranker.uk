@@ -116,7 +116,7 @@
       <h2 id="bi">bi-encoder 如何工作</h2>
       <p>bi-encoder（又称双编码器，dual encoder）把查询和每个文档<em>分别</em>送入同一个模型，为每段文本产生一个定长向量。相关性就是两个向量之间的余弦相似度（或点积）。</p>
       <div class="card" style="margin:1.3rem 0">
-<pre><code>query ───▶ [encoder] ───▶ q⃗  ┐
+<pre tabindex="0"><code>query ───▶ [encoder] ───▶ q⃗  ┐
                               ├─▶ cosine(q⃗, d⃗) = score
 doc   ───▶ [encoder] ───▶ d⃗  ┘</code></pre>
       </div>
@@ -125,7 +125,7 @@ doc   ───▶ [encoder] ───▶ d⃗  ┘</code></pre>
       <h2 id="cross">cross-encoder 如何工作</h2>
       <p>cross-encoder 把查询和文档拼接成一个序列 —— <code>[CLS] query [SEP] document [SEP]</code> —— 并把这一对一起送入 transformer。自注意力让每个查询 token 都能与每个文档 token 交互，模型输出一个相关性分数。</p>
       <div class="card" style="margin:1.3rem 0">
-<pre><code>query + doc ───▶ [encoder, full cross-attention] ───▶ relevance score</code></pre>
+<pre tabindex="0"><code>query + doc ───▶ [encoder, full cross-attention] ───▶ relevance score</code></pre>
       </div>
       <p>这准确得多，因为模型能推理两段文本之间的<em>关系</em>，而不只是表面相似度。代价是：分数取决于具体的那一对，所以什么都没法预计算。每一个 (query, document) 组合都是一次全新的前向传播 —— 这也是为什么你只在短名单上跑 cross-encoder，绝不在整个语料库上跑。这种“只对短名单”的用法<em>就是</em>重排序。</p>
 

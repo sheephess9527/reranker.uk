@@ -76,7 +76,7 @@
 
       <h2 id="dataset">构建标注查询集</h2>
       <p>从日志抽取 30–100 条真实查询（脱敏）。每条标记哪些文档 ID <em>相关</em>（二值标注即可起步）。存为 JSON：</p>
-      <pre><code>{
+      <pre tabindex="0"><code>{
   "q-001": {
     "query": "How do I reset my API key?",
     "relevant": ["doc-42", "doc-108"]
@@ -107,7 +107,7 @@
       </ol>
 
       <h2 id="code">用 ranx 的 Python 示例</h2>
-      <pre><code>from ranx import Qrels, Run, evaluate
+      <pre tabindex="0"><code>from ranx import Qrels, Run, evaluate
 
 qrels = Qrels.from_file("qrels.json")      # ground truth
 run_before = Run.from_file("retrieve.json")

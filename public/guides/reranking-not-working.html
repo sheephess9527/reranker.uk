@@ -87,7 +87,7 @@
       <h2 id="recall">1. Retrieval never returned the right document</h2>
       <p>This is the single most common cause. Reranking is a <em>precision</em> stage; it cannot fix <em>recall</em>. If your vector search misses the relevant chunk entirely, the reranker faithfully ranks a set of documents none of which answer the question.</p>
       <p>Test it directly, before touching the reranker. Take 20 queries where you know the correct document, retrieve your normal top-k, and just check membership:</p>
-      <pre><code>hits = 0
+      <pre tabindex="0"><code>hits = 0
 for q, gold_id in labelled:
     candidates = retriever.search(q, k=50)
     if gold_id in [c.id for c in candidates]:
@@ -114,7 +114,7 @@ print(f"recall@50 = {hits / len(labelled):.2f}")</code></pre>
       <h2 id="truncation">3. Passages are being silently truncated</h2>
       <p>Every cross-encoder has a maximum input length, and the query plus the passage share it. Exceed it and the tail of your passage is cut off — often the part that actually answers the question. Nothing errors; the score just comes back meaningless.</p>
       <p>Classic MiniLM-style rerankers cap at <strong>512 tokens</strong> for the pair. Modern hosted models are far roomier — <a href="/models/cohere-rerank">Cohere Rerank 4</a> and <a href="/models/voyage-rerank">Voyage rerank-2.5</a> both take 32,000 — so a model swap can fix this outright. If you are self-hosting a 512-token model, check where your passages actually land:</p>
-      <pre><code>lengths = [len(tok.encode(d)) for d in passages]
+      <pre tabindex="0"><code>lengths = [len(tok.encode(d)) for d in passages]
 over = sum(1 for n in lengths if n > 480)   # leave room for the query
 print(f"{over}/{len(lengths)} passages will be truncated")</code></pre>
       <p>You can watch this happen in <a href="/demo?s=legal">the demo</a>: it warns when a passage exceeds the selected <code>max_length</code>, and you can see the score for a long passage change as you shorten it.</p>

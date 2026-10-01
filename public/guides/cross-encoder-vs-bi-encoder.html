@@ -116,7 +116,7 @@
       <h2 id="bi">How a bi-encoder works</h2>
       <p>A bi-encoder (also called a dual encoder) passes the query and each document through the same model <em>separately</em>, producing one fixed-length vector per text. Relevance is then just the cosine similarity (or dot product) between two vectors.</p>
       <div class="card" style="margin:1.3rem 0">
-<pre><code>query ───▶ [encoder] ───▶ q⃗  ┐
+<pre tabindex="0"><code>query ───▶ [encoder] ───▶ q⃗  ┐
                               ├─▶ cosine(q⃗, d⃗) = score
 doc   ───▶ [encoder] ───▶ d⃗  ┘</code></pre>
       </div>
@@ -125,7 +125,7 @@ doc   ───▶ [encoder] ───▶ d⃗  ┘</code></pre>
       <h2 id="cross">How a cross-encoder works</h2>
       <p>A cross-encoder concatenates the query and document into one sequence — <code>[CLS] query [SEP] document [SEP]</code> — and runs the pair through the transformer together. Self-attention lets every query token interact with every document token, and the model outputs a single relevance score.</p>
       <div class="card" style="margin:1.3rem 0">
-<pre><code>query + doc ───▶ [encoder, full cross-attention] ───▶ relevance score</code></pre>
+<pre tabindex="0"><code>query + doc ───▶ [encoder, full cross-attention] ───▶ relevance score</code></pre>
       </div>
       <p>This is dramatically more accurate because the model can reason about the <em>relationship</em> between the texts, not just their surface similarity. The catch: the score depends on the specific pair, so you can’t precompute anything. Every (query, document) combination is a fresh forward pass — which is why you only run a cross-encoder on a shortlist, never on the whole corpus. That shortlisted use <em>is</em> reranking.</p>
 

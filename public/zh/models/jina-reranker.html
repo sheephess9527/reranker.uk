@@ -171,7 +171,7 @@
 
       <h2 id="usage">快速上手</h2>
       <h3>托管 API（Python）</h3>
-      <pre><code>import requests
+      <pre tabindex="0"><code>import requests
 
 def rerank(query: str, documents: list[str], top_n: int = 5) -> list[str]:
     resp = requests.post(
@@ -187,7 +187,7 @@ def rerank(query: str, documents: list[str], top_n: int = 5) -> list[str]:
     return [documents[r["index"]] for r in resp["results"]]</code></pre>
 
       <h3>自建部署（sentence-transformers）</h3>
-      <pre><code>from sentence_transformers import CrossEncoder
+      <pre tabindex="0"><code>from sentence_transformers import CrossEncoder
 
 # Open weights — same model, self-hosted
 model = CrossEncoder("jinaai/jina-reranker-v2-base-multilingual",
@@ -198,7 +198,7 @@ ranked = sorted(zip(scores, documents), reverse=True)</code></pre>
 
       <h2 id="browser">浏览器 / 边缘端使用</h2>
       <p><code>v1-tiny</code> 模型（量化后 33 MB）在普通宽带下可通过 transformers.js 在 10 秒内加载，对 10 个候选的批次打分约需 200 ms。这正是驱动我们 Demo 的模型：</p>
-      <pre><code>// transformers.js (ES module in the browser)
+      <pre tabindex="0"><code>// transformers.js (ES module in the browser)
 import { AutoTokenizer, AutoModelForSequenceClassification }
   from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4";
 

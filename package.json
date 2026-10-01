@@ -9,11 +9,13 @@
     "check:zh": "node scripts/check-zh-coverage.mjs",
     "check:i18n": "node scripts/check-i18n-gaps.mjs",
     "check": "npm run build && npm run check:links",
-    "test": "playwright test tests/demo.smoke.spec.js",
+    "test": "playwright test tests/demo.smoke.spec.js tests/a11y.spec.js",
+    "test:a11y": "playwright test tests/a11y.spec.js",
     "test:real": "playwright test tests/demo.smoke.real.spec.js",
     "deploy": "npm run build && npx wrangler deploy"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@playwright/test": "^1.63.0",
     "node-html-parser": "^9.0.1"
   }
