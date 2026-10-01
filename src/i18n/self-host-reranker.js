@@ -73,4 +73,8 @@ window.I18N_PAGE = { zh: {
     "多语言（含中文）；mxbai v2 里体量与质量最均衡的一款",
   "Listwise, long context — <strong>non-commercial</strong> unless licensed":
     "Listwise、长上下文 —— 未获许可时<strong>仅限非商用</strong>",
+
+  // Oct 2026: jina-reranker-v3.5, licences
+  "<strong>GPU:</strong> worth it once you rerank more than a few dozen passages per query. Measure p50 / p95 on your own hardware before sizing — model cards rarely publish latency, and we don’t quote figures we haven’t measured.":
+    "<strong>GPU：</strong>每次查询要重排几十段以上时就值得上 GPU。确定配置前，请在你自己的硬件上实测 p50 / p95 —— 模型卡很少公布延迟，我们也不引用自己没测过的数字。",
 }};

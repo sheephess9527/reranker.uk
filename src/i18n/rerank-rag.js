@@ -78,5 +78,15 @@ window.I18N_PAGE = { zh: {
   "What is a reranker?": "什么是 reranker？",
   "Start with the fundamentals.": "从基础概念开始。",
   "Cross-encoder vs bi-encoder": "Cross-encoder vs bi-encoder",
-  "The architecture behind the speed/accuracy trade-off.": "速度／准确性取舍背后的架构。"
+  "The architecture behind the speed/accuracy trade-off.": "速度／准确性取舍背后的架构。",
+
+  // Oct 2026: jina-reranker-v3.5, licences
+  "Rough latency":
+    "大致延迟",
+  "jina-tiny in the browser":
+    "浏览器中的 jina-tiny",
+  "~{{fact:jina-reranker-v1-tiny-en.browser_ms_30}} ms for 30 (measured)":
+    "30 段约 {{fact:jina-reranker-v1-tiny-en.browser_ms_30}} ms（实测）",
+  "Only the browser row is measured (live demo, 4-vCPU GitHub Actions runner, Oct 2026). The others are rough guides, not measurements: hosted-API time is mostly network and depends on your region — Jina’s FAQ gives about 150 ms for 100 documents of 256 tokens — and self-hosted numbers depend entirely on your hardware and passage length.":
+    "只有浏览器那一行是实测的（在线 Demo，4 核 GitHub Actions 机器，2026 年 10 月）。其余都是粗略参考，不是测量结果：托管 API 的耗时主要花在网络上，取决于你所在的区域 —— Jina 的 FAQ 给出 100 篇 256 token 的文档约 150 ms；自建部署的耗时则完全取决于你的硬件和段落长度。",
 }};

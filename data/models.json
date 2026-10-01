@@ -17,6 +17,14 @@
       "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
       "protocol_note": "Mr.TyDi multilingual average, mixedbread's own comparison table",
       "verified_on": "2026-09-25"
+    },
+    "latency_a100_s": {
+      "value": "2.24",
+      "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
+      "check_pattern": "mxbai-rerank-large-v1 49\\.32 21\\.88 72\\.53 30\\.72 {value}",
+      "check_hint": "Latency",
+      "note": "mixedbread's comparison table, 'Latency (s)', measured on an A100; the workload behind it isn't stated",
+      "verified_on": "2026-10-01"
     }
   },
   "mxbai-rerank-base-v2": {
@@ -36,6 +44,14 @@
       "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
       "protocol_note": "Mr.TyDi multilingual average, mixedbread's own comparison table",
       "verified_on": "2026-09-25"
+    },
+    "latency_a100_s": {
+      "value": "0.67",
+      "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
+      "check_pattern": "mxbai-rerank-base-v2 55\\.57 28\\.56 83\\.70 31\\.73 {value}",
+      "check_hint": "Latency",
+      "note": "mixedbread's comparison table, 'Latency (s)', measured on an A100; the workload behind it isn't stated",
+      "verified_on": "2026-10-01"
     }
   },
   "mxbai-rerank-large-v2": {
@@ -55,6 +71,14 @@
       "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
       "protocol_note": "Mr.TyDi multilingual average, mixedbread's own comparison table",
       "verified_on": "2026-09-25"
+    },
+    "latency_a100_s": {
+      "value": "0.89",
+      "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
+      "check_pattern": "mxbai-rerank-large-v2 57\\.49 29\\.79 84\\.16 32\\.05 {value}",
+      "check_hint": "Latency",
+      "note": "mixedbread's comparison table, 'Latency (s)', measured on an A100; the workload behind it isn't stated",
+      "verified_on": "2026-10-01"
     }
   },
   "bge-reranker-v2-m3": {
@@ -116,6 +140,34 @@
       "source_url": "https://huggingface.co/jinaai/jina-reranker-v1-tiny-en",
       "protocol_note": "Jina's own evaluation, from the jina-reranker-v1 model card: NDCG@10 averaged over 17 BEIR datasets",
       "verified_on": "2026-10-01"
+    },
+    "browser_ms_10": {
+      "value": "429",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "check": "manual",
+      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "verified_on": "2026-10-01"
+    },
+    "browser_ms_30": {
+      "value": "1,283",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "check": "manual",
+      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "verified_on": "2026-10-01"
+    },
+    "browser_cold_s": {
+      "value": "4.4",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "check": "manual",
+      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "verified_on": "2026-10-01"
+    },
+    "browser_download_mb": {
+      "value": "33.8",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "check": "manual",
+      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "verified_on": "2026-10-01"
     }
   },
   "ms-marco-minilm-l6-v2": {
@@ -123,6 +175,34 @@
       "value": 48.64,
       "source_url": "https://huggingface.co/jinaai/jina-reranker-v1-tiny-en",
       "protocol_note": "Third-party: Jina measured it alongside their v1 models (17 BEIR datasets, jina-reranker-v1 model card). sentence-transformers, who trained it, publish TREC DL 19 and MS MARCO Dev figures but no BEIR average",
+      "verified_on": "2026-10-01"
+    },
+    "browser_ms_10": {
+      "value": "515",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "check": "manual",
+      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "verified_on": "2026-10-01"
+    },
+    "browser_ms_30": {
+      "value": "1,550",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "check": "manual",
+      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "verified_on": "2026-10-01"
+    },
+    "browser_cold_s": {
+      "value": "4.6",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "check": "manual",
+      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "verified_on": "2026-10-01"
+    },
+    "browser_download_mb": {
+      "value": "22.8",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "check": "manual",
+      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
       "verified_on": "2026-10-01"
     }
   },
@@ -286,6 +366,36 @@
       "check_pattern": "gte-reranker-modernbert-base`\\]\\([^)]*\\)\\s*\\|[^|]*\\|[^|]*\\|[^|]*149M[^|]*\\|[^|]*8192[^|]*\\|[^|]*\\|[^|]*\\|\\s*{value}",
       "check_hint": "BEIR",
       "protocol_note": "Alibaba's own figure from the model card; the card doesn't state which BEIR datasets or which first-stage retriever",
+      "verified_on": "2026-10-01"
+    }
+  },
+  "mxbai-rerank-xsmall-v1": {
+    "browser_ms_10": {
+      "value": "1,370",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "check": "manual",
+      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "verified_on": "2026-10-01"
+    },
+    "browser_ms_30": {
+      "value": "4,110",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "check": "manual",
+      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "verified_on": "2026-10-01"
+    },
+    "browser_cold_s": {
+      "value": "6.8",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "check": "manual",
+      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
+      "verified_on": "2026-10-01"
+    },
+    "browser_download_mb": {
+      "value": "91.5",
+      "source_url": "https://github.com/sheephess9527/reranker.uk/actions/runs/36840071950",
+      "check": "manual",
+      "check_note": "Our own measurement with scripts/measure-demo-latency.mjs: the live demo in Chromium (WASM) on a GitHub Actions ubuntu-latest runner, 4 vCPU AMD EPYC 7763, median of 5 warm runs, ~60-word passages; download size as the demo reports it. Re-run the script to refresh; a phone or older laptop will be slower",
       "verified_on": "2026-10-01"
     }
   }

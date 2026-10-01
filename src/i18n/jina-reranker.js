@@ -176,8 +176,8 @@ window.I18N_PAGE = { zh: {
     "付费",
   "Premium":
     "高级",
-  "Rate limits from the jina.ai/reranker FAQ, shared with the Embeddings API. The API accepts up to 131,072 tokens per request (query plus all documents) for v3 and v3.5, truncating beyond that.":
-    "速率限制取自 jina.ai/reranker 的 FAQ，与 Embeddings API 共用。v3 和 v3.5 的 API 每次请求最多接受 131,072 token（query 加全部文档），超出部分会被截断。",
+  "Rate limits from the jina.ai/reranker FAQ, shared with the Embeddings API. The API accepts up to 131,072 tokens per request (query plus all documents) for v3 and v3.5, truncating beyond that. On latency, the same FAQ puts 100 documents of 256 tokens with a 64-token query at about 150 ms, rising to 3.5 s with 4,096-token documents and 7 s if the query is also 512 tokens.":
+    "速率限制取自 jina.ai/reranker 的 FAQ，与 Embeddings API 共用。v3 和 v3.5 的 API 每次请求最多接受 131,072 token（query 加全部文档），超出部分会被截断。延迟方面，同一份 FAQ 给出的数字是：100 篇 256 token 的文档加 64 token 的 query 约 150 毫秒；文档增至 4,096 token 时约 3.5 秒；query 也增至 512 token 时约 7 秒。",
   "Self-hosted (transformers)":
     "自建部署（transformers）",
   "Non-commercial use only, unless you have a licence — see <a href=\"#licence\">above</a>.":
@@ -206,4 +206,8 @@ window.I18N_PAGE = { zh: {
     "Jina Reranker v3.5：listwise、许可证与价格 | reranker.uk",
   "_desc":
     "Jina Reranker 评测（2026 年 10 月）：jina-reranker-v3.5 是 0.6B 的 listwise 模型，在 Jina 自己的测试里 BEIR nDCG@10 为 63.20。注意 v2、v3、v3.5 权重为 CC BY-NC 4.0 非商用许可。另含评测对比、API 用法与浏览器 tiny 模型。",
+
+  // Oct 2026: jina-reranker-v3.5, licences
+  "The <code>v1-tiny</code> model (33M parameters) runs in the browser via transformers.js. On a 4-vCPU GitHub Actions runner, the demo’s first run — download plus scoring 10 passages — took {{fact:jina-reranker-v1-tiny-en.browser_cold_s}} s, and later runs scored 10 passages in {{fact:jina-reranker-v1-tiny-en.browser_ms_10}} ms and 30 in {{fact:jina-reranker-v1-tiny-en.browser_ms_30}} ms. A phone or older laptop will be slower; the demo shows the time for each run on your own device. This is what powers it:":
+    "<code>v1-tiny</code> 模型（3300 万参数）通过 transformers.js 在浏览器中运行。在一台 4 核的 GitHub Actions 机器上，Demo 的首次运行（下载加打分 10 段）用了 {{fact:jina-reranker-v1-tiny-en.browser_cold_s}} 秒，之后打分 10 段用 {{fact:jina-reranker-v1-tiny-en.browser_ms_10}} ms，30 段用 {{fact:jina-reranker-v1-tiny-en.browser_ms_30}} ms。手机或较旧的笔记本会更慢；Demo 会在你自己的设备上显示每次运行的耗时。本站 Demo 用的就是它：",
 }};

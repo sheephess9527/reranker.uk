@@ -143,7 +143,7 @@ def rerank(body: dict):
 
       <h2 id="ops">运维清单</h2>
       <ul>
-        <li><strong>GPU：</strong>单张 T4 跑 bge-base 对 50 段约 30–80 ms；CPU 慢 5–10 倍。</li>
+        <li><strong>GPU：</strong>每次查询要重排几十段以上时就值得上 GPU。确定配置前，请在你自己的硬件上实测 p50 / p95 —— 模型卡很少公布延迟，我们也不引用自己没测过的数字。</li>
         <li><strong>内存：</strong>base 模型预留约 1–2 GB VRAM；大模型需更多。</li>
         <li><strong>预热：</strong>启动时跑一次 dummy predict，避免冷启动延迟尖峰。</li>
         <li><strong>监控：</strong>在标注子集上跟踪 p95 延迟与 NDCG —— <a href="/zh/guides/evaluate-reranker">评测 reranker</a>。</li>

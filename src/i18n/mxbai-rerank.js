@@ -115,4 +115,12 @@ window.I18N_PAGE = { zh: {
   // Oct 2026: jina-reranker-v3.5, licences
   "Parameters":
     "参数量",
+
+  // Oct 2026: jina-reranker-v3.5, licences
+  "On speed, mixedbread’s own table gives A100 latency of {{fact:mxbai-rerank-large-v1.latency_a100_s}} s for large-v1, {{fact:mxbai-rerank-large-v2.latency_a100_s}} s for large-v2 and {{fact:mxbai-rerank-base-v2.latency_a100_s}} s for base-v2. It doesn’t say for what batch, so read it as relative speed — the v2 models are faster despite being larger — not as a per-query figure.":
+    "速度方面，mixedbread 自己的表给出的 A100 延迟是：large-v1 {{fact:mxbai-rerank-large-v1.latency_a100_s}} 秒，large-v2 {{fact:mxbai-rerank-large-v2.latency_a100_s}} 秒，base-v2 {{fact:mxbai-rerank-base-v2.latency_a100_s}} 秒。表里没说是多大批量，所以请把它当作相对速度来看 —— v2 体量更大却更快 —— 而不是单次查询的耗时。",
+
+  // Oct 2026: jina-reranker-v3.5, licences
+  "Browser / edge; the demo’s largest model (~{{fact:mxbai-rerank-xsmall-v1.browser_ms_10}} ms per 10 passages, measured)":
+    "浏览器 / 边缘端；Demo 里最大的模型（实测每 10 段约 {{fact:mxbai-rerank-xsmall-v1.browser_ms_10}} ms）",
 }};

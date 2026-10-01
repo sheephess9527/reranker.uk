@@ -70,32 +70,35 @@ const MAX_DOCS = 30;
 const URL_COMPRESS_THRESHOLD = 1600;
 const MAX_LENGTH_OPTIONS = [256, 384, 512];
 // Object key order sets the dropdown order and, via fillModelSelect's
-// "first key wins" rule below, the default model — smallest download first,
-// so a first-time visitor pays the least bandwidth by default.
+// "first key wins" rule below, the default model. Sizes and notes are what
+// scripts/measure-demo-latency.mjs measured through this page (Oct 2026):
+// jina tiny scores fastest and downloads 34 MB; ms-marco downloads least
+// (23 MB) and is close behind; mxbai xsmall is the largest download and
+// about 3x slower to score than either.
 const MODELS = {
   "jinaai/jina-reranker-v1-tiny-en": {
     name: "jina-reranker v1 tiny",
-    sizeMB: 33,
-    noteEn: "smallest download",
-    noteZh: "下载量最小",
+    sizeMB: 34,
+    noteEn: "fastest to score",
+    noteZh: "打分最快",
     sigmoid: true,
   },
   "mixedbread-ai/mxbai-rerank-xsmall-v1": {
     name: "mxbai-rerank xsmall",
-    sizeMB: 70,
-    noteEn: "balanced",
-    noteZh: "均衡",
+    sizeMB: 92,
+    noteEn: "largest download, slowest",
+    noteZh: "下载最大，最慢",
     sigmoid: true,
   },
   "Xenova/ms-marco-MiniLM-L-6-v2": {
     name: "ms-marco MiniLM-L6",
-    sizeMB: 90,
-    noteEn: "larger, strong quality",
-    noteZh: "更大，质量强",
+    sizeMB: 23,
+    noteEn: "smallest download",
+    noteZh: "下载量最小",
     sigmoid: true,
   },
 };
-const SMALLEST_MODEL_ID = "jinaai/jina-reranker-v1-tiny-en";
+const SMALLEST_MODEL_ID = "Xenova/ms-marco-MiniLM-L-6-v2";
 
 const cache = new Map();
 let webgpuAvailable = null;

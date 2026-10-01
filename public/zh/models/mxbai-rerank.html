@@ -143,7 +143,7 @@
             <tr><th>模型</th><th>参数量</th><th>上下文长度</th><th>语言</th><th>最适合</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>mxbai-rerank-xsmall-v1</code></td><td>71M</td><td>512 tokens</td><td>英文</td><td>浏览器 / 边缘端；延迟最低</td></tr>
+            <tr><td><code>mxbai-rerank-xsmall-v1</code></td><td>71M</td><td>512 tokens</td><td>英文</td><td>浏览器 / 边缘端；Demo 里最大的模型（实测每 10 段约 1,370 ms）</td></tr>
             <tr><td><code>mxbai-rerank-base-v1</code></td><td>~0.2B</td><td>512 tokens</td><td>英文</td><td>速度与质量的良好平衡</td></tr>
             <tr><td><code>mxbai-rerank-large-v1</code></td><td>435M</td><td>512 tokens</td><td>英文</td><td>上一代旗舰；已被下方的 v2 取代</td></tr>
             <tr><td><code>mxbai-rerank-base-v2</code></td><td>0.5B</td><td>默认 8k，最高可达 32k</td><td>100+ 种，含中文</td><td>体积与质量的最佳平衡；生产环境默认选择</td></tr>
@@ -152,6 +152,7 @@
         </table>
       </div>
       <p>v1 系列是在 MS MARCO 段落排序任务上训练的 DeBERTa-v3 cross-encoder；v2 是基于 Qwen2.5 的新一代，采用三步强化学习训练（GRPO、对比学习、偏好学习）。新的生产环境<strong>建议从 <code>mxbai-rerank-base-v2</code> 开始</strong>，尤其是涉及非英文内容时 —— 它在下方所有公开基准上都优于 v1 的 <code>large</code>。仅在浏览器或边缘端部署时才保留 <code>xsmall-v1</code>，因为 v2 没有同等体积的小型变体。</p>
+      <p class="muted" style="font-size:.85rem">速度方面，mixedbread 自己的表给出的 A100 延迟是：large-v1 2.24 秒，large-v2 0.89 秒，base-v2 0.67 秒。表里没说是多大批量，所以请把它当作相对速度来看 —— v2 体量更大却更快 —— 而不是单次查询的耗时。</p>
 
       <h2 id="benchmarks">基准测试</h2>
       <div class="table-wrap">

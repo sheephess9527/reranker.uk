@@ -143,7 +143,7 @@
             <tr><th>Model</th><th>Parameters</th><th>Context</th><th>Languages</th><th>Best for</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>mxbai-rerank-xsmall-v1</code></td><td>71M</td><td>512 tokens</td><td>English</td><td>Browser / edge; lowest latency</td></tr>
+            <tr><td><code>mxbai-rerank-xsmall-v1</code></td><td>71M</td><td>512 tokens</td><td>English</td><td>Browser / edge; the demo’s largest model (~1,370 ms per 10 passages, measured)</td></tr>
             <tr><td><code>mxbai-rerank-base-v1</code></td><td>~0.2B</td><td>512 tokens</td><td>English</td><td>Good balance of speed and quality</td></tr>
             <tr><td><code>mxbai-rerank-large-v1</code></td><td>435M</td><td>512 tokens</td><td>English</td><td>Legacy flagship; superseded by v2 below</td></tr>
             <tr><td><code>mxbai-rerank-base-v2</code></td><td>0.5B</td><td>8k default, up to 32k</td><td>100+, incl. Chinese</td><td>Best size/quality balance; production default</td></tr>
@@ -152,6 +152,7 @@
         </table>
       </div>
       <p>The v1 family are DeBERTa-v3 cross-encoders trained on MS MARCO passage ranking; v2 is a Qwen2.5-based generation trained with a three-step reinforcement-learning process (GRPO, contrastive learning, preference learning). <strong>Start with <code>mxbai-rerank-base-v2</code></strong> for new production use, especially with any non-English content — it beats v1's <code>large</code> on every published benchmark below. Keep <code>xsmall-v1</code> only for browser or edge deployments, since v2 has no comparably small variant.</p>
+      <p class="muted" style="font-size:.85rem">On speed, mixedbread’s own table gives A100 latency of 2.24 s for large-v1, 0.89 s for large-v2 and 0.67 s for base-v2. It doesn’t say for what batch, so read it as relative speed — the v2 models are faster despite being larger — not as a per-query figure.</p>
 
       <h2 id="benchmarks">Benchmarks</h2>
       <div class="table-wrap">

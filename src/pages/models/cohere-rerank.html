@@ -116,7 +116,7 @@ result.results.forEach((r) => console.log(r.relevanceScore, documents[r.index]))
             <li>Closed weights — you depend on Cohere</li>
             <li>Passages over {{fact:cohere-rerank.billing_chunk_tokens}} tokens are billed as several documents</li>
             <li>Self-hosting means a private-deployment contract</li>
-            <li>Latency is network-bound (~100–200 ms)</li>
+            <li>Every call is a network round trip — measure from your own region</li>
           </ul>
         </div>
       </div>

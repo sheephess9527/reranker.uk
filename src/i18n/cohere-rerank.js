@@ -133,4 +133,8 @@ window.I18N_PAGE = { zh: {
     "超过 {{fact:cohere-rerank.billing_chunk_tokens}} token 的段落会按多篇文档计费",
   "Custom":
     "定制",
+
+  // Oct 2026: jina-reranker-v3.5, licences
+  "Every call is a network round trip — measure from your own region":
+    "每次调用都要走一趟网络 —— 请从你自己所在的区域实测",
 }};

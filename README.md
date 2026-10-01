@@ -149,6 +149,17 @@ Migrating a row: add its facts to `data/models.json`, replace the literal in
 `src/pages/` with the token, rebuild, and confirm the number renders
 unchanged (or corrects, if that's why you're touching it).
 
+### Measuring the demo
+
+`npm run measure:latency` (after `npm run build`) loads the live demo in
+Chromium and times each browser model: the cold first run (download + 10
+passages), then the median of 5 warm runs at 10 and 30 passages, plus the
+download size the demo reports. It needs open internet, so run it from a
+`workflow_dispatch` of the real-network workflow (add it as a step) or a
+machine with access. The figures the site quotes live in `data/models.json`
+(`browser_*` fields, `check: "manual"`) with the run URL as their source —
+update them from a new run rather than editing pages.
+
 ### Verified October 2026
 
 Checked against the primary sources on a GitHub runner (this sandbox can't

@@ -198,7 +198,7 @@
           </tbody>
         </table>
       </div>
-      <p class="muted" style="font-size:.85rem">Rate limits from the jina.ai/reranker FAQ, shared with the Embeddings API. The API accepts up to 131,072 tokens per request (query plus all documents) for v3 and v3.5, truncating beyond that.</p>
+      <p class="muted" style="font-size:.85rem">Rate limits from the jina.ai/reranker FAQ, shared with the Embeddings API. The API accepts up to 131,072 tokens per request (query plus all documents) for v3 and v3.5, truncating beyond that. On latency, the same FAQ puts 100 documents of 256 tokens with a 64-token query at about 150 ms, rising to 3.5 s with 4,096-token documents and 7 s if the query is also 512 tokens.</p>
 
       <h2 id="usage">Quick start</h2>
       <h3>Hosted API (Python)</h3>
@@ -234,7 +234,7 @@ for r in results:
     print(f"{r['relevance_score']:.4f}  {r['document'][:80]}")</code></pre>
 
       <h2 id="browser">Browser / edge use</h2>
-      <p>The <code>v1-tiny</code> model (33M parameters) loads via transformers.js in under 10 seconds on a typical broadband connection and runs scoring at ~200 ms for a 10-candidate batch. This is what powers our demo:</p>
+      <p>The <code>v1-tiny</code> model (33M parameters) runs in the browser via transformers.js. On a 4-vCPU GitHub Actions runner, the demo’s first run — download plus scoring 10 passages — took 4.4 s, and later runs scored 10 passages in 429 ms and 30 in 1,283 ms. A phone or older laptop will be slower; the demo shows the time for each run on your own device. This is what powers it:</p>
       <pre tabindex="0"><code>// transformers.js (ES module in the browser)
 import { AutoTokenizer, AutoModelForSequenceClassification }
   from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4";

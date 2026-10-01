@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Thu, 01 Oct 2026 16:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2026 17:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>1 Oct 2026 — Latency figures measured, or sourced, or gone</title>
+      <link>https://reranker.uk/changelog#2026-10-01f</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-01f</guid>
+      <pubDate>Thu, 01 Oct 2026 17:00:00 GMT</pubDate>
+      <description>The browser demo's three models are now measured on a GitHub runner (about 0.4–1.4 s for 10 passages, not the 30–150 ms the site claimed), and two of the demo's download sizes are corrected. mixedbread's and Jina's published latencies are cited; unsourced CPU/GPU figures are removed.</description>
+    </item>
     <item>
       <title>1 Oct 2026 — Qwen3, Contextual AI, GTE and NVIDIA rows checked against their model cards</title>
       <link>https://reranker.uk/changelog#2026-10-01e</link>

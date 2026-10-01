@@ -62,6 +62,16 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-01f">1 Oct 2026 — Latency figures measured, or sourced, or gone</h2>
+        <ul class="feature-list">
+          <li><strong>The browser demo, measured</strong> — a new script runs the live demo in Chromium on a 4-vCPU GitHub Actions runner. Scoring 10 passages takes about 430 ms with Jina v1 tiny, 515 ms with ms-marco MiniLM and 1.4 s with mxbai xsmall. The site had claimed 30–80 ms and 50–150 ms</li>
+          <li><strong>Demo model sizes corrected</strong> — the picker listed mxbai xsmall at 70 MB and ms-marco MiniLM at 90 MB; the demo actually downloads 92 MB and 23 MB. So ms-marco was labelled "larger" when it's the smallest, and mxbai "balanced" when it's the largest and slowest. The "try a smaller model" button now picks the actual smallest</li>
+          <li><strong>Sourced where vendors publish</strong> — mixedbread's own A100 latencies on the mxbai page, and Jina's API latency figures on the Jina page</li>
+          <li><strong>Removed where nobody measured</strong> — the CPU/GPU millisecond ranges for bge and mxbai in the models table, Cohere's "~100–200 ms", and the self-hosting guide's T4 figure had no source; they're now described without numbers, and the RAG guide's latency table says which rows are estimates</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-01e">1 Oct 2026 — Qwen3, Contextual AI, GTE and NVIDIA rows checked against their model cards</h2>
         <ul class="feature-list">
           <li><strong>Contextual AI Rerank v2 was described wrongly</strong> — the table called it an English-only hosted API with prices on request. It has shipped open weights on Hugging Face since August 2025 (1B, 2B and 6B), covers 100+ languages with a 32K context, and is licensed CC BY-NC-SA — non-commercial</li>
