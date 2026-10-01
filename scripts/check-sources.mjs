@@ -20,6 +20,15 @@
  *   check       "manual" to skip — the number is in an image or a PDF figure
  *   check_note  why it's manual, and how it was read; printed on every run so
  *               a skip never goes unexplained
+ *   check_pattern  a regex that must match instead of the bare number, with
+ *               {value} standing for the (escaped) value. Use it when the
+ *               number alone is too common on the page to prove anything —
+ *               "0.05" appears all over a price list; "rerank-3 $0.00005
+ *               $0.05" pins it to one row.
+ *   check_hint  regex for the context to print on a miss (default: BEIR)
+ *   check_raw   true to match check_pattern against the raw HTML rather than
+ *               the visible text — for prices a page only ships as embedded
+ *               JSON and renders client-side (cohere.com/pricing)
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -49,14 +58,15 @@ function snippets(text, re, max = 3, pad = 140) {
 }
 
 const pageCache = new Map();
-async function fetchText(url) {
+async function fetchPage(url) {
   if (!pageCache.has(url)) {
     pageCache.set(
       url,
       (async () => {
         const res = await fetch(url, { headers: { "user-agent": "reranker.uk source check (+https://reranker.uk)" } });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return pageText(await res.text());
+        const raw = await res.text();
+        return { raw, text: pageText(raw) };
       })()
     );
   }
@@ -77,17 +87,20 @@ for (const [id, fields] of Object.entries(DATA)) {
       continue;
     }
     const url = fact.check_url || fact.source_url;
-    let text;
+    let page;
     try {
-      text = await fetchText(url);
+      page = await fetchPage(url);
     } catch (err) {
       console.log(`✗ ${key} = ${value}: could not fetch ${url} (${err.message})`);
       failed++;
       continue;
     }
+    const text = page.text;
     // Standalone number: 55.3 must not match inside 155.36 or 55.367.
-    const re = new RegExp(`(?<![\\d.])${escRe(value)}(?![\\d])`, "g");
-    const hits = snippets(text, re);
+    const re = fact.check_pattern
+      ? new RegExp(fact.check_pattern.replaceAll("{value}", escRe(value)), "g")
+      : new RegExp(`(?<![\\d.])${escRe(value)}(?![\\d])`, "g");
+    const hits = snippets(fact.check_raw ? page.raw : text, re);
     if (hits.length) {
       console.log(`✓ ${key} = ${value}: found at ${url}`);
       if (VERBOSE) for (const s of hits) console.log(`    ${s}`);
@@ -95,9 +108,10 @@ for (const [id, fields] of Object.entries(DATA)) {
       failed++;
       console.log(`✗ ${key} = ${value}: not found at ${url}`);
       // Show what the page says instead, so the fix is a reading job, not a hunt.
-      const around = snippets(text, /BEIR/gi, 5);
+      const hint = fact.check_hint ? new RegExp(fact.check_hint, "gi") : /BEIR/gi;
+      const around = snippets(fact.check_raw ? page.raw : text, hint, 5);
       for (const s of around) console.log(`    ${s}`);
-      if (!around.length) console.log(`    (no "BEIR" on the page either — ${text.length} chars of text)`);
+      if (!around.length) console.log(`    (nothing matching ${hint} on the page either — ${text.length} chars of text)`);
     }
   }
 }

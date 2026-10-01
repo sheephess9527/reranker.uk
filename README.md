@@ -134,7 +134,10 @@ id>.<field>}}` token that `scripts/build.mjs` resolves at build time:
 `scripts/check-sources.mjs` closes the other half of the loop: the build knows
 a source exists, not what it says. The script fetches every `source_url` (or
 `check_url`, e.g. a raw README) and fails if the value no longer appears there
-as a standalone number. It needs open internet, so it runs in the daily
+as a standalone number — or, with `check_pattern`, if a regex pinning the value to
+its row no longer matches (a bare "0.05" proves nothing on a price list).
+`check_raw` matches against the raw HTML instead, for pages that ship their
+numbers as embedded JSON and render them client-side. It needs open internet, so it runs in the daily
 real-network workflow, not on PRs. A figure that only exists in an image is
 marked `check: "manual"` with a `check_note` saying where to look; the script
 prints it on every run so the skip is never silent.
@@ -163,6 +166,8 @@ reach HuggingFace or arXiv), via `check-sources.mjs --verbose`.
 | Jina pricing | Only what jina.ai serves as text: free trial tokens on new keys, then packages; new pricing model since 6 May 2025; rate limits 100/500/5,000 RPM. Package prices render client-side, so none are quoted |
 | Other licences | bge-reranker-base/large MIT; bge v2, Qwen3-Reranker, mxbai v1/v2, gte-modernbert, ms-marco MiniLM Apache 2.0; nemotron-rerank "other" (NVIDIA licence) |
 | mxbai-rerank-large-v1 | 435M parameters per HF safetensors metadata; mixedbread's README says 1.5B |
+| Cohere pricing | $2.50 / $2 per 1K searches (Pro / Fast), 32,768 context — from the JSON embedded in cohere.com/pricing (the price cards render client-side, hence `check_raw`). Search unit per the same page's FAQ: 1 query + up to 100 docs, docs over 500 tokens incl. query split and counted per chunk. **Reverses the Sep 2026 "chunking myth" note.** Trial keys: 1,000 calls/month, not for production (docs/rate-limits) |
+| Voyage rerankers | rerank-3 / -lite are current and recommended (docs/reranker), $0.05 / $0.02 per 1M tokens with 200M free each; rerank-2.5 / -lite are "older models", same price, no free tokens per the price table (one stale sentence on the same page still says otherwise). Batch API 33% off, listed for rerank-2.5 / -lite only; instructions documented for 2.5 only |
 
 ### Verified September 2026
 

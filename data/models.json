@@ -143,5 +143,108 @@
       "protocol_note": "Third-party: Jina measured it in the jina-reranker-v3.5 evaluation (13 BEIR datasets, top 100 from jina-embeddings-v5-text-small). Qwen report MTEB-R, not a BEIR average",
       "verified_on": "2026-10-01"
     }
+  },
+  "cohere-rerank-4-pro": {
+    "price_per_search": {
+      "value": "0.0025",
+      "source_url": "https://cohere.com/pricing",
+      "check_raw": true,
+      "check_pattern": "Rerank 4 Pro[\\s\\S]{0,3000}?inputPrice\\W{1,6}2\\.5,[\\s\\S]{0,80}?1K searches",
+      "check_hint": "1K searches",
+      "verified_on": "2026-10-01",
+      "note": "cohere.com/pricing renders its price cards client-side; the figures are in the page's embedded JSON as a price per 1K searches ($2.50 per 1K = $0.0025 per search)"
+    }
+  },
+  "cohere-rerank-4-fast": {
+    "price_per_search": {
+      "value": "0.002",
+      "source_url": "https://cohere.com/pricing",
+      "check_raw": true,
+      "check_pattern": "Rerank 4 Fast[\\s\\S]{0,3000}?inputPrice\\W{1,6}2,[\\s\\S]{0,80}?1K searches",
+      "check_hint": "1K searches",
+      "verified_on": "2026-10-01",
+      "note": "cohere.com/pricing renders its price cards client-side; the figures are in the page's embedded JSON as a price per 1K searches ($2 per 1K = $0.002 per search)"
+    }
+  },
+  "cohere-rerank": {
+    "context_tokens": {
+      "value": "32,768",
+      "source_url": "https://cohere.com/pricing",
+      "check_raw": true,
+      "check_pattern": "{value} context window",
+      "check_hint": "context window",
+      "verified_on": "2026-10-01"
+    },
+    "docs_per_search": {
+      "value": 100,
+      "source_url": "https://cohere.com/pricing",
+      "check_pattern": "one query with up to {value} documents",
+      "check_hint": "search unit",
+      "verified_on": "2026-10-01"
+    },
+    "billing_chunk_tokens": {
+      "value": 500,
+      "source_url": "https://cohere.com/pricing",
+      "check_pattern": "exceeds {value} tokens \\(including the length of the search query\\)",
+      "check_hint": "search unit",
+      "verified_on": "2026-10-01"
+    },
+    "trial_calls_per_month": {
+      "value": "1,000",
+      "source_url": "https://docs.cohere.com/docs/rate-limits",
+      "check_pattern": "limited to {value} API calls a month",
+      "check_hint": "Trial",
+      "verified_on": "2026-10-01"
+    }
+  },
+  "voyage-rerank-3": {
+    "price_per_m_tokens": {
+      "value": "0.05",
+      "source_url": "https://docs.voyageai.com/docs/pricing",
+      "check_pattern": "rerank-3 \\$0\\.00005 \\${value} \\$0\\.0025 200 million",
+      "check_hint": "rerank-3",
+      "verified_on": "2026-10-01"
+    },
+    "free_tokens": {
+      "value": "200 million",
+      "source_url": "https://docs.voyageai.com/docs/pricing",
+      "check_pattern": "rerank-3 \\$0\\.00005 \\$0\\.05 \\$0\\.0025 {value}",
+      "check_hint": "rerank-3",
+      "verified_on": "2026-10-01"
+    },
+    "context_tokens": {
+      "value": "32,000",
+      "source_url": "https://docs.voyageai.com/docs/reranker",
+      "check_pattern": "rerank-3 {value} Highest accuracy",
+      "check_hint": "rerank-3",
+      "verified_on": "2026-10-01"
+    }
+  },
+  "voyage-rerank-3-lite": {
+    "price_per_m_tokens": {
+      "value": "0.02",
+      "source_url": "https://docs.voyageai.com/docs/pricing",
+      "check_pattern": "rerank-3-lite \\$0\\.00002 \\${value} \\$0\\.001 200 million",
+      "check_hint": "rerank-3-lite",
+      "verified_on": "2026-10-01"
+    }
+  },
+  "voyage-rerank-2.5": {
+    "price_per_m_tokens": {
+      "value": "0.05",
+      "source_url": "https://docs.voyageai.com/docs/pricing",
+      "check_pattern": "rerank-2\\.5 \\$0\\.00005 \\${value}",
+      "check_hint": "Older models",
+      "verified_on": "2026-10-01"
+    }
+  },
+  "voyage-batch": {
+    "discount": {
+      "value": "33%",
+      "source_url": "https://docs.voyageai.com/docs/batch-inference",
+      "check_pattern": "providing a {value} discount",
+      "check_hint": "discount",
+      "verified_on": "2026-10-01"
+    }
   }
 }

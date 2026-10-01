@@ -2,8 +2,8 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span>Rerank cost calculator</div>
       <h1>Rerank cost calculator</h1>
-      <p class="meta">Tool · <time datetime="2026-09-18">Updated 18 Sep 2026</time></p>
-      <p class="lead">Hosted rerankers do not bill the same way. Cohere charges per <strong>search</strong> — one query plus up to 100 documents, whatever their length. Voyage charges per <strong>token</strong>. So the cheaper vendor flips depending on how long your passages are and how many you rerank. Put your own numbers in.</p>
+      <p class="meta">Tool · <time datetime="2026-10-01">Updated 1 Oct 2026</time></p>
+      <p class="lead">Hosted rerankers do not bill the same way. Cohere charges per <strong>search</strong> — one query plus up to {{fact:cohere-rerank.docs_per_search}} documents, with any document over {{fact:cohere-rerank.billing_chunk_tokens}} tokens counted as several. Voyage charges per <strong>token</strong>. The two land closer than they look, and which is cheaper depends on how your passages round. Put your own numbers in.</p>
 
       <section class="demo-panel" aria-labelledby="calc-head">
         <h2 id="calc-head" class="mt-0" style="margin-bottom:1rem">Your workload</h2>
@@ -35,7 +35,7 @@
 
       <h2 id="results">Monthly cost</h2>
       <div class="table-wrap">
-        <table id="calc-table">
+        <table id="calc-table" data-docs-per-search="{{fact:cohere-rerank.docs_per_search}}" data-chunk-tokens="{{fact:cohere-rerank.billing_chunk_tokens}}" data-cohere-pro-per-search="{{fact:cohere-rerank-4-pro.price_per_search}}" data-cohere-fast-per-search="{{fact:cohere-rerank-4-fast.price_per_search}}" data-voyage-per-m="{{fact:voyage-rerank-3.price_per_m_tokens}}" data-voyage-lite-per-m="{{fact:voyage-rerank-3-lite.price_per_m_tokens}}">
           <caption class="sr-only">Estimated monthly rerank cost by vendor for the workload entered above</caption>
           <thead>
             <tr>
@@ -51,17 +51,19 @@
       <p class="muted" style="font-size:.85rem" id="calc-note"></p>
 
       <h2 id="why">Why the ranking changes</h2>
-      <p>Per-search pricing is indifferent to passage length: reranking 50 chunks of 80 tokens costs exactly what 50 chunks of 800 tokens costs. Per-token pricing scales with everything you send. That gives a simple rule of thumb:</p>
+      <p>Both vendors end up charging for text, but they round it differently. Cohere bills each candidate as one document per started {{fact:cohere-rerank.billing_chunk_tokens}} tokens — query included — and each search covers {{fact:cohere-rerank.docs_per_search}} documents. Voyage bills exactly the tokens you send, counting the query once per document.</p>
+      <p>At list prices the two meet exactly: {{fact:cohere-rerank.billing_chunk_tokens}} tokens costs the same on Cohere Rerank 4 Pro (${{fact:cohere-rerank-4-pro.price_per_search}} per search of {{fact:cohere-rerank.docs_per_search}} documents) and Voyage rerank-3 (${{fact:voyage-rerank-3.price_per_m_tokens}} per 1M tokens) — Voyage’s own pricing page uses that very example. What separates them is rounding:</p>
       <ul>
-        <li><strong>Short passages, large top-k</strong> — per-token billing tends to win, because you are paying for very little text.</li>
-        <li><strong>Long passages</strong> — per-search billing tends to win, and its advantage grows with every extra token in the chunk.</li>
-        <li><strong>Top-k above 100</strong> — Cohere starts a second billable search per query, so cost steps up rather than sliding.</li>
+        <li><strong>Short passages</strong> — Cohere still bills each one as a full document, so per-token billing wins, by more the shorter they are.</li>
+        <li><strong>Just past a {{fact:cohere-rerank.billing_chunk_tokens}}-token boundary</strong> — a 520-token candidate is two documents on Cohere; per-token billing costs about half.</li>
+        <li><strong>Top-k that isn’t a multiple of {{fact:cohere-rerank.docs_per_search}}</strong> — Cohere rounds each query up to a whole search, so cost steps up rather than sliding.</li>
+        <li><strong>Cohere Fast vs Voyage rerank-3</strong> — Fast is cheaper only when query plus passage fills more than 80% of its last chunk. The <code>-lite</code> tier is cheaper than both on any workload.</li>
       </ul>
       <div class="callout">
-        <p><strong>A note on "chunking":</strong> some pricing write-ups claim Cohere splits any document over 500 tokens into multiple billable chunks. That is not correct for Rerank 4 — its context window is 32,768 tokens per document, and <code>max_chunks_per_doc</code> defaults to 1, so a normal RAG passage (a few hundred tokens) is never split. Chunking only kicks in for documents that individually exceed roughly 32.7K tokens, and only if you opt into it.</p>
+        <p><strong>Correction, October 2026:</strong> until now this page said Cohere’s {{fact:cohere-rerank.billing_chunk_tokens}}-token splitting was a myth and that per-search pricing ignores passage length. Cohere’s own pricing FAQ says otherwise: a document over {{fact:cohere-rerank.billing_chunk_tokens}} tokens, counting the query, is split, and every chunk counts toward the {{fact:cohere-rerank.docs_per_search}} documents in a search. The calculator now models that, which removes the long-passage advantage the old version showed for Cohere.</p>
       </div>
       <div class="callout accent">
-        <p><strong>Breakeven:</strong> <span id="calc-breakeven">—</span></p>
+        <p><strong>Your workload:</strong> <span id="calc-billing">—</span></p>
       </div>
 
       <h2 id="self-host">What about self-hosting?</h2>
@@ -70,10 +72,10 @@
 
       <h2 id="assumptions">Assumptions and sources</h2>
       <ul>
-        <li><strong>Cohere Rerank 4</strong> — $0.0025 per search (Pro) and $0.002 per search (Fast), where a search is one query plus up to 100 documents. More than 100 candidates bills as multiple searches; so does a single document beyond the 32,768-token context window, though that is not a realistic case for RAG-sized passages.</li>
-        <li><strong>Voyage rerank-2.5</strong> — $0.05 per 1M tokens, and $0.02 per 1M tokens for <code>rerank-2.5-lite</code>. Billable tokens are the query counted once per document, plus every document token you send — so 50 candidates means the query is billed 50 times, not once. The 200M-free-token grant that rerank-2.5 launched with has since moved to the newer <code>rerank-3</code> preview generation; rerank-2.5/2.5-lite are no longer free for the first tokens. The Batch API is discounted 33%, not applied above.</li>
+        <li><strong>Cohere Rerank 4</strong> — ${{fact:cohere-rerank-4-pro.price_per_search}} per search (Pro) and ${{fact:cohere-rerank-4-fast.price_per_search}} per search (Fast). A search is one query plus up to {{fact:cohere-rerank.docs_per_search}} documents; per Cohere’s pricing FAQ, a document longer than {{fact:cohere-rerank.billing_chunk_tokens}} tokens including the query is split, and each chunk counts as a document. Prices are from <a href="https://cohere.com/pricing" rel="noopener noreferrer">cohere.com/pricing</a> ($2.50 and $2 per 1,000 searches).</li>
+        <li><strong>Voyage rerank-3</strong> — ${{fact:voyage-rerank-3.price_per_m_tokens}} per 1M tokens, and ${{fact:voyage-rerank-3-lite.price_per_m_tokens}} for <code>rerank-3-lite</code>. Billable tokens are the query counted once per document, plus every document token you send — so 50 candidates means the query is billed 50 times. The older <code>rerank-2.5</code> and <code>-lite</code> cost the same per token. Free tokens and the Batch API discount are not applied here — see the <a href="/models/voyage-rerank.html">Voyage page</a> for which models they cover.</li>
         <li>Token counts are approximate — every vendor tokenises differently, and this page multiplies your averages rather than tokenising real text.</li>
-        <li>Rates verified September 2026. Check <a href="https://docs.cohere.com/docs/rerank-overview" rel="noopener noreferrer">Cohere</a> and <a href="https://docs.voyageai.com/docs/pricing" rel="noopener noreferrer">Voyage</a> for current pricing before committing to a budget.</li>
+        <li>Rates verified 1 October 2026 and re-checked against <a href="https://cohere.com/pricing" rel="noopener noreferrer">Cohere</a> and <a href="https://docs.voyageai.com/docs/pricing" rel="noopener noreferrer">Voyage</a> daily by this site’s source check. Confirm before committing to a budget.</li>
       </ul>
 
       <div class="cta-band">

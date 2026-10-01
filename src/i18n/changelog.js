@@ -1,4 +1,14 @@
 window.I18N_PAGE = { zh: {
+  "1 Oct 2026 — Cohere's 500-token rule, and Voyage rerank-3":
+    "2026 年 10 月 1 日 —— Cohere 的 500 token 规则，以及 Voyage rerank-3",
+  "<strong>A correction to our own correction</strong> — in September this site called it a myth that Cohere splits documents over 500 tokens into extra billable chunks. Cohere's own pricing FAQ says it does: a document over 500 tokens, query included, counts once per 500-token chunk toward a search's 100 documents. The cost calculator now models that, and the \"long passages favour Cohere\" rule it used to give is gone":
+    "<strong>更正我们自己的更正</strong> —— 9 月时本站说「Cohere 把超过 500 token 的文档拆成多块额外计费」是误传。但 Cohere 自己的价格 FAQ 写明确实如此：文档连同 query 超过 500 token，每 500 token 一块，每块都计入一次检索的 100 篇文档。成本计算器已按此重算，之前给出的「段落越长越适合 Cohere」的结论也随之撤回",
+  "<strong>Voyage rerank-3 is current, not a preview</strong> — Voyage now list rerank-3 and -lite as their recommended rerankers and rerank-2.5 among older models. The Voyage page, models table and calculator lead with rerank-3. The 200M free tokens apply to rerank-3; the 33% Batch API discount and natural-language instructions are documented only for rerank-2.5":
+    "<strong>Voyage rerank-3 已是正式版，不再是预览</strong> —— Voyage 现在把 rerank-3 和 -lite 列为推荐模型，rerank-2.5 归入旧模型。Voyage 专页、模型对比表和计算器都改为以 rerank-3 为主。2 亿免费 token 适用于 rerank-3；Batch API 的 33% 折扣和自然语言指令目前只在 rerank-2.5 的文档里写明",
+  "<strong>Prices are sourced and checked daily</strong> — Cohere's per-search and Voyage's per-token prices now live in data/models.json; the calculator reads them from the page, and the daily source check confirms them against cohere.com/pricing and Voyage's docs":
+    "<strong>价格有了出处，并且每天核对</strong> —— Cohere 的按次价格和 Voyage 的按 token 价格现在都放在 data/models.json 里；计算器直接从页面读取，每日来源检查会对照 cohere.com/pricing 和 Voyage 文档确认",
+  "<strong>Smaller fixes</strong> — Cohere trial keys (1,000 calls a month) may not be used in production, so the scenario guide no longer suggests them for customer support; Cohere's context is 32,768 tokens, not 32,000; the RAG guide's API cost was more than ten times too low; rerank-2-lite's context is 8,000 tokens, not 16,000; Voyage does have a TypeScript library":
+    "<strong>其他小修正</strong> —— Cohere 试用 key（每月 1,000 次调用）不得用于生产，场景指南不再推荐用它做客服；Cohere 的上下文是 32,768 token，不是 32,000；RAG 指南里的 API 成本低估了十倍以上；rerank-2-lite 的上下文是 8,000 token，不是 16,000；Voyage 其实有 TypeScript 库",
   "1 Oct 2026 — jina-reranker-v3.5, and Jina's licences spelled out":
     "2026 年 10 月 1 日 —— 收录 jina-reranker-v3.5，并写明 Jina 的许可证",
   "<strong>jina-reranker-v3.5 added</strong> — Jina's August 2026 flagship: 0.6B, listwise, a drop-in replacement for v3 and 1.22–1.56× faster. 63.20 BEIR nDCG@10 in Jina's own test. It's in the models table, and the Jina page is rewritten around it":

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>重排序成本计算器 —— Cohere 与 Voyage 价格对比 | reranker.uk</title>
-  <meta name="description" content="估算重排序每月要花多少钱。Cohere Rerank 4 按次检索计费，Voyage rerank-2.5 按 token 计费，所以哪家更便宜会随段落长度和 top-k 翻转。输入你自己的量级来对比。" >
+  <meta name="description" content="估算重排序每月要花多少钱。Cohere Rerank 4 按次检索计费，长文档每 500 token 算一篇；Voyage rerank-3 按 token 计费。输入你自己的量级来对比。" >
   <link rel="canonical" href="https://reranker.uk/zh/rerank-cost-calculator" >
   <link rel="alternate" hreflang="en" href="https://reranker.uk/rerank-cost-calculator" >
   <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/rerank-cost-calculator" >
@@ -18,7 +18,7 @@
   <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
   <meta property="og:type" content="website" >
   <meta property="og:title" content="重排序成本计算器 —— Cohere 与 Voyage 价格对比 | reranker.uk" >
-  <meta property="og:description" content="估算重排序每月要花多少钱。Cohere Rerank 4 按次检索计费，Voyage rerank-2.5 按 token 计费，所以哪家更便宜会随段落长度和 top-k 翻转。输入你自己的量级来对比。" >
+  <meta property="og:description" content="估算重排序每月要花多少钱。Cohere Rerank 4 按次检索计费，长文档每 500 token 算一篇；Voyage rerank-3 按 token 计费。输入你自己的量级来对比。" >
   <meta property="og:url" content="https://reranker.uk/zh/rerank-cost-calculator" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="zh_CN" >
@@ -69,8 +69,8 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span>重排序成本计算器</div>
       <h1>重排序成本计算器</h1>
-      <p class="meta">工具 · <time datetime="2026-09-18">更新于 2026 年 9 月 18 日</time></p>
-      <p class="lead">托管重排序服务的计费方式并不相同。Cohere 按<strong>次检索</strong>收费 —— 一个 query 加最多 100 篇文档，与长度无关；Voyage 则按 <strong>token</strong> 收费。因此哪家更便宜，取决于你的段落有多长、一次重排多少条。把你自己的数字填进去看看。</p>
+      <p class="meta">工具 · <time datetime="2026-10-01">更新于 2026 年 10 月 1 日</time></p>
+      <p class="lead">托管重排序服务的计费方式各不相同。Cohere 按<strong>检索次数</strong>计费 —— 一个 query 加最多 100 篇文档，超过 500 token 的文档会被算作多篇。Voyage 按 <strong>token</strong> 计费。两者实际差距比看上去小，哪家更便宜取决于你的段落长度怎么取整。填入你自己的数字试试。</p>
 
       <section class="demo-panel" aria-labelledby="calc-head">
         <h2 id="calc-head" class="mt-0" style="margin-bottom:1rem">你的负载</h2>
@@ -102,7 +102,7 @@
 
       <h2 id="results">每月成本</h2>
       <div class="table-wrap">
-        <table id="calc-table">
+        <table id="calc-table" data-docs-per-search="100" data-chunk-tokens="500" data-cohere-pro-per-search="0.0025" data-cohere-fast-per-search="0.002" data-voyage-per-m="0.05" data-voyage-lite-per-m="0.02">
           <caption class="sr-only">Estimated monthly rerank cost by vendor for the workload entered above</caption>
           <thead>
             <tr>
@@ -118,17 +118,19 @@
       <p class="muted" style="font-size:.85rem" id="calc-note"></p>
 
       <h2 id="why">为什么排名会变</h2>
-      <p>按次计费对段落长度不敏感：重排 50 段 80 token 的内容，和重排 50 段 800 token 的内容价格完全一样。按 token 计费则随你发送的全部内容线性增长。由此可得一条简单经验：</p>
+      <p>两家最终都是按文本量收费，只是取整方式不同。Cohere 把每个候选按「每满 500 token 算一篇，不足也算」计费（query 计入在内），每次检索包含 100 篇文档。Voyage 只按你实际发送的 token 计费，query 按每篇文档各算一次。</p>
+      <p>按标价算，两家恰好在一个点上相等：500 token 的文本，在 Cohere Rerank 4 Pro（每次检索 100 篇，$0.0025）和 Voyage rerank-3（每百万 token $0.05）上花费完全相同 —— Voyage 自己的价格页用的就是这个例子。真正拉开差距的是取整：</p>
       <ul>
-        <li><strong>段落短、top-k 大</strong> —— 按 token 计费通常更划算，因为你实际付费的文本很少。</li>
-        <li><strong>段落长</strong> —— 按次计费通常更划算，而且分块每多一个 token，这个优势就更大一分。</li>
-        <li><strong>top-k 超过 100</strong> —— Cohere 每次查询会多计一次检索，成本是阶梯式跳升而非平滑上升。</li>
+        <li><strong>段落较短</strong> —— Cohere 仍把每段按一整篇计费，所以按 token 计费更便宜，段落越短差得越多。</li>
+        <li><strong>刚超过 500 token 的边界</strong> —— 520 token 的候选在 Cohere 算两篇；按 token 计费只要大约一半的钱。</li>
+        <li><strong>top-k 不是 100 的整数倍</strong> —— Cohere 会把每次查询向上取整到整次检索，所以成本是阶梯式上涨，而不是平滑变化。</li>
+        <li><strong>Cohere Fast 对比 Voyage rerank-3</strong> —— 只有当 query 加段落占满最后一块的 80% 以上时，Fast 才更便宜。<code>-lite</code> 档在任何负载下都比两者便宜。</li>
       </ul>
       <div class="callout">
-        <p><strong>关于「分块」的说明：</strong>有些价格分析文章声称 Cohere 会把超过 500 token 的文档拆成多个计费单元。这个说法对 Rerank 4 并不成立 —— 它每篇文档的上下文窗口是 32,768 token，且 <code>max_chunks_per_doc</code> 默认值为 1，所以一段普通的 RAG 段落（几百 token）根本不会被拆分。只有单篇文档本身超过约 32.7K token、且你主动开启该选项时，分块才会发生。</p>
+        <p><strong>2026 年 10 月更正：</strong>此前本页说 Cohere 按 500 token 拆分计费是误传，并称按次计费与段落长度无关。Cohere 自己的价格 FAQ 写的正相反：文档（连同 query）超过 500 token 就会被拆分，每一块都计入每次检索的 100 篇文档。计算器现已按此建模，旧版里 Cohere 在长段落上的优势也随之消失。</p>
       </div>
       <div class="callout accent">
-        <p><strong>盈亏平衡点：</strong><span id="calc-breakeven">—</span></p>
+        <p><strong>你的负载：</strong><span id="calc-billing">—</span></p>
       </div>
 
       <h2 id="self-host">那自托管呢？</h2>
@@ -137,10 +139,10 @@
 
       <h2 id="assumptions">假设与来源</h2>
       <ul>
-        <li><strong>Cohere Rerank 4</strong> —— Pro 每次检索 $0.0025，Fast 每次检索 $0.002；一次检索指一个 query 加最多 100 篇文档。候选超过 100 篇会按多次检索计费；单篇文档超过 32,768 token 的上下文窗口同样会触发多次计费，不过对 RAG 场景的段落长度而言这基本不会发生。</li>
-        <li><strong>Voyage rerank-2.5</strong> —— 每 100 万 token $0.05，<code>rerank-2.5-lite</code> 每 100 万 token $0.02。计费 token 是「查询按每篇文档各计一次」再加上你发送的每篇文档本身的 token —— 也就是说 50 个候选意味着查询被计费 50 次，而不是 1 次。rerank-2.5 发布时带的那 2 亿免费 token 额度，后来已经转移到了更新的 <code>rerank-3</code> 预览版；rerank-2.5/2.5-lite 现在不再享有首批免费额度。Batch API 有 33% 折扣，上表未计入。</li>
+        <li><strong>Cohere Rerank 4</strong> —— 每次检索 $0.0025（Pro）和 $0.002（Fast）。一次检索 = 一个 query 加最多 100 篇文档；按 Cohere 价格 FAQ，文档连同 query 超过 500 token 就会被拆分，每一块算一篇文档。价格取自 <a href="https://cohere.com/pricing" rel="noopener noreferrer">cohere.com/pricing</a>（每千次检索 $2.50 和 $2）。</li>
+        <li><strong>Voyage rerank-3</strong> —— 每百万 token $0.05，<code>rerank-3-lite</code> 为 $0.02。计费 token = query 按每篇文档各算一次，再加上你发送的全部文档 token —— 所以 50 个候选意味着 query 被计费 50 次。旧版 <code>rerank-2.5</code> 及其 <code>-lite</code> 的单价相同。这里没有计入免费 token 和 Batch API 折扣 —— 哪些模型适用，见 <a href="/zh/models/voyage-rerank">Voyage 专页</a>。</li>
         <li>token 数为近似值 —— 各家分词方式不同，本页是用你填的平均值相乘，而非对真实文本做分词。</li>
-        <li>价格核对于 2026 年 9 月。做预算前请以 <a href="https://docs.cohere.com/docs/rerank-overview" rel="noopener noreferrer">Cohere</a> 与 <a href="https://docs.voyageai.com/docs/pricing" rel="noopener noreferrer">Voyage</a> 的最新价格为准。</li>
+        <li>价格于 2026 年 10 月 1 日核对，本站的来源检查每天都会对照 <a href="https://cohere.com/pricing" rel="noopener noreferrer">Cohere</a> 和 <a href="https://docs.voyageai.com/docs/pricing" rel="noopener noreferrer">Voyage</a> 复核一次。做预算前请再确认。</li>
       </ul>
 
       <div class="cta-band">

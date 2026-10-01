@@ -32,7 +32,7 @@ window.I18N_PAGE = { zh: {
   "Exact identifiers, syntax matters": "精确标识符与语法很重要",
   "Hybrid retrieve + rerank": "混合检索 + 重排序",
   "<a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> (self-host) or <a href=\"/models/cohere-rerank.html\">Cohere Rerank</a> (API)": "<a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a>（自托管）或 <a href=\"/models/cohere-rerank.html\">Cohere Rerank</a>（API）",
-  "<a href=\"/models/jina-reranker.html\">jina-reranker tiny</a> or <a href=\"/models/cohere-rerank.html\">Cohere</a> free tier": "<a href=\"/models/jina-reranker.html\">jina-reranker tiny</a> 或 <a href=\"/models/cohere-rerank.html\">Cohere</a> 免费档",
+  "<a href=\"/models/jina-reranker.html\">jina-reranker tiny</a> or <a href=\"/models/cohere-rerank.html\">Cohere Rerank 4 Fast</a>": "可在浏览器跑 <a href=\"/models/jina-reranker.html\">jina-reranker tiny</a>，或用托管的 <a href=\"/models/cohere-rerank.html\">Cohere Rerank 4 Fast</a>",
   "<a href=\"/models/mxbai-rerank.html\">mxbai-rerank-large</a> or <a href=\"/models/voyage-rerank.html\">Voyage</a> legal-tuned": "<a href=\"/models/mxbai-rerank.html\">mxbai-rerank-large</a> 或 <a href=\"/models/voyage-rerank.html\">Voyage</a> 法律微调",
   "<a href=\"/models/voyage-rerank.html\">Voyage code</a> or hybrid BM25 + <a href=\"/models/bge-reranker.html\">bge</a>": "<a href=\"/models/voyage-rerank.html\">Voyage code</a> 或混合 BM25 + <a href=\"/models/bge-reranker.html\">bge</a>",
 

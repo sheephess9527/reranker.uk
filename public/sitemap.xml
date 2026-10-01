@@ -164,7 +164,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/guides/rerank-rag</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/rerank-rag" />
@@ -173,7 +173,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/guides/rerank-rag</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/rerank-rag" />
@@ -218,7 +218,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/guides/self-host-reranker</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/self-host-reranker" />
@@ -227,7 +227,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/guides/self-host-reranker</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/self-host-reranker" />
@@ -254,7 +254,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/</loc>
-    <lastmod>2026-09-26</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/" />
@@ -263,7 +263,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/</loc>
-    <lastmod>2026-09-26</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/" />
@@ -326,7 +326,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/models/jina-reranker</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/jina-reranker" />
@@ -335,7 +335,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/models/jina-reranker</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/jina-reranker" />
@@ -344,7 +344,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/models/mxbai-rerank</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/mxbai-rerank" />
@@ -353,7 +353,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/models/mxbai-rerank</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/mxbai-rerank" />
@@ -362,7 +362,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/models/qwen-reranker</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/qwen-reranker" />
@@ -371,7 +371,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/models/qwen-reranker</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/qwen-reranker" />
@@ -416,7 +416,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/rerank-cost-calculator</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/rerank-cost-calculator" />
@@ -425,7 +425,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/rerank-cost-calculator</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/rerank-cost-calculator" />
