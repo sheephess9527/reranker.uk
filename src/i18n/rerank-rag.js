@@ -42,7 +42,7 @@ window.I18N_PAGE = { zh: {
   "Approach": "方案",
   "P50 latency (50 docs)": "P50 延迟（50 篇文档）",
   "Cost": "成本",
-  "Per-call pricing (~$0.0002–0.002 / 1k chunks)": "按次计费（约 $0.0002–0.002 / 千片段）",
+  "Per search or per token (~$0.006–0.025 per 1,000 chunks of ~300 tokens)": "按次或按 token 计费（每 1,000 个约 300 token 的片段约 $0.006–0.025）",
   "Your infra cost; free per-call": "你的基础设施成本；按次免费",
   "GPU cost; free per-call": "GPU 成本；按次免费",
   "Free": "免费",

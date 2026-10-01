@@ -1,6 +1,6 @@
 {
   "title": "Rerank cost calculator — Cohere vs Voyage pricing | reranker.uk",
-  "description": "Estimate what reranking costs per month. Cohere Rerank 4 bills per search, Voyage rerank-2.5 bills per token, so the cheaper option flips with passage length and top-k. Enter your own volume and compare.",
+  "description": "Estimate what reranking costs per month. Cohere Rerank 4 bills per search, counting long documents once per 500 tokens; Voyage rerank-3 bills per token. Enter your own volume and compare.",
   "canonical": "https://reranker.uk/rerank-cost-calculator.html",
   "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
   "og_type": "website",

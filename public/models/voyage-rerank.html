@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-  <title>Voyage rerank-2.5: instruction-following rerank API review | reranker.uk</title>
-  <meta name="description" content="Voyage rerank-2.5 review: rerank-2.5 and rerank-2.5-lite compared — 32k context, instruction following, per-token pricing, Python usage, pros and cons for RAG." >
+  <title>Voyage rerank-3: per-token rerank API review | reranker.uk</title>
+  <meta name="description" content="Voyage rerank-3 review (Oct 2026): rerank-3 and rerank-3-lite, 32K context, per-token pricing with 200M free tokens, how the older rerank-2.5 differs, Python usage, pros and cons for RAG." >
   <link rel="canonical" href="https://reranker.uk/models/voyage-rerank" >
   <link rel="alternate" hreflang="en" href="https://reranker.uk/models/voyage-rerank" >
   <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/voyage-rerank" >
@@ -17,8 +17,8 @@
   <link rel="manifest" href="/site.webmanifest" >
   <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
   <meta property="og:type" content="article" >
-  <meta property="og:title" content="Voyage rerank-2.5 — instruction-following rerank API" >
-  <meta property="og:description" content="32k context and natural-language instructions that reshape relevance without fine-tuning. Priced per token." >
+  <meta property="og:title" content="Voyage rerank-3 — per-token rerank API" >
+  <meta property="og:description" content="rerank-3 and -lite: 32K context, billed per token with 200M free tokens per account. The older rerank-2.5 keeps instructions and the Batch discount." >
   <meta property="og:url" content="https://reranker.uk/models/voyage-rerank" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="en_GB" >
@@ -62,12 +62,12 @@
       },
       {
         "@type": "Article",
-        "headline": "Voyage Rerank — high-precision rerank API",
-        "description": "Voyage Rerank review: voyage-rerank-2 and domain-specific variants (code, finance). Benchmarks, pricing, Python usage, pros and cons for adding high-quality reranking to RAG.",
+        "headline": "Voyage rerank-3 — per-token rerank API",
+        "description": "Voyage rerank-3 review (Oct 2026): rerank-3 and rerank-3-lite, 32K context, per-token pricing with 200M free tokens, how the older rerank-2.5 differs, Python usage, pros and cons for RAG.",
         "image": "https://reranker.uk/assets/img/og-cover.png",
         "inLanguage": "en",
         "datePublished": "2026-06-20",
-        "dateModified": "2026-06-21",
+        "dateModified": "2026-10-01",
         "author": {
           "@type": "Organization",
           "name": "reranker.uk",
@@ -119,10 +119,10 @@
 <main id="main">
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Voyage Rerank</div>
-      <h1>Voyage rerank-2.5</h1>
-      <p class="meta">Hosted API · Voyage AI · <time datetime="2026-09-18">Updated 18 Sep 2026</time></p>
-      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">Hosted API</span><span class="pill info">High precision</span><span class="pill info">Instruction-following</span></div>
-      <p class="lead">Voyage AI built their rerankers with a single goal: maximise retrieval precision. The current generation, <code>rerank-2.5</code> and <code>rerank-2.5-lite</code>, doubles the context window to 32,000 tokens and adds <strong>instruction following</strong> — you can shape what counts as relevant with a natural-language prompt instead of fine-tuning. Pricing is per token, which stays cheap when your passages are short.</p>
+      <h1>Voyage rerank-3</h1>
+      <p class="meta">Hosted API · Voyage AI · <time datetime="2026-10-01">Updated 1 Oct 2026</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">Hosted API</span><span class="pill info">Per token</span><span class="pill info">32K context</span></div>
+      <p class="lead">Voyage AI’s current rerankers are <code>rerank-3</code>, which Voyage call their highest-accuracy model and recommend for most applications, and <code>rerank-3-lite</code>, tuned for latency. Both accept 32,000 tokens of query plus document, and both are billed per token with 200 million free tokens per account. The previous <code>rerank-2.5</code> generation is still served at the same price — and it’s the one Voyage document for natural-language instructions and the Batch API.</p>
 
       <div class="toc">
         <strong>On this page</strong>
@@ -138,33 +138,34 @@
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Model</th><th>Context</th><th>Best for</th></tr>
+            <tr><th>Model</th><th>Context</th><th>Notes</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>rerank-2.5</code></td><td>32K tokens</td><td>Current flagship; instruction following</td></tr>
-            <tr><td><code>rerank-2.5-lite</code></td><td>32K tokens</td><td>Same context and instructions, lower cost</td></tr>
-            <tr><td><code>rerank-3</code> / <code>rerank-3-lite</code></td><td>32K tokens</td><td>Preview; same context and price, carries the free-token grant</td></tr>
-            <tr><td><code>rerank-2</code> / <code>rerank-2-lite</code></td><td>16K tokens</td><td>Previous generation, still served</td></tr>
+            <tr><td><code>rerank-3</code></td><td>32,000 tokens</td><td>Highest accuracy; Voyage’s recommendation for most applications</td></tr>
+            <tr><td><code>rerank-3-lite</code></td><td>32,000 tokens</td><td>Fast and cost-effective, for latency-sensitive use</td></tr>
+            <tr><td><code>rerank-2.5</code> / <code>rerank-2.5-lite</code></td><td>32,000 tokens</td><td>Older; instruction-following and multilingual, per Voyage’s docs</td></tr>
+            <tr><td><code>rerank-2</code> / <code>rerank-2-lite</code></td><td>16,000 / 8,000 tokens</td><td>Older</td></tr>
           </tbody>
         </table>
       </div>
-      <p>The 32K context window on the 2.5 models is large enough to rerank long legal, medical or financial documents without chunking them first. Instruction following is the more interesting change: a prompt such as <em>“prefer passages that cite a statute”</em> reshapes the ranking without any training data.</p>
+      <p>Per request the query can be up to 8,000 tokens, the query plus any one document up to 32,000, with up to 1,000 documents and 600K tokens in total — counting the query once per document.</p>
+      <p>Instructions — a line such as <em>“prefer passages that cite a statute”</em> added to the query — reshape relevance without training data. Voyage’s docs describe them for <code>rerank-2.5</code> and <code>-lite</code>, and don’t say whether <code>rerank-3</code> accepts them, so if you rely on instructions, test before switching.</p>
 
       <h2 id="pricing">Pricing</h2>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Model</th><th>Price</th></tr>
+            <tr><th>Model</th><th>Per 1M tokens</th><th>Free tokens</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>rerank-2.5</code></td><td>$0.05 / 1M tokens</td></tr>
-            <tr><td><code>rerank-2.5-lite</code></td><td>$0.02 / 1M tokens</td></tr>
-            <tr><td><code>rerank-3</code> / <code>rerank-3-lite</code> (preview)</td><td>Same rate; first 200M tokens per account free</td></tr>
-            <tr><td>Batch API</td><td>33% discount</td></tr>
+            <tr><td><code>rerank-3</code></td><td>$0.05</td><td>200 million</td></tr>
+            <tr><td><code>rerank-3-lite</code></td><td>$0.02</td><td>200 million</td></tr>
+            <tr><td><code>rerank-2.5</code> / <code>-lite</code></td><td>$0.05 / $0.02</td><td>None</td></tr>
+            <tr><td>Batch API</td><td>33% off</td><td><code>rerank-2.5</code> and <code>-lite</code>; free tokens don’t apply</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="muted" style="font-size:.85rem">Voyage uses token-based pricing, which is cost-effective at high volume. The 200M free-token grant moved to the <code>rerank-3</code> preview generation — <code>rerank-2.5</code> and <code>rerank-2.5-lite</code> no longer include it. Check the Voyage AI website for current rates.</p>
+      <p class="muted" style="font-size:.85rem">Billed tokens = query tokens × number of documents + all document tokens. At list price, 100 documents of 500 tokens each (query included) cost $0.0025 on <code>rerank-3</code> — Voyage’s own example, and exactly the price of one Cohere Rerank 4 Pro search. Voyage’s pricing page still says in one sentence that <code>rerank-2.5</code> includes free tokens, while its price table lists <code>rerank-2.5</code> under older models with none; we follow the table. Prices from <a href="https://docs.voyageai.com/docs/pricing" rel="noopener noreferrer">docs.voyageai.com/docs/pricing</a>, verified 1 October 2026 and re-checked daily by this site’s source check.</p>
 
       <h2 id="usage">Quick start</h2>
       <h3>Python</h3>
@@ -184,7 +185,7 @@ documents = [
 result = vo.rerank(
     query=query,
     documents=documents,
-    model="rerank-2.5",
+    model="rerank-3",
     top_k=3,
 )
 
@@ -196,7 +197,7 @@ for r in result.results:
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "rerank-2.5",
+    "model": "rerank-3",
     "query": "How do I add reranking to my RAG pipeline?",
     "documents": ["Rerankers score...", "BM25 is..."],
     "top_k": 3
@@ -211,7 +212,7 @@ def rag_answer(query: str, vector_db, llm) -> str:
     # Stage 1: retrieve wide
     candidates = vector_db.search(query, top_k=50)
     # Stage 2: rerank tight
-    result = vo.rerank(query=query, documents=candidates, model="rerank-2.5", top_k=5)
+    result = vo.rerank(query=query, documents=candidates, model="rerank-3", top_k=5)
     top5 = [candidates[r.index] for r in result.results]
     # Stage 3: generate
     return llm.complete(f"Context:\n" + "\n\n".join(top5) + f"\n\nQ: {query}")</code></pre>
@@ -221,21 +222,20 @@ def rag_answer(query: str, vector_db, llm) -> str:
         <div class="card">
           <h3 style="color:var(--good);margin-top:0">Pros</h3>
           <ul class="feature-list">
-            <li>Top-tier BEIR retrieval precision scores</li>
-            <li>32K token context — great for long documents</li>
-            <li>Competitive token-based pricing</li>
-            <li>Preview <code>rerank-3</code> carries a 200M free-token grant</li>
-            <li>Works seamlessly with Voyage embeddings</li>
-            <li>Clean Python SDK</li>
+            <li><code>rerank-3</code>: Voyage’s highest-accuracy reranker, 32K tokens per query–document pair</li>
+            <li>Billed for exactly the tokens you send — cheap for short passages</li>
+            <li>200 million free tokens per account on <code>rerank-3</code> and <code>-lite</code></li>
+            <li>Same API key and client as Voyage embeddings</li>
+            <li>Python and TypeScript libraries, plus REST</li>
           </ul>
         </div>
         <div class="card">
           <h3 style="color:var(--danger);margin-top:0">Cons</h3>
           <ul style="padding-left:1.2rem;color:var(--text-soft)">
-            <li>Hosted-only — no open weights</li>
+            <li>No open weights; private deployment goes through the AWS or Azure marketplace</li>
+            <li>Instructions and the Batch discount are documented only for the older <code>rerank-2.5</code></li>
+            <li>No published BEIR average — comparisons rest on Voyage’s own evaluations</li>
             <li>Smaller community than Cohere or bge</li>
-            <li>SDK is Python-only (REST for other languages)</li>
-            <li>No multilingual flagship (general model is multilingual but not marketed as such)</li>
           </ul>
         </div>
       </div>

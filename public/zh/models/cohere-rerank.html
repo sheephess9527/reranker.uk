@@ -67,7 +67,7 @@
         "image": "https://reranker.uk/assets/img/og-cover.png",
         "inLanguage": "en",
         "datePublished": "2026-06-20",
-        "dateModified": "2026-06-21",
+        "dateModified": "2026-10-01",
         "author": {
           "@type": "Organization",
           "name": "reranker.uk",
@@ -120,9 +120,9 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>Cohere Rerank</div>
       <h1>Cohere Rerank 4</h1>
-      <p class="meta">托管 API · Cohere · <time datetime="2026-08-11">更新于 2026 年 8 月 11 日</time></p>
-      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">托管 API</span><span class="pill">多语言</span><span class="pill info">免费档</span></div>
-      <p class="lead">Cohere Rerank 是最早的商用重排序 API 之一，至今仍是部署最广泛的产品之一。当前一代 <strong>Rerank 4</strong>（2026 年 4 月发布）提供两个版本 —— 偏精度的 <code>rerank-v4.0-pro</code> 与偏吞吐的 <code>rerank-v4.0-fast</code> —— 两者都是 32,000 token 上下文、支持 100+ 语言，接口为简洁的 REST + SDK。</p>
+      <p class="meta">托管 API · Cohere · <time datetime="2026-10-01">更新于 2026 年 10 月 1 日</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">托管 API</span><span class="pill">多语言</span><span class="pill info">免费试用 key</span></div>
+      <p class="lead">Cohere Rerank 是最早的商用重排序 API 之一，至今仍是部署最广泛的产品之一。当前一代 <strong>Rerank 4</strong>（2026 年 4 月发布）提供两个版本 —— 偏精度的 <code>rerank-v4.0-pro</code> 与偏吞吐的 <code>rerank-v4.0-fast</code> —— 两者都是 32,768 token 上下文、支持 100+ 语言，接口为简洁的 REST + SDK。</p>
 
       <div class="toc">
         <strong>本页目录</strong>
@@ -141,8 +141,8 @@
             <tr><th>模型 ID</th><th>语言</th><th>上下文</th><th>说明</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>rerank-v4.0-pro</code></td><td>100+ 种语言</td><td>32,000 tokens</td><td>当前旗舰；更高精度的重排序</td></tr>
-            <tr><td><code>rerank-v4.0-fast</code></td><td>100+ 种语言</td><td>32,000 tokens</td><td>更低延迟、更高吞吐</td></tr>
+            <tr><td><code>rerank-v4.0-pro</code></td><td>100+ 种语言</td><td>32,768 tokens</td><td>当前旗舰；更高精度的重排序</td></tr>
+            <tr><td><code>rerank-v4.0-fast</code></td><td>100+ 种语言</td><td>32,768 tokens</td><td>更低延迟、更高吞吐</td></tr>
             <tr><td><code>rerank-v3.5</code></td><td>100+ 种语言</td><td>4096 tokens/doc</td><td>上一代多语言旗舰</td></tr>
           </tbody>
         </table>
@@ -156,14 +156,15 @@
             <tr><th>档位</th><th>价格</th><th>限制</th></tr>
           </thead>
           <tbody>
-            <tr><td>免费</td><td>$0</td><td>每月 1,000 次 API 调用</td></tr>
-            <tr><td><code>rerank-v4.0-pro</code></td><td>$0.0025 / search</td><td>一次检索 = 1 个 query + 最多 100 篇文档</td></tr>
+            <tr><td>试用 key</td><td>$0</td><td>每月 1,000 次 API 调用；Rerank 每分钟限 10 次请求；不得用于生产或商业用途</td></tr>
+            <tr><td><code>rerank-v4.0-pro</code></td><td>$0.0025 / search</td><td>一次检索 = 1 个 query + 最多 100 篇文档；文档（连同 query）超过 500 token 时，每 500 token 一块，每块算一篇</td></tr>
             <tr><td><code>rerank-v4.0-fast</code></td><td>$0.002 / search</td><td>计费单位相同</td></tr>
-            <tr><td>企业版</td><td>定制</td><td>SLA、私有部署选项</td></tr>
+            <tr><td>Model Vault（专属实例）</td><td>每小时 $5 起</td><td>专属实例：Rerank 4 Fast 或 Pro（Medium）每小时 $5，Pro（Large）每小时 $10</td></tr>
+            <tr><td>私有部署</td><td>定制</td><td>本地部署或隔离的 VPC</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="muted" style="font-size:.85rem">当前费率请查阅 Cohere 官方价格页 —— 上方数字可能已过时。</p>
+      <p class="muted" style="font-size:.85rem">价格取自 <a href="https://cohere.com/pricing" rel="noopener noreferrer">cohere.com/pricing</a>（每千次检索 $2.50 和 $2）和 Cohere 的<a href="https://docs.cohere.com/docs/rate-limits" rel="noopener noreferrer">速率限制文档</a>，2026 年 10 月 1 日核对，本站来源检查每天复核。500 token 规则影响不小：它对真实负载意味着什么，见<a href="/zh/rerank-cost-calculator">成本计算器</a>。</p>
 
       <h2 id="usage">快速上手</h2>
       <h3>Python</h3>
@@ -222,17 +223,17 @@ result.results.forEach((r) => console.log(r.relevanceScore, documents[r.index]))
             <li>成熟的生产级 API，带 SLA</li>
             <li>在 100+ 语言上质量稳定</li>
             <li>SDK 支持：Python、Node、Java、Go、curl</li>
-            <li>适合原型开发的慷慨免费额度</li>
-            <li>32,000 token 上下文窗口</li>
-            <li>简单、可预期的定价</li>
+            <li>免费试用 key 适合原型开发（每月 1,000 次调用）</li>
+            <li>32,768 token 上下文窗口</li>
+            <li>段落较短时，按次计费很容易预估</li>
           </ul>
         </div>
         <div class="card">
           <h3 style="color:var(--danger);margin-top:0">缺点</h3>
           <ul style="padding-left:1.2rem;color:var(--text-soft)">
             <li>权重闭源 —— 你依赖于 Cohere</li>
-            <li>高流量下按次成本会累积</li>
-            <li>（大多数套餐）没有自建部署选项</li>
+            <li>超过 500 token 的段落会按多篇文档计费</li>
+            <li>想自建部署需要签私有部署合同</li>
             <li>延迟受网络限制（约 100–200 ms）</li>
           </ul>
         </div>

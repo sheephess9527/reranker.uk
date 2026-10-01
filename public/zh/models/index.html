@@ -299,11 +299,33 @@
               <td class="muted" title="Vendor does not publish a classic BEIR average">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
+            <tr data-name="voyage-rerank-3" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+              <th scope="row"><a href="/zh/models/voyage-rerank">Voyage rerank-3</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill">Hosted API</span></td>
+              <td>Voyage 当前旗舰；32k 上下文</td>
+              <td>多语言</td>
+              <td>API</td>
+              <td>$0.05/M tokens† <span class="muted">(200M free)</span></td>
+              <td class="muted" title="Voyage publishes its own retrieval evals, not a classic BEIR average">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr data-name="voyage-rerank-3-lite" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+              <th scope="row"><a href="/zh/models/voyage-rerank">Voyage rerank-3-lite</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill">Hosted API</span></td>
+              <td>当前更快、更便宜的一档；32k 上下文</td>
+              <td>多语言</td>
+              <td>API</td>
+              <td>$0.02/M tokens† <span class="muted">(200M free)</span></td>
+              <td class="muted" title="Voyage publishes its own retrieval evals, not a classic BEIR average">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
             <tr data-name="voyage-rerank-2.5" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
               <th scope="row"><a href="/zh/models/voyage-rerank">Voyage rerank-2.5</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Hosted API</span><span class="pill info">Instruction</span></td>
-              <td>支持指令跟随；32k 上下文</td>
+              <td>旧版；官方文档写明支持指令的就是它；32k 上下文</td>
               <td>多语言</td>
               <td>API</td>
               <td>$0.05/M tokens†</td>
@@ -314,32 +336,10 @@
               <th scope="row"><a href="/zh/models/voyage-rerank">Voyage rerank-2.5-lite</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Hosted API</span></td>
-              <td>更便宜的档位；同样 32k 上下文</td>
+              <td>旧版的便宜一档；32k 上下文</td>
               <td>多语言</td>
               <td>API</td>
               <td>$0.02/M tokens†</td>
-              <td class="muted" title="Voyage publishes its own retrieval evals, not a classic BEIR average">not published*</td>
-              <td class="demo-link-cell muted">—</td>
-            </tr>
-            <tr data-name="voyage-rerank-3" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
-              <th scope="row"><a href="/zh/models/voyage-rerank">Voyage rerank-3</a></th>
-              <td><span class="pill">Cross-encoder</span></td>
-              <td><span class="pill">托管 API</span><span class="pill warn">预览版</span></td>
-              <td>2.5 的预览版继任者；带免费 token 额度</td>
-              <td>多语言</td>
-              <td>API</td>
-              <td>$0.05/M token† <span class="muted">（前 2 亿免费）</span></td>
-              <td class="muted" title="Voyage publishes its own retrieval evals, not a classic BEIR average">not published*</td>
-              <td class="demo-link-cell muted">—</td>
-            </tr>
-            <tr data-name="voyage-rerank-3-lite" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
-              <th scope="row"><a href="/zh/models/voyage-rerank">Voyage rerank-3-lite</a></th>
-              <td><span class="pill">Cross-encoder</span></td>
-              <td><span class="pill">托管 API</span><span class="pill warn">预览版</span></td>
-              <td>更便宜的预览档位；同样 32k 上下文</td>
-              <td>多语言</td>
-              <td>API</td>
-              <td>$0.02/M token† <span class="muted">（前 2 亿免费）</span></td>
               <td class="muted" title="Voyage publishes its own retrieval evals, not a classic BEIR average">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
@@ -402,7 +402,7 @@
         </table>
       </div>
       <div class="benchmark-meta callout" style="margin-top:.8rem;padding:.85rem 1rem">
-        <p class="muted" style="font-size:.82rem;margin:0"><strong>最近核对：</strong>2026 年 10 月（新增 jina-reranker-v3.5；Jina 各行改用同一套 2026 年评测；bge-reranker-v2-m3 由查不到出处的 ~60.1 改为 BAAI 自己公布的 55.36*；Jina v1 tiny 与 ms-marco MiniLM-L6 现在显示 Jina 为它们公布的 BEIR 分数；9 月已将 mxbai-rerank-large-v1 由没有来源的 ~62.1 修正）· <strong>下次复核：</strong>2026 年 11 月。<strong>*</strong> 各家跑 BEIR 的方式都不一样 —— BAAI 用 15 个数据集、对 bge-large-en-v1.5 召回的前 100 条重排，Jina 用 13 个数据集、对 jina-embeddings-v5-text-small 的前 100 条重排，mixedbread 用自己选的一套 —— 所以本列每个 BEIR 数字都带 *，鼠标悬停可见其评测方法。差距并不小：Jina 的评测里 bge-reranker-v2-m3 是 56.51，BAAI 自己测的是 55.36；mxbai-rerank-large-v2 在 Jina 那边是 61.44，mixedbread 自己测的是 57.49。请把这一列当作大致的档位，而不是精确到小数的排名。其余带 * 的格子用的是 MTEB-R 或任务特定指标。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档）计费，Voyage 按 <em>token</em> 计费。我们的<a href="/zh/rerank-cost-calculator">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。</p>
+        <p class="muted" style="font-size:.82rem;margin:0"><strong>最近核对：</strong>2026 年 10 月（新增 jina-reranker-v3.5；Jina 各行改用同一套 2026 年评测；bge-reranker-v2-m3 由查不到出处的 ~60.1 改为 BAAI 自己公布的 55.36*；Jina v1 tiny 与 ms-marco MiniLM-L6 现在显示 Jina 为它们公布的 BEIR 分数；9 月已将 mxbai-rerank-large-v1 由没有来源的 ~62.1 修正）· <strong>下次复核：</strong>2026 年 11 月。<strong>*</strong> 各家跑 BEIR 的方式都不一样 —— BAAI 用 15 个数据集、对 bge-large-en-v1.5 召回的前 100 条重排，Jina 用 13 个数据集、对 jina-embeddings-v5-text-small 的前 100 条重排，mixedbread 用自己选的一套 —— 所以本列每个 BEIR 数字都带 *，鼠标悬停可见其评测方法。差距并不小：Jina 的评测里 bge-reranker-v2-m3 是 56.51，BAAI 自己测的是 55.36；mxbai-rerank-large-v2 在 Jina 那边是 61.44，mixedbread 自己测的是 57.49。请把这一列当作大致的档位，而不是精确到小数的排名。其余带 * 的格子用的是 MTEB-R 或任务特定指标。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档，每篇按每 500 token 计一次）计费，Voyage 按 <em>token</em> 计费。我们的<a href="/zh/rerank-cost-calculator">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。</p>
         <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">资料来源： <a href="https://huggingface.co/Qwen" rel="noopener noreferrer">Qwen3-Reranker</a> · <a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">jina-reranker-v3.5</a> · <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">jina-reranker-v3 论文</a> · <a href="https://huggingface.co/jinaai/jina-reranker-v1-tiny-en" rel="noopener noreferrer">jina-reranker-v1</a> · <a href="https://docs.voyageai.com/docs/reranker" rel="noopener noreferrer">Voyage 重排序器</a> · <a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">mxbai-rerank</a> · <a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">nemotron-rerank</a> · <a href="https://huggingface.co/spaces/mteb/leaderboard" rel="noopener noreferrer">MTEB</a> · <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR</a> · <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker" rel="noopener noreferrer">BAAI 评测</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">GTE ModernBERT</a> · <a href="/zh/models/qwen-reranker">Qwen 指南</a> · <a href="/zh/guides/instruction-reranker">指令跟随</a> · <a href="/zh/guides/late-interaction-rerank">ColBERT</a></p>
       </div>
 
@@ -420,7 +420,7 @@
         <a class="card" href="/zh/models/cohere-rerank">
           <h3>Cohere Rerank 4</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill">Hosted API</span><span class="pill">多语言</span></div>
-          <p>Pro 与 Fast 两个版本，32k 上下文，100+ 语言。按「次检索」计费 —— 一个 query 加最多 100 篇文档 —— 而不是按文档数。</p>
+          <p>Pro 与 Fast 两个版本，32k 上下文，100+ 种语言。按检索次数计费：一个 query 加最多 100 篇文档，每篇按每 500 token 计一次。</p>
         </a>
         <a class="card" href="/zh/models/jina-reranker">
           <h3>Jina Reranker v3.5</h3>
@@ -428,9 +428,9 @@
           <p>0.6B 的 listwise 模型，在 Jina 自己的测试里 BEIR 为 63.20，略高于同一测试中 Qwen3-Reranker-4B 的 62.28 —— 不过在多语言和法律 / 医疗检索上仍是 4B 领先。商用自建部署需要另购许可。v1-tiny（Apache 2.0）仍在驱动我们的 Demo。</p>
         </a>
         <a class="card" href="/zh/models/voyage-rerank">
-          <h3>Voyage rerank-2.5</h3>
-          <div class="tag-row" style="margin-bottom:.8rem"><span class="pill">Hosted API</span><span class="pill info">Instruction</span></div>
-          <p>rerank-2.5 与 -lite，均为 32k 上下文并支持指令跟随，可以用自然语言引导相关性判断。按 token 计费。</p>
+          <h3>Voyage rerank-3</h3>
+          <div class="tag-row" style="margin-bottom:.8rem"><span class="pill">Hosted API</span><span class="pill">按 token 计费</span></div>
+          <p>rerank-3 和 -lite 是 Voyage 当前的重排序模型：32k 上下文，按 token 计费，各送 2 亿免费 token。官方文档写明支持自然语言指令的，是旧版的 rerank-2.5。</p>
         </a>
         <a class="card" href="/zh/models/mxbai-rerank">
           <h3>mxbai-rerank</h3>
@@ -495,12 +495,12 @@
         </div>
         <div class="chooser-card">
           <div class="chooser-badge chooser-api">API</div>
-          <h3><a href="/zh/models/voyage-rerank">Voyage rerank-2.5</a></h3>
-          <p class="chooser-tagline">可用指令引导相关性，按 token 计费</p>
+          <h3><a href="/zh/models/voyage-rerank">Voyage rerank-3</a></h3>
+          <p class="chooser-tagline">按 token 计费，发多少算多少</p>
           <ul class="feature-list">
-            <li>用自然语言指令引导打分，无需微调</li>
-            <li>rerank-2.5 与更便宜的 -lite 都是 32k 上下文</li>
-            <li>预览版 <code>rerank-3</code> 现在带着 2.5 当初发布时的那份 2 亿免费 token 额度；走 Batch API 还能再打 67 折</li>
+            <li>追求准确用 rerank-3，追求速度用 rerank-3-lite —— 每百万 token 分别 $0.05 和 $0.02</li>
+            <li>每个账号各送 2 亿免费 token；32k 上下文</li>
+            <li>需要自然语言指令或 Batch API 的 33% 折扣？Voyage 目前只为旧版 rerank-2.5 写明了这两项</li>
           </ul>
         </div>
         <div class="chooser-card">

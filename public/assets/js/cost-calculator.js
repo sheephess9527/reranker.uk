@@ -1,17 +1,27 @@
 /* reranker.uk — rerank cost calculator.
  *
- * Prices verified September 2026 (see the assumptions section on the page).
- * Cohere bills per search: one query plus up to 100 documents, regardless of
- * length. Voyage bills per token, with the query counted once per document
- * reranked rather than once per call. That difference is the whole point of
- * the page, so the two are modelled separately rather than flattened into
- * one "cost per 1k docs" figure.
+ * Prices come from data/models.json via data-* attributes on #calc-table, so
+ * the page, the table and this script can't disagree and the daily source
+ * check covers all three. See the assumptions section on the page.
+ *
+ * Cohere bills per search: one query plus up to 100 documents, where any
+ * document longer than 500 tokens (query included) counts as one document
+ * per 500-token chunk — that's Cohere's own pricing FAQ, and until Oct 2026
+ * this script ignored it. Voyage bills per token, with the query counted
+ * once per document reranked. Both are modelled as the vendor states them
+ * rather than flattened into one "cost per 1k docs" figure.
  */
 (function () {
   const zh = () => (document.documentElement.lang || "").toLowerCase().indexOf("zh") === 0;
   const L = (en, cn) => (zh() ? cn : en);
 
-  const DOCS_PER_SEARCH = 100;
+  const table = document.getElementById("calc-table");
+  const fact = (name) => {
+    const v = parseFloat(String(table?.dataset[name] ?? "").replace(/,/g, ""));
+    return isFinite(v) ? v : NaN;
+  };
+  const DOCS_PER_SEARCH = fact("docsPerSearch");
+  const CHUNK_TOKENS = fact("chunkTokens");
 
   const OPTIONS = [
     {
@@ -21,7 +31,8 @@
       unitEn: "per search",
       unitZh: "按次检索",
       href: "/models/cohere-rerank",
-      cost: (w) => searches(w) * 0.0025,
+      price: fact("cohereProPerSearch"),
+      cost: (w, o) => searches(w) * o.price,
       volume: (w) => fmtInt(searches(w)) + L(" searches", " 次检索"),
     },
     {
@@ -31,42 +42,45 @@
       unitEn: "per search",
       unitZh: "按次检索",
       href: "/models/cohere-rerank",
-      cost: (w) => searches(w) * 0.002,
+      price: fact("cohereFastPerSearch"),
+      cost: (w, o) => searches(w) * o.price,
       volume: (w) => fmtInt(searches(w)) + L(" searches", " 次检索"),
     },
     {
       id: "voyage",
-      nameEn: "Voyage rerank-2.5",
-      nameZh: "Voyage rerank-2.5",
+      nameEn: "Voyage rerank-3",
+      nameZh: "Voyage rerank-3",
       unitEn: "per token",
       unitZh: "按 token",
       href: "/models/voyage-rerank",
-      cost: (w) => (tokens(w) / 1e6) * 0.05,
+      price: fact("voyagePerM"),
+      cost: (w, o) => (tokens(w) / 1e6) * o.price,
       volume: (w) => fmtTokens(tokens(w)),
     },
     {
       id: "voyage-lite",
-      nameEn: "Voyage rerank-2.5-lite",
-      nameZh: "Voyage rerank-2.5-lite",
+      nameEn: "Voyage rerank-3-lite",
+      nameZh: "Voyage rerank-3-lite",
       unitEn: "per token",
       unitZh: "按 token",
       href: "/models/voyage-rerank",
-      cost: (w) => (tokens(w) / 1e6) * 0.02,
+      price: fact("voyageLitePerM"),
+      cost: (w, o) => (tokens(w) / 1e6) * o.price,
       volume: (w) => fmtTokens(tokens(w)),
     },
-  ];
+  ].filter((o) => isFinite(o.price));
 
-  /** Cohere rounds up to a whole search per 100 documents. */
-  function searches(w) {
-    return w.queries * Math.ceil(w.topk / DOCS_PER_SEARCH);
+  /** Documents Cohere bills per candidate: one per started 500-token chunk. */
+  function cohereDocsPerCandidate(w) {
+    return Math.max(1, Math.ceil((w.queryTokens + w.passageTokens) / CHUNK_TOKENS));
   }
 
-  /**
-   * Voyage bills the query once per document reranked, not once per query —
-   * confirmed against multiple independent citations of Voyage's pricing
-   * page (billable tokens = query_tokens × documents + sum of document
-   * tokens); the primary source itself was unreachable to quote directly.
-   */
+  /** Cohere rounds up to a whole search per 100 billed documents, per query. */
+  function searches(w) {
+    return w.queries * Math.ceil((w.topk * cohereDocsPerCandidate(w)) / DOCS_PER_SEARCH);
+  }
+
+  /** Voyage: query tokens × documents + sum of document tokens (their formula). */
   function tokens(w) {
     return w.queries * w.topk * (w.queryTokens + w.passageTokens);
   }
@@ -79,7 +93,7 @@
     rows: document.getElementById("calc-rows"),
     note: document.getElementById("calc-note"),
     summary: document.getElementById("calc-summary"),
-    breakeven: document.getElementById("calc-breakeven"),
+    billing: document.getElementById("calc-billing"),
   };
 
   const num = (el, fallback) => {
@@ -116,22 +130,11 @@
   const esc = (s) =>
     String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-  /**
-   * Passage length at which per-token billing costs the same as Cohere Pro.
-   * Below it Voyage is cheaper, above it Cohere is — the headline of the page.
-   */
-  function breakevenPassageTokens(w) {
-    const perQuerySearchCost = Math.ceil(w.topk / DOCS_PER_SEARCH) * 0.0025;
-    // perQuerySearchCost = (topk * (queryTokens + p) / 1e6) * 0.05  →  solve for p
-    const p = (perQuerySearchCost / 0.05) * 1e6 / w.topk - w.queryTokens;
-    return p;
-  }
-
   function render() {
     if (!els.rows) return;
     const w = readWorkload();
 
-    const priced = OPTIONS.map((o) => ({ o, cost: o.cost(w) })).sort((a, b) => a.cost - b.cost);
+    const priced = OPTIONS.map((o) => ({ o, cost: o.cost(w, o) })).sort((a, b) => a.cost - b.cost);
     const cheapest = priced[0];
 
     els.rows.innerHTML = priced
@@ -169,22 +172,22 @@
       );
     }
 
-    if (els.breakeven) {
-      const p = breakevenPassageTokens(w);
-      els.breakeven.textContent =
-        p < 1
-          ? L(
-              "At this top-k, per-search billing is cheaper at any passage length.",
-              "在当前 top-k 下，无论段落多短，按次计费都更便宜。"
-            )
-          : L(
-              `At ${fmtInt(w.topk)} candidates per query, Voyage rerank-2.5 and Cohere Rerank 4 Pro cost the same at about ${fmtInt(
-                p
-              )} tokens per passage. Shorter passages favour Voyage; longer ones favour Cohere.`,
-              `在每次查询 ${fmtInt(w.topk)} 个候选时，段落长度约 ${fmtInt(
-                p
-              )} token 时 Voyage rerank-2.5 与 Cohere Rerank 4 Pro 成本相等。更短的段落对 Voyage 有利，更长的对 Cohere 有利。`
-            );
+    if (els.billing) {
+      const perCand = w.queryTokens + w.passageTokens;
+      const docs = cohereDocsPerCandidate(w);
+      const used = Math.round((perCand / (docs * CHUNK_TOKENS)) * 100);
+      els.billing.textContent = L(
+        `Each candidate is ${fmtInt(perCand)} tokens with the query. Cohere bills that as ${fmtInt(docs)} document${
+          docs === 1 ? "" : "s"
+        } (one per ${fmtInt(CHUNK_TOKENS)} tokens started), so you pay for ${fmtInt(
+          docs * CHUNK_TOKENS
+        )} tokens' worth and use ${used}% of it. Voyage bills the ${fmtInt(perCand)} you send.`,
+        `每个候选连同 query 共 ${fmtInt(perCand)} token。Cohere 按每满 ${fmtInt(
+          CHUNK_TOKENS
+        )} token（不足也算）计一篇，所以算作 ${fmtInt(docs)} 篇文档，相当于为 ${fmtInt(
+          docs * CHUNK_TOKENS
+        )} token 付费，实际只用了其中 ${used}%。Voyage 只按你发送的 ${fmtInt(perCand)} token 计费。`
+      );
     }
   }
 

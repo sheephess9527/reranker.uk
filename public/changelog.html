@@ -62,6 +62,16 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-01d">1 Oct 2026 — Cohere's 500-token rule, and Voyage rerank-3</h2>
+        <ul class="feature-list">
+          <li><strong>A correction to our own correction</strong> — in September this site called it a myth that Cohere splits documents over 500 tokens into extra billable chunks. Cohere's own pricing FAQ says it does: a document over 500 tokens, query included, counts once per 500-token chunk toward a search's 100 documents. The cost calculator now models that, and the "long passages favour Cohere" rule it used to give is gone</li>
+          <li><strong>Voyage rerank-3 is current, not a preview</strong> — Voyage now list rerank-3 and -lite as their recommended rerankers and rerank-2.5 among older models. The Voyage page, models table and calculator lead with rerank-3. The 200M free tokens apply to rerank-3; the 33% Batch API discount and natural-language instructions are documented only for rerank-2.5</li>
+          <li><strong>Prices are sourced and checked daily</strong> — Cohere's per-search and Voyage's per-token prices now live in data/models.json; the calculator reads them from the page, and the daily source check confirms them against cohere.com/pricing and Voyage's docs</li>
+          <li><strong>Smaller fixes</strong> — Cohere trial keys (1,000 calls a month) may not be used in production, so the scenario guide no longer suggests them for customer support; Cohere's context is 32,768 tokens, not 32,000; the RAG guide's API cost was more than ten times too low; rerank-2-lite's context is 8,000 tokens, not 16,000; Voyage does have a TypeScript library</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-01c">1 Oct 2026 — jina-reranker-v3.5, and Jina's licences spelled out</h2>
         <ul class="feature-list">
           <li><strong>jina-reranker-v3.5 added</strong> — Jina's August 2026 flagship: 0.6B, listwise, a drop-in replacement for v3 and 1.22–1.56× faster. 63.20 BEIR nDCG@10 in Jina's own test. It's in the models table, and the Jina page is rewritten around it</li>

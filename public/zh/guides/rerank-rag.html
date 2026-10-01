@@ -296,7 +296,7 @@ pipe.connect("retriever.documents", "ranker.documents")</code></pre>
             <tr><th>方案</th><th>P50 延迟（50 篇文档）</th><th>成本</th></tr>
           </thead>
           <tbody>
-            <tr><td>Cohere / Jina / Voyage API</td><td>80–200 ms</td><td>按次计费（约 $0.0002–0.002 / 千片段）</td></tr>
+            <tr><td>Cohere / Jina / Voyage API</td><td>80–200 ms</td><td>按次或按 token 计费（每 1,000 个约 300 token 的片段约 $0.006–0.025）</td></tr>
             <tr><td>bge-reranker on CPU (small)</td><td>200–600 ms</td><td>你的基础设施成本；按次免费</td></tr>
             <tr><td>bge-reranker on GPU</td><td>15–60 ms</td><td>GPU 成本；按次免费</td></tr>
             <tr><td>Local tiny model (e.g. jina-tiny)</td><td>30–120 ms CPU</td><td>免费</td></tr>

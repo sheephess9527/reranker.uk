@@ -3,10 +3,10 @@ window.I18N_PAGE = { zh: {
     "Cohere Rerank 4",
   "Hosted API · Cohere · <time datetime=\"2026-08-11\">Updated 11 Aug 2026</time>":
     "托管 API · Cohere · <time datetime=\"2026-08-11\">更新于 2026 年 8 月 11 日</time>",
-  "Cohere Rerank was one of the first commercial reranking APIs and remains among the most widely deployed. The current generation, <strong>Rerank 4</strong> (released April 2026), ships as two variants — <code>rerank-v4.0-pro</code> for precision and <code>rerank-v4.0-fast</code> for throughput — both with a 32,000-token context window and 100+ languages, behind a clean REST + SDK interface.":
-    "Cohere Rerank 是最早的商用重排序 API 之一，至今仍是部署最广泛的产品之一。当前一代 <strong>Rerank 4</strong>（2026 年 4 月发布）提供两个版本 —— 偏精度的 <code>rerank-v4.0-pro</code> 与偏吞吐的 <code>rerank-v4.0-fast</code> —— 两者都是 32,000 token 上下文、支持 100+ 语言，接口为简洁的 REST + SDK。",
-  "Use <code>rerank-v4.0-pro</code> by default. Switch to <code>rerank-v4.0-fast</code> when throughput or tail latency matters more than the last point of precision — the two are priced close enough ($0.0025 vs $0.002 a search) that quality, not cost, should drive the choice.":
-    "默认用 <code>rerank-v4.0-pro</code>。当吞吐或尾延迟比最后一点精度更重要时再换 <code>rerank-v4.0-fast</code> —— 两者价格相差很小（每次检索 $0.0025 对 $0.002），所以该由质量而非成本来决定选型。",
+  "Cohere Rerank was one of the first commercial reranking APIs and remains among the most widely deployed. The current generation, <strong>Rerank 4</strong> (released April 2026), ships as two variants — <code>rerank-v4.0-pro</code> for precision and <code>rerank-v4.0-fast</code> for throughput — both with a {{fact:cohere-rerank.context_tokens}}-token context window and 100+ languages, behind a clean REST + SDK interface.":
+    "Cohere Rerank 是最早的商用重排序 API 之一，至今仍是部署最广泛的产品之一。当前一代 <strong>Rerank 4</strong>（2026 年 4 月发布）提供两个版本 —— 偏精度的 <code>rerank-v4.0-pro</code> 与偏吞吐的 <code>rerank-v4.0-fast</code> —— 两者都是 {{fact:cohere-rerank.context_tokens}} token 上下文、支持 100+ 语言，接口为简洁的 REST + SDK。",
+  "Use <code>rerank-v4.0-pro</code> by default. Switch to <code>rerank-v4.0-fast</code> when throughput or tail latency matters more than the last point of precision — the two are priced close enough (${{fact:cohere-rerank-4-pro.price_per_search}} vs ${{fact:cohere-rerank-4-fast.price_per_search}} a search) that quality, not cost, should drive the choice.":
+    "默认用 <code>rerank-v4.0-pro</code>。当吞吐或尾延迟比最后一点精度更重要时再换 <code>rerank-v4.0-fast</code> —— 两者价格相差很小（每次检索 ${{fact:cohere-rerank-4-pro.price_per_search}} 对 ${{fact:cohere-rerank-4-fast.price_per_search}}），所以该由质量而非成本来决定选型。",
   "A search = 1 query + up to 100 documents":
     "一次检索 = 1 个 query + 最多 100 篇文档",
   "Same billing unit":
@@ -97,4 +97,40 @@ window.I18N_PAGE = { zh: {
   "Pros": "优点",
   "Cons": "缺点",
   "Other models": "其他模型",
+
+  // Oct 2026: jina-reranker-v3.5, licences
+  "Hosted API · Cohere · <time datetime=\"2026-10-01\">Updated 1 Oct 2026</time>":
+    "托管 API · Cohere · <time datetime=\"2026-10-01\">更新于 2026 年 10 月 1 日</time>",
+  "Free trial key":
+    "免费试用 key",
+  "Trial key":
+    "试用 key",
+  "{{fact:cohere-rerank.trial_calls_per_month}} API calls a month; Rerank limited to 10 requests a minute; not for production or commercial use":
+    "每月 {{fact:cohere-rerank.trial_calls_per_month}} 次 API 调用；Rerank 每分钟限 10 次请求；不得用于生产或商业用途",
+  "A search = 1 query + up to {{fact:cohere-rerank.docs_per_search}} documents; a document over {{fact:cohere-rerank.billing_chunk_tokens}} tokens (query included) counts as one per {{fact:cohere-rerank.billing_chunk_tokens}}-token chunk":
+    "一次检索 = 1 个 query + 最多 {{fact:cohere-rerank.docs_per_search}} 篇文档；文档（连同 query）超过 {{fact:cohere-rerank.billing_chunk_tokens}} token 时，每 {{fact:cohere-rerank.billing_chunk_tokens}} token 一块，每块算一篇",
+  "Model Vault":
+    "Model Vault（专属实例）",
+  "From $5 / hour":
+    "每小时 $5 起",
+  "Dedicated instances: Rerank 4 Fast or Pro (Medium) $5 an hour, Pro (Large) $10 an hour":
+    "专属实例：Rerank 4 Fast 或 Pro（Medium）每小时 $5，Pro（Large）每小时 $10",
+  "Private deployment":
+    "私有部署",
+  "On-premises or isolated VPC":
+    "本地部署或隔离的 VPC",
+  "Prices from <a href=\"https://cohere.com/pricing\" rel=\"noopener noreferrer\">cohere.com/pricing</a> ($2.50 and $2 per 1,000 searches) and Cohere’s <a href=\"https://docs.cohere.com/docs/rate-limits\" rel=\"noopener noreferrer\">rate-limit docs</a>, verified 1 October 2026 and re-checked daily by this site’s source check. The {{fact:cohere-rerank.billing_chunk_tokens}}-token rule matters: see the <a href=\"/rerank-cost-calculator.html\">cost calculator</a> for what it does to a real workload.":
+    "价格取自 <a href=\"https://cohere.com/pricing\" rel=\"noopener noreferrer\">cohere.com/pricing</a>（每千次检索 $2.50 和 $2）和 Cohere 的<a href=\"https://docs.cohere.com/docs/rate-limits\" rel=\"noopener noreferrer\">速率限制文档</a>，2026 年 10 月 1 日核对，本站来源检查每天复核。{{fact:cohere-rerank.billing_chunk_tokens}} token 规则影响不小：它对真实负载意味着什么，见<a href=\"/rerank-cost-calculator.html\">成本计算器</a>。",
+  "Free trial key for prototyping ({{fact:cohere-rerank.trial_calls_per_month}} calls a month)":
+    "免费试用 key 适合原型开发（每月 {{fact:cohere-rerank.trial_calls_per_month}} 次调用）",
+  "{{fact:cohere-rerank.context_tokens}}-token context window":
+    "{{fact:cohere-rerank.context_tokens}} token 上下文窗口",
+  "Per-search pricing is easy to forecast for short passages":
+    "段落较短时，按次计费很容易预估",
+  "Self-hosting means a private-deployment contract":
+    "想自建部署需要签私有部署合同",
+  "Passages over {{fact:cohere-rerank.billing_chunk_tokens}} tokens are billed as several documents":
+    "超过 {{fact:cohere-rerank.billing_chunk_tokens}} token 的段落会按多篇文档计费",
+  "Custom":
+    "定制",
 }};
