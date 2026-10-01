@@ -1,4 +1,10 @@
 window.I18N_PAGE = { zh: {
+  "1 Oct 2026 — The demo scores about twice as fast":
+    "2026 年 10 月 1 日 —— Demo 打分速度快了约一倍",
+  "<strong>Multi-threaded inference in the demo</strong> — the demo pages are now cross-origin isolated, which lets ONNX Runtime Web score on several threads. Measured A/B on the same 4-vCPU runner: about 1.9× faster for all three models (Jina v1 tiny 424 → 229 ms for 10 passages). Browsers that don't support the isolation header simply stay single-threaded":
+    "<strong>Demo 改为多线程推理</strong> —— Demo 页面现在开启了跨源隔离，ONNX Runtime Web 可以用多个线程打分。在同一台 4 核机器上做 A/B 实测：三个模型都快了约 1.9 倍（Jina v1 tiny 打分 10 段从 424 ms 降到 229 ms）。不支持隔离响应头的浏览器会保持单线程，不受影响",
+  "<strong>Only where it's needed</strong> — isolation and a CSP that also allows blob: scripts (the threaded runtime loads that way) apply to the demo pages alone; every other page keeps the stricter policy. A new daily check confirms both on the live site":
+    "<strong>只在需要的地方开启</strong> —— 跨源隔离和允许 blob: 脚本的 CSP（多线程运行时需要这样加载）只用于 Demo 页面；其他页面仍保持更严格的策略。新增的每日检查会在线上确认这两点",
   "1 Oct 2026 — Latency figures measured, or sourced, or gone":
     "2026 年 10 月 1 日 —— 延迟数字：要么实测，要么有出处，要么删掉",
   "<strong>The browser demo, measured</strong> — a new script runs the live demo in Chromium on a 4-vCPU GitHub Actions runner. Scoring 10 passages takes about 430 ms with Jina v1 tiny, 515 ms with ms-marco MiniLM and 1.4 s with mxbai xsmall. The site had claimed 30–80 ms and 50–150 ms":

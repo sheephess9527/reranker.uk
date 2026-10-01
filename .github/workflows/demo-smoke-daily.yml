@@ -70,3 +70,25 @@ jobs:
           node-version: 24
       - name: Every models.json figure still appears at its source
         run: node scripts/check-sources.mjs --verbose
+
+  # The demo's cross-origin isolation and its looser CSP are set in
+  # public/_headers with Cloudflare's "! Name" detach syntax, which only
+  # production can confirm. If isolation silently drops, the demo still works
+  # but scores ~1.9x slower; if the detach stops working, /demo gets both CSPs.
+  headers:
+    runs-on: ubuntu-latest
+    steps:
+      - name: /demo is isolated and carries exactly one CSP, with blob
+        run: |
+          h=$(curl -sSI https://reranker.uk/demo | tr -d '\r')
+          echo "$h"
+          echo "$h" | grep -qi '^cross-origin-opener-policy: same-origin$'
+          echo "$h" | grep -qi '^cross-origin-embedder-policy: credentialless$'
+          test "$(echo "$h" | grep -ci '^content-security-policy-report-only:')" = 1
+          echo "$h" | grep -i '^content-security-policy-report-only:' | grep -Eq "script-src [^;]* blob:"
+      - name: other pages are not isolated and keep the stricter CSP
+        run: |
+          h=$(curl -sSI https://reranker.uk/models/ | tr -d '\r')
+          # (no "! cmd" here: bash -e ignores a negated command's status)
+          if echo "$h" | grep -qi '^cross-origin-embedder-policy:'; then echo "isolated"; exit 1; fi
+          if echo "$h" | grep -i '^content-security-policy-report-only:' | grep -Eq "script-src [^;]* blob:"; then echo "blob: leaked"; exit 1; fi

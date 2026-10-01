@@ -234,7 +234,7 @@ for r in results:
     print(f"{r['relevance_score']:.4f}  {r['document'][:80]}")</code></pre>
 
       <h2 id="browser">浏览器 / 边缘端使用</h2>
-      <p><code>v1-tiny</code> 模型（3300 万参数）通过 transformers.js 在浏览器中运行。在一台 4 核的 GitHub Actions 机器上，Demo 的首次运行（下载加打分 10 段）用了 4.4 秒，之后打分 10 段用 429 ms，30 段用 1,283 ms。手机或较旧的笔记本会更慢；Demo 会在你自己的设备上显示每次运行的耗时。本站 Demo 用的就是它：</p>
+      <p><code>v1-tiny</code> 模型（3300 万参数）通过 transformers.js 在浏览器中运行。在一台 4 核的 GitHub Actions 机器上，Demo 的首次运行（下载加打分 10 段）用了 4.6 秒，之后打分 10 段用 229 ms，30 段用 672 ms。这是在 Demo 页面开启跨源隔离、让 ONNX Runtime 多线程打分时的数字；不支持该隔离响应头的浏览器会以单线程运行，速度约慢一半。手机或较旧的笔记本也会更慢；Demo 会在你自己的设备上显示每次运行的耗时。本站 Demo 用的就是它：</p>
       <pre tabindex="0"><code>// transformers.js (ES module in the browser)
 import { AutoTokenizer, AutoModelForSequenceClassification }
   from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4";

@@ -6,6 +6,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-01g">1 Oct 2026 — The demo scores about twice as fast</h2>
+        <ul class="feature-list">
+          <li><strong>Multi-threaded inference in the demo</strong> — the demo pages are now cross-origin isolated, which lets ONNX Runtime Web score on several threads. Measured A/B on the same 4-vCPU runner: about 1.9× faster for all three models (Jina v1 tiny 424 → 229 ms for 10 passages). Browsers that don't support the isolation header simply stay single-threaded</li>
+          <li><strong>Only where it's needed</strong> — isolation and a CSP that also allows blob: scripts (the threaded runtime loads that way) apply to the demo pages alone; every other page keeps the stricter policy. A new daily check confirms both on the live site</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-01f">1 Oct 2026 — Latency figures measured, or sourced, or gone</h2>
         <ul class="feature-list">
           <li><strong>The browser demo, measured</strong> — a new script runs the live demo in Chromium on a 4-vCPU GitHub Actions runner. Scoring 10 passages takes about 430 ms with Jina v1 tiny, 515 ms with ms-marco MiniLM and 1.4 s with mxbai xsmall. The site had claimed 30–80 ms and 50–150 ms</li>

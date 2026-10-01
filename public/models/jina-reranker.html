@@ -234,7 +234,7 @@ for r in results:
     print(f"{r['relevance_score']:.4f}  {r['document'][:80]}")</code></pre>
 
       <h2 id="browser">Browser / edge use</h2>
-      <p>The <code>v1-tiny</code> model (33M parameters) runs in the browser via transformers.js. On a 4-vCPU GitHub Actions runner, the demo’s first run — download plus scoring 10 passages — took 4.4 s, and later runs scored 10 passages in 429 ms and 30 in 1,283 ms. A phone or older laptop will be slower; the demo shows the time for each run on your own device. This is what powers it:</p>
+      <p>The <code>v1-tiny</code> model (33M parameters) runs in the browser via transformers.js. On a 4-vCPU GitHub Actions runner, the demo’s first run — download plus scoring 10 passages — took 4.6 s, and later runs scored 10 passages in 229 ms and 30 in 672 ms. That is with the demo page cross-origin isolated, which lets ONNX Runtime score on several threads; a browser that doesn’t support the isolation header runs single-threaded, about half as fast. A phone or older laptop will be slower too; the demo shows the time for each run on your own device. This is what powers it:</p>
       <pre tabindex="0"><code>// transformers.js (ES module in the browser)
 import { AutoTokenizer, AutoModelForSequenceClassification }
   from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4";

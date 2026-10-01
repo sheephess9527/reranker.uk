@@ -645,9 +645,10 @@ function writeHeadersFile() {
   const themeScript = partial("head-open.html").match(/<script>([\s\S]*?)<\/script>/)[1];
   const scriptHash = crypto.createHash("sha256").update(themeScript, "utf8").digest("base64");
 
+  const scriptSrc = `script-src 'self' https://cdn.jsdelivr.net 'wasm-unsafe-eval' 'sha256-${scriptHash}'`;
   const csp = [
     "default-src 'self'",
-    `script-src 'self' https://cdn.jsdelivr.net 'wasm-unsafe-eval' 'sha256-${scriptHash}'`,
+    scriptSrc,
     "style-src 'self' 'unsafe-inline'", // the site uses inline style="" attributes throughout
     "img-src 'self' data:",
     "font-src 'self'",
@@ -676,6 +677,29 @@ function writeHeadersFile() {
     "  Permissions-Policy: camera=(), microphone=(), geolocation=()",
     `  Content-Security-Policy-Report-Only: ${csp}`,
     "",
+    // Cross-origin isolation, on the demo pages only: it unlocks
+    // SharedArrayBuffer, which ONNX Runtime Web needs to score on more than
+    // one thread. `credentialless` rather than `require-corp` because the
+    // demo pulls scripts from jsDelivr and weights from HuggingFace, and
+    // credentialless needs nothing from them; a browser that doesn't
+    // support it ignores the header and stays single-threaded.
+    //
+    // Once isolated, ONNX Runtime Web goes multi-threaded and loads its
+    // threaded build through a blob: URL — the daily real-network test caught
+    // that as a script-src violation. The demo pages therefore swap the
+    // site-wide policy for one that also allows blob: scripts. A blob: URL can
+    // only be minted by script already running on the page, so this adds
+    // little; every other page keeps the stricter policy. ("! Name" is
+    // Cloudflare's _headers syntax for dropping a header a broader rule set.)
+    // Measured on a 4-vCPU GitHub runner, Oct 2026: scoring ~1.9x faster.
+    ...["/demo", "/zh/demo"].flatMap((p) => [
+      p,
+      "  ! Content-Security-Policy-Report-Only",
+      `  Content-Security-Policy-Report-Only: ${csp.replace(scriptSrc, `${scriptSrc} blob:`)}`,
+      "  Cross-Origin-Opener-Policy: same-origin",
+      "  Cross-Origin-Embedder-Policy: credentialless",
+      "",
+    ]),
   ];
   fs.writeFileSync(path.join(PUBLIC, "_headers"), lines.join("\n"), "utf8");
 }

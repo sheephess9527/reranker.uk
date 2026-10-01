@@ -160,6 +160,22 @@ machine with access. The figures the site quotes live in `data/models.json`
 (`browser_*` fields, `check: "manual"`) with the run URL as their source —
 update them from a new run rather than editing pages.
 
+`ISOLATION=both` runs every model twice on the same machine, once as served
+and once with COOP/COEP stripped from the page response, to measure what
+cross-origin isolation buys (Oct 2026: ~1.9x on 4 vCPU).
+
+### Cross-origin isolation on the demo
+
+`/demo` and `/zh/demo` send `Cross-Origin-Opener-Policy: same-origin` and
+`Cross-Origin-Embedder-Policy: credentialless`, so ONNX Runtime Web can use
+SharedArrayBuffer and score on several threads. `credentialless` needs nothing
+from jsDelivr or HuggingFace; a browser that doesn't support it stays
+single-threaded. The threaded runtime loads through a `blob:` URL, so those
+two pages replace the site-wide CSP with one that adds `blob:` to
+`script-src`, using Cloudflare's `! Header-Name` detach syntax in `_headers`
+(`scripts/serve.mjs` mirrors it). The daily `headers` job checks both on the
+live site.
+
 ### Verified October 2026
 
 Checked against the primary sources on a GitHub runner (this sandbox can't
