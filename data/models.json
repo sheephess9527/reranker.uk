@@ -1,6 +1,5 @@
 {
-  "_comment": "Single source of truth for benchmark numbers rendered via {{fact:<model-id>.<field>}} tokens in src/pages/. Every value must carry a source_url — scripts/build.mjs refuses to render a fact without one. protocol_note forces a '*' footnote suffix (see the /models/ comparison table's footnote convention). verified_on drives a build-time staleness warning; it does not gate the build.",
-
+  "_comment": "Single source of truth for benchmark numbers rendered via {{fact:<model-id>.<field>}} tokens in src/pages/. Every value must carry a source_url — scripts/build.mjs refuses to render a fact without one. protocol_note forces a '*' footnote suffix: vendors each run BEIR on their own dataset subset and first-stage retriever, so in practice every BEIR figure has one. verified_on drives a build-time staleness warning; it does not gate the build. scripts/check-sources.mjs (daily, real network) re-fetches each source and fails if the value is gone — check_url overrides what it fetches, check: \"manual\" + check_note skips a figure that only exists in an image.",
   "mxbai-rerank-large-v1": {
     "beir": {
       "value": 49.32,
@@ -20,7 +19,6 @@
       "verified_on": "2026-09-25"
     }
   },
-
   "mxbai-rerank-base-v2": {
     "beir": {
       "value": 55.57,
@@ -40,7 +38,6 @@
       "verified_on": "2026-09-25"
     }
   },
-
   "mxbai-rerank-large-v2": {
     "beir": {
       "value": 57.49,
@@ -58,6 +55,68 @@
       "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
       "protocol_note": "Mr.TyDi multilingual average, mixedbread's own comparison table",
       "verified_on": "2026-09-25"
+    }
+  },
+  "bge-reranker-v2-m3": {
+    "beir": {
+      "value": 55.36,
+      "source_url": "https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker",
+      "protocol_note": "BAAI's own evaluation: 15 BEIR datasets, reranking the top 100 results from bge-large-en-v1.5",
+      "check": "manual",
+      "check_note": "BAAI publish this table only as an image — research/llm_reranker/evaluation/BEIR-bge-en-v1.5.png in FlagOpen/FlagEmbedding — read by eye; re-read it at each review",
+      "verified_on": "2026-10-01"
+    }
+  },
+  "bge-reranker-v2-gemma": {
+    "beir": {
+      "value": 60.71,
+      "source_url": "https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker",
+      "protocol_note": "BAAI's own evaluation: 15 BEIR datasets, reranking the top 100 results from bge-large-en-v1.5",
+      "check": "manual",
+      "check_note": "BAAI publish this table only as an image — research/llm_reranker/evaluation/BEIR-bge-en-v1.5.png in FlagOpen/FlagEmbedding — read by eye; re-read it at each review",
+      "verified_on": "2026-10-01"
+    }
+  },
+  "bge-reranker-base": {
+    "cmteb_rerank": {
+      "value": 65.42,
+      "source_url": "https://github.com/FlagOpen/FlagEmbedding/tree/master/research/reranker",
+      "check_url": "https://raw.githubusercontent.com/FlagOpen/FlagEmbedding/master/research/reranker/README.md",
+      "protocol_note": "C-MTEB reranking average (MAP over T2Reranking, its two cross-language variants, MMarcoReranking, CMedQAv1, CMedQAv2) — a Chinese-centric benchmark, not BEIR",
+      "verified_on": "2026-10-01"
+    }
+  },
+  "bge-reranker-large": {
+    "cmteb_rerank": {
+      "value": "66.10",
+      "source_url": "https://github.com/FlagOpen/FlagEmbedding/tree/master/research/reranker",
+      "check_url": "https://raw.githubusercontent.com/FlagOpen/FlagEmbedding/master/research/reranker/README.md",
+      "protocol_note": "C-MTEB reranking average (MAP over T2Reranking, its two cross-language variants, MMarcoReranking, CMedQAv1, CMedQAv2) — a Chinese-centric benchmark, not BEIR",
+      "verified_on": "2026-10-01"
+    }
+  },
+  "jina-reranker-v3": {
+    "beir": {
+      "value": 61.94,
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3",
+      "protocol_note": "Jina's own evaluation: 13 BEIR datasets, reranking the top 100 results from jina-embeddings-v3 (arXiv 2509.25085 §5.1). The arXiv v4 full text reports 61.85 for the same model; the model card, abstract and jina.ai say 61.94",
+      "verified_on": "2026-10-01"
+    }
+  },
+  "jina-reranker-v1-tiny-en": {
+    "beir": {
+      "value": 48.54,
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v1-tiny-en",
+      "protocol_note": "Jina's own evaluation, from the jina-reranker-v1 model card: NDCG@10 averaged over 17 BEIR datasets",
+      "verified_on": "2026-10-01"
+    }
+  },
+  "ms-marco-minilm-l6-v2": {
+    "beir": {
+      "value": 48.64,
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v1-tiny-en",
+      "protocol_note": "Third-party: Jina measured it alongside their v1 models (17 BEIR datasets, jina-reranker-v1 model card). sentence-transformers, who trained it, publish TREC DL 19 and MS MARCO Dev figures but no BEIR average",
+      "verified_on": "2026-10-01"
     }
   }
 }

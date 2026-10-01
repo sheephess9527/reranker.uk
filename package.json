@@ -8,6 +8,7 @@
     "check:links": "node scripts/check-links.mjs",
     "check:zh": "node scripts/check-zh-coverage.mjs",
     "check:i18n": "node scripts/check-i18n-gaps.mjs",
+    "check:sources": "node scripts/check-sources.mjs",
     "check": "npm run build && npm run check:links",
     "test": "playwright test tests/demo.smoke.spec.js tests/a11y.spec.js",
     "test:a11y": "playwright test tests/a11y.spec.js",

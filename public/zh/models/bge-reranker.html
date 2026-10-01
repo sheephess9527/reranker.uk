@@ -67,7 +67,7 @@
         "image": "https://reranker.uk/assets/img/og-cover.png",
         "inLanguage": "en",
         "datePublished": "2026-06-20",
-        "dateModified": "2026-06-21",
+        "dateModified": "2026-10-01",
         "author": {
           "@type": "Organization",
           "name": "reranker.uk",
@@ -120,9 +120,9 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>bge-reranker</div>
       <h1>bge-reranker</h1>
-      <p class="meta">开源权重 · 智源 BAAI · 可免费自建 · <time datetime="2026-06-21">更新于 2026 年 6 月 21 日</time></p>
+      <p class="meta">开源权重 · 智源 BAAI · 可免费自建 · <time datetime="2026-10-01">更新于 2026 年 10 月 1 日</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">开源权重</span><span class="pill">自建部署</span><span class="pill">多语言</span></div>
-      <p class="lead">来自智源研究院（BAAI）的 bge-reranker 系列，是专门为段落重排序训练的开源权重 cross-encoder。它们是自建部署的标准选择：免费下载、可直接接入 sentence-transformers，且在英文基准上强到能击败大多数商业 API。</p>
+      <p class="lead">来自智源研究院（BAAI）的 bge-reranker 系列，是专门为段落重排序训练的开源权重 cross-encoder。它们是自建部署的标准选择：免费下载、可直接接入 sentence-transformers，也是其他大多数重排序模型拿来对比的开源基线。</p>
 
       <div class="toc">
         <strong>本页目录</strong>
@@ -138,33 +138,34 @@
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>模型</th><th>体积</th><th>语言</th><th>最适合</th></tr>
+            <tr><th>模型</th><th>参数量</th><th>语言</th><th>最适合</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>BAAI/bge-reranker-base</code></td><td>278 MB</td><td>英文</td><td>CPU 推理快，良好基线</td></tr>
-            <tr><td><code>BAAI/bge-reranker-large</code></td><td>560 MB</td><td>英文</td><td>更强的英文质量</td></tr>
-            <tr><td><code>BAAI/bge-reranker-v2-m3</code></td><td>568 MB</td><td>100+ 种语言</td><td>综合最佳；多语言主力</td></tr>
-            <tr><td><code>BAAI/bge-reranker-v2-gemma</code></td><td>2.5 GB</td><td>100+ 种语言</td><td>质量最高；需要 GPU</td></tr>
+            <tr><td><code>BAAI/bge-reranker-base</code></td><td>278M</td><td>中文、英文</td><td>CPU 推理快，良好基线</td></tr>
+            <tr><td><code>BAAI/bge-reranker-large</code></td><td>560M</td><td>中文、英文</td><td>质量更强，同样支持中英两种语言</td></tr>
+            <tr><td><code>BAAI/bge-reranker-v2-m3</code></td><td>568M</td><td>100+ 种语言</td><td>综合最佳；多语言主力</td></tr>
+            <tr><td><code>BAAI/bge-reranker-v2-gemma</code></td><td>2.5B</td><td>100+ 种语言</td><td>质量最高；需要 GPU</td></tr>
           </tbody>
         </table>
       </div>
-      <p><strong>建议：</strong>从 <code>bge-reranker-v2-m3</code> 开始。它支持多语言、BEIR 成绩强，在中等流量下用 CPU 也没问题。只有当你有 GPU 且需要极致质量时，才升级到 Gemma 变体。</p>
+      <p><strong>建议：</strong>从 <code>bge-reranker-v2-m3</code> 开始。它支持多语言、体量小到可以跑在 CPU 上，中等流量下完全够用。只有当你有 GPU 且需要极致质量时，才升级到 Gemma 变体。</p>
 
       <h2 id="benchmarks">基准测试</h2>
+      <p>BAAI 给两代模型用的是不同的基准，所以两列都不完整：v2 测的是 BEIR（英文检索），v1 测的是 C-MTEB 重排序（以中文为主）。</p>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>模型</th><th>BEIR NDCG@10（均值）</th><th>MS MARCO MRR@10</th></tr>
+            <tr><th>模型</th><th>BEIR NDCG@10（均值）</th><th>C-MTEB 重排序（MAP 均值）</th></tr>
           </thead>
           <tbody>
-            <tr><td>bge-reranker-base</td><td>~56.8</td><td>~39.0</td></tr>
-            <tr><td>bge-reranker-large</td><td>~58.4</td><td>~40.7</td></tr>
-            <tr><td>bge-reranker-v2-m3</td><td>~60.1</td><td>~41.1</td></tr>
-            <tr><td>bge-reranker-v2-gemma</td><td>~61.8</td><td>~42.0</td></tr>
+            <tr><td>bge-reranker-base</td><td class="muted">未公布</td><td>65.42*</td></tr>
+            <tr><td>bge-reranker-large</td><td class="muted">未公布</td><td>66.10*</td></tr>
+            <tr><td>bge-reranker-v2-m3</td><td>55.36*</td><td class="muted">未公布</td></tr>
+            <tr><td>bge-reranker-v2-gemma</td><td>60.71*</td><td class="muted">未公布</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="muted" style="font-size:.85rem">分数为 18 个 BEIR 数据集上的近似平均值。结果因数据集而异 —— 请务必在你自己的领域上评测。</p>
+      <p class="muted" style="font-size:.85rem">* 所有数字均为 BAAI 自己公布的。BEIR：15 个数据集，对 bge-large-en-v1.5 召回的前 100 条结果重排（<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker" rel="noopener noreferrer">FlagEmbedding llm_reranker 评测</a>）。C-MTEB：六个重排序数据集上的 MAP 均值 —— T2Reranking 及其两个跨语言变体、MMarcoReranking、CMedQAv1 和 CMedQAv2（<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/research/reranker" rel="noopener noreferrer">FlagEmbedding reranker README</a>）。其他评测方用各自的设置会得到不同的 BEIR 分数 —— Jina 的论文里 v2-m3 是 56.51 —— 所以请只在同一来源内比较模型。2026 年 10 月之前，本表给四个模型都列了 BEIR 和 MS MARCO 分数，但我们查不到任何出处，现已删除。</p>
 
       <h2 id="usage">快速上手</h2>
       <h3>安装</h3>
@@ -209,7 +210,7 @@ def rag_answer(query: str, vector_db, llm) -> str:
           <h3 style="color:var(--good);margin-top:0">优点</h3>
           <ul class="feature-list">
             <li>完全免费 —— 无 API 密钥、无按次成本</li>
-            <li>BEIR 成绩强，可与商业 API 一较高下</li>
+            <li>BAAI 公布了 BEIR 成绩，也是其他厂商评测里最常用的对比基线</li>
             <li>通过 sentence-transformers / HuggingFace 轻松集成</li>
             <li>多语言（v2-m3 覆盖 100+ 种语言）</li>
             <li>完全可控：量化、微调、蒸馏</li>

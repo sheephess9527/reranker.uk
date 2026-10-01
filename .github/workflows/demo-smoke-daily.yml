@@ -56,3 +56,17 @@ jobs:
           got=$(curl -sS -o /dev/null -w '%{http_code} %{redirect_url}' 'https://www.reranker.uk/models/?x=1')
           echo "got: $got"
           test "$got" = '301 https://reranker.uk/models/?x=1'
+
+  # Vendors revise their own numbers (jina-reranker-v3's arXiv full text
+  # already says 61.85 where its model card says 61.94), and nothing at
+  # build time can see that. This re-reads every source in data/models.json
+  # and fails if the figure the site renders is no longer there.
+  sources:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Every models.json figure still appears at its source
+        run: node scripts/check-sources.mjs --verbose
