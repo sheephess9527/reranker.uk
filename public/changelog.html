@@ -62,6 +62,16 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-01e">1 Oct 2026 — Qwen3, Contextual AI, GTE and NVIDIA rows checked against their model cards</h2>
+        <ul class="feature-list">
+          <li><strong>Contextual AI Rerank v2 was described wrongly</strong> — the table called it an English-only hosted API with prices on request. It has shipped open weights on Hugging Face since August 2025 (1B, 2B and 6B), covers 100+ languages with a 32K context, and is licensed CC BY-NC-SA — non-commercial</li>
+          <li><strong>Two unsourced scores removed</strong> — the NVIDIA row's "Hit@1 83.0" and the GTE row's "ties nemotron on Hit@1" appear in neither model card. NVIDIA report Recall@5 for their own embed + rerank pipeline; GTE now shows Alibaba's own 56.19 BEIR</li>
+          <li><strong>Qwen3 numbers now sourced</strong> — the table shows Qwen's own MTEB-R (65.80, 69.76, 69.02). "The 4B edges the 8B by ~0.48 on BEIR" is corrected to 0.74 on MTEB-R, with the 8B ahead on Chinese, multilingual, long-document and code. The Qwen page had still been comparing against "bge ~60" and "mxbai ~62", both withdrawn earlier; it now shows Qwen's full table</li>
+          <li><strong>Qwen3 takes instructions</strong> — its page said "maybe not" for instruction-shaped relevance, but the Qwen rerankers are instruction-aware. The quick start now uses the model card's own sentence-transformers code, and the instruction-following guide lists three rerankers that take an instruction, with real usage</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-01d">1 Oct 2026 — Cohere's 500-token rule, and Voyage rerank-3</h2>
         <ul class="feature-list">
           <li><strong>A correction to our own correction</strong> — in September this site called it a myth that Cohere splits documents over 500 tokens into extra billable chunks. Cohere's own pricing FAQ says it does: a document over 500 tokens, query included, counts once per 500-token chunk toward a search's 100 documents. The cost calculator now models that, and the "long passages favour Cohere" rule it used to give is gone</li>

@@ -142,6 +142,15 @@
       "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
       "protocol_note": "Third-party: Jina measured it in the jina-reranker-v3.5 evaluation (13 BEIR datasets, top 100 from jina-embeddings-v5-text-small). Qwen report MTEB-R, not a BEIR average",
       "verified_on": "2026-10-01"
+    },
+    "mteb_r": {
+      "value": "69.76",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "Qwen3-Reranker-4B\\*\\*\\s*\\|\\s*4B\\s*\\|\\s*(\\*\\*)?{value}",
+      "check_hint": "MTEB-R",
+      "protocol_note": "Qwen's own run: retrieval subsets of MTEB(eng, v2), reranking the top 100 from Qwen3-Embedding-0.6B — an English NDCG@10 average, but MTEB-R, not BEIR",
+      "verified_on": "2026-10-01"
     }
   },
   "cohere-rerank-4-pro": {
@@ -244,6 +253,39 @@
       "source_url": "https://docs.voyageai.com/docs/batch-inference",
       "check_pattern": "providing a {value} discount",
       "check_hint": "discount",
+      "verified_on": "2026-10-01"
+    }
+  },
+  "qwen3-reranker-0.6b": {
+    "mteb_r": {
+      "value": "65.80",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-0.6B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-0.6B/raw/main/README.md",
+      "check_pattern": "Qwen3-Reranker-0\\.6B\\*\\*\\s*\\|\\s*0\\.6B\\s*\\|\\s*(\\*\\*)?{value}",
+      "check_hint": "MTEB-R",
+      "protocol_note": "Qwen's own run: retrieval subsets of MTEB(eng, v2), reranking the top 100 from Qwen3-Embedding-0.6B — an English NDCG@10 average, but MTEB-R, not BEIR",
+      "verified_on": "2026-10-01"
+    }
+  },
+  "qwen3-reranker-8b": {
+    "mteb_r": {
+      "value": "69.02",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-8B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-8B/raw/main/README.md",
+      "check_pattern": "Qwen3-Reranker-8B\\*\\*\\s*\\|\\s*8B\\s*\\|\\s*(\\*\\*)?{value}",
+      "check_hint": "MTEB-R",
+      "protocol_note": "Qwen's own run: retrieval subsets of MTEB(eng, v2), reranking the top 100 from Qwen3-Embedding-0.6B — an English NDCG@10 average, but MTEB-R, not BEIR",
+      "verified_on": "2026-10-01"
+    }
+  },
+  "gte-reranker-modernbert-base": {
+    "beir": {
+      "value": "56.19",
+      "source_url": "https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base",
+      "check_url": "https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base/raw/main/README.md",
+      "check_pattern": "gte-reranker-modernbert-base`\\]\\([^)]*\\)\\s*\\|[^|]*\\|[^|]*\\|[^|]*149M[^|]*\\|[^|]*8192[^|]*\\|[^|]*\\|[^|]*\\|\\s*{value}",
+      "check_hint": "BEIR",
+      "protocol_note": "Alibaba's own figure from the model card; the card doesn't state which BEIR datasets or which first-stage retriever",
       "verified_on": "2026-10-01"
     }
   }

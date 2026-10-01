@@ -38,7 +38,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/guides/choose-reranker-scenario</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/choose-reranker-scenario" />
@@ -47,7 +47,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/guides/choose-reranker-scenario</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/choose-reranker-scenario" />
@@ -290,7 +290,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/models/cohere-rerank</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/cohere-rerank" />
@@ -299,7 +299,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/models/cohere-rerank</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/cohere-rerank" />
@@ -380,7 +380,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/models/voyage-rerank</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/voyage-rerank" />
@@ -389,7 +389,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/models/voyage-rerank</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/voyage-rerank" />

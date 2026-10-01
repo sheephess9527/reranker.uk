@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Thu, 01 Oct 2026 15:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2026 16:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>1 Oct 2026 — Qwen3, Contextual AI, GTE and NVIDIA rows checked against their model cards</title>
+      <link>https://reranker.uk/changelog#2026-10-01e</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-01e</guid>
+      <pubDate>Thu, 01 Oct 2026 16:00:00 GMT</pubDate>
+      <description>Contextual AI Rerank v2 is open-weight (non-commercial) and multilingual, not an English-only API. Unsourced Hit@1 figures for NVIDIA and GTE removed; GTE shows Alibaba's 56.19 BEIR. Qwen3 rows show Qwen's own MTEB-R, the 4B-vs-8B claim is corrected, and the Qwen page gains Qwen's full score table and instruction usage.</description>
+    </item>
     <item>
       <title>1 Oct 2026 — Cohere's 500-token rule, and Voyage rerank-3</title>
       <link>https://reranker.uk/changelog#2026-10-01d</link>

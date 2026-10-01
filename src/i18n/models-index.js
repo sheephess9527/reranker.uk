@@ -41,8 +41,8 @@ window.I18N_PAGE = {
     "资料来源： <a href=\"https://huggingface.co/Qwen\" rel=\"noopener noreferrer\">Qwen3-Reranker</a> · <a href=\"https://arxiv.org/abs/2509.25085\" rel=\"noopener noreferrer\">jina-reranker-v3 论文</a> · <a href=\"https://docs.voyageai.com/docs/reranker\" rel=\"noopener noreferrer\">Voyage 重排序器</a> · <a href=\"https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2\" rel=\"noopener noreferrer\">nemotron-rerank</a> · <a href=\"https://huggingface.co/spaces/mteb/leaderboard\" rel=\"noopener noreferrer\">MTEB</a> · <a href=\"https://github.com/beir-cellar/beir\" rel=\"noopener noreferrer\">BEIR</a> · <a href=\"https://huggingface.co/BAAI/bge-reranker-v2-m3\" rel=\"noopener noreferrer\">BAAI</a> · <a href=\"https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base\" rel=\"noopener noreferrer\">GTE ModernBERT</a> · <a href=\"/models/qwen-reranker.html\">Qwen 指南</a> · <a href=\"/guides/instruction-reranker.html\">指令跟随</a> · <a href=\"/guides/late-interaction-rerank.html\">ColBERT</a>",
   "Sources: <a href=\"https://huggingface.co/Qwen\" rel=\"noopener noreferrer\">Qwen3-Reranker</a> · <a href=\"https://huggingface.co/jinaai/jina-reranker-v3.5\" rel=\"noopener noreferrer\">jina-reranker-v3.5</a> · <a href=\"https://arxiv.org/abs/2509.25085\" rel=\"noopener noreferrer\">jina-reranker-v3 paper</a> · <a href=\"https://huggingface.co/jinaai/jina-reranker-v1-tiny-en\" rel=\"noopener noreferrer\">jina-reranker-v1</a> · <a href=\"https://docs.voyageai.com/docs/reranker\" rel=\"noopener noreferrer\">Voyage rerankers</a> · <a href=\"https://github.com/mixedbread-ai/mxbai-rerank\" rel=\"noopener noreferrer\">mxbai-rerank</a> · <a href=\"https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2\" rel=\"noopener noreferrer\">nemotron-rerank</a> · <a href=\"https://huggingface.co/spaces/mteb/leaderboard\" rel=\"noopener noreferrer\">MTEB</a> · <a href=\"https://github.com/beir-cellar/beir\" rel=\"noopener noreferrer\">BEIR</a> · <a href=\"https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker\" rel=\"noopener noreferrer\">BAAI evals</a> · <a href=\"https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base\" rel=\"noopener noreferrer\">GTE ModernBERT</a> · <a href=\"/models/qwen-reranker.html\">Qwen guide</a> · <a href=\"/guides/instruction-reranker.html\">instruction</a> · <a href=\"/guides/late-interaction-rerank.html\">ColBERT</a>":
     "资料来源： <a href=\"https://huggingface.co/Qwen\" rel=\"noopener noreferrer\">Qwen3-Reranker</a> · <a href=\"https://huggingface.co/jinaai/jina-reranker-v3.5\" rel=\"noopener noreferrer\">jina-reranker-v3.5</a> · <a href=\"https://arxiv.org/abs/2509.25085\" rel=\"noopener noreferrer\">jina-reranker-v3 论文</a> · <a href=\"https://huggingface.co/jinaai/jina-reranker-v1-tiny-en\" rel=\"noopener noreferrer\">jina-reranker-v1</a> · <a href=\"https://docs.voyageai.com/docs/reranker\" rel=\"noopener noreferrer\">Voyage 重排序器</a> · <a href=\"https://github.com/mixedbread-ai/mxbai-rerank\" rel=\"noopener noreferrer\">mxbai-rerank</a> · <a href=\"https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2\" rel=\"noopener noreferrer\">nemotron-rerank</a> · <a href=\"https://huggingface.co/spaces/mteb/leaderboard\" rel=\"noopener noreferrer\">MTEB</a> · <a href=\"https://github.com/beir-cellar/beir\" rel=\"noopener noreferrer\">BEIR</a> · <a href=\"https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker\" rel=\"noopener noreferrer\">BAAI 评测</a> · <a href=\"https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base\" rel=\"noopener noreferrer\">GTE ModernBERT</a> · <a href=\"/models/qwen-reranker.html\">Qwen 指南</a> · <a href=\"/guides/instruction-reranker.html\">指令跟随</a> · <a href=\"/guides/late-interaction-rerank.html\">ColBERT</a>",
-  "Production stacks mix <strong>cross-encoders</strong>, <strong>listwise</strong> models, <strong>late-interaction</strong>, and instruction APIs. The headline of 2026 is that <strong>size stopped predicting quality</strong>: a 0.6B listwise model (Jina v3.5) edges Qwen3-Reranker-4B on BEIR in Jina's own test, a 149M cross-encoder ties a 1.2B one on Hit@1, and Qwen3's own 4B edges its 8B. Architecture, latency, languages and cost below — with honest footnotes wherever score protocols differ.":
-    "生产环境往往混用 <strong>cross-encoder</strong>、<strong>listwise</strong> 模型、<strong>late-interaction</strong> 以及指令式 API。2026 年最值得注意的一点是：<strong>参数量不再预测质量</strong> —— 0.6B 的 listwise 模型（Jina v3.5）在 Jina 自己的测试里，BEIR 略高于 Qwen3-Reranker-4B，149M 的 cross-encoder 在 Hit@1 上与 1.2B 打平，而 Qwen3 自己的 4B 也略胜 8B。下表对比架构、延迟、语言与成本，凡评测协议不一致处均如实标注。",
+  "Production stacks mix <strong>cross-encoders</strong>, <strong>listwise</strong> models, <strong>late-interaction</strong>, and instruction-following rerankers. The headline of 2026 is that <strong>size stopped predicting quality</strong>: a 0.6B listwise model (Jina v3.5) edges Qwen3-Reranker-4B on BEIR in Jina's own test, and in Qwen's own tests the 4B beats its 8B on English retrieval. Architecture, latency, languages and cost below — with honest footnotes wherever score protocols differ.":
+    "生产环境往往混用 <strong>cross-encoder</strong>、<strong>listwise</strong> 模型、<strong>late-interaction</strong> 以及指令跟随重排序器。2026 年最值得注意的一点是：<strong>参数量不再预测质量</strong> —— 0.6B 的 listwise 模型（Jina v3.5）在 Jina 自己的测试里，BEIR 略高于 Qwen3-Reranker-4B，而在 Qwen 自己的测试里，4B 在英文检索上胜过自家的 8B。下表对比架构、延迟、语言与成本，凡评测协议不一致处均如实标注。",
   "<span class=\"pill good\">Apache 2.0</span><span class=\"pill info\">Best Qwen3 size</span>":
     "<span class=\"pill good\">Apache 2.0</span><span class=\"pill info\">Qwen3 最佳档位</span>",
   "Strongest multilingual open self-host (GPU)":
@@ -277,4 +277,28 @@ window.I18N_PAGE = {
     "Pro 重精度，Fast 重吞吐 —— 每次检索 ${{fact:cohere-rerank-4-pro.price_per_search}} 对 ${{fact:cohere-rerank-4-fast.price_per_search}}",
   "Pro and Fast variants, 32k context, 100+ languages. Billed per search: one query plus up to 100 documents, each counted once per {{fact:cohere-rerank.billing_chunk_tokens}} tokens.":
     "Pro 与 Fast 两个版本，32k 上下文，100+ 种语言。按检索次数计费：一个 query 加最多 100 篇文档，每篇按每 {{fact:cohere-rerank.billing_chunk_tokens}} token 计一次。",
+
+  // Oct 2026: jina-reranker-v3.5, licences
+  "Best English score of the three; instruction-aware (GPU)":
+    "三者中英文得分最高；支持指令（需 GPU）",
+  "Largest Qwen3 — leads on Chinese, multilingual, long-document and code; 4B edges it on English":
+    "最大的 Qwen3 —— 中文、多语言、长文档和代码上领先；英文上 4B 略胜",
+  "149M, 8K context; also runs in transformers.js":
+    "1.49 亿参数、8K 上下文；也能在 transformers.js 里运行",
+  "1.2B, 8K context; licensed for commercial use":
+    "12 亿参数、8K 上下文；许可允许商用",
+  "Multilingual (26 langs evaluated)":
+    "多语言（评测覆盖 26 种语言）",
+  "Instruction-following; 1B / 2B / 6B":
+    "指令跟随；1B / 2B / 6B 三种尺寸",
+  "100+ langs · 32K ctx":
+    "100+ 种语言 · 32K 上下文",
+  "Free (non-commercial self-host)":
+    "免费（仅限非商用自建）",
+
+  // Oct 2026: jina-reranker-v3.5, licences
+  "0.6B / 4B / 8B, 32K context, Apache 2.0. Start at 4B — in Qwen's own tests it beats the 8B on English and on instruction-following, and trails it by at most 1.5 points elsewhere.":
+    "0.6B / 4B / 8B 三种尺寸，32K 上下文，Apache 2.0。建议从 4B 开始 —— 在 Qwen 自己的测试里，它在英文和指令跟随上胜过 8B，其余项目最多落后 1.5 分。",
+  "4B is the sweet spot — the 8B is twice the size for at most 1.5 points, and only outside English":
+    "4B 最划算 —— 8B 体量翻倍，最多只多 1.5 分，而且只在英文以外的项目上",
 }};

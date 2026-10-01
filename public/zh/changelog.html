@@ -62,6 +62,16 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-01e">2026 年 10 月 1 日 —— 对照官方模型卡核对 Qwen3、Contextual AI、GTE 与 NVIDIA 各行</h2>
+        <ul class="feature-list">
+          <li><strong>Contextual AI Rerank v2 的描述是错的</strong> —— 表里写它是只支持英文、价格需询价的托管 API。实际上它自 2025 年 8 月起就在 Hugging Face 上提供开源权重（1B、2B、6B），支持 100+ 种语言、32K 上下文，许可证是 CC BY-NC-SA —— 仅限非商用</li>
+          <li><strong>删掉两个没有出处的分数</strong> —— NVIDIA 那行的「Hit@1 83.0」和 GTE 那行的「Hit@1 与 nemotron 打平」，在两家的模型卡里都找不到。NVIDIA 公布的是自家向量模型 + 重排序整条流水线的 Recall@5；GTE 现在显示阿里自己公布的 BEIR 56.19</li>
+          <li><strong>Qwen3 的分数有了出处</strong> —— 表里现在显示 Qwen 自己公布的 MTEB-R（65.80、69.76、69.02）。「4B 在 BEIR 上比 8B 高约 0.48」更正为 MTEB-R 上高 0.74，而中文、多语言、长文档和代码上是 8B 领先。Qwen 专页之前还在拿「bge 约 60」「mxbai 约 62」做对比，这两个数字早已撤回；现在改为展示 Qwen 的完整评测表</li>
+          <li><strong>Qwen3 支持指令</strong> —— 它的专页原先说需要指令的场景「不太适合」，但 Qwen 重排序模型本身就支持指令。快速上手现在用的是模型卡里官方的 sentence-transformers 代码，指令跟随指南也列出了三款支持指令的重排序器及其实际用法</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-01d">2026 年 10 月 1 日 —— Cohere 的 500 token 规则，以及 Voyage rerank-3</h2>
         <ul class="feature-list">
           <li><strong>更正我们自己的更正</strong> —— 9 月时本站说「Cohere 把超过 500 token 的文档拆成多块额外计费」是误传。但 Cohere 自己的价格 FAQ 写明确实如此：文档连同 query 超过 500 token，每 500 token 一块，每块都计入一次检索的 100 篇文档。成本计算器已按此重算，之前给出的「段落越长越适合 Cohere」的结论也随之撤回</li>

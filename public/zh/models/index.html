@@ -130,7 +130,7 @@
 <main id="main">
     <section class="hero container" style="padding-bottom:1.5rem">
       <h1>重排序模型对比</h1>
-      <p class="lead">生产环境往往混用 <strong>cross-encoder</strong>、<strong>listwise</strong> 模型、<strong>late-interaction</strong> 以及指令式 API。2026 年最值得注意的一点是：<strong>参数量不再预测质量</strong> —— 0.6B 的 listwise 模型（Jina v3.5）在 Jina 自己的测试里，BEIR 略高于 Qwen3-Reranker-4B，149M 的 cross-encoder 在 Hit@1 上与 1.2B 打平，而 Qwen3 自己的 4B 也略胜 8B。下表对比架构、延迟、语言与成本，凡评测协议不一致处均如实标注。</p>
+      <p class="lead">生产环境往往混用 <strong>cross-encoder</strong>、<strong>listwise</strong> 模型、<strong>late-interaction</strong> 以及指令跟随重排序器。2026 年最值得注意的一点是：<strong>参数量不再预测质量</strong> —— 0.6B 的 listwise 模型（Jina v3.5）在 Jina 自己的测试里，BEIR 略高于 Qwen3-Reranker-4B，而在 Qwen 自己的测试里，4B 在英文检索上胜过自家的 8B。下表对比架构、延迟、语言与成本，凡评测协议不一致处均如实标注。</p>
     </section>
 
     <section class="section container">
@@ -171,22 +171,22 @@
               <th scope="row"><a href="/zh/models/qwen-reranker">Qwen3-Reranker-4B</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Apache 2.0</span><span class="pill info">Qwen3 最佳档位</span></td>
-              <td>多语言开源自托管最强（需 GPU）</td>
-              <td>100+ langs · 32K ctx</td>
+              <td>三者中英文得分最高；支持指令（需 GPU）</td>
+              <td>100+ 种语言 · 32K 上下文</td>
               <td>GPU required</td>
               <td>免费（自建）</td>
-              <td class="muted" title="Vendor reports MTEB-R over top-100 candidates from Qwen3-Embedding-0.6B — not the classic BEIR 18-dataset average">MTEB-R*</td>
+              <td class="muted" title="Qwen's own run: retrieval subsets of MTEB(eng, v2), reranking the top 100 from Qwen3-Embedding-0.6B — not a BEIR average. Jina's 2026 run measured the 4B at 62.28 on 13 BEIR datasets">MTEB-R 69.76*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="qwen3-reranker-8b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="">
               <th scope="row"><a href="/zh/models/qwen-reranker">Qwen3-Reranker-8B</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Apache 2.0</span></td>
-              <td>Qwen3 最大档 —— 但 BEIR 上 4B 更好</td>
-              <td>100+ langs · 32K ctx</td>
+              <td>最大的 Qwen3 —— 中文、多语言、长文档和代码上领先；英文上 4B 略胜</td>
+              <td>100+ 种语言 · 32K 上下文</td>
               <td>GPU / multi-GPU</td>
               <td>免费（自建）</td>
-              <td class="muted" title="Reported ~0.48 points behind Qwen3-Reranker-4B on BEIR tasks — bigger is not better here">MTEB-R*</td>
+              <td class="muted" title="Qwen's own run, same suite as the 4B row, where the 4B scores higher. This table said ~0.48 points behind on BEIR until Oct 2026; Qwen's card gives 0.74 on MTEB-R">MTEB-R 69.02*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="qwen3-reranker-0.6b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="">
@@ -194,10 +194,10 @@
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Apache 2.0</span></td>
               <td>最轻 Qwen3；舒适运行仍需 GPU</td>
-              <td>100+ langs · 32K ctx</td>
+              <td>100+ 种语言 · 32K 上下文</td>
               <td>建议 GPU</td>
               <td>免费（自建）</td>
-              <td class="muted" title="Smaller sibling; not browser-sized">MTEB-R*</td>
+              <td class="muted" title="Qwen's own run, same suite as the 4B row">MTEB-R 65.80*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="bge-reranker-v2-m3" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="55.36*">
@@ -343,26 +343,26 @@
               <td class="muted" title="Voyage publishes its own retrieval evals, not a classic BEIR average">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="gte-reranker-modernbert" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="">
+            <tr data-name="gte-reranker-modernbert" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="56.19*">
               <th scope="row"><a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">gte-reranker-modernbert-base</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><span class="pill info">Compact</span></td>
-              <td>仅约 149M，Hit@1 却与 nemotron-1b 打平</td>
+              <td>1.49 亿参数、8K 上下文；也能在 transformers.js 里运行</td>
               <td>英文</td>
               <td>Fast GPU / CPU-friendly</td>
               <td>免费（自建）</td>
-              <td class="muted" title="Task-specific benches; not classic BEIR avg">Hit@1 ≈ nemotron*</td>
+              <td title="Alibaba's own figure from the model card, which doesn't state the datasets or first stage. This table showed &quot;Hit@1 ≈ nemotron&quot; until Oct 2026, with no source we could find">56.19*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="llama-nemotron-rerank-1b-v2" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="">
               <th scope="row"><a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">llama-nemotron-rerank-1b-v2</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Open + NIM API</span></td>
-              <td>1.2B；在不计延迟时精度居首</td>
-              <td>多语言（MIRACL / MLQA 评测）</td>
+              <td>12 亿参数、8K 上下文；许可允许商用</td>
+              <td>多语言（评测覆盖 26 种语言）</td>
               <td>GPU / NIM</td>
               <td>NIM / self-host</td>
-              <td class="muted" title="Vendor QA protocol across BEIR/TextQA, TechQA, MIRACL, MLQA, MLDR — not a classic BEIR average">Hit@1 83.0*</td>
+              <td class="muted" title="NVIDIA report Recall@5 for their own embed + rerank pipeline (73.64% on NQ, HotpotQA, FiQA and TechQA), not a reranker-only BEIR NDCG. The Hit@1 83.0 this table showed until Oct 2026 has no source we could find">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="ms-marco-minilm" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="48.64*" data-demo="ms-marco">
@@ -376,15 +376,15 @@
               <td title="Third-party figure: Jina measured it alongside their v1 models (17 BEIR datasets). sentence-transformers, who trained it, publish NDCG@10 on TREC DL 19 (74.30) and MRR@10 on MS MARCO Dev (39.01) but no BEIR average. This table carried an unsourced ~55.0 here until Sep 2026">48.64*</td>
               <td class="demo-link-cell"></td>
             </tr>
-            <tr data-name="contextual-rerank-v2" data-type="api" data-arch="cross-encoder" data-langs="en" data-pricing="paid" data-beir="">
-              <th scope="row"><a href="/zh/guides/instruction-reranker">Contextual AI Rerank v2</a></th>
+            <tr data-name="contextual-rerank-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="">
+              <th scope="row"><a href="https://huggingface.co/ContextualAI/ctxl-rerank-v2-instruct-multilingual-2b" rel="noopener noreferrer">Contextual AI Rerank v2</a></th>
               <td><span class="pill">Instruction</span></td>
-              <td><span class="pill">Hosted API</span></td>
-              <td>指令跟随 / 策略型相关性</td>
-              <td>英文</td>
-              <td>API</td>
-              <td>Contact vendor†</td>
-              <td class="muted">不适用</td>
+              <td><span class="pill">Open weights</span><span class="pill warn">权重：仅限非商用</span></td>
+              <td>指令跟随；1B / 2B / 6B 三种尺寸</td>
+              <td>100+ 种语言 · 32K 上下文</td>
+              <td>GPU</td>
+              <td>免费（仅限非商用自建）</td>
+              <td class="muted" title="Contextual AI publish BEIR results only as a chart in their blog post. Until Oct 2026 this row described the model as an English-only hosted API; the weights have been public on Hugging Face since Aug 2025">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="colbertv2" data-type="open" data-arch="late-interaction" data-langs="en" data-pricing="free" data-beir="">
@@ -410,7 +410,7 @@
         <a class="card" href="/zh/models/qwen-reranker">
           <h3>Qwen3-Reranker</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill good">Apache 2.0</span><span class="pill info">多语言</span></div>
-          <p>0.6B / 4B / 8B，32K 上下文。从 4B 开始 —— 据报告它在 BEIR 上略胜 8B，所以「越大越好」在这里并不成立。</p>
+          <p>0.6B / 4B / 8B 三种尺寸，32K 上下文，Apache 2.0。建议从 4B 开始 —— 在 Qwen 自己的测试里，它在英文和指令跟随上胜过 8B，其余项目最多落后 1.5 分。</p>
         </a>
         <a class="card" href="/zh/models/bge-reranker">
           <h3>bge-reranker</h3>
@@ -459,7 +459,7 @@
           <p class="chooser-tagline">多语言开源权重最优 —— 从 4B 起步</p>
           <ul class="feature-list">
             <li>0.6B / 4B / 8B，全部 Apache 2.0，全部 32K 上下文</li>
-            <li>4B 是甜点档 —— 8B 更贵，分数却不更高</li>
+            <li>4B 最划算 —— 8B 体量翻倍，最多只多 1.5 分，而且只在英文以外的项目上</li>
             <li>厂商给的是 MTEB-R 数字，请在你自己的标注集上复核</li>
           </ul>
         </div>

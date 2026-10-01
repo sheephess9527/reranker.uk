@@ -60,7 +60,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/guides/">指南</a><span>/</span>指令跟随 rerank</div>
       <h1>指令跟随 reranker</h1>
-      <p class="meta">新兴方向 · 约 7 分钟阅读 · <time datetime="2026-06-25">更新于 2026 年 6 月 25 日</time></p>
+      <p class="meta">新兴方向 · 约 7 分钟阅读 · <time datetime="2026-10-01">更新于 2026 年 10 月 1 日</time></p>
       <p class="lead">经典 cross-encoder 只回答一个问题：<em>「这段与查询有多相关？」</em><strong>指令跟随</strong> reranker（如 Contextual AI Rerank v2）多一个控制信号 —— 简短指令，定义本任务下何谓「相关」。</p>
 
       <div class="toc">
@@ -88,7 +88,7 @@
             <tr><td>查询</td><td>是</td><td>是</td></tr>
             <tr><td>段落</td><td>是</td><td>是</td></tr>
             <tr><td>任务指令</td><td>否（或塞进查询文本）</td><td>一等字段</td></tr>
-            <tr><td>典型部署</td><td>自托管或 API</td><td>目前多为托管 API</td></tr>
+            <tr><td>典型部署</td><td>自托管或 API</td><td>自建或 API 均可 —— 已有开源权重</td></tr>
           </tbody>
         </table>
       </div>
@@ -98,6 +98,21 @@ results = client.rerank(
     documents=candidates,
     instruction="Prefer official help articles with step-by-step cancel steps; demote marketing and upsell pages.",
 )  # higher score = better match to query under that instruction</code></pre>
+      <h3>目前支持指令的三款</h3>
+      <ul>
+        <li><a href="/zh/models/qwen-reranker">Qwen3-Reranker</a>（0.6B / 4B / 8B，Apache 2.0）—— 通过 sentence-transformers 的 <code>prompts</code> 为每个任务设定指令；Qwen 称量身定制的指令通常能带来 1–5% 的提升。</li>
+        <li><a href="https://huggingface.co/ContextualAI/ctxl-rerank-v2-instruct-multilingual-2b" rel="noopener noreferrer">Contextual AI Rerank v2</a>（1B / 2B / 6B，CC BY-NC-SA —— 仅限非商用）—— 把指令作为 <code>prompt=</code> 传给 <code>predict</code> 或 <code>rank</code>。</li>
+        <li><a href="/zh/models/voyage-rerank">Voyage rerank-2.5</a>（托管）—— 把指令加在 query 的前面或后面。Voyage 的文档只为 2.5 介绍了这种用法，没有提到更新的 rerank-3。</li>
+      </ul>
+      <pre tabindex="0"><code># Contextual AI Rerank v2, from its model card
+from sentence_transformers import CrossEncoder
+
+model = CrossEncoder("ContextualAI/ctxl-rerank-v2-instruct-multilingual-2b")
+ranked = model.rank(
+    "cancel my plan",
+    candidates,
+    prompt="Prefer official help articles with step-by-step cancel steps; demote marketing and upsell pages.",
+)</code></pre>
       <p>经典模型可用查询前缀近似（<code>"[Support KB] cancel my plan"</code>），但专用指令模型会把控制文本当约束，而非词袋话题。</p>
 
       <h2 id="when">何时使用</h2>
@@ -110,8 +125,8 @@ results = client.rerank(
 
       <h2 id="vs">对比经典 cross-encoder</h2>
       <ul>
-        <li><strong>经典（bge、Cohere、Jina、mxbai）：</strong>BEIR 类数字最全；开源或成熟免费档；RAG「话题精度」的默认好选择。</li>
-        <li><strong>指令 API（Contextual AI 等）：</strong>相关性偏策略时更强；可移植性差；公开榜难比 —— 本站 <a href="/zh/models/">模型表</a> 故意标 BEIR 为 <em>n/a</em>。</li>
+        <li><strong>经典模型（bge、Cohere、mxbai、Jina v1–v2）：</strong>公开的 BEIR 类分数最多；有开源权重或成熟的托管 API；适合作为 RAG「主题精度」的默认选择。</li>
+        <li><strong>指令重排序器（Qwen3、Contextual AI v2、Voyage rerank-2.5）：</strong>当相关性取决于业务策略时更强；但很难在公开排行榜上比较，因为分数取决于你写的指令 —— 我们的<a href="/zh/models/">模型对比表</a>在厂商有公布时列出其自测数字。</li>
         <li><strong>Late-interaction（ColBERT）：</strong>完全另一轴（大规模 token MaxSim）—— 见 <a href="/zh/guides/late-interaction-rerank">late-interaction 指南</a>。</li>
       </ul>
 
