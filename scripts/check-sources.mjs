@@ -57,16 +57,31 @@ function snippets(text, re, max = 3, pad = 140) {
   return out;
 }
 
+// A 429 or 5xx says nothing about the figure, only that the host was busy
+// (HuggingFace rate-limits runner IPs; docs.voyageai.com has had brief 500s),
+// so those are retried a couple of times before counting as a miss.
+const RETRY_WAITS_MS = (process.env.RETRY_WAITS_MS ?? "5000,20000").split(",").map(Number);
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
 const pageCache = new Map();
 async function fetchPage(url) {
   if (!pageCache.has(url)) {
     pageCache.set(
       url,
       (async () => {
-        const res = await fetch(url, { headers: { "user-agent": "reranker.uk source check (+https://reranker.uk)" } });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const raw = await res.text();
-        return { raw, text: pageText(raw) };
+        for (let attempt = 0; ; attempt++) {
+          const res = await fetch(url, { headers: { "user-agent": "reranker.uk source check (+https://reranker.uk)" } });
+          if (res.ok) {
+            const raw = await res.text();
+            return { raw, text: pageText(raw) };
+          }
+          const transient = res.status === 429 || res.status >= 500;
+          if (!transient || attempt >= RETRY_WAITS_MS.length) throw new Error(`HTTP ${res.status}`);
+          const retryAfter = Number(res.headers.get("retry-after")) * 1000;
+          const wait = Math.min(Math.max(RETRY_WAITS_MS[attempt], retryAfter || 0), 60_000);
+          console.log(`  (HTTP ${res.status} from ${url}; retrying in ${Math.round(wait / 1000)} s)`);
+          await sleep(wait);
+        }
       })()
     );
   }
