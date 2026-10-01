@@ -301,4 +301,12 @@ window.I18N_PAGE = {
     "0.6B / 4B / 8B 三种尺寸，32K 上下文，Apache 2.0。建议从 4B 开始 —— 在 Qwen 自己的测试里，它在英文和指令跟随上胜过 8B，其余项目最多落后 1.5 分。",
   "4B is the sweet spot — the 8B is twice the size for at most 1.5 points, and only outside English":
     "4B 最划算 —— 8B 体量翻倍，最多只多 1.5 分，而且只在英文以外的项目上",
+
+  // Oct 2026: jina-reranker-v3.5, licences
+  "~{{fact:jina-reranker-v1-tiny-en.browser_ms_10}} ms per 10 passages (browser)":
+    "浏览器中每 10 段约 {{fact:jina-reranker-v1-tiny-en.browser_ms_10}} ms",
+  "~{{fact:ms-marco-minilm-l6-v2.browser_ms_10}} ms per 10 passages (browser)":
+    "浏览器中每 10 段约 {{fact:ms-marco-minilm-l6-v2.browser_ms_10}} ms",
+  "Classic baseline; smallest of the three demo models (23M)":
+    "经典基线；三个 Demo 模型中最小的（2300 万参数）",
 }};

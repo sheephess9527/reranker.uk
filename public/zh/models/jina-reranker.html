@@ -198,7 +198,7 @@
           </tbody>
         </table>
       </div>
-      <p class="muted" style="font-size:.85rem">速率限制取自 jina.ai/reranker 的 FAQ，与 Embeddings API 共用。v3 和 v3.5 的 API 每次请求最多接受 131,072 token（query 加全部文档），超出部分会被截断。</p>
+      <p class="muted" style="font-size:.85rem">速率限制取自 jina.ai/reranker 的 FAQ，与 Embeddings API 共用。v3 和 v3.5 的 API 每次请求最多接受 131,072 token（query 加全部文档），超出部分会被截断。延迟方面，同一份 FAQ 给出的数字是：100 篇 256 token 的文档加 64 token 的 query 约 150 毫秒；文档增至 4,096 token 时约 3.5 秒；query 也增至 512 token 时约 7 秒。</p>
 
       <h2 id="usage">快速上手</h2>
       <h3>托管 API（Python）</h3>
@@ -234,7 +234,7 @@ for r in results:
     print(f"{r['relevance_score']:.4f}  {r['document'][:80]}")</code></pre>
 
       <h2 id="browser">浏览器 / 边缘端使用</h2>
-      <p><code>v1-tiny</code> 模型（3300 万参数）在普通宽带下通过 transformers.js 加载不到 10 秒，给 10 个候选打分约 200 毫秒。本站 Demo 用的就是它：</p>
+      <p><code>v1-tiny</code> 模型（3300 万参数）通过 transformers.js 在浏览器中运行。在一台 4 核的 GitHub Actions 机器上，Demo 的首次运行（下载加打分 10 段）用了 4.4 秒，之后打分 10 段用 429 ms，30 段用 1,283 ms。手机或较旧的笔记本会更慢；Demo 会在你自己的设备上显示每次运行的耗时。本站 Demo 用的就是它：</p>
       <pre tabindex="0"><code>// transformers.js (ES module in the browser)
 import { AutoTokenizer, AutoModelForSequenceClassification }
   from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4";

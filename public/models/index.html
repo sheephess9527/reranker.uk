@@ -206,7 +206,7 @@
               <td><span class="pill good">Open weights</span></td>
               <td>Proven self-host default; CPU-friendly</td>
               <td>100+ langs</td>
-              <td>200–500 ms CPU<br><span class="muted">20–50 ms GPU</span></td>
+              <td>CPU-capable; GPU faster</td>
               <td>Free (self-host)</td>
               <td title="BAAI's own run: 15 BEIR datasets, reranking the top 100 from bge-large-en-v1.5. This table carried an untraceable ~60.1 here until Oct 2026">55.36*</td>
               <td class="demo-link-cell muted">—</td>
@@ -217,7 +217,7 @@
               <td><span class="pill good">Open weights</span><br><span class="pill info">Browser ✓</span></td>
               <td>Legacy generation; xsmall still powers the browser demo</td>
               <td>English</td>
-              <td>150–400 ms CPU<br><span class="muted">~30 ms GPU</span></td>
+              <td>CPU-capable; GPU faster</td>
               <td>Free (self-host)</td>
               <td title="mixedbread's own cross-generation comparison table, not the classic BEIR 18-dataset average other open-weight rows use">49.32*</td>
               <td class="demo-link-cell"></td>
@@ -272,7 +272,7 @@
               <td><span class="pill good">Open weights</span><br><span class="pill info">Browser ✓</span></td>
               <td>Browser / edge; powers our demo</td>
               <td>English</td>
-              <td>30–80 ms CPU (browser)</td>
+              <td title="Measured with the live demo: Chromium (WASM) on a 4-vCPU GitHub Actions runner, median of 5 runs, ~60-word passages, Oct 2026. Phones and older laptops will be slower — the demo shows the time for each run on your device">~429 ms per 10 passages (browser)</td>
               <td>Free (self-host)</td>
               <td title="Jina's own run: 17 BEIR datasets, from the jina-reranker-v1 model card">48.54*</td>
               <td class="demo-link-cell"></td>
@@ -369,9 +369,9 @@
               <th scope="row">ms-marco MiniLM-L6 <span class="muted">(browser)</span></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><br><span class="pill info">Browser ✓</span></td>
-              <td>Classic baseline; largest of the three demo models</td>
+              <td>Classic baseline; smallest of the three demo models (23M)</td>
               <td>English</td>
-              <td>50–150 ms browser WASM</td>
+              <td title="Measured with the live demo: Chromium (WASM) on a 4-vCPU GitHub Actions runner, median of 5 runs, ~60-word passages, Oct 2026. Phones and older laptops will be slower — the demo shows the time for each run on your device">~515 ms per 10 passages (browser)</td>
               <td>Free (self-host)</td>
               <td title="Third-party figure: Jina measured it alongside their v1 models (17 BEIR datasets). sentence-transformers, who trained it, publish NDCG@10 on TREC DL 19 (74.30) and MRR@10 on MS MARCO Dev (39.01) but no BEIR average. This table carried an unsourced ~55.0 here until Sep 2026">48.64*</td>
               <td class="demo-link-cell"></td>

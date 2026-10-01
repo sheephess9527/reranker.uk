@@ -1,4 +1,14 @@
 window.I18N_PAGE = { zh: {
+  "1 Oct 2026 — Latency figures measured, or sourced, or gone":
+    "2026 年 10 月 1 日 —— 延迟数字：要么实测，要么有出处，要么删掉",
+  "<strong>The browser demo, measured</strong> — a new script runs the live demo in Chromium on a 4-vCPU GitHub Actions runner. Scoring 10 passages takes about 430 ms with Jina v1 tiny, 515 ms with ms-marco MiniLM and 1.4 s with mxbai xsmall. The site had claimed 30–80 ms and 50–150 ms":
+    "<strong>浏览器 Demo 有了实测数字</strong> —— 新写了一个脚本，在 4 核的 GitHub Actions 机器上用 Chromium 跑在线 Demo。给 10 段打分：Jina v1 tiny 约 430 ms，ms-marco MiniLM 约 515 ms，mxbai xsmall 约 1.4 秒。网站原先写的是 30–80 ms 和 50–150 ms",
+  "<strong>Demo model sizes corrected</strong> — the picker listed mxbai xsmall at 70 MB and ms-marco MiniLM at 90 MB; the demo actually downloads 92 MB and 23 MB. So ms-marco was labelled \"larger\" when it's the smallest, and mxbai \"balanced\" when it's the largest and slowest. The \"try a smaller model\" button now picks the actual smallest":
+    "<strong>Demo 模型大小改正了</strong> —— 选择框里写 mxbai xsmall 70 MB、ms-marco MiniLM 90 MB；Demo 实际下载的是 92 MB 和 23 MB。所以 ms-marco 明明最小却被标成「更大」，mxbai 最大也最慢却被标成「均衡」。「换个更小的模型」按钮现在指向真正最小的那个",
+  "<strong>Sourced where vendors publish</strong> — mixedbread's own A100 latencies on the mxbai page, and Jina's API latency figures on the Jina page":
+    "<strong>厂商有公布的，就引用出处</strong> —— mxbai 专页引用了 mixedbread 自己公布的 A100 延迟，Jina 专页引用了 Jina 公布的 API 延迟",
+  "<strong>Removed where nobody measured</strong> — the CPU/GPU millisecond ranges for bge and mxbai in the models table, Cohere's \"~100–200 ms\", and the self-hosting guide's T4 figure had no source; they're now described without numbers, and the RAG guide's latency table says which rows are estimates":
+    "<strong>没人测过的，就删掉</strong> —— 模型对比表里 bge 和 mxbai 的 CPU / GPU 毫秒范围、Cohere 的「约 100–200 ms」、自建部署指南里的 T4 数字，都没有出处；现在改为不带数字的描述，RAG 指南的延迟表也注明了哪些行是估算",
   "1 Oct 2026 — Qwen3, Contextual AI, GTE and NVIDIA rows checked against their model cards":
     "2026 年 10 月 1 日 —— 对照官方模型卡核对 Qwen3、Contextual AI、GTE 与 NVIDIA 各行",
   "<strong>Contextual AI Rerank v2 was described wrongly</strong> — the table called it an English-only hosted API with prices on request. It has shipped open weights on Hugging Face since August 2025 (1B, 2B and 6B), covers 100+ languages with a 32K context, and is licensed CC BY-NC-SA — non-commercial":
