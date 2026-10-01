@@ -49,8 +49,8 @@ window.I18N_PAGE = { zh: {
   "What about self-hosting?": "那自托管呢？",
   "Self-hosting has no per-call price, so it does not belong in the table above — you trade a usage bill for a GPU bill plus operations. The comparison only becomes meaningful at your own volume: divide your monthly GPU cost by the number of queries above and compare that to the per-query figures in the table. Below a few hundred thousand queries a month an API is usually cheaper than a dedicated GPU; well above that, self-hosting a <a href=\"/models/qwen-reranker.html\">Qwen3-Reranker</a> or <a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> starts to pay off. Our <a href=\"/guides/self-host-reranker.html\">self-hosting guide</a> covers the serving side.":
     "自托管没有按调用计的价格，所以它不适合放进上面的表里 —— 你是用 GPU 账单加运维成本换掉了用量账单。只有放到你自己的量级上比较才有意义：把每月 GPU 成本除以上面的查询次数，再和表中的每次查询成本对比。每月几十万次查询以下，API 通常比一块专属 GPU 便宜；远高于这个量级后，自托管 <a href=\"/models/qwen-reranker.html\">Qwen3-Reranker</a> 或 <a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> 才开始划算。服务端怎么搭见我们的<a href=\"/guides/self-host-reranker.html\">自托管指南</a>。",
-  "Note that a smaller model is not automatically a worse one — <a href=\"/models/jina-reranker.html\">Jina Reranker v3</a> reaches 61.94 BEIR nDCG@10 at 0.6B, so the cheapest thing to serve may also be the most accurate.":
-    "另外，模型小并不等于差 —— <a href=\"/models/jina-reranker.html\">Jina Reranker v3</a> 以 0.6B 的体量拿到 61.94 的 BEIR nDCG@10，所以最省资源的那个，可能同时也是最准的那个。",
+  "Note that a smaller model is not automatically a worse one — <a href=\"/models/jina-reranker.html\">Jina Reranker v3.5</a> reaches 63.20 BEIR nDCG@10 at 0.6B in Jina's own test, level with a 4B model, so the cheapest thing to serve may also be among the most accurate.":
+    "另外，模型小并不等于差 —— <a href=\"/models/jina-reranker.html\">Jina Reranker v3.5</a> 以 0.6B 的体量，在 Jina 自己的测试里拿到 63.20 的 BEIR nDCG@10，与 4B 模型持平，所以最省资源的那个，也可能是最准的之一。",
 
   "Assumptions and sources": "假设与来源",
   "<strong>Cohere Rerank 4</strong> — $0.0025 per search (Pro) and $0.002 per search (Fast), where a search is one query plus up to 100 documents. More than 100 candidates bills as multiple searches.":

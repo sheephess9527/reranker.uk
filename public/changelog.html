@@ -62,6 +62,17 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-01c">1 Oct 2026 — jina-reranker-v3.5, and Jina's licences spelled out</h2>
+        <ul class="feature-list">
+          <li><strong>jina-reranker-v3.5 added</strong> — Jina's August 2026 flagship: 0.6B, listwise, a drop-in replacement for v3 and 1.22–1.56× faster. 63.20 BEIR nDCG@10 in Jina's own test. It's in the models table, and the Jina page is rewritten around it</li>
+          <li><strong>Licences stated</strong> — the v2, v3, v3.5 and m0 weights are CC BY-NC 4.0, non-commercial. This site called them "open weights" without saying so. The Jina page now has a licence section, and the self-hosting guide's model table a licence column</li>
+          <li><strong>"Jina v3 beats Qwen3-Reranker-4B" withdrawn</strong> — true in the v3 paper's 2025 run (61.94 vs 61.16), but in Jina's own 2026 re-run v3 scores 62.10 and the 4B 62.28. The Jina rows in the models table now use that 2026 run, the same one as v3.5</li>
+          <li><strong>Unsourced Jina prices removed</strong> — "1M tokens/month free" and "~$0.018 / 1M tokens" had no source we could find. Jina's own page says new keys get free trial tokens and then token packages; we now list their published rate limits instead of a price</li>
+          <li><strong>Smaller fixes</strong> — parameter counts written as MB on the Jina and mxbai pages (mxbai-rerank-large-v1 is 435M, not the 1.5B its own README states); jina-reranker-v1-base-en, no longer on Hugging Face, removed</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-01b">1 Oct 2026 — bge-reranker's BEIR figure, and a daily check on every source</h2>
         <ul class="feature-list">
           <li><strong>bge-reranker-v2-m3 now reads 55.36</strong> — BAAI's own BEIR figure. The ~60.1 the models table carried could not be traced to anything BAAI or anyone else published</li>

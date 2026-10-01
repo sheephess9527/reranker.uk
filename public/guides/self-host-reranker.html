@@ -85,17 +85,17 @@
       <h2 id="models">Pick a model</h2>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Model</th><th>Size</th><th>Best for</th></tr></thead>
+          <thead><tr><th>Model</th><th>Size</th><th>Licence</th><th>Best for</th></tr></thead>
           <tbody>
-            <tr><td><a href="/models/bge-reranker">bge-reranker-base</a></td><td>~278M</td><td>CPU-friendly English default</td></tr>
-            <tr><td><a href="/models/bge-reranker">bge-reranker-v2-m3</a></td><td>~568M</td><td>Multilingual when GPU is limited</td></tr>
-            <tr><td><a href="/models/qwen-reranker">Qwen3-Reranker-4B</a></td><td>~4B</td><td><strong>2026 open SOTA pick</strong> (needs GPU)</td></tr>
-            <tr><td><a href="/models/mxbai-rerank">mxbai-rerank-large-v1</a></td><td>~435M</td><td>Strong classic BEIR, Apache 2.0</td></tr>
-            <tr><td><a href="/models/jina-reranker">jina-reranker-v3</a></td><td>large</td><td>Listwise long-context; or v2 pair-wise</td></tr>
+            <tr><td><a href="/models/bge-reranker">bge-reranker-base</a></td><td>~278M</td><td>MIT</td><td>CPU-friendly Chinese / English default</td></tr>
+            <tr><td><a href="/models/bge-reranker">bge-reranker-v2-m3</a></td><td>~568M</td><td>Apache 2.0</td><td>Multilingual when GPU is limited</td></tr>
+            <tr><td><a href="/models/qwen-reranker">Qwen3-Reranker-4B</a></td><td>~4B</td><td>Apache 2.0</td><td><strong>2026 open SOTA pick</strong> (needs GPU)</td></tr>
+            <tr><td><a href="/models/mxbai-rerank">mxbai-rerank-base-v2</a></td><td>~494M</td><td>Apache 2.0</td><td>Multilingual incl. Chinese; best size/quality balance of mxbai v2</td></tr>
+            <tr><td><a href="/models/jina-reranker">jina-reranker-v3.5</a></td><td>~0.6B</td><td>CC BY-NC 4.0</td><td>Listwise, long context — <strong>non-commercial</strong> unless licensed</td></tr>
           </tbody>
         </table>
       </div>
-      <p>Start with <strong>bge-reranker-base</strong> on CPU for prototyping. On GPU, A/B <strong>Qwen3-Reranker-4B</strong> against <strong>bge-v2-m3</strong> or <strong>mxbai-large</strong> on your labelled set — do not assume leaderboard order transfers.</p>
+      <p>Start with <strong>bge-reranker-base</strong> on CPU for prototyping. On GPU, A/B <strong>Qwen3-Reranker-4B</strong> against <strong>bge-v2-m3</strong> or <strong>mxbai-base-v2</strong> on your labelled set — do not assume leaderboard order transfers.</p>
 
       <h2 id="quickstart">Quick start with sentence-transformers</h2>
       <pre tabindex="0"><code>pip install sentence-transformers torch

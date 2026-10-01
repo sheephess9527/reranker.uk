@@ -111,4 +111,8 @@ window.I18N_PAGE = { zh: {
   "Pros": "优点",
   "Cons": "缺点",
   "Other models": "其他模型",
+
+  // Oct 2026: jina-reranker-v3.5, licences
+  "Parameters":
+    "参数量",
 }};

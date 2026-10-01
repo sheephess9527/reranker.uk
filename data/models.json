@@ -101,6 +101,13 @@
       "source_url": "https://huggingface.co/jinaai/jina-reranker-v3",
       "protocol_note": "Jina's own evaluation: 13 BEIR datasets, reranking the top 100 results from jina-embeddings-v3 (arXiv 2509.25085 §5.1). The arXiv v4 full text reports 61.85 for the same model; the model card, abstract and jina.ai say 61.94",
       "verified_on": "2026-10-01"
+    },
+    "beir_2026": {
+      "value": "62.10",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "protocol_note": "Jina's own 2026 evaluation: 13 BEIR datasets, reranking the top 100 from jina-embeddings-v5-text-small under one MTEB v2 pipeline (jina-reranker-v3.5 model card; same table as the v3.5 and Qwen3/mxbai rows there). The v3 paper's own 2025 run, over jina-embeddings-v3, reported 61.94",
+      "verified_on": "2026-10-01"
     }
   },
   "jina-reranker-v1-tiny-en": {
@@ -116,6 +123,24 @@
       "value": 48.64,
       "source_url": "https://huggingface.co/jinaai/jina-reranker-v1-tiny-en",
       "protocol_note": "Third-party: Jina measured it alongside their v1 models (17 BEIR datasets, jina-reranker-v1 model card). sentence-transformers, who trained it, publish TREC DL 19 and MS MARCO Dev figures but no BEIR average",
+      "verified_on": "2026-10-01"
+    }
+  },
+  "jina-reranker-v3.5": {
+    "beir": {
+      "value": "63.20",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "protocol_note": "Jina's own 2026 evaluation: 13 BEIR datasets, reranking the top 100 from jina-embeddings-v5-text-small under one MTEB v2 pipeline (jina-reranker-v3.5 model card; same table as the v3.5 and Qwen3/mxbai rows there)",
+      "verified_on": "2026-10-01"
+    }
+  },
+  "qwen3-reranker-4b": {
+    "beir_jina_2026": {
+      "value": 62.28,
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "protocol_note": "Third-party: Jina measured it in the jina-reranker-v3.5 evaluation (13 BEIR datasets, top 100 from jina-embeddings-v5-text-small). Qwen report MTEB-R, not a BEIR average",
       "verified_on": "2026-10-01"
     }
   }

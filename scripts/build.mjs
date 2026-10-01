@@ -91,7 +91,9 @@ function monthsSince(dateStr) {
 
 function resolveFacts(html, srcRelPath) {
   return html.replace(FACT_TOKEN, (match, key) => {
-    const dot = key.indexOf(".");
+    // Split on the last dot: model ids can contain one (jina-reranker-v3.5),
+    // field names never do.
+    const dot = key.lastIndexOf(".");
     const id = key.slice(0, dot);
     const field = key.slice(dot + 1);
     const fact = MODELS_DATA[id] && MODELS_DATA[id][field];

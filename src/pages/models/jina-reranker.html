@@ -2,15 +2,17 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Jina Reranker</div>
       <h1>Jina Reranker</h1>
-      <p class="meta">Open weights + Hosted API · Jina AI · <time datetime="2026-08-11">Updated 11 Aug 2026</time></p>
-      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Open weights</span><span class="pill">Hosted API</span><span class="pill info">v3 listwise</span><span class="pill">Browser tiny</span></div>
-      <p class="lead">Jina’s 2026 flagship is <strong>jina-reranker-v3</strong>: a <strong>0.6B</strong> <em>listwise</em> reranker built on Qwen3-0.6B that scores up to <strong>64 documents inside one 131K-token context</strong> and reaches <strong>61.94 nDCG@10 on BEIR</strong> — ahead of Qwen3-Reranker-4B at roughly a sixth of the size. Older <strong>v2</strong> pairwise models remain useful; <strong>v1-tiny</strong> is still what runs in <a href="/demo.html?m=jinaai/jina-reranker-v1-tiny-en">our browser demo</a>.</p>
+      <p class="meta">Weights + hosted API · Jina AI, now part of Elastic · <time datetime="2026-10-01">Updated 1 Oct 2026</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">Hosted API</span><span class="pill warn">Weights: non-commercial</span><span class="pill info">v3.5 listwise</span><span class="pill">Browser tiny</span></div>
+      <p class="lead">Jina’s current flagship is <strong>jina-reranker-v3.5</strong>, announced August 2026: a <strong>0.6B</strong> <em>listwise</em> reranker built on Qwen3-0.6B and a drop-in upgrade to v3 — same API, 131K-token context, and 1.22–1.56× faster. In Jina’s own evaluation it scores <strong>{{fact:jina-reranker-v3.5.beir}} nDCG@10 on BEIR</strong>, just above Qwen3-Reranker-4B at about a seventh of the size, though the 4B still leads on multilingual, professional-domain and structured retrieval. The catch for self-hosting: the v2, v3 and v3.5 weights are <strong>CC BY-NC 4.0 — non-commercial</strong>. <strong>v1-tiny</strong> (Apache 2.0) is still what runs in <a href="/demo.html?m=jinaai/jina-reranker-v1-tiny-en">our browser demo</a>.</p>
 
       <div class="toc">
         <strong>On this page</strong>
         <ol>
           <li><a href="#models">Model variants</a></li>
-          <li><a href="#v3">What listwise v3 changes</a></li>
+          <li><a href="#v3">What listwise v3 and v3.5 change</a></li>
+          <li><a href="#benchmarks">Whose benchmark?</a></li>
+          <li><a href="#licence">Licence: what you can self-host</a></li>
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="#usage">Quick start</a></li>
           <li><a href="#browser">Browser / edge use</a></li>
@@ -22,34 +24,63 @@
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Model</th><th>Size</th><th>Languages</th><th>Notes</th></tr>
+            <tr><th>Model</th><th>Parameters</th><th>Languages</th><th>Licence</th><th>Notes</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>jina-reranker-v3</code></td><td>0.6B</td><td>100+ langs</td><td><strong>Flagship 2026</strong> — listwise, 64 docs in 131K ctx, 61.94 BEIR</td></tr>
-            <tr><td><code>jina-reranker-v2-base-multilingual</code></td><td>~278 MB</td><td>100+ langs</td><td>Prior multilingual pair-wise flagship</td></tr>
-            <tr><td><code>jina-reranker-v1-base-en</code></td><td>~278 MB</td><td>English</td><td>English baseline</td></tr>
-            <tr><td><code>jina-reranker-v1-tiny-en</code></td><td>~33 MB</td><td>English</td><td>Browser / edge; powers our demo</td></tr>
+            <tr><td><code>jina-reranker-v3.5</code></td><td>0.6B</td><td>Multilingual</td><td>CC BY-NC 4.0</td><td><strong>Flagship</strong> — listwise, hybrid attention, 131K ctx, {{fact:jina-reranker-v3.5.beir}} BEIR</td></tr>
+            <tr><td><code>jina-reranker-v3</code></td><td>0.6B</td><td>100+ langs</td><td>CC BY-NC 4.0</td><td>Previous flagship — listwise, 64 docs in 131K ctx. Jina now point new projects to v3.5</td></tr>
+            <tr><td><code>jina-reranker-m0</code></td><td>2.4B</td><td>Multilingual</td><td>CC BY-NC 4.0</td><td>Multimodal: ranks visual documents such as page images</td></tr>
+            <tr><td><code>jina-reranker-v2-base-multilingual</code></td><td>278M</td><td>100+ langs</td><td>CC BY-NC 4.0</td><td>Pairwise cross-encoder; the API takes 1,024 tokens per document and chunks longer ones</td></tr>
+            <tr><td><code>jina-reranker-v1-turbo-en</code></td><td>38M</td><td>English</td><td>Apache 2.0</td><td>Legacy; tiny’s slightly larger sibling</td></tr>
+            <tr><td><code>jina-reranker-v1-tiny-en</code></td><td>33M</td><td>English</td><td>Apache 2.0</td><td>Legacy; browser / edge; powers our demo</td></tr>
           </tbody>
         </table>
       </div>
+      <p class="muted" style="font-size:.85rem">Parameter counts and licences from each model’s Hugging Face page (Oct 2026). <code>jina-reranker-v1-base-en</code>, listed here until then, is no longer public on Hugging Face.</p>
 
-      <h2 id="v3">What listwise v3 changes</h2>
+      <h2 id="v3">What listwise v3 and v3.5 change</h2>
       <p>Classic cross-encoders score each <code>(query, doc)</code> independently. <strong>Listwise</strong> models see a slate of candidates at once, which can improve relative ordering when many passages share vocabulary. The trade-off is higher memory and a different serving path than MiniLM-style pair scoring.</p>
-      <p>v3 reports <strong>61.94 nDCG@10 on BEIR</strong> — level with the strongest cross-encoders in <a href="/models/">our table</a> while being small enough to serve on a single GPU, and ahead of Qwen3-Reranker-4B despite being 6× smaller. Architecturally it takes contextual embeddings from each document’s final token after causal attention across the whole slate, rather than scoring pairs late. Details in the <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">v3 paper</a>; confirm model IDs and limits on <a href="https://jina.ai/reranker" rel="noopener noreferrer">jina.ai/reranker</a>.</p>
+      <p>v3 introduced what Jina call <em>last but not late</em> interaction: the query and every candidate run through causal self-attention as one sequence, and each document’s score is the cosine between projected embeddings taken at special token positions — so documents are judged in the context of each other, not just the query. v3.5 keeps that and replaces uniform global attention with a schedule of three sliding-window layers (1,024-token windows) followed by two global layers, with the final layer always global. It adds legal, medical, financial and structured-data training, and distils from a same-size full-attention teacher. Jina measure 1.22× lower latency on short passages and 1.56× on long ones (A100, top-100 lists). Details in the <a href="https://arxiv.org/abs/2607.18152" rel="noopener noreferrer">v3.5 paper</a> and the <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">v3 paper</a>.</p>
 
-      <h2 id="pricing">Pricing</h2>
+      <h2 id="benchmarks">Whose benchmark?</h2>
+      <p>For v3.5, Jina re-ran every model under one protocol: 13 BEIR datasets, MIRACL across 18 languages, RTEB (legal, finance, code, medical) and Struct-IR, each reranking the top 100 candidates from jina-embeddings-v5-text-small.</p>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Tier</th><th>Price</th></tr>
+            <tr><th>Model</th><th>Params</th><th>BEIR</th><th>MIRACL</th><th>RTEB</th><th>Struct-IR</th></tr>
           </thead>
           <tbody>
-            <tr><td>Free tier</td><td>1 M tokens/month free — no credit card</td></tr>
-            <tr><td>Pay-as-you-go</td><td>~$0.018 / 1M tokens</td></tr>
+            <tr><td>jina-reranker-v3.5</td><td>0.6B</td><td>63.20</td><td>74.11</td><td>70.95</td><td>48.3</td></tr>
+            <tr><td>mxbai-rerank-large-v2</td><td>1.5B</td><td>62.45</td><td>69.65</td><td>70.81</td><td>43.0</td></tr>
+            <tr><td>Qwen3-Reranker-4B</td><td>4.0B</td><td>62.28</td><td>76.56</td><td>77.68</td><td>55.6</td></tr>
+            <tr><td>jina-reranker-v3</td><td>0.6B</td><td>62.10</td><td>72.20</td><td>68.01</td><td>38.7</td></tr>
+            <tr><td>mxbai-rerank-base-v2</td><td>0.5B</td><td>59.58</td><td>64.90</td><td>61.44</td><td>30.4</td></tr>
+            <tr><td>Qwen3-Reranker-0.6B</td><td>0.6B</td><td>56.94</td><td>67.12</td><td>68.41</td><td>41.9</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="muted" style="font-size:.85rem">Token-based pricing is friendlier for long documents than per-call pricing. Check the Jina AI website for current rates.</p>
+      <p class="muted" style="font-size:.85rem">nDCG@10, from the <a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">jina-reranker-v3.5 model card</a>. Struct-IR uses a controlled candidate pool (all gold documents plus the 30 hardest distractors), so it isn’t comparable to other Struct-IR leaderboards.</p>
+      <p>v3.5 leads on BEIR, by under a point. On the other three the 4B is ahead, which Jina’s own write-up says plainly. The v3 paper’s 2025 run, over a different first-stage retriever, had v3 at 61.94 and Qwen3-Reranker-4B at 61.16. That is where “v3 beats Qwen3-Reranker-4B”, repeated on this site until October 2026, came from; on the newer run it no longer holds. Qwen3-Reranker-4B moving by more than a point between two runs from the same vendor is a good reason to read BEIR averages as tiers rather than rankings.</p>
+
+      <h2 id="licence">Licence: what you can self-host</h2>
+      <p>The <code>v2</code>, <code>v3</code>, <code>v3.5</code> and <code>m0</code> weights are released under <strong>CC BY-NC 4.0</strong>: free to download and evaluate, not to use commercially. For production there are three routes: Jina’s hosted API, billed per token; for v3.5, Elastic Inference Service (Elastic Stack 9.3 and later); or a commercial licence, which Jina now arrange through Elastic’s sales team. Jina also list v3 on the Azure and Google Cloud marketplaces. Only the legacy <code>v1</code> English models are Apache 2.0.</p>
+      <p>If you need commercially permissive open weights at a similar level, <a href="/models/qwen-reranker.html">Qwen3-Reranker</a>, <a href="/models/mxbai-rerank.html">mxbai-rerank-v2</a> and <a href="/models/bge-reranker.html">bge-reranker-v2</a> are all Apache 2.0.</p>
+
+      <h2 id="pricing">Pricing</h2>
+      <p>Jina bill the reranker by token, from the same balance as their other APIs. New API keys come with free tokens to try it; after that you buy token packages. Jina changed their pricing on 6 May 2025, and their site shows current package prices only once the page has loaded in a browser, so we don’t quote a figure here — check <a href="https://jina.ai/reranker" rel="noopener noreferrer">jina.ai/reranker</a> before you budget.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>API key</th><th>Requests / min</th><th>Tokens / min</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Free</td><td>100</td><td>100K</td></tr>
+            <tr><td>Paid</td><td>500</td><td>2M</td></tr>
+            <tr><td>Premium</td><td>5,000</td><td>50M</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">Rate limits from the jina.ai/reranker FAQ, shared with the Embeddings API. The API accepts up to 131,072 tokens per request (query plus all documents) for v3 and v3.5, truncating beyond that.</p>
 
       <h2 id="usage">Quick start</h2>
       <h3>Hosted API (Python)</h3>
@@ -60,7 +91,7 @@ def rerank(query: str, documents: list[str], top_n: int = 5) -> list[str]:
         "https://api.jina.ai/v1/rerank",
         headers={"Authorization": "Bearer YOUR_KEY", "Content-Type": "application/json"},
         json={
-            "model": "jina-reranker-v3",  # or jina-reranker-v2-base-multilingual
+            "model": "jina-reranker-v3.5",  # or jina-reranker-v3; same request schema
             "query": query,
             "documents": documents,
             "top_n": top_n,
@@ -68,18 +99,24 @@ def rerank(query: str, documents: list[str], top_n: int = 5) -> list[str]:
     ).json()
     return [documents[r["index"]] for r in resp["results"]]</code></pre>
 
-      <h3>Self-hosted (sentence-transformers)</h3>
-      <pre><code>from sentence_transformers import CrossEncoder
+      <h3>Self-hosted (transformers)</h3>
+      <p>Non-commercial use only, unless you have a licence — see <a href="#licence">above</a>.</p>
+      <pre><code>from transformers import AutoModel
 
-# Open weights — same model, self-hosted
-model = CrossEncoder("jinaai/jina-reranker-v2-base-multilingual",
-                     trust_remote_code=True, max_length=1024)
+model = AutoModel.from_pretrained(
+    "jinaai/jina-reranker-v3.5",
+    dtype="auto",
+    trust_remote_code=True,
+)
+model.eval()
 
-scores = model.predict([(query, doc) for doc in documents])
-ranked = sorted(zip(scores, documents), reverse=True)</code></pre>
+# Listwise: all documents are scored together, in one forward pass
+results = model.rerank(query, documents, top_n=5)
+for r in results:
+    print(f"{r['relevance_score']:.4f}  {r['document'][:80]}")</code></pre>
 
       <h2 id="browser">Browser / edge use</h2>
-      <p>The <code>v1-tiny</code> model (33 MB quantised) loads via transformers.js in under 10 seconds on a typical broadband connection and runs scoring at ~200 ms for a 10-candidate batch. This is what powers our demo:</p>
+      <p>The <code>v1-tiny</code> model (33M parameters) loads via transformers.js in under 10 seconds on a typical broadband connection and runs scoring at ~200 ms for a 10-candidate batch. This is what powers our demo:</p>
       <pre><code>// transformers.js (ES module in the browser)
 import { AutoTokenizer, AutoModelForSequenceClassification }
   from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4";
@@ -103,20 +140,21 @@ const scores = logits.sigmoid().tolist();</code></pre>
         <div class="card">
           <h3 style="color:var(--good);margin-top:0">Pros</h3>
           <ul class="feature-list">
-            <li>61.94 BEIR nDCG@10 from only 0.6B parameters</li>
-            <li>Dual-mode: hosted API + open weights</li>
-            <li>Tiny variant still runs in the browser (our demo)</li>
-            <li>Generous free tier (1M tokens/month, no card needed)</li>
-            <li>Token-based pricing suits long documents</li>
+            <li>{{fact:jina-reranker-v3.5.beir}} BEIR nDCG@10 from 0.6B parameters, in Jina’s own test</li>
+            <li>Listwise: documents are scored against each other in one pass</li>
+            <li>The same models as a hosted API and as downloadable weights</li>
+            <li>v3.5 on Elastic Inference Service (Stack 9.3+)</li>
+            <li>v1-tiny is Apache 2.0 and runs in the browser (our demo)</li>
           </ul>
         </div>
         <div class="card">
           <h3 style="color:var(--danger);margin-top:0">Cons</h3>
           <ul style="padding-left:1.2rem;color:var(--text-soft)">
-            <li>v1-tiny is English-only and lower quality</li>
-            <li>Smaller company than Cohere — less ecosystem tooling</li>
+            <li>v2, v3 and v3.5 weights are non-commercial — self-hosting in production needs a licence</li>
+            <li>Qwen3-Reranker-4B still leads on multilingual, legal / medical and structured retrieval</li>
             <li>Self-hosted requires <code>trust_remote_code=True</code></li>
-            <li>Token pricing can be opaque for short passages</li>
+            <li>Listwise calls cap the total length of all candidates (131K tokens)</li>
+            <li>API prices aren’t published as plain text — check before you budget</li>
           </ul>
         </div>
       </div>

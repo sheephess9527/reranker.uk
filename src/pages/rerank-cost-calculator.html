@@ -66,7 +66,7 @@
 
       <h2 id="self-host">What about self-hosting?</h2>
       <p>Self-hosting has no per-call price, so it does not belong in the table above — you trade a usage bill for a GPU bill plus operations. The comparison only becomes meaningful at your own volume: divide your monthly GPU cost by the number of queries above and compare that to the per-query figures in the table. Below a few hundred thousand queries a month an API is usually cheaper than a dedicated GPU; well above that, self-hosting a <a href="/models/qwen-reranker.html">Qwen3-Reranker</a> or <a href="/models/bge-reranker.html">bge-reranker-v2-m3</a> starts to pay off. Our <a href="/guides/self-host-reranker.html">self-hosting guide</a> covers the serving side.</p>
-      <p class="muted" style="font-size:.9rem">Note that a smaller model is not automatically a worse one — <a href="/models/jina-reranker.html">Jina Reranker v3</a> reaches 61.94 BEIR nDCG@10 at 0.6B, so the cheapest thing to serve may also be the most accurate.</p>
+      <p class="muted" style="font-size:.9rem">Note that a smaller model is not automatically a worse one — <a href="/models/jina-reranker.html">Jina Reranker v3.5</a> reaches 63.20 BEIR nDCG@10 at 0.6B in Jina's own test, level with a 4B model, so the cheapest thing to serve may also be among the most accurate.</p>
 
       <h2 id="assumptions">Assumptions and sources</h2>
       <ul>
