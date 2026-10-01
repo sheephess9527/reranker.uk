@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Thu, 01 Oct 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2026 13:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>1 Oct 2026 — bge-reranker's BEIR figure, and a daily check on every source</title>
+      <link>https://reranker.uk/changelog#2026-10-01b</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-01b</guid>
+      <pubDate>Thu, 01 Oct 2026 13:00:00 GMT</pubDate>
+      <description>bge-reranker-v2-m3 corrected from an untraceable ~60.1 to BAAI's own 55.36, and the bge page's benchmark table rebuilt from what BAAI published. Jina v1 tiny and ms-marco MiniLM-L6 now show Jina's published BEIR figures. The footnote no longer claims a common BEIR protocol, and a daily job re-checks every figure against its source.</description>
+    </item>
     <item>
       <title>1 Oct 2026 — An accessibility pass, and a check to keep it</title>
       <link>https://reranker.uk/changelog#2026-10-01</link>

@@ -107,10 +107,10 @@ function resolveFacts(html, srcRelPath) {
         `⚠ ${key}: verified_on ${fact.verified_on} is ${age.toFixed(1)} months old (${srcRelPath}) — due for a re-check.`
       );
     }
-    // A protocol_note means this number isn't directly comparable to the
-    // classic BEIR 18-dataset average other rows use — the footnote marker
-    // is mandatory, not optional, so it can't be typo'd away like the number
-    // it's replacing was.
+    // A protocol_note means this number was measured on someone's own setup
+    // (dataset subset, first-stage retriever, candidate depth) and isn't
+    // directly comparable to its neighbours — the footnote marker is
+    // mandatory, not optional, so it can't be typo'd away.
     return String(fact.value) + (fact.protocol_note ? "*" : "");
   });
 }

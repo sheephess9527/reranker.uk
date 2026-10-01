@@ -101,9 +101,14 @@ the wrong targets.
 
 Review the models table each quarter (target: **Nov 2026**, then Feb/May/Aug):
 
-1. Re-check BEIR / vendor numbers for mature rows (bge, Jina, mxbai, ms-marco).
+1. Run `npm run check:sources` (or read the daily workflow's `sources` job) and
+   re-read the two figures it can't check (BAAI's, published only as an image).
 2. Where a vendor publishes no comparable figure, write **not published** — do
    not substitute a number from a different protocol without marking it `*`.
+   There is no common BEIR protocol to fall back on: BAAI average 15 datasets
+   over bge-large-en-v1.5's top 100, Jina 13 over jina-embeddings-v3's top 100
+   (17 for their v1 models), mixedbread their own set, and the same model can
+   land 1–4 points apart across them.
 3. Spot-check pricing, and note that the *units* differ: Cohere bills per search
    (one query + up to 100 docs), Voyage per token.
 4. Bump **Last verified** / **Next review** in `/models/`, add a changelog entry
@@ -126,12 +131,33 @@ id>.<field>}}` token that `scripts/build.mjs` resolves at build time:
 - `protocol_note` present → the rendered number always gets a trailing `*`,
   so a reader can't miss that it isn't the same protocol as its neighbours.
 
-This is only wired up for the numbers that have actually been re-verified so
-far (the mxbai family, as of Sep 2026) — everything else in the table is
-still a hand-typed literal following the quarterly-review process above.
+`scripts/check-sources.mjs` closes the other half of the loop: the build knows
+a source exists, not what it says. The script fetches every `source_url` (or
+`check_url`, e.g. a raw README) and fails if the value no longer appears there
+as a standalone number. It needs open internet, so it runs in the daily
+real-network workflow, not on PRs. A figure that only exists in an image is
+marked `check: "manual"` with a `check_note` saying where to look; the script
+prints it on every run so the skip is never silent.
+
+Every number in the `/models/` BEIR column now comes from here (as of Oct
+2026). Other hand-typed figures elsewhere on the site still follow the
+quarterly-review process above.
 Migrating a row: add its facts to `data/models.json`, replace the literal in
 `src/pages/` with the token, rebuild, and confirm the number renders
 unchanged (or corrects, if that's why you're touching it).
+
+### Verified October 2026
+
+Checked against the primary sources on a GitHub runner (this sandbox can't
+reach HuggingFace or arXiv), via `check-sources.mjs --verbose`.
+
+| Model | What was confirmed |
+|-------|--------------------|
+| bge-reranker-v2-m3 | BEIR corrected from an untraceable ~60.1 to BAAI's own 55.36 (FlagEmbedding `research/llm_reranker`, image table `BEIR-bge-en-v1.5.png`) |
+| bge-reranker page | Whole benchmark table rebuilt: v2-m3 55.36 and v2-gemma 60.71 BEIR; base 65.42 and large 66.10 C-MTEB reranking (BAAI publish no BEIR for v1). The old MS MARCO column had no source and is gone. Sizes were parameter counts written as MB |
+| jina-reranker-v3 | 61.94 confirmed on the model card, arXiv abstract and jina.ai; the arXiv v4 full text says 61.85. Protocol: 13 BEIR datasets, top 100 from jina-embeddings-v3 |
+| jina-reranker-v1-tiny-en | 48.54 on 17 BEIR datasets (model card). The table's sort key had carried an unsourced 55 |
+| ms-marco-MiniLM-L-6-v2 | 48.64, third-party — Jina's v1 model card measured it; its own authors publish no BEIR average |
 
 ### Verified September 2026
 

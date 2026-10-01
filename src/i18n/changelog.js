@@ -1,4 +1,16 @@
 window.I18N_PAGE = { zh: {
+  "1 Oct 2026 — bge-reranker's BEIR figure, and a daily check on every source":
+    "2026 年 10 月 1 日 —— 修正 bge-reranker 的 BEIR 分数，并每天核对所有来源",
+  "<strong>bge-reranker-v2-m3 now reads 55.36</strong> — BAAI's own BEIR figure. The ~60.1 the models table carried could not be traced to anything BAAI or anyone else published":
+    "<strong>bge-reranker-v2-m3 改为 55.36</strong> —— 这是 BAAI 自己公布的 BEIR 分数。模型对比表此前写的 ~60.1，在 BAAI 和其他任何地方都找不到出处",
+  "<strong>The bge-reranker page's benchmark table, rebuilt</strong> — all four rows' BEIR and MS MARCO figures were untraceable. It now shows what BAAI did publish: BEIR for the v2 models, C-MTEB reranking for v1. The size column was also showing parameter counts as megabytes":
+    "<strong>bge-reranker 专页的基准表重做了</strong> —— 原来四行的 BEIR 和 MS MARCO 分数都查不到出处。现在只列 BAAI 真正公布过的：v2 的 BEIR 分数，v1 的 C-MTEB 重排序分数。「体积」一列原先把参数量写成了 MB，也一并改正",
+  "<strong>Jina v1 tiny and ms-marco MiniLM-L6 get real BEIR figures</strong> — 48.54 and 48.64, both from Jina's v1 model card (17 BEIR datasets). The ms-marco figure is Jina's measurement, not its authors', and says so on hover":
+    "<strong>Jina v1 tiny 与 ms-marco MiniLM-L6 有了真实的 BEIR 分数</strong> —— 分别是 48.54 和 48.64，都来自 Jina 的 v1 模型卡（17 个 BEIR 数据集）。ms-marco 这个分数是 Jina 测的，不是模型作者测的，鼠标悬停时会注明",
+  "<strong>The footnote stops claiming a common protocol</strong> — it said the bge and Jina rows used \"the classic BEIR 18-dataset average\". Neither does: BAAI average 15 datasets, Jina 13, over different first-stage retrievers. The same model lands over a point apart between them (bge-reranker-v2-m3: 55.36 by BAAI, 56.51 by Jina), so every BEIR figure now carries a * and its protocol":
+    "<strong>脚注不再声称有统一的评测方法</strong> —— 原先写 bge 和 Jina 两行用的是「经典 BEIR 18 数据集均值」，其实两家都不是：BAAI 用 15 个数据集，Jina 用 13 个，第一阶段召回模型也不同。同一个模型在两家的测法下能差出一分多（bge-reranker-v2-m3：BAAI 测 55.36，Jina 测 56.51），所以现在每个 BEIR 数字都带 *，并注明评测方法",
+  "<strong>A daily check that sources still say what we say</strong> — every figure in the table that is published as text is re-fetched from its source each day and the run fails if the number has gone. Jina's v3 paper has already been revised once (61.85 in the arXiv full text, 61.94 on the model card) — the kind of drift this exists to catch":
+    "<strong>每天核对一次：来源上的数字是否还和我们一致</strong> —— 表里每个以文字形式公布的数字，每天都会回到来源页面重新抓取，数字不在了就报错。Jina v3 的论文已经改过一版（arXiv 全文写 61.85，模型卡写 61.94）—— 这道检查要抓的就是这种变动",
   "1 Oct 2026 — An accessibility pass, and a check to keep it":
     "2026 年 10 月 1 日 —— 一轮无障碍修复，外加一道防回退的检查",
   "<strong>Links in text are underlined</strong> — they were told apart from surrounding text by colour alone; in the dark theme that was a 1.47:1 difference, well under the 3:1 a reader without full colour vision needs. Buttons, cards and navigation are unchanged":

@@ -68,4 +68,17 @@ window.I18N_PAGE = { zh: {
   "Pros": "优点",
   "Cons": "缺点",
   "Other models": "其他模型",
+
+  // Oct 2026: benchmarks rebuilt from BAAI's own published figures
+  "The bge-reranker family from BAAI (Beijing Academy of Artificial Intelligence) are open-weight cross-encoders trained specifically for passage reranking. They're the standard self-hosted option: free to download, drop into sentence-transformers, and the open-weight baseline most other rerankers measure themselves against.": "来自智源研究院（BAAI）的 bge-reranker 系列，是专门为段落重排序训练的开源权重 cross-encoder。它们是自建部署的标准选择：免费下载、可直接接入 sentence-transformers，也是其他大多数重排序模型拿来对比的开源基线。",
+  "<strong>Recommendation:</strong> start with <code>bge-reranker-v2-m3</code>. It's multilingual, small enough for CPU, and works fine for moderate traffic. Upgrade to the Gemma variant only if you have GPU and need maximum quality.": "<strong>建议：</strong>从 <code>bge-reranker-v2-m3</code> 开始。它支持多语言、体量小到可以跑在 CPU 上，中等流量下完全够用。只有当你有 GPU 且需要极致质量时，才升级到 Gemma 变体。",
+  "BAAI evaluated the two generations on different benchmarks, so neither column is complete: BEIR (English retrieval) for v2, C-MTEB reranking (mostly Chinese) for v1.": "BAAI 给两代模型用的是不同的基准，所以两列都不完整：v2 测的是 BEIR（英文检索），v1 测的是 C-MTEB 重排序（以中文为主）。",
+  "* All figures are BAAI's own. BEIR: 15 datasets, reranking the top 100 results from bge-large-en-v1.5 (<a href=\"https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker\" rel=\"noopener noreferrer\">FlagEmbedding llm_reranker evaluation</a>). C-MTEB: average MAP over six reranking sets — T2Reranking, its two cross-language variants, MMarcoReranking, CMedQAv1 and CMedQAv2 (<a href=\"https://github.com/FlagOpen/FlagEmbedding/tree/master/research/reranker\" rel=\"noopener noreferrer\">FlagEmbedding reranker README</a>). Other evaluators get different BEIR numbers from their own setups — Jina's paper has v2-m3 at 56.51 — so compare models within one source. Until October 2026 this table showed BEIR and MS MARCO figures for all four models that we could not trace to any source; they have been removed.": "* 所有数字均为 BAAI 自己公布的。BEIR：15 个数据集，对 bge-large-en-v1.5 召回的前 100 条结果重排（<a href=\"https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker\" rel=\"noopener noreferrer\">FlagEmbedding llm_reranker 评测</a>）。C-MTEB：六个重排序数据集上的 MAP 均值 —— T2Reranking 及其两个跨语言变体、MMarcoReranking、CMedQAv1 和 CMedQAv2（<a href=\"https://github.com/FlagOpen/FlagEmbedding/tree/master/research/reranker\" rel=\"noopener noreferrer\">FlagEmbedding reranker README</a>）。其他评测方用各自的设置会得到不同的 BEIR 分数 —— Jina 的论文里 v2-m3 是 56.51 —— 所以请只在同一来源内比较模型。2026 年 10 月之前，本表给四个模型都列了 BEIR 和 MS MARCO 分数，但我们查不到任何出处，现已删除。",
+  "Open weights · BAAI · free to self-host · <time datetime=\"2026-10-01\">Updated 1 Oct 2026</time>": "开源权重 · 智源 BAAI · 可免费自建 · <time datetime=\"2026-10-01\">更新于 2026 年 10 月 1 日</time>",
+  "Parameters": "参数量",
+  "Chinese, English": "中文、英文",
+  "Stronger quality, same two languages": "质量更强，同样支持中英两种语言",
+  "C-MTEB reranking (avg MAP)": "C-MTEB 重排序（MAP 均值）",
+  "not published": "未公布",
+  "Published BEIR results from BAAI, and widely used as the baseline in other vendors' evaluations": "BAAI 公布了 BEIR 成绩，也是其他厂商评测里最常用的对比基线",
 }};
