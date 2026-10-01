@@ -189,7 +189,7 @@
       <p>下面是一个使用本地 bge-reranker 的自包含 Python 示例。在生产中，如果你更喜欢托管 API，可以把 <code>rank_documents</code> 换成对 Cohere、Jina 或 Voyage 的调用。</p>
 
       <h3>使用本地 cross-encoder（sentence-transformers）</h3>
-      <pre><code>from sentence_transformers import CrossEncoder
+      <pre tabindex="0"><code>from sentence_transformers import CrossEncoder
 
 # Load once at startup — reuse across requests
 reranker = CrossEncoder("BAAI/bge-reranker-base", max_length=512)
@@ -207,7 +207,7 @@ best_chunks = rerank(query, raw_chunks, top_n=5)  # rerank tight
 answer = llm.complete(build_prompt(query, best_chunks))  # generate</code></pre>
 
       <h3>使用 Cohere 托管 API</h3>
-      <pre><code>import cohere
+      <pre tabindex="0"><code>import cohere
 
 co = cohere.Client("YOUR_API_KEY")
 
@@ -221,7 +221,7 @@ def rerank(query: str, candidates: list[str], top_n: int = 5) -&gt; list[str]:
     return [candidates[r.index] for r in result.results]</code></pre>
 
       <h3>使用 Jina Reranker API</h3>
-      <pre><code>import requests
+      <pre tabindex="0"><code>import requests
 
 def rerank(query: str, candidates: list[str], top_n: int = 5) -&gt; list[str]:
     resp = requests.post(
@@ -239,7 +239,7 @@ def rerank(query: str, candidates: list[str], top_n: int = 5) -&gt; list[str]:
 
       <h3>在框架内（LangChain · LlamaIndex · Haystack）</h3>
       <p>如果你已经在用某个 RAG 框架，重排序通常就是一个即插即用的节点，把你现有的检索器包起来。模式完全一样 —— 宽召回、重排序、保留 top-n —— 只是换成了框架的术语来表达。</p>
-      <pre><code># LangChain — ContextualCompressionRetriever wraps any base retriever
+      <pre tabindex="0"><code># LangChain — ContextualCompressionRetriever wraps any base retriever
 from langchain.retrievers import ContextualCompressionRetriever
 from langchain.retrievers.document_compressors import CrossEncoderReranker
 from langchain_community.cross_encoders import HuggingFaceCrossEncoder
@@ -251,7 +251,7 @@ retriever = ContextualCompressionRetriever(
     base_retriever=vectorstore.as_retriever(search_kwargs={"k": 50}),
 )
 docs = retriever.invoke(query)   # retrieve 50 → rerank → top 5</code></pre>
-      <pre><code># LlamaIndex — a node postprocessor on the query engine
+      <pre tabindex="0"><code># LlamaIndex — a node postprocessor on the query engine
 from llama_index.core.postprocessor import SentenceTransformerRerank
 
 reranker = SentenceTransformerRerank(model="BAAI/bge-reranker-base", top_n=5)
@@ -260,7 +260,7 @@ query_engine = index.as_query_engine(
     node_postprocessors=[reranker],       # rerank to top 5
 )
 response = query_engine.query(query)</code></pre>
-      <pre><code># Haystack 2.x — a Ranker component in the pipeline
+      <pre tabindex="0"><code># Haystack 2.x — a Ranker component in the pipeline
 from haystack import Pipeline
 from haystack.components.rankers import TransformersSimilarityRanker
 
@@ -323,7 +323,7 @@ pipe.connect("retriever.documents", "ranker.documents")</code></pre>
         </table>
       </div>
       <p>MRR 最直观：正确片段排第 1 得 1.0，排第 2 得 0.5，排第 4 得 0.25。在整个查询集上取平均，就得到一个数字，刻画「答案离顶部有多近？」—— 这正是 reranker 应当改善的东西。</p>
-      <pre><code># Minimal MRR + Recall@k over a labelled eval set.
+      <pre tabindex="0"><code># Minimal MRR + Recall@k over a labelled eval set.
 # Each example: a query, the candidate texts, and the indices that are relevant.
 def reciprocal_rank(ranked_ids, relevant_ids):
     for i, doc_id in enumerate(ranked_ids, start=1):

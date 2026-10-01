@@ -77,7 +77,7 @@
 
       <h2 id="pattern">通用模式</h2>
       <p>不管用哪个存储，加重排序对检索调用的改动只有一处 —— 你要的行数比实际要用的多：</p>
-      <pre><code>CANDIDATES = 50   # what you ask the database for
+      <pre tabindex="0"><code>CANDIDATES = 50   # what you ask the database for
 KEEP = 5          # what reaches the prompt
 
 rows = store.search(query_vector, limit=CANDIDATES)
@@ -87,7 +87,7 @@ top = [r for _, r in sorted(zip(scores, rows), key=lambda p: -p[0])][:KEEP]</cod
 
       <h2 id="pgvector">pgvector（Postgres）</h2>
       <p>pgvector 按距离排序返回行。你只需放大 <code>LIMIT</code>、保留 id，然后在应用层排序：</p>
-      <pre><code>import psycopg
+      <pre tabindex="0"><code>import psycopg
 from sentence_transformers import CrossEncoder
 
 reranker = CrossEncoder("BAAI/bge-reranker-v2-m3", max_length=512)
@@ -113,7 +113,7 @@ def search(conn, query: str, query_vec, keep: int = 5):
 
       <h2 id="qdrant">Qdrant</h2>
       <p>结构一样，把 payload 一起带上，避免丢元数据：</p>
-      <pre><code>from qdrant_client import QdrantClient
+      <pre tabindex="0"><code>from qdrant_client import QdrantClient
 
 client = QdrantClient(url="http://localhost:6333")
 
@@ -132,7 +132,7 @@ def search(query: str, query_vec, keep: int = 5):
 
       <h2 id="elasticsearch">Elasticsearch</h2>
       <p>Elasticsearch 上重排序的收益最直观，因为你可以喂给它一个<a href="/zh/guides/hybrid-retrieval-rerank">混合</a>候选集 —— BM25 和向量在不同查询上各自失手，而 cross-encoder 负责把两者的并集理顺：</p>
-      <pre><code>resp = es.search(
+      <pre tabindex="0"><code>resp = es.search(
     index="documents",
     size=50,
     query={"bool": {"should": [

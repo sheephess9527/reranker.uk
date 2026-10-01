@@ -168,10 +168,10 @@
 
       <h2 id="usage">快速上手</h2>
       <h3>安装</h3>
-      <pre><code>pip install sentence-transformers</code></pre>
+      <pre tabindex="0"><code>pip install sentence-transformers</code></pre>
 
       <h3>对一组段落重排序</h3>
-      <pre><code>from sentence_transformers import CrossEncoder
+      <pre tabindex="0"><code>from sentence_transformers import CrossEncoder
 
 model = CrossEncoder("BAAI/bge-reranker-v2-m3", max_length=512)
 
@@ -190,7 +190,7 @@ for score, text in ranked:
     print(f"{score:.4f}  {text[:80]}")</code></pre>
 
       <h3>在 RAG 流水线中</h3>
-      <pre><code>from sentence_transformers import CrossEncoder
+      <pre tabindex="0"><code>from sentence_transformers import CrossEncoder
 
 reranker = CrossEncoder("BAAI/bge-reranker-v2-m3")
 

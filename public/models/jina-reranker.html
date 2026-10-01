@@ -171,7 +171,7 @@
 
       <h2 id="usage">Quick start</h2>
       <h3>Hosted API (Python)</h3>
-      <pre><code>import requests
+      <pre tabindex="0"><code>import requests
 
 def rerank(query: str, documents: list[str], top_n: int = 5) -> list[str]:
     resp = requests.post(
@@ -187,7 +187,7 @@ def rerank(query: str, documents: list[str], top_n: int = 5) -> list[str]:
     return [documents[r["index"]] for r in resp["results"]]</code></pre>
 
       <h3>Self-hosted (sentence-transformers)</h3>
-      <pre><code>from sentence_transformers import CrossEncoder
+      <pre tabindex="0"><code>from sentence_transformers import CrossEncoder
 
 # Open weights — same model, self-hosted
 model = CrossEncoder("jinaai/jina-reranker-v2-base-multilingual",
@@ -198,7 +198,7 @@ ranked = sorted(zip(scores, documents), reverse=True)</code></pre>
 
       <h2 id="browser">Browser / edge use</h2>
       <p>The <code>v1-tiny</code> model (33 MB quantised) loads via transformers.js in under 10 seconds on a typical broadband connection and runs scoring at ~200 ms for a 10-candidate batch. This is what powers our demo:</p>
-      <pre><code>// transformers.js (ES module in the browser)
+      <pre tabindex="0"><code>// transformers.js (ES module in the browser)
 import { AutoTokenizer, AutoModelForSequenceClassification }
   from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4";
 

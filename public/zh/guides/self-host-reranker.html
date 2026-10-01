@@ -98,7 +98,7 @@
       <p>原型阶段用 CPU 跑 <strong>bge-reranker-base</strong>。有 GPU 时在标注集上 A/B <strong>Qwen3-Reranker-4B</strong> 与 <strong>bge-v2-m3</strong> 或 <strong>mxbai-large</strong> —— 不要假设榜单顺序会迁移。</p>
 
       <h2 id="quickstart">sentence-transformers 快速上手</h2>
-      <pre><code>pip install sentence-transformers torch
+      <pre tabindex="0"><code>pip install sentence-transformers torch
 
 from sentence_transformers import CrossEncoder
 
@@ -126,7 +126,7 @@ ranked = sorted(zip(scores, docs), reverse=True)</code></pre>
           <p>暴露 <code>POST /rerank</code>，请求体 <code>{ query, documents[] }</code>。多个应用 Pod 共享一块 GPU。</p>
         </div>
       </div>
-      <pre><code># Minimal FastAPI sketch
+      <pre tabindex="0"><code># Minimal FastAPI sketch
 from fastapi import FastAPI
 from sentence_transformers import CrossEncoder
 

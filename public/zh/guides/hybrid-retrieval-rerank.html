@@ -80,7 +80,7 @@
 
       <h2 id="pattern">检索—合并—重排序范式</h2>
       <div class="card" style="margin:1.3rem 0">
-<pre><code>1. BM25 top 50        ─┐
+<pre tabindex="0"><code>1. BM25 top 50        ─┐
                        ├─▶ dedupe + merge ─▶ ~80 unique candidates
 2. Vector top 50      ─┘
 3. Cross-encoder rerank on merged list ─▶ top 5–10 for LLM</code></pre>
@@ -100,7 +100,7 @@
       </div>
 
       <h2 id="code">最小 Python 示例</h2>
-      <pre><code>from rank_bm25 import BM25Okapi
+      <pre tabindex="0"><code>from rank_bm25 import BM25Okapi
 from sentence_transformers import CrossEncoder
 
 reranker = CrossEncoder("BAAI/bge-reranker-base")

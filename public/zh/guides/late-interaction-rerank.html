@@ -105,7 +105,7 @@
       <blockquote>经验法则：Recall@50 低则先修检索 —— 没有 rerank 架构能变出缺失的 chunk。</blockquote>
 
       <h2 id="colbert">ColBERTv2 实战</h2>
-      <pre><code># Conceptual flow with pyserini / ragatouille-style tooling
+      <pre tabindex="0"><code># Conceptual flow with pyserini / ragatouille-style tooling
 # 1. Index token embeddings offline
 # 2. At query time: MaxSim between query tokens and doc token vectors
 # 3. Take top 50 for optional cross-encoder rerank
@@ -119,7 +119,7 @@ results = colbert.search(query="reset API key", k=50)
 
       <h2 id="pick">如何选择架构</h2>
       <div class="card" style="margin:1.2rem 0">
-<pre><code>Millions of docs, tight latency?
+<pre tabindex="0"><code>Millions of docs, tight latency?
   → bi-encoder (+ BM25 hybrid if lexical matters)
 
 Recall OK but order noisy, 100–1000 candidates?

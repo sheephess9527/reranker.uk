@@ -189,7 +189,7 @@
       <p>Here's a self-contained Python example using a local bge-reranker. In production you'd swap <code>rank_documents</code> for a call to Cohere, Jina, or Voyage if you prefer hosted APIs.</p>
 
       <h3>With a local cross-encoder (sentence-transformers)</h3>
-      <pre><code>from sentence_transformers import CrossEncoder
+      <pre tabindex="0"><code>from sentence_transformers import CrossEncoder
 
 # Load once at startup — reuse across requests
 reranker = CrossEncoder("BAAI/bge-reranker-base", max_length=512)
@@ -207,7 +207,7 @@ best_chunks = rerank(query, raw_chunks, top_n=5)  # rerank tight
 answer = llm.complete(build_prompt(query, best_chunks))  # generate</code></pre>
 
       <h3>With the Cohere hosted API</h3>
-      <pre><code>import cohere
+      <pre tabindex="0"><code>import cohere
 
 co = cohere.Client("YOUR_API_KEY")
 
@@ -221,7 +221,7 @@ def rerank(query: str, candidates: list[str], top_n: int = 5) -&gt; list[str]:
     return [candidates[r.index] for r in result.results]</code></pre>
 
       <h3>With Jina Reranker API</h3>
-      <pre><code>import requests
+      <pre tabindex="0"><code>import requests
 
 def rerank(query: str, candidates: list[str], top_n: int = 5) -&gt; list[str]:
     resp = requests.post(
@@ -239,7 +239,7 @@ def rerank(query: str, candidates: list[str], top_n: int = 5) -&gt; list[str]:
 
       <h3>Inside a framework (LangChain · LlamaIndex · Haystack)</h3>
       <p>If you already use a RAG framework, reranking is usually a drop-in node that wraps your existing retriever. The pattern is identical — retrieve wide, rerank, keep the top-n — just expressed in the framework's vocabulary.</p>
-      <pre><code># LangChain — ContextualCompressionRetriever wraps any base retriever
+      <pre tabindex="0"><code># LangChain — ContextualCompressionRetriever wraps any base retriever
 from langchain.retrievers import ContextualCompressionRetriever
 from langchain.retrievers.document_compressors import CrossEncoderReranker
 from langchain_community.cross_encoders import HuggingFaceCrossEncoder
@@ -251,7 +251,7 @@ retriever = ContextualCompressionRetriever(
     base_retriever=vectorstore.as_retriever(search_kwargs={"k": 50}),
 )
 docs = retriever.invoke(query)   # retrieve 50 → rerank → top 5</code></pre>
-      <pre><code># LlamaIndex — a node postprocessor on the query engine
+      <pre tabindex="0"><code># LlamaIndex — a node postprocessor on the query engine
 from llama_index.core.postprocessor import SentenceTransformerRerank
 
 reranker = SentenceTransformerRerank(model="BAAI/bge-reranker-base", top_n=5)
@@ -260,7 +260,7 @@ query_engine = index.as_query_engine(
     node_postprocessors=[reranker],       # rerank to top 5
 )
 response = query_engine.query(query)</code></pre>
-      <pre><code># Haystack 2.x — a Ranker component in the pipeline
+      <pre tabindex="0"><code># Haystack 2.x — a Ranker component in the pipeline
 from haystack import Pipeline
 from haystack.components.rankers import TransformersSimilarityRanker
 
@@ -323,7 +323,7 @@ pipe.connect("retriever.documents", "ranker.documents")</code></pre>
         </table>
       </div>
       <p>MRR is the intuitive one: if the right chunk lands at position 1 you score 1.0, at position 2 you score 0.5, at position 4 you score 0.25. Averaged over your query set, it's a single number that captures "how near the top is the answer?" — exactly what a reranker is meant to improve.</p>
-      <pre><code># Minimal MRR + Recall@k over a labelled eval set.
+      <pre tabindex="0"><code># Minimal MRR + Recall@k over a labelled eval set.
 # Each example: a query, the candidate texts, and the indices that are relevant.
 def reciprocal_rank(ranked_ids, relevant_ids):
     for i, doc_id in enumerate(ranked_ids, start=1):

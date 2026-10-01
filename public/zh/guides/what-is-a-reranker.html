@@ -121,7 +121,7 @@
       <h2 id="two-stage">两阶段检索范式</h2>
       <p>reranker 之所以存在，是因为速度与准确性之间的取舍。比较查询与文档的准确做法，是把它们<em>一起</em>送进模型 —— 但对语料库里的每一个文档都这么做会慢到不可行。于是我们把工作拆开：</p>
       <div class="card" style="margin:1.3rem 0">
-<pre><code>Stage 1 — Retrieve (fast, approximate)
+<pre tabindex="0"><code>Stage 1 — Retrieve (fast, approximate)
   vector search / BM25 over the whole corpus  →  top 50–100 candidates
 
 Stage 2 — Rerank (slow per item, but only on the shortlist)

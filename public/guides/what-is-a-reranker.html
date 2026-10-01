@@ -121,7 +121,7 @@
       <h2 id="two-stage">The two-stage retrieval pattern</h2>
       <p>Rerankers exist because of a speed-versus-accuracy trade-off. The accurate way to compare a query and a document is to run them through a model <em>together</em> — but doing that against every document in your corpus would be impossibly slow. So we split the work:</p>
       <div class="card" style="margin:1.3rem 0">
-<pre><code>Stage 1 — Retrieve (fast, approximate)
+<pre tabindex="0"><code>Stage 1 — Retrieve (fast, approximate)
   vector search / BM25 over the whole corpus  →  top 50–100 candidates
 
 Stage 2 — Rerank (slow per item, but only on the shortlist)

@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Mon, 28 Sep 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2026 12:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>1 Oct 2026 — An accessibility pass, and a check to keep it</title>
+      <link>https://reranker.uk/changelog#2026-10-01</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-01</guid>
+      <pubDate>Thu, 01 Oct 2026 12:00:00 GMT</pubDate>
+      <description>Links in running text are underlined, five low-contrast text colours fixed, wide code blocks keyboard-scrollable. Every build now runs axe-core's WCAG 2.1 AA rules on all 48 pages in both themes: over 400 issues on the first run, none now.</description>
+    </item>
     <item>
       <title>28 Sep 2026 — transformers.js 4.3.0, and what report-only caught</title>
       <link>https://reranker.uk/changelog#2026-09-28</link>

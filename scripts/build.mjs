@@ -483,6 +483,12 @@ function assemble({ meta, body, relPath, locale, lastmod }) {
     root.querySelector("html")?.setAttribute("data-prerendered", "zh");
   }
   stripExtensionLinks(root);
+  // A code block wider than the viewport scrolls horizontally, and keyboard
+  // users can only scroll what they can focus (WCAG 2.1.1). axe at desktop
+  // width flags just the widest one; on a phone nearly all of them overflow.
+  for (const pre of root.querySelectorAll("main pre")) {
+    if (!pre.hasAttribute("tabindex")) pre.setAttribute("tabindex", "0");
+  }
   // After localiseLinks: the toggle points at the *other* locale, so it must
   // not be swept up by the /zh prefixing pass.
   setLocaleToggle(root, urlPath, zh ? "zh" : "en");

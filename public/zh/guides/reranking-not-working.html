@@ -87,7 +87,7 @@
       <h2 id="recall">1. 检索压根没返回正确的文档</h2>
       <p>这是最常见的单一原因。重排序是<em>精度</em>环节，它修不了<em>召回</em>。如果向量检索完全漏掉了相关分块，reranker 只会老老实实地对一堆都答非所问的文档排序。</p>
       <p>动 reranker 之前先直接测一下。取 20 条你已知正确文档的查询，按平时的 top-k 检索，然后只看命中与否：</p>
-      <pre><code>hits = 0
+      <pre tabindex="0"><code>hits = 0
 for q, gold_id in labelled:
     candidates = retriever.search(q, k=50)
     if gold_id in [c.id for c in candidates]:
@@ -114,7 +114,7 @@ print(f"recall@50 = {hits / len(labelled):.2f}")</code></pre>
       <h2 id="truncation">3. 段落被静默截断了</h2>
       <p>每个 cross-encoder 都有输入长度上限，而且查询和段落共用这个额度。超了，段落尾部就会被切掉 —— 而那往往正是真正回答问题的部分。不会报任何错，只是分数变得没有意义。</p>
       <p>经典的 MiniLM 系 reranker 对「查询+段落」整体上限是 <strong>512 token</strong>。现在的托管模型宽裕得多 —— <a href="/zh/models/cohere-rerank">Cohere Rerank 4</a> 和 <a href="/zh/models/voyage-rerank">Voyage rerank-2.5</a> 都是 32,000 —— 所以换个模型就能直接解决。如果你自托管的是 512 token 的模型，先看看你的段落实际落在哪个区间：</p>
-      <pre><code>lengths = [len(tok.encode(d)) for d in passages]
+      <pre tabindex="0"><code>lengths = [len(tok.encode(d)) for d in passages]
 over = sum(1 for n in lengths if n > 480)   # leave room for the query
 print(f"{over}/{len(lengths)} passages will be truncated")</code></pre>
       <p>这个现象可以在 <a href="/zh/demo?s=legal">Demo</a> 里直接看到：段落超过所选 <code>max_length</code> 时它会警告，你也能看到把长段落缩短后分数是怎么变的。</p>
