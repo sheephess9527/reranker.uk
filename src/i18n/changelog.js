@@ -1,4 +1,10 @@
 window.I18N_PAGE = { zh: {
+  "1 Oct 2026 — The demo recovers when the mirror can’t serve":
+    "2026 年 10 月 1 日 —— 镜像下载失败时，Demo 会自动换回原站",
+  "<strong>Automatic fallback between model hosts</strong> — the demo picks whichever of huggingface.co and hf-mirror.com answers first. Answering isn’t serving: outside mainland China, hf-mirror.com redirects every file to huggingface.co without the CORS header a browser needs, so if it won the race the model never loaded. A load that fails at the network level is now retried once on the other host":
+    "<strong>模型下载源之间自动切换</strong> —— Demo 会在 huggingface.co 和 hf-mirror.com 之间选先响应的那个。但先响应不等于能下载：在中国大陆以外，hf-mirror.com 会把每个文件重定向回 huggingface.co，而且不带浏览器需要的 CORS 响应头，所以一旦它抢先，模型就加载不出来。现在如果因为网络原因加载失败，会自动换另一个下载源重试一次",
+  "<strong>Tested against the real hosts</strong> — the daily real-network check now also loads each model with hf-mirror.com winning the race, and confirms the fallback ranks correctly. Every page is also checked for CSP violations on every pull request, not just the demo":
+    "<strong>对着真实下载源测过</strong> —— 每日真实网络检查新增一项：让 hf-mirror.com 抢先，逐个加载三个模型，确认自动切换后排序结果正确。另外，每次提交 PR 时，全站每个页面都会检查有没有 CSP 违规，不再只查 Demo",
   "1 Oct 2026 — The demo scores about twice as fast":
     "2026 年 10 月 1 日 —— Demo 打分速度快了约一倍",
   "<strong>Multi-threaded inference in the demo</strong> — the demo pages are now cross-origin isolated, which lets ONNX Runtime Web score on several threads. Measured A/B on the same 4-vCPU runner: about 1.9× faster for all three models (Jina v1 tiny 424 → 229 ms for 10 passages). Browsers that don't support the isolation header simply stay single-threaded":

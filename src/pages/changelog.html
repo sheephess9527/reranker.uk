@@ -6,6 +6,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-01h">1 Oct 2026 — The demo recovers when the mirror can’t serve</h2>
+        <ul class="feature-list">
+          <li><strong>Automatic fallback between model hosts</strong> — the demo picks whichever of huggingface.co and hf-mirror.com answers first. Answering isn’t serving: outside mainland China, hf-mirror.com redirects every file to huggingface.co without the CORS header a browser needs, so if it won the race the model never loaded. A load that fails at the network level is now retried once on the other host</li>
+          <li><strong>Tested against the real hosts</strong> — the daily real-network check now also loads each model with hf-mirror.com winning the race, and confirms the fallback ranks correctly. Every page is also checked for CSP violations on every pull request, not just the demo</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-01g">1 Oct 2026 — The demo scores about twice as fast</h2>
         <ul class="feature-list">
           <li><strong>Multi-threaded inference in the demo</strong> — the demo pages are now cross-origin isolated, which lets ONNX Runtime Web score on several threads. Measured A/B on the same 4-vCPU runner: about 1.9× faster for all three models (Jina v1 tiny 424 → 229 ms for 10 passages). Browsers that don't support the isolation header simply stay single-threaded</li>
