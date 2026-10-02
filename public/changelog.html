@@ -62,6 +62,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-02">2 Oct 2026 — Structured data that matches the page</h2>
+        <ul class="feature-list">
+          <li><strong>Hidden FAQs removed</strong> — five pages carried FAQ markup for questions the page never shows, and it had gone stale: it still said Jina v3 beats Qwen3-Reranker-4B and quoted a Hit@1 tie, both withdrawn from the visible pages. Search engines and AI assistants read that markup, so it’s gone (Google stopped showing FAQ results for sites like this in 2023 anyway)</li>
+          <li><strong>Chinese pages describe themselves in Chinese</strong> — the /zh/ pages shipped the English structured data verbatim, some declaring their language as English. Headlines, descriptions, language and breadcrumbs now come from each page’s own title and description at build time, so they can’t drift from the page again; a CI check enforces it</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-01h">1 Oct 2026 — The demo recovers when the mirror can’t serve</h2>
         <ul class="feature-list">
           <li><strong>Automatic fallback between model hosts</strong> — the demo picks whichever of huggingface.co and hf-mirror.com answers first. Answering isn’t serving: outside mainland China, hf-mirror.com redirects every file to huggingface.co without the CORS header a browser needs, so if it won the race the model never loaded. A load that fails at the network level is now retried once on the other host</li>

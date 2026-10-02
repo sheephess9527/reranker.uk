@@ -32,44 +32,9 @@
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    "name": "How to add reranking to a RAG pipeline",
-    "description": "Add a cross-encoder reranker between retrieval and the LLM call to improve answer quality.",
-    "step": [
-      { "@type": "HowToStep", "name": "Retrieve candidates", "text": "Use vector search or BM25 to pull the top 50–100 candidate chunks." },
-      { "@type": "HowToStep", "name": "Rerank", "text": "Score each (query, candidate) pair with a cross-encoder reranker." },
-      { "@type": "HowToStep", "name": "Keep the best", "text": "Pass only the top 3–10 reranked passages to the LLM." }
-    ]
-  }
-  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to add reranking to a RAG pipeline","description":"Step-by-step guide to adding a rerank model to RAG: retrieve 50–100 candidates with vector search, rerank with a cross-encoder, keep the top 5 for the prompt. Includes Python code, top-k tips, latency trade-offs, and model choices.","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"en","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/"},"publisher":{"@type":"Organization","name":"reranker.uk","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"mainEntityOfPage":"https://reranker.uk/guides/rerank-rag"}</script>
   <!-- seo:jsonld -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://reranker.uk/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "How to add reranking to RAG",
-            "item": "https://reranker.uk/guides/rerank-rag"
-          }
-        ]
-      }
-    ]
-  }
-  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"How to add reranking to RAG","item":"https://reranker.uk/guides/rerank-rag"}]}]}</script>
 
 </head>
 <body>

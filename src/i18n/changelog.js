@@ -1,4 +1,10 @@
 window.I18N_PAGE = { zh: {
+  "2 Oct 2026 — Structured data that matches the page":
+    "2026 年 10 月 2 日 —— 结构化数据与页面内容保持一致",
+  "<strong>Hidden FAQs removed</strong> — five pages carried FAQ markup for questions the page never shows, and it had gone stale: it still said Jina v3 beats Qwen3-Reranker-4B and quoted a Hit@1 tie, both withdrawn from the visible pages. Search engines and AI assistants read that markup, so it’s gone (Google stopped showing FAQ results for sites like this in 2023 anyway)":
+    "<strong>删掉了隐藏的 FAQ</strong> —— 有五个页面带着 FAQ 结构化数据，但这些问答在页面上并不显示，而且内容已经过时：仍然写着 Jina v3 超过 Qwen3-Reranker-4B，还引用了一个 Hit@1 打平的数字，这两条在正文里早已撤回。搜索引擎和 AI 助手会读取这些数据，所以全部删掉（Google 从 2023 年起就不再为这类网站显示 FAQ 结果了）",
+  "<strong>Chinese pages describe themselves in Chinese</strong> — the /zh/ pages shipped the English structured data verbatim, some declaring their language as English. Headlines, descriptions, language and breadcrumbs now come from each page’s own title and description at build time, so they can’t drift from the page again; a CI check enforces it":
+    "<strong>中文页面的结构化数据改成中文</strong> —— 之前 /zh/ 页面原样带着英文的结构化数据，有的还把语言标成英文。现在标题、描述、语言和面包屑导航都在构建时从页面自己的标题和描述生成，不会再和页面内容脱节；CI 里加了检查来保证这一点",
   "1 Oct 2026 — The demo recovers when the mirror can’t serve":
     "2026 年 10 月 1 日 —— 镜像下载失败时，Demo 会自动换回原站",
   "<strong>Automatic fallback between model hosts</strong> — the demo picks whichever of huggingface.co and hf-mirror.com answers first. Answering isn’t serving: outside mainland China, hf-mirror.com redirects every file to huggingface.co without the CORS header a browser needs, so if it won the race the model never loaded. A load that fails at the network level is now retried once on the other host":

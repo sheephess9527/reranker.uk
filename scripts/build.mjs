@@ -394,6 +394,51 @@ const CRUMB_LABELS = {
   zh: { home: "首页", guides: "指南", models: "模型对比" },
 };
 
+const LD_LANG = { en: "en", zh: "zh-Hans" };
+
+/**
+ * Hand-written JSON-LD in a page's meta drifts: it kept describing Cohere's
+ * v3.5 models after the page moved to Rerank 4, and the /zh/ copies carried
+ * English headlines with `inLanguage: "en"`. So the fields that restate the
+ * page are filled from the page itself — description and language always,
+ * plus on /zh/ the headline/name and breadcrumb labels from the translated
+ * title — and only what the page can't supply (dates, publisher, item lists)
+ * stays hand-written. Invalid JSON-LD fails the build rather than shipping.
+ */
+function syncJsonLd(headExtra, { locale, title, description, file }) {
+  const headline = title.split("|")[0].trim();
+  const crumbLeaf = headline.split("—")[0].trim() || headline;
+  const L = CRUMB_LABELS[locale];
+  const crumbNames = { Home: L.home, Guides: L.guides, Models: L.models };
+  return headExtra.replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g, (_, body) => {
+    let data;
+    try {
+      data = JSON.parse(body);
+    } catch (err) {
+      throw new Error(`${file}: invalid JSON-LD in head_extra (${err.message})`);
+    }
+    for (const node of Array.isArray(data) ? data : data["@graph"] || [data]) {
+      const type = node["@type"];
+      if (["Article", "WebApplication", "CollectionPage", "WebSite"].includes(type)) {
+        node.description = description;
+        node.inLanguage = LD_LANG[locale];
+        if (locale === "zh" && type === "Article") node.headline = headline;
+        if (locale === "zh" && (type === "WebApplication" || type === "CollectionPage")) node.name = headline;
+      } else if (type === "ItemList" && locale === "zh") {
+        node.name = headline;
+      } else if (type === "BreadcrumbList" && locale === "zh") {
+        const items = node.itemListElement || [];
+        items.forEach((item, i) => {
+          if (crumbNames[item.name]) item.name = crumbNames[item.name];
+          else if (i === items.length - 1) item.name = crumbLeaf;
+        });
+      }
+    }
+    // "<" escaped so no string value can close the <script> early.
+    return `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`;
+  });
+}
+
 /**
  * BreadcrumbList for nested pages whose meta doesn't already declare one.
  * Returns "" for top-level pages and for pages that hand-roll their own.
@@ -447,6 +492,7 @@ function assemble({ meta, body, relPath, locale, lastmod }) {
 
   let headExtra = meta.head_extra || meta.headExtra || "";
   if (zh) headExtra = localiseHeadExtra(headExtra);
+  headExtra = syncJsonLd(headExtra, { locale: zh ? "zh" : "en", title, description, file: relPath });
   headExtra += breadcrumbJsonLd(urlPath, title, zh ? "zh" : "en", headExtra);
 
   const vars = {

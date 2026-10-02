@@ -258,6 +258,15 @@ One axe quirk worth knowing: its link check treats *any* differing
 `text-decoration-thickness` set but no underline drawn still passes. The
 underline on prose links in `style.css` is the actual requirement.
 
+`npm run check:ld` checks the JSON-LD in every built page: it parses, has
+no FAQPage/HowTo (the FAQs were never visible on the page and had gone
+stale), declares the page's language, and on /zh/ is in Chinese. The
+fields that restate the page — description, language, and on /zh/ the
+headline and breadcrumbs — are filled in by `syncJsonLd()` in
+`build.mjs` from the page's own title and description, so editing
+`head_extra` by hand can't make them drift. CI runs it after the link
+check.
+
 Both smoke tests, and the a11y run on every page, also assert zero
 `securitypolicyviolation` events (see `tests/helpers/csp.mjs`) — the one
 way this repo can check the CSP below against something other than a hand

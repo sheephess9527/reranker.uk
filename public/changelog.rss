@@ -5,9 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Thu, 01 Oct 2026 19:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 02 Oct 2026 12:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
     <item>
+      <title>2 Oct 2026 — Structured data that matches the page</title>
+      <link>https://reranker.uk/changelog#2026-10-02</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-02</guid>
+      <pubDate>Fri, 02 Oct 2026 12:00:00 GMT</pubDate>
+      <description>Five pages carried hidden FAQ markup that still repeated claims the site had withdrawn; it's removed. Structured data on every page, including the Chinese ones, is now generated from the page's own title and description, and a CI check keeps it that way.</description>
+    </item>
       <title>1 Oct 2026 — The demo recovers when the mirror can’t serve</title>
       <link>https://reranker.uk/changelog#2026-10-01h</link>
       <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-01h</guid>
