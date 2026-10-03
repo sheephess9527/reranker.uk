@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 02 Oct 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 03 Oct 2026 12:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>3 Oct 2026 — The RAG guide's model picks, corrected; the Chinese pages, finished</title>
+      <link>https://reranker.uk/changelog#2026-10-03</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-03</guid>
+      <pubDate>Sat, 03 Oct 2026 12:00:00 GMT</pubDate>
+      <description>The RAG guide's model recommendations called bge-reranker-v2-m3 English-only and pointed at Cohere Rerank v3.5 and Voyage Rerank 2; they now match the model pages. Remaining English on the Chinese pages — tables of contents, a diagram, table source notes, demo hints — is translated.</description>
+    </item>
     <item>
       <title>2 Oct 2026 — Structured data that matches the page</title>
       <link>https://reranker.uk/changelog#2026-10-02</link>
@@ -14,6 +21,7 @@
       <pubDate>Fri, 02 Oct 2026 12:00:00 GMT</pubDate>
       <description>Five pages carried hidden FAQ markup that still repeated claims the site had withdrawn; it's removed. Structured data on every page, including the Chinese ones, is now generated from the page's own title and description, and a CI check keeps it that way.</description>
     </item>
+    <item>
       <title>1 Oct 2026 — The demo recovers when the mirror can’t serve</title>
       <link>https://reranker.uk/changelog#2026-10-01h</link>
       <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-01h</guid>

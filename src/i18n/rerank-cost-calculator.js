@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "Estimated monthly rerank cost by vendor for the workload entered above":
+    "按上面填写的用量，估算各厂商每月的重排序费用",
   "Tool · <time datetime=\"2026-09-18\">Updated 18 Sep 2026</time>":
     "工具 · <time datetime=\"2026-09-18\">更新于 2026 年 9 月 18 日</time>",
   "<strong>A note on \"chunking\":</strong> some pricing write-ups claim Cohere splits any document over 500 tokens into multiple billable chunks. That is not correct for Rerank 4 — its context window is 32,768 tokens per document, and <code>max_chunks_per_doc</code> defaults to 1, so a normal RAG passage (a few hundred tokens) is never split. Chunking only kicks in for documents that individually exceed roughly 32.7K tokens, and only if you opt into it.":

@@ -63,15 +63,15 @@
       <p class="lead">改善平庸 RAG 答案的办法，很少是换更大的 LLM —— 通常是更好的检索排序。reranker 位于向量搜索和 LLM 调用之间，对候选重新打分，确保只有最相关的段落进入 prompt。</p>
 
       <div class="toc">
-        <strong>On this page</strong>
+        <strong>本页目录</strong>
         <ol>
-          <li><a href="#problem">The ordering problem in RAG</a></li>
-          <li><a href="#pattern">The retrieve-rerank-generate pattern</a></li>
-          <li><a href="#code">Code walkthrough</a></li>
-          <li><a href="#topk">Choosing top-k values</a></li>
-          <li><a href="#latency">Latency trade-offs</a></li>
-          <li><a href="#evaluate">Measuring whether it helped</a></li>
-          <li><a href="#models">Which reranker to pick</a></li>
+          <li><a href="#problem">RAG 中的排序问题</a></li>
+          <li><a href="#pattern">检索—重排序—生成 范式</a></li>
+          <li><a href="#code">代码讲解</a></li>
+          <li><a href="#topk">如何选 top-k 取值</a></li>
+          <li><a href="#latency">延迟取舍</a></li>
+          <li><a href="#evaluate">如何衡量它是否真的有帮助</a></li>
+          <li><a href="#models">该选哪个 reranker</a></li>
         </ol>
       </div>
 
@@ -82,8 +82,8 @@
       <h2 id="pattern">检索—重排序—生成 范式</h2>
       <figure class="pipeline-figure no-i18n">
         <svg viewBox="0 0 640 548" role="img" aria-labelledby="pipe-title pipe-desc" xmlns="http://www.w3.org/2000/svg">
-          <title id="pipe-title">Retrieve, rerank, generate pipeline</title>
-          <desc id="pipe-desc">A query flows through three stages: retrieve 50–100 candidates with vector search, rerank them with a cross-encoder to keep the top 5–10, then generate a grounded answer with the LLM.</desc>
+          <title id="pipe-title">检索、重排序、生成流水线</title>
+          <desc id="pipe-desc">查询依次经过三个阶段：先用向量检索召回 50–100 个候选，再用 cross-encoder 重排序、保留前 5–10 个，最后由 LLM 生成有依据的答案。</desc>
           <defs>
             <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M0,0 L10,5 L0,10 z" class="pipe-arrowhead" ></path>
@@ -109,44 +109,44 @@
 
           <!-- top: user query -->
           <rect class="pipe-pill" x="245" y="8" width="150" height="34" rx="17" ></rect>
-          <text class="pipe-pill-txt" x="320" y="30" text-anchor="middle">User query</text>
+          <text class="pipe-pill-txt" x="320" y="30" text-anchor="middle">用户查询</text>
           <line class="pipe-line" x1="320" y1="42" x2="320" y2="70" marker-end="url(#arrow)" ></line>
 
           <!-- stage 1: retrieve -->
           <rect class="pipe-stage" x="60" y="74" width="520" height="104" rx="14" ></rect>
           <circle class="pipe-badge" cx="98" cy="126" r="18" ></circle>
           <text class="pipe-badge-txt" x="98" y="131" text-anchor="middle">1</text>
-          <text class="pipe-title" x="128" y="112">Retrieve</text>
-          <text class="pipe-sub" x="128" y="135">Embed query → vector search / BM25</text>
-          <text class="pipe-sub" x="128" y="156">top 50–100 candidate chunks</text>
-          <text class="pipe-tag recall" x="560" y="112" text-anchor="end">fast · recall</text>
+          <text class="pipe-title" x="128" y="112">检索</text>
+          <text class="pipe-sub" x="128" y="135">嵌入查询 → 向量检索 / BM25</text>
+          <text class="pipe-sub" x="128" y="156">召回前 50–100 个候选片段</text>
+          <text class="pipe-tag recall" x="560" y="112" text-anchor="end">快 · 召回</text>
           <line class="pipe-line" x1="320" y1="178" x2="320" y2="206" marker-end="url(#arrow)" ></line>
 
           <!-- stage 2: rerank (focus) -->
           <rect class="pipe-stage focus" x="60" y="210" width="520" height="104" rx="14" ></rect>
           <circle class="pipe-badge accent" cx="98" cy="262" r="18" ></circle>
           <text class="pipe-badge-txt" x="98" y="267" text-anchor="middle">2</text>
-          <text class="pipe-title" x="128" y="248">Rerank</text>
-          <text class="pipe-sub" x="128" y="271">Score each (query, chunk) pair — cross-encoder</text>
-          <text class="pipe-sub" x="128" y="292">sort by score → keep top 5–10</text>
-          <text class="pipe-tag precise" x="560" y="248" text-anchor="end">slow · precise</text>
+          <text class="pipe-title" x="128" y="248">重排序</text>
+          <text class="pipe-sub" x="128" y="271">给每个（查询, 片段）对打分 —— cross-encoder</text>
+          <text class="pipe-sub" x="128" y="292">按分数排序 → 保留前 5–10</text>
+          <text class="pipe-tag precise" x="560" y="248" text-anchor="end">慢 · 精准</text>
           <line class="pipe-line" x1="320" y1="314" x2="320" y2="342" marker-end="url(#arrow)" ></line>
 
           <!-- stage 3: generate -->
           <rect class="pipe-stage" x="60" y="346" width="520" height="104" rx="14" ></rect>
           <circle class="pipe-badge" cx="98" cy="398" r="18" ></circle>
           <text class="pipe-badge-txt" x="98" y="403" text-anchor="middle">3</text>
-          <text class="pipe-title" x="128" y="384">Generate</text>
-          <text class="pipe-sub" x="128" y="407">Top-k reranked chunks + query → LLM</text>
-          <text class="pipe-sub" x="128" y="428">synthesise the answer</text>
-          <text class="pipe-tag gen" x="560" y="384" text-anchor="end">synthesis</text>
+          <text class="pipe-title" x="128" y="384">生成</text>
+          <text class="pipe-sub" x="128" y="407">重排后的前 k 个片段 + 查询 → LLM</text>
+          <text class="pipe-sub" x="128" y="428">综合出答案</text>
+          <text class="pipe-tag gen" x="560" y="384" text-anchor="end">综合</text>
           <line class="pipe-line" x1="320" y1="450" x2="320" y2="478" marker-end="url(#arrow)" ></line>
 
           <!-- bottom: grounded answer -->
           <rect class="pipe-pill" x="222" y="482" width="196" height="34" rx="17" ></rect>
-          <text class="pipe-pill-txt" x="320" y="504" text-anchor="middle">Grounded answer</text>
+          <text class="pipe-pill-txt" x="320" y="504" text-anchor="middle">有依据的答案</text>
         </svg>
-        <figcaption>The reranker (stage 2) is the precision step between fast retrieval and the LLM.</figcaption>
+        <figcaption>reranker（第 2 阶段）是快速检索与 LLM 之间负责精度的一步。</figcaption>
       </figure>
       <p>检索器负责规模（毫秒级处理数百万文档）。reranker 负责质量（对几十个候选做精确排序）。LLM 负责综合。每个阶段只做自己擅长的事。</p>
 
@@ -174,11 +174,11 @@ answer = llm.complete(build_prompt(query, best_chunks))  # generate</code></pre>
       <h3>使用 Cohere 托管 API</h3>
       <pre tabindex="0"><code>import cohere
 
-co = cohere.Client("YOUR_API_KEY")
+co = cohere.ClientV2("YOUR_API_KEY")
 
 def rerank(query: str, candidates: list[str], top_n: int = 5) -&gt; list[str]:
     result = co.rerank(
-        model="rerank-v3.5",
+        model="rerank-v4.0-pro",
         query=query,
         documents=candidates,
         top_n=top_n,
@@ -262,8 +262,8 @@ pipe.connect("retriever.documents", "ranker.documents")</code></pre>
           </thead>
           <tbody>
             <tr><td>Cohere / Jina / Voyage API</td><td>80–200 ms</td><td>按次或按 token 计费（每 1,000 个约 300 token 的片段约 $0.006–0.025）</td></tr>
-            <tr><td>bge-reranker on CPU (small)</td><td>200–600 ms</td><td>你的基础设施成本；按次免费</td></tr>
-            <tr><td>bge-reranker on GPU</td><td>15–60 ms</td><td>GPU 成本；按次免费</td></tr>
+            <tr><td>bge-reranker（CPU，小模型）</td><td>200–600 ms</td><td>你的基础设施成本；按次免费</td></tr>
+            <tr><td>bge-reranker（GPU）</td><td>15–60 ms</td><td>GPU 成本；按次免费</td></tr>
             <tr><td>浏览器中的 jina-tiny</td><td>30 段约 672 ms（实测）</td><td>免费</td></tr>
           </tbody>
         </table>
@@ -283,7 +283,7 @@ pipe.connect("retriever.documents", "ranker.documents")</code></pre>
           </thead>
           <tbody>
             <tr><td><strong>Recall@k</strong></td><td>正确片段是否出现在前 k 个里？</td><td>用来确定 <code>retrieval_k</code> —— reranker 无法找回检索器从未返回的片段。</td></tr>
-            <tr><td><strong>MRR</strong> (Mean Reciprocal Rank)</td><td>平均而言，<em>第一个</em>相关片段排得有多高？</td><td>单一答案的查找（FAQ、客服、「找出某条款」）。</td></tr>
+            <tr><td><strong>MRR</strong>（平均倒数排名）</td><td>平均而言，<em>第一个</em>相关片段排得有多高？</td><td>单一答案的查找（FAQ、客服、「找出某条款」）。</td></tr>
             <tr><td><strong>nDCG@k</strong></td><td>相关片段是否排得靠前（按位置加权）？</td><td>多段落答案：多个片段都重要，且顺序也要紧。</td></tr>
           </tbody>
         </table>
@@ -319,11 +319,11 @@ print(base, reranked)   # expect MRR and nDCG to rise after reranking</code></pr
       <h2 id="models">该选哪个 reranker</h2>
       <p>简短版：</p>
       <ul>
-        <li><strong>想自建、仅英文、免费：</strong><a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a> —— 强大且广泛部署。</li>
-        <li><strong>想要托管 API、最佳多语言质量：</strong><a href="/zh/models/cohere-rerank">Cohere Rerank v3.5</a>。</li>
+        <li><strong>想免费自建、支持多语言：</strong><a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a> —— 多语言，小到可以在 CPU 上跑。</li>
+        <li><strong>想要按次检索计费的托管 API：</strong><a href="/zh/models/cohere-rerank">Cohere Rerank 4</a> —— 支持 100+ 种语言，上下文 32,768 token。</li>
         <li><strong>想要托管 API 加一个能在浏览器里跑的微型模型：</strong><a href="/zh/models/jina-reranker">Jina Reranker</a> —— 用 API 调 v3.5，浏览器里跑 Apache 2.0 的 v1-tiny。它更大的模型权重仅限非商用。</li>
-        <li><strong>专注检索专项质量：</strong><a href="/zh/models/voyage-rerank">Voyage Rerank 2</a>。</li>
-        <li><strong>Want Apache 2.0 open weights, browser-runnable xsmall:</strong> <a href="/zh/models/mxbai-rerank">mxbai-rerank</a>.</li>
+        <li><strong>想要按 token 计费的托管 API：</strong><a href="/zh/models/voyage-rerank">Voyage rerank-3</a> —— 上下文 32,000 token，赠送 200 million 免费 token。</li>
+        <li><strong>想要 Apache 2.0 开源权重、可在浏览器运行的 xsmall：</strong><a href="/zh/models/mxbai-rerank">mxbai-rerank</a>。</li>
       </ul>
       <p>查看完整<a href="/zh/models/">模型对比 →</a></p>
 

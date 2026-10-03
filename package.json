@@ -13,7 +13,7 @@
     "check:external": "node scripts/check-external-links.mjs",
     "measure:latency": "node scripts/measure-demo-latency.mjs",
     "check": "npm run build && npm run check:links && npm run check:ld",
-    "test": "playwright test tests/demo.smoke.spec.js tests/a11y.spec.js",
+    "test": "playwright test tests/demo.smoke.spec.js tests/a11y.spec.js tests/feed.spec.js",
     "test:a11y": "playwright test tests/a11y.spec.js",
     "test:real": "playwright test tests/demo.smoke.real.spec.js",
     "deploy": "npm run build && npx wrangler deploy"

@@ -174,11 +174,11 @@ answer = llm.complete(build_prompt(query, best_chunks))  # generate</code></pre>
       <h3>With the Cohere hosted API</h3>
       <pre tabindex="0"><code>import cohere
 
-co = cohere.Client("YOUR_API_KEY")
+co = cohere.ClientV2("YOUR_API_KEY")
 
 def rerank(query: str, candidates: list[str], top_n: int = 5) -&gt; list[str]:
     result = co.rerank(
-        model="rerank-v3.5",
+        model="rerank-v4.0-pro",
         query=query,
         documents=candidates,
         top_n=top_n,
@@ -319,10 +319,10 @@ print(base, reranked)   # expect MRR and nDCG to rise after reranking</code></pr
       <h2 id="models">Which reranker to pick</h2>
       <p>The short version:</p>
       <ul>
-        <li><strong>Want to self-host, English-only, free:</strong> <a href="/models/bge-reranker">bge-reranker-v2-m3</a> — strong, widely deployed.</li>
-        <li><strong>Want a hosted API, best multilingual quality:</strong> <a href="/models/cohere-rerank">Cohere Rerank v3.5</a>.</li>
+        <li><strong>Want to self-host for free, in many languages:</strong> <a href="/models/bge-reranker">bge-reranker-v2-m3</a> — multilingual and small enough for CPU.</li>
+        <li><strong>Want a hosted API billed per search:</strong> <a href="/models/cohere-rerank">Cohere Rerank 4</a> — 100+ languages, 32,768-token context.</li>
         <li><strong>Want a hosted API plus a tiny browser-runnable model:</strong> <a href="/models/jina-reranker">Jina Reranker</a> — v3.5 by API, the Apache 2.0 v1-tiny in the browser. Its larger weights are non-commercial.</li>
-        <li><strong>Optimising for retrieval-specific quality:</strong> <a href="/models/voyage-rerank">Voyage Rerank 2</a>.</li>
+        <li><strong>Want a hosted API billed per token:</strong> <a href="/models/voyage-rerank">Voyage rerank-3</a> — 32,000-token context, 200 million free tokens.</li>
         <li><strong>Want Apache 2.0 open weights, browser-runnable xsmall:</strong> <a href="/models/mxbai-rerank">mxbai-rerank</a>.</li>
       </ul>
       <p>See the full <a href="/models/">model comparison →</a></p>

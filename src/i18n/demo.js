@@ -16,6 +16,16 @@ window.I18N_PAGE = {
     "demoStatic.docLondon": "伦敦是英国的首都，也是欧洲人口最多的城市之一。",
   },
   zh: {
+  "Max sequence length for tokenization":
+    "分词的最大序列长度",
+  "Second model for comparison":
+    "用于对比的第二个模型",
+  "e.g. How do I add reranking to my RAG pipeline?":
+    "例如：如何在 RAG 流水线里加入重排序？",
+  "Paste one candidate passage per line, or a JSON array like [\"passage 1\", \"passage 2\"]…":
+    "每行粘贴一段候选文本，或粘贴 JSON 数组，如 [\"段落 1\", \"段落 2\"]…",
+  "Per-passage scores and rank deltas between two rerank models":
+    "两个重排序模型对每段文本的打分与名次变化",
     "See the effect before you download anything": "下载任何东西之前，先看看效果",
     "This example needs no model — the left column is the real output of the token-overlap heuristic used elsewhere on this page. The interactive demo below scores your own text with an actual cross-encoder.": "这个例子不需要任何模型 —— 左列是本页其他地方也在用的词元重叠算法的真实输出。下方的交互式 Demo 会用真正的 cross-encoder 为你自己的文本打分。",
     "<strong>Query:</strong> “How do I add a reranking step to my RAG pipeline?”": "<strong>查询：</strong>“我该如何在 RAG 流水线里加入重排序（rerank）这一步？”",

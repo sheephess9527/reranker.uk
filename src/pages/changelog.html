@@ -6,6 +6,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-03">3 Oct 2026 — The RAG guide’s model picks, corrected; the Chinese pages, finished</h2>
+        <ul class="feature-list">
+          <li><strong>“Which reranker to pick” was out of date</strong> — the RAG guide called bge-reranker-v2-m3 English-only (it’s BAAI’s multilingual model), recommended Cohere Rerank v3.5 for “best multilingual quality” and Voyage Rerank 2. It now points at Cohere Rerank 4 and Voyage rerank-3, describes each by how it bills and what it supports rather than with an unsourced superlative, and its code sample uses Cohere’s current client and model</li>
+          <li><strong>English left on the Chinese pages</strong> — five guides’ tables of contents, the RAG pipeline diagram, every source note on the model table’s BEIR column, the demo’s input hints and screen-reader labels, and several badges were still in English. Tables of contents now take their wording from the translated headings, so they can’t fall behind again</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-02">2 Oct 2026 — Structured data that matches the page</h2>
         <ul class="feature-list">
           <li><strong>Hidden FAQs removed</strong> — five pages carried FAQ markup for questions the page never shows, and it had gone stale: it still said Jina v3 beats Qwen3-Reranker-4B and quoted a Hit@1 tie, both withdrawn from the visible pages. Search engines and AI assistants read that markup, so it’s gone (Google stopped showing FAQ results for sites like this in 2023 anyway)</li>

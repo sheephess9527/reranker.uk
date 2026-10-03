@@ -193,7 +193,7 @@
             </div>
             <div class="field">
               <label for="max-length-select">最大序列长度 <span class="hint">— 查询 + 段落 token；超长会截断</span></label>
-              <select id="max-length-select" aria-label="Max sequence length for tokenization">
+              <select id="max-length-select" aria-label="分词的最大序列长度">
                 <option value="256">256 tokens</option>
                 <option value="384">384 tokens</option>
                 <option value="512" selected>512 tokens (default)</option>
@@ -204,7 +204,7 @@
                 <input type="checkbox" id="compare-toggle" >
                 <span data-i18n="demo.compare">并排对比两个模型</span>
               </label>
-              <select id="model-select-b" disabled aria-label="Second model for comparison"></select>
+              <select id="model-select-b" disabled aria-label="用于对比的第二个模型"></select>
             </div>
             <div class="field">
               <label>试一个示例场景 <span class="hint">— 真实查询 + 干扰段落</span></label>
@@ -212,14 +212,14 @@
             </div>
             <div class="field">
               <label for="query-input">查询（Query）</label>
-              <input type="text" id="query-input" placeholder="e.g. How do I add reranking to my RAG pipeline?" >
+              <input type="text" id="query-input" placeholder="例如：如何在 RAG 流水线里加入重排序？">
             </div>
           </div>
           <div>
             <div class="field field-fill">
               <label for="docs-input">候选段落 <span class="hint">— 每行一段，或 JSON 数组（最多 30 条）</span></label>
               <div class="docs-editor">
-                <textarea id="docs-input" placeholder="Paste one candidate passage per line, or a JSON array like [&quot;passage 1&quot;, &quot;passage 2&quot;]…"></textarea>
+                <textarea id="docs-input" placeholder="每行粘贴一段候选文本，或粘贴 JSON 数组，如 [&quot;段落 1&quot;, &quot;段落 2&quot;]…"></textarea>
                 <div class="docs-list" id="docs-list" hidden>
                   <div class="docs-list-items" id="docs-list-items"></div>
                   <button type="button" class="btn btn-ghost btn-sm docs-add-btn" id="docs-add-btn">+ 添加段落</button>
@@ -282,7 +282,7 @@
           <p class="muted results-sub" id="dual-diff-sub"></p>
           <div class="diff-table-wrap">
             <table class="diff-table" id="diff-table" aria-describedby="dual-diff-sub">
-              <caption class="sr-only" id="diff-table-caption">Per-passage scores and rank deltas between two rerank models</caption>
+              <caption class="sr-only" id="diff-table-caption">两个重排序模型对每段文本的打分与名次变化</caption>
               <thead>
                 <tr>
                   <th scope="col">#</th>

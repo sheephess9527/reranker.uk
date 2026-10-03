@@ -1,4 +1,52 @@
 window.I18N_PAGE = { zh: {
+  "bge-reranker on CPU (small)":
+    "bge-reranker（CPU，小模型）",
+  "bge-reranker on GPU":
+    "bge-reranker（GPU）",
+  "<strong>Want to self-host for free, in many languages:</strong> <a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> — multilingual and small enough for CPU.":
+    "<strong>想免费自建、支持多语言：</strong><a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> —— 多语言，小到可以在 CPU 上跑。",
+  "<strong>Want a hosted API billed per search:</strong> <a href=\"/models/cohere-rerank.html\">Cohere Rerank 4</a> — 100+ languages, {{fact:cohere-rerank.context_tokens}}-token context.":
+    "<strong>想要按次检索计费的托管 API：</strong><a href=\"/models/cohere-rerank.html\">Cohere Rerank 4</a> —— 支持 100+ 种语言，上下文 {{fact:cohere-rerank.context_tokens}} token。",
+  "<strong>Want a hosted API billed per token:</strong> <a href=\"/models/voyage-rerank.html\">Voyage rerank-3</a> — {{fact:voyage-rerank-3.context_tokens}}-token context, {{fact:voyage-rerank-3.free_tokens}} free tokens.":
+    "<strong>想要按 token 计费的托管 API：</strong><a href=\"/models/voyage-rerank.html\">Voyage rerank-3</a> —— 上下文 {{fact:voyage-rerank-3.context_tokens}} token，赠送 {{fact:voyage-rerank-3.free_tokens}} 免费 token。",
+  "<strong>Want Apache 2.0 open weights, browser-runnable xsmall:</strong> <a href=\"/models/mxbai-rerank.html\">mxbai-rerank</a>.":
+    "<strong>想要 Apache 2.0 开源权重、可在浏览器运行的 xsmall：</strong><a href=\"/models/mxbai-rerank.html\">mxbai-rerank</a>。",
+  "<strong>MRR</strong> (Mean Reciprocal Rank)":
+    "<strong>MRR</strong>（平均倒数排名）",
+  "Retrieve, rerank, generate pipeline":
+    "检索、重排序、生成流水线",
+  "A query flows through three stages: retrieve 50–100 candidates with vector search, rerank them with a cross-encoder to keep the top 5–10, then generate a grounded answer with the LLM.":
+    "查询依次经过三个阶段：先用向量检索召回 50–100 个候选，再用 cross-encoder 重排序、保留前 5–10 个，最后由 LLM 生成有依据的答案。",
+  "User query":
+    "用户查询",
+  "Retrieve":
+    "检索",
+  "Embed query → vector search / BM25":
+    "嵌入查询 → 向量检索 / BM25",
+  "top 50–100 candidate chunks":
+    "召回前 50–100 个候选片段",
+  "fast · recall":
+    "快 · 召回",
+  "Rerank":
+    "重排序",
+  "Score each (query, chunk) pair — cross-encoder":
+    "给每个（查询, 片段）对打分 —— cross-encoder",
+  "sort by score → keep top 5–10":
+    "按分数排序 → 保留前 5–10",
+  "slow · precise":
+    "慢 · 精准",
+  "Generate":
+    "生成",
+  "Top-k reranked chunks + query → LLM":
+    "重排后的前 k 个片段 + 查询 → LLM",
+  "synthesise the answer":
+    "综合出答案",
+  "synthesis":
+    "综合",
+  "Grounded answer":
+    "有依据的答案",
+  "The reranker (stage 2) is the precision step between fast retrieval and the LLM.":
+    "reranker（第 2 阶段）是快速检索与 LLM 之间负责精度的一步。",
   "Practical · ~10 min read · <time datetime=\"2026-06-21\">Updated 21 Jun 2026</time>":
     "实践 · 约 10 分钟阅读 · <time datetime=\"2026-06-21\">更新于 2026 年 6 月 21 日</time>",
   "_title": "如何为 RAG 流水线加重排序 —— 实操指南 | reranker.uk",
@@ -64,11 +112,8 @@ window.I18N_PAGE = { zh: {
   "<strong>Common pitfalls:</strong> retrieving too few candidates (the reranker can only reorder what it's given); leaving <code>max_length</code> too short so long chunks get truncated before scoring; sorting ascending instead of descending; and assuming raw scores are comparable across models — they aren't calibrated, so rank order is what matters, not the absolute number.": "<strong>常见坑：</strong>召回的候选太少（reranker 只能对拿到的东西重新排序）；<code>max_length</code> 留得太短，长片段在打分前就被截断；把排序写成升序而非降序；以及以为不同模型的原始分数可以互相比较 —— 它们并未校准，重要的是排名顺序，而非绝对数值。",
 
   "The short version:": "简短版：",
-  "<strong>Want to self-host, English-only, free:</strong> <a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> — strong, widely deployed.": "<strong>想自建、仅英文、免费：</strong><a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> —— 强大且广泛部署。",
-  "<strong>Want a hosted API, best multilingual quality:</strong> <a href=\"/models/cohere-rerank.html\">Cohere Rerank v3.5</a>.": "<strong>想要托管 API、最佳多语言质量：</strong><a href=\"/models/cohere-rerank.html\">Cohere Rerank v3.5</a>。",
   "<strong>Want open weights + hosted API + tiny browser-runnable model:</strong> <a href=\"/models/jina-reranker.html\">Jina Reranker v2</a>.": "<strong>想要开源权重 + 托管 API + 可在浏览器运行的微型模型：</strong><a href=\"/models/jina-reranker.html\">Jina Reranker v2</a>。",
   "<strong>Want a hosted API plus a tiny browser-runnable model:</strong> <a href=\"/models/jina-reranker.html\">Jina Reranker</a> — v3.5 by API, the Apache 2.0 v1-tiny in the browser. Its larger weights are non-commercial.": "<strong>想要托管 API 加一个能在浏览器里跑的微型模型：</strong><a href=\"/models/jina-reranker.html\">Jina Reranker</a> —— 用 API 调 v3.5，浏览器里跑 Apache 2.0 的 v1-tiny。它更大的模型权重仅限非商用。",
-  "<strong>Optimising for retrieval-specific quality:</strong> <a href=\"/models/voyage-rerank.html\">Voyage Rerank 2</a>.": "<strong>专注检索专项质量：</strong><a href=\"/models/voyage-rerank.html\">Voyage Rerank 2</a>。",
   "See the full <a href=\"/models/\">model comparison →</a>": "查看完整<a href=\"/models/\">模型对比 →</a>",
 
   "See reranking in action": "看看重排序的实际效果",
