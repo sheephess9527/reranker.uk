@@ -32,43 +32,7 @@
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://reranker.uk/#org",
-        "name": "reranker.uk",
-        "url": "https://reranker.uk/",
-        "logo": { "@type": "ImageObject", "url": "https://reranker.uk/assets/img/icon-512.png" }
-      },
-      {
-        "@type": "WebSite",
-        "name": "reranker.uk",
-        "url": "https://reranker.uk/",
-        "inLanguage": "en",
-        "publisher": { "@id": "https://reranker.uk/#org" },
-        "description": "A resource on rerankers for retrieval and RAG, plus a browser-based reranking demo."
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is a reranker?",
-            "acceptedAnswer": { "@type": "Answer", "text": "A reranker is a model that takes a query and a set of candidate documents and reorders them by relevance. It usually runs as a second stage after fast retrieval, scoring each query–document pair jointly with a cross-encoder for higher precision." }
-          },
-          {
-            "@type": "Question",
-            "name": "Why use a rerank model in RAG?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Vector search returns roughly relevant chunks, but the order is often imperfect. A rerank model re-scores the top candidates so the most relevant passages land at the top of the prompt, improving answer quality and letting you send fewer tokens to the LLM." }
-          }
-        ]
-      }
-    ]
-  }
-  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://reranker.uk/#org","name":"reranker.uk","url":"https://reranker.uk/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/","inLanguage":"en","publisher":{"@id":"https://reranker.uk/#org"},"description":"A practical guide to rerankers for search and RAG: what a rerank model is, cross-encoder vs bi-encoder, how to add reranking to RAG, model comparisons (bge, Cohere, Jina, Voyage), and a free demo that runs entirely in your browser."}]}</script>
 
 </head>
 <body>

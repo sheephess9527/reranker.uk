@@ -32,43 +32,7 @@
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://reranker.uk/zh/#org",
-        "name": "reranker.uk",
-        "url": "https://reranker.uk/zh/",
-        "logo": { "@type": "ImageObject", "url": "https://reranker.uk/assets/img/icon-512.png" }
-      },
-      {
-        "@type": "WebSite",
-        "name": "reranker.uk",
-        "url": "https://reranker.uk/zh/",
-        "inLanguage": "en",
-        "publisher": { "@id": "https://reranker.uk/zh/#org" },
-        "description": "A resource on rerankers for retrieval and RAG, plus a browser-based reranking demo."
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is a reranker?",
-            "acceptedAnswer": { "@type": "Answer", "text": "A reranker is a model that takes a query and a set of candidate documents and reorders them by relevance. It usually runs as a second stage after fast retrieval, scoring each query–document pair jointly with a cross-encoder for higher precision." }
-          },
-          {
-            "@type": "Question",
-            "name": "Why use a rerank model in RAG?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Vector search returns roughly relevant chunks, but the order is often imperfect. A rerank model re-scores the top candidates so the most relevant passages land at the top of the prompt, improving answer quality and letting you send fewer tokens to the LLM." }
-          }
-        ]
-      }
-    ]
-  }
-  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://reranker.uk/zh/#org","name":"reranker.uk","url":"https://reranker.uk/zh/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/zh/","inLanguage":"zh-Hans","publisher":{"@id":"https://reranker.uk/zh/#org"},"description":"免费在浏览器里体验 Reranker（重排序模型）。纯客户端运行，无需 API Key，保护隐私。学习 reranker 原理，并通过交互式 Demo 理解它如何提升 RAG 检索效果。"}]}</script>
 
 </head>
 <body>

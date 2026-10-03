@@ -67,10 +67,13 @@ export async function mockTransformersOnPage(page, { mirrorWinsButFails = false 
   await page.route("https://cdn.jsdelivr.net/npm/@huggingface/transformers**", (route) =>
     route.fulfill({ contentType: "text/javascript", body: FAKE_TRANSFORMERS_MODULE_SOURCE })
   );
-  if (mirrorWinsButFails) {
-    await page.addInitScript(() => (globalThis.__downHost = "https://hf-mirror.com"));
-    await page.route("https://huggingface.co/api/models", (route) => route.abort());
-  }
   await page.route("https://huggingface.co/**", (route) => route.fulfill({ status: 200, body: "" }));
   await page.route("https://hf-mirror.com/**", (route) => route.fulfill({ status: 200, body: "" }));
+  if (mirrorWinsButFails) {
+    await page.addInitScript(() => (globalThis.__downHost = "https://hf-mirror.com"));
+    // Registered last on purpose: Playwright tries the most recently added
+    // route first, so before the catch-all above it would never be reached
+    // and the race would go to whichever 200 came back first.
+    await page.route("https://huggingface.co/api/models", (route) => route.abort());
+  }
 }

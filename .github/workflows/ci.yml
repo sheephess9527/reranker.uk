@@ -27,6 +27,9 @@ jobs:
       - name: Check for broken internal links
         run: npm run check:links
 
+      - name: Check structured data (JSON-LD)
+        run: npm run check:ld
+
       - name: Check Chinese translation coverage (informational)
         run: npm run check:zh
 

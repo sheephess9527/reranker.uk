@@ -38,7 +38,7 @@ Benchmark figures carry their protocol: rows marked with an asterisk on /models/
 
 - [Reranker guides — fundamentals to production](https://reranker.uk/guides/): All reranker.uk guides: what is a reranker, cross-encoder vs bi-encoder, RAG integration, hybrid retrieval, and how to evaluate rerank models.
 - [Reranker — what it is, how it works, and a live in-browser demo](https://reranker.uk/): A practical guide to rerankers for search and RAG: what a rerank model is, cross-encoder vs bi-encoder, how to add reranking to RAG, model comparisons (bge, Cohere, Jina, Voyage), and a free demo t…
-- [Rerank model comparison 2026: Qwen3, Jina v3, bge, mxbai](https://reranker.uk/models/): 2026 reranker comparison: Qwen3-Reranker 0.6B/4B/8B, Jina v3 listwise, bge, mxbai, Cohere, Voyage, GTE ModernBERT, NVIDIA, ColBERT, instruction APIs.
+- [Rerank model comparison 2026: Qwen3, Jina v3.5, bge, mxbai](https://reranker.uk/models/): 2026 reranker comparison: Qwen3-Reranker 0.6B/4B/8B, Jina v3.5 listwise, bge, mxbai, Cohere, Voyage, GTE ModernBERT, NVIDIA, ColBERT, instruction APIs.
 
 ## About
 

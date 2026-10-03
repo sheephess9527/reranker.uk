@@ -32,12 +32,7 @@
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Article","headline":"Your reranker didn't improve results. Here's why","datePublished":"2026-08-25","dateModified":"2026-08-25","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/reranking-not-working"}
-  </script>
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why did adding a reranker not improve my search results?","acceptedAnswer":{"@type":"Answer","text":"Most often because retrieval never returned the relevant document. Reranking is a precision stage and can only reorder the candidates it is given, so it cannot fix a recall problem. Measure recall@50 of your retriever first; if it is below about 0.8, fix retrieval before tuning the reranker."}},{"@type":"Question","name":"How many candidates should I rerank?","acceptedAnswer":{"@type":"Answer","text":"Retrieve roughly 5-10 times what you intend to keep. Reranking 5 candidates and keeping 5 does nothing useful; retrieving 50 and keeping 5 gives the reranker 45 candidates it can promote, which is where the improvement comes from."}},{"@type":"Question","name":"Are reranker scores probabilities?","acceptedAnswer":{"@type":"Answer","text":"No. Most cross-encoders emit an unbounded logit rather than a calibrated relevance probability, and scores are not comparable across models or across different queries. Only the ordering is meaningful. Calibrate any absolute threshold on your own labelled data."}}]}
-  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"加了 reranker 却没变好？7 个原因","datePublished":"2026-08-25","dateModified":"2026-08-25","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/reranking-not-working","description":"接入重排序后效果没提升？常见原因是检索召回不够、候选池太小、超过模型 token 上限被静默截断、分块过大、语言不匹配，以及把未校准的分数当概率用。附逐条排查清单。","inLanguage":"zh-Hans"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://reranker.uk/zh/guides/"},{"@type":"ListItem","position":3,"name":"加了 reranker 却没变好？7 个原因","item":"https://reranker.uk/zh/guides/reranking-not-working"}]}</script>
 
 </head>

@@ -32,44 +32,9 @@
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    "name": "How to add reranking to a RAG pipeline",
-    "description": "Add a cross-encoder reranker between retrieval and the LLM call to improve answer quality.",
-    "step": [
-      { "@type": "HowToStep", "name": "Retrieve candidates", "text": "Use vector search or BM25 to pull the top 50–100 candidate chunks." },
-      { "@type": "HowToStep", "name": "Rerank", "text": "Score each (query, candidate) pair with a cross-encoder reranker." },
-      { "@type": "HowToStep", "name": "Keep the best", "text": "Pass only the top 3–10 reranked passages to the LLM." }
-    ]
-  }
-  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"如何为 RAG 流水线加重排序 —— 实操指南","description":"为 RAG 加 rerank 模型的分步指南：用向量搜索召回 50–100 个候选，用 cross-encoder 重排序，保留前 5 个进 prompt。含 Python 代码、top-k 建议、延迟取舍与模型选择。","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"zh-Hans","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/"},"publisher":{"@type":"Organization","name":"reranker.uk","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"mainEntityOfPage":"https://reranker.uk/zh/guides/rerank-rag"}</script>
   <!-- seo:jsonld -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://reranker.uk/zh/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "How to add reranking to RAG",
-            "item": "https://reranker.uk/zh/guides/rerank-rag"
-          }
-        ]
-      }
-    ]
-  }
-  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"如何为 RAG 流水线加重排序","item":"https://reranker.uk/zh/guides/rerank-rag"}]}]}</script>
 
 </head>
 <body>
