@@ -4,6 +4,62 @@ window.I18N_PAGE = {
     "models.tableCaption": "重排序模型对比：架构、类型、适用场景、语言、延迟、价格与 BEIR 分数",
   },
   zh: {
+  "Alibaba's own figure from the model card, which doesn't state the datasets or first stage. This table showed \"Hit@1 ≈ nemotron\" until Oct 2026, with no source we could find":
+    "阿里巴巴在模型卡里给出的数字，没有说明用了哪些数据集、第一阶段用的什么检索。本表到 2026 年 10 月之前写的是“Hit@1 ≈ nemotron”，我们找不到任何出处",
+  "BAAI's own run: 15 BEIR datasets, reranking the top 100 from bge-large-en-v1.5. This table carried an untraceable ~60.1 here until Oct 2026":
+    "BAAI 自己的测试：15 个 BEIR 数据集，对 bge-large-en-v1.5 召回的前 100 条重排序。本表到 2026 年 10 月之前这里写的是一个查不到出处的 ~60.1",
+  "Cohere does not publish a classic BEIR 18-dataset average for Rerank 4":
+    "Cohere 没有为 Rerank 4 公布经典的 BEIR 18 数据集平均分",
+  "Contextual AI publish BEIR results only as a chart in their blog post. Until Oct 2026 this row described the model as an English-only hosted API; the weights have been public on Hugging Face since Aug 2025":
+    "Contextual AI 只在博客文章里以图表形式公布 BEIR 结果。到 2026 年 10 月之前，本行把这个模型写成仅英文的托管 API；其实它的权重自 2025 年 8 月起就已在 Hugging Face 公开",
+  "Jina's own 2026 run, same as the v3.5 row: 13 BEIR datasets over jina-embeddings-v5-text-small's top 100. The v3 paper's 2025 run, over jina-embeddings-v3, reported 61.94":
+    "Jina 自己 2026 年的测试，与 v3.5 那一行相同：13 个 BEIR 数据集，对 jina-embeddings-v5-text-small 召回的前 100 条重排序。v3 论文 2025 年基于 jina-embeddings-v3 的测试报告的是 61.94",
+  "Jina's own 2026 run: 13 BEIR datasets, reranking the top 100 from jina-embeddings-v5-text-small. Same run: Qwen3-Reranker-4B 62.28, mxbai-rerank-large-v2 62.45":
+    "Jina 自己 2026 年的测试：13 个 BEIR 数据集，对 jina-embeddings-v5-text-small 召回的前 100 条重排序。同一测试中：Qwen3-Reranker-4B 62.28，mxbai-rerank-large-v2 62.45",
+  "Jina's own run: 17 BEIR datasets, from the jina-reranker-v1 model card":
+    "Jina 自己的测试：17 个 BEIR 数据集，出自 jina-reranker-v1 的模型卡",
+  "Measured with the live demo: Chromium (WASM) on a 4-vCPU GitHub Actions runner, median of 5 runs, ~60-word passages, Oct 2026. Phones and older laptops will be slower — the demo shows the time for each run on your device":
+    "用在线 Demo 实测：在 4 核 GitHub Actions 机器上用 Chromium（WASM）运行，5 次取中位数，每段约 60 个英文单词，2026 年 10 月。手机和较旧的笔记本会更慢 —— Demo 会显示每次在你设备上的耗时",
+  "NVIDIA report Recall@5 for their own embed + rerank pipeline (73.64% on NQ, HotpotQA, FiQA and TechQA), not a reranker-only BEIR NDCG. The Hit@1 83.0 this table showed until Oct 2026 has no source we could find":
+    "NVIDIA 公布的是他们自己的嵌入 + 重排序流水线的 Recall@5（在 NQ、HotpotQA、FiQA 和 TechQA 上为 73.64%），不是只测重排序模型的 BEIR NDCG。本表到 2026 年 10 月之前写的 Hit@1 83.0 找不到任何出处",
+  "Qwen's own run, same suite as the 4B row":
+    "Qwen 自己的测试，与 4B 那一行相同的测试集",
+  "Qwen's own run, same suite as the 4B row, where the 4B scores higher. This table said ~0.48 points behind on BEIR until Oct 2026; Qwen's card gives 0.74 on MTEB-R":
+    "Qwen 自己的测试，与 4B 那一行相同的测试集，其中 4B 得分更高。本表到 2026 年 10 月之前写的是在 BEIR 上落后约 0.48 分；Qwen 的模型卡在 MTEB-R 上给出的差距是 0.74",
+  "Qwen's own run: retrieval subsets of MTEB(eng, v2), reranking the top 100 from Qwen3-Embedding-0.6B — not a BEIR average. Jina's 2026 run measured the 4B at 62.28 on 13 BEIR datasets":
+    "Qwen 自己的测试：MTEB(eng, v2) 的检索子集，对 Qwen3-Embedding-0.6B 召回的前 100 条重排序 —— 不是 BEIR 平均分。Jina 2026 年的测试中，4B 在 13 个 BEIR 数据集上得分 62.28",
+  "Third-party figure: Jina measured it alongside their v1 models (17 BEIR datasets). sentence-transformers, who trained it, publish NDCG@10 on TREC DL 19 (74.30) and MRR@10 on MS MARCO Dev (39.01) but no BEIR average. This table carried an unsourced ~55.0 here until Sep 2026":
+    "第三方数字：Jina 在测自家 v1 模型时一起测了它（17 个 BEIR 数据集）。训练它的 sentence-transformers 公布了 TREC DL 19 上的 NDCG@10（74.30）和 MS MARCO Dev 上的 MRR@10（39.01），但没有 BEIR 平均分。本表到 2026 年 9 月之前这里写的是一个没有出处的 ~55.0",
+  "Vendor does not publish a classic BEIR average":
+    "厂商没有公布经典的 BEIR 平均分",
+  "Voyage publishes its own retrieval evals, not a classic BEIR average":
+    "Voyage 公布的是自己的检索评测，不是经典的 BEIR 平均分",
+  "mixedbread's own comparison table, not the classic BEIR 18-dataset average other open-weight rows use":
+    "mixedbread 自己的对比表，不是其他开源权重行使用的经典 BEIR 18 数据集平均分",
+  "mixedbread's own cross-generation comparison table, not the classic BEIR 18-dataset average other open-weight rows use":
+    "mixedbread 自己的跨代对比表，不是其他开源权重行使用的经典 BEIR 18 数据集平均分",
+  "GPU / multi-GPU":
+    "GPU / 多 GPU",
+  "API or GPU self-host":
+    "API 或 GPU 自建",
+  "Fast GPU / CPU-friendly":
+    "GPU 上快，CPU 友好",
+  "NIM / self-host":
+    "NIM / 自建",
+  "Open + NIM API":
+    "开源 + NIM API",
+  "Hosted API":
+    "托管 API",
+  "Open weights":
+    "开源权重",
+  "Browser ✓":
+    "浏览器可跑 ✓",
+  "Self-host":
+    "自建",
+  "Browser xsmall":
+    "浏览器可跑 xsmall",
+  "Compact":
+    "轻量",
   "<a href=\"/models/voyage-rerank\">Voyage rerank-3</a>":
     "<a href=\"/models/voyage-rerank\">Voyage rerank-3</a>",
   "<span class=\"pill\">Hosted API</span><span class=\"pill warn\">Preview</span>":

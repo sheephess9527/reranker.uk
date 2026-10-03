@@ -321,6 +321,47 @@ function translate(root, pageDict) {
     }
   }
 
+  // Attribute text a reader still sees or hears — tooltips on table cells,
+  // input placeholders, labels on controls without visible text — looked up
+  // in the same dictionary as the prose, by its exact English value.
+  for (const el of root.querySelectorAll("main [title], main [placeholder], main [aria-label]")) {
+    for (const attr of ["title", "placeholder", "aria-label"]) {
+      if (attr === "aria-label" && el.hasAttribute("data-i18n-aria-label")) continue;
+      const value = el.getAttribute(attr);
+      const hit = value != null ? legacy[norm(value)] : null;
+      if (hit != null) {
+        el.setAttribute(attr, hit);
+        prose++;
+      }
+    }
+  }
+
+  // Text the selector list above doesn't reach: an SVG diagram's labels (its
+  // <title>/<desc> are what a screen reader announces), figure captions and
+  // table captions, including screen-reader-only ones.
+  for (const el of root.querySelectorAll("main svg title, main svg desc, main svg text, main figcaption, main caption")) {
+    if (el.hasAttribute("data-i18n") || el.hasAttribute("data-i18n-html")) continue;
+    const hit = legacy[norm(el.innerHTML)];
+    if (hit != null) {
+      el.set_content(hit);
+      prose++;
+    }
+  }
+
+  // A table of contents restates the headings it links to, so on /zh/ each
+  // entry takes the translated heading rather than needing its own
+  // dictionary entry — five guides' TOCs had stayed English because the
+  // entries were worded slightly differently from their headings.
+  const hasCjk = (s) => /[一-鿿]/.test(s);
+  for (const toc of root.querySelectorAll("main .toc")) {
+    const label = toc.querySelector("strong");
+    if (label && !hasCjk(label.text) && SHARED_KEYS["shared.toc"]) label.set_content(SHARED_KEYS["shared.toc"]);
+    for (const a of toc.querySelectorAll('a[href^="#"]')) {
+      const target = root.querySelector(`[id="${a.getAttribute("href").slice(1)}"]`);
+      if (!hasCjk(a.text) && target && hasCjk(target.text)) a.set_content(target.innerHTML.trim());
+    }
+  }
+
   return { keyed, prose, missingKeys };
 }
 

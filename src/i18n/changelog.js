@@ -1,4 +1,10 @@
 window.I18N_PAGE = { zh: {
+  "3 Oct 2026 — The RAG guide’s model picks, corrected; the Chinese pages, finished":
+    "2026 年 10 月 3 日 —— 修正 RAG 指南的模型推荐，补完中文页面",
+  "<strong>“Which reranker to pick” was out of date</strong> — the RAG guide called bge-reranker-v2-m3 English-only (it’s BAAI’s multilingual model), recommended Cohere Rerank v3.5 for “best multilingual quality” and Voyage Rerank 2. It now points at Cohere Rerank 4 and Voyage rerank-3, describes each by how it bills and what it supports rather than with an unsourced superlative, and its code sample uses Cohere’s current client and model":
+    "<strong>“该选哪个 reranker”过时了</strong> —— RAG 指南把 bge-reranker-v2-m3 说成仅支持英文（它其实是 BAAI 的多语言模型），还推荐 Cohere Rerank v3.5 为“最佳多语言质量”、以及 Voyage Rerank 2。现在改为推荐 Cohere Rerank 4 和 Voyage rerank-3，按计费方式和支持的能力来描述，不再用没有出处的最高级说法；示例代码也换成了 Cohere 当前的客户端和模型",
+  "<strong>English left on the Chinese pages</strong> — five guides’ tables of contents, the RAG pipeline diagram, every source note on the model table’s BEIR column, the demo’s input hints and screen-reader labels, and several badges were still in English. Tables of contents now take their wording from the translated headings, so they can’t fall behind again":
+    "<strong>中文页面里残留的英文</strong> —— 五篇指南的目录、RAG 流水线示意图、模型对比表 BEIR 列的全部出处说明、Demo 的输入提示和读屏标签，以及若干标签徽章，之前都还是英文。现在目录直接取自翻译后的标题，以后不会再落下",
   "2 Oct 2026 — Structured data that matches the page":
     "2026 年 10 月 2 日 —— 结构化数据与页面内容保持一致",
   "<strong>Hidden FAQs removed</strong> — five pages carried FAQ markup for questions the page never shows, and it had gone stale: it still said Jina v3 beats Qwen3-Reranker-4B and quoted a Hit@1 tie, both withdrawn from the visible pages. Search engines and AI assistants read that markup, so it’s gone (Google stopped showing FAQ results for sites like this in 2023 anyway)":
