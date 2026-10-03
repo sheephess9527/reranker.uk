@@ -10,6 +10,7 @@
     "check:i18n": "node scripts/check-i18n-gaps.mjs",
     "check:sources": "node scripts/check-sources.mjs",
     "check:ld": "node scripts/check-structured-data.mjs",
+    "check:external": "node scripts/check-external-links.mjs",
     "measure:latency": "node scripts/measure-demo-latency.mjs",
     "check": "npm run build && npm run check:links && npm run check:ld",
     "test": "playwright test tests/demo.smoke.spec.js tests/a11y.spec.js",
