@@ -247,6 +247,17 @@
               <td title="Third-party figure: Jina measured it alongside their v1 models (17 BEIR datasets). sentence-transformers, who trained it, publish NDCG@10 on TREC DL 19 (74.30) and MRR@10 on MS MARCO Dev (39.01) but no BEIR average. This table carried an unsourced ~55.0 here until Sep 2026">{{fact:ms-marco-minilm-l6-v2.beir}}</td>
               <td class="demo-link-cell"></td>
             </tr>
+            <tr data-name="lighton-rerank" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="">
+              <th scope="row"><a href="https://huggingface.co/lightonai/LightOn-rerank-PW-2B" rel="noopener noreferrer">LightOn-rerank</a></th>
+              <td><span class="pill">Cross-encoder</span><span class="pill info">Listwise</span></td>
+              <td><span class="pill good">Open weights</span><span class="pill good">Apache 2.0</span></td>
+              <td>Text and document-page images in one model; 0.8B / 2B / 4B, pointwise or listwise</td>
+              <td>English · French</td>
+              <td>GPU</td>
+              <td>Free (self-host)</td>
+              <td title="LightOn's own run (PW-2B): BEIR over BM25's top 100, averaged over the 11 datasets that weren't in its training data — not comparable with rows that rerank dense retrieval. Same run: jina-reranker-m0 51.97, Qwen3-VL-Reranker-2B 49.08. Its strength is visual documents: on ViDoRe V3 the listwise 4B scores {{fact:lighton-rerank-lw-4b.vidore_v3}}">{{fact:lighton-rerank-pw-2b.beir}}</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
             <tr data-name="contextual-rerank-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="">
               <th scope="row"><a href="https://huggingface.co/ContextualAI/ctxl-rerank-v2-instruct-multilingual-2b" rel="noopener noreferrer">Contextual AI Rerank v2</a></th>
               <td><span class="pill">Instruction</span></td>
@@ -301,7 +312,7 @@
         <a class="card" href="/models/voyage-rerank.html">
           <h3>Voyage rerank-3</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill">Hosted API</span><span class="pill">Per token</span></div>
-          <p>rerank-3 and -lite are Voyage’s current rerankers: 32k context, priced per token, with 200M free tokens each. The older rerank-2.5 is the one Voyage document for natural-language instructions.</p>
+          <p>rerank-3 and -lite are Voyage’s current rerankers: 32k context, priced per token, with 200M free tokens each. They keep rerank-2.5’s natural-language instructions, with the biggest gains on long documents and code in Voyage’s own tests.</p>
         </a>
         <a class="card" href="/models/mxbai-rerank.html">
           <h3>mxbai-rerank</h3>
@@ -371,7 +382,7 @@
           <ul class="feature-list">
             <li>rerank-3 for accuracy, rerank-3-lite for latency — ${{fact:voyage-rerank-3.price_per_m_tokens}} and ${{fact:voyage-rerank-3-lite.price_per_m_tokens}} per 1M tokens</li>
             <li>200M free tokens per account on each; 32k context</li>
-            <li>Need natural-language instructions or the 33% Batch API discount? Voyage document both for the older rerank-2.5 only</li>
+            <li>Need the 33% Batch API discount? Voyage document it for the older rerank-2.5 only</li>
           </ul>
         </div>
         <div class="chooser-card">

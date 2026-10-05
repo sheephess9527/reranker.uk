@@ -62,6 +62,15 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-05">5 Oct 2026 — Voyage rerank-3, what changed; LightOn-rerank added</h2>
+        <ul class="feature-list">
+          <li><strong>Voyage rerank-3, from Voyage’s announcement</strong> — the site said Voyage’s docs didn’t say whether rerank-3 takes natural-language instructions. Voyage’s 30 September announcement does: the Rerank 3 series keeps them. The Voyage page now covers what changed — a drop-in upgrade at the same price, scores calibrated to rerank-2.5, the largest gains on long documents and code, and Voyage’s own comparison against Cohere and Qwen3 — with each figure checked daily against the announcement</li>
+          <li><strong>LightOn-rerank in the models table</strong> — LightOn’s Apache 2.0 family (0.8B / 2B / 4B, pointwise or listwise) scores text passages and document-page images with one model. The table shows LightOn’s own BEIR figure with its protocol, which differs from the other rows</li>
+          <li><strong>A daily watch for new releases</strong> — every morning the site now checks Hugging Face and the Cohere, Voyage and Jina model pages for rerankers it doesn’t cover yet, and adds them after reading each vendor’s own announcement</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-03">3 Oct 2026 — The RAG guide’s model picks, corrected; the Chinese pages, finished</h2>
         <ul class="feature-list">
           <li><strong>“Which reranker to pick” was out of date</strong> — the RAG guide called bge-reranker-v2-m3 English-only (it’s BAAI’s multilingual model), recommended Cohere Rerank v3.5 for “best multilingual quality” and Voyage Rerank 2. It now points at Cohere Rerank 4 and Voyage rerank-3, describes each by how it bills and what it supports rather than with an unsourced superlative, and its code sample uses Cohere’s current client and model</li>

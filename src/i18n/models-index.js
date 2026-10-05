@@ -4,6 +4,12 @@ window.I18N_PAGE = {
     "models.tableCaption": "重排序模型对比：架构、类型、适用场景、语言、延迟、价格与 BEIR 分数",
   },
   zh: {
+  "Text and document-page images in one model; 0.8B / 2B / 4B, pointwise or listwise":
+    "一个模型同时给文本和文档页面图片打分；0.8B / 2B / 4B，逐点或列表式",
+  "English · French":
+    "英语 · 法语",
+  "LightOn's own run (PW-2B): BEIR over BM25's top 100, averaged over the 11 datasets that weren't in its training data — not comparable with rows that rerank dense retrieval. Same run: jina-reranker-m0 51.97, Qwen3-VL-Reranker-2B 49.08. Its strength is visual documents: on ViDoRe V3 the listwise 4B scores {{fact:lighton-rerank-lw-4b.vidore_v3}}":
+    "LightOn 自己的测试（PW-2B）：对 BM25 召回的前 100 条重排序，取训练中没用到的 11 个 BEIR 数据集的平均分 —— 与对稠密检索结果重排序的行不可比。同一测试中：jina-reranker-m0 51.97，Qwen3-VL-Reranker-2B 49.08。它的强项是视觉文档：在 ViDoRe V3 上，列表式 4B 得分 {{fact:lighton-rerank-lw-4b.vidore_v3}}",
   "Alibaba's own figure from the model card, which doesn't state the datasets or first stage. This table showed \"Hit@1 ≈ nemotron\" until Oct 2026, with no source we could find":
     "阿里巴巴在模型卡里给出的数字，没有说明用了哪些数据集、第一阶段用的什么检索。本表到 2026 年 10 月之前写的是“Hit@1 ≈ nemotron”，我们找不到任何出处",
   "BAAI's own run: 15 BEIR datasets, reranking the top 100 from bge-large-en-v1.5. This table carried an untraceable ~60.1 here until Oct 2026":
@@ -319,16 +325,16 @@ window.I18N_PAGE = {
     "Voyage rerank-3",
   "Per token":
     "按 token 计费",
-  "rerank-3 and -lite are Voyage’s current rerankers: 32k context, priced per token, with 200M free tokens each. The older rerank-2.5 is the one Voyage document for natural-language instructions.":
-    "rerank-3 和 -lite 是 Voyage 当前的重排序模型：32k 上下文，按 token 计费，各送 2 亿免费 token。官方文档写明支持自然语言指令的，是旧版的 rerank-2.5。",
+  "rerank-3 and -lite are Voyage’s current rerankers: 32k context, priced per token, with 200M free tokens each. They keep rerank-2.5’s natural-language instructions, with the biggest gains on long documents and code in Voyage’s own tests.":
+    "rerank-3 和 -lite 是 Voyage 当前的重排序模型：32k 上下文，按 token 计费，各送 2 亿免费 token。它们保留了 rerank-2.5 的自然语言指令能力；在 Voyage 自己的测试中，长文档和代码检索提升最大。",
   "Per-token pricing that tracks what you send":
     "按 token 计费，发多少算多少",
   "rerank-3 for accuracy, rerank-3-lite for latency — ${{fact:voyage-rerank-3.price_per_m_tokens}} and ${{fact:voyage-rerank-3-lite.price_per_m_tokens}} per 1M tokens":
     "追求准确用 rerank-3，追求速度用 rerank-3-lite —— 每百万 token 分别 ${{fact:voyage-rerank-3.price_per_m_tokens}} 和 ${{fact:voyage-rerank-3-lite.price_per_m_tokens}}",
   "200M free tokens per account on each; 32k context":
     "每个账号各送 2 亿免费 token；32k 上下文",
-  "Need natural-language instructions or the 33% Batch API discount? Voyage document both for the older rerank-2.5 only":
-    "需要自然语言指令或 Batch API 的 33% 折扣？Voyage 目前只为旧版 rerank-2.5 写明了这两项",
+  "Need the 33% Batch API discount? Voyage document it for the older rerank-2.5 only":
+    "需要 Batch API 的 33% 折扣？Voyage 目前只为旧版 rerank-2.5 写明了这一项",
   "Pro for precision, Fast for throughput — ${{fact:cohere-rerank-4-pro.price_per_search}} vs ${{fact:cohere-rerank-4-fast.price_per_search}} a search":
     "Pro 重精度，Fast 重吞吐 —— 每次检索 ${{fact:cohere-rerank-4-pro.price_per_search}} 对 ${{fact:cohere-rerank-4-fast.price_per_search}}",
   "Pro and Fast variants, 32k context, 100+ languages. Billed per search: one query plus up to 100 documents, each counted once per {{fact:cohere-rerank.billing_chunk_tokens}} tokens.":

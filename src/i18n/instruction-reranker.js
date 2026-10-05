@@ -75,10 +75,10 @@ window.I18N_PAGE = { zh: {
     "<a href=\"/models/qwen-reranker.html\">Qwen3-Reranker</a>（0.6B / 4B / 8B，Apache 2.0）—— 通过 sentence-transformers 的 <code>prompts</code> 为每个任务设定指令；Qwen 称量身定制的指令通常能带来 1–5% 的提升。",
   "<a href=\"https://huggingface.co/ContextualAI/ctxl-rerank-v2-instruct-multilingual-2b\" rel=\"noopener noreferrer\">Contextual AI Rerank v2</a> (1B / 2B / 6B, CC BY-NC-SA — non-commercial) — pass the instruction as <code>prompt=</code> to <code>predict</code> or <code>rank</code>.":
     "<a href=\"https://huggingface.co/ContextualAI/ctxl-rerank-v2-instruct-multilingual-2b\" rel=\"noopener noreferrer\">Contextual AI Rerank v2</a>（1B / 2B / 6B，CC BY-NC-SA —— 仅限非商用）—— 把指令作为 <code>prompt=</code> 传给 <code>predict</code> 或 <code>rank</code>。",
-  "<a href=\"/models/voyage-rerank.html\">Voyage rerank-2.5</a> (hosted) — append or prepend the instruction to the query. Voyage’s docs describe this for 2.5, not for the newer rerank-3.":
-    "<a href=\"/models/voyage-rerank.html\">Voyage rerank-2.5</a>（托管）—— 把指令加在 query 的前面或后面。Voyage 的文档只为 2.5 介绍了这种用法，没有提到更新的 rerank-3。",
+  "<a href=\"/models/voyage-rerank.html\">Voyage rerank-3</a> (hosted) — append or prepend the instruction to the query. Voyage introduced instructions with rerank-2.5 and say the Rerank 3 series keeps them.":
+    "<a href=\"/models/voyage-rerank.html\">Voyage rerank-3</a>（托管）—— 把指令加在 query 的前面或后面。Voyage 从 rerank-2.5 开始支持指令，并表示 Rerank 3 系列保留了这一能力。",
   "<strong>Classic (bge, Cohere, mxbai, Jina v1–v2):</strong> the most published BEIR-style numbers; open weights or mature hosted APIs; a good default for RAG “topical precision”.":
     "<strong>经典模型（bge、Cohere、mxbai、Jina v1–v2）：</strong>公开的 BEIR 类分数最多；有开源权重或成熟的托管 API；适合作为 RAG「主题精度」的默认选择。",
-  "<strong>Instruction rerankers (Qwen3, Contextual AI v2, Voyage rerank-2.5):</strong> stronger when relevance is policy-shaped; harder to compare on public leaderboards, because the score depends on the instruction you write — our <a href=\"/models/\">models table</a> shows each vendor’s own numbers where they publish any.":
-    "<strong>指令重排序器（Qwen3、Contextual AI v2、Voyage rerank-2.5）：</strong>当相关性取决于业务策略时更强；但很难在公开排行榜上比较，因为分数取决于你写的指令 —— 我们的<a href=\"/models/\">模型对比表</a>在厂商有公布时列出其自测数字。",
+  "<strong>Instruction rerankers (Qwen3, Contextual AI v2, Voyage rerank-3):</strong> stronger when relevance is policy-shaped; harder to compare on public leaderboards, because the score depends on the instruction you write — our <a href=\"/models/\">models table</a> shows each vendor’s own numbers where they publish any.":
+    "<strong>指令重排序器（Qwen3、Contextual AI v2、Voyage rerank-3）：</strong>当相关性取决于业务策略时更强；但很难在公开排行榜上比较，因为分数取决于你写的指令 —— 我们的<a href=\"/models/\">模型对比表</a>在厂商有公布时列出其自测数字。",
 }};

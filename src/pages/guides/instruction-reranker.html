@@ -44,7 +44,7 @@ results = client.rerank(
       <ul>
         <li><a href="/models/qwen-reranker.html">Qwen3-Reranker</a> (0.6B / 4B / 8B, Apache 2.0) — an instruction per task through sentence-transformers’ <code>prompts</code>; Qwen report typical gains of 1–5% from a tailored one.</li>
         <li><a href="https://huggingface.co/ContextualAI/ctxl-rerank-v2-instruct-multilingual-2b" rel="noopener noreferrer">Contextual AI Rerank v2</a> (1B / 2B / 6B, CC BY-NC-SA — non-commercial) — pass the instruction as <code>prompt=</code> to <code>predict</code> or <code>rank</code>.</li>
-        <li><a href="/models/voyage-rerank.html">Voyage rerank-2.5</a> (hosted) — append or prepend the instruction to the query. Voyage’s docs describe this for 2.5, not for the newer rerank-3.</li>
+        <li><a href="/models/voyage-rerank.html">Voyage rerank-3</a> (hosted) — append or prepend the instruction to the query. Voyage introduced instructions with rerank-2.5 and say the Rerank 3 series keeps them.</li>
       </ul>
       <pre><code># Contextual AI Rerank v2, from its model card
 from sentence_transformers import CrossEncoder
@@ -68,7 +68,7 @@ ranked = model.rank(
       <h2 id="vs">Vs classic cross-encoders</h2>
       <ul>
         <li><strong>Classic (bge, Cohere, mxbai, Jina v1–v2):</strong> the most published BEIR-style numbers; open weights or mature hosted APIs; a good default for RAG “topical precision”.</li>
-        <li><strong>Instruction rerankers (Qwen3, Contextual AI v2, Voyage rerank-2.5):</strong> stronger when relevance is policy-shaped; harder to compare on public leaderboards, because the score depends on the instruction you write — our <a href="/models/">models table</a> shows each vendor’s own numbers where they publish any.</li>
+        <li><strong>Instruction rerankers (Qwen3, Contextual AI v2, Voyage rerank-3):</strong> stronger when relevance is policy-shaped; harder to compare on public leaderboards, because the score depends on the instruction you write — our <a href="/models/">models table</a> shows each vendor’s own numbers where they publish any.</li>
         <li><strong>Late-interaction (ColBERT):</strong> different axis entirely (token MaxSim at scale) — see <a href="/guides/late-interaction-rerank.html">late-interaction guide</a>.</li>
       </ul>
 
