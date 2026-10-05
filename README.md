@@ -258,6 +258,34 @@ One axe quirk worth knowing: its link check treats *any* differing
 `text-decoration-thickness` set but no underline drawn still passes. The
 underline on prose links in `style.css` is the actual requirement.
 
+## Release watch
+
+`.github/workflows/release-watch.yml` runs `scripts/watch-releases.mjs`
+every morning (07:47 Beijing). It looks for reranker releases the site
+doesn't cover yet, from official channels only: new Hugging Face models
+from the organisations in `data/release-watch.json` (`hf_authors`),
+new rerankers trending on the Hub, and new model IDs on Cohere's,
+Voyage's and Jina's model pages. Anything new goes into a GitHub issue
+labelled `release-watch`.
+
+A scheduled Claude task picks that issue up an hour later, reads each
+vendor's own announcement or model card, updates the site (facts in
+`data/models.json` with sources, both languages, changelog and RSS),
+runs every check, and merges if they all pass. Releases it handles —
+added, or judged out of scope — go into `hf_seen` or a page's `known`
+list in `data/release-watch.json`, so they aren't reported again.
+The review often runs where huggingface.co and vendor sites are blocked,
+so it never needs raw workflow logs: the watcher attaches each Hugging Face
+find's metadata (licence, base model, whether weights are included) and
+model card to the issue; `.github/workflows/fetch-for-review.yml` fetches
+any other official page from a runner and posts its text on an issue; and
+`check-sources.mjs` reports every miss as a GitHub annotation
+(`check-runs/<job id>/annotations` in the REST API).
+
+`node scripts/watch-releases.mjs --baseline` prints what each vendor page
+lists today; `RELEASE_WATCH_SINCE=2026-06-01T00:00:00Z` looks further
+back on Hugging Face.
+
 `npm run check:external` fetches every external link in `src/pages` and
 `src/partials` (vendor docs, model cards, papers — 22 of them in Oct
 2026) and fails on any that no longer resolves; a 429 or 5xx is retried

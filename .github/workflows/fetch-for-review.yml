@@ -1,0 +1,34 @@
+name: Fetch pages for review
+
+# Fetches vendor pages and model cards from a GitHub runner and posts their
+# text as comments on an issue, for a reviewer whose own network can't reach
+# them (see scripts/fetch-for-review.mjs). Used by the daily release review.
+
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: "URLs to fetch, separated by spaces"
+        required: true
+      issue:
+        description: "Issue number to post the text on"
+        required: true
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Fetch and post
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          URLS: ${{ inputs.urls }}
+          ISSUE: ${{ inputs.issue }}
+        run: node scripts/fetch-for-review.mjs

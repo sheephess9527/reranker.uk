@@ -1,0 +1,34 @@
+name: Release watch
+
+# Looks for new reranker releases (Hugging Face, vendor model pages) the site
+# doesn't cover yet and opens a "release-watch" issue listing them. A
+# scheduled Claude task picks that issue up an hour later, verifies each
+# release against the vendor's own announcement, and updates the site.
+# Config and memory: data/release-watch.json.
+
+on:
+  schedule:
+    - cron: "47 23 * * *" # 07:47 Beijing time, ahead of the Claude task
+  workflow_dispatch:
+    inputs:
+      baseline:
+        description: "Only print the model IDs each vendor page lists now (to seed `known`)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Look for new releases
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/watch-releases.mjs ${{ inputs.baseline && '--baseline' || '--issue' }}

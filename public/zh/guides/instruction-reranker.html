@@ -100,7 +100,7 @@ results = client.rerank(
       <ul>
         <li><a href="/zh/models/qwen-reranker">Qwen3-Reranker</a>（0.6B / 4B / 8B，Apache 2.0）—— 通过 sentence-transformers 的 <code>prompts</code> 为每个任务设定指令；Qwen 称量身定制的指令通常能带来 1–5% 的提升。</li>
         <li><a href="https://huggingface.co/ContextualAI/ctxl-rerank-v2-instruct-multilingual-2b" rel="noopener noreferrer">Contextual AI Rerank v2</a>（1B / 2B / 6B，CC BY-NC-SA —— 仅限非商用）—— 把指令作为 <code>prompt=</code> 传给 <code>predict</code> 或 <code>rank</code>。</li>
-        <li><a href="/zh/models/voyage-rerank">Voyage rerank-2.5</a>（托管）—— 把指令加在 query 的前面或后面。Voyage 的文档只为 2.5 介绍了这种用法，没有提到更新的 rerank-3。</li>
+        <li><a href="/zh/models/voyage-rerank">Voyage rerank-3</a>（托管）—— 把指令加在 query 的前面或后面。Voyage 从 rerank-2.5 开始支持指令，并表示 Rerank 3 系列保留了这一能力。</li>
       </ul>
       <pre tabindex="0"><code># Contextual AI Rerank v2, from its model card
 from sentence_transformers import CrossEncoder
@@ -124,7 +124,7 @@ ranked = model.rank(
       <h2 id="vs">对比经典 cross-encoder</h2>
       <ul>
         <li><strong>经典模型（bge、Cohere、mxbai、Jina v1–v2）：</strong>公开的 BEIR 类分数最多；有开源权重或成熟的托管 API；适合作为 RAG「主题精度」的默认选择。</li>
-        <li><strong>指令重排序器（Qwen3、Contextual AI v2、Voyage rerank-2.5）：</strong>当相关性取决于业务策略时更强；但很难在公开排行榜上比较，因为分数取决于你写的指令 —— 我们的<a href="/zh/models/">模型对比表</a>在厂商有公布时列出其自测数字。</li>
+        <li><strong>指令重排序器（Qwen3、Contextual AI v2、Voyage rerank-3）：</strong>当相关性取决于业务策略时更强；但很难在公开排行榜上比较，因为分数取决于你写的指令 —— 我们的<a href="/zh/models/">模型对比表</a>在厂商有公布时列出其自测数字。</li>
         <li><strong>Late-interaction（ColBERT）：</strong>完全另一轴（大规模 token MaxSim）—— 见 <a href="/zh/guides/late-interaction-rerank">late-interaction 指南</a>。</li>
       </ul>
 

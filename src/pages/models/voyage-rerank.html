@@ -2,7 +2,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Voyage Rerank</div>
       <h1>Voyage rerank-3</h1>
-      <p class="meta">Hosted API · Voyage AI · <time datetime="2026-10-01">Updated 1 Oct 2026</time></p>
+      <p class="meta">Hosted API · Voyage AI · <time datetime="2026-10-05">Updated 5 Oct 2026</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">Hosted API</span><span class="pill info">Per token</span><span class="pill info">32K context</span></div>
       <p class="lead">Voyage AI’s current rerankers are <code>rerank-3</code>, which Voyage call their highest-accuracy model and recommend for most applications, and <code>rerank-3-lite</code>, tuned for latency. Both accept {{fact:voyage-rerank-3.context_tokens}} tokens of query plus document, and both are billed per token with {{fact:voyage-rerank-3.free_tokens}} free tokens per account. The previous <code>rerank-2.5</code> generation is still served at the same price — and it’s the one Voyage document for natural-language instructions and the Batch API.</p>
 
@@ -10,6 +10,7 @@
         <strong>On this page</strong>
         <ol>
           <li><a href="#models">Available models</a></li>
+          <li><a href="#rerank-3">What changed in rerank-3</a></li>
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="#usage">Quick start</a></li>
           <li><a href="#pros-cons">Pros and cons</a></li>
@@ -31,7 +32,16 @@
         </table>
       </div>
       <p>Per request the query can be up to 8,000 tokens, the query plus any one document up to 32,000, with up to 1,000 documents and 600K tokens in total — counting the query once per document.</p>
-      <p>Instructions — a line such as <em>“prefer passages that cite a statute”</em> added to the query — reshape relevance without training data. Voyage’s docs describe them for <code>rerank-2.5</code> and <code>-lite</code>, and don’t say whether <code>rerank-3</code> accepts them, so if you rely on instructions, test before switching.</p>
+      <p>Instructions — a line such as <em>“prefer passages that cite a statute”</em> added to the query — reshape relevance without training data. Voyage introduced them with <code>rerank-2.5</code>, and their rerank-3 announcement says the Rerank 3 series keeps them: on the MAIR instruction-following benchmark, <code>rerank-3</code> scores on par with <code>rerank-2.5</code> in Voyage’s own test.</p>
+
+      <h2 id="rerank-3">What changed in rerank-3</h2>
+      <p>Voyage released <code>rerank-3</code> and <code>rerank-3-lite</code> on 30 September 2026 as a drop-in upgrade to the 2.5 series: same API, context length, instruction support and price, and relevance scores calibrated to match the 2.5 models, so thresholds you tuned on 2.5 should still hold. <code>rerank-2.5</code> remains available.</p>
+      <ul>
+        <li><strong>Largest gains on long documents and code.</strong> On LongEmbed, <code>rerank-3</code> beats <code>rerank-2.5</code> by {{fact:voyage-rerank-3.longdoc_gain_vs_2_5}}; on Voyage’s code datasets the gain is about 2%.</li>
+        <li><strong>Against other rerankers.</strong> Across Voyage’s 95-dataset suite (top 100 from four first-stage retrievers, NDCG@10), Voyage report <code>rerank-3</code> ahead of Cohere Rerank v4.0 Pro by {{fact:voyage-rerank-3.gain_vs_cohere_v4_pro}} and of Qwen3-Reranker-8B by {{fact:voyage-rerank-3.gain_vs_qwen3_8b}}.</li>
+        <li><strong><code>rerank-3-lite</code></strong> matches <code>rerank-2.5</code>’s quality at {{fact:voyage-rerank-3-lite.price_vs_2_5}} of its price, per Voyage.</li>
+      </ul>
+      <p class="muted">These are Voyage’s own evaluations; no independent benchmark covers rerank-3 yet. Source: <a href="https://blog.voyageai.com/2026/09/30/rerank-3/" rel="noopener noreferrer">Voyage’s announcement</a>. Voyage also publish each model’s tokenizer — no weights — on Hugging Face, which you can use to count tokens locally before you’re billed for them.</p>
 
       <h2 id="pricing">Pricing</h2>
       <div class="table-wrap">
@@ -115,7 +125,7 @@ def rag_answer(query: str, vector_db, llm) -> str:
           <h3 style="color:var(--danger);margin-top:0">Cons</h3>
           <ul style="padding-left:1.2rem;color:var(--text-soft)">
             <li>No open weights; private deployment goes through the AWS or Azure marketplace</li>
-            <li>Instructions and the Batch discount are documented only for the older <code>rerank-2.5</code></li>
+            <li>The Batch discount is documented only for the older <code>rerank-2.5</code></li>
             <li>No published BEIR average — comparisons rest on Voyage’s own evaluations</li>
             <li>Smaller community than Cohere or bge</li>
           </ul>

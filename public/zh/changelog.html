@@ -62,6 +62,15 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-05">2026 年 10 月 5 日 —— Voyage rerank-3 有哪些变化；新增 LightOn-rerank</h2>
+        <ul class="feature-list">
+          <li><strong>Voyage rerank-3：依据 Voyage 的发布公告</strong> —— 本站之前写的是 Voyage 文档没说 rerank-3 是否支持自然语言指令。Voyage 9 月 30 日的发布公告明确说了：Rerank 3 系列保留这项能力。Voyage 页面新增了“rerank-3 有哪些变化”：价格不变的直接升级、分数按 rerank-2.5 校准、长文档和代码提升最大，以及 Voyage 自己与 Cohere、Qwen3 的对比 —— 每个数字每天都会和公告核对</li>
+          <li><strong>模型对比表新增 LightOn-rerank</strong> —— LightOn 的 Apache 2.0 模型系列（0.8B / 2B / 4B，逐点或列表式）用一个模型同时给文本段落和文档页面图片打分。表中列出 LightOn 自己的 BEIR 数字及其测试方法，与其他行不同</li>
+          <li><strong>每天检查新发布</strong> —— 现在每天早上都会检查 Hugging Face 以及 Cohere、Voyage、Jina 的模型页面，发现本站还没收录的重排序模型后，先阅读厂商自己的公告，再更新到网站</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-03">2026 年 10 月 3 日 —— 修正 RAG 指南的模型推荐，补完中文页面</h2>
         <ul class="feature-list">
           <li><strong>“该选哪个 reranker”过时了</strong> —— RAG 指南把 bge-reranker-v2-m3 说成仅支持英文（它其实是 BAAI 的多语言模型），还推荐 Cohere Rerank v3.5 为“最佳多语言质量”、以及 Voyage Rerank 2。现在改为推荐 Cohere Rerank 4 和 Voyage rerank-3，按计费方式和支持的能力来描述，不再用没有出处的最高级说法；示例代码也换成了 Cohere 当前的客户端和模型</li>

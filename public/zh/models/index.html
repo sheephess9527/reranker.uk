@@ -303,6 +303,17 @@
               <td title="第三方数字：Jina 在测自家 v1 模型时一起测了它（17 个 BEIR 数据集）。训练它的 sentence-transformers 公布了 TREC DL 19 上的 NDCG@10（74.30）和 MS MARCO Dev 上的 MRR@10（39.01），但没有 BEIR 平均分。本表到 2026 年 9 月之前这里写的是一个没有出处的 ~55.0">48.64*</td>
               <td class="demo-link-cell"></td>
             </tr>
+            <tr data-name="lighton-rerank" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="">
+              <th scope="row"><a href="https://huggingface.co/lightonai/LightOn-rerank-PW-2B" rel="noopener noreferrer">LightOn-rerank</a></th>
+              <td><span class="pill">Cross-encoder</span><span class="pill info">Listwise</span></td>
+              <td><span class="pill good">开源权重</span><span class="pill good">Apache 2.0</span></td>
+              <td>一个模型同时给文本和文档页面图片打分；0.8B / 2B / 4B，逐点或列表式</td>
+              <td>英语 · 法语</td>
+              <td>GPU</td>
+              <td>免费（自建）</td>
+              <td title="LightOn 自己的测试（PW-2B）：对 BM25 召回的前 100 条重排序，取训练中没用到的 11 个 BEIR 数据集的平均分 —— 与对稠密检索结果重排序的行不可比。同一测试中：jina-reranker-m0 51.97，Qwen3-VL-Reranker-2B 49.08。它的强项是视觉文档：在 ViDoRe V3 上，列表式 4B 得分 64.69">49.13*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
             <tr data-name="contextual-rerank-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="">
               <th scope="row"><a href="https://huggingface.co/ContextualAI/ctxl-rerank-v2-instruct-multilingual-2b" rel="noopener noreferrer">Contextual AI Rerank v2</a></th>
               <td><span class="pill">Instruction</span></td>
@@ -357,7 +368,7 @@
         <a class="card" href="/zh/models/voyage-rerank">
           <h3>Voyage rerank-3</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill">托管 API</span><span class="pill">按 token 计费</span></div>
-          <p>rerank-3 和 -lite 是 Voyage 当前的重排序模型：32k 上下文，按 token 计费，各送 2 亿免费 token。官方文档写明支持自然语言指令的，是旧版的 rerank-2.5。</p>
+          <p>rerank-3 和 -lite 是 Voyage 当前的重排序模型：32k 上下文，按 token 计费，各送 2 亿免费 token。它们保留了 rerank-2.5 的自然语言指令能力；在 Voyage 自己的测试中，长文档和代码检索提升最大。</p>
         </a>
         <a class="card" href="/zh/models/mxbai-rerank">
           <h3>mxbai-rerank</h3>
@@ -427,7 +438,7 @@
           <ul class="feature-list">
             <li>追求准确用 rerank-3，追求速度用 rerank-3-lite —— 每百万 token 分别 $0.05 和 $0.02</li>
             <li>每个账号各送 2 亿免费 token；32k 上下文</li>
-            <li>需要自然语言指令或 Batch API 的 33% 折扣？Voyage 目前只为旧版 rerank-2.5 写明了这两项</li>
+            <li>需要 Batch API 的 33% 折扣？Voyage 目前只为旧版 rerank-2.5 写明了这一项</li>
           </ul>
         </div>
         <div class="chooser-card">

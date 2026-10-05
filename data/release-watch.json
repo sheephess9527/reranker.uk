@@ -1,0 +1,80 @@
+{
+  "_doc": "Input for scripts/watch-releases.mjs. hf_since: Hugging Face models created before this are not news. hf_seen / known: releases already handled (added to the site, or judged not worth adding) — append to them when you handle one, so it isn't reported again.",
+  "hf_since": "2026-10-05T00:00:00Z",
+  "hf_authors": [
+    "jinaai",
+    "BAAI",
+    "mixedbread-ai",
+    "Qwen",
+    "nvidia",
+    "ContextualAI",
+    "Alibaba-NLP",
+    "cross-encoder",
+    "lightonai",
+    "Snowflake",
+    "ibm-granite",
+    "zeroentropy",
+    "voyageai",
+    "Cohere"
+  ],
+  "hf_trending_min_likes": 30,
+  "hf_seen": [
+    "Alibaba-NLP/core-reranker-2b",
+    "Alibaba-NLP/core-reranker-8b",
+    "jinaai/jina-reranker-v3.5",
+    "jinaai/jina-reranker-v3.5-GGUF",
+    "jinaai/jina-reranker-v3.5-mlx",
+    "lightonai/LightOn-rerank-LW-0.8B",
+    "lightonai/LightOn-rerank-LW-2B",
+    "lightonai/LightOn-rerank-LW-4B",
+    "lightonai/LightOn-rerank-PW-0.8B",
+    "lightonai/LightOn-rerank-PW-2B",
+    "lightonai/LightOn-rerank-PW-4B",
+    "tencent/R3-rerank-0.6b",
+    "voyageai/rerank-3",
+    "voyageai/rerank-3-lite"
+  ],
+  "pages": [
+    {
+      "name": "Cohere rerank models",
+      "url": "https://docs.cohere.com/docs/rerank",
+      "pattern": "rerank-(?:v\\d+(?:\\.\\d+)*(?:-[a-z]+)?|english-v\\d+(?:\\.\\d+)?|multilingual-v\\d+(?:\\.\\d+)?)",
+      "known": [
+        "rerank-english-v3.0",
+        "rerank-multilingual-v3.0",
+        "rerank-v3.5",
+        "rerank-v4.0-fast",
+        "rerank-v4.0-pro"
+      ]
+    },
+    {
+      "name": "Voyage rerankers",
+      "url": "https://docs.voyageai.com/docs/reranker",
+      "pattern": "rerank-(?:lite-)?\\d+(?:\\.\\d+)?(?:-lite)?",
+      "known": [
+        "rerank-1",
+        "rerank-2",
+        "rerank-2-lite",
+        "rerank-2.5",
+        "rerank-2.5-lite",
+        "rerank-3",
+        "rerank-3-lite",
+        "rerank-lite-1"
+      ]
+    },
+    {
+      "name": "Jina rerankers",
+      "url": "https://jina.ai/models/",
+      "pattern": "jina-reranker-(?:m\\d+|v\\d+(?:\\.\\d+)?(?:-(?:tiny|base|turbo|small|large)-(?:en|multilingual))?)",
+      "known": [
+        "jina-reranker-m0",
+        "jina-reranker-v1-base-en",
+        "jina-reranker-v1-tiny-en",
+        "jina-reranker-v1-turbo-en",
+        "jina-reranker-v2-base-multilingual",
+        "jina-reranker-v3",
+        "jina-reranker-v3.5"
+      ]
+    }
+  ]
+}

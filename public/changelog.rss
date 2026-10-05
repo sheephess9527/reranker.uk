@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Sat, 03 Oct 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 05 Oct 2026 12:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>5 Oct 2026 — Voyage rerank-3, what changed; LightOn-rerank added</title>
+      <link>https://reranker.uk/changelog#2026-10-05</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-05</guid>
+      <pubDate>Mon, 05 Oct 2026 12:00:00 GMT</pubDate>
+      <description>Voyage's rerank-3 announcement confirms the Rerank 3 series keeps natural-language instructions; the Voyage page now covers what changed, with figures checked daily. LightOn-rerank, an Apache 2.0 text-and-image reranker family, joins the models table. A daily watch now looks for new reranker releases.</description>
+    </item>
     <item>
       <title>3 Oct 2026 — The RAG guide's model picks, corrected; the Chinese pages, finished</title>
       <link>https://reranker.uk/changelog#2026-10-03</link>

@@ -307,6 +307,27 @@
       "check_pattern": "rerank-3 {value} Highest accuracy",
       "check_hint": "rerank-3",
       "verified_on": "2026-10-01"
+    },
+    "longdoc_gain_vs_2_5": {
+      "value": "3.35%",
+      "source_url": "https://blog.voyageai.com/2026/09/30/rerank-3/",
+      "check_pattern": "rerank-3 outperforms rerank-2\\.5 by {value}",
+      "check_hint": "LongEmbed",
+      "verified_on": "2026-10-05"
+    },
+    "gain_vs_cohere_v4_pro": {
+      "value": "2.72%",
+      "source_url": "https://blog.voyageai.com/2026/09/30/rerank-3/",
+      "check_pattern": "outperform Cohere Rerank v4\\.0 Pro by {value}",
+      "check_hint": "Cohere",
+      "verified_on": "2026-10-05"
+    },
+    "gain_vs_qwen3_8b": {
+      "value": "3.02%",
+      "source_url": "https://blog.voyageai.com/2026/09/30/rerank-3/",
+      "check_pattern": "Qwen3-Reranker-8B by {value}",
+      "check_hint": "Qwen3",
+      "verified_on": "2026-10-05"
     }
   },
   "voyage-rerank-3-lite": {
@@ -316,6 +337,13 @@
       "check_pattern": "rerank-3-lite \\$0\\.00002 \\${value} \\$0\\.001 200 million",
       "check_hint": "rerank-3-lite",
       "verified_on": "2026-10-01"
+    },
+    "price_vs_2_5": {
+      "value": "40%",
+      "source_url": "https://blog.voyageai.com/2026/09/30/rerank-3/",
+      "check_pattern": "rerank-3-lite now matches the retrieval quality of rerank-2\\.5 at {value} of the price",
+      "check_hint": "rerank-3-lite",
+      "verified_on": "2026-10-05"
     }
   },
   "voyage-rerank-2.5": {
@@ -397,6 +425,27 @@
       "check": "manual",
       "check_note": "Our own measurement with ISOLATION=both node scripts/measure-demo-latency.mjs: the live demo in Chromium on a GitHub Actions ubuntu-latest runner (4 vCPU AMD EPYC 7763), cross-origin isolated so ONNX Runtime Web runs multi-threaded; median of 5 warm runs, ~60-word passages; download size as the demo reports it. Same run with isolation stripped (single-threaded, what a browser without COEP credentialless gets): 424 / 1,359 / 516 ms for 10 passages. A phone or older laptop will be slower",
       "verified_on": "2026-10-01"
+    }
+  },
+  "lighton-rerank-pw-2b": {
+    "beir": {
+      "value": "49.13",
+      "source_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B",
+      "check_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B/raw/main/README.md",
+      "check_pattern": "Decontaminated mean[^|]*\\|\\s*\\*\\*{value}\\*\\*",
+      "check_hint": "Decontaminated",
+      "protocol_note": "LightOn's own run: 11 BEIR datasets not in the training mix, reranking BM25's top 100",
+      "verified_on": "2026-10-05"
+    }
+  },
+  "lighton-rerank-lw-4b": {
+    "vidore_v3": {
+      "value": "64.69",
+      "source_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B",
+      "check_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B/raw/main/README.md",
+      "check_pattern": "LightOn-rerank-LW-4B\\]\\([^)]*\\) \\| 4\\.5B \\| listwise \\| {value}",
+      "check_hint": "ViDoRe",
+      "verified_on": "2026-10-05"
     }
   }
 }

@@ -90,6 +90,10 @@ async function fetchPage(url) {
 
 const escRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
+// In GitHub Actions each miss is also an error annotation, which the REST API
+// serves (check-runs/<job id>/annotations) to clients that can't read raw logs.
+const annotate = (msg) => process.env.GITHUB_ACTIONS && console.log(`::error title=check-sources::${msg}`);
+
 let failed = 0;
 for (const [id, fields] of Object.entries(DATA)) {
   if (id.startsWith("_")) continue;
@@ -107,6 +111,7 @@ for (const [id, fields] of Object.entries(DATA)) {
       page = await fetchPage(url);
     } catch (err) {
       console.log(`✗ ${key} = ${value}: could not fetch ${url} (${err.message})`);
+      annotate(`${key} = ${value}: could not fetch ${url} (${err.message})`);
       failed++;
       continue;
     }
@@ -122,6 +127,7 @@ for (const [id, fields] of Object.entries(DATA)) {
     } else {
       failed++;
       console.log(`✗ ${key} = ${value}: not found at ${url}`);
+      annotate(`${key} = ${value}: not found at ${url}`);
       // Show what the page says instead, so the fix is a reading job, not a hunt.
       const hint = fact.check_hint ? new RegExp(fact.check_hint, "gi") : /BEIR/gi;
       const around = snippets(fact.check_raw ? page.raw : text, hint, 5);
