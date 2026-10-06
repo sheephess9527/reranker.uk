@@ -268,7 +268,8 @@ new rerankers trending on the Hub, and new model IDs on Cohere's,
 Voyage's and Jina's model pages. Anything new goes into a GitHub issue
 labelled `release-watch`.
 
-A scheduled Claude task picks that issue up an hour later, reads each
+A scheduled Claude task (08:54 Beijing) dispatches the watcher itself and
+waits for it — GitHub's own schedule can start hours late — then reads each
 vendor's own announcement or model card, updates the site (facts in
 `data/models.json` with sources, both languages, changelog and RSS),
 runs every check, and merges if they all pass. Releases it handles —
