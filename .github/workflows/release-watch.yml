@@ -1,10 +1,11 @@
 name: Release watch
 
 # Looks for new reranker releases (Hugging Face, vendor model pages) the site
-# doesn't cover yet and opens a "release-watch" issue listing them. A
-# scheduled Claude task picks that issue up an hour later, verifies each
-# release against the vendor's own announcement, and updates the site.
-# Config and memory: data/release-watch.json.
+# doesn't cover yet and opens a "release-watch" issue listing them. The
+# scheduled Claude review (08:54 Beijing) dispatches this workflow itself and
+# waits for it, because GitHub's own schedule below can run hours late (on
+# 6 Oct 2026 the 07:47 run started at 11:20, after the review had finished);
+# the schedule stays as a backup. Config and memory: data/release-watch.json.
 
 on:
   schedule:
