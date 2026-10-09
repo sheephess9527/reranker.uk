@@ -270,6 +270,39 @@
               <td class="muted" title="Voyage publishes its own retrieval evals, not a classic BEIR average">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
+            <tr data-name="alibaba-model-studio" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
+              <th scope="row"><a href="https://help.aliyun.com/zh/model-studio/text-rerank-api" rel="noopener noreferrer">Alibaba Cloud Model Studio</a> <span class="muted">(qwen3-rerank)</span></th>
+              <td><span class="pill">Reranker API</span></td>
+              <td><span class="pill">Hosted API</span></td>
+              <td>Alibaba Cloud’s hosted Qwen rerankers: qwen3-rerank (500 documents, 4K tokens each), qwen3.7-text-rerank (30K tokens each, Beijing region only) and qwen3-vl-rerank for images and video</td>
+              <td>100+ langs · qwen3.7: 201</td>
+              <td>API</td>
+              <td>¥0.5/M tokens in China, $0.1/M internationally†</td>
+              <td class="muted" title="Alibaba Cloud publish no benchmark for the hosted models. Prices are per million input tokens; the Beijing region includes a one-million-token free quota for 90 days. gte-rerank was retired on 30 May 2026; gte-rerank-v2 remains">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr data-name="siliconflow" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="">
+              <th scope="row"><a href="https://docs.siliconflow.com/en/api-reference/rerank/create-rerank" rel="noopener noreferrer">SiliconFlow</a> <span class="muted">(hosted open models)</span></th>
+              <td><span class="pill">Reranker API</span></td>
+              <td><span class="pill">Hosted API</span></td>
+              <td>Hosted bge-reranker-v2-m3, bce-reranker-base_v1 and Qwen3-Reranker 0.6B / 4B / 8B behind one rerank endpoint</td>
+              <td>Model-dependent</td>
+              <td>API</td>
+              <td>bge-reranker-v2-m3 free; Pro tier ¥0.07/M tokens†</td>
+              <td class="muted" title="SiliconFlow serve other vendors’ open models, so the scores are those models’ own — see their rows. Its price page lists no price for the Qwen3-Reranker models">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr data-name="vertex-ai-ranking" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+              <th scope="row"><a href="https://docs.cloud.google.com/generative-ai-app-builder/docs/ranking" rel="noopener noreferrer">Google Vertex AI ranking</a> <span class="muted">(semantic-ranker)</span></th>
+              <td><span class="pill">Reranker API</span></td>
+              <td><span class="pill">Hosted API</span></td>
+              <td>Google Cloud’s ranking API; 1,024 tokens per record; semantic-ranker-default-004 is the default, the 005 models are in preview since Sep 2026</td>
+              <td>25 langs</td>
+              <td>API</td>
+              <td>$1.00 per 1,000 queries†</td>
+              <td class="muted" title="Google publish no benchmark for the ranking models. A query counts up to 100 documents; each further 100 counts as another query">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
             <tr data-name="gte-reranker-modernbert" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="56.19*">
               <th scope="row"><a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">gte-reranker-modernbert-base</a></th>
               <td><span class="pill">Cross-encoder</span></td>
@@ -289,7 +322,7 @@
               <td>70+ langs</td>
               <td>Fast GPU / CPU-friendly</td>
               <td>Free (self-host)</td>
-              <td class="muted" title="Alibaba publish its reranking results only as a chart on the model card and in the mGTE paper (EMNLP 2024). Alibaba Cloud's hosted gte-rerank is a related model, not the same one, per the card">not published*</td>
+              <td class="muted" title="Alibaba publish its reranking results only as a chart on the model card and in the mGTE paper (EMNLP 2024). Alibaba Cloud's hosted rerankers are related models, not the same one, per the card">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="qwen3-vl-reranker" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-beir="">
