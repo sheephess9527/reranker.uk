@@ -1,4 +1,12 @@
 window.I18N_PAGE = { zh: {
+  "9 Oct 2026 (later) — Hosted rerankers watched too; Mixedbread’s new listwise model":
+    "2026 年 10 月 9 日（稍后）—— 托管重排序 API 也纳入每日检查；Mixedbread 的新列表式模型",
+  "<strong>Eleven more vendor pages watched</strong> — the daily release check now also reads the model lists of ZeroEntropy, Mixedbread, Alibaba Cloud Model Studio, SiliconFlow, Pinecone, Contextual AI, Amazon Bedrock, Google Vertex AI and NVIDIA NIM, so hosted-only rerankers are noticed too, including ones sold mainly in China":
+    "<strong>多盯 11 个厂商页面</strong> —— 每日新发布检查现在还会读取 ZeroEntropy、Mixedbread、阿里云百炼（Model Studio）、硅基流动、Pinecone、Contextual AI、Amazon Bedrock、Google Vertex AI 和 NVIDIA NIM 的模型列表，只以托管 API 形式发布的重排序模型（包括主要面向国内的）也能及时发现",
+  "<strong>Mixedbread’s hosted reranker has moved on</strong> — Mixedbread now lists v1 and v2 as legacy models and reranks inside Mixedbread Search with mxbai-rerank-v3.1-listwise, a listwise, instruction-following model whose weights aren’t published. The Mixedbread page says so, with the instruction-following figures from Mixedbread’s announcement, checked daily":
+    "<strong>Mixedbread 的托管重排序已经换代</strong> —— Mixedbread 现在把 v1、v2 列为旧版模型，在 Mixedbread Search 内用 mxbai-rerank-v3.1-listwise 重排序，这是一个能跟随指令的列表式模型，权重未公开。Mixedbread 页面已写明这一点，并附上 Mixedbread 公告里的指令跟随评测数字，每天核对",
+  "<strong>zerank-2’s licence</strong> — the weights on Hugging Face were relicensed to Apache 2.0 in July 2026, while ZeroEntropy’s own docs still call them non-commercial; the models table now notes the conflict. NVIDIA’s smaller llama-nemotron-rerank-500m-v2 is mentioned beside the 1B":
+    "<strong>zerank-2 的许可</strong> —— Hugging Face 上的权重在 2026 年 7 月改为 Apache 2.0 许可，而 ZeroEntropy 自己的文档仍写着非商用；模型对比表现在注明了这一矛盾。NVIDIA 更小的 llama-nemotron-rerank-500m-v2 也在 1B 旁边提到",
   "9 Oct 2026 — Three rerankers the release watch had missed; ColBERT through sentence-transformers":
     "2026 年 10 月 9 日 —— 补上新发布检查漏掉的三个重排序模型；用 sentence-transformers 跑 ColBERT",
   "<strong>The release watch was looking in too few places</strong> — it only checked 14 organisations on Hugging Face, and only models with “rerank” in the name. It now checks every model Hugging Face tags as a reranker, whoever published it, plus popular ones the site has never mentioned, and new releases of the libraries the demo and guides use":

@@ -498,5 +498,43 @@
       "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
       "verified_on": "2026-10-09"
     }
+  },
+  "mxbai-rerank-v3-listwise": {
+    "instr_mrr": {
+      "value": "0.93",
+      "source_url": "https://www.mixedbread.com/blog/listwise-rerank",
+      "check_url": "https://www.mixedbread.com/blog/listwise-rerank.md",
+      "check_pattern": "\\*\\*mxbai-rerank-v3-listwise\\*\\*\\s*\\|\\s*\\*\\*{value}\\*\\*",
+      "check_hint": "MRR",
+      "protocol_note": "Mixedbread's own 900-example instruction-following evaluation (recency, source priority, multi-step instructions), from the mxbai-rerank-v3-listwise announcement; v3.1 replaced v3 in September 2026",
+      "verified_on": "2026-10-09"
+    },
+    "instr_mrr_voyage_2_5": {
+      "value": "0.84",
+      "source_url": "https://www.mixedbread.com/blog/listwise-rerank",
+      "check_url": "https://www.mixedbread.com/blog/listwise-rerank.md",
+      "check_pattern": "Voyage rerank-2\\.5\\s*\\|\\s*{value}\\s*\\|",
+      "check_hint": "MRR",
+      "protocol_note": "Mixedbread's own 900-example instruction-following evaluation (recency, source priority, multi-step instructions), from the mxbai-rerank-v3-listwise announcement; v3.1 replaced v3 in September 2026",
+      "verified_on": "2026-10-09"
+    },
+    "instr_mrr_cohere_4_pro": {
+      "value": "0.77",
+      "source_url": "https://www.mixedbread.com/blog/listwise-rerank",
+      "check_url": "https://www.mixedbread.com/blog/listwise-rerank.md",
+      "check_pattern": "Cohere Rerank 4 Pro\\s*\\|\\s*{value}\\s*\\|",
+      "check_hint": "MRR",
+      "protocol_note": "Mixedbread's own 900-example instruction-following evaluation (recency, source priority, multi-step instructions), from the mxbai-rerank-v3-listwise announcement; v3.1 replaced v3 in September 2026",
+      "verified_on": "2026-10-09"
+    },
+    "instr_mrr_zerank_2": {
+      "value": "0.71",
+      "source_url": "https://www.mixedbread.com/blog/listwise-rerank",
+      "check_url": "https://www.mixedbread.com/blog/listwise-rerank.md",
+      "check_pattern": "ZeroEntropy zerank-2\\s*\\|\\s*{value}\\s*\\|",
+      "check_hint": "MRR",
+      "protocol_note": "Mixedbread's own 900-example instruction-following evaluation (recency, source priority, multi-step instructions), from the mxbai-rerank-v3-listwise announcement; v3.1 replaced v3 in September 2026",
+      "verified_on": "2026-10-09"
+    }
   }
 }

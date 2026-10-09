@@ -4,6 +4,10 @@ window.I18N_PAGE = {
     "models.tableCaption": "重排序模型对比：架构、类型、适用场景、语言、延迟、价格与 BEIR 分数",
   },
   zh: {
+  "4B on Qwen3-4B, 32K context; also served by ZeroEntropy’s API. Relicensed to Apache 2.0 on Hugging Face in July 2026 — ZeroEntropy’s own docs still call it non-commercial":
+    "4B，基于 Qwen3-4B，32K 上下文；ZeroEntropy 的 API 也提供。2026 年 7 月在 Hugging Face 上改为 Apache 2.0 许可 —— ZeroEntropy 自己的文档仍写着非商用",
+  "1.2B, 8K context; licensed for commercial use. NIM also serves a smaller llama-nemotron-rerank-500m-v2":
+    "1.2B，8K 上下文；许可允许商用。NIM 还提供更小的 llama-nemotron-rerank-500m-v2",
   "306M, 8K context; small multilingual default, served by Text Embeddings Inference":
     "306M，8K 上下文；小巧的多语言默认之选，可用 Text Embeddings Inference 部署",
   "70+ langs":
