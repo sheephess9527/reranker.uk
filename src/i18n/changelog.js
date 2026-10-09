@@ -1,4 +1,10 @@
 window.I18N_PAGE = { zh: {
+  "9 Oct 2026 (evening) — Alibaba Cloud, SiliconFlow and Google’s ranking API in the models table":
+    "2026 年 10 月 9 日（晚）—— 阿里云百炼、硅基流动和 Google 排序 API 加入模型对比表",
+  "<strong>Hosted rerankers you can buy in China, and Google’s</strong> — the models table now lists Alibaba Cloud Model Studio (qwen3-rerank at ¥0.5 per million tokens in China or $0.1 internationally, the 201-language qwen3.7-text-rerank, and qwen3-vl-rerank for images and video), SiliconFlow (bge-reranker-v2-m3 free, Qwen3-Reranker 0.6B / 4B / 8B on the same endpoint) and Google Vertex AI ranking ($1.00 per 1,000 queries). Prices come from each vendor’s price page and are checked daily":
+    "<strong>国内能直接买到的托管重排序，以及 Google 的</strong> —— 模型对比表新增阿里云百炼（qwen3-rerank 国内每百万 token ¥0.5、国际 $0.1，支持 201 种语言的 qwen3.7-text-rerank，以及处理图片和视频的 qwen3-vl-rerank）、硅基流动（bge-reranker-v2-m3 免费，同一接口还提供 Qwen3-Reranker 0.6B / 4B / 8B）和 Google Vertex AI 排序（每 1,000 次查询 $1.00）。价格都取自各厂商的价格页，每天核对",
+  "<strong>The release watch now catches qwen3.7-text-rerank</strong> — Alibaba’s newest reranker didn’t match the watch’s pattern for Alibaba model names; it does now":
+    "<strong>新发布检查现在能发现 qwen3.7-text-rerank</strong> —— 阿里最新的重排序模型之前没匹配上检查规则里的阿里模型名格式，现在补上了",
   "9 Oct 2026 (later) — Hosted rerankers watched too; Mixedbread’s new listwise model":
     "2026 年 10 月 9 日（稍后）—— 托管重排序 API 也纳入每日检查；Mixedbread 的新列表式模型",
   "<strong>Eleven more vendor pages watched</strong> — the daily release check now also reads the model lists of ZeroEntropy, Mixedbread, Alibaba Cloud Model Studio, SiliconFlow, Pinecone, Contextual AI, Amazon Bedrock, Google Vertex AI and NVIDIA NIM, so hosted-only rerankers are noticed too, including ones sold mainly in China":

@@ -4,6 +4,38 @@ window.I18N_PAGE = {
     "models.tableCaption": "重排序模型对比：架构、类型、适用场景、语言、延迟、价格与 BEIR 分数",
   },
   zh: {
+  "Reranker API":
+    "重排序 API",
+  "Alibaba Cloud’s hosted Qwen rerankers: qwen3-rerank (500 documents, 4K tokens each), qwen3.7-text-rerank (30K tokens each, Beijing region only) and qwen3-vl-rerank for images and video":
+    "阿里云托管的 Qwen 重排序模型：qwen3-rerank（最多 500 篇文档，每篇 4K token）、qwen3.7-text-rerank（每篇 30K token，仅北京地域）以及处理图片和视频的 qwen3-vl-rerank",
+  "100+ langs · qwen3.7: {{fact:alibaba-model-studio-rerank.qwen37_languages}}":
+    "100+ 种语言 · qwen3.7：{{fact:alibaba-model-studio-rerank.qwen37_languages}} 种",
+  "¥{{fact:alibaba-model-studio-rerank.qwen3_rerank_cny_per_m}}/M tokens in China, ${{fact:alibaba-model-studio-rerank.qwen3_rerank_usd_per_m}}/M internationally†":
+    "国内 ¥{{fact:alibaba-model-studio-rerank.qwen3_rerank_cny_per_m}}/百万 token，国际 ${{fact:alibaba-model-studio-rerank.qwen3_rerank_usd_per_m}}/百万 token†",
+  "Alibaba Cloud publish no benchmark for the hosted models. Prices are per million input tokens; the Beijing region includes a one-million-token free quota for 90 days. gte-rerank was retired on 30 May 2026; gte-rerank-v2 remains":
+    "阿里云没有为托管模型公布评测分数。价格按每百万输入 token 计；北京地域开通后 90 天内有 100 万 token 免费额度。gte-rerank 已于 2026 年 5 月 30 日下线，gte-rerank-v2 仍可用",
+  "<a href=\"https://help.aliyun.com/zh/model-studio/text-rerank-api\" rel=\"noopener noreferrer\">Alibaba Cloud Model Studio</a> <span class=\"muted\">(qwen3-rerank)</span>":
+    "<a href=\"https://help.aliyun.com/zh/model-studio/text-rerank-api\" rel=\"noopener noreferrer\">阿里云百炼</a> <span class=\"muted\">（qwen3-rerank）</span>",
+  "Hosted bge-reranker-v2-m3, bce-reranker-base_v1 and Qwen3-Reranker 0.6B / 4B / 8B behind one rerank endpoint":
+    "一个 rerank 接口托管 bge-reranker-v2-m3、bce-reranker-base_v1 和 Qwen3-Reranker 0.6B / 4B / 8B",
+  "Model-dependent":
+    "取决于所选模型",
+  "bge-reranker-v2-m3 free; Pro tier ¥{{fact:siliconflow-rerank.bge_v2_m3_pro_cny_per_m}}/M tokens†":
+    "bge-reranker-v2-m3 免费；Pro 版 ¥{{fact:siliconflow-rerank.bge_v2_m3_pro_cny_per_m}}/百万 token†",
+  "SiliconFlow serve other vendors’ open models, so the scores are those models’ own — see their rows. Its price page lists no price for the Qwen3-Reranker models":
+    "硅基流动托管的是其他厂商的开源模型，分数就是这些模型自己的 —— 见对应的行。它的价格页没有列出 Qwen3-Reranker 的价格",
+  "<a href=\"https://docs.siliconflow.com/en/api-reference/rerank/create-rerank\" rel=\"noopener noreferrer\">SiliconFlow</a> <span class=\"muted\">(hosted open models)</span>":
+    "<a href=\"https://docs.siliconflow.com/en/api-reference/rerank/create-rerank\" rel=\"noopener noreferrer\">硅基流动 SiliconFlow</a> <span class=\"muted\">（托管开源模型）</span>",
+  "Google Cloud’s ranking API; 1,024 tokens per record; semantic-ranker-default-004 is the default, the 005 models are in preview since Sep 2026":
+    "Google Cloud 的排序 API；每条记录最多 1,024 token；默认是 semantic-ranker-default-004，005 系列自 2026 年 9 月起预览",
+  "25 langs":
+    "25 种语言",
+  "${{fact:vertex-ai-ranking.usd_per_1000_queries}} per 1,000 queries†":
+    "每 1,000 次查询 ${{fact:vertex-ai-ranking.usd_per_1000_queries}}†",
+  "Google publish no benchmark for the ranking models. A query counts up to 100 documents; each further 100 counts as another query":
+    "Google 没有为排序模型公布评测分数。一次查询最多计 100 篇文档，每多 100 篇算一次查询",
+  "<a href=\"https://docs.cloud.google.com/generative-ai-app-builder/docs/ranking\" rel=\"noopener noreferrer\">Google Vertex AI ranking</a> <span class=\"muted\">(semantic-ranker)</span>":
+    "<a href=\"https://docs.cloud.google.com/generative-ai-app-builder/docs/ranking\" rel=\"noopener noreferrer\">Google Vertex AI 排序</a> <span class=\"muted\">（semantic-ranker）</span>",
   "4B on Qwen3-4B, 32K context; also served by ZeroEntropy’s API. Relicensed to Apache 2.0 on Hugging Face in July 2026 — ZeroEntropy’s own docs still call it non-commercial":
     "4B，基于 Qwen3-4B，32K 上下文；ZeroEntropy 的 API 也提供。2026 年 7 月在 Hugging Face 上改为 Apache 2.0 许可 —— ZeroEntropy 自己的文档仍写着非商用",
   "1.2B, 8K context; licensed for commercial use. NIM also serves a smaller llama-nemotron-rerank-500m-v2":
@@ -12,8 +44,8 @@ window.I18N_PAGE = {
     "306M，8K 上下文；小巧的多语言默认之选，可用 Text Embeddings Inference 部署",
   "70+ langs":
     "70+ 种语言",
-  "Alibaba publish its reranking results only as a chart on the model card and in the mGTE paper (EMNLP 2024). Alibaba Cloud's hosted gte-rerank is a related model, not the same one, per the card":
-    "阿里巴巴只在模型卡的图表和 mGTE 论文（EMNLP 2024）里公布了它的重排序结果。据模型卡说明，阿里云托管的 gte-rerank 是相关模型，但不是同一个",
+  "Alibaba publish its reranking results only as a chart on the model card and in the mGTE paper (EMNLP 2024). Alibaba Cloud's hosted rerankers are related models, not the same one, per the card":
+    "阿里巴巴只在模型卡的图表和 mGTE 论文（EMNLP 2024）里公布了它的重排序结果。据模型卡说明，阿里云托管的重排序模型是相关模型，但不是同一个",
   "Text, images, screenshots and video in one model; 2B / 8B, 32K context":
     "一个模型处理文本、图片、截图和视频；2B / 8B，32K 上下文",
   "30+ langs":

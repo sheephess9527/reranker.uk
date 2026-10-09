@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 09 Oct 2026 14:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 09 Oct 2026 16:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>9 Oct 2026 (evening) — Alibaba Cloud, SiliconFlow and Google's ranking API in the models table</title>
+      <link>https://reranker.uk/changelog#2026-10-09-china</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-09-china</guid>
+      <pubDate>Fri, 09 Oct 2026 16:00:00 GMT</pubDate>
+      <description>The models table adds three hosted reranker APIs: Alibaba Cloud Model Studio (qwen3-rerank, qwen3.7-text-rerank, qwen3-vl-rerank), SiliconFlow (hosted bge-reranker-v2-m3 and Qwen3-Reranker) and Google Vertex AI ranking, with prices checked daily against each vendor's price page.</description>
+    </item>
     <item>
       <title>9 Oct 2026 (later) — Hosted rerankers watched too; Mixedbread's new listwise model</title>
       <link>https://reranker.uk/changelog#2026-10-09-hosted</link>

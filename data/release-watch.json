@@ -131,12 +131,13 @@
     {
       "name": "Alibaba Cloud Model Studio rerank",
       "url": "https://help.aliyun.com/zh/model-studio/text-rerank-api",
-      "pattern": "(?:gte-rerank|qwen\\d*(?:\\.\\d+)?-(?:vl-)?rerank)(?:-(?:v\\d+(?:\\.\\d+)?|plus|max|turbo|flash|lite|pro))*(?![\\w-]|\\.\\w)",
+      "pattern": "(?:gte-rerank|qwen\\d*(?:\\.\\d+)?-(?:vl-|text-)?rerank)(?:-(?:v\\d+(?:\\.\\d+)?|plus|max|turbo|flash|lite|pro))*(?![\\w-]|\\.\\w)",
       "known": [
         "gte-rerank",
         "gte-rerank-v2",
         "qwen3-rerank",
-        "qwen3-vl-rerank"
+        "qwen3-vl-rerank",
+        "qwen3.7-text-rerank"
       ]
     },
     {

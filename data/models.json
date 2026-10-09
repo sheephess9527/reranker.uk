@@ -536,5 +536,53 @@
       "protocol_note": "Mixedbread's own 900-example instruction-following evaluation (recency, source priority, multi-step instructions), from the mxbai-rerank-v3-listwise announcement; v3.1 replaced v3 in September 2026",
       "verified_on": "2026-10-09"
     }
+  },
+  "alibaba-model-studio-rerank": {
+    "qwen3_rerank_cny_per_m": {
+      "value": "0.5",
+      "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+      "check_pattern": "qwen3-rerank 文本输入：{value} 元",
+      "check_hint": "rerank",
+      "verified_on": "2026-10-09"
+    },
+    "qwen37_text_rerank_cny_per_m": {
+      "value": "0.5",
+      "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+      "check_pattern": "qwen3\\.7-text-rerank 文本输入：{value} 元",
+      "check_hint": "rerank",
+      "verified_on": "2026-10-09"
+    },
+    "qwen3_rerank_usd_per_m": {
+      "value": "0.1",
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+      "check_pattern": "qwen3-rerank International \\$\\s*{value}\\s",
+      "check_hint": "rerank",
+      "verified_on": "2026-10-09"
+    },
+    "qwen37_languages": {
+      "value": "201",
+      "source_url": "https://help.aliyun.com/zh/model-studio/text-rerank-api",
+      "check_pattern": "qwen3\\.7-text-rerank[^。]{0,200}?{value} 种主流语种",
+      "check_hint": "qwen3.7",
+      "verified_on": "2026-10-09"
+    }
+  },
+  "siliconflow-rerank": {
+    "bge_v2_m3_pro_cny_per_m": {
+      "value": "0.07",
+      "source_url": "https://siliconflow.cn/pricing",
+      "check_pattern": "bge-reranker-v2-m3 \\(Pro\\) Pro/BAAI/bge-reranker-v2-m3 ¥ {value}",
+      "check_hint": "reranker",
+      "verified_on": "2026-10-09"
+    }
+  },
+  "vertex-ai-ranking": {
+    "usd_per_1000_queries": {
+      "value": "1.00",
+      "source_url": "https://cloud.google.com/generative-ai-app-builder/pricing?hl=en",
+      "check_pattern": "Ranking \\$\\s*{value} / 1,000 count",
+      "check_hint": "Ranking",
+      "verified_on": "2026-10-09"
+    }
   }
 }
