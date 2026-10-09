@@ -3,11 +3,17 @@
  * Looks for reranker releases the site doesn't cover yet, from official
  * channels only:
  *
- *   - Hugging Face: reranker models created after `hf_since` by the
- *     organisations in `hf_authors`, plus any new reranker trending on the
- *     Hub with at least `hf_trending_min_likes` likes;
+ *   - Hugging Face, new: rerankers created after `hf_since` — any model the
+ *     organisations in `hf_authors` publish, plus any `text-ranking` model on
+ *     the Hub with at least `hf_new_min_likes` likes (community re-uploads
+ *     and quantisations of other people's models are left out);
+ *   - Hugging Face, catch-up: `text-ranking` models with at least
+ *     `hf_catchup_min_likes` likes, whenever they came out, that no page
+ *     on the site mentions — popular releases the watch started too late for;
  *   - vendor pages for hosted APIs (Cohere, Voyage, Jina): model IDs
- *     matching each page's `pattern` that aren't in its `known` list.
+ *     matching each page's `pattern` that aren't in its `known` list;
+ *   - GitHub releases of the libraries the site's code and guides depend on
+ *     (`libraries`): a stable release newer than `known`.
  *
  * Config and memory live in data/release-watch.json. Whoever handles a
  * release (adds it to the site, or decides it isn't worth adding) appends it
@@ -36,7 +42,8 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function get(url, as = "text") {
   for (let attempt = 0; ; attempt++) {
-    const res = await fetch(url, { headers: UA, signal: AbortSignal.timeout(30_000) });
+    const auth = url.startsWith("https://api.github.com/") && process.env.GITHUB_TOKEN ? { authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {};
+    const res = await fetch(url, { headers: { ...UA, ...auth }, signal: AbortSignal.timeout(30_000) });
     if (res.ok) return as === "json" ? res.json() : res.text();
     if ((res.status === 429 || res.status >= 500) && attempt < 2) {
       await sleep(5000 * (attempt + 1));
@@ -51,46 +58,91 @@ const found = []; // { key, source, title, url, detail }
 // RELEASE_WATCH_SINCE overrides hf_since for a one-off look further back.
 const since = Date.parse(process.env.RELEASE_WATCH_SINCE || CONFIG.hf_since);
 const seen = new Set(CONFIG.hf_seen.map((s) => s.toLowerCase()));
-const isReranker = (id) => /rerank|cross-encoder|colbert/i.test(id);
+const tracked = new Set(CONFIG.hf_authors.map((a) => a.toLowerCase()));
+// Hugging Face's own task tag for rerankers is `text-ranking`; the name test
+// catches models published without it.
+const isReranker = (m) => m.pipeline_tag === "text-ranking" || /rerank|cross-encoder|colbert/i.test(m.id);
+// A GGUF/MLX/AWQ… copy of someone else's model is a packaging, not a release.
+const isRepack = (id) => /gguf|mlx|awq|gptq|nvfp4|fp8|int[48]|[-_]\d+bit|onnx|seq-cls|-vllm\b/i.test(id);
+const hfModel = (m, source, detail) => {
+  const id = m.id || m.modelId;
+  if (!id || seen.has(id.toLowerCase()) || found.some((f) => f.key === id)) return;
+  found.push({ key: id, source, title: id, url: `https://huggingface.co/${id}`, detail });
+};
+const stats = (m) => `created ${m.createdAt?.slice(0, 10)}, ${m.likes ?? 0} likes, ${m.downloads ?? 0} downloads`;
+const HF = "https://huggingface.co/api/models?full=false";
 
-// --- Hugging Face, by organisation
+// --- Hugging Face, new, by organisation
 for (const author of CONFIG.hf_authors) {
-  const url = `https://huggingface.co/api/models?author=${encodeURIComponent(author)}&sort=createdAt&direction=-1&limit=50&full=false`;
   try {
-    for (const m of await get(url, "json")) {
-      const id = m.id || m.modelId;
-      if (!id || !isReranker(id) || seen.has(id.toLowerCase())) continue;
-      if (Date.parse(m.createdAt) <= since) continue;
-      found.push({
-        key: id,
-        source: `Hugging Face · ${author}`,
-        title: id,
-        url: `https://huggingface.co/${id}`,
-        detail: `created ${m.createdAt?.slice(0, 10)}, ${m.likes ?? 0} likes, ${m.downloads ?? 0} downloads`,
-      });
+    for (const m of await get(`${HF}&author=${encodeURIComponent(author)}&sort=createdAt&direction=-1&limit=50`, "json")) {
+      if (isReranker(m) && Date.parse(m.createdAt) > since) hfModel(m, `Hugging Face · ${author}`, stats(m));
     }
   } catch (err) {
     warnings.push(`Hugging Face ${author}: ${err.message}`);
   }
 }
 
-// --- Hugging Face, trending rerankers from anyone
+// --- Hugging Face, new, from anyone (the list is newest first)
 try {
-  const url = "https://huggingface.co/api/models?search=rerank&sort=trendingScore&direction=-1&limit=40&full=false";
-  for (const m of await get(url, "json")) {
-    const id = m.id || m.modelId;
-    if (!id || seen.has(id.toLowerCase()) || found.some((f) => f.key === id)) continue;
-    if (Date.parse(m.createdAt) <= since || (m.likes ?? 0) < CONFIG.hf_trending_min_likes) continue;
-    found.push({
-      key: id,
-      source: "Hugging Face · trending",
-      title: id,
-      url: `https://huggingface.co/${id}`,
-      detail: `created ${m.createdAt?.slice(0, 10)}, ${m.likes} likes — not from a tracked organisation; check who published it`,
-    });
+  for (const m of await get(`${HF}&pipeline_tag=text-ranking&sort=createdAt&direction=-1&limit=500`, "json")) {
+    if (Date.parse(m.createdAt) <= since) break;
+    const author = m.id.split("/")[0].toLowerCase();
+    if ((m.likes ?? 0) < CONFIG.hf_new_min_likes || (isRepack(m.id) && !tracked.has(author))) continue;
+    hfModel(m, "Hugging Face · new text-ranking model", `${stats(m)} — not from a tracked organisation; check who published it`);
   }
 } catch (err) {
-  warnings.push(`Hugging Face trending: ${err.message}`);
+  warnings.push(`Hugging Face new: ${err.message}`);
+}
+
+// --- Hugging Face, catch-up: popular rerankers no page mentions
+// The site's own pages are the record of what it covers, so a model it
+// names anywhere (even to say it was left out) is not reported.
+const siteText = (() => {
+  const out = [];
+  const walk = (dir) => {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const p = path.join(dir, e.name);
+      if (e.isDirectory()) walk(p);
+      else if (e.name.endsWith(".html")) out.push(fs.readFileSync(p, "utf8"));
+    }
+  };
+  walk(path.join(ROOT, "src/pages"));
+  return out.join("\n").toLowerCase();
+})();
+try {
+  for (const m of await get(`${HF}&pipeline_tag=text-ranking&sort=likes&direction=-1&limit=200`, "json")) {
+    if ((m.likes ?? 0) < CONFIG.hf_catchup_min_likes) break;
+    const name = m.id.split("/")[1].toLowerCase();
+    if (isRepack(m.id) || siteText.includes(name)) continue;
+    hfModel(m, "Hugging Face · popular, never covered", `${stats(m)} — the site doesn't mention it anywhere`);
+  }
+} catch (err) {
+  warnings.push(`Hugging Face catch-up: ${err.message}`);
+}
+
+// --- libraries the site's code and guides depend on
+for (const lib of CONFIG.libraries) {
+  try {
+    const releases = await get(`https://api.github.com/repos/${lib.repo}/releases?per_page=10`, "json");
+    const latest = releases.find((r) => !r.prerelease && !r.draft);
+    if (BASELINE) {
+      console.log(`${lib.repo}: ${latest?.tag_name}`);
+      continue;
+    }
+    if (latest && latest.tag_name !== lib.known) {
+      found.push({
+        key: `${lib.repo}@${latest.tag_name}`,
+        source: `GitHub releases · ${lib.repo}`,
+        title: `${lib.repo} ${latest.tag_name}`,
+        url: latest.html_url,
+        detail: `released ${latest.published_at?.slice(0, 10)}; the site was last checked against ${lib.known} — ${lib.why}`,
+        notes: latest.body || "",
+      });
+    }
+  } catch (err) {
+    warnings.push(`${lib.repo}: ${err.message}`);
+  }
 }
 
 // --- vendor pages for hosted APIs
@@ -123,6 +175,10 @@ if (!found.length) {
 // review can read the vendor's own words from the issue — it often runs
 // where huggingface.co isn't reachable.
 async function evidence(f) {
+  const fence = "~~~~";
+  if (f.notes) {
+    return `<details><summary>${f.title}: release notes</summary>\n\n${fence}markdown\n${f.notes.slice(0, 12000)}\n${fence}\n</details>`;
+  }
   if (!f.url.startsWith("https://huggingface.co/")) return "";
   const id = f.url.slice("https://huggingface.co/".length);
   try {
@@ -134,7 +190,7 @@ async function evidence(f) {
       pipeline_tag: m.pipeline_tag,
       languages: m.cardData?.language,
       gated: m.gated,
-      has_weights: files.some((x) => /\.(safetensors|bin|onnx|gguf)$/.test(x)),
+      has_weights: files.some((x) => /\.(safetensors|bin|onnx|gguf|pt|pth)$/.test(x)),
       files: files.length > 25 ? [...files.slice(0, 25), `…${files.length - 25} more`] : files,
     };
     let card;
@@ -143,7 +199,6 @@ async function evidence(f) {
     } catch (err) {
       card = `(README not fetched: ${err.message})`;
     }
-    const fence = "~~~~";
     return `<details><summary>${id}: metadata and model card</summary>\n\n${fence}json\n${JSON.stringify(meta, null, 1)}\n${fence}\n\n${fence}markdown\n${card}\n${fence}\n</details>`;
   } catch (err) {
     return `${id}: metadata not fetched (${err.message})`;

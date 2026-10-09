@@ -262,11 +262,24 @@ underline on prose links in `style.css` is the actual requirement.
 
 `.github/workflows/release-watch.yml` runs `scripts/watch-releases.mjs`
 every morning (07:47 Beijing). It looks for reranker releases the site
-doesn't cover yet, from official channels only: new Hugging Face models
-from the organisations in `data/release-watch.json` (`hf_authors`),
-new rerankers trending on the Hub, and new model IDs on Cohere's,
-Voyage's and Jina's model pages. Anything new goes into a GitHub issue
-labelled `release-watch`.
+doesn't cover yet, from official channels only:
+
+- **new on Hugging Face** — anything the organisations in
+  `data/release-watch.json` (`hf_authors`) publish, and any model tagged
+  `text-ranking` (the Hub's task tag for rerankers) with at least
+  `hf_new_min_likes` likes, whoever published it; community GGUF/MLX/AWQ
+  copies of other people's models are left out;
+- **catch-up** — `text-ranking` models with at least `hf_catchup_min_likes`
+  likes, however old, that no page on the site mentions. Until 9 Oct 2026
+  the watch only looked at 14 organisations and names containing
+  "rerank", and missed Contrastive-LM/CLM-v0.1-8B (21 Sept, by then the
+  most-liked reranker on the Hub) and zerank-2;
+- **hosted APIs** — new model IDs on Cohere's, Voyage's and Jina's model pages;
+- **libraries** — a new stable GitHub release of the libraries the demo and
+  guides use (`libraries`, with the release the site was last checked
+  against).
+
+Anything new goes into a GitHub issue labelled `release-watch`.
 
 A scheduled Claude task (08:54 Beijing) dispatches the watcher itself and
 waits for it — GitHub's own schedule can start hours late — then reads each

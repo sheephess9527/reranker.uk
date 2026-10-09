@@ -103,16 +103,22 @@
       <blockquote>Rule of thumb: if Recall@50 is low, fix retrieval — no reranker architecture invents missing chunks.</blockquote>
 
       <h2 id="colbert">ColBERTv2 in practice</h2>
-      <pre tabindex="0"><code># Conceptual flow with pyserini / ragatouille-style tooling
-# 1. Index token embeddings offline
-# 2. At query time: MaxSim between query tokens and doc token vectors
-# 3. Take top 50 for optional cross-encoder rerank
+      <pre tabindex="0"><code># pip install -U "sentence-transformers>=6"
+# Rescore first-stage candidates with ColBERTv2's token-level MaxSim,
+# keep the top 50 for an optional cross-encoder pass
+from sentence_transformers import MultiVectorEncoder
 
-from ragatouille import RAGPretrainedModel
+colbert = MultiVectorEncoder("colbert-ir/colbertv2.0")
 
-colbert = RAGPretrainedModel.from_pretrained("colbert-ir/colbertv2.0")
-results = colbert.search(query="reset API key", k=50)
-# Pass `results` to bge-reranker or Cohere for final ordering</code></pre>
+query = "reset API key"
+candidates = [...]  # e.g. the top 200 from BM25 or a bi-encoder
+
+q = colbert.encode_query([query])        # queries and documents are encoded
+d = colbert.encode_document(candidates)  # differently: use both methods
+scores = colbert.similarity(q, d)[0]     # one MaxSim score per candidate
+top50 = [candidates[i] for i in scores.argsort(descending=True)[:50].tolist()]
+# Pass top50 to bge-reranker or Cohere for final ordering</code></pre>
+      <p>Since version 6.0 (August 2026), sentence-transformers loads ColBERT-style models directly — Stanford ColBERT checkpoints like <code>colbert-ir/colbertv2.0</code>, PyLate models and ColPali-style visual retrievers — through <code>MultiVectorEncoder</code> (<a href="https://github.com/huggingface/sentence-transformers/releases/tag/v6.0.0" rel="noopener noreferrer">release notes</a>). We ran the snippet above on sentence-transformers 6.1.0 in October 2026. Used this way, rescoring what your first stage returns, it needs no index at all; to search a whole corpus with ColBERT itself you would build a compressed index such as PLAID (LightOn’s fast-plaid), as the release notes explain.</p>
       <p>ColBERT shines on keyword-heavy corpora (support KBs, legal clauses, SKUs) where bi-encoders blur exact tokens. It does <em>not</em> run in our browser demo — different inference path — but belongs on your <a href="/models/">architecture comparison</a> checklist.</p>
 
       <h2 id="pick">How to pick an architecture</h2>

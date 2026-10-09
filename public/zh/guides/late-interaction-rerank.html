@@ -103,16 +103,22 @@
       <blockquote>经验法则：Recall@50 低则先修检索 —— 没有 rerank 架构能变出缺失的 chunk。</blockquote>
 
       <h2 id="colbert">ColBERTv2 实战</h2>
-      <pre tabindex="0"><code># Conceptual flow with pyserini / ragatouille-style tooling
-# 1. Index token embeddings offline
-# 2. At query time: MaxSim between query tokens and doc token vectors
-# 3. Take top 50 for optional cross-encoder rerank
+      <pre tabindex="0"><code># pip install -U "sentence-transformers>=6"
+# Rescore first-stage candidates with ColBERTv2's token-level MaxSim,
+# keep the top 50 for an optional cross-encoder pass
+from sentence_transformers import MultiVectorEncoder
 
-from ragatouille import RAGPretrainedModel
+colbert = MultiVectorEncoder("colbert-ir/colbertv2.0")
 
-colbert = RAGPretrainedModel.from_pretrained("colbert-ir/colbertv2.0")
-results = colbert.search(query="reset API key", k=50)
-# Pass `results` to bge-reranker or Cohere for final ordering</code></pre>
+query = "reset API key"
+candidates = [...]  # e.g. the top 200 from BM25 or a bi-encoder
+
+q = colbert.encode_query([query])        # queries and documents are encoded
+d = colbert.encode_document(candidates)  # differently: use both methods
+scores = colbert.similarity(q, d)[0]     # one MaxSim score per candidate
+top50 = [candidates[i] for i in scores.argsort(descending=True)[:50].tolist()]
+# Pass top50 to bge-reranker or Cohere for final ordering</code></pre>
+      <p>从 6.0 版（2026 年 8 月）起，sentence-transformers 可以通过 <code>MultiVectorEncoder</code> 直接加载 ColBERT 类模型 —— 包括 <code>colbert-ir/colbertv2.0</code> 这样的 Stanford ColBERT 检查点、PyLate 模型和 ColPali 类视觉检索模型（<a href="https://github.com/huggingface/sentence-transformers/releases/tag/v6.0.0" rel="noopener noreferrer">发布说明</a>）。我们在 2026 年 10 月用 sentence-transformers 6.1.0 实际跑过上面这段代码。像这样只对第一阶段返回的候选重新打分，完全不需要建索引；如果要直接用 ColBERT 检索整个语料库，就得建 PLAID 这类压缩索引（LightOn 的 fast-plaid），发布说明里有介绍。</p>
       <p>ColBERT 在关键词密集语料（客服 KB、法律条款、SKU）上表现好，bi-encoder 易模糊精确 token。它<em>不会</em>在我们的浏览器 Demo 里跑 —— 推理路径不同 —— 但应列入你的 <a href="/zh/models/">架构对比</a> 清单。</p>
 
       <h2 id="pick">如何选择架构</h2>

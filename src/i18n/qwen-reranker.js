@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "For images, screenshots and video there is a separate family, <a href=\"https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B\" rel=\"noopener noreferrer\">Qwen3-VL-Reranker</a> (2B / 8B, 32K context, 30+ languages, Apache 2.0). In Qwen’s own runs on ViDoRe v3, a visual-document retrieval benchmark, the 8B scores {{fact:qwen3-vl-reranker-8b.vidore_v3}} and the 2B {{fact:qwen3-vl-reranker-2b.vidore_v3}}; it is in the <a href=\"/models/\">models table</a> alongside LightOn-rerank, which also scores page images.":
+    "处理图片、截图和视频的是另一个系列：<a href=\"https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B\" rel=\"noopener noreferrer\">Qwen3-VL-Reranker</a>（2B / 8B，32K 上下文，30+ 种语言，Apache 2.0）。在 Qwen 自己用视觉文档检索基准 ViDoRe v3 做的测试中，8B 得分 {{fact:qwen3-vl-reranker-8b.vidore_v3}}，2B 得分 {{fact:qwen3-vl-reranker-2b.vidore_v3}}；它和同样能给页面图片打分的 LightOn-rerank 一起列在<a href=\"/models/\">模型对比表</a>里。",
   "_title": "Qwen3-Reranker：0.6B / 4B / 8B 开源重排序评测 | reranker.uk",
   "_desc": "Qwen3-Reranker 评测（2026 年 10 月）：0.6B、4B、8B 怎么选，Qwen 自己公布的 MTEB-R 等分数及其测法，指令用法、sentence-transformers 示例，以及相对 bge 与托管 API 的取舍。",
 

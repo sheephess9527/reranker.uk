@@ -62,6 +62,16 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-09">2026 年 10 月 9 日 —— 补上新发布检查漏掉的三个重排序模型；用 sentence-transformers 跑 ColBERT</h2>
+        <ul class="feature-list">
+          <li><strong>新发布检查看的范围太窄</strong> —— 之前只查 Hugging Face 上的 14 个机构，而且只看名字里带“rerank”的模型。现在会检查 Hugging Face 标为重排序的所有模型（不论谁发布），以及本站从没提过的热门模型，还有 Demo 和指南所用库的新版本</li>
+          <li><strong>模型对比表新增 Qwen3-VL-Reranker、zerank-2 和 gte-multilingual-reranker-base</strong> —— Qwen 能处理文本、图片、截图和视频的 2B / 8B 重排序模型；ZeroEntropy 以 Apache 2.0 开源、也作为 API 出售的 4B 模型；以及阿里巴巴支持 70 多种语言的 306M 多语言模型。每一行都列出厂商自己的数字和测试方法，每天和模型卡核对</li>
+          <li><strong>CLM-v0.1-8B：说明原因，不收录</strong> —— Hugging Face 上点赞最多的“重排序”标签模型，打分对象是智能体的动作，而不是 RAG 里的段落；模型页现在写明了这一点</li>
+          <li><strong>能跑通的 ColBERT 代码</strong> —— late-interaction 指南里的代码去检索一个从没建过的 ColBERT 索引。现在改为用 sentence-transformers 6 的 <code>MultiVectorEncoder</code> 对候选重新打分，我们在 6.1.0 版上实际跑过</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-05">2026 年 10 月 5 日 —— Voyage rerank-3 有哪些变化；新增 LightOn-rerank</h2>
         <ul class="feature-list">
           <li><strong>Voyage rerank-3：依据 Voyage 的发布公告</strong> —— 本站之前写的是 Voyage 文档没说 rerank-3 是否支持自然语言指令。Voyage 9 月 30 日的发布公告明确说了：Rerank 3 系列保留这项能力。Voyage 页面新增了“rerank-3 有哪些变化”：价格不变的直接升级、分数按 rerank-2.5 校准、长文档和代码提升最大，以及 Voyage 自己与 Cohere、Qwen3 的对比 —— 每个数字每天都会和公告核对</li>

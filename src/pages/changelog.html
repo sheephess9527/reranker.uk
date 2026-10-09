@@ -6,6 +6,16 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-09">9 Oct 2026 — Three rerankers the release watch had missed; ColBERT through sentence-transformers</h2>
+        <ul class="feature-list">
+          <li><strong>The release watch was looking in too few places</strong> — it only checked 14 organisations on Hugging Face, and only models with “rerank” in the name. It now checks every model Hugging Face tags as a reranker, whoever published it, plus popular ones the site has never mentioned, and new releases of the libraries the demo and guides use</li>
+          <li><strong>Qwen3-VL-Reranker, zerank-2 and gte-multilingual-reranker-base in the models table</strong> — Qwen’s 2B / 8B reranker for text, images, screenshots and video; ZeroEntropy’s Apache 2.0 4B model, also sold as an API; and Alibaba’s 306M multilingual model, which supports 70+ languages. Each row shows the vendor’s own figures with how they were measured, checked daily against the model card</li>
+          <li><strong>CLM-v0.1-8B, explained rather than added</strong> — the most-liked reranker-tagged model on Hugging Face scores actions for agents, not passages for RAG; the models page now says so</li>
+          <li><strong>ColBERT code that runs</strong> — the late-interaction guide’s snippet searched a ColBERT index it never built. It now rescores candidates with sentence-transformers 6’s <code>MultiVectorEncoder</code>, which we ran on version 6.1.0</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-05">5 Oct 2026 — Voyage rerank-3, what changed; LightOn-rerank added</h2>
         <ul class="feature-list">
           <li><strong>Voyage rerank-3, from Voyage’s announcement</strong> — the site said Voyage’s docs didn’t say whether rerank-3 takes natural-language instructions. Voyage’s 30 September announcement does: the Rerank 3 series keeps them. The Voyage page now covers what changed — a drop-in upgrade at the same price, scores calibrated to rerank-2.5, the largest gains on long documents and code, and Voyage’s own comparison against Cohere and Qwen3 — with each figure checked daily against the announcement</li>
