@@ -96,7 +96,8 @@
       "known": [
         "zerank-1",
         "zerank-1-small",
-        "zerank-2"
+        "zerank-2",
+        "zerank-2-nano"
       ]
     },
     {
@@ -106,7 +107,9 @@
       "known": [
         "zerank-1",
         "zerank-1-small",
-        "zerank-2"
+        "zerank-2",
+        "zerank-2-nano",
+        "zerank-2-small"
       ]
     },
     {
@@ -114,13 +117,15 @@
       "url": "https://www.mixedbread.com/llms.txt",
       "pattern": "mxbai-rerank-(?:(?:large|base|xsmall)-)?v\\d+(?:\\.\\d+)?(?:-listwise)?(?![\\w-]|\\.\\w)",
       "known": [
+        "mxbai-rerank-base-v1",
+        "mxbai-rerank-base-v2",
+        "mxbai-rerank-large-v1",
+        "mxbai-rerank-large-v2",
         "mxbai-rerank-v1",
         "mxbai-rerank-v2",
-        "mxbai-rerank-large-v1",
-        "mxbai-rerank-base-v1",
-        "mxbai-rerank-xsmall-v1",
-        "mxbai-rerank-large-v2",
-        "mxbai-rerank-base-v2"
+        "mxbai-rerank-v3-listwise",
+        "mxbai-rerank-v3.1-listwise",
+        "mxbai-rerank-xsmall-v1"
       ]
     },
     {
@@ -198,8 +203,11 @@
         "semantic-ranker-default-002",
         "semantic-ranker-default-003",
         "semantic-ranker-default-004",
+        "semantic-ranker-default-005",
         "semantic-ranker-default@latest",
-        "semantic-ranker-fast-004"
+        "semantic-ranker-fast-004",
+        "semantic-ranker-fast-005",
+        "semantic-ranker-fast@latest"
       ]
     },
     {
@@ -208,6 +216,7 @@
       "pattern": "(?:llama-(?:\\d+\\.\\d+-)?nemotron-rerank(?:-vl)?-\\d+[mb]-v\\d+|nv-rerankqa-[a-z0-9-]+?-v\\d+)(?![\\w-]|\\.\\w)",
       "known": [
         "llama-nemotron-rerank-1b-v2",
+        "llama-nemotron-rerank-500m-v2",
         "llama-nemotron-rerank-vl-1b-v2"
       ]
     }

@@ -6,6 +6,15 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-09-hosted">9 Oct 2026 (later) — Hosted rerankers watched too; Mixedbread’s new listwise model</h2>
+        <ul class="feature-list">
+          <li><strong>Eleven more vendor pages watched</strong> — the daily release check now also reads the model lists of ZeroEntropy, Mixedbread, Alibaba Cloud Model Studio, SiliconFlow, Pinecone, Contextual AI, Amazon Bedrock, Google Vertex AI and NVIDIA NIM, so hosted-only rerankers are noticed too, including ones sold mainly in China</li>
+          <li><strong>Mixedbread’s hosted reranker has moved on</strong> — Mixedbread now lists v1 and v2 as legacy models and reranks inside Mixedbread Search with mxbai-rerank-v3.1-listwise, a listwise, instruction-following model whose weights aren’t published. The Mixedbread page says so, with the instruction-following figures from Mixedbread’s announcement, checked daily</li>
+          <li><strong>zerank-2’s licence</strong> — the weights on Hugging Face were relicensed to Apache 2.0 in July 2026, while ZeroEntropy’s own docs still call them non-commercial; the models table now notes the conflict. NVIDIA’s smaller llama-nemotron-rerank-500m-v2 is mentioned beside the 1B</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-09">9 Oct 2026 — Three rerankers the release watch had missed; ColBERT through sentence-transformers</h2>
         <ul class="feature-list">
           <li><strong>The release watch was looking in too few places</strong> — it only checked 14 organisations on Hugging Face, and only models with “rerank” in the name. It now checks every model Hugging Face tags as a reranker, whoever published it, plus popular ones the site has never mentioned, and new releases of the libraries the demo and guides use</li>

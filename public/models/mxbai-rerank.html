@@ -33,7 +33,7 @@
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <!-- seo:jsonld -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://reranker.uk/models/"},{"@type":"ListItem","position":3,"name":"mxbai-rerank","item":"https://reranker.uk/models/mxbai-rerank"}]},{"@type":"Article","headline":"mxbai-rerank — mixedbread-ai's open-weight rerankers, v1 and v2","description":"mxbai-rerank review: mixedbread-ai's open-weight rerankers, both generations. v1 (DeBERTa-v3, English-only, browser-runnable xsmall) and v2 (Qwen2.5-based, 100+ languages incl. Chinese). Benchmarks, Python usage, hosted API.","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"en","datePublished":"2026-06-20","dateModified":"2026-09-26","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/"},"mainEntityOfPage":"https://reranker.uk/models/mxbai-rerank","about":{"@type":"Thing","name":"mxbai-rerank reranker model"}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://reranker.uk/models/"},{"@type":"ListItem","position":3,"name":"mxbai-rerank","item":"https://reranker.uk/models/mxbai-rerank"}]},{"@type":"Article","headline":"mxbai-rerank — mixedbread-ai's open-weight rerankers, v1 and v2","description":"mxbai-rerank review: mixedbread-ai's open-weight rerankers, both generations. v1 (DeBERTa-v3, English-only, browser-runnable xsmall) and v2 (Qwen2.5-based, 100+ languages incl. Chinese). Benchmarks, Python usage, hosted API.","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"en","datePublished":"2026-06-20","dateModified":"2026-10-09","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/"},"mainEntityOfPage":"https://reranker.uk/models/mxbai-rerank","about":{"@type":"Thing","name":"mxbai-rerank reranker model"}}]}</script>
 
 </head>
 <body>
@@ -58,7 +58,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>mxbai-rerank</div>
       <h1>mxbai-rerank</h1>
-      <p class="meta">Open weights · mixedbread-ai · <time datetime="2026-09-26">Updated 26 Sep 2026</time></p>
+      <p class="meta">Open weights · mixedbread-ai · <time datetime="2026-10-09">Updated 9 Oct 2026</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Open weights</span><span class="pill">Hosted API</span><span class="pill info">Apache 2.0</span><span class="pill info">v2: 100+ languages</span><span class="pill">Browser-runnable xsmall</span></div>
       <p class="lead">mixedbread-ai ships two generations of reranker. <strong>v1</strong> (<code>xsmall</code>/<code>base</code>/<code>large</code>) is a DeBERTa-v3 cross-encoder family, English-only, and its <code>xsmall</code> variant is compact enough to run in the browser — which is why it's one of the options in <a href="/demo?m=mixedbread-ai/mxbai-rerank-xsmall-v1">this site's live demo</a>. <strong>v2</strong> (<code>base</code>/<code>large</code>) is a newer, Qwen2.5-based, RL-trained generation that adds support for 100+ languages, including Chinese. Both generations ship under Apache 2.0.</p>
 
@@ -178,7 +178,9 @@ def rag_answer(query: str, vector_db, llm) -> str:
     return llm.complete(f"Context:\n" + "\n\n".join(top5) + f"\n\nQ: {query}")</code></pre>
 
       <h2 id="api">Hosted API</h2>
-      <p>mixedbread-ai offers a hosted rerank endpoint backed by the same model weights. Useful if you want to avoid running inference on your own infrastructure. The current SDK is <code>mixedbread</code> (the older <code>mixedbread_ai</code> package was v1-era):</p>
+      <p><strong>Mixedbread’s current hosted reranker is not v1 or v2.</strong> Its documentation now files both generations under <a href="https://www.mixedbread.com/docs/legacy-models" rel="noopener noreferrer">legacy models</a>: the weights stay on Hugging Face, but the direct rerank API is no longer documented, and existing integrations are asked to contact Mixedbread’s support about migrating. Hosted reranking now runs inside Mixedbread Search, on documents you have uploaded to a Mixedbread store, with <code>mxbai-rerank-v3.1-listwise</code> as the default (July 2026). It is a listwise model — it reads the candidate set as a whole and follows natural-language instructions such as “the most recent booking wins” — and its weights are not published.</p>
+      <p>In Mixedbread’s own 900-example instruction-following evaluation, the v3 listwise model reached an MRR of 0.93*, against 0.84* for Voyage rerank-2.5, 0.77* for Cohere Rerank 4 Pro and 0.71* for zerank-2 (<a href="https://www.mixedbread.com/blog/listwise-rerank" rel="noopener noreferrer">announcement</a>); v3.1, which replaced it in September, is described as faster and better (<a href="https://www.mixedbread.com/blog/mxbai-rerank-v3-1-listwise" rel="noopener noreferrer">v3.1 post</a>). No independent run exists yet.</p>
+      <p>The direct endpoint below, with the open v2 weights, is what Mixedbread documented until 2026. The SDK is <code>mixedbread</code> (the older <code>mixedbread_ai</code> package was v1-era):</p>
       <pre tabindex="0"><code>pip install mixedbread</code></pre>
       <pre tabindex="0"><code>from mixedbread import Mixedbread
 
@@ -230,7 +232,7 @@ const scores = logits.sigmoid().tolist();</code></pre>
             <li>v1 xsmall variant runs in-browser via transformers.js</li>
             <li>v2 beats v1's large on every published benchmark</li>
             <li>Easy drop-in with the <code>mxbai-rerank</code>/sentence-transformers packages</li>
-            <li>Hosted API option for managed inference</li>
+            <li>Hosted reranking through Mixedbread Search, now with a listwise, instruction-following model</li>
           </ul>
         </div>
         <div class="card">

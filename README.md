@@ -274,7 +274,9 @@ doesn't cover yet, from official channels only:
   the watch only looked at 14 organisations and names containing
   "rerank", and missed Contrastive-LM/CLM-v0.1-8B (21 Sept, by then the
   most-liked reranker on the Hub) and zerank-2;
-- **hosted APIs** — new model IDs on Cohere's, Voyage's and Jina's model pages;
+- **hosted APIs** — new model IDs on the model pages of Cohere, Voyage, Jina,
+  ZeroEntropy, Mixedbread, Alibaba Cloud Model Studio, SiliconFlow, Pinecone,
+  Contextual AI, Amazon Bedrock, Google Vertex AI and NVIDIA NIM (`pages`);
 - **libraries** — a new stable GitHub release of the libraries the demo and
   guides use (`libraries`, with the release the site was last checked
   against).

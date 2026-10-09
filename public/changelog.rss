@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 09 Oct 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 09 Oct 2026 14:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>9 Oct 2026 (later) — Hosted rerankers watched too; Mixedbread's new listwise model</title>
+      <link>https://reranker.uk/changelog#2026-10-09-hosted</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-09-hosted</guid>
+      <pubDate>Fri, 09 Oct 2026 14:00:00 GMT</pubDate>
+      <description>The daily release check now reads the model lists of nine more hosted-reranker vendors, including Alibaba Cloud and SiliconFlow. Mixedbread now treats v1 and v2 as legacy and reranks with mxbai-rerank-v3.1-listwise inside Mixedbread Search; the Mixedbread page covers it. The models table notes zerank-2's licence conflict and NVIDIA's 500M reranker.</description>
+    </item>
     <item>
       <title>9 Oct 2026 — Three rerankers the release watch had missed; ColBERT through sentence-transformers</title>
       <link>https://reranker.uk/changelog#2026-10-09</link>

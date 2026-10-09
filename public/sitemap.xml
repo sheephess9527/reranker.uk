@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://reranker.uk/changelog</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/changelog" />
@@ -11,7 +11,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/changelog</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/changelog" />
@@ -146,7 +146,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/guides/late-interaction-rerank</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/late-interaction-rerank" />
@@ -155,7 +155,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/guides/late-interaction-rerank</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/late-interaction-rerank" />
@@ -308,7 +308,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/models/</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/" />
@@ -317,7 +317,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/models/</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/" />
@@ -362,7 +362,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/models/qwen-reranker</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/qwen-reranker" />
@@ -371,7 +371,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/models/qwen-reranker</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/qwen-reranker" />

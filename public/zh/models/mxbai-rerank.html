@@ -33,7 +33,7 @@
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <!-- seo:jsonld -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"模型对比","item":"https://reranker.uk/zh/models/"},{"@type":"ListItem","position":3,"name":"mxbai-rerank：mixedbread-ai 开源重排序模型评测（v1 与 v2）","item":"https://reranker.uk/zh/models/mxbai-rerank"}]},{"@type":"Article","headline":"mxbai-rerank：mixedbread-ai 开源重排序模型评测（v1 与 v2）","description":"mxbai-rerank 评测：mixedbread-ai 的开源权重重排序器，两代都覆盖。v1（DeBERTa-v3，仅英文，浏览器可跑 xsmall）与 v2（基于 Qwen2.5，支持 100+ 种语言含中文）。基准、Python 用法、托管 API。","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"zh-Hans","datePublished":"2026-06-20","dateModified":"2026-09-26","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/zh/"},"mainEntityOfPage":"https://reranker.uk/zh/models/mxbai-rerank","about":{"@type":"Thing","name":"mxbai-rerank reranker model"}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"模型对比","item":"https://reranker.uk/zh/models/"},{"@type":"ListItem","position":3,"name":"mxbai-rerank：mixedbread-ai 开源重排序模型评测（v1 与 v2）","item":"https://reranker.uk/zh/models/mxbai-rerank"}]},{"@type":"Article","headline":"mxbai-rerank：mixedbread-ai 开源重排序模型评测（v1 与 v2）","description":"mxbai-rerank 评测：mixedbread-ai 的开源权重重排序器，两代都覆盖。v1（DeBERTa-v3，仅英文，浏览器可跑 xsmall）与 v2（基于 Qwen2.5，支持 100+ 种语言含中文）。基准、Python 用法、托管 API。","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"zh-Hans","datePublished":"2026-06-20","dateModified":"2026-10-09","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/zh/"},"mainEntityOfPage":"https://reranker.uk/zh/models/mxbai-rerank","about":{"@type":"Thing","name":"mxbai-rerank reranker model"}}]}</script>
 
 </head>
 <body>
@@ -58,7 +58,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>mxbai-rerank</div>
       <h1>mxbai-rerank</h1>
-      <p class="meta">开源权重 · mixedbread-ai · <time datetime="2026-09-26">更新于 2026 年 9 月 26 日</time></p>
+      <p class="meta">开源权重 · mixedbread-ai · <time datetime="2026-10-09">更新于 2026 年 10 月 9 日</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">开源权重</span><span class="pill">托管 API</span><span class="pill info">Apache 2.0</span><span class="pill info">v2：100+ 种语言</span><span class="pill">浏览器可跑 xsmall</span></div>
       <p class="lead">mixedbread-ai 目前有两代重排序器。<strong>v1</strong>（<code>xsmall</code>/<code>base</code>/<code>large</code>）是基于 DeBERTa-v3 的 cross-encoder 系列，仅支持英文，其中 <code>xsmall</code> 足够轻量、可在浏览器中运行 —— 这也是它成为<a href="/zh/demo?m=mixedbread-ai/mxbai-rerank-xsmall-v1">本站在线 Demo</a> 选项之一的原因。<strong>v2</strong>（<code>base</code>/<code>large</code>）是更新的一代，基于 Qwen2.5、经强化学习训练，新增了 100+ 种语言支持，包括中文。两代均采用 Apache 2.0 协议。</p>
 
@@ -178,7 +178,9 @@ def rag_answer(query: str, vector_db, llm) -> str:
     return llm.complete(f"Context:\n" + "\n\n".join(top5) + f"\n\nQ: {query}")</code></pre>
 
       <h2 id="api">托管 API</h2>
-      <p>mixedbread-ai 提供基于相同模型权重的托管重排序端点。如果你不想在自有基础设施上运行推理，这是个不错的选择。目前使用的 SDK 是 <code>mixedbread</code>（较早的 <code>mixedbread_ai</code> 包是 v1 时代的）：</p>
+      <p><strong>Mixedbread 现在主推的托管重排序模型已经不是 v1 或 v2。</strong>它的文档把这两代都归入<a href="https://www.mixedbread.com/docs/legacy-models" rel="noopener noreferrer">旧版模型</a>：权重仍在 Hugging Face 上，但直接调用的 rerank API 已不再出现在文档中，现有集成需要联系 Mixedbread 支持团队了解迁移。托管重排序现在在 Mixedbread Search 内部运行，对象是你上传到 Mixedbread 存储里的文档，默认模型是 <code>mxbai-rerank-v3.1-listwise</code>（2026 年 7 月）。它是列表式模型 —— 把候选集当作一个整体来读，能按“以最近一次预订为准”这样的自然语言指令排序 —— 权重没有公开。</p>
+      <p>在 Mixedbread 自己的 900 条指令跟随评测中，v3 列表式模型的 MRR 为 0.93*，Voyage rerank-2.5 为 0.84*，Cohere Rerank 4 Pro 为 0.77*，zerank-2 为 0.71*（<a href="https://www.mixedbread.com/blog/listwise-rerank" rel="noopener noreferrer">发布公告</a>）；9 月取代它的 v3.1 据称更快、效果更好（<a href="https://www.mixedbread.com/blog/mxbai-rerank-v3-1-listwise" rel="noopener noreferrer">v3.1 公告</a>）。目前还没有第三方测试。</p>
+      <p>下面这个直接调用的接口配合开源的 v2 权重，是 Mixedbread 到 2026 年为止文档里的用法。SDK 是 <code>mixedbread</code>（旧的 <code>mixedbread_ai</code> 包属于 v1 时代）：</p>
       <pre tabindex="0"><code>pip install mixedbread</code></pre>
       <pre tabindex="0"><code>from mixedbread import Mixedbread
 
@@ -230,7 +232,7 @@ const scores = logits.sigmoid().tolist();</code></pre>
             <li>v1 的 xsmall 变体可通过 transformers.js 在浏览器中运行</li>
             <li>v2 在所有已公开的基准上都优于 v1 的 large</li>
             <li>可通过 <code>mxbai-rerank</code> / sentence-transformers 包轻松集成</li>
-            <li>提供托管 API 选项，无需自行管理推理</li>
+            <li>可通过 Mixedbread Search 使用托管重排序，现在用的是能跟随指令的列表式模型</li>
           </ul>
         </div>
         <div class="card">

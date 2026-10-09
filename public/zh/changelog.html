@@ -62,6 +62,15 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-09-hosted">2026 年 10 月 9 日（稍后）—— 托管重排序 API 也纳入每日检查；Mixedbread 的新列表式模型</h2>
+        <ul class="feature-list">
+          <li><strong>多盯 11 个厂商页面</strong> —— 每日新发布检查现在还会读取 ZeroEntropy、Mixedbread、阿里云百炼（Model Studio）、硅基流动、Pinecone、Contextual AI、Amazon Bedrock、Google Vertex AI 和 NVIDIA NIM 的模型列表，只以托管 API 形式发布的重排序模型（包括主要面向国内的）也能及时发现</li>
+          <li><strong>Mixedbread 的托管重排序已经换代</strong> —— Mixedbread 现在把 v1、v2 列为旧版模型，在 Mixedbread Search 内用 mxbai-rerank-v3.1-listwise 重排序，这是一个能跟随指令的列表式模型，权重未公开。Mixedbread 页面已写明这一点，并附上 Mixedbread 公告里的指令跟随评测数字，每天核对</li>
+          <li><strong>zerank-2 的许可</strong> —— Hugging Face 上的权重在 2026 年 7 月改为 Apache 2.0 许可，而 ZeroEntropy 自己的文档仍写着非商用；模型对比表现在注明了这一矛盾。NVIDIA 更小的 llama-nemotron-rerank-500m-v2 也在 1B 旁边提到</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-09">2026 年 10 月 9 日 —— 补上新发布检查漏掉的三个重排序模型；用 sentence-transformers 跑 ColBERT</h2>
         <ul class="feature-list">
           <li><strong>新发布检查看的范围太窄</strong> —— 之前只查 Hugging Face 上的 14 个机构，而且只看名字里带“rerank”的模型。现在会检查 Hugging Face 标为重排序的所有模型（不论谁发布），以及本站从没提过的热门模型，还有 Demo 和指南所用库的新版本</li>
