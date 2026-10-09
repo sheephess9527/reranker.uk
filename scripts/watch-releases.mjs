@@ -10,8 +10,10 @@
  *   - Hugging Face, catch-up: `text-ranking` models with at least
  *     `hf_catchup_min_likes` likes, whenever they came out, that no page
  *     on the site mentions — popular releases the watch started too late for;
- *   - vendor pages for hosted APIs (Cohere, Voyage, Jina): model IDs
- *     matching each page's `pattern` that aren't in its `known` list;
+ *   - vendor pages for hosted APIs (Cohere, Voyage, Jina, ZeroEntropy,
+ *     Mixedbread, Alibaba Cloud, SiliconFlow, Pinecone, Contextual AI,
+ *     Amazon Bedrock, Google Vertex AI, NVIDIA NIM): model IDs matching each
+ *     page's `pattern` that aren't in its `known` list;
  *   - GitHub releases of the libraries the site's code and guides depend on
  *     (`libraries`): a stable release newer than `known`.
  *
@@ -164,7 +166,10 @@ for (const page of CONFIG.pages) {
     warnings.push(`${page.name}: ${err.message}`);
   }
 }
-if (BASELINE) process.exit(0);
+if (BASELINE) {
+  for (const w of warnings) console.log(`⚠ ${w}`);
+  process.exit(0);
+}
 
 for (const w of warnings) console.log(`⚠ ${w}`);
 if (!found.length) {

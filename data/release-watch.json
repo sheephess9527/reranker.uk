@@ -88,6 +88,128 @@
         "jina-reranker-v3",
         "jina-reranker-v3.5"
       ]
+    },
+    {
+      "name": "ZeroEntropy models",
+      "url": "https://docs.zeroentropy.dev/models",
+      "pattern": "zerank-\\d+(?:\\.\\d+)?(?:-(?:small|nano|mini|base|large))?(?![\\w-]|\\.\\w)",
+      "known": [
+        "zerank-1",
+        "zerank-1-small",
+        "zerank-2"
+      ]
+    },
+    {
+      "name": "ZeroEntropy pricing",
+      "url": "https://www.zeroentropy.dev/pricing",
+      "pattern": "zerank-\\d+(?:\\.\\d+)?(?:-(?:small|nano|mini|base|large))?(?![\\w-]|\\.\\w)",
+      "known": [
+        "zerank-1",
+        "zerank-1-small",
+        "zerank-2"
+      ]
+    },
+    {
+      "name": "Mixedbread docs index",
+      "url": "https://www.mixedbread.com/llms.txt",
+      "pattern": "mxbai-rerank-(?:(?:large|base|xsmall)-)?v\\d+(?:\\.\\d+)?(?:-listwise)?(?![\\w-]|\\.\\w)",
+      "known": [
+        "mxbai-rerank-v1",
+        "mxbai-rerank-v2",
+        "mxbai-rerank-large-v1",
+        "mxbai-rerank-base-v1",
+        "mxbai-rerank-xsmall-v1",
+        "mxbai-rerank-large-v2",
+        "mxbai-rerank-base-v2"
+      ]
+    },
+    {
+      "name": "Alibaba Cloud Model Studio rerank",
+      "url": "https://help.aliyun.com/zh/model-studio/text-rerank-api",
+      "pattern": "(?:gte-rerank|qwen\\d*(?:\\.\\d+)?-(?:vl-)?rerank)(?:-(?:v\\d+(?:\\.\\d+)?|plus|max|turbo|flash|lite|pro))*(?![\\w-]|\\.\\w)",
+      "known": [
+        "gte-rerank",
+        "gte-rerank-v2",
+        "qwen3-rerank",
+        "qwen3-vl-rerank"
+      ]
+    },
+    {
+      "name": "SiliconFlow rerank API",
+      "url": "https://docs.siliconflow.com/en/api-reference/rerank/create-rerank",
+      "pattern": "[\\w-]+/[\\w.-]*reranker[\\w.-]*",
+      "known": [
+        "baai/bge-reranker-v2-m3",
+        "netease-youdao/bce-reranker-base_v1",
+        "qwen/qwen3-reranker-0.6b",
+        "qwen/qwen3-reranker-4b",
+        "qwen/qwen3-reranker-8b"
+      ]
+    },
+    {
+      "name": "SiliconFlow models",
+      "url": "https://siliconflow.cn/models",
+      "pattern": "[\\w-]+/[\\w.-]*reranker[\\w.-]*",
+      "known": [
+        "baai/bge-reranker-v2-m3",
+        "netease-youdao/bce-reranker-base_v1",
+        "qwen/qwen3-reranker-0.6b",
+        "qwen/qwen3-reranker-4b",
+        "qwen/qwen3-reranker-8b",
+        "qwen/qwen3-vl-reranker-8b"
+      ]
+    },
+    {
+      "name": "Pinecone hosted rerankers",
+      "url": "https://docs.pinecone.io/guides/search/rerank-results",
+      "pattern": "(?:pinecone-rerank-v\\d+|bge-reranker-v\\d+-m\\d+|cohere-rerank-\\d+(?:\\.\\d+)?(?:-(?:fast|pro))?)(?![\\w-]|\\.\\w)",
+      "known": [
+        "bge-reranker-v2-m3",
+        "cohere-rerank-3.5",
+        "cohere-rerank-4-fast",
+        "pinecone-rerank-v0"
+      ]
+    },
+    {
+      "name": "Contextual AI rerank API",
+      "url": "https://docs.contextual.ai/api-reference/rerank/rerank",
+      "pattern": "ctxl-rerank-v\\d+(?:-instruct)?(?:-multilingual)?(?:-(?:mini|small|large|\\d+b))?(?![\\w-]|\\.\\w)",
+      "known": [
+        "ctxl-rerank-v1-instruct",
+        "ctxl-rerank-v2-instruct-multilingual",
+        "ctxl-rerank-v2-instruct-multilingual-mini"
+      ]
+    },
+    {
+      "name": "Amazon Bedrock rerank models",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/rerank-supported.html",
+      "pattern": "(?:amazon|cohere)\\.rerank-v[\\d-]+:\\d+",
+      "known": [
+        "amazon.rerank-v1:0",
+        "cohere.rerank-v3-5:0"
+      ]
+    },
+    {
+      "name": "Google Vertex AI ranking API",
+      "url": "https://docs.cloud.google.com/generative-ai-app-builder/docs/ranking?hl=en",
+      "pattern": "semantic-ranker-(?:[a-z0-9]+-\\d{3}|[a-z]+@latest)",
+      "known": [
+        "semantic-ranker-512-003",
+        "semantic-ranker-default-002",
+        "semantic-ranker-default-003",
+        "semantic-ranker-default-004",
+        "semantic-ranker-default@latest",
+        "semantic-ranker-fast-004"
+      ]
+    },
+    {
+      "name": "NVIDIA NIM rerankers",
+      "url": "https://docs.nvidia.com/nim/nemo-retriever/reranking/latest/support-matrix.html",
+      "pattern": "(?:llama-(?:\\d+\\.\\d+-)?nemotron-rerank(?:-vl)?-\\d+[mb]-v\\d+|nv-rerankqa-[a-z0-9-]+?-v\\d+)(?![\\w-]|\\.\\w)",
+      "known": [
+        "llama-nemotron-rerank-1b-v2",
+        "llama-nemotron-rerank-vl-1b-v2"
+      ]
     }
   ],
   "libraries": [
