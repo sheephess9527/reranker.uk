@@ -87,6 +87,7 @@
         </table>
       </div>
       <p>All three: 32K context, 100+ languages, Apache 2.0.</p>
+      <p>For images, screenshots and video there is a separate family, <a href="https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B" rel="noopener noreferrer">Qwen3-VL-Reranker</a> (2B / 8B, 32K context, 30+ languages, Apache 2.0). In Qwen’s own runs on ViDoRe v3, a visual-document retrieval benchmark, the 8B scores 66.7* and the 2B 60.8*; it is in the <a href="/models/">models table</a> alongside LightOn-rerank, which also scores page images.</p>
       <p><strong>Recommendation:</strong> start with <strong>4B</strong> on a single modern GPU. Drop to 0.6B only if memory is tight; move to 8B only when labelled eval shows a clear NDCG gain worth the cost.</p>
 
       <h2 id="scores">Scores, and whose they are</h2>

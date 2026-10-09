@@ -447,5 +447,56 @@
       "check_hint": "ViDoRe",
       "verified_on": "2026-10-05"
     }
+  },
+  "qwen3-vl-reranker-8b": {
+    "vidore_v3": {
+      "value": "66.7",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/raw/main/README.md",
+      "check_pattern": "Qwen3-VL-Reranker-8B\\s*\\|\\s*8B\\s*\\|(?:[^|]*\\|){6}\\s*{value}\\s*\\|",
+      "check_hint": "ViDoRe",
+      "protocol_note": "Qwen's own run, from the model card; the card doesn't say which first stage was reranked. Visual-document retrieval, not BEIR",
+      "verified_on": "2026-10-09"
+    },
+    "mmteb_r": {
+      "value": "74.9",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/raw/main/README.md",
+      "check_pattern": "Qwen3-VL-Reranker-8B\\s*\\|\\s*8B\\s*\\|(?:[^|]*\\|){4}\\s*{value}\\s*\\|",
+      "check_hint": "MMTEB",
+      "protocol_note": "Qwen's own run: the retrieval tasks of MMTEB, from the model card — not BEIR",
+      "verified_on": "2026-10-09"
+    }
+  },
+  "qwen3-vl-reranker-2b": {
+    "vidore_v3": {
+      "value": "60.8",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-2B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/raw/main/README.md",
+      "check_pattern": "Qwen3-VL-Reranker-2B\\s*\\|\\s*2B\\s*\\|(?:[^|]*\\|){6}\\s*{value}\\s*\\|",
+      "check_hint": "ViDoRe",
+      "protocol_note": "Qwen's own run, from the model card; the card doesn't say which first stage was reranked. Visual-document retrieval, not BEIR",
+      "verified_on": "2026-10-09"
+    }
+  },
+  "zerank-2": {
+    "avg_ndcg10": {
+      "value": "0.6714",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\*\\*Average\\*\\*\\s*\\|\\s*\\*\\*0\\.4509\\*\\*\\s*\\|\\s*\\*\\*{value}\\*\\*",
+      "check_hint": "Average",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-09"
+    },
+    "cohere_3_5_same_run": {
+      "value": "0.5847",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\*\\*Average\\*\\*(?:\\s*\\|\\s*\\*\\*[0-9.]+\\*\\*){4}\\s*\\|\\s*\\*\\*{value}\\*\\*",
+      "check_hint": "Average",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-09"
+    }
   }
 }

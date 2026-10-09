@@ -281,6 +281,39 @@
               <td title="阿里巴巴在模型卡里给出的数字，没有说明用了哪些数据集、第一阶段用的什么检索。本表到 2026 年 10 月之前写的是“Hit@1 ≈ nemotron”，我们找不到任何出处">56.19*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
+            <tr data-name="gte-multilingual-reranker-base" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-beir="">
+              <th scope="row"><a href="https://huggingface.co/Alibaba-NLP/gte-multilingual-reranker-base" rel="noopener noreferrer">gte-multilingual-reranker-base</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill good">开源权重</span><span class="pill info">轻量</span></td>
+              <td>306M，8K 上下文；小巧的多语言默认之选，可用 Text Embeddings Inference 部署</td>
+              <td>70+ 种语言</td>
+              <td>GPU 上快，CPU 友好</td>
+              <td>免费（自建）</td>
+              <td class="muted" title="阿里巴巴只在模型卡的图表和 mGTE 论文（EMNLP 2024）里公布了它的重排序结果。据模型卡说明，阿里云托管的 gte-rerank 是相关模型，但不是同一个">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr data-name="qwen3-vl-reranker" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-beir="">
+              <th scope="row"><a href="https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B" rel="noopener noreferrer">Qwen3-VL-Reranker</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill good">开源权重</span><span class="pill good">Apache 2.0</span></td>
+              <td>一个模型处理文本、图片、截图和视频；2B / 8B，32K 上下文</td>
+              <td>30+ 种语言</td>
+              <td>GPU</td>
+              <td>免费（自建）</td>
+              <td class="muted" title="Qwen 没有为它公布 BEIR 平均分。模型卡里 Qwen 自己的测试：ViDoRe v3 上 8B 为 66.7*、2B 为 60.8*，MMTEB 检索上 8B 为 74.9*。LightOn 的测试中，2B 在 11 个 BEIR 数据集上（对 BM25 召回的前 100 条重排序）得分 49.08">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr data-name="zerank-2" data-type="open api" data-arch="cross-encoder" data-langs="en" data-pricing="freemium" data-beir="">
+              <th scope="row"><a href="https://huggingface.co/zeroentropy/zerank-2-reranker" rel="noopener noreferrer">zerank-2</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill good">开源权重</span><span class="pill good">Apache 2.0</span></td>
+              <td>4B，基于 Qwen3-4B，32K 上下文；ZeroEntropy 的 API 也提供</td>
+              <td>英文</td>
+              <td>GPU</td>
+              <td>免费（自建）/ API</td>
+              <td class="muted" title="ZeroEntropy 公布的是自己在七个领域上的 NDCG@10，对 OpenAI text-embedding-3-small 召回的前 100 条重排序：平均 0.6714*，同一测试中 Cohere rerank-3.5 为 0.5847*。不是 BEIR 平均分">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
             <tr data-name="llama-nemotron-rerank-1b-v2" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="">
               <th scope="row"><a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">llama-nemotron-rerank-1b-v2</a></th>
               <td><span class="pill">Cross-encoder</span></td>
@@ -340,8 +373,9 @@
         </table>
       </div>
       <div class="benchmark-meta callout" style="margin-top:.8rem;padding:.85rem 1rem">
-        <p class="muted" style="font-size:.82rem;margin:0"><strong>最近核对：</strong>2026 年 10 月（新增 jina-reranker-v3.5；Jina 各行改用同一套 2026 年评测；bge-reranker-v2-m3 由查不到出处的 ~60.1 改为 BAAI 自己公布的 55.36*；Jina v1 tiny 与 ms-marco MiniLM-L6 现在显示 Jina 为它们公布的 BEIR 分数；9 月已将 mxbai-rerank-large-v1 由没有来源的 ~62.1 修正）· <strong>下次复核：</strong>2026 年 11 月。<strong>*</strong> 各家跑 BEIR 的方式都不一样 —— BAAI 用 15 个数据集、对 bge-large-en-v1.5 召回的前 100 条重排，Jina 用 13 个数据集、对 jina-embeddings-v5-text-small 的前 100 条重排，mixedbread 用自己选的一套 —— 所以本列每个 BEIR 数字都带 *，鼠标悬停可见其评测方法。差距并不小：Jina 的评测里 bge-reranker-v2-m3 是 56.51，BAAI 自己测的是 55.36；mxbai-rerank-large-v2 在 Jina 那边是 61.44，mixedbread 自己测的是 57.49。请把这一列当作大致的档位，而不是精确到小数的排名。其余带 * 的格子用的是 MTEB-R 或任务特定指标。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档，每篇按每 500 token 计一次）计费，Voyage 按 <em>token</em> 计费。我们的<a href="/zh/rerank-cost-calculator">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。</p>
-        <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">资料来源： <a href="https://huggingface.co/Qwen" rel="noopener noreferrer">Qwen3-Reranker</a> · <a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">jina-reranker-v3.5</a> · <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">jina-reranker-v3 论文</a> · <a href="https://huggingface.co/jinaai/jina-reranker-v1-tiny-en" rel="noopener noreferrer">jina-reranker-v1</a> · <a href="https://docs.voyageai.com/docs/reranker" rel="noopener noreferrer">Voyage 重排序器</a> · <a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">mxbai-rerank</a> · <a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">nemotron-rerank</a> · <a href="https://huggingface.co/spaces/mteb/leaderboard" rel="noopener noreferrer">MTEB</a> · <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR</a> · <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker" rel="noopener noreferrer">BAAI 评测</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">GTE ModernBERT</a> · <a href="/zh/models/qwen-reranker">Qwen 指南</a> · <a href="/zh/guides/instruction-reranker">指令跟随</a> · <a href="/zh/guides/late-interaction-rerank">ColBERT</a></p>
+        <p class="muted" style="font-size:.82rem;margin:0"><strong>最近核对：</strong>2026 年 10 月（新增 Qwen3-VL-Reranker、zerank-2 和 gte-multilingual-reranker-base；新增 jina-reranker-v3.5；Jina 各行改用同一套 2026 年评测；bge-reranker-v2-m3 由查不到出处的 ~60.1 改为 BAAI 自己公布的 55.36*；Jina v1 tiny 与 ms-marco MiniLM-L6 现在显示 Jina 为它们公布的 BEIR 分数；9 月已将 mxbai-rerank-large-v1 由没有来源的 ~62.1 修正）· <strong>下次复核：</strong>2026 年 11 月。<strong>*</strong> 各家跑 BEIR 的方式都不一样 —— BAAI 用 15 个数据集、对 bge-large-en-v1.5 召回的前 100 条重排，Jina 用 13 个数据集、对 jina-embeddings-v5-text-small 的前 100 条重排，mixedbread 用自己选的一套 —— 所以本列每个 BEIR 数字都带 *，鼠标悬停可见其评测方法。差距并不小：Jina 的评测里 bge-reranker-v2-m3 是 56.51，BAAI 自己测的是 55.36；mxbai-rerank-large-v2 在 Jina 那边是 61.44，mixedbread 自己测的是 57.49。请把这一列当作大致的档位，而不是精确到小数的排名。其余带 * 的格子用的是 MTEB-R 或任务特定指标。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档，每篇按每 500 token 计一次）计费，Voyage 按 <em>token</em> 计费。我们的<a href="/zh/rerank-cost-calculator">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。</p>
+        <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">资料来源： <a href="https://huggingface.co/Qwen" rel="noopener noreferrer">Qwen3-Reranker</a> · <a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">jina-reranker-v3.5</a> · <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">jina-reranker-v3 论文</a> · <a href="https://huggingface.co/jinaai/jina-reranker-v1-tiny-en" rel="noopener noreferrer">jina-reranker-v1</a> · <a href="https://docs.voyageai.com/docs/reranker" rel="noopener noreferrer">Voyage 重排序器</a> · <a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">mxbai-rerank</a> · <a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">nemotron-rerank</a> · <a href="https://huggingface.co/spaces/mteb/leaderboard" rel="noopener noreferrer">MTEB</a> · <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR</a> · <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker" rel="noopener noreferrer">BAAI 评测</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">GTE ModernBERT</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-multilingual-reranker-base" rel="noopener noreferrer">mGTE 重排序模型</a> · <a href="https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B" rel="noopener noreferrer">Qwen3-VL-Reranker</a> · <a href="https://huggingface.co/zeroentropy/zerank-2-reranker" rel="noopener noreferrer">zerank-2</a> · <a href="/zh/models/qwen-reranker">Qwen 指南</a> · <a href="/zh/guides/instruction-reranker">指令跟随</a> · <a href="/zh/guides/late-interaction-rerank">ColBERT</a></p>
+        <p class="muted" style="font-size:.82rem;margin:.5rem 0 0"><strong>标着重排序，但不是给 RAG 用的：</strong>Contrastive-LM 的 <a href="https://huggingface.co/Contrastive-LM/CLM-v0.1-8B" rel="noopener noreferrer">CLM-v0.1-8B</a>（2026 年 9 月）到 10 月初已是 Hugging Face 上点赞最多的 <code>text-ranking</code> 模型。它给智能体的候选动作和答案打分 —— 在冻结的 Qwen3-8B 上加两个小的投影头，Qwen3-8B 要另外部署来提供嵌入 —— 主要成绩是用微调过的投影头跑的智能体基准，不是检索。所以本表没有收录它。</p>
       </div>
 
       <div class="grid grid-2" style="margin-top:2.5rem">

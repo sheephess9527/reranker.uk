@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Mon, 05 Oct 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 09 Oct 2026 12:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>9 Oct 2026 — Three rerankers the release watch had missed; ColBERT through sentence-transformers</title>
+      <link>https://reranker.uk/changelog#2026-10-09</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-09</guid>
+      <pubDate>Fri, 09 Oct 2026 12:00:00 GMT</pubDate>
+      <description>The daily release watch now checks every model Hugging Face tags as a reranker, popular ones the site never mentioned, and the libraries the demo and guides use. Qwen3-VL-Reranker, zerank-2 and gte-multilingual-reranker-base join the models table; CLM-v0.1-8B is explained rather than added; the ColBERT example now runs on sentence-transformers 6.</description>
+    </item>
     <item>
       <title>5 Oct 2026 — Voyage rerank-3, what changed; LightOn-rerank added</title>
       <link>https://reranker.uk/changelog#2026-10-05</link>

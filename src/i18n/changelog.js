@@ -1,4 +1,14 @@
 window.I18N_PAGE = { zh: {
+  "9 Oct 2026 — Three rerankers the release watch had missed; ColBERT through sentence-transformers":
+    "2026 年 10 月 9 日 —— 补上新发布检查漏掉的三个重排序模型；用 sentence-transformers 跑 ColBERT",
+  "<strong>The release watch was looking in too few places</strong> — it only checked 14 organisations on Hugging Face, and only models with “rerank” in the name. It now checks every model Hugging Face tags as a reranker, whoever published it, plus popular ones the site has never mentioned, and new releases of the libraries the demo and guides use":
+    "<strong>新发布检查看的范围太窄</strong> —— 之前只查 Hugging Face 上的 14 个机构，而且只看名字里带“rerank”的模型。现在会检查 Hugging Face 标为重排序的所有模型（不论谁发布），以及本站从没提过的热门模型，还有 Demo 和指南所用库的新版本",
+  "<strong>Qwen3-VL-Reranker, zerank-2 and gte-multilingual-reranker-base in the models table</strong> — Qwen’s 2B / 8B reranker for text, images, screenshots and video; ZeroEntropy’s Apache 2.0 4B model, also sold as an API; and Alibaba’s 306M multilingual model, which supports 70+ languages. Each row shows the vendor’s own figures with how they were measured, checked daily against the model card":
+    "<strong>模型对比表新增 Qwen3-VL-Reranker、zerank-2 和 gte-multilingual-reranker-base</strong> —— Qwen 能处理文本、图片、截图和视频的 2B / 8B 重排序模型；ZeroEntropy 以 Apache 2.0 开源、也作为 API 出售的 4B 模型；以及阿里巴巴支持 70 多种语言的 306M 多语言模型。每一行都列出厂商自己的数字和测试方法，每天和模型卡核对",
+  "<strong>CLM-v0.1-8B, explained rather than added</strong> — the most-liked reranker-tagged model on Hugging Face scores actions for agents, not passages for RAG; the models page now says so":
+    "<strong>CLM-v0.1-8B：说明原因，不收录</strong> —— Hugging Face 上点赞最多的“重排序”标签模型，打分对象是智能体的动作，而不是 RAG 里的段落；模型页现在写明了这一点",
+  "<strong>ColBERT code that runs</strong> — the late-interaction guide’s snippet searched a ColBERT index it never built. It now rescores candidates with sentence-transformers 6’s <code>MultiVectorEncoder</code>, which we ran on version 6.1.0":
+    "<strong>能跑通的 ColBERT 代码</strong> —— late-interaction 指南里的代码去检索一个从没建过的 ColBERT 索引。现在改为用 sentence-transformers 6 的 <code>MultiVectorEncoder</code> 对候选重新打分，我们在 6.1.0 版上实际跑过",
   "5 Oct 2026 — Voyage rerank-3, what changed; LightOn-rerank added":
     "2026 年 10 月 5 日 —— Voyage rerank-3 有哪些变化；新增 LightOn-rerank",
   "<strong>Voyage rerank-3, from Voyage’s announcement</strong> — the site said Voyage’s docs didn’t say whether rerank-3 takes natural-language instructions. Voyage’s 30 September announcement does: the Rerank 3 series keeps them. The Voyage page now covers what changed — a drop-in upgrade at the same price, scores calibrated to rerank-2.5, the largest gains on long documents and code, and Voyage’s own comparison against Cohere and Qwen3 — with each figure checked daily against the announcement":

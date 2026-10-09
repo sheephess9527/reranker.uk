@@ -190,7 +190,7 @@ async function evidence(f) {
       pipeline_tag: m.pipeline_tag,
       languages: m.cardData?.language,
       gated: m.gated,
-      has_weights: files.some((x) => /\.(safetensors|bin|onnx|gguf)$/.test(x)),
+      has_weights: files.some((x) => /\.(safetensors|bin|onnx|gguf|pt|pth)$/.test(x)),
       files: files.length > 25 ? [...files.slice(0, 25), `…${files.length - 25} more`] : files,
     };
     let card;
