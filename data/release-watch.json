@@ -1,5 +1,5 @@
 {
-  "_doc": "Input for scripts/watch-releases.mjs. hf_since: Hugging Face models created before this are not news. hf_seen / known: releases already handled (added to the site, or judged not worth adding) — append to them when you handle one, so it isn't reported again.",
+  "_doc": "Input for scripts/watch-releases.mjs. hf_since: Hugging Face models created before this are not news (the catch-up pass still reports popular ones no page mentions). hf_seen / known: releases already handled (added to the site, or judged not worth adding) — append to them when you handle one, so it isn't reported again. libraries[].known: the release the site was last checked against.",
   "hf_since": "2026-10-05T00:00:00Z",
   "hf_authors": [
     "jinaai",
@@ -17,7 +17,8 @@
     "voyageai",
     "Cohere"
   ],
-  "hf_trending_min_likes": 30,
+  "hf_new_min_likes": 10,
+  "hf_catchup_min_likes": 50,
   "hf_seen": [
     "Alibaba-NLP/core-reranker-2b",
     "Alibaba-NLP/core-reranker-8b",
@@ -75,6 +76,23 @@
         "jina-reranker-v3",
         "jina-reranker-v3.5"
       ]
+    }
+  ],
+  "libraries": [
+    {
+      "repo": "huggingface/transformers.js",
+      "known": "4.3.0",
+      "why": "the browser demo loads it (public/assets/js/demo.js)"
+    },
+    {
+      "repo": "UKPLab/sentence-transformers",
+      "known": "unchecked",
+      "why": "the self-host guide's quick start and the cross-encoder examples use it"
+    },
+    {
+      "repo": "FlagOpen/FlagEmbedding",
+      "known": "unchecked",
+      "why": "the BGE page's code uses it"
     }
   ]
 }
