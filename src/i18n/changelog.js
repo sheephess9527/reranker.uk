@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "9 Oct 2026 (night) — The cost calculator covers Google, Alibaba Cloud and SiliconFlow":
+    "2026 年 10 月 9 日（夜）—— 成本计算器加入 Google、阿里云和硅基流动",
+  "<strong>Five more prices in the cost calculator</strong> — Google Vertex AI ranking (per query of up to 100 documents) and Alibaba Cloud’s international qwen3-rerank (per token) join Cohere and Voyage in the dollar table. A new yuan table compares Alibaba Cloud’s Beijing-region qwen3-rerank / qwen3.7-text-rerank with SiliconFlow’s bge-reranker-v2-m3, and warns when your passages are longer than qwen3-rerank accepts. Every price is the same daily-checked figure the models table shows":
+    "<strong>成本计算器新增五个价格</strong> —— Google Vertex AI 排序（按查询计费，每次最多 100 篇文档）和阿里云国际版 qwen3-rerank（按 token 计费）与 Cohere、Voyage 一起列在美元表里。新增的人民币表对比阿里云北京地域的 qwen3-rerank / qwen3.7-text-rerank 和硅基流动的 bge-reranker-v2-m3，段落超过 qwen3-rerank 的长度上限时会提示。所有价格都和模型对比表用的是同一组每天核对的数字",
   "9 Oct 2026 (evening) — Alibaba Cloud, SiliconFlow and Google’s ranking API in the models table":
     "2026 年 10 月 9 日（晚）—— 阿里云百炼、硅基流动和 Google 排序 API 加入模型对比表",
   "<strong>Hosted rerankers you can buy in China, and Google’s</strong> — the models table now lists Alibaba Cloud Model Studio (qwen3-rerank at ¥0.5 per million tokens in China or $0.1 internationally, the 201-language qwen3.7-text-rerank, and qwen3-vl-rerank for images and video), SiliconFlow (bge-reranker-v2-m3 free, Qwen3-Reranker 0.6B / 4B / 8B on the same endpoint) and Google Vertex AI ranking ($1.00 per 1,000 queries). Prices come from each vendor’s price page and are checked daily":

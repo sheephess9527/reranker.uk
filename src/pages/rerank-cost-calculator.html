@@ -2,8 +2,8 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span>Rerank cost calculator</div>
       <h1>Rerank cost calculator</h1>
-      <p class="meta">Tool · <time datetime="2026-10-01">Updated 1 Oct 2026</time></p>
-      <p class="lead">Hosted rerankers do not bill the same way. Cohere charges per <strong>search</strong> — one query plus up to {{fact:cohere-rerank.docs_per_search}} documents, with any document over {{fact:cohere-rerank.billing_chunk_tokens}} tokens counted as several. Voyage charges per <strong>token</strong>. The two land closer than they look, and which is cheaper depends on how your passages round. Put your own numbers in.</p>
+      <p class="meta">Tool · <time datetime="2026-10-09">Updated 9 Oct 2026</time></p>
+      <p class="lead">Hosted rerankers do not bill the same way. Cohere charges per <strong>search</strong> — one query plus up to {{fact:cohere-rerank.docs_per_search}} documents, with any document over {{fact:cohere-rerank.billing_chunk_tokens}} tokens counted as several. Google charges per <strong>query</strong> of up to 100 documents, whatever their length. Voyage and Alibaba Cloud charge per <strong>token</strong>, and so do the yuan-priced services in mainland China. Which is cheapest depends on how your passages round. Put your own numbers in.</p>
 
       <section class="demo-panel" aria-labelledby="calc-head">
         <h2 id="calc-head" class="mt-0" style="margin-bottom:1rem">Your workload</h2>
@@ -35,7 +35,7 @@
 
       <h2 id="results">Monthly cost</h2>
       <div class="table-wrap">
-        <table id="calc-table" data-docs-per-search="{{fact:cohere-rerank.docs_per_search}}" data-chunk-tokens="{{fact:cohere-rerank.billing_chunk_tokens}}" data-cohere-pro-per-search="{{fact:cohere-rerank-4-pro.price_per_search}}" data-cohere-fast-per-search="{{fact:cohere-rerank-4-fast.price_per_search}}" data-voyage-per-m="{{fact:voyage-rerank-3.price_per_m_tokens}}" data-voyage-lite-per-m="{{fact:voyage-rerank-3-lite.price_per_m_tokens}}">
+        <table id="calc-table" data-docs-per-search="{{fact:cohere-rerank.docs_per_search}}" data-chunk-tokens="{{fact:cohere-rerank.billing_chunk_tokens}}" data-cohere-pro-per-search="{{fact:cohere-rerank-4-pro.price_per_search}}" data-cohere-fast-per-search="{{fact:cohere-rerank-4-fast.price_per_search}}" data-voyage-per-m="{{fact:voyage-rerank-3.price_per_m_tokens}}" data-voyage-lite-per-m="{{fact:voyage-rerank-3-lite.price_per_m_tokens}}" data-google-per-k-queries="{{fact:vertex-ai-ranking.usd_per_1000_queries}}" data-alibaba-intl-per-m="{{fact:alibaba-model-studio-rerank.qwen3_rerank_usd_per_m}}" data-alibaba-cn-per-m="{{fact:alibaba-model-studio-rerank.qwen3_rerank_cny_per_m}}" data-siliconflow-pro-per-m="{{fact:siliconflow-rerank.bge_v2_m3_pro_cny_per_m}}">
           <caption class="sr-only">Estimated monthly rerank cost by vendor for the workload entered above</caption>
           <thead>
             <tr>
@@ -49,6 +49,23 @@
         </table>
       </div>
       <p class="muted" style="font-size:.85rem" id="calc-note"></p>
+
+      <h3 id="results-cny">Priced in yuan, for mainland China</h3>
+      <div class="table-wrap">
+        <table id="calc-table-cny" class="calc-table">
+          <caption class="sr-only">Estimated monthly rerank cost in yuan for the workload entered above</caption>
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Billing unit</th>
+              <th>Billable volume</th>
+              <th>Monthly cost</th>
+            </tr>
+          </thead>
+          <tbody id="calc-rows-cny"></tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem" id="calc-note-cny"></p>
 
       <h2 id="why">Why the ranking changes</h2>
       <p>Both vendors end up charging for text, but they round it differently. Cohere bills each candidate as one document per started {{fact:cohere-rerank.billing_chunk_tokens}} tokens — query included — and each search covers {{fact:cohere-rerank.docs_per_search}} documents. Voyage bills exactly the tokens you send, counting the query once per document.</p>
@@ -74,8 +91,11 @@
       <ul>
         <li><strong>Cohere Rerank 4</strong> — ${{fact:cohere-rerank-4-pro.price_per_search}} per search (Pro) and ${{fact:cohere-rerank-4-fast.price_per_search}} per search (Fast). A search is one query plus up to {{fact:cohere-rerank.docs_per_search}} documents; per Cohere’s pricing FAQ, a document longer than {{fact:cohere-rerank.billing_chunk_tokens}} tokens including the query is split, and each chunk counts as a document. Prices are from <a href="https://cohere.com/pricing" rel="noopener noreferrer">cohere.com/pricing</a> ($2.50 and $2 per 1,000 searches).</li>
         <li><strong>Voyage rerank-3</strong> — ${{fact:voyage-rerank-3.price_per_m_tokens}} per 1M tokens, and ${{fact:voyage-rerank-3-lite.price_per_m_tokens}} for <code>rerank-3-lite</code>. Billable tokens are the query counted once per document, plus every document token you send — so 50 candidates means the query is billed 50 times. The older <code>rerank-2.5</code> and <code>-lite</code> cost the same per token. Free tokens and the Batch API discount are not applied here — see the <a href="/models/voyage-rerank.html">Voyage page</a> for which models they cover.</li>
+        <li><strong>Google Vertex AI ranking</strong> — ${{fact:vertex-ai-ranking.usd_per_1000_queries}} per 1,000 queries; a query covers up to 100 documents, and each further 100 counts as another query (<a href="https://cloud.google.com/generative-ai-app-builder/pricing" rel="noopener noreferrer">Google’s pricing</a>). Passage length doesn’t change the price, but the models read only 1,024 tokens per record.</li>
+        <li><strong>Alibaba Cloud Model Studio</strong> — qwen3-rerank at ${{fact:alibaba-model-studio-rerank.qwen3_rerank_usd_per_m}} per 1M input tokens internationally and ¥{{fact:alibaba-model-studio-rerank.qwen3_rerank_cny_per_m}} in the Beijing region, where qwen3.7-text-rerank costs the same (<a href="https://help.aliyun.com/zh/model-studio/model-pricing" rel="noopener noreferrer">price list</a>). Alibaba bills input tokens and caps a request at query tokens × documents + document tokens, so this page counts tokens the way it does for Voyage. qwen3-rerank rejects any single document over 4,000 tokens rather than truncating it.</li>
+        <li><strong>SiliconFlow</strong> — bge-reranker-v2-m3 is listed free and its Pro tier at ¥{{fact:siliconflow-rerank.bge_v2_m3_pro_cny_per_m}} per 1M tokens (<a href="https://siliconflow.cn/pricing" rel="noopener noreferrer">price list</a>). SiliconFlow doesn’t say how it counts rerank tokens; this page assumes the same formula as Alibaba and Voyage. Its price list gives no price for the Qwen3-Reranker models it also serves.</li>
         <li>Token counts are approximate — every vendor tokenises differently, and this page multiplies your averages rather than tokenising real text.</li>
-        <li>Rates verified 1 October 2026 and re-checked against <a href="https://cohere.com/pricing" rel="noopener noreferrer">Cohere</a> and <a href="https://docs.voyageai.com/docs/pricing" rel="noopener noreferrer">Voyage</a> daily by this site’s source check. Confirm before committing to a budget.</li>
+        <li>Rates verified in October 2026 and re-checked daily against each vendor’s price page by this site’s source check. Confirm before committing to a budget.</li>
       </ul>
 
       <div class="cta-band">

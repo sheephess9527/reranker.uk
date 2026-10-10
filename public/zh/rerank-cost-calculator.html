@@ -58,8 +58,8 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span>重排序成本计算器</div>
       <h1>重排序成本计算器</h1>
-      <p class="meta">工具 · <time datetime="2026-10-01">更新于 2026 年 10 月 1 日</time></p>
-      <p class="lead">托管重排序服务的计费方式各不相同。Cohere 按<strong>检索次数</strong>计费 —— 一个 query 加最多 100 篇文档，超过 500 token 的文档会被算作多篇。Voyage 按 <strong>token</strong> 计费。两者实际差距比看上去小，哪家更便宜取决于你的段落长度怎么取整。填入你自己的数字试试。</p>
+      <p class="meta">工具 · <time datetime="2026-10-09">更新于 2026 年 10 月 9 日</time></p>
+      <p class="lead">托管重排序服务的计费方式各不相同。Cohere 按<strong>检索次数</strong>收费 —— 一次检索包含一个 query 和最多 100 篇文档，超过 500 token 的文档按多篇计。Google 按<strong>查询次数</strong>收费，每次最多 100 篇文档，不管长短。Voyage 和阿里云按 <strong>token</strong> 收费，国内以人民币计价的服务也是如此。哪家最便宜取决于你的段落长度怎么取整。填入你自己的数字试试。</p>
 
       <section class="demo-panel" aria-labelledby="calc-head">
         <h2 id="calc-head" class="mt-0" style="margin-bottom:1rem">你的负载</h2>
@@ -91,7 +91,7 @@
 
       <h2 id="results">每月成本</h2>
       <div class="table-wrap">
-        <table id="calc-table" data-docs-per-search="100" data-chunk-tokens="500" data-cohere-pro-per-search="0.0025" data-cohere-fast-per-search="0.002" data-voyage-per-m="0.05" data-voyage-lite-per-m="0.02">
+        <table id="calc-table" data-docs-per-search="100" data-chunk-tokens="500" data-cohere-pro-per-search="0.0025" data-cohere-fast-per-search="0.002" data-voyage-per-m="0.05" data-voyage-lite-per-m="0.02" data-google-per-k-queries="1.00" data-alibaba-intl-per-m="0.1" data-alibaba-cn-per-m="0.5" data-siliconflow-pro-per-m="0.07">
           <caption class="sr-only">按上面填写的用量，估算各厂商每月的重排序费用</caption>
           <thead>
             <tr>
@@ -105,6 +105,23 @@
         </table>
       </div>
       <p class="muted" style="font-size:.85rem" id="calc-note"></p>
+
+      <h3 id="results-cny">以人民币计价（中国大陆）</h3>
+      <div class="table-wrap">
+        <table id="calc-table-cny" class="calc-table">
+          <caption class="sr-only">按上方负载估算的每月重排序费用（人民币）</caption>
+          <thead>
+            <tr>
+              <th>方案</th>
+              <th>计费单位</th>
+              <th>计费量</th>
+              <th>每月成本</th>
+            </tr>
+          </thead>
+          <tbody id="calc-rows-cny"></tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem" id="calc-note-cny"></p>
 
       <h2 id="why">为什么排名会变</h2>
       <p>两家最终都是按文本量收费，只是取整方式不同。Cohere 把每个候选按「每满 500 token 算一篇，不足也算」计费（query 计入在内），每次检索包含 100 篇文档。Voyage 只按你实际发送的 token 计费，query 按每篇文档各算一次。</p>
@@ -130,8 +147,11 @@
       <ul>
         <li><strong>Cohere Rerank 4</strong> —— 每次检索 $0.0025（Pro）和 $0.002（Fast）。一次检索 = 一个 query 加最多 100 篇文档；按 Cohere 价格 FAQ，文档连同 query 超过 500 token 就会被拆分，每一块算一篇文档。价格取自 <a href="https://cohere.com/pricing" rel="noopener noreferrer">cohere.com/pricing</a>（每千次检索 $2.50 和 $2）。</li>
         <li><strong>Voyage rerank-3</strong> —— 每百万 token $0.05，<code>rerank-3-lite</code> 为 $0.02。计费 token = query 按每篇文档各算一次，再加上你发送的全部文档 token —— 所以 50 个候选意味着 query 被计费 50 次。旧版 <code>rerank-2.5</code> 及其 <code>-lite</code> 的单价相同。这里没有计入免费 token 和 Batch API 折扣 —— 哪些模型适用，见 <a href="/zh/models/voyage-rerank">Voyage 专页</a>。</li>
+        <li><strong>Google Vertex AI 排序</strong> —— 每 1,000 次查询 $1.00；一次查询最多 100 篇文档，每多 100 篇算一次查询（<a href="https://cloud.google.com/generative-ai-app-builder/pricing" rel="noopener noreferrer">Google 价格页</a>）。段落长短不影响价格，但模型每条记录只读 1,024 token。</li>
+        <li><strong>阿里云百炼</strong> —— qwen3-rerank 国际版每百万输入 token $0.1，北京地域 ¥0.5，qwen3.7-text-rerank 在北京地域同价（<a href="https://help.aliyun.com/zh/model-studio/model-pricing" rel="noopener noreferrer">价格页</a>）。阿里云按输入 token 计费，单次请求上限按 query token × 文档数 + 文档 token 总和计算，所以本页和 Voyage 用同一种方式数 token。qwen3-rerank 遇到单篇超过 4,000 token 的文档会直接报错，不会截断。</li>
+        <li><strong>硅基流动</strong> —— 价格页上 bge-reranker-v2-m3 免费，Pro 版每百万 token ¥0.07（<a href="https://siliconflow.cn/pricing" rel="noopener noreferrer">价格页</a>）。硅基流动没有说明重排序怎么数 token，本页假定与阿里云、Voyage 的算法相同。它同时提供的 Qwen3-Reranker 在价格页上没有标价。</li>
         <li>token 数为近似值 —— 各家分词方式不同，本页是用你填的平均值相乘，而非对真实文本做分词。</li>
-        <li>价格于 2026 年 10 月 1 日核对，本站的来源检查每天都会对照 <a href="https://cohere.com/pricing" rel="noopener noreferrer">Cohere</a> 和 <a href="https://docs.voyageai.com/docs/pricing" rel="noopener noreferrer">Voyage</a> 复核一次。做预算前请再确认。</li>
+        <li>价格于 2026 年 10 月核对，本站的来源检查每天都会和各厂商的价格页重新核对。做预算前请再确认一次。</li>
       </ul>
 
       <div class="cta-band">

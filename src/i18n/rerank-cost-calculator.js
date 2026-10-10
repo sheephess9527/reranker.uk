@@ -1,4 +1,22 @@
 window.I18N_PAGE = { zh: {
+  "Tool · <time datetime=\"2026-10-09\">Updated 9 Oct 2026</time>":
+    "工具 · <time datetime=\"2026-10-09\">更新于 2026 年 10 月 9 日</time>",
+  "<time datetime=\"2026-10-09\">Updated 9 Oct 2026</time>":
+    "<time datetime=\"2026-10-09\">更新于 2026 年 10 月 9 日</time>",
+  "Hosted rerankers do not bill the same way. Cohere charges per <strong>search</strong> — one query plus up to {{fact:cohere-rerank.docs_per_search}} documents, with any document over {{fact:cohere-rerank.billing_chunk_tokens}} tokens counted as several. Google charges per <strong>query</strong> of up to 100 documents, whatever their length. Voyage and Alibaba Cloud charge per <strong>token</strong>, and so do the yuan-priced services in mainland China. Which is cheapest depends on how your passages round. Put your own numbers in.":
+    "托管重排序服务的计费方式各不相同。Cohere 按<strong>检索次数</strong>收费 —— 一次检索包含一个 query 和最多 {{fact:cohere-rerank.docs_per_search}} 篇文档，超过 {{fact:cohere-rerank.billing_chunk_tokens}} token 的文档按多篇计。Google 按<strong>查询次数</strong>收费，每次最多 100 篇文档，不管长短。Voyage 和阿里云按 <strong>token</strong> 收费，国内以人民币计价的服务也是如此。哪家最便宜取决于你的段落长度怎么取整。填入你自己的数字试试。",
+  "Priced in yuan, for mainland China":
+    "以人民币计价（中国大陆）",
+  "Estimated monthly rerank cost in yuan for the workload entered above":
+    "按上方负载估算的每月重排序费用（人民币）",
+  "<strong>Google Vertex AI ranking</strong> — ${{fact:vertex-ai-ranking.usd_per_1000_queries}} per 1,000 queries; a query covers up to 100 documents, and each further 100 counts as another query (<a href=\"https://cloud.google.com/generative-ai-app-builder/pricing\" rel=\"noopener noreferrer\">Google’s pricing</a>). Passage length doesn’t change the price, but the models read only 1,024 tokens per record.":
+    "<strong>Google Vertex AI 排序</strong> —— 每 1,000 次查询 ${{fact:vertex-ai-ranking.usd_per_1000_queries}}；一次查询最多 100 篇文档，每多 100 篇算一次查询（<a href=\"https://cloud.google.com/generative-ai-app-builder/pricing\" rel=\"noopener noreferrer\">Google 价格页</a>）。段落长短不影响价格，但模型每条记录只读 1,024 token。",
+  "<strong>Alibaba Cloud Model Studio</strong> — qwen3-rerank at ${{fact:alibaba-model-studio-rerank.qwen3_rerank_usd_per_m}} per 1M input tokens internationally and ¥{{fact:alibaba-model-studio-rerank.qwen3_rerank_cny_per_m}} in the Beijing region, where qwen3.7-text-rerank costs the same (<a href=\"https://help.aliyun.com/zh/model-studio/model-pricing\" rel=\"noopener noreferrer\">price list</a>). Alibaba bills input tokens and caps a request at query tokens × documents + document tokens, so this page counts tokens the way it does for Voyage. qwen3-rerank rejects any single document over 4,000 tokens rather than truncating it.":
+    "<strong>阿里云百炼</strong> —— qwen3-rerank 国际版每百万输入 token ${{fact:alibaba-model-studio-rerank.qwen3_rerank_usd_per_m}}，北京地域 ¥{{fact:alibaba-model-studio-rerank.qwen3_rerank_cny_per_m}}，qwen3.7-text-rerank 在北京地域同价（<a href=\"https://help.aliyun.com/zh/model-studio/model-pricing\" rel=\"noopener noreferrer\">价格页</a>）。阿里云按输入 token 计费，单次请求上限按 query token × 文档数 + 文档 token 总和计算，所以本页和 Voyage 用同一种方式数 token。qwen3-rerank 遇到单篇超过 4,000 token 的文档会直接报错，不会截断。",
+  "<strong>SiliconFlow</strong> — bge-reranker-v2-m3 is listed free and its Pro tier at ¥{{fact:siliconflow-rerank.bge_v2_m3_pro_cny_per_m}} per 1M tokens (<a href=\"https://siliconflow.cn/pricing\" rel=\"noopener noreferrer\">price list</a>). SiliconFlow doesn’t say how it counts rerank tokens; this page assumes the same formula as Alibaba and Voyage. Its price list gives no price for the Qwen3-Reranker models it also serves.":
+    "<strong>硅基流动</strong> —— 价格页上 bge-reranker-v2-m3 免费，Pro 版每百万 token ¥{{fact:siliconflow-rerank.bge_v2_m3_pro_cny_per_m}}（<a href=\"https://siliconflow.cn/pricing\" rel=\"noopener noreferrer\">价格页</a>）。硅基流动没有说明重排序怎么数 token，本页假定与阿里云、Voyage 的算法相同。它同时提供的 Qwen3-Reranker 在价格页上没有标价。",
+  "Rates verified in October 2026 and re-checked daily against each vendor’s price page by this site’s source check. Confirm before committing to a budget.":
+    "价格于 2026 年 10 月核对，本站的来源检查每天都会和各厂商的价格页重新核对。做预算前请再确认一次。",
   "Estimated monthly rerank cost by vendor for the workload entered above":
     "按上面填写的用量，估算各厂商每月的重排序费用",
   "Tool · <time datetime=\"2026-09-18\">Updated 18 Sep 2026</time>":
