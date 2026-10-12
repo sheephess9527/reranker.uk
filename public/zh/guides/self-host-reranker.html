@@ -32,7 +32,7 @@
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"如何自托管 reranker — sentence-transformers、GPU、部署","datePublished":"2026-06-23","dateModified":"2026-06-23","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/self-host-reranker","description":"自托管 cross-encoder reranker 实战指南：模型选择（bge、mxbai、Jina）、sentence-transformers 快速上手、FastAPI 服务化与运维清单。","inLanguage":"zh-Hans"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"如何自托管 reranker — sentence-transformers、GPU、部署","datePublished":"2026-06-23","dateModified":"2026-10-12","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/self-host-reranker","description":"自托管 cross-encoder reranker 实战指南：模型选择（bge、mxbai、Jina）、sentence-transformers 快速上手、FastAPI 服务化与运维清单。","inLanguage":"zh-Hans"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://reranker.uk/zh/guides/"},{"@type":"ListItem","position":3,"name":"如何自托管 reranker","item":"https://reranker.uk/zh/guides/self-host-reranker"}]}</script>
 
 </head>
@@ -58,7 +58,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/guides/">指南</a><span>/</span>自托管 reranker</div>
       <h1>如何自托管 reranker</h1>
-      <p class="meta">生产实践 · 约 10 分钟阅读 · <time datetime="2026-06-23">更新于 2026 年 6 月 23 日</time></p>
+      <p class="meta">生产实践 · 约 10 分钟阅读 · <time datetime="2026-10-12">更新于 2026 年 10 月 12 日</time></p>
       <p class="lead">托管 rerank API 很方便，但<strong>自托管</strong>能带来零按次成本、数据完全可控，以及在自己 GPU/CPU 集群上的可预测延迟。本文从第一次 <code>CrossEncoder</code> 调用，到生产级微服务的实操路径。</p>
 
       <div class="toc">
@@ -78,29 +78,29 @@
         <li><strong>数据驻留。</strong>查询与文档不出你的 VPC。</li>
         <li><strong>自定义微调。</strong>可随时换上领域微调 checkpoint，无需等厂商。</li>
       </ul>
-      <p>若你需要多语言质量且运维要极简，<a href="/zh/models/cohere-rerank">Cohere Rerank</a> 或 <a href="/zh/models/jina-reranker">Jina</a> 等托管 API 的综合成本可能更低 —— 见<a href="/zh/guides/choose-reranker-scenario">按场景选型</a>。</p>
+      <p>如果需要多语言效果、又不想多运维，托管 API —— <a href="/zh/models/cohere-rerank">Cohere</a>、<a href="/zh/models/voyage-rerank">Voyage</a>，国内则有<a href="/zh/models/#alibaba-model-studio">阿里云百炼</a>和<a href="/zh/models/#siliconflow">硅基流动</a> —— 算上所有成本可能仍然更便宜。<a href="/zh/rerank-cost-calculator">成本计算器</a>可以按你的量级算价格；另见<a href="/zh/guides/choose-reranker-scenario">按场景选择</a>。</p>
 
       <h2 id="models">选择模型</h2>
       <div class="table-wrap">
         <table>
           <thead><tr><th>模型</th><th>规模</th><th>许可证</th><th>最适合</th></tr></thead>
           <tbody>
-            <tr><td><a href="/zh/models/bge-reranker">bge-reranker-base</a></td><td>~278M</td><td>MIT</td><td>CPU 友好的中英文默认选择</td></tr>
-            <tr><td><a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a></td><td>~568M</td><td>Apache 2.0</td><td>GPU 有限时的多语言选择</td></tr>
-            <tr><td><a href="/zh/models/qwen-reranker">Qwen3-Reranker-4B</a></td><td>~4B</td><td>Apache 2.0</td><td><strong>2026 开源 SOTA 首选</strong>（需 GPU）</td></tr>
+            <tr><td><a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a></td><td>~568M</td><td>Apache 2.0</td><td><strong>默认之选</strong> —— 多语言，小到能在 CPU 上跑</td></tr>
+            <tr><td><a href="/zh/models/#gte-multilingual-reranker-base">gte-multilingual-reranker-base</a></td><td>306M</td><td>Apache 2.0</td><td>更小的多语言选择（70 多种语言，8K 上下文）</td></tr>
+            <tr><td><a href="/zh/models/qwen-reranker">Qwen3-Reranker-4B</a></td><td>~4B</td><td>Apache 2.0</td><td><strong>有 GPU 时的默认之选</strong> —— 在 Qwen 的测试中，三个尺寸里英文和指令跟随表现最好</td></tr>
             <tr><td><a href="/zh/models/mxbai-rerank">mxbai-rerank-base-v2</a></td><td>~494M</td><td>Apache 2.0</td><td>多语言（含中文）；mxbai v2 里体量与质量最均衡的一款</td></tr>
             <tr><td><a href="/zh/models/jina-reranker">jina-reranker-v3.5</a></td><td>~0.6B</td><td>CC BY-NC 4.0</td><td>Listwise、长上下文 —— 未获许可时<strong>仅限非商用</strong></td></tr>
           </tbody>
         </table>
       </div>
-      <p>原型阶段用 CPU 跑 <strong>bge-reranker-base</strong>。有 GPU 时在标注集上 A/B <strong>Qwen3-Reranker-4B</strong> 与 <strong>bge-v2-m3</strong> 或 <strong>mxbai-base-v2</strong> —— 不要假设榜单顺序会迁移。</p>
+      <p>先用 <strong>bge-reranker-v2-m3</strong>，它在 CPU 上就能跑。有 GPU 时，在你的标注数据上把 <strong>Qwen3-Reranker-4B</strong> 和它或 <strong>mxbai-rerank-base-v2</strong> 做 A/B 对比 —— 不要以为排行榜上的顺序能照搬到你的数据。2026 年 10 月之前，这张表推荐的是 bge-reranker-base，那是 BAAI 2023 年只支持中英文的模型。</p>
 
       <h2 id="quickstart">sentence-transformers 快速上手</h2>
       <pre tabindex="0"><code>pip install sentence-transformers torch
 
 from sentence_transformers import CrossEncoder
 
-model = CrossEncoder("BAAI/bge-reranker-base", max_length=512)
+model = CrossEncoder("BAAI/bge-reranker-v2-m3", max_length=512)
 
 query = "How do I add reranking to RAG?"
 docs = [
@@ -111,7 +111,7 @@ docs = [
 pairs = [(query, d) for d in docs]
 scores = model.predict(pairs)  # higher = more relevant
 ranked = sorted(zip(scores, docs), reverse=True)</code></pre>
-      <p>批量打分 —— 一次 <code>predict()</code> 处理 50 段远比 50 次单独前向快。单段长度建议不超过 512 token（模型默认），避免静默截断。</p>
+      <p>把文档对批量处理 —— 一次 <code>predict()</code> 给 50 篇文档打分，比单独前向 50 次快得多。<code>max_length=512</code> 会截断更长的内容，所以要把段落切到合适长度，别让段落末尾被悄悄丢掉。</p>
 
       <h2 id="serve">服务化方案</h2>
       <div class="grid grid-2" style="margin:1.2rem 0">
@@ -129,7 +129,7 @@ from fastapi import FastAPI
 from sentence_transformers import CrossEncoder
 
 app = FastAPI()
-model = CrossEncoder("BAAI/bge-reranker-base")
+model = CrossEncoder("BAAI/bge-reranker-v2-m3", max_length=512)
 
 @app.post("/rerank")
 def rerank(body: dict):
@@ -137,12 +137,13 @@ def rerank(body: dict):
     scores = model.predict([(q, d) for d in docs])
     order = sorted(range(len(docs)), key=lambda i: -scores[i])
     return {"results": [{"index": i, "score": float(scores[i])} for i in order]}</code></pre>
+      <p>服务不一定要自己写：Hugging Face 的 <a href="https://github.com/huggingface/text-embeddings-inference" rel="noopener noreferrer">Text Embeddings Inference</a> 和 <a href="https://github.com/michaelfeil/infinity" rel="noopener noreferrer">Infinity</a> 都能把 cross-encoder 部署成 rerank 接口 —— <a href="https://huggingface.co/Alibaba-NLP/gte-multilingual-reranker-base" rel="noopener noreferrer">gte-multilingual-reranker-base 的模型卡</a>里有两者的 Docker 命令。先确认你的模型在服务端的支持列表里。</p>
       <p>ONNX 导出与 C++ 运行时见 Hugging Face 模型卡。仅浏览器实验可用我们的 <a href="/zh/demo?s=techdocs">在线 Demo</a>（xsmall ONNX 构建）。</p>
 
       <h2 id="ops">运维清单</h2>
       <ul>
         <li><strong>GPU：</strong>每次查询要重排几十段以上时就值得上 GPU。确定配置前，请在你自己的硬件上实测 p50 / p95 —— 模型卡很少公布延迟，我们也不引用自己没测过的数字。</li>
-        <li><strong>内存：</strong>base 模型预留约 1–2 GB VRAM；大模型需更多。</li>
+        <li><strong>显存：</strong>fp16 下光权重就要每个参数约 2 字节 —— bge-reranker-v2-m3 的 568M 参数约 1.1 GB，4B 模型约 8 GB —— 再加上随批大小和段落长度增长的激活值。</li>
         <li><strong>预热：</strong>启动时跑一次 dummy predict，避免冷启动延迟尖峰。</li>
         <li><strong>监控：</strong>在标注子集上跟踪 p95 延迟与 NDCG —— <a href="/zh/guides/evaluate-reranker">评测 reranker</a>。</li>
         <li><strong>降级：</strong>rerank 服务不可用时，透传向量 top-k，不要让整条 RAG 请求失败。</li>

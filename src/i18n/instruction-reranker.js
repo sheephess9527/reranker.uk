@@ -1,4 +1,14 @@
 window.I18N_PAGE = { zh: {
+  "Emerging · ~7 min read · <time datetime=\"2026-10-12\">Updated 12 Oct 2026</time>":
+    "新兴方向 · 约 7 分钟阅读 · <time datetime=\"2026-10-12\">更新于 2026 年 10 月 12 日</time>",
+  "Models that take an instruction today":
+    "目前支持指令的模型",
+  "<a href=\"/models/#alibaba-model-studio\">Alibaba Cloud Model Studio</a> (hosted) — <code>qwen3-rerank</code>, <code>qwen3.7-text-rerank</code> and <code>qwen3-vl-rerank</code> take an <code>instruct</code> parameter. Without one they rank for question answering (“Given a web search query, retrieve relevant passages that answer the query.”); Alibaba suggest writing instructions in English.":
+    "<a href=\"/models/#alibaba-model-studio\">阿里云百炼</a>（托管）—— <code>qwen3-rerank</code>、<code>qwen3.7-text-rerank</code> 和 <code>qwen3-vl-rerank</code> 支持 <code>instruct</code> 参数。不传时默认按问答检索排序（“Given a web search query, retrieve relevant passages that answer the query.”）；阿里云建议用英文写指令。",
+  "<a href=\"/models/mxbai-rerank.html#api\">Mixedbread mxbai-rerank-v3.1-listwise</a> (hosted, inside Mixedbread Search only) — a listwise model that reads the whole candidate set, so an instruction such as “later amendments supersede earlier ones” can compare documents with each other. Its weights are not published.":
+    "<a href=\"/models/mxbai-rerank.html#api\">Mixedbread mxbai-rerank-v3.1-listwise</a>（托管，只能在 Mixedbread Search 里用）—— 列表式模型，把整个候选集一起读，所以“后来的修订取代先前的”这类指令可以让文档之间互相比较。权重未公开。",
+  "<strong>Instruction rerankers (Qwen3, Contextual AI v2, Voyage rerank-3, Alibaba’s qwen3-rerank, Mixedbread’s listwise model):</strong> stronger when relevance is policy-shaped; harder to compare on public leaderboards, because the score depends on the instruction you write — our <a href=\"/models/\">models table</a> shows each vendor’s own numbers where they publish any.":
+    "<strong>指令重排序器（Qwen3、Contextual AI v2、Voyage rerank-3、阿里云 qwen3-rerank、Mixedbread 列表式模型）：</strong>当相关性取决于业务策略时更强；但很难在公开排行榜上比较，因为分数取决于你写的指令 —— 我们的<a href=\"/models/\">模型对比表</a>在厂商有公布时列出其自测数字。",
   "_title": "指令跟随 reranker — Contextual AI 与任务导向排序 | reranker.uk",
   "_desc": "指令跟随（instruction-following）reranker 与经典 cross-encoder 的区别：任务指令如何改变相关性、何时用 Contextual AI 类 API，以及如何在自有标注上评测。",
 

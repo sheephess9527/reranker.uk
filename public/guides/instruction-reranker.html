@@ -32,7 +32,7 @@
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Instruction-following rerankers","datePublished":"2026-06-25","dateModified":"2026-06-25","inLanguage":"en","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/instruction-reranker","description":"What instruction-following rerankers add over classic cross-encoders: task instructions, when to use Contextual AI-style APIs, and how to evaluate them on your own labels."}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Instruction-following rerankers","datePublished":"2026-06-25","dateModified":"2026-10-12","inLanguage":"en","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/instruction-reranker","description":"What instruction-following rerankers add over classic cross-encoders: task instructions, when to use Contextual AI-style APIs, and how to evaluate them on your own labels."}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://reranker.uk/guides/"},{"@type":"ListItem","position":3,"name":"Instruction-following rerankers","item":"https://reranker.uk/guides/instruction-reranker"}]}</script>
 
 </head>
@@ -58,7 +58,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Instruction-following rerank</div>
       <h1>Instruction-following rerankers</h1>
-      <p class="meta">Emerging · ~7 min read · <time datetime="2026-10-01">Updated 1 Oct 2026</time></p>
+      <p class="meta">Emerging · ~7 min read · <time datetime="2026-10-12">Updated 12 Oct 2026</time></p>
       <p class="lead">Classic cross-encoders answer one question: <em>“how relevant is this passage to this query?”</em> <strong>Instruction-following</strong> rerankers (e.g. Contextual AI Rerank v2) take an extra control signal — a short instruction that defines what “relevant” means for this task.</p>
 
       <div class="toc">
@@ -96,11 +96,13 @@ results = client.rerank(
     documents=candidates,
     instruction="Prefer official help articles with step-by-step cancel steps; demote marketing and upsell pages.",
 )  # higher score = better match to query under that instruction</code></pre>
-      <h3>Three that take an instruction today</h3>
+      <h3>Models that take an instruction today</h3>
       <ul>
         <li><a href="/models/qwen-reranker">Qwen3-Reranker</a> (0.6B / 4B / 8B, Apache 2.0) — an instruction per task through sentence-transformers’ <code>prompts</code>; Qwen report typical gains of 1–5% from a tailored one.</li>
         <li><a href="https://huggingface.co/ContextualAI/ctxl-rerank-v2-instruct-multilingual-2b" rel="noopener noreferrer">Contextual AI Rerank v2</a> (1B / 2B / 6B, CC BY-NC-SA — non-commercial) — pass the instruction as <code>prompt=</code> to <code>predict</code> or <code>rank</code>.</li>
         <li><a href="/models/voyage-rerank">Voyage rerank-3</a> (hosted) — append or prepend the instruction to the query. Voyage introduced instructions with rerank-2.5 and say the Rerank 3 series keeps them.</li>
+        <li><a href="/models/#alibaba-model-studio">Alibaba Cloud Model Studio</a> (hosted) — <code>qwen3-rerank</code>, <code>qwen3.7-text-rerank</code> and <code>qwen3-vl-rerank</code> take an <code>instruct</code> parameter. Without one they rank for question answering (“Given a web search query, retrieve relevant passages that answer the query.”); Alibaba suggest writing instructions in English.</li>
+        <li><a href="/models/mxbai-rerank#api">Mixedbread mxbai-rerank-v3.1-listwise</a> (hosted, inside Mixedbread Search only) — a listwise model that reads the whole candidate set, so an instruction such as “later amendments supersede earlier ones” can compare documents with each other. Its weights are not published.</li>
       </ul>
       <pre tabindex="0"><code># Contextual AI Rerank v2, from its model card
 from sentence_transformers import CrossEncoder
@@ -124,7 +126,7 @@ ranked = model.rank(
       <h2 id="vs">Vs classic cross-encoders</h2>
       <ul>
         <li><strong>Classic (bge, Cohere, mxbai, Jina v1–v2):</strong> the most published BEIR-style numbers; open weights or mature hosted APIs; a good default for RAG “topical precision”.</li>
-        <li><strong>Instruction rerankers (Qwen3, Contextual AI v2, Voyage rerank-3):</strong> stronger when relevance is policy-shaped; harder to compare on public leaderboards, because the score depends on the instruction you write — our <a href="/models/">models table</a> shows each vendor’s own numbers where they publish any.</li>
+        <li><strong>Instruction rerankers (Qwen3, Contextual AI v2, Voyage rerank-3, Alibaba’s qwen3-rerank, Mixedbread’s listwise model):</strong> stronger when relevance is policy-shaped; harder to compare on public leaderboards, because the score depends on the instruction you write — our <a href="/models/">models table</a> shows each vendor’s own numbers where they publish any.</li>
         <li><strong>Late-interaction (ColBERT):</strong> different axis entirely (token MaxSim at scale) — see <a href="/guides/late-interaction-rerank">late-interaction guide</a>.</li>
       </ul>
 

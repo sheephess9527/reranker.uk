@@ -2,7 +2,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Choose by scenario</div>
       <h1>Which reranker fits your scenario?</h1>
-      <p class="meta">Decision guide · ~8 min read · <time datetime="2026-06-23">Updated 23 Jun 2026</time></p>
+      <p class="meta">Decision guide · ~8 min read · <time datetime="2026-10-12">Updated 12 Oct 2026</time></p>
       <p class="lead">Rerankers are not one-size-fits-all. The right choice depends on <strong>language coverage</strong>, <strong>latency budget</strong>, <strong>data sensitivity</strong>, and whether your queries look more like <em>support tickets</em>, <em>legal clauses</em>, <em>code search</em>, or <em>RAG chunks</em>.</p>
 
       <div class="toc">
@@ -10,9 +10,11 @@
         <ol>
           <li><a href="#matrix">Scenario matrix</a></li>
           <li><a href="#rag">RAG &amp; knowledge bases</a></li>
+          <li><a href="#multilingual">Chinese and multilingual</a></li>
           <li><a href="#support">Customer support</a></li>
           <li><a href="#legal">Legal &amp; compliance</a></li>
           <li><a href="#code">Code &amp; technical docs</a></li>
+          <li><a href="#visual">Scanned PDFs, slides and screenshots</a></li>
           <li><a href="#try">Try it in the demo</a></li>
         </ol>
       </div>
@@ -27,43 +29,62 @@
             <tr>
               <td>RAG pipeline</td>
               <td>Noisy vector recall, need top-5 precision</td>
-              <td><a href="/models/bge-reranker.html">bge-reranker-v2-m3</a> (self-host) or <a href="/models/cohere-rerank.html">Cohere Rerank</a> (API)</td>
-              <td>Your GPU / hosted API</td>
+              <td><a href="/models/bge-reranker.html">bge-reranker-v2-m3</a> or <a href="/models/qwen-reranker.html">Qwen3-Reranker-4B</a> (self-host), <a href="/models/cohere-rerank.html">Cohere Rerank 4</a> or <a href="/models/voyage-rerank.html">Voyage rerank-3</a> (API)</td>
+              <td>CPU or GPU / hosted API</td>
+            </tr>
+            <tr>
+              <td>Chinese and multilingual</td>
+              <td>Mixed-language queries and documents</td>
+              <td><a href="/models/qwen-reranker.html">Qwen3-Reranker</a>, <a href="/models/bge-reranker.html">bge-reranker-v2-m3</a> or <a href="/models/#gte-multilingual-reranker-base">gte-multilingual-reranker-base</a>; in mainland China, <a href="/models/#alibaba-model-studio">Alibaba Cloud Model Studio</a> or <a href="/models/#siliconflow">SiliconFlow</a></td>
+              <td>Self-host / API in China</td>
             </tr>
             <tr>
               <td>Customer support</td>
               <td>Many similar FAQ lines, fast response</td>
-              <td><a href="/models/jina-reranker.html">jina-reranker tiny</a> or <a href="/models/cohere-rerank.html">Cohere Rerank 4 Fast</a></td>
-              <td>API or browser demo</td>
+              <td><a href="/models/jina-reranker.html">jina-reranker-v1-tiny-en</a> or ms-marco MiniLM (English), <a href="/models/cohere-rerank.html">Cohere Rerank 4 Fast</a></td>
+              <td>CPU, browser or API</td>
             </tr>
             <tr>
               <td>Legal / contracts</td>
               <td>Subtle wording, distractors share vocabulary</td>
-              <td><a href="/models/mxbai-rerank.html">mxbai-rerank-large</a> or <a href="/models/voyage-rerank.html">Voyage</a> legal-tuned</td>
+              <td>An <a href="/guides/instruction-reranker.html">instruction-following reranker</a>: Qwen3-Reranker, Voyage rerank-3, or Contextual AI Rerank v2 for non-commercial use</td>
               <td>Self-host / API</td>
             </tr>
             <tr>
               <td>Code &amp; API docs</td>
               <td>Exact identifiers, syntax matters</td>
-              <td><a href="/models/voyage-rerank.html">Voyage code</a> or hybrid BM25 + <a href="/models/bge-reranker.html">bge</a></td>
+              <td><a href="/guides/hybrid-retrieval-rerank.html">Hybrid BM25 + vector retrieval</a>, then Qwen3-Reranker or Voyage rerank-3</td>
               <td>Hybrid retrieve + rerank</td>
+            </tr>
+            <tr>
+              <td>Scanned PDFs, slides, screenshots</td>
+              <td>The text is in an image, or the layout carries meaning</td>
+              <td><a href="/models/#qwen3-vl-reranker">Qwen3-VL-Reranker</a> or <a href="/models/#lighton-rerank">LightOn-rerank</a></td>
+              <td>GPU</td>
             </tr>
           </tbody>
         </table>
       </div>
+      <p class="muted" style="font-size:.85rem">Each pick links to its page or row, where the vendor’s own figures are shown with how they were measured. None of them replaces a test on your own queries — see <a href="/guides/evaluate-reranker.html">evaluating a reranker</a>.</p>
 
       <h2 id="rag">RAG &amp; knowledge bases</h2>
-      <p>Retrieve 50–100 chunks, rerank to 5–10, then prompt. Multilingual knowledge bases favour <strong>bge-v2-m3</strong> or <strong>Cohere v3.5</strong>. English-only stacks with tight quality targets often pick <strong>mxbai-large</strong>. See <a href="/guides/rerank-rag.html">rerank for RAG</a> and <a href="/guides/hybrid-retrieval-rerank.html">hybrid retrieval</a> when lexical matches matter.</p>
+      <p>Retrieve 50–100 chunks, rerank to 5–10, then prompt. Without a GPU, <strong>bge-reranker-v2-m3</strong> is the usual self-hosted default; with one, <strong>Qwen3-Reranker-4B</strong>, which in Qwen’s own tests beats the 8B on English. As a hosted API, <strong>Cohere Rerank 4</strong> bills per search and <strong>Voyage rerank-3</strong> per token — the <a href="/rerank-cost-calculator.html">cost calculator</a> shows which is cheaper for your volume. See <a href="/guides/rerank-rag.html">rerank for RAG</a> and <a href="/guides/hybrid-retrieval-rerank.html">hybrid retrieval</a> when lexical matches matter.</p>
       <blockquote>Rule of thumb: if bi-encoder recall is already good, a mid-size reranker is enough. If recall is messy, fix retrieval width first.</blockquote>
 
+      <h2 id="multilingual">Chinese and multilingual</h2>
+      <p>The classic small models — ms-marco MiniLM, Jina v1, mxbai v1 — were trained on English only. Qwen3-Reranker (100+ languages), bge-reranker-v2-m3 and the 306M <strong>gte-multilingual-reranker-base</strong> (70+ languages) were trained for it. If your servers are in mainland China and you would rather not host a model, <strong>Alibaba Cloud Model Studio</strong> sells qwen3-rerank by the token in yuan, and <strong>SiliconFlow</strong> serves bge-reranker-v2-m3 and Qwen3-Reranker behind one endpoint; both are in the <a href="/models/">models table</a> and the cost calculator’s yuan table. To download open weights in mainland China, <a href="https://hf-mirror.com" rel="noopener noreferrer">hf-mirror.com</a> mirrors Hugging Face.</p>
+
       <h2 id="support">Customer support</h2>
-      <p>Queries are short, passages are FAQ-sized, and latency dominates UX. A <strong>tiny</strong> cross-encoder (Jina tiny, ms-marco MiniLM) often suffices — you are choosing among a handful of similar answers, not reading 100-page PDFs. Try the <strong>Customer support</strong> preset in our <a href="/demo.html?s=support">demo</a>.</p>
+      <p>Queries are short, passages are FAQ-sized, and latency dominates UX. A <strong>tiny</strong> cross-encoder (Jina v1 tiny, ms-marco MiniLM) often suffices for English — you are choosing among a handful of similar answers, not reading 100-page PDFs. For other languages, start with bge-reranker-v2-m3. Try the <strong>Customer support</strong> preset in our <a href="/demo.html?s=support">demo</a>.</p>
 
       <h2 id="legal">Legal &amp; compliance</h2>
-      <p>Distractors share vocabulary (“termination”, “notice period”, “breach”). Bi-encoders confuse them; cross-encoders separate nuance. Budget extra latency for a larger model and keep passages to single clauses. Demo preset: <strong>Legal clause</strong>.</p>
+      <p>Distractors share vocabulary (“termination”, “notice period”, “breach”). Bi-encoders confuse them; cross-encoders separate nuance, and an <strong>instruction-following</strong> reranker lets you say what counts — “the clause that governs termination for convenience”, “later amendments supersede earlier ones”. Qwen3-Reranker and Voyage rerank-3 take instructions; Contextual AI Rerank v2’s weights are non-commercial. Budget extra latency for a larger model and keep passages to single clauses. Demo preset: <strong>Legal clause</strong>.</p>
 
       <h2 id="code">Code &amp; technical docs</h2>
-      <p>Vector search alone misses exact function names; BM25 alone misses paraphrased “how do I…” questions. Use <strong>hybrid retrieval</strong>, then rerank. Domain rerankers (Voyage code) help; otherwise bge-base + good chunking works. Demo presets: <strong>Technical docs</strong> and <strong>Code search</strong>.</p>
+      <p>Vector search alone misses exact function names; BM25 alone misses paraphrased “how do I…” questions. Use <strong>hybrid retrieval</strong>, then rerank. Qwen publish code-retrieval scores for Qwen3-Reranker (see the <a href="/models/qwen-reranker.html#scores">Qwen page</a>), and Voyage report rerank-3’s gain over rerank-2.5 on their code datasets (see the <a href="/models/voyage-rerank.html">Voyage page</a>). Demo presets: <strong>Technical docs</strong> and <strong>Code search</strong>.</p>
+
+      <h2 id="visual">Scanned PDFs, slides and screenshots</h2>
+      <p>If your documents are page images — scans, slide decks, dashboards — a text reranker only sees whatever OCR extracted. <strong>Qwen3-VL-Reranker</strong> (2B / 8B) and <strong>LightOn-rerank</strong> score page images directly, both under Apache 2.0, and Alibaba Cloud sells <strong>qwen3-vl-rerank</strong> as an API. Their published scores are on ViDoRe, a visual-document benchmark, so compare them with each other rather than with the BEIR column.</p>
 
       <h2 id="try">Try it in the demo</h2>
       <p>Each scenario below maps to a built-in preset — load it, hit Rerank, and watch the bi-encoder proxy column mis-order before the cross-encoder fixes it.</p>
@@ -76,7 +97,7 @@
 
       <div class="cta-band">
         <h2 style="margin-top:0">Still deciding?</h2>
-        <p class="soft">Compare all five model families side by side, then jump into the demo with one click.</p>
+        <p class="soft">Compare every model and hosted API in one table, then jump into the demo with one click.</p>
         <a class="btn btn-primary" href="/models/">Compare models →</a>
       </div>
 

@@ -2,7 +2,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Self-host a reranker</div>
       <h1>How to self-host a reranker</h1>
-      <p class="meta">Production · ~10 min read · <time datetime="2026-06-23">Updated 23 Jun 2026</time></p>
+      <p class="meta">Production · ~10 min read · <time datetime="2026-10-12">Updated 12 Oct 2026</time></p>
       <p class="lead">Hosted rerank APIs are convenient, but <strong>self-hosting</strong> gives you zero per-call cost, full data control, and predictable latency on your own GPU or CPU fleet. Here’s a practical path from a first <code>CrossEncoder</code> call to a production microservice.</p>
 
       <div class="toc">
@@ -22,29 +22,29 @@
         <li><strong>Data residency.</strong> Queries and documents never leave your VPC.</li>
         <li><strong>Custom fine-tuning.</strong> You can swap in a domain-tuned checkpoint without waiting on a vendor.</li>
       </ul>
-      <p>When you need multilingual quality with minimal ops, a hosted API like <a href="/models/cohere-rerank.html">Cohere Rerank</a> or <a href="/models/jina-reranker.html">Jina</a> may still be cheaper all-in — see <a href="/guides/choose-reranker-scenario.html">choose by scenario</a>.</p>
+      <p>When you need multilingual quality with minimal ops, a hosted API — <a href="/models/cohere-rerank.html">Cohere</a>, <a href="/models/voyage-rerank.html">Voyage</a>, or in mainland China <a href="/models/#alibaba-model-studio">Alibaba Cloud Model Studio</a> and <a href="/models/#siliconflow">SiliconFlow</a> — may still be cheaper all-in. The <a href="/rerank-cost-calculator.html">cost calculator</a> prices your volume; see also <a href="/guides/choose-reranker-scenario.html">choose by scenario</a>.</p>
 
       <h2 id="models">Pick a model</h2>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Model</th><th>Size</th><th>Licence</th><th>Best for</th></tr></thead>
           <tbody>
-            <tr><td><a href="/models/bge-reranker.html">bge-reranker-base</a></td><td>~278M</td><td>MIT</td><td>CPU-friendly Chinese / English default</td></tr>
-            <tr><td><a href="/models/bge-reranker.html">bge-reranker-v2-m3</a></td><td>~568M</td><td>Apache 2.0</td><td>Multilingual when GPU is limited</td></tr>
-            <tr><td><a href="/models/qwen-reranker.html">Qwen3-Reranker-4B</a></td><td>~4B</td><td>Apache 2.0</td><td><strong>2026 open SOTA pick</strong> (needs GPU)</td></tr>
+            <tr><td><a href="/models/bge-reranker.html">bge-reranker-v2-m3</a></td><td>~568M</td><td>Apache 2.0</td><td><strong>Default</strong> — multilingual, small enough for CPU</td></tr>
+            <tr><td><a href="/models/#gte-multilingual-reranker-base">gte-multilingual-reranker-base</a></td><td>306M</td><td>Apache 2.0</td><td>Smaller multilingual option (70+ languages, 8K context)</td></tr>
+            <tr><td><a href="/models/qwen-reranker.html">Qwen3-Reranker-4B</a></td><td>~4B</td><td>Apache 2.0</td><td><strong>Default GPU pick</strong> — in Qwen’s tests, the best of its three sizes on English and instruction-following</td></tr>
             <tr><td><a href="/models/mxbai-rerank.html">mxbai-rerank-base-v2</a></td><td>~494M</td><td>Apache 2.0</td><td>Multilingual incl. Chinese; best size/quality balance of mxbai v2</td></tr>
             <tr><td><a href="/models/jina-reranker.html">jina-reranker-v3.5</a></td><td>~0.6B</td><td>CC BY-NC 4.0</td><td>Listwise, long context — <strong>non-commercial</strong> unless licensed</td></tr>
           </tbody>
         </table>
       </div>
-      <p>Start with <strong>bge-reranker-base</strong> on CPU for prototyping. On GPU, A/B <strong>Qwen3-Reranker-4B</strong> against <strong>bge-v2-m3</strong> or <strong>mxbai-base-v2</strong> on your labelled set — do not assume leaderboard order transfers.</p>
+      <p>Start with <strong>bge-reranker-v2-m3</strong>, which runs on CPU. On GPU, A/B <strong>Qwen3-Reranker-4B</strong> against it or <strong>mxbai-rerank-base-v2</strong> on your labelled set — do not assume leaderboard order transfers. Until October 2026 this table recommended bge-reranker-base, BAAI’s 2023 model for Chinese and English only.</p>
 
       <h2 id="quickstart">Quick start with sentence-transformers</h2>
       <pre><code>pip install sentence-transformers torch
 
 from sentence_transformers import CrossEncoder
 
-model = CrossEncoder("BAAI/bge-reranker-base", max_length=512)
+model = CrossEncoder("BAAI/bge-reranker-v2-m3", max_length=512)
 
 query = "How do I add reranking to RAG?"
 docs = [
@@ -55,7 +55,7 @@ docs = [
 pairs = [(query, d) for d in docs]
 scores = model.predict(pairs)  # higher = more relevant
 ranked = sorted(zip(scores, docs), reverse=True)</code></pre>
-      <p>Batch your pairs — scoring 50 documents in one <code>predict()</code> call is far faster than 50 separate forwards. Cap passage length at 512 tokens (model default) to avoid silent truncation.</p>
+      <p>Batch your pairs — scoring 50 documents in one <code>predict()</code> call is far faster than 50 separate forwards. <code>max_length=512</code> truncates anything longer, so chunk passages to fit rather than letting the end of a passage silently drop off.</p>
 
       <h2 id="serve">Serving options</h2>
       <div class="grid grid-2" style="margin:1.2rem 0">
@@ -73,7 +73,7 @@ from fastapi import FastAPI
 from sentence_transformers import CrossEncoder
 
 app = FastAPI()
-model = CrossEncoder("BAAI/bge-reranker-base")
+model = CrossEncoder("BAAI/bge-reranker-v2-m3", max_length=512)
 
 @app.post("/rerank")
 def rerank(body: dict):
@@ -81,12 +81,13 @@ def rerank(body: dict):
     scores = model.predict([(q, d) for d in docs])
     order = sorted(range(len(docs)), key=lambda i: -scores[i])
     return {"results": [{"index": i, "score": float(scores[i])} for i in order]}</code></pre>
+      <p>You don’t have to write the service yourself: Hugging Face’s <a href="https://github.com/huggingface/text-embeddings-inference" rel="noopener noreferrer">Text Embeddings Inference</a> and <a href="https://github.com/michaelfeil/infinity" rel="noopener noreferrer">Infinity</a> both serve cross-encoders behind a rerank endpoint — the <a href="https://huggingface.co/Alibaba-NLP/gte-multilingual-reranker-base" rel="noopener noreferrer">gte-multilingual-reranker-base card</a> shows the Docker commands for each. Check that your model is on the server’s supported list first.</p>
       <p>For ONNX export and C++ runtimes, see the model cards on Hugging Face. For browser-only experiments, try our <a href="/demo.html?s=techdocs">in-browser demo</a> with the xsmall ONNX builds.</p>
 
       <h2 id="ops">Ops checklist</h2>
       <ul>
         <li><strong>GPU:</strong> worth it once you rerank more than a few dozen passages per query. Measure p50 / p95 on your own hardware before sizing — model cards rarely publish latency, and we don’t quote figures we haven’t measured.</li>
-        <li><strong>Memory:</strong> budget ~1–2 GB VRAM for base models; large variants need more.</li>
+        <li><strong>Memory:</strong> in fp16 the weights alone take about 2 bytes per parameter — roughly 1.1 GB for bge-reranker-v2-m3’s 568M and 8 GB for a 4B model — plus activations that grow with batch size and passage length.</li>
         <li><strong>Warm-up:</strong> run a dummy predict on startup to avoid cold-start latency spikes.</li>
         <li><strong>Monitoring:</strong> track p95 latency and NDCG on a labelled slice — <a href="/guides/evaluate-reranker.html">evaluate rerankers</a>.</li>
         <li><strong>Fallback:</strong> if the rerank service is down, pass through vector top-k rather than failing the whole RAG request.</li>

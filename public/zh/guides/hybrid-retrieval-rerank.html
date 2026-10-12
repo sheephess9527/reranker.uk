@@ -32,7 +32,7 @@
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"混合检索 + 重排序 — BM25、向量，再 rerank","datePublished":"2026-06-23","dateModified":"2026-06-23","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/hybrid-retrieval-rerank","description":"如何结合 BM25 与向量检索提升召回，再用 cross-encoder reranker 修正排序。融合策略、top-k 调优，以及混合检索何时优于纯向量。","inLanguage":"zh-Hans"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"混合检索 + 重排序 — BM25、向量，再 rerank","datePublished":"2026-06-23","dateModified":"2026-10-12","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/hybrid-retrieval-rerank","description":"如何结合 BM25 与向量检索提升召回，再用 cross-encoder reranker 修正排序。融合策略、top-k 调优，以及混合检索何时优于纯向量。","inLanguage":"zh-Hans"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://reranker.uk/zh/guides/"},{"@type":"ListItem","position":3,"name":"混合检索 + 重排序","item":"https://reranker.uk/zh/guides/hybrid-retrieval-rerank"}]}</script>
 
 </head>
@@ -58,7 +58,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/guides/">指南</a><span>/</span>混合检索 + 重排序</div>
       <h1>混合检索 + 重排序</h1>
-      <p class="meta">生产实践 · 约 9 分钟阅读 · <time datetime="2026-06-23">更新于 2026 年 6 月 23 日</time></p>
+      <p class="meta">生产实践 · 约 9 分钟阅读 · <time datetime="2026-10-12">更新于 2026 年 10 月 12 日</time></p>
       <p class="lead">纯向量检索常漏掉精确关键词匹配；纯 BM25 又漏掉改写表述。<strong>混合检索</strong>同时跑两路、合并候选列表，再由 <strong>reranker</strong> 在 LLM 看到内容前修正最终顺序。</p>
 
       <div class="toc">
@@ -101,7 +101,7 @@
       <pre tabindex="0"><code>from rank_bm25 import BM25Okapi
 from sentence_transformers import CrossEncoder
 
-reranker = CrossEncoder("BAAI/bge-reranker-base")
+reranker = CrossEncoder("BAAI/bge-reranker-v2-m3", max_length=512)
 
 def hybrid_rerank(query, corpus_chunks, vector_hits, bm25_hits, top_n=5):
     # Merge by chunk id, preserve text

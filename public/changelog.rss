@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 09 Oct 2026 18:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 12 Oct 2026 12:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>12 Oct 2026 — Older guides brought up to date; framework code re-run</title>
+      <link>https://reranker.uk/changelog#2026-10-12</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-12</guid>
+      <pubDate>Mon, 12 Oct 2026 12:00:00 GMT</pubDate>
+      <description>The scenario guide drops two Voyage models that don't exist and adds Chinese/multilingual and scanned-document sections. The RAG guide's LangChain and Haystack examples failed on current releases; they are fixed and were re-run on LangChain 1.4, LlamaIndex 0.14 and Haystack 3.3. The self-hosting, instruction and troubleshooting guides are updated to current models.</description>
+    </item>
     <item>
       <title>9 Oct 2026 (night) — The cost calculator covers Google, Alibaba Cloud and SiliconFlow</title>
       <link>https://reranker.uk/changelog#2026-10-09-calculator</link>

@@ -32,7 +32,7 @@
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"按场景选择 reranker — RAG、客服、法律、代码","datePublished":"2026-06-23","dateModified":"2026-06-23","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/choose-reranker-scenario","description":"决策指南：RAG 流水线、客服工单、法律检索、代码搜索分别适合哪种 rerank 模型。含场景矩阵、模型推荐与 Demo 预设对照。","inLanguage":"zh-Hans"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"按场景选择 reranker — RAG、客服、法律、代码","datePublished":"2026-06-23","dateModified":"2026-10-12","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/choose-reranker-scenario","description":"决策指南：RAG 流水线、客服工单、法律检索、代码搜索分别适合哪种 rerank 模型。含场景矩阵、模型推荐与 Demo 预设对照。","inLanguage":"zh-Hans"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://reranker.uk/zh/guides/"},{"@type":"ListItem","position":3,"name":"按场景选择 reranker","item":"https://reranker.uk/zh/guides/choose-reranker-scenario"}]}</script>
 
 </head>
@@ -58,7 +58,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/guides/">指南</a><span>/</span>按场景选型</div>
       <h1>哪种 reranker 适合你的场景？</h1>
-      <p class="meta">决策指南 · 约 8 分钟阅读 · <time datetime="2026-06-23">更新于 2026 年 6 月 23 日</time></p>
+      <p class="meta">决策指南 · 约 8 分钟阅读 · <time datetime="2026-10-12">更新于 2026 年 10 月 12 日</time></p>
       <p class="lead">reranker 并非一刀切。正确选择取决于<strong>语言覆盖</strong>、<strong>延迟预算</strong>、<strong>数据敏感度</strong>，以及你的查询更像<em>客服工单</em>、<em>法律条款</em>、<em>代码检索</em>还是<em>RAG 分块</em>。</p>
 
       <div class="toc">
@@ -66,9 +66,11 @@
         <ol>
           <li><a href="#matrix">场景矩阵</a></li>
           <li><a href="#rag">RAG 与知识库</a></li>
+          <li><a href="#multilingual">中文与多语言</a></li>
           <li><a href="#support">客服工单</a></li>
           <li><a href="#legal">法律与合规</a></li>
           <li><a href="#code">代码与技术文档</a></li>
+          <li><a href="#visual">扫描 PDF、幻灯片和截图</a></li>
           <li><a href="#try">在 Demo 中试用</a></li>
         </ol>
       </div>
@@ -83,43 +85,62 @@
             <tr>
               <td>RAG 流水线</td>
               <td>向量召回噪声大，需要 top-5 精度</td>
-              <td><a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a>（自托管）或 <a href="/zh/models/cohere-rerank">Cohere Rerank</a>（API）</td>
-              <td>你的 GPU / 托管 API</td>
+              <td>自建可用 <a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a> 或 <a href="/zh/models/qwen-reranker">Qwen3-Reranker-4B</a>；托管 API 可用 <a href="/zh/models/cohere-rerank">Cohere Rerank 4</a> 或 <a href="/zh/models/voyage-rerank">Voyage rerank-3</a></td>
+              <td>CPU 或 GPU / 托管 API</td>
+            </tr>
+            <tr>
+              <td>中文与多语言</td>
+              <td>查询和文档混合多种语言</td>
+              <td><a href="/zh/models/qwen-reranker">Qwen3-Reranker</a>、<a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a> 或 <a href="/zh/models/#gte-multilingual-reranker-base">gte-multilingual-reranker-base</a>；在国内可用<a href="/zh/models/#alibaba-model-studio">阿里云百炼</a>或<a href="/zh/models/#siliconflow">硅基流动</a></td>
+              <td>自建 / 国内 API</td>
             </tr>
             <tr>
               <td>客服工单</td>
               <td>大量相似 FAQ，要求快速响应</td>
-              <td>可在浏览器跑 <a href="/zh/models/jina-reranker">jina-reranker tiny</a>，或用托管的 <a href="/zh/models/cohere-rerank">Cohere Rerank 4 Fast</a></td>
-              <td>API 或浏览器 Demo</td>
+              <td>英文场景用 <a href="/zh/models/jina-reranker">jina-reranker-v1-tiny-en</a> 或 ms-marco MiniLM，托管 API 用 <a href="/zh/models/cohere-rerank">Cohere Rerank 4 Fast</a></td>
+              <td>CPU、浏览器或 API</td>
             </tr>
             <tr>
               <td>法律 / 合同</td>
               <td>措辞细微，干扰项共享词汇</td>
-              <td><a href="/zh/models/mxbai-rerank">mxbai-rerank-large</a> 或 <a href="/zh/models/voyage-rerank">Voyage</a> 法律微调</td>
+              <td><a href="/zh/guides/instruction-reranker">能跟随指令的重排序模型</a>：Qwen3-Reranker、Voyage rerank-3，非商用场景也可用 Contextual AI Rerank v2</td>
               <td>自托管 / API</td>
             </tr>
             <tr>
               <td>代码与 API 文档</td>
               <td>精确标识符与语法很重要</td>
-              <td><a href="/zh/models/voyage-rerank">Voyage code</a> 或混合 BM25 + <a href="/zh/models/bge-reranker">bge</a></td>
+              <td><a href="/zh/guides/hybrid-retrieval-rerank">BM25 + 向量混合检索</a>，再用 Qwen3-Reranker 或 Voyage rerank-3 重排序</td>
               <td>混合检索 + 重排序</td>
+            </tr>
+            <tr>
+              <td>扫描 PDF、幻灯片、截图</td>
+              <td>文字在图片里，或版面本身带有信息</td>
+              <td><a href="/zh/models/#qwen3-vl-reranker">Qwen3-VL-Reranker</a> 或 <a href="/zh/models/#lighton-rerank">LightOn-rerank</a></td>
+              <td>GPU</td>
             </tr>
           </tbody>
         </table>
       </div>
+      <p class="muted" style="font-size:.85rem">每个推荐都链接到对应的页面或表格行，那里列有厂商自己的数字和测试方法。但这些都替代不了用你自己的查询做测试 —— 见<a href="/zh/guides/evaluate-reranker">如何评估重排序模型</a>。</p>
 
       <h2 id="rag">RAG 与知识库</h2>
-      <p>召回 50–100 个 chunk，重排至 5–10 条再进 prompt。多语言知识库倾向 <strong>bge-v2-m3</strong> 或 <strong>Cohere v3.5</strong>；仅英文且质量要求高常选 <strong>mxbai-large</strong>。词面匹配重要时见 <a href="/zh/guides/rerank-rag">为 RAG 加重排序</a> 与 <a href="/zh/guides/hybrid-retrieval-rerank">混合检索</a>。</p>
+      <p>先召回 50–100 个分块，重排序后留 5–10 个，再交给大模型。没有 GPU 时，自建通常默认用 <strong>bge-reranker-v2-m3</strong>；有 GPU 就用 <strong>Qwen3-Reranker-4B</strong>，在 Qwen 自己的测试里它在英文上比 8B 还好。托管 API 方面，<strong>Cohere Rerank 4</strong> 按检索次数计费，<strong>Voyage rerank-3</strong> 按 token 计费 —— <a href="/zh/rerank-cost-calculator">成本计算器</a>能算出在你的量级下哪个更便宜。需要关键词精确匹配时，见<a href="/zh/guides/rerank-rag">RAG 中的重排序</a>和<a href="/zh/guides/hybrid-retrieval-rerank">混合检索</a>。</p>
       <blockquote>经验法则：bi-encoder 召回已经够好，中等 reranker 即可；召回很乱时，先加宽检索。</blockquote>
 
+      <h2 id="multilingual">中文与多语言</h2>
+      <p>经典的小模型 —— ms-marco MiniLM、Jina v1、mxbai v1 —— 只用英文训练。Qwen3-Reranker（100 多种语言）、bge-reranker-v2-m3 和 306M 的 <strong>gte-multilingual-reranker-base</strong>（70 多种语言）是为多语言训练的。如果服务器在国内、又不想自己部署模型，<strong>阿里云百炼</strong>按 token 以人民币出售 qwen3-rerank，<strong>硅基流动</strong>用同一个接口提供 bge-reranker-v2-m3 和 Qwen3-Reranker；两者都在<a href="/zh/models/">模型对比表</a>和成本计算器的人民币表里。在国内下载开源权重，可以用 Hugging Face 的镜像 <a href="https://hf-mirror.com" rel="noopener noreferrer">hf-mirror.com</a>。</p>
+
       <h2 id="support">客服工单</h2>
-      <p>查询短、段落 FAQ 体量、延迟主导体验。<strong>tiny</strong> cross-encoder（Jina tiny、ms-marco MiniLM）往往够用 —— 你是在若干相似答案里选，不是读百页 PDF。可在 <a href="/zh/demo?s=support">Demo</a> 试 <strong>客服工单</strong> 预设。</p>
+      <p>查询很短，段落只有 FAQ 那么长，延迟决定体验。英文场景下，一个<strong>极小</strong>的 cross-encoder（Jina v1 tiny、ms-marco MiniLM）往往就够了 —— 你是在几条相似答案里挑一条，而不是读 100 页的 PDF。其他语言先从 bge-reranker-v2-m3 开始。可以在 <a href="/zh/demo?s=support">Demo</a> 里试试<strong>客服</strong>预设。</p>
 
       <h2 id="legal">法律与合规</h2>
-      <p>干扰项共享词汇（「终止」「通知期」「违约」）。bi-encoder 易混淆；cross-encoder 能区分细微差别。为大模型预留额外延迟，段落保持单条款粒度。Demo 预设：<strong>法律条款</strong>。</p>
+      <p>干扰项和正确答案用词相同（“终止”“通知期”“违约”）。bi-encoder 容易混淆它们；cross-encoder 能分辨细微差别，而<strong>能跟随指令</strong>的重排序模型还能让你说明什么才算相关 —— 例如“规定无故终止的条款”“后来的修订取代先前的”。Qwen3-Reranker 和 Voyage rerank-3 支持指令；Contextual AI Rerank v2 的权重仅限非商用。为更大的模型预留延迟，并把段落切成单条条款。Demo 预设：<strong>法律条款</strong>。</p>
 
       <h2 id="code">代码与技术文档</h2>
-      <p>纯向量检索会漏精确函数名；纯 BM25 会漏「我该如何…」类改写。用<strong>混合检索</strong>再 rerank。领域 reranker（Voyage code）有帮助；否则 bge-base + 合理分块也行。Demo 预设：<strong>技术文档</strong>、<strong>代码检索</strong>。</p>
+      <p>单靠向量检索会漏掉精确的函数名；单靠 BM25 会漏掉换了说法的“怎么……”类问题。先做<strong>混合检索</strong>，再重排序。Qwen 公布了 Qwen3-Reranker 的代码检索分数（见 <a href="/zh/models/qwen-reranker#scores">Qwen 页面</a>），Voyage 也公布了 rerank-3 在自家代码数据集上相对 rerank-2.5 的提升（见 <a href="/zh/models/voyage-rerank">Voyage 页面</a>）。Demo 预设：<strong>技术文档</strong>和<strong>代码搜索</strong>。</p>
+
+      <h2 id="visual">扫描 PDF、幻灯片和截图</h2>
+      <p>如果你的文档是页面图片 —— 扫描件、幻灯片、仪表盘 —— 文本重排序模型只能看到 OCR 提取出来的内容。<strong>Qwen3-VL-Reranker</strong>（2B / 8B）和 <strong>LightOn-rerank</strong> 直接给页面图片打分，都是 Apache 2.0 许可，阿里云还以 API 形式提供 <strong>qwen3-vl-rerank</strong>。它们公布的分数来自视觉文档基准 ViDoRe，所以应该互相比较，而不是和 BEIR 那一列比。</p>
 
       <h2 id="try">在 Demo 中试用</h2>
       <p>下列场景对应内置预设 —— 载入后点重排序，看 bi-encoder 代理列先排错，再由 cross-encoder 纠正。</p>
@@ -132,7 +153,7 @@
 
       <div class="cta-band">
         <h2 style="margin-top:0">还在犹豫？</h2>
-        <p class="soft">并排对比五大模型家族，一键跳进 Demo。</p>
+        <p class="soft">在一张表里对比所有模型和托管 API，一键跳转到 Demo。</p>
         <a class="btn btn-primary" href="/zh/models/">对比模型 →</a>
       </div>
 

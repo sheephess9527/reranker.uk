@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "Practical · ~10 min read · <time datetime=\"2026-10-12\">Updated 12 Oct 2026</time>":
+    "实践 · 约 10 分钟阅读 · <time datetime=\"2026-10-12\">更新于 2026 年 10 月 12 日</time>",
+  "All three accept hosted rerankers too (Cohere, Jina, Voyage) via their respective integration packages — swap the component, keep the pipeline. We ran these three snippets in October 2026 on LangChain 1.4, LlamaIndex core 0.14 and Haystack 3.3. Two things moved since the versions most tutorials show: LangChain 1.0 took the retriever classes out of <code>langchain</code> into <code>langchain-classic</code>, and Haystack 3 has no cross-encoder ranker in its core package — it is in the <code>sentence-transformers-haystack</code> integration. <code>langchain-community</code> still works but now warns that it is being retired in favour of standalone integration packages.":
+    "这三个框架也都能通过各自的集成包接入托管重排序服务（Cohere、Jina、Voyage）—— 换掉组件，流水线不变。我们在 2026 年 10 月用 LangChain 1.4、LlamaIndex core 0.14 和 Haystack 3.3 实际跑过这三段代码。和多数教程里的版本相比，有两处变了：LangChain 1.0 把检索器相关的类从 <code>langchain</code> 移到了 <code>langchain-classic</code>；Haystack 3 的核心包里不再有 cross-encoder 排序组件，它在 <code>sentence-transformers-haystack</code> 集成包里。<code>langchain-community</code> 仍然能用，但现在会提示它即将停止维护、建议改用独立的集成包。",
   "bge-reranker on CPU (small)":
     "bge-reranker（CPU，小模型）",
   "bge-reranker on GPU":

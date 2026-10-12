@@ -1,4 +1,52 @@
 window.I18N_PAGE = { zh: {
+  "<a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> or <a href=\"/models/qwen-reranker.html\">Qwen3-Reranker-4B</a> (self-host), <a href=\"/models/cohere-rerank.html\">Cohere Rerank 4</a> or <a href=\"/models/voyage-rerank.html\">Voyage rerank-3</a> (API)":
+    "自建可用 <a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> 或 <a href=\"/models/qwen-reranker.html\">Qwen3-Reranker-4B</a>；托管 API 可用 <a href=\"/models/cohere-rerank.html\">Cohere Rerank 4</a> 或 <a href=\"/models/voyage-rerank.html\">Voyage rerank-3</a>",
+  "CPU or GPU / hosted API":
+    "CPU 或 GPU / 托管 API",
+  "Chinese and multilingual":
+    "中文与多语言",
+  "Mixed-language queries and documents":
+    "查询和文档混合多种语言",
+  "<a href=\"/models/qwen-reranker.html\">Qwen3-Reranker</a>, <a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> or <a href=\"/models/#gte-multilingual-reranker-base\">gte-multilingual-reranker-base</a>; in mainland China, <a href=\"/models/#alibaba-model-studio\">Alibaba Cloud Model Studio</a> or <a href=\"/models/#siliconflow\">SiliconFlow</a>":
+    "<a href=\"/models/qwen-reranker.html\">Qwen3-Reranker</a>、<a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> 或 <a href=\"/models/#gte-multilingual-reranker-base\">gte-multilingual-reranker-base</a>；在国内可用<a href=\"/models/#alibaba-model-studio\">阿里云百炼</a>或<a href=\"/models/#siliconflow\">硅基流动</a>",
+  "Self-host / API in China":
+    "自建 / 国内 API",
+  "<a href=\"/models/jina-reranker.html\">jina-reranker-v1-tiny-en</a> or ms-marco MiniLM (English), <a href=\"/models/cohere-rerank.html\">Cohere Rerank 4 Fast</a>":
+    "英文场景用 <a href=\"/models/jina-reranker.html\">jina-reranker-v1-tiny-en</a> 或 ms-marco MiniLM，托管 API 用 <a href=\"/models/cohere-rerank.html\">Cohere Rerank 4 Fast</a>",
+  "CPU, browser or API":
+    "CPU、浏览器或 API",
+  "An <a href=\"/guides/instruction-reranker.html\">instruction-following reranker</a>: Qwen3-Reranker, Voyage rerank-3, or Contextual AI Rerank v2 for non-commercial use":
+    "<a href=\"/guides/instruction-reranker.html\">能跟随指令的重排序模型</a>：Qwen3-Reranker、Voyage rerank-3，非商用场景也可用 Contextual AI Rerank v2",
+  "<a href=\"/guides/hybrid-retrieval-rerank.html\">Hybrid BM25 + vector retrieval</a>, then Qwen3-Reranker or Voyage rerank-3":
+    "<a href=\"/guides/hybrid-retrieval-rerank.html\">BM25 + 向量混合检索</a>，再用 Qwen3-Reranker 或 Voyage rerank-3 重排序",
+  "Scanned PDFs, slides, screenshots":
+    "扫描 PDF、幻灯片、截图",
+  "The text is in an image, or the layout carries meaning":
+    "文字在图片里，或版面本身带有信息",
+  "<a href=\"/models/#qwen3-vl-reranker\">Qwen3-VL-Reranker</a> or <a href=\"/models/#lighton-rerank\">LightOn-rerank</a>":
+    "<a href=\"/models/#qwen3-vl-reranker\">Qwen3-VL-Reranker</a> 或 <a href=\"/models/#lighton-rerank\">LightOn-rerank</a>",
+  "GPU":
+    "GPU",
+  "Each pick links to its page or row, where the vendor’s own figures are shown with how they were measured. None of them replaces a test on your own queries — see <a href=\"/guides/evaluate-reranker.html\">evaluating a reranker</a>.":
+    "每个推荐都链接到对应的页面或表格行，那里列有厂商自己的数字和测试方法。但这些都替代不了用你自己的查询做测试 —— 见<a href=\"/guides/evaluate-reranker.html\">如何评估重排序模型</a>。",
+  "Retrieve 50–100 chunks, rerank to 5–10, then prompt. Without a GPU, <strong>bge-reranker-v2-m3</strong> is the usual self-hosted default; with one, <strong>Qwen3-Reranker-4B</strong>, which in Qwen’s own tests beats the 8B on English. As a hosted API, <strong>Cohere Rerank 4</strong> bills per search and <strong>Voyage rerank-3</strong> per token — the <a href=\"/rerank-cost-calculator.html\">cost calculator</a> shows which is cheaper for your volume. See <a href=\"/guides/rerank-rag.html\">rerank for RAG</a> and <a href=\"/guides/hybrid-retrieval-rerank.html\">hybrid retrieval</a> when lexical matches matter.":
+    "先召回 50–100 个分块，重排序后留 5–10 个，再交给大模型。没有 GPU 时，自建通常默认用 <strong>bge-reranker-v2-m3</strong>；有 GPU 就用 <strong>Qwen3-Reranker-4B</strong>，在 Qwen 自己的测试里它在英文上比 8B 还好。托管 API 方面，<strong>Cohere Rerank 4</strong> 按检索次数计费，<strong>Voyage rerank-3</strong> 按 token 计费 —— <a href=\"/rerank-cost-calculator.html\">成本计算器</a>能算出在你的量级下哪个更便宜。需要关键词精确匹配时，见<a href=\"/guides/rerank-rag.html\">RAG 中的重排序</a>和<a href=\"/guides/hybrid-retrieval-rerank.html\">混合检索</a>。",
+  "The classic small models — ms-marco MiniLM, Jina v1, mxbai v1 — were trained on English only. Qwen3-Reranker (100+ languages), bge-reranker-v2-m3 and the 306M <strong>gte-multilingual-reranker-base</strong> (70+ languages) were trained for it. If your servers are in mainland China and you would rather not host a model, <strong>Alibaba Cloud Model Studio</strong> sells qwen3-rerank by the token in yuan, and <strong>SiliconFlow</strong> serves bge-reranker-v2-m3 and Qwen3-Reranker behind one endpoint; both are in the <a href=\"/models/\">models table</a> and the cost calculator’s yuan table. To download open weights in mainland China, <a href=\"https://hf-mirror.com\" rel=\"noopener noreferrer\">hf-mirror.com</a> mirrors Hugging Face.":
+    "经典的小模型 —— ms-marco MiniLM、Jina v1、mxbai v1 —— 只用英文训练。Qwen3-Reranker（100 多种语言）、bge-reranker-v2-m3 和 306M 的 <strong>gte-multilingual-reranker-base</strong>（70 多种语言）是为多语言训练的。如果服务器在国内、又不想自己部署模型，<strong>阿里云百炼</strong>按 token 以人民币出售 qwen3-rerank，<strong>硅基流动</strong>用同一个接口提供 bge-reranker-v2-m3 和 Qwen3-Reranker；两者都在<a href=\"/models/\">模型对比表</a>和成本计算器的人民币表里。在国内下载开源权重，可以用 Hugging Face 的镜像 <a href=\"https://hf-mirror.com\" rel=\"noopener noreferrer\">hf-mirror.com</a>。",
+  "Queries are short, passages are FAQ-sized, and latency dominates UX. A <strong>tiny</strong> cross-encoder (Jina v1 tiny, ms-marco MiniLM) often suffices for English — you are choosing among a handful of similar answers, not reading 100-page PDFs. For other languages, start with bge-reranker-v2-m3. Try the <strong>Customer support</strong> preset in our <a href=\"/demo.html?s=support\">demo</a>.":
+    "查询很短，段落只有 FAQ 那么长，延迟决定体验。英文场景下，一个<strong>极小</strong>的 cross-encoder（Jina v1 tiny、ms-marco MiniLM）往往就够了 —— 你是在几条相似答案里挑一条，而不是读 100 页的 PDF。其他语言先从 bge-reranker-v2-m3 开始。可以在 <a href=\"/demo.html?s=support\">Demo</a> 里试试<strong>客服</strong>预设。",
+  "Distractors share vocabulary (“termination”, “notice period”, “breach”). Bi-encoders confuse them; cross-encoders separate nuance, and an <strong>instruction-following</strong> reranker lets you say what counts — “the clause that governs termination for convenience”, “later amendments supersede earlier ones”. Qwen3-Reranker and Voyage rerank-3 take instructions; Contextual AI Rerank v2’s weights are non-commercial. Budget extra latency for a larger model and keep passages to single clauses. Demo preset: <strong>Legal clause</strong>.":
+    "干扰项和正确答案用词相同（“终止”“通知期”“违约”）。bi-encoder 容易混淆它们；cross-encoder 能分辨细微差别，而<strong>能跟随指令</strong>的重排序模型还能让你说明什么才算相关 —— 例如“规定无故终止的条款”“后来的修订取代先前的”。Qwen3-Reranker 和 Voyage rerank-3 支持指令；Contextual AI Rerank v2 的权重仅限非商用。为更大的模型预留延迟，并把段落切成单条条款。Demo 预设：<strong>法律条款</strong>。",
+  "Vector search alone misses exact function names; BM25 alone misses paraphrased “how do I…” questions. Use <strong>hybrid retrieval</strong>, then rerank. Qwen publish code-retrieval scores for Qwen3-Reranker (see the <a href=\"/models/qwen-reranker.html#scores\">Qwen page</a>), and Voyage report rerank-3’s gain over rerank-2.5 on their code datasets (see the <a href=\"/models/voyage-rerank.html\">Voyage page</a>). Demo presets: <strong>Technical docs</strong> and <strong>Code search</strong>.":
+    "单靠向量检索会漏掉精确的函数名；单靠 BM25 会漏掉换了说法的“怎么……”类问题。先做<strong>混合检索</strong>，再重排序。Qwen 公布了 Qwen3-Reranker 的代码检索分数（见 <a href=\"/models/qwen-reranker.html#scores\">Qwen 页面</a>），Voyage 也公布了 rerank-3 在自家代码数据集上相对 rerank-2.5 的提升（见 <a href=\"/models/voyage-rerank.html\">Voyage 页面</a>）。Demo 预设：<strong>技术文档</strong>和<strong>代码搜索</strong>。",
+  "Scanned PDFs, slides and screenshots":
+    "扫描 PDF、幻灯片和截图",
+  "If your documents are page images — scans, slide decks, dashboards — a text reranker only sees whatever OCR extracted. <strong>Qwen3-VL-Reranker</strong> (2B / 8B) and <strong>LightOn-rerank</strong> score page images directly, both under Apache 2.0, and Alibaba Cloud sells <strong>qwen3-vl-rerank</strong> as an API. Their published scores are on ViDoRe, a visual-document benchmark, so compare them with each other rather than with the BEIR column.":
+    "如果你的文档是页面图片 —— 扫描件、幻灯片、仪表盘 —— 文本重排序模型只能看到 OCR 提取出来的内容。<strong>Qwen3-VL-Reranker</strong>（2B / 8B）和 <strong>LightOn-rerank</strong> 直接给页面图片打分，都是 Apache 2.0 许可，阿里云还以 API 形式提供 <strong>qwen3-vl-rerank</strong>。它们公布的分数来自视觉文档基准 ViDoRe，所以应该互相比较，而不是和 BEIR 那一列比。",
+  "Compare every model and hosted API in one table, then jump into the demo with one click.":
+    "在一张表里对比所有模型和托管 API，一键跳转到 Demo。",
+  "Decision guide · ~8 min read · <time datetime=\"2026-10-12\">Updated 12 Oct 2026</time>":
+    "决策指南 · 约 8 分钟阅读 · <time datetime=\"2026-10-12\">更新于 2026 年 10 月 12 日</time>",
   "_title": "按场景选择 reranker — RAG、客服、法律、代码 | reranker.uk",
   "_desc": "决策指南：RAG 流水线、客服工单、法律检索、代码搜索分别适合哪种 rerank 模型。含场景矩阵、模型推荐与 Demo 预设对照。",
 

@@ -32,7 +32,7 @@
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Late-interaction 重排序 — ColBERT 与何时跳过 cross-encoder","datePublished":"2026-06-25","dateModified":"2026-06-25","inLanguage":"zh-Hans","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/late-interaction-rerank","description":"Late-interaction reranker（ColBERTv2）指南：与 cross-encoder、bi-encoder 的区别，何时不必做 cross-encoder rerank，以及 2026 技术栈如何组合多种架构。"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Late-interaction 重排序 — ColBERT 与何时跳过 cross-encoder","datePublished":"2026-06-25","dateModified":"2026-10-09","inLanguage":"zh-Hans","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/late-interaction-rerank","description":"Late-interaction reranker（ColBERTv2）指南：与 cross-encoder、bi-encoder 的区别，何时不必做 cross-encoder rerank，以及 2026 技术栈如何组合多种架构。"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://reranker.uk/zh/guides/"},{"@type":"ListItem","position":3,"name":"Late-interaction 重排序","item":"https://reranker.uk/zh/guides/late-interaction-rerank"}]}</script>
 
 </head>
@@ -58,7 +58,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/guides/">指南</a><span>/</span>Late-interaction 重排序</div>
       <h1>Late-interaction 重排序（ColBERT 及更多）</h1>
-      <p class="meta">架构 · 约 9 分钟阅读 · <time datetime="2026-06-25">更新于 2026 年 6 月 25 日</time></p>
+      <p class="meta">架构 · 约 9 分钟阅读 · <time datetime="2026-10-09">更新于 2026 年 10 月 9 日</time></p>
       <p class="lead">并非每个检索栈都需要 <strong>cross-encoder</strong> reranker。<strong>Late-interaction</strong> 模型（如 ColBERT）在保持嵌入可缓存的同时做 token 级交互打分 —— 往往比 bi-encoder 更合适，大规模下也比完整 cross-encoder 更省。</p>
 
       <div class="toc">
