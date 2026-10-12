@@ -62,6 +62,16 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-12">12 Oct 2026 — Older guides brought up to date; framework code re-run</h2>
+        <ul class="feature-list">
+          <li><strong>Choosing by scenario</strong> — the guide recommended a “Voyage code” and a “legal-tuned” Voyage reranker that don’t exist, and Cohere v3.5 for multilingual work. It now points at current models, with new sections for Chinese and multilingual search (including Alibaba Cloud and SiliconFlow in mainland China) and for scanned PDFs and screenshots (Qwen3-VL-Reranker, LightOn-rerank)</li>
+          <li><strong>Code that runs on today’s libraries</strong> — we re-ran the RAG guide’s framework examples. LangChain 1.0 moved the reranking retriever to <code>langchain-classic</code>, and Haystack 3 no longer ships a cross-encoder ranker in its core package, so both snippets failed with an import error; they are fixed and were run on LangChain 1.4, LlamaIndex 0.14 and Haystack 3.3. The examples now use bge-reranker-v2-m3 instead of the 2023 bge-reranker-base, and the Jina API example uses jina-reranker-v3.5</li>
+          <li><strong>Self-hosting</strong> — the model table starts from bge-reranker-v2-m3, drops an unsourced “2026 open SOTA” label, adds gte-multilingual-reranker-base, points to ready-made servers (Text Embeddings Inference, Infinity), and works out memory from parameter counts instead of a guess</li>
+          <li><strong>Instruction-following</strong> — the guide adds Alibaba Cloud’s <code>instruct</code> parameter and Mixedbread’s listwise model. The ColBERT guide’s “updated” date now shows its 9 October change</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-09-calculator">9 Oct 2026 (night) — The cost calculator covers Google, Alibaba Cloud and SiliconFlow</h2>
         <ul class="feature-list">
           <li><strong>Five more prices in the cost calculator</strong> — Google Vertex AI ranking (per query of up to 100 documents) and Alibaba Cloud’s international qwen3-rerank (per token) join Cohere and Voyage in the dollar table. A new yuan table compares Alibaba Cloud’s Beijing-region qwen3-rerank / qwen3.7-text-rerank with SiliconFlow’s bge-reranker-v2-m3, and warns when your passages are longer than qwen3-rerank accepts. Every price is the same daily-checked figure the models table shows</li>

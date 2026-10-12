@@ -62,6 +62,16 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-12">2026 年 10 月 12 日 —— 旧指南全面更新；框架代码重新实测</h2>
+        <ul class="feature-list">
+          <li><strong>按场景选择</strong> —— 这篇指南之前推荐了并不存在的“Voyage code”和“法律专用” Voyage 重排序模型，多语言场景还推荐 Cohere v3.5。现在改为当前的模型，并新增两节：中文与多语言检索（包括国内的阿里云百炼和硅基流动），以及扫描 PDF 和截图（Qwen3-VL-Reranker、LightOn-rerank）</li>
+          <li><strong>能在当前版本上跑通的代码</strong> —— 我们重新运行了 RAG 指南里的框架示例。LangChain 1.0 把重排序检索器移到了 <code>langchain-classic</code>，Haystack 3 的核心包里也不再有 cross-encoder 排序组件，所以这两段代码都会报导入错误；现已修好，并在 LangChain 1.4、LlamaIndex 0.14 和 Haystack 3.3 上实际跑通。示例模型从 2023 年的 bge-reranker-base 换成 bge-reranker-v2-m3，Jina API 示例改用 jina-reranker-v3.5</li>
+          <li><strong>自建部署</strong> —— 模型表改为从 bge-reranker-v2-m3 开始，去掉了没有出处的“2026 开源 SOTA”标签，加入 gte-multilingual-reranker-base，介绍了现成的推理服务（Text Embeddings Inference、Infinity），显存估算也改为按参数量计算，而不是凭感觉</li>
+          <li><strong>指令跟随</strong> —— 指南加入了阿里云的 <code>instruct</code> 参数和 Mixedbread 的列表式模型。ColBERT 指南的“更新日期”也改成了 10 月 9 日那次修改</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-09-calculator">2026 年 10 月 9 日（夜）—— 成本计算器加入 Google、阿里云和硅基流动</h2>
         <ul class="feature-list">
           <li><strong>成本计算器新增五个价格</strong> —— Google Vertex AI 排序（按查询计费，每次最多 100 篇文档）和阿里云国际版 qwen3-rerank（按 token 计费）与 Cohere、Voyage 一起列在美元表里。新增的人民币表对比阿里云北京地域的 qwen3-rerank / qwen3.7-text-rerank 和硅基流动的 bge-reranker-v2-m3，段落超过 qwen3-rerank 的长度上限时会提示。所有价格都和模型对比表用的是同一组每天核对的数字</li>

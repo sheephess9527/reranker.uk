@@ -32,7 +32,7 @@
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Hybrid retrieval + reranking","datePublished":"2026-06-23","dateModified":"2026-06-23","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/hybrid-retrieval-rerank","description":"How to combine BM25 and vector search for better recall, then use a cross-encoder reranker to fix ordering. Fusion strategies, top-k tuning, and when hybrid beats vectors alone.","inLanguage":"en"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Hybrid retrieval + reranking","datePublished":"2026-06-23","dateModified":"2026-10-12","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/hybrid-retrieval-rerank","description":"How to combine BM25 and vector search for better recall, then use a cross-encoder reranker to fix ordering. Fusion strategies, top-k tuning, and when hybrid beats vectors alone.","inLanguage":"en"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://reranker.uk/guides/"},{"@type":"ListItem","position":3,"name":"Hybrid retrieval + reranking","item":"https://reranker.uk/guides/hybrid-retrieval-rerank"}]}</script>
 
 </head>
@@ -58,7 +58,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Hybrid retrieval + rerank</div>
       <h1>Hybrid retrieval + reranking</h1>
-      <p class="meta">Production · ~9 min read · <time datetime="2026-06-23">Updated 23 Jun 2026</time></p>
+      <p class="meta">Production · ~9 min read · <time datetime="2026-10-12">Updated 12 Oct 2026</time></p>
       <p class="lead">Vector search alone often misses exact keyword matches; BM25 alone misses paraphrases. <strong>Hybrid retrieval</strong> runs both, merges the candidate lists, and a <strong>reranker</strong> then fixes the final order before your LLM sees anything.</p>
 
       <div class="toc">
@@ -101,7 +101,7 @@
       <pre tabindex="0"><code>from rank_bm25 import BM25Okapi
 from sentence_transformers import CrossEncoder
 
-reranker = CrossEncoder("BAAI/bge-reranker-base")
+reranker = CrossEncoder("BAAI/bge-reranker-v2-m3", max_length=512)
 
 def hybrid_rerank(query, corpus_chunks, vector_hits, bm25_hits, top_n=5):
     # Merge by chunk id, preserve text

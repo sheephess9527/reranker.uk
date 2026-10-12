@@ -59,7 +59,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Rerank for RAG</div>
       <h1>How to add reranking to your RAG pipeline</h1>
-      <p class="meta">Practical · ~10 min read · <time datetime="2026-06-21">Updated 21 Jun 2026</time></p>
+      <p class="meta">Practical · ~10 min read · <time datetime="2026-10-12">Updated 12 Oct 2026</time></p>
       <p class="lead">The fix for mediocre RAG answers is rarely a bigger LLM — it's usually a better retrieval order. A reranker sits between your vector search and your LLM call, re-scores the candidates, and ensures only the most relevant passages land in the prompt.</p>
 
       <div class="toc">
@@ -157,7 +157,7 @@
       <pre tabindex="0"><code>from sentence_transformers import CrossEncoder
 
 # Load once at startup — reuse across requests
-reranker = CrossEncoder("BAAI/bge-reranker-base", max_length=512)
+reranker = CrossEncoder("BAAI/bge-reranker-v2-m3", max_length=512)
 
 def rerank(query: str, candidates: list[str], top_n: int = 5) -&gt; list[str]:
     """Return top_n candidates reranked by relevance to query."""
@@ -193,7 +193,7 @@ def rerank(query: str, candidates: list[str], top_n: int = 5) -&gt; list[str]:
         "https://api.jina.ai/v1/rerank",
         headers={"Authorization": "Bearer YOUR_KEY"},
         json={
-            "model": "jina-reranker-v2-base-multilingual",
+            "model": "jina-reranker-v3.5",
             "query": query,
             "documents": candidates,
             "top_n": top_n,
@@ -204,12 +204,13 @@ def rerank(query: str, candidates: list[str], top_n: int = 5) -&gt; list[str]:
 
       <h3>Inside a framework (LangChain · LlamaIndex · Haystack)</h3>
       <p>If you already use a RAG framework, reranking is usually a drop-in node that wraps your existing retriever. The pattern is identical — retrieve wide, rerank, keep the top-n — just expressed in the framework's vocabulary.</p>
-      <pre tabindex="0"><code># LangChain — ContextualCompressionRetriever wraps any base retriever
-from langchain.retrievers import ContextualCompressionRetriever
-from langchain.retrievers.document_compressors import CrossEncoderReranker
+      <pre tabindex="0"><code># LangChain 1.x — pip install langchain-classic langchain-community
+# ContextualCompressionRetriever wraps any base retriever
+from langchain_classic.retrievers import ContextualCompressionRetriever
+from langchain_classic.retrievers.document_compressors import CrossEncoderReranker
 from langchain_community.cross_encoders import HuggingFaceCrossEncoder
 
-model = HuggingFaceCrossEncoder(model_name="BAAI/bge-reranker-base")
+model = HuggingFaceCrossEncoder(model_name="BAAI/bge-reranker-v2-m3")
 compressor = CrossEncoderReranker(model=model, top_n=5)
 retriever = ContextualCompressionRetriever(
     base_compressor=compressor,
@@ -219,22 +220,24 @@ docs = retriever.invoke(query)   # retrieve 50 → rerank → top 5</code></pre>
       <pre tabindex="0"><code># LlamaIndex — a node postprocessor on the query engine
 from llama_index.core.postprocessor import SentenceTransformerRerank
 
-reranker = SentenceTransformerRerank(model="BAAI/bge-reranker-base", top_n=5)
+reranker = SentenceTransformerRerank(model="BAAI/bge-reranker-v2-m3", top_n=5)
 query_engine = index.as_query_engine(
     similarity_top_k=50,                 # retrieve wide
     node_postprocessors=[reranker],       # rerank to top 5
 )
 response = query_engine.query(query)</code></pre>
-      <pre tabindex="0"><code># Haystack 2.x — a Ranker component in the pipeline
+      <pre tabindex="0"><code># Haystack 3.x — pip install haystack-ai sentence-transformers-haystack
 from haystack import Pipeline
-from haystack.components.rankers import TransformersSimilarityRanker
+from haystack_integrations.components.rankers.sentence_transformers import (
+    SentenceTransformersSimilarityRanker,
+)
 
-ranker = TransformersSimilarityRanker(model="BAAI/bge-reranker-base", top_k=5)
+ranker = SentenceTransformersSimilarityRanker(model="BAAI/bge-reranker-v2-m3", top_k=5)
 pipe = Pipeline()
 pipe.add_component("retriever", retriever)   # returns ~50 docs
 pipe.add_component("ranker", ranker)
 pipe.connect("retriever.documents", "ranker.documents")</code></pre>
-      <p>All three accept hosted rerankers too (Cohere, Jina, Voyage) via their respective integration packages — swap the component, keep the pipeline.</p>
+      <p>All three accept hosted rerankers too (Cohere, Jina, Voyage) via their respective integration packages — swap the component, keep the pipeline. We ran these three snippets in October 2026 on LangChain 1.4, LlamaIndex core 0.14 and Haystack 3.3. Two things moved since the versions most tutorials show: LangChain 1.0 took the retriever classes out of <code>langchain</code> into <code>langchain-classic</code>, and Haystack 3 has no cross-encoder ranker in its core package — it is in the <code>sentence-transformers-haystack</code> integration. <code>langchain-community</code> still works but now warns that it is being retired in favour of standalone integration packages.</p>
 
       <h2 id="topk">Choosing top-k values</h2>
       <p>You have two k values to tune: <em>how many to retrieve</em> and <em>how many to keep after reranking</em>.</p>

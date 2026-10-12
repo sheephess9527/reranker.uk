@@ -6,6 +6,6 @@
   "og_type": "article",
   "og_title": "Your reranker didn't improve results. Here's why",
   "og_description": "Seven reasons reranking shows no lift — and how to tell which one you have.",
-  "head_extra": "<script type=\"application/ld+json\">\n  {\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"headline\":\"Your reranker didn't improve results. Here's why\",\"datePublished\":\"2026-08-25\",\"dateModified\":\"2026-08-25\",\"author\":{\"@type\":\"Organization\",\"name\":\"reranker.uk\"},\"mainEntityOfPage\":\"https://reranker.uk/guides/reranking-not-working.html\"}\n  </script>",
+  "head_extra": "<script type=\"application/ld+json\">\n  {\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"headline\":\"Your reranker didn't improve results. Here's why\",\"datePublished\":\"2026-08-25\",\"dateModified\":\"2026-10-12\",\"author\":{\"@type\":\"Organization\",\"name\":\"reranker.uk\"},\"mainEntityOfPage\":\"https://reranker.uk/guides/reranking-not-working.html\"}\n  </script>",
   "page_scripts": "<script src=\"/assets/js/i18n/reranking-not-working.js\"></script>"
 }

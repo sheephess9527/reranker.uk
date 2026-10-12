@@ -2,7 +2,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Reranking didn't help</div>
       <h1>Your reranker didn't improve results. Here's why</h1>
-      <p class="meta">Troubleshooting · ~9 min read · <time datetime="2026-08-25">Updated 25 Aug 2026</time></p>
+      <p class="meta">Troubleshooting · ~9 min read · <time datetime="2026-10-12">Updated 12 Oct 2026</time></p>
       <p class="lead">You added a rerank stage, the latency went up, and the answers are the same. That is a common outcome, and it is almost never because the reranker is bad. In nearly every case the model is doing its job on inputs that make its job pointless. Work through these in order — the first two explain most failures.</p>
 
       <div class="toc">
@@ -52,7 +52,7 @@ print(f"recall@50 = {hits / len(labelled):.2f}")</code></pre>
 
       <h2 id="truncation">3. Passages are being silently truncated</h2>
       <p>Every cross-encoder has a maximum input length, and the query plus the passage share it. Exceed it and the tail of your passage is cut off — often the part that actually answers the question. Nothing errors; the score just comes back meaningless.</p>
-      <p>Classic MiniLM-style rerankers cap at <strong>512 tokens</strong> for the pair. Modern hosted models are far roomier — <a href="/models/cohere-rerank.html">Cohere Rerank 4</a> and <a href="/models/voyage-rerank.html">Voyage rerank-2.5</a> both take 32,000 — so a model swap can fix this outright. If you are self-hosting a 512-token model, check where your passages actually land:</p>
+      <p>Classic MiniLM-style rerankers cap at <strong>512 tokens</strong> for the pair. Modern hosted models are far roomier — <a href="/models/cohere-rerank.html">Cohere Rerank 4</a> and <a href="/models/voyage-rerank.html">Voyage rerank-3</a> both take 32,000 — so a model swap can fix this outright. If you are self-hosting a 512-token model, check where your passages actually land:</p>
       <pre><code>lengths = [len(tok.encode(d)) for d in passages]
 over = sum(1 for n in lengths if n > 480)   # leave room for the query
 print(f"{over}/{len(lengths)} passages will be truncated")</code></pre>

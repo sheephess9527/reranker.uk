@@ -1,4 +1,22 @@
 window.I18N_PAGE = { zh: {
+  "Production · ~10 min read · <time datetime=\"2026-10-12\">Updated 12 Oct 2026</time>":
+    "生产实践 · 约 10 分钟阅读 · <time datetime=\"2026-10-12\">更新于 2026 年 10 月 12 日</time>",
+  "When you need multilingual quality with minimal ops, a hosted API — <a href=\"/models/cohere-rerank.html\">Cohere</a>, <a href=\"/models/voyage-rerank.html\">Voyage</a>, or in mainland China <a href=\"/models/#alibaba-model-studio\">Alibaba Cloud Model Studio</a> and <a href=\"/models/#siliconflow\">SiliconFlow</a> — may still be cheaper all-in. The <a href=\"/rerank-cost-calculator.html\">cost calculator</a> prices your volume; see also <a href=\"/guides/choose-reranker-scenario.html\">choose by scenario</a>.":
+    "如果需要多语言效果、又不想多运维，托管 API —— <a href=\"/models/cohere-rerank.html\">Cohere</a>、<a href=\"/models/voyage-rerank.html\">Voyage</a>，国内则有<a href=\"/models/#alibaba-model-studio\">阿里云百炼</a>和<a href=\"/models/#siliconflow\">硅基流动</a> —— 算上所有成本可能仍然更便宜。<a href=\"/rerank-cost-calculator.html\">成本计算器</a>可以按你的量级算价格；另见<a href=\"/guides/choose-reranker-scenario.html\">按场景选择</a>。",
+  "<strong>Default</strong> — multilingual, small enough for CPU":
+    "<strong>默认之选</strong> —— 多语言，小到能在 CPU 上跑",
+  "Smaller multilingual option (70+ languages, 8K context)":
+    "更小的多语言选择（70 多种语言，8K 上下文）",
+  "<strong>Default GPU pick</strong> — in Qwen’s tests, the best of its three sizes on English and instruction-following":
+    "<strong>有 GPU 时的默认之选</strong> —— 在 Qwen 的测试中，三个尺寸里英文和指令跟随表现最好",
+  "Start with <strong>bge-reranker-v2-m3</strong>, which runs on CPU. On GPU, A/B <strong>Qwen3-Reranker-4B</strong> against it or <strong>mxbai-rerank-base-v2</strong> on your labelled set — do not assume leaderboard order transfers. Until October 2026 this table recommended bge-reranker-base, BAAI’s 2023 model for Chinese and English only.":
+    "先用 <strong>bge-reranker-v2-m3</strong>，它在 CPU 上就能跑。有 GPU 时，在你的标注数据上把 <strong>Qwen3-Reranker-4B</strong> 和它或 <strong>mxbai-rerank-base-v2</strong> 做 A/B 对比 —— 不要以为排行榜上的顺序能照搬到你的数据。2026 年 10 月之前，这张表推荐的是 bge-reranker-base，那是 BAAI 2023 年只支持中英文的模型。",
+  "Batch your pairs — scoring 50 documents in one <code>predict()</code> call is far faster than 50 separate forwards. <code>max_length=512</code> truncates anything longer, so chunk passages to fit rather than letting the end of a passage silently drop off.":
+    "把文档对批量处理 —— 一次 <code>predict()</code> 给 50 篇文档打分，比单独前向 50 次快得多。<code>max_length=512</code> 会截断更长的内容，所以要把段落切到合适长度，别让段落末尾被悄悄丢掉。",
+  "You don’t have to write the service yourself: Hugging Face’s <a href=\"https://github.com/huggingface/text-embeddings-inference\" rel=\"noopener noreferrer\">Text Embeddings Inference</a> and <a href=\"https://github.com/michaelfeil/infinity\" rel=\"noopener noreferrer\">Infinity</a> both serve cross-encoders behind a rerank endpoint — the <a href=\"https://huggingface.co/Alibaba-NLP/gte-multilingual-reranker-base\" rel=\"noopener noreferrer\">gte-multilingual-reranker-base card</a> shows the Docker commands for each. Check that your model is on the server’s supported list first.":
+    "服务不一定要自己写：Hugging Face 的 <a href=\"https://github.com/huggingface/text-embeddings-inference\" rel=\"noopener noreferrer\">Text Embeddings Inference</a> 和 <a href=\"https://github.com/michaelfeil/infinity\" rel=\"noopener noreferrer\">Infinity</a> 都能把 cross-encoder 部署成 rerank 接口 —— <a href=\"https://huggingface.co/Alibaba-NLP/gte-multilingual-reranker-base\" rel=\"noopener noreferrer\">gte-multilingual-reranker-base 的模型卡</a>里有两者的 Docker 命令。先确认你的模型在服务端的支持列表里。",
+  "<strong>Memory:</strong> in fp16 the weights alone take about 2 bytes per parameter — roughly 1.1 GB for bge-reranker-v2-m3’s 568M and 8 GB for a 4B model — plus activations that grow with batch size and passage length.":
+    "<strong>显存：</strong>fp16 下光权重就要每个参数约 2 字节 —— bge-reranker-v2-m3 的 568M 参数约 1.1 GB，4B 模型约 8 GB —— 再加上随批大小和段落长度增长的激活值。",
   "_title": "如何自托管 reranker — sentence-transformers、GPU、部署 | reranker.uk",
   "_desc": "自托管 cross-encoder reranker 实战指南：模型选择（bge、mxbai、Jina）、sentence-transformers 快速上手、FastAPI 服务化与运维清单。",
 
