@@ -93,7 +93,7 @@ print(f"recall@50 = {hits / len(labelled):.2f}")</code></pre>
 
       <h2 id="topk">2. 候选池太小</h2>
       <p>对前 5 条重排再保留 5 条，等于什么也没做 —— 没有任何有意义的顺序可调。reranker 需要发挥空间：先宽召回，再排序，最后截断。</p>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="2. 候选池太小">
         <table>
           <thead><tr><th>召回</th><th>重排后保留</th><th>效果</th></tr></thead>
           <tbody>

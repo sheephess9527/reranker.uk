@@ -25,6 +25,22 @@
       "check_hint": "Latency",
       "note": "mixedbread's comparison table, 'Latency (s)', measured on an A100; the workload behind it isn't stated",
       "verified_on": "2026-10-01"
+    },
+    "beir11_ndcg10": {
+      "value": "48.8",
+      "source_url": "https://huggingface.co/mixedbread-ai/mxbai-rerank-xsmall-v1",
+      "check_url": "https://huggingface.co/mixedbread-ai/mxbai-rerank-xsmall-v1/raw/main/README.md",
+      "check_pattern": "\\[mxbai-rerank-large-v1\\]\\([^)]*\\)\\s*\\|\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "NDCG",
+      "verified_on": "2026-10-12"
+    },
+    "beir11_acc3": {
+      "value": "74.9",
+      "source_url": "https://huggingface.co/mixedbread-ai/mxbai-rerank-xsmall-v1",
+      "check_url": "https://huggingface.co/mixedbread-ai/mxbai-rerank-xsmall-v1/raw/main/README.md",
+      "check_pattern": "\\[mxbai-rerank-large-v1\\]\\([^)]*\\)\\s*\\|\\s*\\**[0-9.]+\\**\\s*\\|\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Accuracy",
+      "verified_on": "2026-10-12"
     }
   },
   "mxbai-rerank-base-v2": {
@@ -52,6 +68,38 @@
       "check_hint": "Latency",
       "note": "mixedbread's comparison table, 'Latency (s)', measured on an A100; the workload behind it isn't stated",
       "verified_on": "2026-10-01"
+    },
+    "jina2026_beir": {
+      "value": "59.58",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**mxbai-rerank-base-v2\\**\\s*\\|\\s*0\\.5B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "BEIR",
+      "verified_on": "2026-10-12"
+    },
+    "jina2026_miracl": {
+      "value": "64.90",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**mxbai-rerank-base-v2\\**\\s*\\|\\s*0\\.5B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MIRACL",
+      "verified_on": "2026-10-12"
+    },
+    "jina2026_rteb": {
+      "value": "61.44",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**mxbai-rerank-base-v2\\**\\s*\\|\\s*0\\.5B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "RTEB",
+      "verified_on": "2026-10-12"
+    },
+    "jina2026_structir": {
+      "value": "30.4",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**mxbai-rerank-base-v2\\**\\s*\\|\\s*0\\.5B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "STRUCTIR",
+      "verified_on": "2026-10-12"
     }
   },
   "mxbai-rerank-large-v2": {
@@ -79,6 +127,47 @@
       "check_hint": "Latency",
       "note": "mixedbread's comparison table, 'Latency (s)', measured on an A100; the workload behind it isn't stated",
       "verified_on": "2026-10-01"
+    },
+    "jina2026_beir": {
+      "value": "62.45",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**mxbai-rerank-large-v2\\**\\s*\\|\\s*1\\.5B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "BEIR",
+      "verified_on": "2026-10-12"
+    },
+    "jina2026_miracl": {
+      "value": "69.65",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**mxbai-rerank-large-v2\\**\\s*\\|\\s*1\\.5B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MIRACL",
+      "verified_on": "2026-10-12"
+    },
+    "jina2026_rteb": {
+      "value": "70.81",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**mxbai-rerank-large-v2\\**\\s*\\|\\s*1\\.5B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "RTEB",
+      "verified_on": "2026-10-12"
+    },
+    "jina2026_structir": {
+      "value": "43.0",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**mxbai-rerank-large-v2\\**\\s*\\|\\s*1\\.5B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "STRUCTIR",
+      "verified_on": "2026-10-12"
+    },
+    "beir_jina_2025": {
+      "value": "61.44",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3/raw/main/README.md",
+      "check_pattern": "\\|\\s*mxbai-rerank-large-v2\\s*\\|\\s*1\\.5B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "BEIR",
+      "verified_on": "2026-10-12",
+      "protocol_note": "Third-party: Jina's 2025 evaluation for the jina-reranker-v3 paper, 13 BEIR datasets reranking the top 100 from jina-embeddings-v3"
     }
   },
   "bge-reranker-v2-m3": {
@@ -89,6 +178,63 @@
       "check": "manual",
       "check_note": "BAAI publish this table only as an image — research/llm_reranker/evaluation/BEIR-bge-en-v1.5.png in FlagOpen/FlagEmbedding — read by eye; re-read it at each review",
       "verified_on": "2026-10-01"
+    },
+    "qwen_mteb_r": {
+      "value": "57.03",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**BGE-reranker-v2-m3\\**\\s*\\|\\s*0\\.6B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MTEB-R",
+      "verified_on": "2026-10-12"
+    },
+    "qwen_cmteb_r": {
+      "value": "72.16",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**BGE-reranker-v2-m3\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "CMTEB-R",
+      "verified_on": "2026-10-12"
+    },
+    "qwen_mmteb_r": {
+      "value": "58.36",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**BGE-reranker-v2-m3\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MMTEB-R",
+      "verified_on": "2026-10-12"
+    },
+    "qwen_mldr": {
+      "value": "59.51",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**BGE-reranker-v2-m3\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MLDR",
+      "verified_on": "2026-10-12"
+    },
+    "qwen_mteb_code": {
+      "value": "41.38",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**BGE-reranker-v2-m3\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MTEB-CODE",
+      "verified_on": "2026-10-12"
+    },
+    "qwen_followir": {
+      "value": "-0.01",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**BGE-reranker-v2-m3\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "FOLLOWIR",
+      "verified_on": "2026-10-12"
+    },
+    "beir_jina_2025": {
+      "value": "56.51",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3/raw/main/README.md",
+      "check_pattern": "\\|\\s*bge-reranker-v2-m3\\s*\\|\\s*0\\.6B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "BEIR",
+      "verified_on": "2026-10-12",
+      "protocol_note": "Third-party: Jina's 2025 evaluation for the jina-reranker-v3 paper, 13 BEIR datasets reranking the top 100 from jina-embeddings-v3"
     }
   },
   "bge-reranker-v2-gemma": {
@@ -132,6 +278,38 @@
       "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
       "protocol_note": "Jina's own 2026 evaluation: 13 BEIR datasets, reranking the top 100 from jina-embeddings-v5-text-small under one MTEB v2 pipeline (jina-reranker-v3.5 model card; same table as the v3.5 and Qwen3/mxbai rows there). The v3 paper's own 2025 run, over jina-embeddings-v3, reported 61.94",
       "verified_on": "2026-10-01"
+    },
+    "jina2026_beir": {
+      "value": "62.10",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**jina-reranker-v3\\**\\s*\\|\\s*0\\.6B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "BEIR",
+      "verified_on": "2026-10-12"
+    },
+    "jina2026_miracl": {
+      "value": "72.20",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**jina-reranker-v3\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MIRACL",
+      "verified_on": "2026-10-12"
+    },
+    "jina2026_rteb": {
+      "value": "68.01",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**jina-reranker-v3\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "RTEB",
+      "verified_on": "2026-10-12"
+    },
+    "jina2026_structir": {
+      "value": "38.7",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**jina-reranker-v3\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "STRUCTIR",
+      "verified_on": "2026-10-12"
     }
   },
   "jina-reranker-v1-tiny-en": {
@@ -204,6 +382,22 @@
       "check": "manual",
       "check_note": "Our own measurement with ISOLATION=both node scripts/measure-demo-latency.mjs: the live demo in Chromium on a GitHub Actions ubuntu-latest runner (4 vCPU AMD EPYC 7763), cross-origin isolated so ONNX Runtime Web runs multi-threaded; median of 5 warm runs, ~60-word passages; download size as the demo reports it. Same run with isolation stripped (single-threaded, what a browser without COEP credentialless gets): 424 / 1,359 / 516 ms for 10 passages. A phone or older laptop will be slower",
       "verified_on": "2026-10-01"
+    },
+    "trec_dl19": {
+      "value": "74.30",
+      "source_url": "https://huggingface.co/cross-encoder/ms-marco-MiniLM-L6-v2",
+      "check_url": "https://huggingface.co/cross-encoder/ms-marco-MiniLM-L6-v2/raw/main/README.md",
+      "check_pattern": "cross-encoder/ms-marco-MiniLM-L6-v2\\s*\\|\\s*{value}\\s*\\|",
+      "check_hint": "TREC",
+      "verified_on": "2026-10-12"
+    },
+    "msmarco_mrr10": {
+      "value": "39.01",
+      "source_url": "https://huggingface.co/cross-encoder/ms-marco-MiniLM-L6-v2",
+      "check_url": "https://huggingface.co/cross-encoder/ms-marco-MiniLM-L6-v2/raw/main/README.md",
+      "check_pattern": "cross-encoder/ms-marco-MiniLM-L6-v2\\s*\\|\\s*74\\.30\\s*\\|\\s*{value}\\s*\\|",
+      "check_hint": "MARCO",
+      "verified_on": "2026-10-12"
     }
   },
   "jina-reranker-v3.5": {
@@ -213,6 +407,38 @@
       "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
       "protocol_note": "Jina's own 2026 evaluation: 13 BEIR datasets, reranking the top 100 from jina-embeddings-v5-text-small under one MTEB v2 pipeline (jina-reranker-v3.5 model card; same table as the v3.5 and Qwen3/mxbai rows there)",
       "verified_on": "2026-10-01"
+    },
+    "jina2026_beir": {
+      "value": "63.20",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**jina-reranker-v3\\.5\\**\\s*\\|\\s*0\\.6B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "BEIR",
+      "verified_on": "2026-10-12"
+    },
+    "jina2026_miracl": {
+      "value": "74.11",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**jina-reranker-v3\\.5\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MIRACL",
+      "verified_on": "2026-10-12"
+    },
+    "jina2026_rteb": {
+      "value": "70.95",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**jina-reranker-v3\\.5\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "RTEB",
+      "verified_on": "2026-10-12"
+    },
+    "jina2026_structir": {
+      "value": "48.3",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**jina-reranker-v3\\.5\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "STRUCTIR",
+      "verified_on": "2026-10-12"
     }
   },
   "qwen3-reranker-4b": {
@@ -231,6 +457,87 @@
       "check_hint": "MTEB-R",
       "protocol_note": "Qwen's own run: retrieval subsets of MTEB(eng, v2), reranking the top 100 from Qwen3-Embedding-0.6B — an English NDCG@10 average, but MTEB-R, not BEIR",
       "verified_on": "2026-10-01"
+    },
+    "jina2026_beir": {
+      "value": "62.28",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-4B\\**\\s*\\|\\s*4\\.0B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "BEIR",
+      "verified_on": "2026-10-12"
+    },
+    "jina2026_miracl": {
+      "value": "76.56",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-4B\\**\\s*\\|\\s*4\\.0B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MIRACL",
+      "verified_on": "2026-10-12"
+    },
+    "jina2026_rteb": {
+      "value": "77.68",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-4B\\**\\s*\\|\\s*4\\.0B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "RTEB",
+      "verified_on": "2026-10-12"
+    },
+    "jina2026_structir": {
+      "value": "55.6",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-4B\\**\\s*\\|\\s*4\\.0B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "STRUCTIR",
+      "verified_on": "2026-10-12"
+    },
+    "cmteb_r": {
+      "value": "75.94",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-4B\\**\\s*\\|\\s*4B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "CMTEB-R",
+      "verified_on": "2026-10-12"
+    },
+    "mmteb_r": {
+      "value": "72.74",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-4B\\**\\s*\\|\\s*4B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MMTEB-R",
+      "verified_on": "2026-10-12"
+    },
+    "mldr": {
+      "value": "69.97",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-4B\\**\\s*\\|\\s*4B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MLDR",
+      "verified_on": "2026-10-12"
+    },
+    "mteb_code": {
+      "value": "81.20",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-4B\\**\\s*\\|\\s*4B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MTEB-CODE",
+      "verified_on": "2026-10-12"
+    },
+    "followir": {
+      "value": "14.84",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-4B\\**\\s*\\|\\s*4B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "FOLLOWIR",
+      "verified_on": "2026-10-12"
+    },
+    "beir_jina_2025": {
+      "value": "61.16",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3/raw/main/README.md",
+      "check_pattern": "\\|\\s*Qwen3-Reranker-4B\\s*\\|\\s*4\\.0B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "BEIR",
+      "verified_on": "2026-10-12",
+      "protocol_note": "Third-party: Jina's 2025 evaluation for the jina-reranker-v3 paper, 13 BEIR datasets reranking the top 100 from jina-embeddings-v3"
     }
   },
   "cohere-rerank-4-pro": {
@@ -373,6 +680,78 @@
       "check_hint": "MTEB-R",
       "protocol_note": "Qwen's own run: retrieval subsets of MTEB(eng, v2), reranking the top 100 from Qwen3-Embedding-0.6B — an English NDCG@10 average, but MTEB-R, not BEIR",
       "verified_on": "2026-10-01"
+    },
+    "jina2026_beir": {
+      "value": "56.94",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-0\\.6B\\**\\s*\\|\\s*0\\.6B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "BEIR",
+      "verified_on": "2026-10-12"
+    },
+    "jina2026_miracl": {
+      "value": "67.12",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-0\\.6B\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MIRACL",
+      "verified_on": "2026-10-12"
+    },
+    "jina2026_rteb": {
+      "value": "68.41",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-0\\.6B\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "RTEB",
+      "verified_on": "2026-10-12"
+    },
+    "jina2026_structir": {
+      "value": "41.9",
+      "source_url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-0\\.6B\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "STRUCTIR",
+      "verified_on": "2026-10-12"
+    },
+    "cmteb_r": {
+      "value": "71.31",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-0\\.6B\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "CMTEB-R",
+      "verified_on": "2026-10-12"
+    },
+    "mmteb_r": {
+      "value": "66.36",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-0\\.6B\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MMTEB-R",
+      "verified_on": "2026-10-12"
+    },
+    "mldr": {
+      "value": "67.28",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-0\\.6B\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MLDR",
+      "verified_on": "2026-10-12"
+    },
+    "mteb_code": {
+      "value": "73.42",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-0\\.6B\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MTEB-CODE",
+      "verified_on": "2026-10-12"
+    },
+    "followir": {
+      "value": "5.41",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-0\\.6B\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "FOLLOWIR",
+      "verified_on": "2026-10-12"
     }
   },
   "qwen3-reranker-8b": {
@@ -384,6 +763,46 @@
       "check_hint": "MTEB-R",
       "protocol_note": "Qwen's own run: retrieval subsets of MTEB(eng, v2), reranking the top 100 from Qwen3-Embedding-0.6B — an English NDCG@10 average, but MTEB-R, not BEIR",
       "verified_on": "2026-10-01"
+    },
+    "cmteb_r": {
+      "value": "77.45",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-8B\\**\\s*\\|\\s*8B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "CMTEB-R",
+      "verified_on": "2026-10-12"
+    },
+    "mmteb_r": {
+      "value": "72.94",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-8B\\**\\s*\\|\\s*8B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MMTEB-R",
+      "verified_on": "2026-10-12"
+    },
+    "mldr": {
+      "value": "70.19",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-8B\\**\\s*\\|\\s*8B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MLDR",
+      "verified_on": "2026-10-12"
+    },
+    "mteb_code": {
+      "value": "81.22",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-8B\\**\\s*\\|\\s*8B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MTEB-CODE",
+      "verified_on": "2026-10-12"
+    },
+    "followir": {
+      "value": "8.05",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**Qwen3-Reranker-8B\\**\\s*\\|\\s*8B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "FOLLOWIR",
+      "verified_on": "2026-10-12"
     }
   },
   "gte-reranker-modernbert-base": {
@@ -425,6 +844,22 @@
       "check": "manual",
       "check_note": "Our own measurement with ISOLATION=both node scripts/measure-demo-latency.mjs: the live demo in Chromium on a GitHub Actions ubuntu-latest runner (4 vCPU AMD EPYC 7763), cross-origin isolated so ONNX Runtime Web runs multi-threaded; median of 5 warm runs, ~60-word passages; download size as the demo reports it. Same run with isolation stripped (single-threaded, what a browser without COEP credentialless gets): 424 / 1,359 / 516 ms for 10 passages. A phone or older laptop will be slower",
       "verified_on": "2026-10-01"
+    },
+    "beir11_ndcg10": {
+      "value": "43.9",
+      "source_url": "https://huggingface.co/mixedbread-ai/mxbai-rerank-xsmall-v1",
+      "check_url": "https://huggingface.co/mixedbread-ai/mxbai-rerank-xsmall-v1/raw/main/README.md",
+      "check_pattern": "\\[mxbai-rerank-xsmall-v1\\]\\([^)]*\\)\\s*\\|\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "NDCG",
+      "verified_on": "2026-10-12"
+    },
+    "beir11_acc3": {
+      "value": "70.0",
+      "source_url": "https://huggingface.co/mixedbread-ai/mxbai-rerank-xsmall-v1",
+      "check_url": "https://huggingface.co/mixedbread-ai/mxbai-rerank-xsmall-v1/raw/main/README.md",
+      "check_pattern": "\\[mxbai-rerank-xsmall-v1\\]\\([^)]*\\)\\s*\\|\\s*\\**[0-9.]+\\**\\s*\\|\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Accuracy",
+      "verified_on": "2026-10-12"
     }
   },
   "lighton-rerank-pw-2b": {
@@ -477,6 +912,14 @@
       "check_hint": "ViDoRe",
       "protocol_note": "Qwen's own run, from the model card; the card doesn't say which first stage was reranked. Visual-document retrieval, not BEIR",
       "verified_on": "2026-10-09"
+    },
+    "beir_lighton": {
+      "value": "49.08",
+      "source_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B",
+      "check_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B/raw/main/README.md",
+      "check_pattern": "Qwen3-VL-Reranker-2B {value}\\.",
+      "check_hint": "decontaminated",
+      "verified_on": "2026-10-12"
     }
   },
   "zerank-2": {
@@ -583,6 +1026,70 @@
       "check_pattern": "Ranking \\$\\s*{value} / 1,000 count",
       "check_hint": "Ranking",
       "verified_on": "2026-10-09"
+    }
+  },
+  "gte-multilingual-reranker-base": {
+    "qwen_mteb_r": {
+      "value": "59.51",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**gte-multilingual-reranker-base\\**\\s*\\|\\s*0\\.3B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MTEB-R",
+      "verified_on": "2026-10-12"
+    },
+    "qwen_cmteb_r": {
+      "value": "74.08",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**gte-multilingual-reranker-base\\**\\s*\\|\\s*0\\.3B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "CMTEB-R",
+      "verified_on": "2026-10-12"
+    },
+    "qwen_mmteb_r": {
+      "value": "59.44",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\**gte-multilingual-reranker-base\\**\\s*\\|\\s*0\\.3B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "MMTEB-R",
+      "verified_on": "2026-10-12"
+    }
+  },
+  "jina-reranker-m0": {
+    "beir_lighton": {
+      "value": "51.97",
+      "source_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B",
+      "check_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B/raw/main/README.md",
+      "check_pattern": "jina-reranker-m0 scores {value} decontaminated",
+      "check_hint": "decontaminated",
+      "verified_on": "2026-10-12"
+    }
+  },
+  "llama-nemotron-rerank-1b-v2": {
+    "pipeline_recall5": {
+      "value": "73.64",
+      "source_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2",
+      "check_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2/raw/main/README.md",
+      "check_pattern": "\\+ llama-nemotron-rerank-1b-v2\\s*\\|\\s*{value}%",
+      "check_hint": "Recall",
+      "verified_on": "2026-10-12"
+    }
+  },
+  "mxbai-rerank-base-v1": {
+    "beir11_ndcg10": {
+      "value": "46.9",
+      "source_url": "https://huggingface.co/mixedbread-ai/mxbai-rerank-xsmall-v1",
+      "check_url": "https://huggingface.co/mixedbread-ai/mxbai-rerank-xsmall-v1/raw/main/README.md",
+      "check_pattern": "\\[mxbai-rerank-base-v1\\]\\([^)]*\\)\\s*\\|\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "NDCG",
+      "verified_on": "2026-10-12"
+    },
+    "beir11_acc3": {
+      "value": "72.3",
+      "source_url": "https://huggingface.co/mixedbread-ai/mxbai-rerank-xsmall-v1",
+      "check_url": "https://huggingface.co/mixedbread-ai/mxbai-rerank-xsmall-v1/raw/main/README.md",
+      "check_pattern": "\\[mxbai-rerank-base-v1\\]\\([^)]*\\)\\s*\\|\\s*\\**[0-9.]+\\**\\s*\\|\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Accuracy",
+      "verified_on": "2026-10-12"
     }
   }
 }

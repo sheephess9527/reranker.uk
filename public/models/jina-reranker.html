@@ -33,7 +33,7 @@
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <!-- seo:jsonld -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://reranker.uk/models/"},{"@type":"ListItem","position":3,"name":"Jina Reranker","item":"https://reranker.uk/models/jina-reranker"}]},{"@type":"Article","headline":"Jina Reranker v3.5 — listwise, licence and pricing","description":"Jina Reranker review (Oct 2026): jina-reranker-v3.5 is a 0.6B listwise model scoring 63.20 nDCG@10 on BEIR in Jina's own test. Note the v2, v3 and v3.5 weights are CC BY-NC 4.0, non-commercial. Benchmarks, API usage and the browser tiny model.","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"en","datePublished":"2026-06-20","dateModified":"2026-10-01","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/"},"mainEntityOfPage":"https://reranker.uk/models/jina-reranker","about":{"@type":"Thing","name":"Jina Reranker reranker model"}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://reranker.uk/models/"},{"@type":"ListItem","position":3,"name":"Jina Reranker","item":"https://reranker.uk/models/jina-reranker"}]},{"@type":"Article","headline":"Jina Reranker v3.5 — listwise, licence and pricing","description":"Jina Reranker review (Oct 2026): jina-reranker-v3.5 is a 0.6B listwise model scoring 63.20 nDCG@10 on BEIR in Jina's own test. Note the v2, v3 and v3.5 weights are CC BY-NC 4.0, non-commercial. Benchmarks, API usage and the browser tiny model.","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"en","datePublished":"2026-06-20","dateModified":"2026-10-12","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/"},"mainEntityOfPage":"https://reranker.uk/models/jina-reranker","about":{"@type":"Thing","name":"Jina Reranker reranker model"}}]}</script>
 
 </head>
 <body>
@@ -58,7 +58,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Jina Reranker</div>
       <h1>Jina Reranker</h1>
-      <p class="meta">Weights + hosted API · Jina AI, now part of Elastic · <time datetime="2026-10-01">Updated 1 Oct 2026</time></p>
+      <p class="meta">Weights + hosted API · Jina AI, now part of Elastic · <time datetime="2026-10-12">Updated 12 Oct 2026</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">Hosted API</span><span class="pill warn">Weights: non-commercial</span><span class="pill info">v3.5 listwise</span><span class="pill">Browser tiny</span></div>
       <p class="lead">Jina’s current flagship is <strong>jina-reranker-v3.5</strong>, announced August 2026: a <strong>0.6B</strong> <em>listwise</em> reranker built on Qwen3-0.6B and a drop-in upgrade to v3 — same API, 131K-token context, and 1.22–1.56× faster. In Jina’s own evaluation it scores <strong>63.20* nDCG@10 on BEIR</strong>, just above Qwen3-Reranker-4B at about a seventh of the size, though the 4B still leads on multilingual, professional-domain and structured retrieval. The catch for self-hosting: the v2, v3 and v3.5 weights are <strong>CC BY-NC 4.0 — non-commercial</strong>. <strong>v1-tiny</strong> (Apache 2.0) is still what runs in <a href="/demo?m=jinaai/jina-reranker-v1-tiny-en">our browser demo</a>.</p>
 
@@ -77,7 +77,7 @@
       </div>
 
       <h2 id="models">Model variants</h2>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Model variants">
         <table>
           <thead>
             <tr><th>Model</th><th>Parameters</th><th>Languages</th><th>Licence</th><th>Notes</th></tr>
@@ -100,7 +100,7 @@
 
       <h2 id="benchmarks">Whose benchmark?</h2>
       <p>For v3.5, Jina re-ran every model under one protocol: 13 BEIR datasets, MIRACL across 18 languages, RTEB (legal, finance, code, medical) and Struct-IR, each reranking the top 100 candidates from jina-embeddings-v5-text-small.</p>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Whose benchmark?">
         <table>
           <thead>
             <tr><th>Model</th><th>Params</th><th>BEIR</th><th>MIRACL</th><th>RTEB</th><th>Struct-IR</th></tr>
@@ -116,7 +116,7 @@
         </table>
       </div>
       <p class="muted" style="font-size:.85rem">nDCG@10, from the <a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">jina-reranker-v3.5 model card</a>. Struct-IR uses a controlled candidate pool (all gold documents plus the 30 hardest distractors), so it isn’t comparable to other Struct-IR leaderboards.</p>
-      <p>v3.5 leads on BEIR, by under a point. On the other three the 4B is ahead, which Jina’s own write-up says plainly. The v3 paper’s 2025 run, over a different first-stage retriever, had v3 at 61.94 and Qwen3-Reranker-4B at 61.16. That is where “v3 beats Qwen3-Reranker-4B”, repeated on this site until October 2026, came from; on the newer run it no longer holds. Qwen3-Reranker-4B moving by more than a point between two runs from the same vendor is a good reason to read BEIR averages as tiers rather than rankings.</p>
+      <p>v3.5 leads on BEIR, by under a point. On the other three the 4B is ahead, which Jina’s own write-up says plainly. The v3 paper’s 2025 run, over a different first-stage retriever, had v3 at 61.94* and Qwen3-Reranker-4B at 61.16*. That is where “v3 beats Qwen3-Reranker-4B”, repeated on this site until October 2026, came from; on the newer run it no longer holds. Qwen3-Reranker-4B moving by more than a point between two runs from the same vendor is a good reason to read BEIR averages as tiers rather than rankings.</p>
 
       <h2 id="licence">Licence: what you can self-host</h2>
       <p>The <code>v2</code>, <code>v3</code>, <code>v3.5</code> and <code>m0</code> weights are released under <strong>CC BY-NC 4.0</strong>: free to download and evaluate, not to use commercially. For production there are three routes: Jina’s hosted API, billed per token; for v3.5, Elastic Inference Service (Elastic Stack 9.3 and later); or a commercial licence, which Jina now arrange through Elastic’s sales team. Jina also list v3 on the Azure and Google Cloud marketplaces. Only the legacy <code>v1</code> English models are Apache 2.0.</p>
@@ -124,7 +124,7 @@
 
       <h2 id="pricing">Pricing</h2>
       <p>Jina bill the reranker by token, from the same balance as their other APIs. New API keys come with free tokens to try it; after that you buy token packages. Jina changed their pricing on 6 May 2025, and their site shows current package prices only once the page has loaded in a browser, so we don’t quote a figure here — check <a href="https://jina.ai/reranker" rel="noopener noreferrer">jina.ai/reranker</a> before you budget.</p>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Pricing">
         <table>
           <thead>
             <tr><th>API key</th><th>Requests / min</th><th>Tokens / min</th></tr>

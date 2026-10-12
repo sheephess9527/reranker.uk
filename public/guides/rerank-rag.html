@@ -241,7 +241,7 @@ pipe.connect("retriever.documents", "ranker.documents")</code></pre>
 
       <h2 id="topk">Choosing top-k values</h2>
       <p>You have two k values to tune: <em>how many to retrieve</em> and <em>how many to keep after reranking</em>.</p>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Choosing top-k values">
         <table>
           <thead>
             <tr><th>Parameter</th><th>Typical range</th><th>Notes</th></tr>
@@ -258,7 +258,7 @@ pipe.connect("retriever.documents", "ranker.documents")</code></pre>
 
       <h2 id="latency">Latency trade-offs</h2>
       <p>Reranking adds a model call to your pipeline. The cost depends on the approach:</p>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Latency trade-offs">
         <table>
           <thead>
             <tr><th>Approach</th><th>Rough latency</th><th>Cost</th></tr>
@@ -279,7 +279,7 @@ pipe.connect("retriever.documents", "ranker.documents")</code></pre>
 
       <h2 id="evaluate">Measuring whether it actually helped</h2>
       <p>Don't add a reranker on faith — measure it. Build a small evaluation set of queries paired with the chunk(s) that <em>should</em> be retrieved, then compare retrieval-only vs retrieval+rerank on the same set. Three metrics cover almost every case:</p>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Measuring whether it actually helped">
         <table>
           <thead>
             <tr><th>Metric</th><th>What it asks</th><th>Use it when</th></tr>

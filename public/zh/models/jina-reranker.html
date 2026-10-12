@@ -33,7 +33,7 @@
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <!-- seo:jsonld -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"模型对比","item":"https://reranker.uk/zh/models/"},{"@type":"ListItem","position":3,"name":"Jina Reranker v3.5：listwise、许可证与价格","item":"https://reranker.uk/zh/models/jina-reranker"}]},{"@type":"Article","headline":"Jina Reranker v3.5：listwise、许可证与价格","description":"Jina Reranker 评测（2026 年 10 月）：jina-reranker-v3.5 是 0.6B 的 listwise 模型，在 Jina 自己的测试里 BEIR nDCG@10 为 63.20。注意 v2、v3、v3.5 权重为 CC BY-NC 4.0 非商用许可。另含评测对比、API 用法与浏览器 tiny 模型。","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"zh-Hans","datePublished":"2026-06-20","dateModified":"2026-10-01","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/zh/"},"mainEntityOfPage":"https://reranker.uk/zh/models/jina-reranker","about":{"@type":"Thing","name":"Jina Reranker reranker model"}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"模型对比","item":"https://reranker.uk/zh/models/"},{"@type":"ListItem","position":3,"name":"Jina Reranker v3.5：listwise、许可证与价格","item":"https://reranker.uk/zh/models/jina-reranker"}]},{"@type":"Article","headline":"Jina Reranker v3.5：listwise、许可证与价格","description":"Jina Reranker 评测（2026 年 10 月）：jina-reranker-v3.5 是 0.6B 的 listwise 模型，在 Jina 自己的测试里 BEIR nDCG@10 为 63.20。注意 v2、v3、v3.5 权重为 CC BY-NC 4.0 非商用许可。另含评测对比、API 用法与浏览器 tiny 模型。","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"zh-Hans","datePublished":"2026-06-20","dateModified":"2026-10-12","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/zh/"},"mainEntityOfPage":"https://reranker.uk/zh/models/jina-reranker","about":{"@type":"Thing","name":"Jina Reranker reranker model"}}]}</script>
 
 </head>
 <body>
@@ -58,7 +58,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>Jina Reranker</div>
       <h1>Jina Reranker</h1>
-      <p class="meta">权重 + 托管 API · Jina AI（现属 Elastic）· <time datetime="2026-10-01">更新于 2026 年 10 月 1 日</time></p>
+      <p class="meta">权重 + 托管 API · Jina AI（现属 Elastic）· <time datetime="2026-10-12">更新于 2026 年 10 月 12 日</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">托管 API</span><span class="pill warn">权重：仅限非商用</span><span class="pill info">v3.5 listwise</span><span class="pill">浏览器 tiny</span></div>
       <p class="lead">Jina 目前的旗舰是 2026 年 8 月发布的 <strong>jina-reranker-v3.5</strong>：一个基于 Qwen3-0.6B 的 <strong>0.6B</strong> <em>listwise</em> 重排序器，可直接替换 v3 —— API 相同、131K token 上下文，速度快 1.22–1.56 倍。在 Jina 自己的评测里，它的 <strong>BEIR nDCG@10 为 63.20*</strong>，以约七分之一的体量略高于 Qwen3-Reranker-4B；不过在多语言、专业领域和结构化数据检索上，仍是 4B 领先。自建部署要注意：v2、v3 和 v3.5 的权重采用 <strong>CC BY-NC 4.0 —— 仅限非商用</strong>。<strong>v1-tiny</strong>（Apache 2.0）仍是<a href="/zh/demo?m=jinaai/jina-reranker-v1-tiny-en">本站浏览器 Demo</a> 所用的模型。</p>
 
@@ -77,7 +77,7 @@
       </div>
 
       <h2 id="models">模型变体</h2>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="模型变体">
         <table>
           <thead>
             <tr><th>模型</th><th>参数量</th><th>语言</th><th>许可证</th><th>说明</th></tr>
@@ -100,7 +100,7 @@
 
       <h2 id="benchmarks">谁测的分数？</h2>
       <p>为了 v3.5，Jina 用同一套方法把所有模型重新测了一遍：13 个 BEIR 数据集、覆盖 18 种语言的 MIRACL、RTEB（法律、金融、代码、医疗）以及 Struct-IR，每项都是对 jina-embeddings-v5-text-small 召回的前 100 个候选重排。</p>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="谁测的分数？">
         <table>
           <thead>
             <tr><th>模型</th><th>参数</th><th>BEIR</th><th>MIRACL</th><th>RTEB</th><th>Struct-IR</th></tr>
@@ -116,7 +116,7 @@
         </table>
       </div>
       <p class="muted" style="font-size:.85rem">指标为 nDCG@10，取自 <a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">jina-reranker-v3.5 模型卡</a>。Struct-IR 用的是受控候选池（全部正确文档加上最难的 30 个干扰项），因此不能和其他 Struct-IR 排行榜直接比较。</p>
-      <p>v3.5 在 BEIR 上领先，但不到一分；另外三项都是 4B 领先，Jina 自己的文章也直说了这一点。v3 论文在 2025 年用另一个第一阶段召回模型测过一次，当时 v3 是 61.94，Qwen3-Reranker-4B 是 61.16 —— 本站直到 2026 年 10 月都在重复的「v3 超过 Qwen3-Reranker-4B」就出自这里；在新的评测里，这个结论已经不成立。同一家厂商测的两次结果里，Qwen3-Reranker-4B 就差了一分多，这正说明 BEIR 均值应当当作档位来看，而不是精确排名。</p>
+      <p>v3.5 在 BEIR 上领先，但不到一分；另外三项都是 4B 领先，Jina 自己的文章也直说了这一点。v3 论文在 2025 年用另一个第一阶段召回模型测过一次，当时 v3 是 61.94*，Qwen3-Reranker-4B 是 61.16* —— 本站直到 2026 年 10 月都在重复的「v3 超过 Qwen3-Reranker-4B」就出自这里；在新的评测里，这个结论已经不成立。同一家厂商测的两次结果里，Qwen3-Reranker-4B 就差了一分多，这正说明 BEIR 均值应当当作档位来看，而不是精确排名。</p>
 
       <h2 id="licence">许可证：哪些能自建部署</h2>
       <p><code>v2</code>、<code>v3</code>、<code>v3.5</code> 和 <code>m0</code> 的权重采用 <strong>CC BY-NC 4.0</strong> 发布：可以免费下载和评估，但不能商用。生产环境有三条路：Jina 的托管 API，按 token 计费；v3.5 还可以走 Elastic Inference Service（Elastic Stack 9.3 及以上）；或者购买商用许可，现在由 Elastic 的销售团队负责。Jina 还把 v3 上架到了 Azure 和 Google Cloud 的应用市场。只有旧版的 <code>v1</code> 英文模型是 Apache 2.0。</p>
@@ -124,7 +124,7 @@
 
       <h2 id="pricing">价格</h2>
       <p>Jina 的重排序 API 按 token 计费，和他们的其他 API 共用同一个余额。新的 API key 附带免费 token 供试用；之后需要购买 token 包。Jina 在 2025 年 5 月 6 日调整过定价，而且他们网站上的当前价格要在浏览器里加载完页面才显示，所以这里不写具体数字 —— 做预算前请到 <a href="https://jina.ai/reranker" rel="noopener noreferrer">jina.ai/reranker</a> 查看。</p>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="价格">
         <table>
           <thead>
             <tr><th>API key</th><th>每分钟请求数</th><th>每分钟 token 数</th></tr>

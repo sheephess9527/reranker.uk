@@ -77,7 +77,7 @@
       <p><strong>Late-interaction</strong> 介于二者之间：离线预计算文档 token 嵌入，查询时用廉价交互（通常是 MaxSim —— 每个 query token 取最大余弦）在 query 与文档 token 间打分。比单向量点积更细，又不必对每对跑完整 cross-encoder。</p>
 
       <h2 id="vs">Cross-encoder vs late-interaction vs bi-encoder</h2>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Cross-encoder vs late-interaction vs bi-encoder">
         <table>
           <thead>
             <tr><th>架构</th><th>预计算文档？</th><th>查询时成本</th><th>典型用途</th></tr>

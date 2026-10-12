@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Mon, 12 Oct 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 12 Oct 2026 16:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>12 Oct 2026 (later) — Every benchmark figure is now checked daily; Mixedbread v1 figures corrected</title>
+      <link>https://reranker.uk/changelog#2026-10-12-facts</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-12-facts</guid>
+      <pubDate>Mon, 12 Oct 2026 16:00:00 GMT</pubDate>
+      <description>About 70 benchmark figures that were typed into the Jina, Qwen, Mixedbread and models pages are now read from each vendor's model card and checked daily. The Mixedbread page's untraceable v1 BEIR and MS MARCO figures are replaced by the numbers on Mixedbread's own model cards.</description>
+    </item>
     <item>
       <title>12 Oct 2026 — Older guides brought up to date; framework code re-run</title>
       <link>https://reranker.uk/changelog#2026-10-12</link>

@@ -2,7 +2,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Qwen3-Reranker</div>
       <h1>Qwen3-Reranker</h1>
-      <p class="meta">Open weights · Qwen, Alibaba · <time datetime="2026-10-01">Updated 1 Oct 2026</time></p>
+      <p class="meta">Open weights · Qwen, Alibaba · <time datetime="2026-10-12">Updated 12 Oct 2026</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Apache 2.0</span><span class="pill info">Instruction-aware</span><span class="pill">GPU recommended</span></div>
       <p class="lead">The <strong>Qwen3-Reranker</strong> family (0.6B / 4B / 8B) are Apache 2.0 rerankers built on Qwen3, with a 32K context, 100+ languages and support for a task instruction. In Qwen’s own tests the 4B and 8B lead bge-reranker-v2-m3 and gte-multilingual-reranker on every suite they ran — English, Chinese, multilingual, long-document and code. Those are Qwen’s numbers on Qwen’s setup: validate on your own labels before replacing bge or a hosted API.</p>
 
@@ -41,10 +41,10 @@
             <tr><th>Model</th><th>MTEB-R</th><th>CMTEB-R</th><th>MMTEB-R</th><th>MLDR</th><th>MTEB-Code</th><th>FollowIR</th></tr>
           </thead>
           <tbody>
-            <tr><td>bge-reranker-v2-m3</td><td>57.03</td><td>72.16</td><td>58.36</td><td>59.51</td><td>41.38</td><td>−0.01</td></tr>
-            <tr><td>Qwen3-Reranker-0.6B</td><td>{{fact:qwen3-reranker-0.6b.mteb_r}}</td><td>71.31</td><td>66.36</td><td>67.28</td><td>73.42</td><td>5.41</td></tr>
-            <tr><td>Qwen3-Reranker-4B</td><td><strong>{{fact:qwen3-reranker-4b.mteb_r}}</strong></td><td>75.94</td><td>72.74</td><td>69.97</td><td>81.20</td><td><strong>14.84</strong></td></tr>
-            <tr><td>Qwen3-Reranker-8B</td><td>{{fact:qwen3-reranker-8b.mteb_r}}</td><td><strong>77.45</strong></td><td><strong>72.94</strong></td><td><strong>70.19</strong></td><td><strong>81.22</strong></td><td>8.05</td></tr>
+            <tr><td>bge-reranker-v2-m3</td><td>{{fact:bge-reranker-v2-m3.qwen_mteb_r}}</td><td>{{fact:bge-reranker-v2-m3.qwen_cmteb_r}}</td><td>{{fact:bge-reranker-v2-m3.qwen_mmteb_r}}</td><td>{{fact:bge-reranker-v2-m3.qwen_mldr}}</td><td>{{fact:bge-reranker-v2-m3.qwen_mteb_code}}</td><td>{{fact:bge-reranker-v2-m3.qwen_followir}}</td></tr>
+            <tr><td>Qwen3-Reranker-0.6B</td><td>{{fact:qwen3-reranker-0.6b.mteb_r}}</td><td>{{fact:qwen3-reranker-0.6b.cmteb_r}}</td><td>{{fact:qwen3-reranker-0.6b.mmteb_r}}</td><td>{{fact:qwen3-reranker-0.6b.mldr}}</td><td>{{fact:qwen3-reranker-0.6b.mteb_code}}</td><td>{{fact:qwen3-reranker-0.6b.followir}}</td></tr>
+            <tr><td>Qwen3-Reranker-4B</td><td><strong>{{fact:qwen3-reranker-4b.mteb_r}}</strong></td><td>{{fact:qwen3-reranker-4b.cmteb_r}}</td><td>{{fact:qwen3-reranker-4b.mmteb_r}}</td><td>{{fact:qwen3-reranker-4b.mldr}}</td><td>{{fact:qwen3-reranker-4b.mteb_code}}</td><td><strong>{{fact:qwen3-reranker-4b.followir}}</strong></td></tr>
+            <tr><td>Qwen3-Reranker-8B</td><td>{{fact:qwen3-reranker-8b.mteb_r}}</td><td><strong>{{fact:qwen3-reranker-8b.cmteb_r}}</strong></td><td><strong>{{fact:qwen3-reranker-8b.mmteb_r}}</strong></td><td><strong>{{fact:qwen3-reranker-8b.mldr}}</strong></td><td><strong>{{fact:qwen3-reranker-8b.mteb_code}}</strong></td><td>{{fact:qwen3-reranker-8b.followir}}</td></tr>
           </tbody>
         </table>
       </div>

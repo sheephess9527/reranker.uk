@@ -6,6 +6,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-12-facts">12 Oct 2026 (later) — Every benchmark figure is now checked daily; Mixedbread v1 figures corrected</h2>
+        <ul class="feature-list">
+          <li><strong>About 70 more figures under the daily source check</strong> — the benchmark tables on the Jina and Qwen pages, and the third-party figures quoted in the models table’s notes, were typed into the pages, so a vendor revising a number would have gone unnoticed. Each one is now read from the vendor’s own model card and checked against it every day, like the rest of the site’s numbers. The gte-multilingual row also gains the scores Qwen published for it</li>
+          <li><strong>Mixedbread v1, corrected</strong> — the Mixedbread page showed xsmall-v1 and base-v1 at ~55.5 and ~59.8 BEIR, and an MS MARCO column from ~38.0 to ~42.3, none of which we could trace. Mixedbread’s own model cards give 43.9 and 46.9 on their 11-dataset BEIR run, with Accuracy@3, and no MS MARCO figures; the table now shows those</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-12">12 Oct 2026 — Older guides brought up to date; framework code re-run</h2>
         <ul class="feature-list">
           <li><strong>Choosing by scenario</strong> — the guide recommended a “Voyage code” and a “legal-tuned” Voyage reranker that don’t exist, and Cohere v3.5 for multilingual work. It now points at current models, with new sections for Chinese and multilingual search (including Alibaba Cloud and SiliconFlow in mainland China) and for scanned PDFs and screenshots (Qwen3-VL-Reranker, LightOn-rerank)</li>

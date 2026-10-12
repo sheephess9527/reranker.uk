@@ -578,6 +578,23 @@ function assemble({ meta, body, relPath, locale, lastmod }) {
   for (const pre of root.querySelectorAll("main pre")) {
     if (!pre.hasAttribute("tabindex")) pre.setAttribute("tabindex", "0");
   }
+  // Same for wide tables: a .table-wrap scrolls when the table is wider than
+  // the column. A focusable region needs a name, taken from the table's
+  // caption or the nearest heading above it (already translated on /zh/).
+  for (const wrap of root.querySelectorAll("main .table-wrap")) {
+    if (wrap.hasAttribute("tabindex")) continue;
+    let label = wrap.querySelector("caption")?.text.trim();
+    if (!label) {
+      const kids = wrap.parentNode.childNodes.filter((n) => n.nodeType === 1);
+      for (let i = kids.indexOf(wrap) - 1; i >= 0 && !label; i--) {
+        if (/^h[2-4]$/i.test(kids[i].tagName)) label = kids[i].text.trim();
+      }
+    }
+    if (!label) continue;
+    wrap.setAttribute("tabindex", "0");
+    wrap.setAttribute("role", "region");
+    wrap.setAttribute("aria-label", label);
+  }
   // After localiseLinks: the toggle points at the *other* locale, so it must
   // not be swept up by the /zh prefixing pass.
   setLocaleToggle(root, urlPath, zh ? "zh" : "en");

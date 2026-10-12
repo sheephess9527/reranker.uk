@@ -4,6 +4,8 @@ window.I18N_PAGE = {
     "models.tableCaption": "重排序模型对比：架构、类型、适用场景、语言、延迟、价格与 BEIR 分数",
   },
   zh: {
+  "Alibaba publish its reranking results only as a chart on the model card and in the mGTE paper (EMNLP 2024). Third-party: Qwen’s run on the Qwen3-Reranker cards puts it at {{fact:gte-multilingual-reranker-base.qwen_mteb_r}} on MTEB-R, {{fact:gte-multilingual-reranker-base.qwen_cmteb_r}} on CMTEB-R and {{fact:gte-multilingual-reranker-base.qwen_mmteb_r}} on MMTEB-R. Alibaba Cloud's hosted rerankers are related models, not the same one, per the card":
+    "阿里巴巴只在模型卡的图表和 mGTE 论文（EMNLP 2024）里公布了它的重排序结果。第三方数据：Qwen3-Reranker 模型卡里 Qwen 的测试中，它在 MTEB-R 上为 {{fact:gte-multilingual-reranker-base.qwen_mteb_r}}，CMTEB-R 上为 {{fact:gte-multilingual-reranker-base.qwen_cmteb_r}}，MMTEB-R 上为 {{fact:gte-multilingual-reranker-base.qwen_mmteb_r}}。据模型卡说明，阿里云托管的重排序模型是相关模型，但不是同一个",
   "Reranker API":
     "重排序 API",
   "Alibaba Cloud’s hosted Qwen rerankers: qwen3-rerank (500 documents, 4K tokens each), qwen3.7-text-rerank (30K tokens each, Beijing region only) and qwen3-vl-rerank for images and video":
@@ -50,8 +52,8 @@ window.I18N_PAGE = {
     "一个模型处理文本、图片、截图和视频；2B / 8B，32K 上下文",
   "30+ langs":
     "30+ 种语言",
-  "Qwen publish no BEIR average for it. Their own runs, from the model card: ViDoRe v3 {{fact:qwen3-vl-reranker-8b.vidore_v3}} for the 8B and {{fact:qwen3-vl-reranker-2b.vidore_v3}} for the 2B, MMTEB retrieval {{fact:qwen3-vl-reranker-8b.mmteb_r}} for the 8B. LightOn's run puts the 2B at 49.08 on 11 BEIR datasets over BM25's top 100":
-    "Qwen 没有为它公布 BEIR 平均分。模型卡里 Qwen 自己的测试：ViDoRe v3 上 8B 为 {{fact:qwen3-vl-reranker-8b.vidore_v3}}、2B 为 {{fact:qwen3-vl-reranker-2b.vidore_v3}}，MMTEB 检索上 8B 为 {{fact:qwen3-vl-reranker-8b.mmteb_r}}。LightOn 的测试中，2B 在 11 个 BEIR 数据集上（对 BM25 召回的前 100 条重排序）得分 49.08",
+  "Qwen publish no BEIR average for it. Their own runs, from the model card: ViDoRe v3 {{fact:qwen3-vl-reranker-8b.vidore_v3}} for the 8B and {{fact:qwen3-vl-reranker-2b.vidore_v3}} for the 2B, MMTEB retrieval {{fact:qwen3-vl-reranker-8b.mmteb_r}} for the 8B. LightOn's run puts the 2B at {{fact:qwen3-vl-reranker-2b.beir_lighton}} on 11 BEIR datasets over BM25's top 100":
+    "Qwen 没有为它公布 BEIR 平均分。模型卡里 Qwen 自己的测试：ViDoRe v3 上 8B 为 {{fact:qwen3-vl-reranker-8b.vidore_v3}}、2B 为 {{fact:qwen3-vl-reranker-2b.vidore_v3}}，MMTEB 检索上 8B 为 {{fact:qwen3-vl-reranker-8b.mmteb_r}}。LightOn 的测试中，2B 在 11 个 BEIR 数据集上（对 BM25 召回的前 100 条重排序）得分 {{fact:qwen3-vl-reranker-2b.beir_lighton}}",
   "4B on Qwen3-4B, 32K context; also served by ZeroEntropy’s API":
     "4B，基于 Qwen3-4B，32K 上下文；ZeroEntropy 的 API 也提供",
   "Free (self-host) / API":
@@ -64,8 +66,8 @@ window.I18N_PAGE = {
     "一个模型同时给文本和文档页面图片打分；0.8B / 2B / 4B，逐点或列表式",
   "English · French":
     "英语 · 法语",
-  "LightOn's own run (PW-2B): BEIR over BM25's top 100, averaged over the 11 datasets that weren't in its training data — not comparable with rows that rerank dense retrieval. Same run: jina-reranker-m0 51.97, Qwen3-VL-Reranker-2B 49.08. Its strength is visual documents: on ViDoRe V3 the listwise 4B scores {{fact:lighton-rerank-lw-4b.vidore_v3}}":
-    "LightOn 自己的测试（PW-2B）：对 BM25 召回的前 100 条重排序，取训练中没用到的 11 个 BEIR 数据集的平均分 —— 与对稠密检索结果重排序的行不可比。同一测试中：jina-reranker-m0 51.97，Qwen3-VL-Reranker-2B 49.08。它的强项是视觉文档：在 ViDoRe V3 上，列表式 4B 得分 {{fact:lighton-rerank-lw-4b.vidore_v3}}",
+  "LightOn's own run (PW-2B): BEIR over BM25's top 100, averaged over the 11 datasets that weren't in its training data — not comparable with rows that rerank dense retrieval. Same run: jina-reranker-m0 {{fact:jina-reranker-m0.beir_lighton}}, Qwen3-VL-Reranker-2B {{fact:qwen3-vl-reranker-2b.beir_lighton}}. Its strength is visual documents: on ViDoRe V3 the listwise 4B scores {{fact:lighton-rerank-lw-4b.vidore_v3}}":
+    "LightOn 自己的测试（PW-2B）：对 BM25 召回的前 100 条重排序，取训练中没用到的 11 个 BEIR 数据集的平均分 —— 与对稠密检索结果重排序的行不可比。同一测试中：jina-reranker-m0 {{fact:jina-reranker-m0.beir_lighton}}，Qwen3-VL-Reranker-2B {{fact:qwen3-vl-reranker-2b.beir_lighton}}。它的强项是视觉文档：在 ViDoRe V3 上，列表式 4B 得分 {{fact:lighton-rerank-lw-4b.vidore_v3}}",
   "Alibaba's own figure from the model card, which doesn't state the datasets or first stage. This table showed \"Hit@1 ≈ nemotron\" until Oct 2026, with no source we could find":
     "阿里巴巴在模型卡里给出的数字，没有说明用了哪些数据集、第一阶段用的什么检索。本表到 2026 年 10 月之前写的是“Hit@1 ≈ nemotron”，我们找不到任何出处",
   "BAAI's own run: 15 BEIR datasets, reranking the top 100 from bge-large-en-v1.5. This table carried an untraceable ~60.1 here until Oct 2026":
@@ -74,24 +76,24 @@ window.I18N_PAGE = {
     "Cohere 没有为 Rerank 4 公布经典的 BEIR 18 数据集平均分",
   "Contextual AI publish BEIR results only as a chart in their blog post. Until Oct 2026 this row described the model as an English-only hosted API; the weights have been public on Hugging Face since Aug 2025":
     "Contextual AI 只在博客文章里以图表形式公布 BEIR 结果。到 2026 年 10 月之前，本行把这个模型写成仅英文的托管 API；其实它的权重自 2025 年 8 月起就已在 Hugging Face 公开",
-  "Jina's own 2026 run, same as the v3.5 row: 13 BEIR datasets over jina-embeddings-v5-text-small's top 100. The v3 paper's 2025 run, over jina-embeddings-v3, reported 61.94":
-    "Jina 自己 2026 年的测试，与 v3.5 那一行相同：13 个 BEIR 数据集，对 jina-embeddings-v5-text-small 召回的前 100 条重排序。v3 论文 2025 年基于 jina-embeddings-v3 的测试报告的是 61.94",
-  "Jina's own 2026 run: 13 BEIR datasets, reranking the top 100 from jina-embeddings-v5-text-small. Same run: Qwen3-Reranker-4B 62.28, mxbai-rerank-large-v2 62.45":
-    "Jina 自己 2026 年的测试：13 个 BEIR 数据集，对 jina-embeddings-v5-text-small 召回的前 100 条重排序。同一测试中：Qwen3-Reranker-4B 62.28，mxbai-rerank-large-v2 62.45",
+  "Jina's own 2026 run, same as the v3.5 row: 13 BEIR datasets over jina-embeddings-v5-text-small's top 100. The v3 paper's 2025 run, over jina-embeddings-v3, reported {{fact:jina-reranker-v3.beir}}":
+    "Jina 自己 2026 年的测试，与 v3.5 那一行相同：13 个 BEIR 数据集，对 jina-embeddings-v5-text-small 召回的前 100 条重排序。v3 论文 2025 年基于 jina-embeddings-v3 的测试报告的是 {{fact:jina-reranker-v3.beir}}",
+  "Jina's own 2026 run: 13 BEIR datasets, reranking the top 100 from jina-embeddings-v5-text-small. Same run: Qwen3-Reranker-4B {{fact:qwen3-reranker-4b.beir_jina_2026}}, mxbai-rerank-large-v2 {{fact:mxbai-rerank-large-v2.jina2026_beir}}":
+    "Jina 自己 2026 年的测试：13 个 BEIR 数据集，对 jina-embeddings-v5-text-small 召回的前 100 条重排序。同一测试中：Qwen3-Reranker-4B {{fact:qwen3-reranker-4b.beir_jina_2026}}，mxbai-rerank-large-v2 {{fact:mxbai-rerank-large-v2.jina2026_beir}}",
   "Jina's own run: 17 BEIR datasets, from the jina-reranker-v1 model card":
     "Jina 自己的测试：17 个 BEIR 数据集，出自 jina-reranker-v1 的模型卡",
   "Measured with the live demo: Chromium (WASM) on a 4-vCPU GitHub Actions runner, median of 5 runs, ~60-word passages, Oct 2026. Phones and older laptops will be slower — the demo shows the time for each run on your device":
     "用在线 Demo 实测：在 4 核 GitHub Actions 机器上用 Chromium（WASM）运行，5 次取中位数，每段约 60 个英文单词，2026 年 10 月。手机和较旧的笔记本会更慢 —— Demo 会显示每次在你设备上的耗时",
-  "NVIDIA report Recall@5 for their own embed + rerank pipeline (73.64% on NQ, HotpotQA, FiQA and TechQA), not a reranker-only BEIR NDCG. The Hit@1 83.0 this table showed until Oct 2026 has no source we could find":
-    "NVIDIA 公布的是他们自己的嵌入 + 重排序流水线的 Recall@5（在 NQ、HotpotQA、FiQA 和 TechQA 上为 73.64%），不是只测重排序模型的 BEIR NDCG。本表到 2026 年 10 月之前写的 Hit@1 83.0 找不到任何出处",
+  "NVIDIA report Recall@5 for their own embed + rerank pipeline ({{fact:llama-nemotron-rerank-1b-v2.pipeline_recall5}}% on NQ, HotpotQA, FiQA and TechQA), not a reranker-only BEIR NDCG. The Hit@1 83.0 this table showed until Oct 2026 has no source we could find":
+    "NVIDIA 公布的是他们自己的嵌入 + 重排序流水线的 Recall@5（在 NQ、HotpotQA、FiQA 和 TechQA 上为 {{fact:llama-nemotron-rerank-1b-v2.pipeline_recall5}}%），不是只测重排序模型的 BEIR NDCG。本表到 2026 年 10 月之前写的 Hit@1 83.0 找不到任何出处",
   "Qwen's own run, same suite as the 4B row":
     "Qwen 自己的测试，与 4B 那一行相同的测试集",
   "Qwen's own run, same suite as the 4B row, where the 4B scores higher. This table said ~0.48 points behind on BEIR until Oct 2026; Qwen's card gives 0.74 on MTEB-R":
     "Qwen 自己的测试，与 4B 那一行相同的测试集，其中 4B 得分更高。本表到 2026 年 10 月之前写的是在 BEIR 上落后约 0.48 分；Qwen 的模型卡在 MTEB-R 上给出的差距是 0.74",
-  "Qwen's own run: retrieval subsets of MTEB(eng, v2), reranking the top 100 from Qwen3-Embedding-0.6B — not a BEIR average. Jina's 2026 run measured the 4B at 62.28 on 13 BEIR datasets":
-    "Qwen 自己的测试：MTEB(eng, v2) 的检索子集，对 Qwen3-Embedding-0.6B 召回的前 100 条重排序 —— 不是 BEIR 平均分。Jina 2026 年的测试中，4B 在 13 个 BEIR 数据集上得分 62.28",
-  "Third-party figure: Jina measured it alongside their v1 models (17 BEIR datasets). sentence-transformers, who trained it, publish NDCG@10 on TREC DL 19 (74.30) and MRR@10 on MS MARCO Dev (39.01) but no BEIR average. This table carried an unsourced ~55.0 here until Sep 2026":
-    "第三方数字：Jina 在测自家 v1 模型时一起测了它（17 个 BEIR 数据集）。训练它的 sentence-transformers 公布了 TREC DL 19 上的 NDCG@10（74.30）和 MS MARCO Dev 上的 MRR@10（39.01），但没有 BEIR 平均分。本表到 2026 年 9 月之前这里写的是一个没有出处的 ~55.0",
+  "Qwen's own run: retrieval subsets of MTEB(eng, v2), reranking the top 100 from Qwen3-Embedding-0.6B — not a BEIR average. Jina's 2026 run measured the 4B at {{fact:qwen3-reranker-4b.beir_jina_2026}} on 13 BEIR datasets":
+    "Qwen 自己的测试：MTEB(eng, v2) 的检索子集，对 Qwen3-Embedding-0.6B 召回的前 100 条重排序 —— 不是 BEIR 平均分。Jina 2026 年的测试中，4B 在 13 个 BEIR 数据集上得分 {{fact:qwen3-reranker-4b.beir_jina_2026}}",
+  "Third-party figure: Jina measured it alongside their v1 models (17 BEIR datasets). sentence-transformers, who trained it, publish NDCG@10 on TREC DL 19 ({{fact:ms-marco-minilm-l6-v2.trec_dl19}}) and MRR@10 on MS MARCO Dev ({{fact:ms-marco-minilm-l6-v2.msmarco_mrr10}}) but no BEIR average. This table carried an unsourced ~55.0 here until Sep 2026":
+    "第三方数字：Jina 在测自家 v1 模型时一起测了它（17 个 BEIR 数据集）。训练它的 sentence-transformers 公布了 TREC DL 19 上的 NDCG@10（{{fact:ms-marco-minilm-l6-v2.trec_dl19}}）和 MS MARCO Dev 上的 MRR@10（{{fact:ms-marco-minilm-l6-v2.msmarco_mrr10}}），但没有 BEIR 平均分。本表到 2026 年 9 月之前这里写的是一个没有出处的 ~55.0",
   "Vendor does not publish a classic BEIR average":
     "厂商没有公布经典的 BEIR 平均分",
   "Voyage publishes its own retrieval evals, not a classic BEIR average":
@@ -148,8 +150,8 @@ window.I18N_PAGE = {
     "<strong>最近核对：</strong>2026 年 9 月（新增 mxbai-rerank-v2；修正了 mxbai-rerank-large-v1 的 BEIR 数字 —— 本表此前挂着一个没有来源的 ~62.1，而 mixedbread 自己的对比表给出的是 {{fact:mxbai-rerank-large-v1.beir}}）· <strong>下次复核：</strong>2026 年 11 月。标 <strong>*</strong> 的列使用 MTEB-R、厂商或任务特定协议，<em>不同于</em> bge / Jina 行所用的经典 BEIR 18 数据集均值。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档）计费，Voyage 按 <em>token</em> 计费。我们的<a href=\"/rerank-cost-calculator.html\">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。",
   "<strong>Last verified:</strong> September 2026 (added mxbai-rerank-v2; corrected mxbai-rerank-large-v1's BEIR figure, which this table carried at an unsourced ~62.1 — mixedbread's own comparison table puts it at {{fact:mxbai-rerank-large-v1.beir}}; ms-marco MiniLM-L6 now reads not published — sentence-transformers' own docs report NDCG@10 on TREC DL 19, not a BEIR average, so the ~55.0 this table carried had nowhere to point) · <strong>Next review:</strong> Nov 2026. Columns marked <strong>*</strong> use MTEB-R, vendor, or task-specific protocols — <em>not</em> the same classic BEIR 18-dataset avg as the bge/Jina rows. Where a vendor publishes no comparable number we say <em>not published</em> rather than guess. <strong>†</strong> Note the differing units: Cohere bills per <em>search</em> (one query + up to 100 docs), Voyage per <em>token</em>. Our <a href=\"/rerank-cost-calculator.html\">cost calculator</a> works out which is cheaper for your volume. Demo-capable models only: mxbai xsmall, Jina tiny, ms-marco MiniLM.":
     "<strong>最近核对：</strong>2026 年 9 月（新增 mxbai-rerank-v2；修正了 mxbai-rerank-large-v1 的 BEIR 数字 —— 本表此前挂着一个没有来源的 ~62.1，而 mixedbread 自己的对比表给出的是 {{fact:mxbai-rerank-large-v1.beir}}；ms-marco MiniLM-L6 现在写「未公布」—— sentence-transformers 自己的文档给的是 TREC DL 19 上的 NDCG@10，并不是 BEIR 均值，所以本表此前挂着的 ~55.0 根本无处可查）· <strong>下次复核：</strong>2026 年 11 月。标 <strong>*</strong> 的列使用 MTEB-R、厂商或任务特定协议，<em>不同于</em> bge / Jina 行所用的经典 BEIR 18 数据集均值。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档）计费，Voyage 按 <em>token</em> 计费。我们的<a href=\"/rerank-cost-calculator.html\">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。",
-  "<strong>Last verified:</strong> October 2026 (added Qwen3-VL-Reranker, zerank-2 and gte-multilingual-reranker-base; added jina-reranker-v3.5; Jina rows now share one 2026 protocol; bge-reranker-v2-m3 corrected from an untraceable ~60.1 to BAAI's own {{fact:bge-reranker-v2-m3.beir}}; Jina v1 tiny and ms-marco MiniLM-L6 now show the BEIR figures Jina published for them; in September, mxbai-rerank-large-v1 was corrected from an unsourced ~62.1) · <strong>Next review:</strong> Nov 2026. <strong>*</strong> No two vendors run BEIR the same way — BAAI average 15 datasets over bge-large-en-v1.5's top 100, Jina 13 datasets over jina-embeddings-v5-text-small's top 100, mixedbread their own set — so every BEIR figure here carries a * and its protocol on hover. The differences are not small: Jina's run puts bge-reranker-v2-m3 at 56.51 against BAAI's own 55.36, and mxbai-rerank-large-v2 at 61.44 against mixedbread's 57.49. Read the column as rough tiers, not decimals. Other * cells use MTEB-R or task-specific metrics. Where a vendor publishes no comparable number we say <em>not published</em> rather than guess. <strong>†</strong> Note the differing units: Cohere bills per <em>search</em> (one query + up to 100 docs, each counted once per {{fact:cohere-rerank.billing_chunk_tokens}} tokens), Voyage per <em>token</em>. Our <a href=\"/rerank-cost-calculator.html\">cost calculator</a> works out which is cheaper for your volume. Demo-capable models only: mxbai xsmall, Jina tiny, ms-marco MiniLM.":
-    "<strong>最近核对：</strong>2026 年 10 月（新增 Qwen3-VL-Reranker、zerank-2 和 gte-multilingual-reranker-base；新增 jina-reranker-v3.5；Jina 各行改用同一套 2026 年评测；bge-reranker-v2-m3 由查不到出处的 ~60.1 改为 BAAI 自己公布的 {{fact:bge-reranker-v2-m3.beir}}；Jina v1 tiny 与 ms-marco MiniLM-L6 现在显示 Jina 为它们公布的 BEIR 分数；9 月已将 mxbai-rerank-large-v1 由没有来源的 ~62.1 修正）· <strong>下次复核：</strong>2026 年 11 月。<strong>*</strong> 各家跑 BEIR 的方式都不一样 —— BAAI 用 15 个数据集、对 bge-large-en-v1.5 召回的前 100 条重排，Jina 用 13 个数据集、对 jina-embeddings-v5-text-small 的前 100 条重排，mixedbread 用自己选的一套 —— 所以本列每个 BEIR 数字都带 *，鼠标悬停可见其评测方法。差距并不小：Jina 的评测里 bge-reranker-v2-m3 是 56.51，BAAI 自己测的是 55.36；mxbai-rerank-large-v2 在 Jina 那边是 61.44，mixedbread 自己测的是 57.49。请把这一列当作大致的档位，而不是精确到小数的排名。其余带 * 的格子用的是 MTEB-R 或任务特定指标。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档，每篇按每 {{fact:cohere-rerank.billing_chunk_tokens}} token 计一次）计费，Voyage 按 <em>token</em> 计费。我们的<a href=\"/rerank-cost-calculator.html\">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。",
+  "<strong>Last verified:</strong> October 2026 (added Qwen3-VL-Reranker, zerank-2 and gte-multilingual-reranker-base; added jina-reranker-v3.5; Jina rows now share one 2026 protocol; bge-reranker-v2-m3 corrected from an untraceable ~60.1 to BAAI's own {{fact:bge-reranker-v2-m3.beir}}; Jina v1 tiny and ms-marco MiniLM-L6 now show the BEIR figures Jina published for them; in September, mxbai-rerank-large-v1 was corrected from an unsourced ~62.1) · <strong>Next review:</strong> Nov 2026. <strong>*</strong> No two vendors run BEIR the same way — BAAI average 15 datasets over bge-large-en-v1.5's top 100, Jina 13 datasets over jina-embeddings-v5-text-small's top 100, mixedbread their own set — so every BEIR figure here carries a * and its protocol on hover. The differences are not small: Jina's run puts bge-reranker-v2-m3 at {{fact:bge-reranker-v2-m3.beir_jina_2025}} against BAAI's own {{fact:bge-reranker-v2-m3.beir}}, and mxbai-rerank-large-v2 at {{fact:mxbai-rerank-large-v2.beir_jina_2025}} against mixedbread's {{fact:mxbai-rerank-large-v2.beir}}. Read the column as rough tiers, not decimals. Other * cells use MTEB-R or task-specific metrics. Where a vendor publishes no comparable number we say <em>not published</em> rather than guess. <strong>†</strong> Note the differing units: Cohere bills per <em>search</em> (one query + up to 100 docs, each counted once per {{fact:cohere-rerank.billing_chunk_tokens}} tokens), Voyage per <em>token</em>. Our <a href=\"/rerank-cost-calculator.html\">cost calculator</a> works out which is cheaper for your volume. Demo-capable models only: mxbai xsmall, Jina tiny, ms-marco MiniLM.":
+    "<strong>最近核对：</strong>2026 年 10 月（新增 Qwen3-VL-Reranker、zerank-2 和 gte-multilingual-reranker-base；新增 jina-reranker-v3.5；Jina 各行改用同一套 2026 年评测；bge-reranker-v2-m3 由查不到出处的 ~60.1 改为 BAAI 自己公布的 {{fact:bge-reranker-v2-m3.beir}}；Jina v1 tiny 与 ms-marco MiniLM-L6 现在显示 Jina 为它们公布的 BEIR 分数；9 月已将 mxbai-rerank-large-v1 由没有来源的 ~62.1 修正）· <strong>下次复核：</strong>2026 年 11 月。<strong>*</strong> 各家跑 BEIR 的方式都不一样 —— BAAI 用 15 个数据集、对 bge-large-en-v1.5 召回的前 100 条重排，Jina 用 13 个数据集、对 jina-embeddings-v5-text-small 的前 100 条重排，mixedbread 用自己选的一套 —— 所以本列每个 BEIR 数字都带 *，鼠标悬停可见其评测方法。差距并不小：Jina 的评测里 bge-reranker-v2-m3 是 {{fact:bge-reranker-v2-m3.beir_jina_2025}}，BAAI 自己测的是 {{fact:bge-reranker-v2-m3.beir}}；mxbai-rerank-large-v2 在 Jina 那边是 {{fact:mxbai-rerank-large-v2.beir_jina_2025}}，mixedbread 自己测的是 {{fact:mxbai-rerank-large-v2.beir}}。请把这一列当作大致的档位，而不是精确到小数的排名。其余带 * 的格子用的是 MTEB-R 或任务特定指标。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档，每篇按每 {{fact:cohere-rerank.billing_chunk_tokens}} token 计一次）计费，Voyage 按 <em>token</em> 计费。我们的<a href=\"/rerank-cost-calculator.html\">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。",
   "The preview <code>rerank-3</code> tier now carries the 200M free-token grant that 2.5 launched with; 33% off via the Batch API":
     "预览版 <code>rerank-3</code> 现在带着 2.5 当初发布时的那份 2 亿免费 token 额度；走 Batch API 还能再打 67 折",
   "Classic baseline; largest of the three demo models": "经典基线；三个 Demo 模型里体积最大",
@@ -191,8 +193,8 @@ window.I18N_PAGE = {
     "0.6B / 4B / 8B，32K 上下文。从 4B 开始 —— 据报告它在 BEIR 上略胜 8B，所以「越大越好」在这里并不成立。",
   "Pro and Fast variants, 32k context, 100+ languages. Billed per search — one query plus up to 100 documents — not per document.":
     "Pro 与 Fast 两个版本，32k 上下文，100+ 语言。按「次检索」计费 —— 一个 query 加最多 100 篇文档 —— 而不是按文档数。",
-  "0.6B listwise model scoring 61.94 on BEIR — ahead of Qwen3-Reranker-4B at a sixth of the size. v1-tiny still powers our demo.":
-    "0.6B 的 listwise 模型，BEIR 得分 61.94 —— 以约六分之一的体量超过 Qwen3-Reranker-4B。v1-tiny 仍在驱动我们的 Demo。",
+  "0.6B listwise model scoring {{fact:jina-reranker-v3.beir}} on BEIR — ahead of Qwen3-Reranker-4B at a sixth of the size. v1-tiny still powers our demo.":
+    "0.6B 的 listwise 模型，BEIR 得分 {{fact:jina-reranker-v3.beir}} —— 以约六分之一的体量超过 Qwen3-Reranker-4B。v1-tiny 仍在驱动我们的 Demo。",
   "rerank-2.5 and -lite, both 32k context with instruction following, so you can steer relevance in natural language. Priced per token.":
     "rerank-2.5 与 -lite，均为 32k 上下文并支持指令跟随，可以用自然语言引导相关性判断。按 token 计费。",
   "Best multilingual open weights — start at 4B":
@@ -211,8 +213,8 @@ window.I18N_PAGE = {
     "Pro 重精度，Fast 重吞吐 —— 每次检索 $0.0025 对 $0.002",
   "Top-tier BEIR from a model that fits on one GPU":
     "单卡就能跑，BEIR 却在第一梯队",
-  "61.94 BEIR nDCG@10 from 0.6B — beats Qwen3-Reranker-4B, 6× its size":
-    "0.6B 拿到 61.94 BEIR nDCG@10 —— 胜过体量 6 倍的 Qwen3-Reranker-4B",
+  "{{fact:jina-reranker-v3.beir}} BEIR nDCG@10 from 0.6B — beats Qwen3-Reranker-4B, 6× its size":
+    "0.6B 拿到 {{fact:jina-reranker-v3.beir}} BEIR nDCG@10 —— 胜过体量 6 倍的 Qwen3-Reranker-4B",
   "Listwise: 64 documents share one 131K-token context":
     "Listwise：64 篇文档共享同一个 131K token 的上下文",
   "Instruction-following relevance, priced per token":
@@ -359,10 +361,10 @@ window.I18N_PAGE = {
     "0.6B listwise；131K 上下文内 64 篇文档；已被 v3.5 取代",
   "Jina Reranker v3.5":
     "Jina Reranker v3.5",
-  "0.6B listwise model at 63.20 BEIR in Jina's own test, just ahead of Qwen3-Reranker-4B's 62.28 there — though the 4B still leads on multilingual and legal/medical retrieval. Self-hosting the weights commercially needs a licence. v1-tiny (Apache 2.0) still powers our demo.":
-    "0.6B 的 listwise 模型，在 Jina 自己的测试里 BEIR 为 63.20，略高于同一测试中 Qwen3-Reranker-4B 的 62.28 —— 不过在多语言和法律 / 医疗检索上仍是 4B 领先。商用自建部署需要另购许可。v1-tiny（Apache 2.0）仍在驱动我们的 Demo。",
-  "63.20 BEIR nDCG@10 from 0.6B in Jina's own test — level with Qwen3-Reranker-4B, ~7× its size":
-    "0.6B 在 Jina 自己的测试里拿到 63.20 BEIR nDCG@10 —— 与体量约 7 倍的 Qwen3-Reranker-4B 持平",
+  "0.6B listwise model at {{fact:jina-reranker-v3.5.beir}} BEIR in Jina's own test, just ahead of Qwen3-Reranker-4B's {{fact:qwen3-reranker-4b.beir_jina_2026}} there — though the 4B still leads on multilingual and legal/medical retrieval. Self-hosting the weights commercially needs a licence. v1-tiny (Apache 2.0) still powers our demo.":
+    "0.6B 的 listwise 模型，在 Jina 自己的测试里 BEIR 为 {{fact:jina-reranker-v3.5.beir}}，略高于同一测试中 Qwen3-Reranker-4B 的 {{fact:qwen3-reranker-4b.beir_jina_2026}} —— 不过在多语言和法律 / 医疗检索上仍是 4B 领先。商用自建部署需要另购许可。v1-tiny（Apache 2.0）仍在驱动我们的 Demo。",
+  "{{fact:jina-reranker-v3.5.beir}} BEIR nDCG@10 from 0.6B in Jina's own test — level with Qwen3-Reranker-4B, ~7× its size":
+    "0.6B 在 Jina 自己的测试里拿到 {{fact:jina-reranker-v3.5.beir}} BEIR nDCG@10 —— 与体量约 7 倍的 Qwen3-Reranker-4B 持平",
   "Listwise: the query and all candidates share one 131K-token context":
     "Listwise：query 和全部候选文档共享同一个 131K token 上下文",
   "Weights are CC BY-NC 4.0: use the API, or license them for commercial self-hosting":

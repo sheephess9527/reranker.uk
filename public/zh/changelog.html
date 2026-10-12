@@ -62,6 +62,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-12-facts">2026 年 10 月 12 日（稍后）—— 所有基准分数都纳入每日核对；更正 Mixedbread v1 的分数</h2>
+        <ul class="feature-list">
+          <li><strong>又有约 70 个数字纳入每日来源核对</strong> —— Jina 和 Qwen 页面上的基准表，以及模型对比表注释里引用的第三方数字，之前都是手写在页面里的，厂商改了数字也发现不了。现在每个数字都从厂商自己的模型卡读取，并像网站上其他数字一样每天核对。gte-multilingual 那一行也补上了 Qwen 为它公布的分数</li>
+          <li><strong>更正 Mixedbread v1</strong> —— Mixedbread 页面之前写 xsmall-v1 和 base-v1 的 BEIR 约为 55.5 和 59.8，还有一列 MS MARCO（约 38.0 到 42.3），这些我们都查不到出处。Mixedbread 自己的模型卡给出的是 11 个 BEIR 数据集上的 43.9 和 46.9（附 Accuracy@3），没有 MS MARCO 分数；表格已改为这些数字</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-12">2026 年 10 月 12 日 —— 旧指南全面更新；框架代码重新实测</h2>
         <ul class="feature-list">
           <li><strong>按场景选择</strong> —— 这篇指南之前推荐了并不存在的“Voyage code”和“法律专用” Voyage 重排序模型，多语言场景还推荐 Cohere v3.5。现在改为当前的模型，并新增两节：中文与多语言检索（包括国内的阿里云百炼和硅基流动），以及扫描 PDF 和截图（Qwen3-VL-Reranker、LightOn-rerank）</li>

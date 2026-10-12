@@ -1,4 +1,10 @@
 window.I18N_PAGE = { zh: {
+  "12 Oct 2026 (later) — Every benchmark figure is now checked daily; Mixedbread v1 figures corrected":
+    "2026 年 10 月 12 日（稍后）—— 所有基准分数都纳入每日核对；更正 Mixedbread v1 的分数",
+  "<strong>About 70 more figures under the daily source check</strong> — the benchmark tables on the Jina and Qwen pages, and the third-party figures quoted in the models table’s notes, were typed into the pages, so a vendor revising a number would have gone unnoticed. Each one is now read from the vendor’s own model card and checked against it every day, like the rest of the site’s numbers. The gte-multilingual row also gains the scores Qwen published for it":
+    "<strong>又有约 70 个数字纳入每日来源核对</strong> —— Jina 和 Qwen 页面上的基准表，以及模型对比表注释里引用的第三方数字，之前都是手写在页面里的，厂商改了数字也发现不了。现在每个数字都从厂商自己的模型卡读取，并像网站上其他数字一样每天核对。gte-multilingual 那一行也补上了 Qwen 为它公布的分数",
+  "<strong>Mixedbread v1, corrected</strong> — the Mixedbread page showed xsmall-v1 and base-v1 at ~55.5 and ~59.8 BEIR, and an MS MARCO column from ~38.0 to ~42.3, none of which we could trace. Mixedbread’s own model cards give 43.9 and 46.9 on their 11-dataset BEIR run, with Accuracy@3, and no MS MARCO figures; the table now shows those":
+    "<strong>更正 Mixedbread v1</strong> —— Mixedbread 页面之前写 xsmall-v1 和 base-v1 的 BEIR 约为 55.5 和 59.8，还有一列 MS MARCO（约 38.0 到 42.3），这些我们都查不到出处。Mixedbread 自己的模型卡给出的是 11 个 BEIR 数据集上的 43.9 和 46.9（附 Accuracy@3），没有 MS MARCO 分数；表格已改为这些数字",
   "12 Oct 2026 — Older guides brought up to date; framework code re-run":
     "2026 年 10 月 12 日 —— 旧指南全面更新；框架代码重新实测",
   "<strong>Choosing by scenario</strong> — the guide recommended a “Voyage code” and a “legal-tuned” Voyage reranker that don’t exist, and Cohere v3.5 for multilingual work. It now points at current models, with new sections for Chinese and multilingual search (including Alibaba Cloud and SiliconFlow in mainland China) and for scanned PDFs and screenshots (Qwen3-VL-Reranker, LightOn-rerank)":

@@ -19,8 +19,8 @@ window.I18N_PAGE = {
     "0.6B / 4B / 8B 的 Apache 2.0 家族 —— 多语言 GPU 自托管首选。从 4B 起步，而不是 8B。",
   "Mature hosted API in Pro and Fast variants — 32k context, 100+ languages, billed per search.":
     "成熟的托管 API，分 Pro 与 Fast 两档 —— 32k 上下文、100+ 语言，按「次检索」计费。",
-  "0.6B listwise model at 63.20 BEIR in Jina's own test, level with Qwen3-Reranker-4B. Weights are non-commercial; v1-tiny powers our demo.":
-    "0.6B 的 listwise 模型，在 Jina 自己的测试里 BEIR 达 63.20，与 Qwen3-Reranker-4B 持平。权重仅限非商用；v1-tiny 仍在驱动我们的 Demo。",
+  "0.6B listwise model at {{fact:jina-reranker-v3.5.beir}} BEIR in Jina's own test, level with Qwen3-Reranker-4B. Weights are non-commercial; v1-tiny powers our demo.":
+    "0.6B 的 listwise 模型，在 Jina 自己的测试里 BEIR 达 {{fact:jina-reranker-v3.5.beir}}，与 Qwen3-Reranker-4B 持平。权重仅限非商用；v1-tiny 仍在驱动我们的 Demo。",
   "Hosted rerankers you steer with a natural-language instruction. 32k context, per-token pricing.":
     "可以用自然语言指令来引导的托管重排序器。32k 上下文，按 token 计费。",
   "_title": "Reranker 是什么？浏览器内免费体验重排序模型 | reranker.uk",

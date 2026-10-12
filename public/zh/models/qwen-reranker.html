@@ -32,7 +32,7 @@
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Qwen3-Reranker：0.6B / 4B / 8B 开源重排序评测","datePublished":"2026-06-25","dateModified":"2026-06-25","inLanguage":"zh-Hans","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/models/qwen-reranker","description":"Qwen3-Reranker 评测（2026 年 10 月）：0.6B、4B、8B 怎么选，Qwen 自己公布的 MTEB-R 等分数及其测法，指令用法、sentence-transformers 示例，以及相对 bge 与托管 API 的取舍。"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Qwen3-Reranker：0.6B / 4B / 8B 开源重排序评测","datePublished":"2026-06-25","dateModified":"2026-10-12","inLanguage":"zh-Hans","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/models/qwen-reranker","description":"Qwen3-Reranker 评测（2026 年 10 月）：0.6B、4B、8B 怎么选，Qwen 自己公布的 MTEB-R 等分数及其测法，指令用法、sentence-transformers 示例，以及相对 bge 与托管 API 的取舍。"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"模型对比","item":"https://reranker.uk/zh/models/"},{"@type":"ListItem","position":3,"name":"Qwen3-Reranker：0.6B / 4B / 8B 开源重排序评测","item":"https://reranker.uk/zh/models/qwen-reranker"}]}</script>
 
 </head>
@@ -58,7 +58,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>Qwen3-Reranker</div>
       <h1>Qwen3-Reranker</h1>
-      <p class="meta">开源权重 · 阿里巴巴 Qwen · <time datetime="2026-10-01">更新于 2026 年 10 月 1 日</time></p>
+      <p class="meta">开源权重 · 阿里巴巴 Qwen · <time datetime="2026-10-12">更新于 2026 年 10 月 12 日</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Apache 2.0</span><span class="pill info">支持指令</span><span class="pill">GPU recommended</span></div>
       <p class="lead"><strong>Qwen3-Reranker</strong> 家族（0.6B / 4B / 8B）是基于 Qwen3 的 Apache 2.0 重排序模型，32K 上下文，支持 100+ 种语言，并且可以接收任务指令。在 Qwen 自己的测试里，4B 和 8B 在他们跑的每一项上都领先 bge-reranker-v2-m3 和 gte-multilingual-reranker —— 英文、中文、多语言、长文档和代码。这些是 Qwen 在自己的设置下测出的数字：替换 bge 或托管 API 之前，请先在你自己的标注数据上验证。</p>
 
@@ -74,7 +74,7 @@
       </div>
 
       <h2 id="variants">模型变体</h2>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="模型变体">
         <table>
           <thead>
             <tr><th>模型</th><th>参数量</th><th>层数</th><th>最适合</th></tr>
@@ -91,13 +91,13 @@
       <p><strong>建议：</strong>在一张现代 GPU 上从 <strong>4B</strong> 开始。只有显存吃紧时才降到 0.6B；只有在标注评测显示 NDCG 有明显、值得付出成本的提升时，才换到 8B。</p>
 
       <h2 id="scores">分数，以及是谁测的</h2>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="分数，以及是谁测的">
         <table>
           <thead>
             <tr><th>模型</th><th>MTEB-R</th><th>CMTEB-R</th><th>MMTEB-R</th><th>MLDR</th><th>MTEB-Code</th><th>FollowIR</th></tr>
           </thead>
           <tbody>
-            <tr><td>bge-reranker-v2-m3</td><td>57.03</td><td>72.16</td><td>58.36</td><td>59.51</td><td>41.38</td><td>−0.01</td></tr>
+            <tr><td>bge-reranker-v2-m3</td><td>57.03</td><td>72.16</td><td>58.36</td><td>59.51</td><td>41.38</td><td>-0.01</td></tr>
             <tr><td>Qwen3-Reranker-0.6B</td><td>65.80*</td><td>71.31</td><td>66.36</td><td>67.28</td><td>73.42</td><td>5.41</td></tr>
             <tr><td>Qwen3-Reranker-4B</td><td><strong>69.76*</strong></td><td>75.94</td><td>72.74</td><td>69.97</td><td>81.20</td><td><strong>14.84</strong></td></tr>
             <tr><td>Qwen3-Reranker-8B</td><td>69.02*</td><td><strong>77.45</strong></td><td><strong>72.94</strong></td><td><strong>70.19</strong></td><td><strong>81.22</strong></td><td>8.05</td></tr>

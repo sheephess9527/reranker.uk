@@ -2,7 +2,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Jina Reranker</div>
       <h1>Jina Reranker</h1>
-      <p class="meta">Weights + hosted API · Jina AI, now part of Elastic · <time datetime="2026-10-01">Updated 1 Oct 2026</time></p>
+      <p class="meta">Weights + hosted API · Jina AI, now part of Elastic · <time datetime="2026-10-12">Updated 12 Oct 2026</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">Hosted API</span><span class="pill warn">Weights: non-commercial</span><span class="pill info">v3.5 listwise</span><span class="pill">Browser tiny</span></div>
       <p class="lead">Jina’s current flagship is <strong>jina-reranker-v3.5</strong>, announced August 2026: a <strong>0.6B</strong> <em>listwise</em> reranker built on Qwen3-0.6B and a drop-in upgrade to v3 — same API, 131K-token context, and 1.22–1.56× faster. In Jina’s own evaluation it scores <strong>{{fact:jina-reranker-v3.5.beir}} nDCG@10 on BEIR</strong>, just above Qwen3-Reranker-4B at about a seventh of the size, though the 4B still leads on multilingual, professional-domain and structured retrieval. The catch for self-hosting: the v2, v3 and v3.5 weights are <strong>CC BY-NC 4.0 — non-commercial</strong>. <strong>v1-tiny</strong> (Apache 2.0) is still what runs in <a href="/demo.html?m=jinaai/jina-reranker-v1-tiny-en">our browser demo</a>.</p>
 
@@ -50,17 +50,17 @@
             <tr><th>Model</th><th>Params</th><th>BEIR</th><th>MIRACL</th><th>RTEB</th><th>Struct-IR</th></tr>
           </thead>
           <tbody>
-            <tr><td>jina-reranker-v3.5</td><td>0.6B</td><td>63.20</td><td>74.11</td><td>70.95</td><td>48.3</td></tr>
-            <tr><td>mxbai-rerank-large-v2</td><td>1.5B</td><td>62.45</td><td>69.65</td><td>70.81</td><td>43.0</td></tr>
-            <tr><td>Qwen3-Reranker-4B</td><td>4.0B</td><td>62.28</td><td>76.56</td><td>77.68</td><td>55.6</td></tr>
-            <tr><td>jina-reranker-v3</td><td>0.6B</td><td>62.10</td><td>72.20</td><td>68.01</td><td>38.7</td></tr>
-            <tr><td>mxbai-rerank-base-v2</td><td>0.5B</td><td>59.58</td><td>64.90</td><td>61.44</td><td>30.4</td></tr>
-            <tr><td>Qwen3-Reranker-0.6B</td><td>0.6B</td><td>56.94</td><td>67.12</td><td>68.41</td><td>41.9</td></tr>
+            <tr><td>jina-reranker-v3.5</td><td>0.6B</td><td>{{fact:jina-reranker-v3.5.jina2026_beir}}</td><td>{{fact:jina-reranker-v3.5.jina2026_miracl}}</td><td>{{fact:jina-reranker-v3.5.jina2026_rteb}}</td><td>{{fact:jina-reranker-v3.5.jina2026_structir}}</td></tr>
+            <tr><td>mxbai-rerank-large-v2</td><td>1.5B</td><td>{{fact:mxbai-rerank-large-v2.jina2026_beir}}</td><td>{{fact:mxbai-rerank-large-v2.jina2026_miracl}}</td><td>{{fact:mxbai-rerank-large-v2.jina2026_rteb}}</td><td>{{fact:mxbai-rerank-large-v2.jina2026_structir}}</td></tr>
+            <tr><td>Qwen3-Reranker-4B</td><td>4.0B</td><td>{{fact:qwen3-reranker-4b.jina2026_beir}}</td><td>{{fact:qwen3-reranker-4b.jina2026_miracl}}</td><td>{{fact:qwen3-reranker-4b.jina2026_rteb}}</td><td>{{fact:qwen3-reranker-4b.jina2026_structir}}</td></tr>
+            <tr><td>jina-reranker-v3</td><td>0.6B</td><td>{{fact:jina-reranker-v3.jina2026_beir}}</td><td>{{fact:jina-reranker-v3.jina2026_miracl}}</td><td>{{fact:jina-reranker-v3.jina2026_rteb}}</td><td>{{fact:jina-reranker-v3.jina2026_structir}}</td></tr>
+            <tr><td>mxbai-rerank-base-v2</td><td>0.5B</td><td>{{fact:mxbai-rerank-base-v2.jina2026_beir}}</td><td>{{fact:mxbai-rerank-base-v2.jina2026_miracl}}</td><td>{{fact:mxbai-rerank-base-v2.jina2026_rteb}}</td><td>{{fact:mxbai-rerank-base-v2.jina2026_structir}}</td></tr>
+            <tr><td>Qwen3-Reranker-0.6B</td><td>0.6B</td><td>{{fact:qwen3-reranker-0.6b.jina2026_beir}}</td><td>{{fact:qwen3-reranker-0.6b.jina2026_miracl}}</td><td>{{fact:qwen3-reranker-0.6b.jina2026_rteb}}</td><td>{{fact:qwen3-reranker-0.6b.jina2026_structir}}</td></tr>
           </tbody>
         </table>
       </div>
       <p class="muted" style="font-size:.85rem">nDCG@10, from the <a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">jina-reranker-v3.5 model card</a>. Struct-IR uses a controlled candidate pool (all gold documents plus the 30 hardest distractors), so it isn’t comparable to other Struct-IR leaderboards.</p>
-      <p>v3.5 leads on BEIR, by under a point. On the other three the 4B is ahead, which Jina’s own write-up says plainly. The v3 paper’s 2025 run, over a different first-stage retriever, had v3 at 61.94 and Qwen3-Reranker-4B at 61.16. That is where “v3 beats Qwen3-Reranker-4B”, repeated on this site until October 2026, came from; on the newer run it no longer holds. Qwen3-Reranker-4B moving by more than a point between two runs from the same vendor is a good reason to read BEIR averages as tiers rather than rankings.</p>
+      <p>v3.5 leads on BEIR, by under a point. On the other three the 4B is ahead, which Jina’s own write-up says plainly. The v3 paper’s 2025 run, over a different first-stage retriever, had v3 at {{fact:jina-reranker-v3.beir}} and Qwen3-Reranker-4B at {{fact:qwen3-reranker-4b.beir_jina_2025}}. That is where “v3 beats Qwen3-Reranker-4B”, repeated on this site until October 2026, came from; on the newer run it no longer holds. Qwen3-Reranker-4B moving by more than a point between two runs from the same vendor is a good reason to read BEIR averages as tiers rather than rankings.</p>
 
       <h2 id="licence">Licence: what you can self-host</h2>
       <p>The <code>v2</code>, <code>v3</code>, <code>v3.5</code> and <code>m0</code> weights are released under <strong>CC BY-NC 4.0</strong>: free to download and evaluate, not to use commercially. For production there are three routes: Jina’s hosted API, billed per token; for v3.5, Elastic Inference Service (Elastic Stack 9.3 and later); or a commercial licence, which Jina now arrange through Elastic’s sales team. Jina also list v3 on the Azure and Google Cloud marketplaces. Only the legacy <code>v1</code> English models are Apache 2.0.</p>
