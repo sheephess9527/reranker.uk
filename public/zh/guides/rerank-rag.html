@@ -241,7 +241,7 @@ pipe.connect("retriever.documents", "ranker.documents")</code></pre>
 
       <h2 id="topk">如何选 top-k 取值</h2>
       <p>你有两个 k 值要调：<em>召回多少个</em>，以及<em>重排序后保留多少个</em>。</p>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="如何选 top-k 取值">
         <table>
           <thead>
             <tr><th>参数</th><th>常见范围</th><th>说明</th></tr>
@@ -258,7 +258,7 @@ pipe.connect("retriever.documents", "ranker.documents")</code></pre>
 
       <h2 id="latency">延迟取舍</h2>
       <p>重排序会给你的流水线增加一次模型调用。成本取决于具体方案：</p>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="延迟取舍">
         <table>
           <thead>
             <tr><th>方案</th><th>大致延迟</th><th>成本</th></tr>
@@ -279,7 +279,7 @@ pipe.connect("retriever.documents", "ranker.documents")</code></pre>
 
       <h2 id="evaluate">如何衡量它是否真的有帮助</h2>
       <p>不要凭感觉就加 reranker —— 要量化它。构建一个小型评测集，把查询与<em>应当</em>被检索到的片段配对，然后在同一集合上对比「仅检索」与「检索 + 重排序」。三个指标几乎覆盖所有场景：</p>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="如何衡量它是否真的有帮助">
         <table>
           <thead>
             <tr><th>Metric</th><th>它衡量什么</th><th>适用场景</th></tr>

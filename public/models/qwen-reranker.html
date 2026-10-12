@@ -32,7 +32,7 @@
   <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Qwen3-Reranker","datePublished":"2026-06-25","dateModified":"2026-06-25","inLanguage":"en","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/models/qwen-reranker","description":"Qwen3-Reranker review (Oct 2026): when to use 0.6B, 4B or 8B, Qwen's own MTEB-R and other scores and how they were measured, task instructions, a sentence-transformers quick start, and trade-offs vs bge and hosted APIs."}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Qwen3-Reranker","datePublished":"2026-06-25","dateModified":"2026-10-12","inLanguage":"en","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/models/qwen-reranker","description":"Qwen3-Reranker review (Oct 2026): when to use 0.6B, 4B or 8B, Qwen's own MTEB-R and other scores and how they were measured, task instructions, a sentence-transformers quick start, and trade-offs vs bge and hosted APIs."}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://reranker.uk/models/"},{"@type":"ListItem","position":3,"name":"Qwen3-Reranker: 0.6B / 4B / 8B open-weight review","item":"https://reranker.uk/models/qwen-reranker"}]}</script>
 
 </head>
@@ -58,7 +58,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Qwen3-Reranker</div>
       <h1>Qwen3-Reranker</h1>
-      <p class="meta">Open weights · Qwen, Alibaba · <time datetime="2026-10-01">Updated 1 Oct 2026</time></p>
+      <p class="meta">Open weights · Qwen, Alibaba · <time datetime="2026-10-12">Updated 12 Oct 2026</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Apache 2.0</span><span class="pill info">Instruction-aware</span><span class="pill">GPU recommended</span></div>
       <p class="lead">The <strong>Qwen3-Reranker</strong> family (0.6B / 4B / 8B) are Apache 2.0 rerankers built on Qwen3, with a 32K context, 100+ languages and support for a task instruction. In Qwen’s own tests the 4B and 8B lead bge-reranker-v2-m3 and gte-multilingual-reranker on every suite they ran — English, Chinese, multilingual, long-document and code. Those are Qwen’s numbers on Qwen’s setup: validate on your own labels before replacing bge or a hosted API.</p>
 
@@ -74,7 +74,7 @@
       </div>
 
       <h2 id="variants">Model variants</h2>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Model variants">
         <table>
           <thead>
             <tr><th>Model</th><th>Parameters</th><th>Layers</th><th>Best for</th></tr>
@@ -91,13 +91,13 @@
       <p><strong>Recommendation:</strong> start with <strong>4B</strong> on a single modern GPU. Drop to 0.6B only if memory is tight; move to 8B only when labelled eval shows a clear NDCG gain worth the cost.</p>
 
       <h2 id="scores">Scores, and whose they are</h2>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Scores, and whose they are">
         <table>
           <thead>
             <tr><th>Model</th><th>MTEB-R</th><th>CMTEB-R</th><th>MMTEB-R</th><th>MLDR</th><th>MTEB-Code</th><th>FollowIR</th></tr>
           </thead>
           <tbody>
-            <tr><td>bge-reranker-v2-m3</td><td>57.03</td><td>72.16</td><td>58.36</td><td>59.51</td><td>41.38</td><td>−0.01</td></tr>
+            <tr><td>bge-reranker-v2-m3</td><td>57.03</td><td>72.16</td><td>58.36</td><td>59.51</td><td>41.38</td><td>-0.01</td></tr>
             <tr><td>Qwen3-Reranker-0.6B</td><td>65.80*</td><td>71.31</td><td>66.36</td><td>67.28</td><td>73.42</td><td>5.41</td></tr>
             <tr><td>Qwen3-Reranker-4B</td><td><strong>69.76*</strong></td><td>75.94</td><td>72.74</td><td>69.97</td><td>81.20</td><td><strong>14.84</strong></td></tr>
             <tr><td>Qwen3-Reranker-8B</td><td>69.02*</td><td><strong>77.45</strong></td><td><strong>72.94</strong></td><td><strong>70.19</strong></td><td><strong>81.22</strong></td><td>8.05</td></tr>

@@ -90,7 +90,7 @@ doc   ───▶ [encoder] ───▶ d⃗  ┘</code></pre>
       <p>这准确得多，因为模型能推理两段文本之间的<em>关系</em>，而不只是表面相似度。代价是：分数取决于具体的那一对，所以什么都没法预计算。每一个 (query, document) 组合都是一次全新的前向传播 —— 这也是为什么你只在短名单上跑 cross-encoder，绝不在整个语料库上跑。这种“只对短名单”的用法<em>就是</em>重排序。</p>
 
       <h2 id="table">逐项对比</h2>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="逐项对比">
         <table>
           <thead>
             <tr><th>项目</th><th>Bi-encoder</th><th>Cross-encoder</th></tr>

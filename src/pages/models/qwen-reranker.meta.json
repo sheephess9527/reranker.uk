@@ -6,6 +6,6 @@
   "og_type": "article",
   "og_title": "Qwen3-Reranker — Apache 2.0, 0.6B to 8B",
   "og_description": "Start with 4B: in Qwen's own tests it beats the 8B on English and instruction-following. All three are Apache 2.0 with 32K context.",
-  "head_extra": "<script type=\"application/ld+json\">\r\n  {\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"headline\":\"Qwen3-Reranker\",\"datePublished\":\"2026-06-25\",\"dateModified\":\"2026-06-25\",\"inLanguage\":\"en\",\"author\":{\"@type\":\"Organization\",\"name\":\"reranker.uk\"},\"mainEntityOfPage\":\"https://reranker.uk/models/qwen-reranker.html\"}\r\n  </script>",
+  "head_extra": "<script type=\"application/ld+json\">\r\n  {\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"headline\":\"Qwen3-Reranker\",\"datePublished\":\"2026-06-25\",\"dateModified\":\"2026-10-12\",\"inLanguage\":\"en\",\"author\":{\"@type\":\"Organization\",\"name\":\"reranker.uk\"},\"mainEntityOfPage\":\"https://reranker.uk/models/qwen-reranker.html\"}\r\n  </script>",
   "page_scripts": "<script src=\"/assets/js/i18n/qwen-reranker.js\"></script>"
 }

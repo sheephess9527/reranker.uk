@@ -1,4 +1,16 @@
 window.I18N_PAGE = { zh: {
+  "Open weights · mixedbread-ai · <time datetime=\"2026-10-12\">Updated 12 Oct 2026</time>":
+    "开源权重 · mixedbread-ai · <time datetime=\"2026-10-12\">更新于 2026 年 10 月 12 日</time>",
+  "BEIR, mixedbread’s 2026 table":
+    "BEIR，mixedbread 2026 年对比表",
+  "11 BEIR datasets, v1 launch (NDCG@10)":
+    "11 个 BEIR 数据集，v1 发布时（NDCG@10）",
+  "Same run, Accuracy@3":
+    "同一测试，Accuracy@3",
+  "not in that run":
+    "未参与该测试",
+  "Both runs are mixedbread’s own. The first column is their cross-generation comparison table (<a href=\"https://github.com/mixedbread-ai/mxbai-rerank\" rel=\"noopener noreferrer\">mxbai-rerank on GitHub</a>); the other two come from the v1 model cards: 11 BEIR datasets, reranking the top 100 from Lucene keyword search, where keyword search alone scores 38.0. Until October 2026 this table showed xsmall-v1 and base-v1 at ~55.5 and ~59.8 on BEIR, and an MS MARCO MRR@10 column from ~38.0 to ~42.3, none of which we could trace; mixedbread publish {{fact:mxbai-rerank-xsmall-v1.beir11_ndcg10}} and {{fact:mxbai-rerank-base-v1.beir11_ndcg10}} on their 11-dataset run and no MS MARCO figures for these models. In September the page had already corrected large-v1 from an unsourced ~62.1.":
+    "两组测试都是 mixedbread 自己做的。第一列来自他们的跨代对比表（<a href=\"https://github.com/mixedbread-ai/mxbai-rerank\" rel=\"noopener noreferrer\">GitHub 上的 mxbai-rerank</a>）；后两列来自 v1 的模型卡：11 个 BEIR 数据集，对 Lucene 关键词检索召回的前 100 条重排序，单用关键词检索得分为 38.0。2026 年 10 月之前，这张表写的是 xsmall-v1 和 base-v1 在 BEIR 上约 55.5 和约 59.8，另有一列 MS MARCO MRR@10（约 38.0 到 42.3），这些我们都查不到出处；mixedbread 在 11 数据集测试中公布的是 {{fact:mxbai-rerank-xsmall-v1.beir11_ndcg10}} 和 {{fact:mxbai-rerank-base-v1.beir11_ndcg10}}，也没有为这几个模型公布 MS MARCO 分数。9 月时本页已将 large-v1 从没有出处的约 62.1 改正。",
   "Open weights · mixedbread-ai · <time datetime=\"2026-10-09\">Updated 9 Oct 2026</time>":
     "开源权重 · mixedbread-ai · <time datetime=\"2026-10-09\">更新于 2026 年 10 月 9 日</time>",
   "<strong>Mixedbread’s current hosted reranker is not v1 or v2.</strong> Its documentation now files both generations under <a href=\"https://www.mixedbread.com/docs/legacy-models\" rel=\"noopener noreferrer\">legacy models</a>: the weights stay on Hugging Face, but the direct rerank API is no longer documented, and existing integrations are asked to contact Mixedbread’s support about migrating. Hosted reranking now runs inside Mixedbread Search, on documents you have uploaded to a Mixedbread store, with <code>mxbai-rerank-v3.1-listwise</code> as the default (July 2026). It is a listwise model — it reads the candidate set as a whole and follows natural-language instructions such as “the most recent booking wins” — and its weights are not published.":

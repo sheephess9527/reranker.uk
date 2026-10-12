@@ -77,7 +77,7 @@
       <p><strong>Late-interaction</strong> sits between them: you still pre-compute document token embeddings offline, but at query time you run a cheap interaction (typically MaxSim — max cosine per query token) between query tokens and document tokens. You get finer matching than a single vector dot product without scoring every pair with a full cross-encoder.</p>
 
       <h2 id="vs">Cross-encoder vs late-interaction vs bi-encoder</h2>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Cross-encoder vs late-interaction vs bi-encoder">
         <table>
           <thead>
             <tr><th>Architecture</th><th>Precompute docs?</th><th>Query-time cost</th><th>Typical use</th></tr>

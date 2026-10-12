@@ -93,7 +93,7 @@ print(f"recall@50 = {hits / len(labelled):.2f}")</code></pre>
 
       <h2 id="topk">2. Your candidate pool is too small</h2>
       <p>Reranking the top 5 and keeping 5 does nothing — there is no reordering to do that matters. The reranker needs room to work: retrieve wide, rank, then cut.</p>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="2. Your candidate pool is too small">
         <table>
           <thead><tr><th>Retrieve</th><th>Keep after rerank</th><th>Effect</th></tr></thead>
           <tbody>

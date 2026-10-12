@@ -33,7 +33,7 @@
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <!-- seo:jsonld -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"模型对比","item":"https://reranker.uk/zh/models/"},{"@type":"ListItem","position":3,"name":"mxbai-rerank：mixedbread-ai 开源重排序模型评测（v1 与 v2）","item":"https://reranker.uk/zh/models/mxbai-rerank"}]},{"@type":"Article","headline":"mxbai-rerank：mixedbread-ai 开源重排序模型评测（v1 与 v2）","description":"mxbai-rerank 评测：mixedbread-ai 的开源权重重排序器，两代都覆盖。v1（DeBERTa-v3，仅英文，浏览器可跑 xsmall）与 v2（基于 Qwen2.5，支持 100+ 种语言含中文）。基准、Python 用法、托管 API。","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"zh-Hans","datePublished":"2026-06-20","dateModified":"2026-10-09","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/zh/"},"mainEntityOfPage":"https://reranker.uk/zh/models/mxbai-rerank","about":{"@type":"Thing","name":"mxbai-rerank reranker model"}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"模型对比","item":"https://reranker.uk/zh/models/"},{"@type":"ListItem","position":3,"name":"mxbai-rerank：mixedbread-ai 开源重排序模型评测（v1 与 v2）","item":"https://reranker.uk/zh/models/mxbai-rerank"}]},{"@type":"Article","headline":"mxbai-rerank：mixedbread-ai 开源重排序模型评测（v1 与 v2）","description":"mxbai-rerank 评测：mixedbread-ai 的开源权重重排序器，两代都覆盖。v1（DeBERTa-v3，仅英文，浏览器可跑 xsmall）与 v2（基于 Qwen2.5，支持 100+ 种语言含中文）。基准、Python 用法、托管 API。","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"zh-Hans","datePublished":"2026-06-20","dateModified":"2026-10-12","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/zh/"},"mainEntityOfPage":"https://reranker.uk/zh/models/mxbai-rerank","about":{"@type":"Thing","name":"mxbai-rerank reranker model"}}]}</script>
 
 </head>
 <body>
@@ -58,7 +58,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>mxbai-rerank</div>
       <h1>mxbai-rerank</h1>
-      <p class="meta">开源权重 · mixedbread-ai · <time datetime="2026-10-09">更新于 2026 年 10 月 9 日</time></p>
+      <p class="meta">开源权重 · mixedbread-ai · <time datetime="2026-10-12">更新于 2026 年 10 月 12 日</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">开源权重</span><span class="pill">托管 API</span><span class="pill info">Apache 2.0</span><span class="pill info">v2：100+ 种语言</span><span class="pill">浏览器可跑 xsmall</span></div>
       <p class="lead">mixedbread-ai 目前有两代重排序器。<strong>v1</strong>（<code>xsmall</code>/<code>base</code>/<code>large</code>）是基于 DeBERTa-v3 的 cross-encoder 系列，仅支持英文，其中 <code>xsmall</code> 足够轻量、可在浏览器中运行 —— 这也是它成为<a href="/zh/demo?m=mixedbread-ai/mxbai-rerank-xsmall-v1">本站在线 Demo</a> 选项之一的原因。<strong>v2</strong>（<code>base</code>/<code>large</code>）是更新的一代，基于 Qwen2.5、经强化学习训练，新增了 100+ 种语言支持，包括中文。两代均采用 Apache 2.0 协议。</p>
 
@@ -75,7 +75,7 @@
       </div>
 
       <h2 id="models">模型变体</h2>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="模型变体">
         <table>
           <thead>
             <tr><th>模型</th><th>参数量</th><th>上下文长度</th><th>语言</th><th>最适合</th></tr>
@@ -93,24 +93,24 @@
       <p class="muted" style="font-size:.85rem">速度方面，mixedbread 自己的表给出的 A100 延迟是：large-v1 2.24 秒，large-v2 0.89 秒，base-v2 0.67 秒。表里没说是多大批量，所以请把它当作相对速度来看 —— v2 体量更大却更快 —— 而不是单次查询的耗时。</p>
 
       <h2 id="benchmarks">基准测试</h2>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="基准测试">
         <table>
           <thead>
-            <tr><th>模型</th><th>BEIR NDCG@10（均值）</th><th>MS MARCO MRR@10</th></tr>
+            <tr><th>模型</th><th>BEIR，mixedbread 2026 年对比表</th><th>11 个 BEIR 数据集，v1 发布时（NDCG@10）</th><th>同一测试，Accuracy@3</th></tr>
           </thead>
           <tbody>
-            <tr><td>mxbai-rerank-xsmall-v1</td><td>~55.5</td><td>~38.0</td></tr>
-            <tr><td>mxbai-rerank-base-v1</td><td>~59.8</td><td>~40.6</td></tr>
-            <tr><td>mxbai-rerank-large-v1</td><td>49.32*</td><td>~42.3</td></tr>
-            <tr><td>mxbai-rerank-base-v2</td><td>55.57*</td><td class="muted">未公布</td></tr>
-            <tr><td>mxbai-rerank-large-v2</td><td>57.49*</td><td class="muted">未公布</td></tr>
+            <tr><td>mxbai-rerank-xsmall-v1</td><td class="muted">未公布</td><td>43.9</td><td>70.0</td></tr>
+            <tr><td>mxbai-rerank-base-v1</td><td class="muted">未公布</td><td>46.9</td><td>72.3</td></tr>
+            <tr><td>mxbai-rerank-large-v1</td><td>49.32*</td><td>48.8</td><td>74.9</td></tr>
+            <tr><td>mxbai-rerank-base-v2</td><td>55.57*</td><td class="muted">未参与该测试</td><td class="muted">—</td></tr>
+            <tr><td>mxbai-rerank-large-v2</td><td>57.49*</td><td class="muted">未参与该测试</td><td class="muted">—</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="muted" style="font-size:.85rem">标 <strong>*</strong> 的行来自 mixedbread 自己的跨代对比表（<a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">mxbai-rerank GitHub 仓库</a>），并非经典的 BEIR 18 数据集协议。在 2026 年 9 月之前，本页给 large-v1 挂的是一个没有来源的 ~62.1 —— 而 mixedbread 自己的发布博客当时报的是 11 个 BEIR 数据集上 ~48.8 的 NDCG@10，他们 2026 年的对比表给出的是 49.32*；两者都远低于本页此前的数字，现已更正。xsmall-v1/base-v1 两行以及 MS MARCO 一列仍是我们尚未独立复核的近似数字 —— 请查阅 mixedbread-ai 在 HuggingFace 上的模型卡片以获取权威的分数据集结果。</p>
+      <p class="muted" style="font-size:.85rem">两组测试都是 mixedbread 自己做的。第一列来自他们的跨代对比表（<a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">GitHub 上的 mxbai-rerank</a>）；后两列来自 v1 的模型卡：11 个 BEIR 数据集，对 Lucene 关键词检索召回的前 100 条重排序，单用关键词检索得分为 38.0。2026 年 10 月之前，这张表写的是 xsmall-v1 和 base-v1 在 BEIR 上约 55.5 和约 59.8，另有一列 MS MARCO MRR@10（约 38.0 到 42.3），这些我们都查不到出处；mixedbread 在 11 数据集测试中公布的是 43.9 和 46.9，也没有为这几个模型公布 MS MARCO 分数。9 月时本页已将 large-v1 从没有出处的约 62.1 改正。</p>
 
       <h3>多语言（v2 存在的原因）</h3>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="多语言（v2 存在的原因）">
         <table>
           <thead>
             <tr><th>模型</th><th>Mr.TyDi 多语言均值</th><th>中文</th></tr>

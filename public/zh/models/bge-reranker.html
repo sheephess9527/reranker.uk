@@ -33,7 +33,7 @@
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <!-- seo:jsonld -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"模型对比","item":"https://reranker.uk/zh/models/"},{"@type":"ListItem","position":3,"name":"bge-reranker：智源 BAAI 开源重排序模型评测","item":"https://reranker.uk/zh/models/bge-reranker"}]},{"@type":"Article","headline":"bge-reranker：智源 BAAI 开源重排序模型评测","description":"bge-reranker 评测：智源（BAAI）的开源 cross-encoder 重排序器。涵盖 bge-reranker-base、bge-reranker-large 与多语言的 bge-reranker-v2-m3。基准、Python 用法、优缺点。","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"zh-Hans","datePublished":"2026-06-20","dateModified":"2026-10-01","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/zh/"},"mainEntityOfPage":"https://reranker.uk/zh/models/bge-reranker","about":{"@type":"Thing","name":"bge-reranker reranker model"}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"模型对比","item":"https://reranker.uk/zh/models/"},{"@type":"ListItem","position":3,"name":"bge-reranker：智源 BAAI 开源重排序模型评测","item":"https://reranker.uk/zh/models/bge-reranker"}]},{"@type":"Article","headline":"bge-reranker：智源 BAAI 开源重排序模型评测","description":"bge-reranker 评测：智源（BAAI）的开源 cross-encoder 重排序器。涵盖 bge-reranker-base、bge-reranker-large 与多语言的 bge-reranker-v2-m3。基准、Python 用法、优缺点。","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"zh-Hans","datePublished":"2026-06-20","dateModified":"2026-10-12","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/zh/"},"mainEntityOfPage":"https://reranker.uk/zh/models/bge-reranker","about":{"@type":"Thing","name":"bge-reranker reranker model"}}]}</script>
 
 </head>
 <body>
@@ -58,7 +58,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>bge-reranker</div>
       <h1>bge-reranker</h1>
-      <p class="meta">开源权重 · 智源 BAAI · 可免费自建 · <time datetime="2026-10-01">更新于 2026 年 10 月 1 日</time></p>
+      <p class="meta">开源权重 · 智源 BAAI · 可免费自建 · <time datetime="2026-10-12">更新于 2026 年 10 月 12 日</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">开源权重</span><span class="pill">自建部署</span><span class="pill">多语言</span></div>
       <p class="lead">来自智源研究院（BAAI）的 bge-reranker 系列，是专门为段落重排序训练的开源权重 cross-encoder。它们是自建部署的标准选择：免费下载、可直接接入 sentence-transformers，也是其他大多数重排序模型拿来对比的开源基线。</p>
 
@@ -73,7 +73,7 @@
       </div>
 
       <h2 id="models">模型变体</h2>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="模型变体">
         <table>
           <thead>
             <tr><th>模型</th><th>参数量</th><th>语言</th><th>最适合</th></tr>
@@ -90,7 +90,7 @@
 
       <h2 id="benchmarks">基准测试</h2>
       <p>BAAI 给两代模型用的是不同的基准，所以两列都不完整：v2 测的是 BEIR（英文检索），v1 测的是 C-MTEB 重排序（以中文为主）。</p>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="基准测试">
         <table>
           <thead>
             <tr><th>模型</th><th>BEIR NDCG@10（均值）</th><th>C-MTEB 重排序（MAP 均值）</th></tr>
@@ -103,7 +103,7 @@
           </tbody>
         </table>
       </div>
-      <p class="muted" style="font-size:.85rem">* 所有数字均为 BAAI 自己公布的。BEIR：15 个数据集，对 bge-large-en-v1.5 召回的前 100 条结果重排（<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker" rel="noopener noreferrer">FlagEmbedding llm_reranker 评测</a>）。C-MTEB：六个重排序数据集上的 MAP 均值 —— T2Reranking 及其两个跨语言变体、MMarcoReranking、CMedQAv1 和 CMedQAv2（<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/research/reranker" rel="noopener noreferrer">FlagEmbedding reranker README</a>）。其他评测方用各自的设置会得到不同的 BEIR 分数 —— Jina 的论文里 v2-m3 是 56.51 —— 所以请只在同一来源内比较模型。2026 年 10 月之前，本表给四个模型都列了 BEIR 和 MS MARCO 分数，但我们查不到任何出处，现已删除。</p>
+      <p class="muted" style="font-size:.85rem">* 所有数字均为 BAAI 自己公布的。BEIR：15 个数据集，对 bge-large-en-v1.5 召回的前 100 条结果重排（<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker" rel="noopener noreferrer">FlagEmbedding llm_reranker 评测</a>）。C-MTEB：六个重排序数据集上的 MAP 均值 —— T2Reranking 及其两个跨语言变体、MMarcoReranking、CMedQAv1 和 CMedQAv2（<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/research/reranker" rel="noopener noreferrer">FlagEmbedding reranker README</a>）。其他评测方用各自的设置会得到不同的 BEIR 分数 —— Jina 的论文里 v2-m3 是 56.51* —— 所以请只在同一来源内比较模型。2026 年 10 月之前，本表给四个模型都列了 BEIR 和 MS MARCO 分数，但我们查不到任何出处，现已删除。</p>
 
       <h2 id="usage">快速上手</h2>
       <h3>安装</h3>

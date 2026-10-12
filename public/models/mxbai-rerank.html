@@ -33,7 +33,7 @@
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <!-- seo:jsonld -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://reranker.uk/models/"},{"@type":"ListItem","position":3,"name":"mxbai-rerank","item":"https://reranker.uk/models/mxbai-rerank"}]},{"@type":"Article","headline":"mxbai-rerank — mixedbread-ai's open-weight rerankers, v1 and v2","description":"mxbai-rerank review: mixedbread-ai's open-weight rerankers, both generations. v1 (DeBERTa-v3, English-only, browser-runnable xsmall) and v2 (Qwen2.5-based, 100+ languages incl. Chinese). Benchmarks, Python usage, hosted API.","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"en","datePublished":"2026-06-20","dateModified":"2026-10-09","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/"},"mainEntityOfPage":"https://reranker.uk/models/mxbai-rerank","about":{"@type":"Thing","name":"mxbai-rerank reranker model"}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://reranker.uk/models/"},{"@type":"ListItem","position":3,"name":"mxbai-rerank","item":"https://reranker.uk/models/mxbai-rerank"}]},{"@type":"Article","headline":"mxbai-rerank — mixedbread-ai's open-weight rerankers, v1 and v2","description":"mxbai-rerank review: mixedbread-ai's open-weight rerankers, both generations. v1 (DeBERTa-v3, English-only, browser-runnable xsmall) and v2 (Qwen2.5-based, 100+ languages incl. Chinese). Benchmarks, Python usage, hosted API.","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"en","datePublished":"2026-06-20","dateModified":"2026-10-12","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/"},"mainEntityOfPage":"https://reranker.uk/models/mxbai-rerank","about":{"@type":"Thing","name":"mxbai-rerank reranker model"}}]}</script>
 
 </head>
 <body>
@@ -58,7 +58,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>mxbai-rerank</div>
       <h1>mxbai-rerank</h1>
-      <p class="meta">Open weights · mixedbread-ai · <time datetime="2026-10-09">Updated 9 Oct 2026</time></p>
+      <p class="meta">Open weights · mixedbread-ai · <time datetime="2026-10-12">Updated 12 Oct 2026</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Open weights</span><span class="pill">Hosted API</span><span class="pill info">Apache 2.0</span><span class="pill info">v2: 100+ languages</span><span class="pill">Browser-runnable xsmall</span></div>
       <p class="lead">mixedbread-ai ships two generations of reranker. <strong>v1</strong> (<code>xsmall</code>/<code>base</code>/<code>large</code>) is a DeBERTa-v3 cross-encoder family, English-only, and its <code>xsmall</code> variant is compact enough to run in the browser — which is why it's one of the options in <a href="/demo?m=mixedbread-ai/mxbai-rerank-xsmall-v1">this site's live demo</a>. <strong>v2</strong> (<code>base</code>/<code>large</code>) is a newer, Qwen2.5-based, RL-trained generation that adds support for 100+ languages, including Chinese. Both generations ship under Apache 2.0.</p>
 
@@ -75,7 +75,7 @@
       </div>
 
       <h2 id="models">Model variants</h2>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Model variants">
         <table>
           <thead>
             <tr><th>Model</th><th>Parameters</th><th>Context</th><th>Languages</th><th>Best for</th></tr>
@@ -93,24 +93,24 @@
       <p class="muted" style="font-size:.85rem">On speed, mixedbread’s own table gives A100 latency of 2.24 s for large-v1, 0.89 s for large-v2 and 0.67 s for base-v2. It doesn’t say for what batch, so read it as relative speed — the v2 models are faster despite being larger — not as a per-query figure.</p>
 
       <h2 id="benchmarks">Benchmarks</h2>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Benchmarks">
         <table>
           <thead>
-            <tr><th>Model</th><th>BEIR NDCG@10 (avg)</th><th>MS MARCO MRR@10</th></tr>
+            <tr><th>Model</th><th>BEIR, mixedbread’s 2026 table</th><th>11 BEIR datasets, v1 launch (NDCG@10)</th><th>Same run, Accuracy@3</th></tr>
           </thead>
           <tbody>
-            <tr><td>mxbai-rerank-xsmall-v1</td><td>~55.5</td><td>~38.0</td></tr>
-            <tr><td>mxbai-rerank-base-v1</td><td>~59.8</td><td>~40.6</td></tr>
-            <tr><td>mxbai-rerank-large-v1</td><td>49.32*</td><td>~42.3</td></tr>
-            <tr><td>mxbai-rerank-base-v2</td><td>55.57*</td><td class="muted">not published</td></tr>
-            <tr><td>mxbai-rerank-large-v2</td><td>57.49*</td><td class="muted">not published</td></tr>
+            <tr><td>mxbai-rerank-xsmall-v1</td><td class="muted">not published</td><td>43.9</td><td>70.0</td></tr>
+            <tr><td>mxbai-rerank-base-v1</td><td class="muted">not published</td><td>46.9</td><td>72.3</td></tr>
+            <tr><td>mxbai-rerank-large-v1</td><td>49.32*</td><td>48.8</td><td>74.9</td></tr>
+            <tr><td>mxbai-rerank-base-v2</td><td>55.57*</td><td class="muted">not in that run</td><td class="muted">—</td></tr>
+            <tr><td>mxbai-rerank-large-v2</td><td>57.49*</td><td class="muted">not in that run</td><td class="muted">—</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="muted" style="font-size:.85rem">Rows marked <strong>*</strong> are from mixedbread's own cross-generation comparison table (<a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">mxbai-rerank on GitHub</a>), not the classic BEIR 18-dataset suite. Until September 2026 this page carried large-v1 at an unsourced ~62.1 — mixedbread's own launch blog reported ~48.8 NDCG@10 on 11 BEIR datasets, and their 2026 comparison table reports 49.32*; both are far below the number this page previously carried, so it's now corrected. The xsmall-v1/base-v1 rows and the MS MARCO column remain approximate figures we haven't independently re-verified — check the mixedbread-ai HuggingFace model cards for authoritative per-dataset results.</p>
+      <p class="muted" style="font-size:.85rem">Both runs are mixedbread’s own. The first column is their cross-generation comparison table (<a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">mxbai-rerank on GitHub</a>); the other two come from the v1 model cards: 11 BEIR datasets, reranking the top 100 from Lucene keyword search, where keyword search alone scores 38.0. Until October 2026 this table showed xsmall-v1 and base-v1 at ~55.5 and ~59.8 on BEIR, and an MS MARCO MRR@10 column from ~38.0 to ~42.3, none of which we could trace; mixedbread publish 43.9 and 46.9 on their 11-dataset run and no MS MARCO figures for these models. In September the page had already corrected large-v1 from an unsourced ~62.1.</p>
 
       <h3>Multilingual (why v2 exists)</h3>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Multilingual (why v2 exists)">
         <table>
           <thead>
             <tr><th>Model</th><th>Mr.TyDi multilingual avg</th><th>Chinese</th></tr>
