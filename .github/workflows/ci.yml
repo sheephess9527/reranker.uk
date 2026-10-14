@@ -30,6 +30,9 @@ jobs:
       - name: Check structured data (JSON-LD)
         run: npm run check:ld
 
+      - name: Check social preview cards are current
+        run: npm run check:og
+
       - name: Check Chinese translation coverage (informational)
         run: npm run check:zh
 
