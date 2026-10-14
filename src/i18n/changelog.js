@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "15 Oct 2026 (later) — Search the site":
+    "2026 年 10 月 15 日（稍后）—— 全站搜索",
+  "<strong>Site search</strong> — a search button in the header, or press <kbd>/</kbd> on any page, finds guides and model pages by title, section headings and description. It runs in your browser from a small index built with the site, the Chinese pages search the Chinese pages, and it works with the keyboard alone: arrow keys move through the results and <kbd>Esc</kbd> closes it":
+    "<strong>站内搜索</strong> —— 点页头的搜索按钮，或在任意页面按 <kbd>/</kbd>，就能按标题、小节标题和简介找到指南和模型页。搜索在浏览器里运行，用的是随网站一起生成的小索引；中文页面只搜中文页面；只用键盘也能操作：方向键在结果间移动，<kbd>Esc</kbd> 关闭",
   "15 Oct 2026 — Guides in reading order; text no longer touches the screen edge on phones":
     "2026 年 10 月 15 日 —— 指南有了阅读顺序；手机上文字不再贴着屏幕边",
   "<strong>A reading order for the guides</strong> — the guides page now starts with the five guides meant to be read in sequence, numbered, then lists the pages for specific jobs: choosing a model, reranking from mainland China, costs, troubleshooting and the rest":

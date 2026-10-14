@@ -69,7 +69,9 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 译文在 `src/i18n/guides-index.js`。新的 `<h2>` / `<p>` 都要有中文键。
 
-### 3. 全站没有站内搜索
+### ~~3. 全站没有站内搜索~~（2026-10-15 已完成）
+
+> 完成：`build.mjs` 每页生成一条索引（`l` 语言、`u` 链接、`t` 页面 h1、`d` description、`h` 各 h2，fact 已解析；更新日志的 h2 不收），写到 `public/search-index.json`（约 21 KB，已加入 `LOCALE_NEUTRAL`）。导航右侧加了搜索按钮，面板在 header 里；逻辑在 `main.js`：首次打开才拉索引，`/` 打开（在输入框里打字不触发），Esc 关闭并把焦点还给按钮，上下方向键在结果间移动，每个词都必须命中，标题 > h2 > 简介加权。按钮和输入框的中文用新支持的 `data-i18n-placeholder` 和 shared 键。`tests/search.spec.js`：英文搜 Cohere 第一条是模型页、`/zh/` 搜百炼命中国内指南且只返回中文页、输入框里按 `/` 不触发。面板打开时 axe 无问题。
 
 22 页英文 + 22 页中文，导航只有 Home / Guides / Models / Demo。
 

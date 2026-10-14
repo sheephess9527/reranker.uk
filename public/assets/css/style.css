@@ -264,6 +264,11 @@ hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
 .lang-toggle::before { content: "🌐"; font-size: 0.85rem; }
 .lang-toggle:hover { color: var(--text); border-color: var(--primary); background: var(--bg-elev); text-decoration: none; }
 .theme-toggle { width: 36px; font-size: 1rem; }
+.search-toggle {
+  width: 36px; height: 36px; border-radius: 9px; cursor: pointer; font-size: 1.15rem; line-height: 1;
+  background: var(--bg-card); border: 1px solid var(--border); color: var(--text-soft);
+}
+.search-toggle:hover, .search-toggle[aria-expanded="true"] { color: var(--text); border-color: var(--primary); background: var(--bg-elev); }
 .theme-toggle:hover { color: var(--text); border-color: var(--primary); background: var(--bg-elev); }
 .nav-right { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
 
@@ -829,3 +834,21 @@ input[type="number"] {
 .reading-path > li { counter-increment: step; display: flex; }
 .reading-path > li > .card { flex: 1; }
 .reading-path .card h3::before { content: counter(step) ". "; color: var(--text-mut); }
+
+/* Site search panel, under the header */
+.site-search { border-top: 1px solid var(--border-soft); background: var(--bg-soft); padding: 0.9rem 0 1rem; }
+.site-search input {
+  width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text);
+  border-radius: var(--radius-sm); padding: 0.7rem 0.85rem; font: inherit; font-size: 1rem;
+}
+.search-status { margin: 0.5rem 0 0; font-size: 0.82rem; color: var(--text-mut); min-height: 1.2em; }
+.search-results { list-style: none; margin: 0.3rem 0 0; padding: 0; max-height: 60vh; overflow-y: auto; }
+.search-results a {
+  display: block; padding: 0.6rem 0.75rem; border-radius: 8px; color: var(--text); text-decoration: none;
+}
+.search-results a:hover, .search-results a:focus-visible { background: var(--bg-elev); text-decoration: none; }
+.search-results strong { display: block; font-size: 0.95rem; }
+.search-results span {
+  display: block; font-size: 0.82rem; color: var(--text-soft); margin-top: 0.15rem;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}

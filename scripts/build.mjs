@@ -41,6 +41,7 @@ const LOCALE_NEUTRAL = [
   "/site.webmanifest",
   "/changelog.rss",
   "/llms.txt",
+  "/search-index.json",
 ];
 
 const DEFAULT_META = {
@@ -283,15 +284,17 @@ function translate(root, pageDict) {
 
   // Attribute-only counterpart, for text a screen reader announces (aria-label)
   // that has no visible child content for the loop above to replace.
-  for (const el of root.querySelectorAll("[data-i18n-aria-label]")) {
-    const key = el.getAttribute("data-i18n-aria-label");
-    const value = pageKeys[key] != null ? pageKeys[key] : SHARED_KEYS[key];
-    if (value == null) {
-      missingKeys.push(key);
-      continue;
+  for (const attr of ["aria-label", "placeholder"]) {
+    for (const el of root.querySelectorAll(`[data-i18n-${attr}]`)) {
+      const key = el.getAttribute(`data-i18n-${attr}`);
+      const value = pageKeys[key] != null ? pageKeys[key] : SHARED_KEYS[key];
+      if (value == null) {
+        missingKeys.push(key);
+        continue;
+      }
+      el.setAttribute(attr, value);
+      keyed++;
     }
-    el.setAttribute("aria-label", value);
-    keyed++;
   }
 
   if (Object.keys(legacy).length) {
@@ -622,7 +625,20 @@ function assemble({ meta, body, relPath, locale, lastmod }) {
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, "<!DOCTYPE html>\n" + finalHtml.replace(/^<!DOCTYPE html>\s*/i, ""), "utf8");
 
-  return { urlPath, enUrl, zhUrl, lastmod, stats, outPath, title, description };
+  // One entry for the site search (main.js): what the reader sees as the
+  // page's heading, its description and its section headings, facts resolved.
+  const built = parse(finalHtml);
+  const clean = (el) => el.text.replace(/\s+/g, " ").trim();
+  const search = {
+    l: zh ? "zh" : "en",
+    u: zh ? zhPath(stripHtmlExt(urlPath)) : stripHtmlExt(urlPath),
+    t: clean(built.querySelector("main h1") || built.querySelector("title")),
+    d: built.querySelector('meta[name="description"]')?.getAttribute("content") || "",
+    // The changelog's headings are release titles, not topics: leave them out.
+    h: relPath === "changelog.html" ? [] : built.querySelectorAll("main h2").map(clean).filter(Boolean),
+  };
+
+  return { urlPath, enUrl, zhUrl, lastmod, stats, outPath, title, description, search };
 }
 
 /**
@@ -833,6 +849,7 @@ function buildAll() {
   const pages = walk(PAGES);
   const sitemap = [];
   const gaps = [];
+  const searchIndex = [];
   let written = 0;
 
   for (const relPath of pages) {
@@ -851,8 +868,12 @@ function buildAll() {
     if (zh.stats.missingKeys.length) {
       gaps.push(`${relPath}: ${[...new Set(zh.stats.missingKeys)].join(", ")}`);
     }
-    if (!NO_SITEMAP.has(relPath)) sitemap.push(en);
+    if (!NO_SITEMAP.has(relPath)) {
+      sitemap.push(en);
+      searchIndex.push(en.search, zh.search);
+    }
   }
+  fs.writeFileSync(path.join(PUBLIC, "search-index.json"), JSON.stringify(searchIndex) + "\n", "utf8");
 
   const urls = writeSitemap(sitemap);
   const listed = writeLlmsTxt(sitemap);
@@ -861,6 +882,7 @@ function buildAll() {
   console.log(`Built ${written} pages → public/ (${pages.length} en + ${pages.length} zh)`);
   console.log(`Sitemap: ${urls} URLs with hreflang alternates`);
   console.log(`llms.txt: ${listed} pages listed`);
+  console.log(`Search index: ${searchIndex.length} entries`);
   if (gaps.length) {
     console.warn(`\nUntranslated i18n keys in ${gaps.length} page(s):`);
     for (const g of gaps) console.warn("  " + g);
