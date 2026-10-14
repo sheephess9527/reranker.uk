@@ -258,6 +258,17 @@ One axe quirk worth knowing: its link check treats *any* differing
 `text-decoration-thickness` set but no underline drawn still passes. The
 underline on prose links in `style.css` is the actual requirement.
 
+## Social preview cards
+
+Every page except the 404 has its own 1200×630 card at
+`public/assets/og/<page>.jpg` (Chinese pages under `og/zh/`), drawn from
+the page's `<h1>`, description and section by `scripts/og-images.mjs` in
+Chromium; the build points `og:image` at it. Cards are committed, because
+rendering Chinese needs a CJK font the CI runner may not have. After
+changing a page's title or description, run `npm run og` (renders the
+changed cards, then rebuilds); CI's `npm run check:og` fails when a card
+no longer matches its page.
+
 ## Release watch
 
 `.github/workflows/release-watch.yml` runs `scripts/watch-releases.mjs`

@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "14 Oct 2026 (later) — Every page has its own preview card":
+    "2026 年 10 月 14 日（稍后）—— 每个页面都有自己的分享卡片",
+  "<strong>Share previews that say what the page is</strong> — a link to any page used to show the same site-wide cover in WeChat, X or Slack. Each page now has its own card with its title, description and section, in English or Chinese to match the page, and CI checks the cards stay in step with the pages":
+    "<strong>分享时能看出是哪一页</strong> —— 之前在微信、X 或 Slack 里分享任何页面，显示的都是同一张网站封面。现在每个页面都有自己的卡片，显示标题、简介和所属栏目，中英文页面各用对应的语言；CI 会检查卡片和页面内容保持一致",
   "14 Oct 2026 — New guide: reranking in mainland China":
     "2026 年 10 月 14 日 —— 新指南：在国内做重排序",
   "<strong>Alibaba Cloud, SiliconFlow or your own server</strong> — a guide for readers whose servers are in mainland China: what each route offers, prices in yuan, Qwen’s Chinese retrieval scores (CMTEB-R) for the open models, working code for Model Studio and SiliconFlow, and how to download weights through hf-mirror.com or ModelScope. Every price and score on it is checked daily against the vendor’s own page":

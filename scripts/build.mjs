@@ -518,6 +518,21 @@ function breadcrumbJsonLd(urlPath, title, locale, headExtra) {
  * Page assembly
  * ------------------------------------------------------------------ */
 
+/**
+ * The page's own social card from scripts/og-images.mjs when it has one,
+ * otherwise the site-wide cover.
+ */
+function ogImage(relPath, zh) {
+  const card = path.posix.join("assets/og", zh ? "zh" : "", relPath.split(path.sep).join("/").replace(/\.html$/, ".jpg"));
+  if (fs.existsSync(path.join(PUBLIC, card))) {
+    return { og_image: `${SITE}/${card}`, og_image_alt: "" };
+  }
+  return {
+    og_image: `${SITE}/assets/img/og-cover.png`,
+    og_image_alt: "reranker.uk — understand rerankers and run a cross-encoder in your browser",
+  };
+}
+
 function assemble({ meta, body, relPath, locale, lastmod }) {
   const urlPath = urlPathFor(relPath);
   const enUrl = SITE + urlPath;
@@ -552,7 +567,9 @@ function assemble({ meta, body, relPath, locale, lastmod }) {
     og_description: (zh && zhStrings._desc) || meta.og_description || meta.ogDescription || description,
     head_extra: headExtra,
     page_scripts: stripDictScripts(meta.page_scripts || meta.pageScripts),
+    ...ogImage(relPath, zh),
   };
+  if (!vars.og_image_alt) vars.og_image_alt = vars.og_title;
 
   let html = fill(partial("head-open.html"), vars);
   html += "\n</head>\n<body>\n";
