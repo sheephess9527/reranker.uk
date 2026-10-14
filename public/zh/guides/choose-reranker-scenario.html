@@ -128,7 +128,7 @@
       <blockquote>经验法则：bi-encoder 召回已经够好，中等 reranker 即可；召回很乱时，先加宽检索。</blockquote>
 
       <h2 id="multilingual">中文与多语言</h2>
-      <p>经典的小模型 —— ms-marco MiniLM、Jina v1、mxbai v1 —— 只用英文训练。Qwen3-Reranker（100 多种语言）、bge-reranker-v2-m3 和 306M 的 <strong>gte-multilingual-reranker-base</strong>（70 多种语言）是为多语言训练的。如果服务器在国内、又不想自己部署模型，<strong>阿里云百炼</strong>按 token 以人民币出售 qwen3-rerank，<strong>硅基流动</strong>用同一个接口提供 bge-reranker-v2-m3 和 Qwen3-Reranker；两者都在<a href="/zh/models/">模型对比表</a>和成本计算器的人民币表里。在国内下载开源权重，可以用 Hugging Face 的镜像 <a href="https://hf-mirror.com" rel="noopener noreferrer">hf-mirror.com</a>。</p>
+      <p>经典的小模型 —— ms-marco MiniLM、Jina v1、mxbai v1 —— 只用英文训练。Qwen3-Reranker（100 多种语言）、bge-reranker-v2-m3 和 306M 的 <strong>gte-multilingual-reranker-base</strong>（70 多种语言）是为多语言训练的。如果服务器在国内、又不想自己部署模型，<strong>阿里云百炼</strong>按 token 以人民币出售 qwen3-rerank，<strong>硅基流动</strong>用同一个接口提供 bge-reranker-v2-m3 和 Qwen3-Reranker；两者都在<a href="/zh/models/">模型对比表</a>和成本计算器的人民币表里。在国内下载开源权重，可以用 Hugging Face 的镜像 <a href="https://hf-mirror.com" rel="noopener noreferrer">hf-mirror.com</a>。<a href="/zh/guides/rerank-in-china">国内选型指南</a>详细对比了这三条路。</p>
 
       <h2 id="support">客服工单</h2>
       <p>查询很短，段落只有 FAQ 那么长，延迟决定体验。英文场景下，一个<strong>极小</strong>的 cross-encoder（Jina v1 tiny、ms-marco MiniLM）往往就够了 —— 你是在几条相似答案里挑一条，而不是读 100 页的 PDF。其他语言先从 bge-reranker-v2-m3 开始。可以在 <a href="/zh/demo?s=support">Demo</a> 里试试<strong>客服</strong>预设。</p>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-locale="zh" data-prerendered="zh">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <title>在国内做重排序 —— 阿里云百炼、硅基流动还是自己部署 | reranker.uk</title>
+  <meta name="description" content="在国内给检索加上重排序：阿里云百炼（qwen3-rerank）、硅基流动（托管 bge-reranker-v2-m3 和 Qwen3-Reranker），或者通过 hf-mirror 和魔搭下载模型自己部署 —— 人民币价格、中文评测分数和代码。" >
+  <link rel="canonical" href="https://reranker.uk/zh/guides/rerank-in-china" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/rerank-in-china" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/rerank-in-china" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/rerank-in-china" >
+  <meta name="theme-color" content="#0b0d17" >
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
+  <meta name="author" content="reranker.uk" >
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
+  <link rel="manifest" href="/site.webmanifest" >
+  <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
+  <meta property="og:type" content="article" >
+  <meta property="og:title" content="在国内做重排序 —— 阿里云百炼、硅基流动还是自己部署 | reranker.uk" >
+  <meta property="og:description" content="在国内给检索加上重排序：阿里云百炼（qwen3-rerank）、硅基流动（托管 bge-reranker-v2-m3 和 Qwen3-Reranker），或者通过 hf-mirror 和魔搭下载模型自己部署 —— 人民币价格、中文评测分数和代码。" >
+  <meta property="og:url" content="https://reranker.uk/zh/guides/rerank-in-china" >
+  <meta property="og:site_name" content="reranker.uk" >
+  <meta property="og:locale" content="zh_CN" >
+  <meta property="og:locale:alternate" content="en_GB" >
+  <meta name="twitter:card" content="summary_large_image" >
+  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <meta property="og:image:width" content="1200" >
+  <meta property="og:image:height" content="630" >
+  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
+  <link rel="preload" href="/assets/css/style.css" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css" >
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"在国内做重排序 —— 阿里云百炼、硅基流动还是自己部署","datePublished":"2026-10-14","dateModified":"2026-10-14","inLanguage":"zh-Hans","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/rerank-in-china","description":"在国内给检索加上重排序：阿里云百炼（qwen3-rerank）、硅基流动（托管 bge-reranker-v2-m3 和 Qwen3-Reranker），或者通过 hf-mirror 和魔搭下载模型自己部署 —— 人民币价格、中文评测分数和代码。"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://reranker.uk/zh/guides/"},{"@type":"ListItem","position":3,"name":"在国内做重排序","item":"https://reranker.uk/zh/guides/rerank-in-china"}]}</script>
+
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="shared.skip">跳到正文</a>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
+        <li><a href="/zh/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">指南</a></li>
+        <li><a href="/zh/models/" data-i18n="shared.nav.models">模型对比</a></li>
+        <li><a class="nav-cta" href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+      </ul>
+      <div class="nav-right">
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+        <a class="lang-toggle" href="/guides/rerank-in-china" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
+      </div>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/guides/">指南</a><span>/</span>在国内做重排序</div>
+      <h1>在国内做重排序：阿里云百炼、硅基流动，还是自己部署</h1>
+      <p class="meta">实践 · 约 8 分钟阅读 · <time datetime="2026-10-14">更新于 2026 年 10 月 14 日</time></p>
+      <p class="lead">服务器在国内时，常见的建议 —— 调用 Cohere 或 Voyage，或者从 Hugging Face 下载权重 —— 会碰到连接慢甚至连不上、要用外币付费的问题。在国内比较好走的路有三条：<strong>阿里云百炼</strong>、<strong>硅基流动</strong>，或者<strong>自己部署开源模型</strong>。本指南只用各厂商自己公布的信息，从价格、中文效果和接入方式三方面对比它们。</p>
+
+      <div class="toc">
+        <strong>本页目录</strong>
+        <ol>
+          <li><a href="#routes">三条路一览</a></li>
+          <li><a href="#chinese">这些模型的中文效果如何</a></li>
+          <li><a href="#alibaba">阿里云百炼</a></li>
+          <li><a href="#siliconflow">硅基流动</a></li>
+          <li><a href="#self-host">自己部署：怎么下载权重</a></li>
+          <li><a href="#cost">费用</a></li>
+        </ol>
+      </div>
+
+      <h2 id="routes">三条路一览</h2>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="三条路一览">
+        <table>
+          <thead>
+            <tr><th>方案</th><th>模型</th><th>价格</th><th>适合什么情况</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="/zh/models/#alibaba-model-studio">阿里云百炼</a></td>
+              <td>qwen3-rerank、qwen3.7-text-rerank、qwen3-vl-rerank（支持图片和视频）</td>
+              <td>每百万输入 token ¥0.5</td>
+              <td>已经在用阿里云，需要处理长文档或多种语言，又不想自己维护 GPU</td>
+            </tr>
+            <tr>
+              <td><a href="/zh/models/#siliconflow">硅基流动</a></td>
+              <td>托管的开源模型，包括 bge-reranker-v2-m3、bce-reranker-base_v1、Qwen3-Reranker 0.6B / 4B / 8B 和多模态的 Qwen3-VL-Reranker-8B</td>
+              <td>bge-reranker-v2-m3 免费；Pro 版每百万 token ¥0.07</td>
+              <td>想用开源模型但不想自己部署，或者想先从免费额度开始</td>
+            </tr>
+            <tr>
+              <td><a href="/zh/guides/self-host-reranker">自己的服务器</a></td>
+              <td>用 CPU 就能跑的 bge-reranker-v2-m3、需要 GPU 的 Qwen3-Reranker-4B，以及更小的 gte-multilingual-reranker-base</td>
+              <td>没有按调用收费；成本是硬件</td>
+              <td>数据不能离开自己的网络，或者调用量大到自建 GPU 比 API 更便宜</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>这三条路并不互斥。常见的做法是先用硅基流动免费的 bge-reranker-v2-m3，在自己的查询上测一测，然后要么继续用托管服务，要么把同一个开源模型搬到自己的机器上 —— 分数不会变，因为是同一个模型。</p>
+
+      <h2 id="chinese">这些模型的中文效果如何</h2>
+      <p>目前覆盖了其中大多数模型的中文检索公开对比，只有 Qwen 做的这一份：CMTEB-R，即中文 MTEB 的检索任务，对 Qwen3-Embedding-0.6B 召回的前 100 条重排序。这是 Qwen 自己的测试，所以把它当作大致的档位参考，而不是最终排名。</p>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="这些模型的中文效果如何">
+        <table>
+          <thead>
+            <tr><th>模型</th><th>规模</th><th>CMTEB-R</th><th>MMTEB-R（多语言）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>bge-reranker-v2-m3</td><td>568M</td><td>72.16</td><td>58.36</td></tr>
+            <tr><td>gte-multilingual-reranker-base</td><td>306M</td><td>74.08</td><td>59.44</td></tr>
+            <tr><td>Qwen3-Reranker-0.6B</td><td>0.6B</td><td>71.31</td><td>66.36</td></tr>
+            <tr><td>Qwen3-Reranker-4B</td><td>4B</td><td>75.94</td><td>72.74</td></tr>
+            <tr><td>Qwen3-Reranker-8B</td><td>8B</td><td>77.45</td><td>72.94</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">数据来自 <a href="https://huggingface.co/Qwen/Qwen3-Reranker-4B" rel="noopener noreferrer">Qwen3-Reranker 模型卡</a>，每天核对。阿里云没有为托管的 qwen3-rerank、qwen3.7-text-rerank 和 qwen3-vl-rerank 公布分数，所以它们不在表中。</p>
+      <p>有两点值得注意。306M 的 <strong>gte-multilingual-reranker-base</strong> 在中文上的分数高于 bge-reranker-v2-m3，体积却只有它的一半左右，是这里部署成本最低的模型。另外，从 bge-reranker-v2-m3 换到 <strong>Qwen3-Reranker-4B</strong>，中文上提升不大，多语言那一列却提升很多 —— 语料混合多种语言时值得换，只做中文就没那么必要。经典的英文模型（ms-marco MiniLM、Jina v1、mxbai v1）没有用中文训练过，不在考虑之列。</p>
+
+      <h2 id="alibaba">阿里云百炼</h2>
+      <p>百炼（Model Studio）提供三个重排序模型，在北京地域按每百万输入 token 以人民币计费：</p>
+      <ul>
+        <li><strong>qwen3-rerank</strong> —— 支持 100 多种语言，每次请求最多 500 篇文档，每篇最多 4,000 token。超长的文档会直接报错，不会被截断，所以发送前要先切分。</li>
+        <li><strong>qwen3.7-text-rerank</strong> —— 支持 201 种语言和方言，每篇最多 30,000 token，价格相同；仅北京地域提供。</li>
+        <li><strong>qwen3-vl-rerank</strong> —— 除了文本，还能给图片和视频排序。</li>
+      </ul>
+      <p>三个模型都支持 <code>instruct</code> 参数，用来说明什么算“相关”；不传时默认按问答检索排序，阿里云建议用英文写指令（见<a href="/zh/guides/instruction-reranker">指令跟随重排序</a>）。较早的 gte-rerank 已于 2026 年 5 月 30 日下线，gte-rerank-v2 仍在售。qwen3-rerank 在国际站也有，每百万 token $0.1。</p>
+      <pre tabindex="0"><code># From Alibaba Cloud's Model Studio docs (qwen3-rerank)
+curl --request POST \
+  --url https://{WorkspaceId}.cn-beijing.maas.aliyuncs.com/compatible-api/v1/reranks \
+  --header "Authorization: Bearer $DASHSCOPE_API_KEY" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "model": "qwen3-rerank",
+    "query": "什么是文本排序模型",
+    "documents": [
+      "文本排序模型广泛用于搜索引擎和推荐系统中，它们根据文本相关性对候选文本进行排序",
+      "量子计算是计算科学的一个前沿领域",
+      "预训练语言模型的发展给文本排序模型带来了新的进展"
+    ],
+    "top_n": 2
+  }'</code></pre>
+      <p>qwen3.7-text-rerank、qwen3-vl-rerank 和 gte-rerank-v2 用的是另一个接口和请求格式；<a href="https://help.aliyun.com/zh/model-studio/text-rerank-api" rel="noopener noreferrer">百炼重排序 API 文档</a>里两种都有。</p>
+
+      <h2 id="siliconflow">硅基流动</h2>
+      <p>硅基流动（SiliconFlow）用一个 rerank 接口托管其他厂商的开源模型，所以你调用的就是公开发布的开源模型，上面的表格描述的就是它。它的价格页上 bge-reranker-v2-m3 免费，Pro 版每百万 token ¥0.07；没有列出 Qwen3-Reranker 的价格。</p>
+      <pre tabindex="0"><code>import requests
+
+resp = requests.post(
+    "https://api.siliconflow.cn/v1/rerank",
+    headers={"Authorization": "Bearer YOUR_API_KEY"},
+    json={
+        "model": "BAAI/bge-reranker-v2-m3",
+        "query": "如何退货",
+        "documents": ["退货需在收货后七天内申请", "我们的门店营业时间为早九点到晚九点"],
+        "top_n": 1,
+    },
+).json()
+
+for r in resp["results"]:
+    print(r["index"], r["relevance_score"])</code></pre>
+      <p>有两个参数只对部分模型有效。<code>instruction</code> 只支持 Qwen3-Reranker 系列。对于 bge-reranker-v2-m3 和 bce-reranker-base_v1，硅基流动会自己把长文档切成片段（<code>max_chunks_per_doc</code>、<code>overlap_tokens</code>），取得分最高的片段作为整篇文档的分数 —— 很方便，但意味着一篇长文档只凭其中最好的一段胜出。Qwen3-VL-Reranker-8B 有自己的多模态请求格式。详见<a href="https://docs.siliconflow.cn/docs/api/rerank-post" rel="noopener noreferrer">硅基流动重排序 API 文档</a>。</p>
+
+      <h2 id="self-host">自己部署：怎么下载权重</h2>
+      <p>这些模型都是开源的，但在国内访问 huggingface.co 经常很慢甚至连不上。有两个办法：</p>
+      <ul>
+        <li><strong><a href="https://hf-mirror.com" rel="noopener noreferrer">hf-mirror.com</a></strong>，一个社区维护的 Hugging Face 镜像。设置好 <code>HF_ENDPOINT</code> 后，所有基于 <code>huggingface_hub</code> 的工具 —— 包括 sentence-transformers —— 都会从镜像下载。</li>
+        <li><strong>魔搭（ModelScope）</strong>，阿里的模型社区，以相同的名称托管了 <a href="https://modelscope.cn/models/Qwen/Qwen3-Reranker-4B" rel="noopener noreferrer">Qwen/Qwen3-Reranker-4B</a> 和 <a href="https://modelscope.cn/models/BAAI/bge-reranker-v2-m3" rel="noopener noreferrer">BAAI/bge-reranker-v2-m3</a>。</li>
+      </ul>
+      <pre tabindex="0"><code># Linux / macOS — from hf-mirror.com's own instructions
+export HF_ENDPOINT=https://hf-mirror.com
+huggingface-cli download BAAI/bge-reranker-v2-m3 --local-dir bge-reranker-v2-m3
+
+# With HF_ENDPOINT set, sentence-transformers fetches from the mirror too
+python -c "from sentence_transformers import CrossEncoder; CrossEncoder('BAAI/bge-reranker-v2-m3')"</code></pre>
+      <p>之后的部署就和在其他地方一样了 —— 见<a href="/zh/guides/self-host-reranker">自建重排序服务</a>。bge-reranker-v2-m3 用 CPU 就能跑；Qwen3-Reranker-4B 需要 GPU。我们的<a href="/zh/demo">浏览器 Demo</a> 也用了镜像：它同时向 huggingface.co 和 hf-mirror.com 请求模型，哪边先响应就用哪边。</p>
+
+      <h2 id="cost">费用</h2>
+      <p>阿里云和硅基流动都按 token 计费，所以费用取决于你重排序多少候选、每条有多长，而不只是查询次数。<a href="/zh/rerank-cost-calculator#results-cny">成本计算器的人民币表</a>能按你的量级算出来，段落超过 qwen3-rerank 的长度上限时还会提示。免费额度和试用金不计算在内；请查看各厂商的价格页。</p>
+      <blockquote>不管选哪条路，都先给 30–100 条自己的查询标注相关性，比较之后再定 —— <a href="/zh/guides/evaluate-reranker">评估指南</a>里有做法。</blockquote>
+
+      <h2>延伸阅读</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/zh/guides/choose-reranker-scenario"><h3>按场景选择</h3><p>RAG、客服、法律、代码、扫描文档。</p></a>
+        <a class="card" href="/zh/models/qwen-reranker"><h3>Qwen3-Reranker</h3><p>0.6B / 4B / 8B，Apache 2.0 —— 规格和分数。</p></a>
+      </div>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch" data-i18n="shared.footer.blurb">一个关于检索与 RAG 重排序（reranker）的开放学习资源，外加一个在浏览器里零成本运行的实时 Demo。</p>
+          <p style="margin-top:.6rem"><a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer" data-i18n="shared.footer.github">在 GitHub 上查看源码</a></p>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.guides">指南</h4>
+          <ul>
+            <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/guides/reranking-not-working" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
+            <li><a href="/zh/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
+            <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
+            <li><a href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
+            <li><a href="/zh/privacy" data-i18n="shared.footer.privacy">隐私说明</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.models">模型</h4>
+          <ul>
+            <li><a href="/zh/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank">Voyage Rerank</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> reranker.uk</span>
+        <span class="footer-legal muted">
+          <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
+          · <a href="/zh/privacy" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog" data-i18n="shared.footer.changelogShort">更新日志</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+  
+  <script src="/assets/js/i18n.js"></script>
+</body>
+</html>

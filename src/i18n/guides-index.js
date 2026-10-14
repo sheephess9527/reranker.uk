@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "Reranking in mainland China":
+    "在国内做重排序",
+  "Alibaba Cloud, SiliconFlow or your own server — prices in yuan, Chinese scores, downloading weights.":
+    "阿里云百炼、硅基流动还是自己部署 —— 人民币价格、中文分数、模型下载。",
   "Reranking didn't help":
     "重排序没起作用",
   "Seven reasons you see no lift — recall, pool size, truncation — and how to tell which one you have.":

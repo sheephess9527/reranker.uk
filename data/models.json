@@ -1008,6 +1008,20 @@
       "check_pattern": "qwen3\\.7-text-rerank[^。]{0,200}?{value} 种主流语种",
       "check_hint": "qwen3.7",
       "verified_on": "2026-10-09"
+    },
+    "qwen3_rerank_tokens_per_doc": {
+      "value": "4,000",
+      "source_url": "https://help.aliyun.com/zh/model-studio/text-rerank-api",
+      "check_pattern": "qwen3-rerank 500 {value} 中文",
+      "check_hint": "qwen3-rerank",
+      "verified_on": "2026-10-14"
+    },
+    "qwen37_tokens_per_doc": {
+      "value": "30,000",
+      "source_url": "https://help.aliyun.com/zh/model-studio/text-rerank-api",
+      "check_pattern": "qwen3\\.7-text-rerank 500 {value} ",
+      "check_hint": "qwen3.7",
+      "verified_on": "2026-10-14"
     }
   },
   "siliconflow-rerank": {

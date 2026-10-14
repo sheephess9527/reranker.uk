@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" data-locale="en">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <title>Reranking in mainland China — Alibaba Cloud, SiliconFlow or self-host | reranker.uk</title>
+  <meta name="description" content="How to add a reranker from mainland China: Alibaba Cloud Model Studio (qwen3-rerank), SiliconFlow (hosted bge-reranker-v2-m3 and Qwen3-Reranker) or self-hosting via hf-mirror and ModelScope — prices in yuan, Chinese benchmark scores and code." >
+  <link rel="canonical" href="https://reranker.uk/guides/rerank-in-china" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/rerank-in-china" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/rerank-in-china" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/rerank-in-china" >
+  <meta name="theme-color" content="#0b0d17" >
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
+  <meta name="author" content="reranker.uk" >
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
+  <link rel="manifest" href="/site.webmanifest" >
+  <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
+  <meta property="og:type" content="article" >
+  <meta property="og:title" content="Reranking in mainland China" >
+  <meta property="og:description" content="Alibaba Cloud, SiliconFlow or your own server: price, Chinese quality and setup." >
+  <meta property="og:url" content="https://reranker.uk/guides/rerank-in-china" >
+  <meta property="og:site_name" content="reranker.uk" >
+  <meta property="og:locale" content="en_GB" >
+  <meta property="og:locale:alternate" content="zh_CN" >
+  <meta name="twitter:card" content="summary_large_image" >
+  <meta property="og:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <meta property="og:image:width" content="1200" >
+  <meta property="og:image:height" content="630" >
+  <meta property="og:image:alt" content="reranker.uk — understand rerankers and run a cross-encoder in your browser" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/img/og-cover.png" >
+  <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
+  <link rel="preload" href="/assets/css/style.css" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css" >
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Reranking in mainland China: Alibaba Cloud, SiliconFlow or your own server","datePublished":"2026-10-14","dateModified":"2026-10-14","inLanguage":"en","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/rerank-in-china","description":"How to add a reranker from mainland China: Alibaba Cloud Model Studio (qwen3-rerank), SiliconFlow (hosted bge-reranker-v2-m3 and Qwen3-Reranker) or self-hosting via hf-mirror and ModelScope — prices in yuan, Chinese benchmark scores and code."}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://reranker.uk/guides/"},{"@type":"ListItem","position":3,"name":"Reranking in mainland China","item":"https://reranker.uk/guides/rerank-in-china"}]}</script>
+
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="shared.skip">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
+        <li><a href="/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">Guides</a></li>
+        <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
+        <li><a class="nav-cta" href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
+      </ul>
+      <div class="nav-right">
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+        <a class="lang-toggle" href="/zh/guides/rerank-in-china" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
+      </div>
+    </nav>
+  </header>
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Reranking in mainland China</div>
+      <h1>Reranking in mainland China: Alibaba Cloud, SiliconFlow or your own server</h1>
+      <p class="meta">Practical · ~8 min read · <time datetime="2026-10-14">Updated 14 Oct 2026</time></p>
+      <p class="lead">From a server in mainland China, the usual advice — call Cohere or Voyage, or download weights from Hugging Face — runs into slow or blocked connections and foreign-currency billing. There are three routes that work well from inside China: <strong>Alibaba Cloud Model Studio</strong>, <strong>SiliconFlow</strong>, or <strong>running an open model yourself</strong>. This guide compares them on price, Chinese-language quality and setup, using only what each vendor publishes.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#routes">Three routes at a glance</a></li>
+          <li><a href="#chinese">How well the models handle Chinese</a></li>
+          <li><a href="#alibaba">Alibaba Cloud Model Studio</a></li>
+          <li><a href="#siliconflow">SiliconFlow</a></li>
+          <li><a href="#self-host">Self-hosting: getting the weights</a></li>
+          <li><a href="#cost">What it costs</a></li>
+        </ol>
+      </div>
+
+      <h2 id="routes">Three routes at a glance</h2>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Three routes at a glance">
+        <table>
+          <thead>
+            <tr><th>Route</th><th>Models</th><th>Price</th><th>Pick it when</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="/models/#alibaba-model-studio">Alibaba Cloud Model Studio</a></td>
+              <td>qwen3-rerank, qwen3.7-text-rerank, qwen3-vl-rerank (images and video)</td>
+              <td>¥0.5 per million input tokens</td>
+              <td>You already use Alibaba Cloud, need long documents or many languages, and don’t want to run a GPU</td>
+            </tr>
+            <tr>
+              <td><a href="/models/#siliconflow">SiliconFlow</a></td>
+              <td>Hosted open models: bge-reranker-v2-m3, bce-reranker-base_v1, Qwen3-Reranker 0.6B / 4B / 8B, Qwen3-VL-Reranker-8B</td>
+              <td>bge-reranker-v2-m3 free; Pro tier ¥0.07 per million tokens</td>
+              <td>You want an open model without hosting it, or a free tier to start on</td>
+            </tr>
+            <tr>
+              <td><a href="/guides/self-host-reranker">Your own server</a></td>
+              <td>bge-reranker-v2-m3 (CPU), Qwen3-Reranker-4B (GPU), gte-multilingual-reranker-base</td>
+              <td>No per-call price; you pay for the hardware</td>
+              <td>Data must not leave your network, or your volume is high enough that a GPU costs less than an API</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The three are not exclusive. A common path is to start on SiliconFlow’s free bge-reranker-v2-m3, measure on your own queries, then either stay hosted or move the same open model onto your own hardware — the scores don’t change, because it is the same model.</p>
+
+      <h2 id="chinese">How well the models handle Chinese</h2>
+      <p>The one public comparison that covers most of these models on Chinese retrieval is Qwen’s: CMTEB-R, the retrieval tasks of the Chinese MTEB, reranking the top 100 from Qwen3-Embedding-0.6B. It is Qwen’s own run, so read it as a guide to tiers rather than a final ranking.</p>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="How well the models handle Chinese">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Size</th><th>CMTEB-R</th><th>MMTEB-R (multilingual)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>bge-reranker-v2-m3</td><td>568M</td><td>72.16</td><td>58.36</td></tr>
+            <tr><td>gte-multilingual-reranker-base</td><td>306M</td><td>74.08</td><td>59.44</td></tr>
+            <tr><td>Qwen3-Reranker-0.6B</td><td>0.6B</td><td>71.31</td><td>66.36</td></tr>
+            <tr><td>Qwen3-Reranker-4B</td><td>4B</td><td>75.94</td><td>72.74</td></tr>
+            <tr><td>Qwen3-Reranker-8B</td><td>8B</td><td>77.45</td><td>72.94</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">From the <a href="https://huggingface.co/Qwen/Qwen3-Reranker-4B" rel="noopener noreferrer">Qwen3-Reranker model card</a>, checked daily. Alibaba Cloud publishes no scores for its hosted qwen3-rerank, qwen3.7-text-rerank or qwen3-vl-rerank, so they are not in the table.</p>
+      <p>Two things stand out. The 306M <strong>gte-multilingual-reranker-base</strong> scores above bge-reranker-v2-m3 on Chinese at about half its size, which makes it the cheapest model to serve here. And the step from bge-reranker-v2-m3 to <strong>Qwen3-Reranker-4B</strong> is small on Chinese but large on the multilingual column — worth it if your corpus mixes languages, less so for Chinese alone. The classic English models (ms-marco MiniLM, Jina v1, mxbai v1) were not trained on Chinese and don’t belong in this list.</p>
+
+      <h2 id="alibaba">Alibaba Cloud Model Studio</h2>
+      <p>Model Studio (百炼) sells three rerankers, billed per million input tokens in yuan in the Beijing region:</p>
+      <ul>
+        <li><strong>qwen3-rerank</strong> — 100+ languages, up to 500 documents per request and 4,000 tokens per document. A longer document is rejected with an error, not truncated, so chunk before you send.</li>
+        <li><strong>qwen3.7-text-rerank</strong> — 201 languages and dialects and up to 30,000 tokens per document, at the same price; Beijing region only.</li>
+        <li><strong>qwen3-vl-rerank</strong> — ranks images and video as well as text.</li>
+      </ul>
+      <p>All three take an <code>instruct</code> parameter that says what “relevant” means; without one they rank for question answering, and Alibaba suggest writing instructions in English (see <a href="/guides/instruction-reranker">instruction-following rerankers</a>). The older gte-rerank was retired on 30 May 2026; gte-rerank-v2 is still sold. qwen3-rerank is also offered internationally at $0.1 per million tokens.</p>
+      <pre tabindex="0"><code># From Alibaba Cloud's Model Studio docs (qwen3-rerank)
+curl --request POST \
+  --url https://{WorkspaceId}.cn-beijing.maas.aliyuncs.com/compatible-api/v1/reranks \
+  --header "Authorization: Bearer $DASHSCOPE_API_KEY" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "model": "qwen3-rerank",
+    "query": "什么是文本排序模型",
+    "documents": [
+      "文本排序模型广泛用于搜索引擎和推荐系统中，它们根据文本相关性对候选文本进行排序",
+      "量子计算是计算科学的一个前沿领域",
+      "预训练语言模型的发展给文本排序模型带来了新的进展"
+    ],
+    "top_n": 2
+  }'</code></pre>
+      <p>qwen3.7-text-rerank, qwen3-vl-rerank and gte-rerank-v2 use a different endpoint and request shape; the <a href="https://help.aliyun.com/zh/model-studio/text-rerank-api" rel="noopener noreferrer">Model Studio rerank API page</a> has both.</p>
+
+      <h2 id="siliconflow">SiliconFlow</h2>
+      <p>SiliconFlow (硅基流动) runs other vendors’ open models behind one rerank endpoint, so what you call is the published open model, and the table above describes it. Its price list shows bge-reranker-v2-m3 as free and a Pro tier at ¥0.07 per million tokens; it lists no price for the Qwen3-Reranker models.</p>
+      <pre tabindex="0"><code>import requests
+
+resp = requests.post(
+    "https://api.siliconflow.cn/v1/rerank",
+    headers={"Authorization": "Bearer YOUR_API_KEY"},
+    json={
+        "model": "BAAI/bge-reranker-v2-m3",
+        "query": "如何退货",
+        "documents": ["退货需在收货后七天内申请", "我们的门店营业时间为早九点到晚九点"],
+        "top_n": 1,
+    },
+).json()
+
+for r in resp["results"]:
+    print(r["index"], r["relevance_score"])</code></pre>
+      <p>Two options are model-specific. <code>instruction</code> works only with the Qwen3-Reranker models. For bge-reranker-v2-m3 and bce-reranker-base_v1, SiliconFlow splits a long document into chunks itself (<code>max_chunks_per_doc</code>, <code>overlap_tokens</code>) and scores the document by its best chunk — convenient, but it means a long document wins on its single best passage. Qwen3-VL-Reranker-8B has its own multimodal request format. Details are on the <a href="https://docs.siliconflow.cn/docs/api/rerank-post" rel="noopener noreferrer">SiliconFlow rerank API page</a>.</p>
+
+      <h2 id="self-host">Self-hosting: getting the weights</h2>
+      <p>The models are open, but huggingface.co is often slow or unreachable from mainland China. Two ways around it:</p>
+      <ul>
+        <li><strong><a href="https://hf-mirror.com" rel="noopener noreferrer">hf-mirror.com</a></strong>, a community mirror of Hugging Face. Set <code>HF_ENDPOINT</code> and every tool built on <code>huggingface_hub</code> — including sentence-transformers — downloads from the mirror.</li>
+        <li><strong>ModelScope (魔搭)</strong>, Alibaba’s model hub, which hosts <a href="https://modelscope.cn/models/Qwen/Qwen3-Reranker-4B" rel="noopener noreferrer">Qwen/Qwen3-Reranker-4B</a> and <a href="https://modelscope.cn/models/BAAI/bge-reranker-v2-m3" rel="noopener noreferrer">BAAI/bge-reranker-v2-m3</a> under the same names.</li>
+      </ul>
+      <pre tabindex="0"><code># Linux / macOS — from hf-mirror.com's own instructions
+export HF_ENDPOINT=https://hf-mirror.com
+huggingface-cli download BAAI/bge-reranker-v2-m3 --local-dir bge-reranker-v2-m3
+
+# With HF_ENDPOINT set, sentence-transformers fetches from the mirror too
+python -c "from sentence_transformers import CrossEncoder; CrossEncoder('BAAI/bge-reranker-v2-m3')"</code></pre>
+      <p>From there, serving is the same as anywhere else — see <a href="/guides/self-host-reranker">self-hosting a reranker</a>. bge-reranker-v2-m3 runs on a CPU; Qwen3-Reranker-4B wants a GPU. Our <a href="/demo">browser demo</a> uses the mirror too: it requests the model from huggingface.co and hf-mirror.com at once and keeps whichever answers first.</p>
+
+      <h2 id="cost">What it costs</h2>
+      <p>Alibaba Cloud and SiliconFlow both bill by the token, so the cost scales with how many candidates you rerank and how long they are, not with the number of queries alone. The <a href="/rerank-cost-calculator#results-cny">cost calculator’s yuan table</a> works it out for your volume, and warns when your passages are longer than qwen3-rerank accepts. Free quotas and trial credits are not included; check each vendor’s price page.</p>
+      <blockquote>Whichever route you pick, label 30–100 of your own queries and compare before committing — the <a href="/guides/evaluate-reranker">evaluation guide</a> shows how.</blockquote>
+
+      <h2>Keep reading</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/guides/choose-reranker-scenario"><h3>Choose by scenario</h3><p>RAG, support, legal, code, scanned documents.</p></a>
+        <a class="card" href="/models/qwen-reranker"><h3>Qwen3-Reranker</h3><p>0.6B / 4B / 8B, Apache 2.0 — sizes and scores.</p></a>
+      </div>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch" data-i18n="shared.footer.blurb">An open educational resource on rerankers for retrieval and RAG — plus a zero-cost demo that runs in your browser.</p>
+          <p style="margin-top:.6rem"><a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer" data-i18n="shared.footer.github">View source on GitHub</a></p>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.guides">Guides</h4>
+          <ul>
+            <li><a href="/guides/" data-i18n="shared.footer.allGuides">All guides</a></li>
+            <li><a href="/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">What is a reranker</a></li>
+            <li><a href="/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs bi-encoder</a></li>
+            <li><a href="/guides/rerank-rag" data-i18n="shared.nav.rerankRag">Rerank for RAG</a></li>
+            <li><a href="/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">Hybrid retrieval + rerank</a></li>
+            <li><a href="/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
+            <li><a href="/guides/self-host-reranker" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
+            <li><a href="/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
+            <li><a href="/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
+            <li><a href="/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
+            <li><a href="/guides/reranking-not-working" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
+            <li><a href="/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
+            <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
+            <li><a href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
+            <li><a href="/changelog" data-i18n="shared.footer.changelog">Changelog</a></li>
+            <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>
+            <li><a href="/privacy" data-i18n="shared.footer.privacy">Privacy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.models">Models</h4>
+          <ul>
+            <li><a href="/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/models/voyage-rerank">Voyage Rerank</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> reranker.uk</span>
+        <span class="footer-legal muted">
+          <span data-i18n="shared.footer.disclaimer">Open educational resource · not affiliated with any model vendor</span>
+          · <a href="/privacy" data-i18n="shared.footer.privacyShort">Privacy</a>
+          · <a href="/changelog" data-i18n="shared.footer.changelogShort">Changelog</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+  
+  <script src="/assets/js/i18n.js"></script>
+</body>
+</html>
