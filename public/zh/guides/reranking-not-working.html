@@ -29,7 +29,7 @@
   <meta property="og:image:height" content="630" >
   <meta property="og:image:alt" content="加了 reranker 却没变好？7 个原因 | reranker.uk" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/guides/reranking-not-working.jpg" >
-  <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
+  <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"加了 reranker 却没变好？7 个原因","datePublished":"2026-08-25","dateModified":"2026-10-12","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/reranking-not-working","description":"接入重排序后效果没提升？常见原因是检索召回不够、候选池太小、超过模型 token 上限被静默截断、分块过大、语言不匹配，以及把未校准的分数当概率用。附逐条排查清单。","inLanguage":"zh-Hans"}</script>

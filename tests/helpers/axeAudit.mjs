@@ -36,8 +36,9 @@ export function allPagePaths() {
 export async function setTheme(page, theme) {
   await page.addInitScript((t) => {
     try {
-      if (t === "light") localStorage.setItem("rr_theme", "light");
-      else localStorage.removeItem("rr_theme");
+      // Store the choice explicitly: with nothing stored the site follows
+      // prefers-color-scheme, which Playwright emulates as light.
+      localStorage.setItem("rr_theme", t);
     } catch (e) {}
   }, theme);
 }

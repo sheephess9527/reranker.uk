@@ -29,7 +29,7 @@
   <meta property="og:image:height" content="630" >
   <meta property="og:image:alt" content="如何评测 reranker — NDCG、MRR 与标注查询 | reranker.uk" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/guides/evaluate-reranker.jpg" >
-  <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
+  <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"如何评测 reranker — NDCG、MRR 与标注查询","datePublished":"2026-06-23","dateModified":"2026-06-23","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/evaluate-reranker","description":"评测重排序模型的实用指南：构建标注查询集、衡量 NDCG@k 与 MRR、对比重排前后效果，并对流水线变更做回归测试。","inLanguage":"zh-Hans"}</script>

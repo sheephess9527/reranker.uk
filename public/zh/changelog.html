@@ -29,7 +29,7 @@
   <meta property="og:image:height" content="630" >
   <meta property="og:image:alt" content="更新日志 — reranker.uk 版本记录 | reranker.uk" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/changelog.jpg" >
-  <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
+  <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   
@@ -70,6 +70,13 @@
     </section>
 
     <section class="section container narrow">
+      <article class="changelog-entry">
+        <h2 id="2026-10-15-theme">2026 年 10 月 15 日（晚）—— 深色还是浅色，跟随系统设置</h2>
+        <ul class="feature-list">
+          <li><strong>首次访问跟随系统主题</strong> —— 以前网站对所有人都默认打开深色主题。现在在你使用主题切换按钮之前，网站会跟随操作系统的浅色或深色设置，系统切换时也会跟着变；一旦你用按钮选过，就以你的选择为准</li>
+        </ul>
+      </article>
+
       <article class="changelog-entry">
         <h2 id="2026-10-15-search">2026 年 10 月 15 日（稍后）—— 全站搜索</h2>
         <ul class="feature-list">

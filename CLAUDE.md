@@ -80,7 +80,11 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 - 中文页只搜中文结果，英文页只搜英文结果（索引用 `locale` 字段区分）。
 - 完成标准：搜 “Cohere” 能进模型页，搜 “百炼” 在 `/zh/` 能进国内指南；`npm test` 里加一条键盘用例，不要另起一套测试框架。
 
-### 4. 第一次访问不跟系统主题
+### ~~4. 第一次访问不跟系统主题~~（2026-10-15 已完成）
+
+> 完成：`head-open.html` 的内联脚本和 `main.js` 一起改：`rr_theme` 存了 `light`/`dark` 就照它；没存时跟随 `prefers-color-scheme`，系统切换时也跟着变（只在没存过时）。内联脚本的 CSP 哈希由 `build.mjs` 的 `writeHeadersFile()` 自动重算。测试辅助 `setTheme` 现在把 dark 也显式存进 `rr_theme`（Playwright 默认模拟浅色系统，不存的话 dark 用例会变成浅色）。`tests/theme.spec.js` 覆盖：浅色/深色系统首访、已存选择优先、切换后跨页保持、系统变化只在未存时生效。
+>
+> 下一轮四项全部完成。
 
 现在只要 `localStorage` 里没有 `rr_theme`，就一律深色。`src/partials/head-open.html` 里的内联脚本和 `public/assets/js/main.js` 的 `applyTheme` 要一起改：没有存过选择时，跟随 `prefers-color-scheme`。用户点过切换之后仍然以 `rr_theme` 为准，不要把已经存过的人改掉。
 

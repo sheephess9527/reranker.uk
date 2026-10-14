@@ -56,10 +56,28 @@
     if (metaTheme) metaTheme.setAttribute("content", light ? "#f4f5f9" : "#0b0d17");
   }
 
-  try {
-    applyTheme(localStorage.getItem(THEME_KEY) === "light" ? "light" : "dark");
-  } catch (e) {
-    applyTheme("dark");
+  // A choice the reader made with the toggle wins; until they make one, the
+  // site follows the system setting, including when it changes (the inline
+  // script in <head> does the same before first paint).
+  var systemLight = window.matchMedia ? window.matchMedia("(prefers-color-scheme: light)") : null;
+  function storedTheme() {
+    try {
+      var t = localStorage.getItem(THEME_KEY);
+      return t === "light" || t === "dark" ? t : null;
+    } catch (e) {
+      return null;
+    }
+  }
+  function initialTheme() {
+    return storedTheme() || (systemLight && systemLight.matches ? "light" : "dark");
+  }
+  applyTheme(initialTheme());
+  if (systemLight) {
+    var onSystemChange = function () {
+      if (!storedTheme()) applyTheme(initialTheme());
+    };
+    if (systemLight.addEventListener) systemLight.addEventListener("change", onSystemChange);
+    else if (systemLight.addListener) systemLight.addListener(onSystemChange);
   }
 
   if (themeBtn) {

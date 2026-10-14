@@ -29,7 +29,7 @@
   <meta property="og:image:height" content="630" >
   <meta property="og:image:alt" content="在国内做重排序 —— 阿里云百炼、硅基流动还是自己部署 | reranker.uk" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/guides/rerank-in-china.jpg" >
-  <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
+  <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"在国内做重排序 —— 阿里云百炼、硅基流动还是自己部署","datePublished":"2026-10-14","dateModified":"2026-10-14","inLanguage":"zh-Hans","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/rerank-in-china","description":"在国内给检索加上重排序：阿里云百炼（qwen3-rerank）、硅基流动（托管 bge-reranker-v2-m3 和 Qwen3-Reranker），或者通过 hf-mirror 和魔搭下载模型自己部署 —— 人民币价格、中文评测分数和代码。"}</script>

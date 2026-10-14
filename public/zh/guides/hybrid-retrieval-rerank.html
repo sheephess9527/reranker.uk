@@ -29,7 +29,7 @@
   <meta property="og:image:height" content="630" >
   <meta property="og:image:alt" content="混合检索 + 重排序 — BM25、向量，再 rerank | reranker.uk" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/guides/hybrid-retrieval-rerank.jpg" >
-  <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
+  <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"混合检索 + 重排序 — BM25、向量，再 rerank","datePublished":"2026-06-23","dateModified":"2026-10-12","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/hybrid-retrieval-rerank","description":"如何结合 BM25 与向量检索提升召回，再用 cross-encoder reranker 修正排序。融合策略、top-k 调优，以及混合检索何时优于纯向量。","inLanguage":"zh-Hans"}</script>
