@@ -1,18 +1,20 @@
 window.I18N_PAGE = {
   keys: {
-    "pipeline.ariaLabel": "查询流经检索器得到 50–100 个候选，再由重排序器逐对打分，保留前 5 个，最后由 LLM 生成答案。",
+    "pipeline.ariaLabel": "查询先进入检索器，检索器返回 50–100 个候选。重排序器对每一对打分，只保留前 5 个，再送给 LLM。",
+    "pipeline.stepIn": "输入",
     "pipeline.query": "查询",
-    "pipeline.top1": "召回 50–100",
+    "pipeline.fastRecall": "快 · 召回",
     "pipeline.retriever": "检索器",
     "pipeline.retrieverSub": "bi-encoder / BM25",
-    "pipeline.fastRecall": "快 · 召回",
-    "pipeline.top2": "精选 5–10",
+    "pipeline.outRetrieve": "返回 50–100 个",
+    "pipeline.slowPrecise": "慢 · 精确",
     "pipeline.reranker": "Reranker",
     "pipeline.rerankerSub": "cross-encoder 打分",
-    "pipeline.slowPrecise": "慢 · 精确",
+    "pipeline.outRerank": "只留前 5 个",
+    "pipeline.stepOut": "答案",
     "pipeline.llm": "LLM",
     "pipeline.generate": "生成",
-    "pipeline.caption": "宽召回保证 recall，重排序保证 precision，只把最优结果送进模型。",
+    "pipeline.caption": "返回 50–100 个候选的是检索器。把这份名单砍到前 5 个、再送给 LLM 的，是重排序器。",
   },
   zh: {
   "0.6B / 4B / 8B Apache 2.0 family — the multilingual GPU self-host pick. Start at 4B, not 8B.":
@@ -75,6 +77,19 @@ window.I18N_PAGE = {
   "High quality": "高质量",
   "Browser ✓": "浏览器 ✓",
 
-  "Reranking in one diagram": "一张图看懂重排序",
-  "Retrieve wide for recall, rerank for precision, send only the best to the model.": "宽召回保证 recall，重排序保证 precision，只把最优结果送进模型。"
+  "Jump to the job": "直接去做这件事",
+  "Already know what you need? Skip the tour and open the page that answers it.": "已经知道自己要什么？跳过导览，直接打开那一页。",
+  "Choose by scenario": "按场景选型",
+  "RAG, support, legal, code or Chinese search — which reranker actually fits.": "RAG、客服、法律、代码或中文检索 —— 到底该用哪一个 reranker。",
+  "Reranking in mainland China": "在国内做重排序",
+  "Alibaba Cloud, SiliconFlow, or your own GPU — prices in yuan, and how to get the weights.": "阿里云百炼、硅基流动，或自己的 GPU —— 人民币价格，以及怎么拿到权重。",
+  "What will it cost?": "一个月要花多少？",
+  "Cohere per search, Voyage per token, plus Alibaba Cloud and SiliconFlow in yuan.": "Cohere 按次检索、Voyage 按 token，外加阿里云和硅基流动的人民币价格。",
+  "Reranking didn't help": "重排序没起作用",
+  "Seven usual causes — recall, pool size, truncation — and how to tell which one you have.": "七个常见原因 —— 召回不够、候选池太小、被截断 —— 以及怎么判断是哪一个。",
+  "Decision": "选型",
+  "Troubleshooting": "排错",
+  "Tool": "工具",
+
+  "Reranking in one diagram": "一张图看懂重排序"
 }};

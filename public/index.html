@@ -96,6 +96,39 @@
     </section>
 
     <section class="section container">
+      <div class="section-head">
+        <h2>Jump to the job</h2>
+        <p>Already know what you need? Skip the tour and open the page that answers it.</p>
+      </div>
+      <div class="grid grid-2">
+        <a class="card" href="/guides/choose-reranker-scenario">
+          <span class="ico" aria-hidden="true">🎯</span>
+          <h3>Choose by scenario</h3>
+          <p>RAG, support, legal, code or Chinese search — which reranker actually fits.</p>
+          <div class="tag-row"><span class="pill info">Decision</span></div>
+        </a>
+        <a class="card" href="/guides/rerank-in-china">
+          <span class="ico" aria-hidden="true">🇨🇳</span>
+          <h3>Reranking in mainland China</h3>
+          <p>Alibaba Cloud, SiliconFlow, or your own GPU — prices in yuan, and how to get the weights.</p>
+          <div class="tag-row"><span class="pill info">Practical</span></div>
+        </a>
+        <a class="card" href="/rerank-cost-calculator">
+          <span class="ico" aria-hidden="true">🧮</span>
+          <h3>What will it cost?</h3>
+          <p>Cohere per search, Voyage per token, plus Alibaba Cloud and SiliconFlow in yuan.</p>
+          <div class="tag-row"><span class="pill good">Tool</span></div>
+        </a>
+        <a class="card" href="/guides/reranking-not-working">
+          <span class="ico" aria-hidden="true">🩺</span>
+          <h3>Reranking didn't help</h3>
+          <p>Seven usual causes — recall, pool size, truncation — and how to tell which one you have.</p>
+          <div class="tag-row"><span class="pill info">Troubleshooting</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section container">
       <div class="cta-band">
         <span class="eyebrow">The fun part</span>
         <h2>Rerank in your browser, right now</h2>
@@ -128,49 +161,34 @@
 
     <section class="section container narrow">
       <h2 class="center">Reranking in one diagram</h2>
-      <figure class="pipeline-figure no-i18n" style="margin-top:1.2rem">
-        <svg viewBox="0 0 620 100" role="img" data-i18n-aria-label="pipeline.ariaLabel" aria-label="Query flows through a retriever to get 50-100 candidates, then a reranker scores each pair to keep the top 5, then the LLM generates an answer." xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 z" class="pipe-arrowhead" ></path>
-            </marker>
-          </defs>
-          <style>
-            .pb { fill: var(--bg-elev); stroke: var(--border); stroke-width: 1.5; }
-            .pb.focus { stroke: var(--primary); stroke-width: 2; }
-            .pt { fill: var(--text); font: 600 13px var(--sans); }
-            .ps { fill: var(--text-soft); font: 12px var(--sans); }
-            .pm { fill: var(--text-mut); font: 11px var(--sans); }
-            .pl { stroke: var(--text-mut); stroke-width: 1.8; fill: none; }
-            .pipe-arrowhead { fill: var(--text-mut); }
-          </style>
-          <!-- query -->
-          <rect class="pb" x="2" y="28" width="80" height="44" rx="10" ></rect>
-          <text class="pt" x="42" y="52" text-anchor="middle" data-i18n-html="pipeline.query">Query</text>
-          <!-- arrow 1 -->
-          <line class="pl" x1="82" y1="50" x2="138" y2="50" marker-end="url(#arr)" ></line>
-          <text class="pm" x="110" y="44" text-anchor="middle" data-i18n-html="pipeline.top1">top 50–100</text>
-          <!-- retriever -->
-          <rect class="pb" x="140" y="14" width="130" height="72" rx="10" ></rect>
-          <text class="pt" x="205" y="44" text-anchor="middle" data-i18n-html="pipeline.retriever">Retriever</text>
-          <text class="ps" x="205" y="61" text-anchor="middle" data-i18n-html="pipeline.retrieverSub">bi-encoder / BM25</text>
-          <text class="pm" x="205" y="77" text-anchor="middle" data-i18n-html="pipeline.fastRecall">fast · recall</text>
-          <!-- arrow 2 -->
-          <line class="pl" x1="270" y1="50" x2="326" y2="50" marker-end="url(#arr)" ></line>
-          <text class="pm" x="298" y="44" text-anchor="middle" data-i18n-html="pipeline.top2">top 5–10</text>
-          <!-- reranker (focus) -->
-          <rect class="pb focus" x="328" y="14" width="140" height="72" rx="10" ></rect>
-          <text class="pt" x="398" y="44" text-anchor="middle" data-i18n-html="pipeline.reranker">Reranker</text>
-          <text class="ps" x="398" y="61" text-anchor="middle" data-i18n-html="pipeline.rerankerSub">cross-encoder scores</text>
-          <text class="pm" x="398" y="77" text-anchor="middle" data-i18n-html="pipeline.slowPrecise">slow · precise</text>
-          <!-- arrow 3 -->
-          <line class="pl" x1="468" y1="50" x2="524" y2="50" marker-end="url(#arr)" ></line>
-          <!-- llm -->
-          <rect class="pb" x="526" y="28" width="90" height="44" rx="10" ></rect>
-          <text class="pt" x="571" y="48" text-anchor="middle" data-i18n-html="pipeline.llm">LLM</text>
-          <text class="ps" x="571" y="64" text-anchor="middle" data-i18n-html="pipeline.generate">generate</text>
-        </svg>
-        <figcaption data-i18n-html="pipeline.caption">Retrieve wide for recall, rerank for precision, send only the best to the model.</figcaption>
+      <figure class="pipeline-figure">
+        <ol class="pipeline" data-i18n-aria-label="pipeline.ariaLabel" aria-label="A query goes into a retriever, which returns 50 to 100 candidates. A reranker scores each pair and keeps the top 5. Only those go to the LLM.">
+          <li class="pipe-step">
+            <span class="pipe-kicker" data-i18n-html="pipeline.stepIn">Input</span>
+            <strong data-i18n-html="pipeline.query">Query</strong>
+          </li>
+          <li class="pipe-arrow" aria-hidden="true">→</li>
+          <li class="pipe-step">
+            <span class="pipe-kicker" data-i18n-html="pipeline.fastRecall">fast · recall</span>
+            <strong data-i18n-html="pipeline.retriever">Retriever</strong>
+            <span data-i18n-html="pipeline.retrieverSub">bi-encoder / BM25</span>
+            <span class="pipe-out" data-i18n-html="pipeline.outRetrieve">returns 50–100</span>
+          </li>
+          <li class="pipe-arrow" aria-hidden="true">→</li>
+          <li class="pipe-step pipe-step-focus">
+            <span class="pipe-kicker" data-i18n-html="pipeline.slowPrecise">slow · precise</span>
+            <strong data-i18n-html="pipeline.reranker">Reranker</strong>
+            <span data-i18n-html="pipeline.rerankerSub">cross-encoder scores</span>
+            <span class="pipe-out" data-i18n-html="pipeline.outRerank">keeps the top 5</span>
+          </li>
+          <li class="pipe-arrow" aria-hidden="true">→</li>
+          <li class="pipe-step">
+            <span class="pipe-kicker" data-i18n-html="pipeline.stepOut">Answer</span>
+            <strong data-i18n-html="pipeline.llm">LLM</strong>
+            <span data-i18n-html="pipeline.generate">generate</span>
+          </li>
+        </ol>
+        <figcaption data-i18n-html="pipeline.caption">The retriever is what returns 50–100 candidates. The reranker is what cuts that list to the top 5 before the LLM sees it.</figcaption>
       </figure>
     </section>
   </main>

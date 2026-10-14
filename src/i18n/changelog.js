@@ -1,4 +1,10 @@
 window.I18N_PAGE = { zh: {
+  "14 Oct 2026 (night) — Homepage diagram corrected; shortcuts for the job in front of you":
+    "2026 年 10 月 14 日（夜）—— 更正首页流程图；常用任务直接能点到",
+  "<strong>The pipeline diagram was labelling the wrong arrows</strong> — “top 50–100” sat on the arrow into the retriever, and “top 5–10” sat on the arrow into the reranker. Those counts are what each stage returns, not what it receives. The diagram now shows the retriever returning 50–100 candidates and the reranker keeping the top 5, and on a phone it stacks instead of shrinking the labels until they cannot be read":
+    "<strong>流程图把数字标在了错误的箭头上</strong> —— “top 50–100”写在进入检索器的箭头上，“top 5–10”写在进入重排序器的箭头上。这两个数字是每一级返回的结果，不是它收到的输入。现在图上写的是：检索器返回 50–100 个候选，重排序器只留下前 5 个。手机上改为纵向排列，不再把字缩到看不清",
+  "<strong>Four shortcuts</strong> — choose a model by scenario, rerank from mainland China, the cost calculator, and what to check when reranking didn't help. They were already on the site; the homepage didn't point at them":
+    "<strong>四个快捷入口</strong> —— 按场景选型、在国内做重排序、成本计算器，以及重排序没起作用时该查什么。这些页面本来就有，首页之前没有指向它们",
   "14 Oct 2026 (later) — Every page has its own preview card":
     "2026 年 10 月 14 日（稍后）—— 每个页面都有自己的分享卡片",
   "<strong>Share previews that say what the page is</strong> — a link to any page used to show the same site-wide cover in WeChat, X or Slack. Each page now has its own card with its title, description and section, in English or Chinese to match the page, and CI checks the cards stay in step with the pages":

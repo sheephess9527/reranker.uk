@@ -1,15 +1,27 @@
 /* reranker.uk — small shared UI helpers (mobile nav, active link, year) */
 (function () {
+  var zh = (document.documentElement.lang || "").toLowerCase().indexOf("zh") === 0;
+
   // Mobile nav toggle
   var toggle = document.querySelector(".nav-toggle");
   var links = document.querySelector(".nav-links");
   if (toggle && links) {
+    function menuLabel(open) {
+      if (zh) return open ? "关闭菜单" : "打开菜单";
+      return open ? "Close menu" : "Open menu";
+    }
+    toggle.setAttribute("aria-label", menuLabel(false));
     toggle.addEventListener("click", function () {
       var open = links.classList.toggle("open");
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", menuLabel(open));
     });
     links.addEventListener("click", function (e) {
-      if (e.target.tagName === "A") links.classList.remove("open");
+      if (e.target.tagName === "A") {
+        links.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", menuLabel(false));
+      }
     });
   }
 
@@ -33,9 +45,13 @@
       themeBtn.textContent = light ? "🌙" : "☀";
       themeBtn.setAttribute(
         "aria-label",
-        light ? "Switch to dark theme" : "Switch to light theme"
+        light
+          ? (zh ? "切换到深色" : "Switch to dark theme")
+          : (zh ? "切换到浅色" : "Switch to light theme")
       );
-      themeBtn.title = light ? "Dark theme" : "Light theme";
+      themeBtn.title = light
+        ? (zh ? "深色" : "Dark theme")
+        : (zh ? "浅色" : "Light theme");
     }
     if (metaTheme) metaTheme.setAttribute("content", light ? "#f4f5f9" : "#0b0d17");
   }

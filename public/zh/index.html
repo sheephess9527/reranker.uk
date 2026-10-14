@@ -96,6 +96,39 @@
     </section>
 
     <section class="section container">
+      <div class="section-head">
+        <h2>直接去做这件事</h2>
+        <p>已经知道自己要什么？跳过导览，直接打开那一页。</p>
+      </div>
+      <div class="grid grid-2">
+        <a class="card" href="/zh/guides/choose-reranker-scenario">
+          <span class="ico" aria-hidden="true">🎯</span>
+          <h3>按场景选型</h3>
+          <p>RAG、客服、法律、代码或中文检索 —— 到底该用哪一个 reranker。</p>
+          <div class="tag-row"><span class="pill info">选型</span></div>
+        </a>
+        <a class="card" href="/zh/guides/rerank-in-china">
+          <span class="ico" aria-hidden="true">🇨🇳</span>
+          <h3>在国内做重排序</h3>
+          <p>阿里云百炼、硅基流动，或自己的 GPU —— 人民币价格，以及怎么拿到权重。</p>
+          <div class="tag-row"><span class="pill info">实战</span></div>
+        </a>
+        <a class="card" href="/zh/rerank-cost-calculator">
+          <span class="ico" aria-hidden="true">🧮</span>
+          <h3>一个月要花多少？</h3>
+          <p>Cohere 按次检索、Voyage 按 token，外加阿里云和硅基流动的人民币价格。</p>
+          <div class="tag-row"><span class="pill good">工具</span></div>
+        </a>
+        <a class="card" href="/zh/guides/reranking-not-working">
+          <span class="ico" aria-hidden="true">🩺</span>
+          <h3>重排序没起作用</h3>
+          <p>七个常见原因 —— 召回不够、候选池太小、被截断 —— 以及怎么判断是哪一个。</p>
+          <div class="tag-row"><span class="pill info">排错</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section container">
       <div class="cta-band">
         <span class="eyebrow">最有意思的部分</span>
         <h2>现在就在你的浏览器里重排序</h2>
@@ -128,49 +161,34 @@
 
     <section class="section container narrow">
       <h2 class="center">一张图看懂重排序</h2>
-      <figure class="pipeline-figure no-i18n" style="margin-top:1.2rem">
-        <svg viewBox="0 0 620 100" role="img" data-i18n-aria-label="pipeline.ariaLabel" aria-label="查询流经检索器得到 50–100 个候选，再由重排序器逐对打分，保留前 5 个，最后由 LLM 生成答案。" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 z" class="pipe-arrowhead" ></path>
-            </marker>
-          </defs>
-          <style>
-            .pb { fill: var(--bg-elev); stroke: var(--border); stroke-width: 1.5; }
-            .pb.focus { stroke: var(--primary); stroke-width: 2; }
-            .pt { fill: var(--text); font: 600 13px var(--sans); }
-            .ps { fill: var(--text-soft); font: 12px var(--sans); }
-            .pm { fill: var(--text-mut); font: 11px var(--sans); }
-            .pl { stroke: var(--text-mut); stroke-width: 1.8; fill: none; }
-            .pipe-arrowhead { fill: var(--text-mut); }
-          </style>
-          <!-- query -->
-          <rect class="pb" x="2" y="28" width="80" height="44" rx="10" ></rect>
-          <text class="pt" x="42" y="52" text-anchor="middle" data-i18n-html="pipeline.query">查询</text>
-          <!-- arrow 1 -->
-          <line class="pl" x1="82" y1="50" x2="138" y2="50" marker-end="url(#arr)" ></line>
-          <text class="pm" x="110" y="44" text-anchor="middle" data-i18n-html="pipeline.top1">召回 50–100</text>
-          <!-- retriever -->
-          <rect class="pb" x="140" y="14" width="130" height="72" rx="10" ></rect>
-          <text class="pt" x="205" y="44" text-anchor="middle" data-i18n-html="pipeline.retriever">检索器</text>
-          <text class="ps" x="205" y="61" text-anchor="middle" data-i18n-html="pipeline.retrieverSub">bi-encoder / BM25</text>
-          <text class="pm" x="205" y="77" text-anchor="middle" data-i18n-html="pipeline.fastRecall">快 · 召回</text>
-          <!-- arrow 2 -->
-          <line class="pl" x1="270" y1="50" x2="326" y2="50" marker-end="url(#arr)" ></line>
-          <text class="pm" x="298" y="44" text-anchor="middle" data-i18n-html="pipeline.top2">精选 5–10</text>
-          <!-- reranker (focus) -->
-          <rect class="pb focus" x="328" y="14" width="140" height="72" rx="10" ></rect>
-          <text class="pt" x="398" y="44" text-anchor="middle" data-i18n-html="pipeline.reranker">Reranker</text>
-          <text class="ps" x="398" y="61" text-anchor="middle" data-i18n-html="pipeline.rerankerSub">cross-encoder 打分</text>
-          <text class="pm" x="398" y="77" text-anchor="middle" data-i18n-html="pipeline.slowPrecise">慢 · 精确</text>
-          <!-- arrow 3 -->
-          <line class="pl" x1="468" y1="50" x2="524" y2="50" marker-end="url(#arr)" ></line>
-          <!-- llm -->
-          <rect class="pb" x="526" y="28" width="90" height="44" rx="10" ></rect>
-          <text class="pt" x="571" y="48" text-anchor="middle" data-i18n-html="pipeline.llm">LLM</text>
-          <text class="ps" x="571" y="64" text-anchor="middle" data-i18n-html="pipeline.generate">生成</text>
-        </svg>
-        <figcaption data-i18n-html="pipeline.caption">宽召回保证 recall，重排序保证 precision，只把最优结果送进模型。</figcaption>
+      <figure class="pipeline-figure">
+        <ol class="pipeline" data-i18n-aria-label="pipeline.ariaLabel" aria-label="查询先进入检索器，检索器返回 50–100 个候选。重排序器对每一对打分，只保留前 5 个，再送给 LLM。">
+          <li class="pipe-step">
+            <span class="pipe-kicker" data-i18n-html="pipeline.stepIn">输入</span>
+            <strong data-i18n-html="pipeline.query">查询</strong>
+          </li>
+          <li class="pipe-arrow" aria-hidden="true">→</li>
+          <li class="pipe-step">
+            <span class="pipe-kicker" data-i18n-html="pipeline.fastRecall">快 · 召回</span>
+            <strong data-i18n-html="pipeline.retriever">检索器</strong>
+            <span data-i18n-html="pipeline.retrieverSub">bi-encoder / BM25</span>
+            <span class="pipe-out" data-i18n-html="pipeline.outRetrieve">返回 50–100 个</span>
+          </li>
+          <li class="pipe-arrow" aria-hidden="true">→</li>
+          <li class="pipe-step pipe-step-focus">
+            <span class="pipe-kicker" data-i18n-html="pipeline.slowPrecise">慢 · 精确</span>
+            <strong data-i18n-html="pipeline.reranker">Reranker</strong>
+            <span data-i18n-html="pipeline.rerankerSub">cross-encoder 打分</span>
+            <span class="pipe-out" data-i18n-html="pipeline.outRerank">只留前 5 个</span>
+          </li>
+          <li class="pipe-arrow" aria-hidden="true">→</li>
+          <li class="pipe-step">
+            <span class="pipe-kicker" data-i18n-html="pipeline.stepOut">答案</span>
+            <strong data-i18n-html="pipeline.llm">LLM</strong>
+            <span data-i18n-html="pipeline.generate">生成</span>
+          </li>
+        </ol>
+        <figcaption data-i18n-html="pipeline.caption">返回 50–100 个候选的是检索器。把这份名单砍到前 5 个、再送给 LLM 的，是重排序器。</figcaption>
       </figure>
     </section>
   </main>

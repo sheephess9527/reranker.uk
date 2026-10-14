@@ -6,6 +6,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-14-home">14 Oct 2026 (night) — Homepage diagram corrected; shortcuts for the job in front of you</h2>
+        <ul class="feature-list">
+          <li><strong>The pipeline diagram was labelling the wrong arrows</strong> — “top 50–100” sat on the arrow into the retriever, and “top 5–10” sat on the arrow into the reranker. Those counts are what each stage returns, not what it receives. The diagram now shows the retriever returning 50–100 candidates and the reranker keeping the top 5, and on a phone it stacks instead of shrinking the labels until they cannot be read</li>
+          <li><strong>Four shortcuts</strong> — choose a model by scenario, rerank from mainland China, the cost calculator, and what to check when reranking didn't help. They were already on the site; the homepage didn't point at them</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-14-cards">14 Oct 2026 (later) — Every page has its own preview card</h2>
         <ul class="feature-list">
           <li><strong>Share previews that say what the page is</strong> — a link to any page used to show the same site-wide cover in WeChat, X or Slack. Each page now has its own card with its title, description and section, in English or Chinese to match the page, and CI checks the cards stay in step with the pages</li>
