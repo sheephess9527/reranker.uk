@@ -29,7 +29,7 @@
   <meta property="og:image:height" content="630" >
   <meta property="og:image:alt" content="Late-interaction reranking — ColBERT & beyond" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/guides/late-interaction-rerank.jpg" >
-  <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
+  <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Late-interaction reranking (ColBERT & beyond)","datePublished":"2026-06-25","dateModified":"2026-10-09","inLanguage":"en","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/late-interaction-rerank","description":"Guide to late-interaction rerankers (ColBERTv2): how they differ from cross-encoders and bi-encoders, when to skip reranking, and how to combine architectures in 2026 stacks."}</script>

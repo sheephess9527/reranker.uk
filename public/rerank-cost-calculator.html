@@ -29,7 +29,7 @@
   <meta property="og:image:height" content="630" >
   <meta property="og:image:alt" content="Rerank cost calculator — Cohere vs Voyage" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/rerank-cost-calculator.jpg" >
-  <script>try{var t=localStorage.getItem("rr_theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}</script>
+  <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
   <link rel="preload" href="/assets/css/style.css" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css" >
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Rerank cost calculator","url":"https://reranker.uk/rerank-cost-calculator","applicationCategory":"BusinessApplication","operatingSystem":"Any browser","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"description":"Estimate what reranking costs per month. Cohere Rerank 4 bills per search, counting long documents once per 500 tokens; Voyage rerank-3 bills per token. Enter your own volume and compare.","inLanguage":"en"}</script>

@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "15 Oct 2026 (evening) — Light or dark, as your system is set":
+    "2026 年 10 月 15 日（晚）—— 深色还是浅色，跟随系统设置",
+  "<strong>First visit follows your system theme</strong> — the site used to open in the dark theme for everyone. Until you use the theme switch, it now follows your operating system’s light or dark setting, and changes with it; once you’ve picked one with the switch, your choice stays":
+    "<strong>首次访问跟随系统主题</strong> —— 以前网站对所有人都默认打开深色主题。现在在你使用主题切换按钮之前，网站会跟随操作系统的浅色或深色设置，系统切换时也会跟着变；一旦你用按钮选过，就以你的选择为准",
   "15 Oct 2026 (later) — Search the site":
     "2026 年 10 月 15 日（稍后）—— 全站搜索",
   "<strong>Site search</strong> — a search button in the header, or press <kbd>/</kbd> on any page, finds guides and model pages by title, section headings and description. It runs in your browser from a small index built with the site, the Chinese pages search the Chinese pages, and it works with the keyboard alone: arrow keys move through the results and <kbd>Esc</kbd> closes it":
