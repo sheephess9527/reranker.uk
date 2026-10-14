@@ -1,4 +1,12 @@
 window.I18N_PAGE = { zh: {
+  "Read these in order":
+    "按这个顺序读",
+  "Five guides that build on each other, from what a reranker does to measuring one on your own data.":
+    "五篇循序渐进的指南：从重排序模型是做什么的，到在你自己的数据上评估它。",
+  "Already have a specific question?":
+    "已经有具体问题？",
+  "Go straight to the page for the job in front of you.":
+    "直接去解决你手头问题的那一页。",
   "Reranking in mainland China":
     "在国内做重排序",
   "Alibaba Cloud, SiliconFlow or your own server — prices in yuan, Chinese scores, downloading weights.":

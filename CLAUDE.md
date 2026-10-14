@@ -56,7 +56,11 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 - 完成标准：390×844 下横滑时模型名一直可见；`tests/a11y.spec.js` 仍过（粘性单元格的对比度不能比现在差）；中英文页面都生效（样式是全局的）。
 - 不要把表改成卡片堆，桌面端现在的表是对的。
 
-### 2. 指南目录没有阅读顺序
+### ~~2. 指南目录没有阅读顺序~~（2026-10-14 已完成）
+
+> 完成：`/guides/` 拆成「Read these in order」（`<ol class="reading-path">`，标题前自动编号 1–5）和「Already have a specific question?」两组，URL 未变，卡片原文和译文不动，只新增两组的 h2/p 译文。卡片放进 `li` 后被正文链接的下划线规则套上了，规则改为 `a:not(.btn, .card)`。
+>
+> 顺带修了全站手机边距的另一半：`.hero`、`.article`、`.demo-wrap` 也用 `padding: X 0` 盖掉了 `.container` 的 20px，所有指南和模型页的正文在手机上贴着屏幕边。现在都只设上下内边距；`tests/mobile-layout.spec.js` 在 390px 下逐页检查左右至少 16px、页面不横向滚动（在旧样式上 50 页全部失败）。
 
 `src/pages/guides/index.html` 现在是一格一格平铺。拆成两组，URL 不要改：
 
