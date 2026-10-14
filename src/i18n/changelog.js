@@ -1,4 +1,10 @@
 window.I18N_PAGE = { zh: {
+  "14 Oct 2026 (late night) — The models table keeps its first column on a phone":
+    "2026 年 10 月 14 日（深夜）—— 手机上看模型对比表，第一列不再滑走",
+  "<strong>Model names stay in view</strong> — on a phone the models table scrolls sideways, and the model name used to scroll away with it, leaving scores with no row label. The name column and the column headings now stay put while you scroll; on a desktop the table is unchanged":
+    "<strong>模型名一直可见</strong> —— 在手机上横向滑动模型对比表时，模型名会跟着滑出屏幕，分数就对不上是哪个模型了。现在模型名这一列和表头在滑动时都固定不动；桌面端表格不变",
+  "<strong>Side margins on phones</strong> — the homepage, changelog and demo sections had lost their side margins on phones, so the new pipeline diagram touched the screen edges. They’re back":
+    "<strong>手机上的左右边距</strong> —— 首页、更新日志和 Demo 页的几个区块在手机上丢了左右边距，新的流程图因此贴着屏幕边缘。现在边距恢复了",
   "14 Oct 2026 (night) — Homepage diagram corrected; shortcuts for the job in front of you":
     "2026 年 10 月 14 日（夜）—— 更正首页流程图；常用任务直接能点到",
   "<strong>The pipeline diagram was labelling the wrong arrows</strong> — “top 50–100” sat on the arrow into the retriever, and “top 5–10” sat on the arrow into the reranker. Those counts are what each stage returns, not what it receives. The diagram now shows the retriever returning 50–100 candidates and the reranker keeping the top 5, and on a phone it stacks instead of shrinking the labels until they cannot be read":

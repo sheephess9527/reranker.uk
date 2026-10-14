@@ -6,6 +6,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-14-table">14 Oct 2026 (late night) — The models table keeps its first column on a phone</h2>
+        <ul class="feature-list">
+          <li><strong>Model names stay in view</strong> — on a phone the models table scrolls sideways, and the model name used to scroll away with it, leaving scores with no row label. The name column and the column headings now stay put while you scroll; on a desktop the table is unchanged</li>
+          <li><strong>Side margins on phones</strong> — the homepage, changelog and demo sections had lost their side margins on phones, so the new pipeline diagram touched the screen edges. They’re back</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-14-home">14 Oct 2026 (night) — Homepage diagram corrected; shortcuts for the job in front of you</h2>
         <ul class="feature-list">
           <li><strong>The pipeline diagram was labelling the wrong arrows</strong> — “top 50–100” sat on the arrow into the retriever, and “top 5–10” sat on the arrow into the reranker. Those counts are what each stage returns, not what it receives. The diagram now shows the retriever returning 50–100 candidates and the reranker keeping the top 5, and on a phone it stacks instead of shrinking the labels until they cannot be read</li>

@@ -43,7 +43,11 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 每一项做完：划掉本段、按上面的铁律写 changelog、跑检查。不要顺手改无关文案，不要换模型分数。
 
-### 1. 模型对比表在手机上横滑时，模型名会滑走
+### ~~1. 模型对比表在手机上横滑时，模型名会滑走~~（2026-10-14 已完成）
+
+> 完成：`.table-sticky`（只加在 `/models/` 的表上），≤960px 时外框 `max-height: 78vh` 双向滚动，表头 `top: 0`、模型名列 `left: 0` 粘住，实色 `--bg-elev` + 右侧 1px 分隔，列宽 8.5rem 允许换行。`tests/models-table.spec.js` 在 390×844 下核对，已加进 `npm test`。桌面端不变。
+>
+> 顺带修了全站的手机边距：`.section { padding: 2.75rem 0 }` 写在 `.container` 后面，把所有 `section container`（首页、更新日志、Demo）的左右 20px 边距清成了 0，首页流程图在手机上因此贴边。现在 `.section` 只设上下内边距。
 
 `/models/` 的表列很多。390px 宽时向右滑，第一列（模型名）离开视口，后面的分数对不上是谁。
 
