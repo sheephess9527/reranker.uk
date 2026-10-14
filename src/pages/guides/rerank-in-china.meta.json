@@ -1,0 +1,11 @@
+{
+  "title": "Reranking in mainland China — Alibaba Cloud, SiliconFlow or self-host | reranker.uk",
+  "description": "How to add a reranker from mainland China: Alibaba Cloud Model Studio (qwen3-rerank), SiliconFlow (hosted bge-reranker-v2-m3 and Qwen3-Reranker) or self-hosting via hf-mirror and ModelScope — prices in yuan, Chinese benchmark scores and code.",
+  "canonical": "https://reranker.uk/guides/rerank-in-china.html",
+  "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  "og_type": "article",
+  "og_title": "Reranking in mainland China",
+  "og_description": "Alibaba Cloud, SiliconFlow or your own server: price, Chinese quality and setup.",
+  "head_extra": "<script type=\"application/ld+json\">\n  {\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"headline\":\"Reranking in mainland China: Alibaba Cloud, SiliconFlow or your own server\",\"datePublished\":\"2026-10-14\",\"dateModified\":\"2026-10-14\",\"inLanguage\":\"en\",\"author\":{\"@type\":\"Organization\",\"name\":\"reranker.uk\"},\"mainEntityOfPage\":\"https://reranker.uk/guides/rerank-in-china.html\"}\n  </script>",
+  "page_scripts": "<script src=\"/assets/js/i18n/rerank-in-china.js\"></script>"
+}

@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "14 Oct 2026 — New guide: reranking in mainland China":
+    "2026 年 10 月 14 日 —— 新指南：在国内做重排序",
+  "<strong>Alibaba Cloud, SiliconFlow or your own server</strong> — a guide for readers whose servers are in mainland China: what each route offers, prices in yuan, Qwen’s Chinese retrieval scores (CMTEB-R) for the open models, working code for Model Studio and SiliconFlow, and how to download weights through hf-mirror.com or ModelScope. Every price and score on it is checked daily against the vendor’s own page":
+    "<strong>阿里云百炼、硅基流动，还是自己部署</strong> —— 写给服务器在国内的读者：每条路能提供什么、人民币价格、Qwen 公布的开源模型中文检索分数（CMTEB-R）、百炼和硅基流动的可运行代码，以及如何通过 hf-mirror.com 或魔搭下载模型。页面上的每个价格和分数都每天和厂商自己的页面核对",
   "12 Oct 2026 (later) — Every benchmark figure is now checked daily; Mixedbread v1 figures corrected":
     "2026 年 10 月 12 日（稍后）—— 所有基准分数都纳入每日核对；更正 Mixedbread v1 的分数",
   "<strong>About 70 more figures under the daily source check</strong> — the benchmark tables on the Jina and Qwen pages, and the third-party figures quoted in the models table’s notes, were typed into the pages, so a vendor revising a number would have gone unnoticed. Each one is now read from the vendor’s own model card and checked against it every day, like the rest of the site’s numbers. The gte-multilingual row also gains the scores Qwen published for it":
