@@ -128,7 +128,7 @@ a:hover { text-decoration: underline; }
 /* A link inside running text needs a cue besides colour (WCAG 1.4.1): in the
    dark theme --primary is only 1.47:1 against body text. Buttons, cards and
    nav stay undecorated — they aren't inside these blocks or are .btn. */
-main :is(p, li, td, th, dd, blockquote, figcaption, .meta, .breadcrumb) a:not(.btn) {
+main :is(p, li, td, th, dd, blockquote, figcaption, .meta, .breadcrumb) a:not(.btn, .card) {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
@@ -281,7 +281,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
 }
 
 /* ---------- Hero ---------- */
-.hero { padding: 4.5rem 0 3rem; text-align: center; }
+.hero { padding-top: 4.5rem; padding-bottom: 3rem; text-align: center; }
 .hero .eyebrow {
   display: inline-block; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--accent); background: var(--accent-soft); padding: 0.35rem 0.85rem; border-radius: 999px;
@@ -390,7 +390,7 @@ html[data-theme="light"] .pill.good { color: var(--good); border-color: rgba(4,1
 html[data-theme="light"] .pill.warn { color: #92400e; border-color: rgba(180,83,9,0.28); background: rgba(180,83,9,0.08); }
 
 /* ---------- Article ---------- */
-.article { padding: 2.5rem 0 3.5rem; }
+.article { padding-top: 2.5rem; padding-bottom: 3.5rem; } /* vertical only: keeps .container's side gutter */
 .article .meta { color: var(--text-mut); font-size: 0.9rem; margin-bottom: 1.5rem; }
 .article .lead { font-size: var(--step-1); color: var(--text-soft); }
 .article ul, .article ol { padding-left: 1.3rem; }
@@ -522,7 +522,7 @@ html[data-theme="light"] .chooser-tagline { color: var(--accent); }
 .breadcrumb span { margin: 0 0.4rem; }
 
 /* ---------- Demo ---------- */
-.demo-wrap { padding: 2rem 0 3rem; }
+.demo-wrap { padding-top: 2rem; padding-bottom: 3rem; }
 .demo-panel {
   background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
   padding: 1.5rem 1.5rem 1.3rem; box-shadow: var(--shadow-sm);
@@ -823,3 +823,9 @@ input[type="number"] {
   width: 100%; background: var(--bg-soft); border: 1px solid var(--border); color: var(--text);
   border-radius: var(--radius-sm); padding: 0.7rem 0.85rem; font-family: var(--mono); font-size: 0.95rem;
 }
+
+/* Guides index: the five guides meant to be read in order, numbered. */
+.reading-path { list-style: none; padding: 0; margin: 0; counter-reset: step; }
+.reading-path > li { counter-increment: step; display: flex; }
+.reading-path > li > .card { flex: 1; }
+.reading-path .card h3::before { content: counter(step) ". "; color: var(--text-mut); }

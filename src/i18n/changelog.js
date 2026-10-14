@@ -1,4 +1,10 @@
 window.I18N_PAGE = { zh: {
+  "15 Oct 2026 — Guides in reading order; text no longer touches the screen edge on phones":
+    "2026 年 10 月 15 日 —— 指南有了阅读顺序；手机上文字不再贴着屏幕边",
+  "<strong>A reading order for the guides</strong> — the guides page now starts with the five guides meant to be read in sequence, numbered, then lists the pages for specific jobs: choosing a model, reranking from mainland China, costs, troubleshooting and the rest":
+    "<strong>指南的阅读顺序</strong> —— 指南页现在先列出五篇需要按顺序读的指南并编了号，然后是解决具体问题的页面：选模型、在国内做重排序、算成本、排查问题等",
+  "<strong>Margins on phones, everywhere</strong> — on every guide and model page, the text ran right up to the edges of a phone screen: a stylesheet rule meant to set top and bottom spacing was also removing the side margins. Fixed, and a new test checks every page at phone width":
+    "<strong>手机上的页边距，全站修好</strong> —— 在手机上，每篇指南和模型页的正文都一直贴到屏幕边缘：一条本来只该设置上下间距的样式规则，把左右边距也清掉了。已修复，并新增一项测试，在手机宽度下逐页检查",
   "14 Oct 2026 (late night) — The models table keeps its first column on a phone":
     "2026 年 10 月 14 日（深夜）—— 手机上看模型对比表，第一列不再滑走",
   "<strong>Model names stay in view</strong> — on a phone the models table scrolls sideways, and the model name used to scroll away with it, leaving scores with no row label. The name column and the column headings now stay put while you scroll; on a desktop the table is unchanged":
