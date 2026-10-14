@@ -72,4 +72,110 @@
       applyTheme(next);
     });
   }
+
+  // Site search: a static index built by scripts/build.mjs, fetched on first
+  // use. "/" opens it, Esc closes it, arrow keys move through the results.
+  // Each locale searches only its own pages.
+  var searchBtn = document.getElementById("search-toggle");
+  var panel = document.getElementById("site-search");
+  var input = document.getElementById("site-search-input");
+  var list = document.getElementById("site-search-results");
+  var status = document.getElementById("site-search-status");
+  if (searchBtn && panel && input && list) {
+    var index = null;
+    var loading = null;
+    var locale = zh ? "zh" : "en";
+
+    function load() {
+      if (!loading) {
+        loading = fetch("/search-index.json")
+          .then(function (r) { return r.json(); })
+          .then(function (all) { index = all.filter(function (e) { return e.l === locale; }); })
+          .catch(function () { index = []; });
+      }
+      return loading;
+    }
+
+    function fold(t) { return (t || "").toLowerCase(); }
+
+    function search(q) {
+      var terms = fold(q).split(/\s+/).filter(Boolean);
+      if (!terms.length || !index) return [];
+      return index
+        .map(function (e) {
+          var t = fold(e.t), d = fold(e.d), h = fold(e.h.join(" "));
+          var score = 0;
+          for (var i = 0; i < terms.length; i++) {
+            var w = terms[i], s = 0;
+            if (t.indexOf(w) !== -1) s += 5;
+            if (h.indexOf(w) !== -1) s += 2;
+            if (d.indexOf(w) !== -1) s += 1;
+            if (!s) return null; // every term must match somewhere
+            score += s;
+          }
+          return { e: e, score: score };
+        })
+        .filter(Boolean)
+        .sort(function (a, b) { return b.score - a.score; })
+        .slice(0, 8)
+        .map(function (r) { return r.e; });
+    }
+
+    function render() {
+      var q = input.value.trim();
+      var hits = search(q);
+      list.innerHTML = "";
+      hits.forEach(function (e) {
+        var li = document.createElement("li");
+        var a = document.createElement("a");
+        a.href = e.u;
+        var strong = document.createElement("strong");
+        strong.textContent = e.t;
+        var span = document.createElement("span");
+        span.textContent = e.d;
+        a.appendChild(strong);
+        a.appendChild(span);
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+      if (!q) status.textContent = "";
+      else if (!hits.length) status.textContent = zh ? "没有找到相关页面。" : "No pages match.";
+      else status.textContent = zh ? "找到 " + hits.length + " 个页面" : hits.length + (hits.length === 1 ? " page" : " pages");
+    }
+
+    function open() {
+      panel.hidden = false;
+      searchBtn.setAttribute("aria-expanded", "true");
+      input.focus();
+      load().then(render);
+    }
+
+    function close(returnFocus) {
+      panel.hidden = true;
+      searchBtn.setAttribute("aria-expanded", "false");
+      if (returnFocus) searchBtn.focus();
+    }
+
+    searchBtn.addEventListener("click", function () {
+      if (panel.hidden) open(); else close(true);
+    });
+    input.addEventListener("input", function () { load().then(render); });
+
+    document.addEventListener("keydown", function (e) {
+      var typing = /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) || e.target.isContentEditable;
+      if (e.key === "/" && !typing && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        e.preventDefault();
+        open();
+      } else if (e.key === "Escape" && !panel.hidden) {
+        close(true);
+      } else if ((e.key === "ArrowDown" || e.key === "ArrowUp") && !panel.hidden && panel.contains(e.target)) {
+        var links = Array.prototype.slice.call(list.querySelectorAll("a"));
+        if (!links.length) return;
+        var i = links.indexOf(e.target);
+        var next = e.key === "ArrowDown" ? (i < 0 ? 0 : Math.min(i + 1, links.length - 1)) : i - 1;
+        e.preventDefault();
+        if (next < 0) input.focus(); else links[next].focus();
+      }
+    });
+  }
 })();

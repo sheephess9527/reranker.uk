@@ -49,10 +49,19 @@
         <li><a class="nav-cta" href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
       </ul>
       <div class="nav-right">
+        <button type="button" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="site-search" data-i18n-aria-label="shared.search.open" aria-label="搜索全站（按 /）" title="/">⌕</button>
         <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
         <a class="lang-toggle" href="/guides/self-host-reranker" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
       </div>
     </nav>
+    <div class="site-search" id="site-search" role="search" hidden>
+      <div class="container narrow">
+        <label class="sr-only" for="site-search-input" data-i18n="shared.search.label">搜索 reranker.uk</label>
+        <input id="site-search-input" type="search" autocomplete="off" spellcheck="false" data-i18n-placeholder="shared.search.placeholder" placeholder="搜索指南和模型…" aria-describedby="site-search-status">
+        <p class="search-status" id="site-search-status" aria-live="polite"></p>
+        <ul class="search-results" id="site-search-results"></ul>
+      </div>
+    </div>
   </header>
 <main id="main">
     <article class="article container narrow">

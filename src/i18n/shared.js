@@ -1,5 +1,8 @@
 window.I18N_SHARED = {
   keys: {
+    "shared.search.open": "搜索全站（按 /）",
+    "shared.search.label": "搜索 reranker.uk",
+    "shared.search.placeholder": "搜索指南和模型…",
     "shared.skip": "跳到正文",
     "shared.nav.home": "首页",
     "shared.nav.guides": "指南",
