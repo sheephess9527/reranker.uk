@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "15 Oct 2026 (late) — Previous and next on the reading path":
+    "2026 年 10 月 15 日（稍晚）—— 阅读路线有了上一篇和下一篇",
+  "<strong>Reading-path links</strong> — the five guides in the reading order on the guides page (what a reranker is, cross- vs bi-encoders, adding reranking to RAG, hybrid retrieval, evaluation) now end with links to the guide before and after, and say which step of five you’re on":
+    "<strong>阅读路线导航</strong> —— 指南页阅读路线上的五篇（什么是 reranker、Cross- 与 Bi-encoder、为 RAG 加重排序、混合检索、评测）末尾现在有上一篇和下一篇的链接，并标明你读到了五篇中的第几篇",
   "15 Oct 2026 — Pages for zerank-2 and Qwen3-VL-Reranker":
     "2026 年 10 月 15 日 —— zerank-2 和 Qwen3-VL-Reranker 有了专页",
   "<strong><a href=\"/models/zerank.html\">zerank-2</a></strong> — ZeroEntropy’s 4B reranker gets its own page: the licence conflict between its model card (Apache 2.0) and ZeroEntropy’s docs (non-commercial), ZeroEntropy’s seven-domain scores against Cohere rerank-3.5, API pricing and a quick start":

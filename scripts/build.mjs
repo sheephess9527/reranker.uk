@@ -557,6 +557,47 @@ function ogImage(relPath, zh) {
   };
 }
 
+/**
+ * "Previous / next" links on the guides in the reading path, in the order
+ * /guides/ lists them (its ol.reading-path) — so reordering that list is the
+ * only edit needed. Titles are the neighbouring pages' own <h1>, translated
+ * from their dictionaries on /zh/. Inserted before the page's closing
+ * .cta-band, where the guide's content ends.
+ */
+function readingPath() {
+  const { body } = parsePage(path.join(PAGES, "guides/index.html"));
+  return parse(body).querySelectorAll("ol.reading-path a.card")
+    .map((a) => a.getAttribute("href").replace(/^\//, ""));
+}
+
+function pageHeading(relPath, zh) {
+  const { meta, body } = parsePage(path.join(PAGES, relPath));
+  const h1 = norm(parse(body).querySelector("h1").innerHTML);
+  if (!zh) return h1;
+  const dictFile = dictFileFor(meta);
+  return (dictFile && loadDict(dictFile).I18N_PAGE?.zh?.[h1]) || h1;
+}
+
+function readingPathPager(relPath, zh) {
+  const order = readingPath();
+  const i = order.indexOf(relPath);
+  if (i === -1) return "";
+  const t = (key, en) => (zh && SHARED_KEYS[key]) || en;
+  const link = (rel, href, label, title) =>
+    `<a class="card guide-pager-link guide-pager-${rel}" href="${href}" rel="${rel}">` +
+    `<span class="guide-pager-label">${label}</span><span class="guide-pager-title">${title}</span></a>`;
+  const prev = i > 0
+    ? link("prev", "/" + order[i - 1], t("shared.pager.prev", "← Previous"), pageHeading(order[i - 1], zh))
+    : "";
+  const next = i < order.length - 1
+    ? link("next", "/" + order[i + 1], t("shared.pager.next", "Next →"), pageHeading(order[i + 1], zh))
+    : link("next", "/guides/", t("shared.pager.done", "End of the reading path →"), t("shared.footer.allGuides", "All guides"));
+  const step = t("shared.pager.step", "Reading path: {n} of {total}")
+    .replace("{n}", i + 1).replace("{total}", order.length);
+  return `<nav class="guide-pager" aria-label="${step}">` +
+    `<div class="guide-pager-step">${step}</div>${prev}${next}</nav>\n      `;
+}
+
 function assemble({ meta, body, relPath, locale, lastmod }) {
   const urlPath = urlPathFor(relPath);
   const enUrl = SITE + urlPath;
@@ -598,6 +639,8 @@ function assemble({ meta, body, relPath, locale, lastmod }) {
   let html = fill(partial("head-open.html"), vars);
   html += "\n</head>\n<body>\n";
   html += partial("nav.html");
+  const pager = readingPathPager(relPath, zh);
+  if (pager) body = body.replace('<div class="cta-band">', pager + '<div class="cta-band">');
   html += "\n" + body + "\n";
   html += fill(partial("footer.html"), { page_scripts: vars.page_scripts });
 

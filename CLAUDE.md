@@ -102,9 +102,9 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 > 完成：新增 `/models/zerank` 和 `/models/qwen3-vl-reranker`（中英文、meta、JSON-LD、社交卡片），结构照现有模型页。所有数字都新进了 `data/models.json`（46 个，来源是 ZeroEntropy 模型卡与文档、Qwen3-VL-Reranker 模型卡，每个 check_pattern 都在抓下来的原文上验证过只命中一次）。模型对比表、页脚、Qwen 页里的链接改指向新页面。zerank-2 的许可证矛盾（模型卡 Apache 2.0，文档仍写非商业）在页面上写明；HF 上 `zeroentropy/zerank-2` 会重定向到 `zerank-2-reranker`，代码用后者。表里其余没有专页的（Contextual、NVIDIA、GTE、LightOn）以后再补。
 
-### 8. 入门五篇指南加「上一篇 / 下一篇」
+### ~~8. 入门五篇指南加「上一篇 / 下一篇」~~（2026-10-15 已完成）
 
-顺序同 `/guides/` 的阅读路线。
+> 完成：`build.mjs` 的 `readingPathPager()` 从 `src/pages/guides/index.html` 的 `ol.reading-path` 读顺序，在这五篇的 `.cta-band` 前插入 `nav.guide-pager`（「阅读路线：第 n 篇，共 5 篇」+ 上一篇/下一篇，最后一篇的下一篇指回 `/guides/`）。标题取相邻页面自己的 h1，中文页用对方词典里的译文；按钮文字是 shared 键 `shared.pager.*`。要改顺序只改指南索引那个列表。样式 `.guide-pager`（≤560px 纵向）。`tests/guide-pager.spec.js` 中英文各走一遍路线。
 
 ### 9. 更新日志太长
 
