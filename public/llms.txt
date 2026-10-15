@@ -44,7 +44,7 @@ Benchmark figures carry their protocol: rows marked with an asterisk on /models/
 ## About
 
 - [Changelog — reranker.uk updates](https://reranker.uk/changelog): Release notes for reranker.uk: demo features, new guides, model comparison updates, and site improvements.
-- [Privacy — reranker.uk](https://reranker.uk/privacy): How reranker.uk handles your data: static pages, in-browser demo processing, third-party CDNs, and share links.
+- [Privacy — reranker.uk](https://reranker.uk/privacy): How reranker.uk handles your data: static pages, cookie-free Cloudflare Web Analytics, in-browser demo processing, third-party CDNs, and share links.
 
 ## Also
 

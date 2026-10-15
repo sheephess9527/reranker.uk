@@ -71,6 +71,13 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-15-privacy">2026 年 10 月 15 日（凌晨）—— 隐私说明写明了所用的访问统计</h2>
+        <ul class="feature-list">
+          <li><strong>更正隐私说明</strong> —— 页面原来写着本站不运行任何统计，但 Cloudflare Web Analytics 一直在统计页面浏览量。现在页面如实写明了这一点，并列出 Cloudflare 文档中的说明：不使用 cookie 或本地存储、不做指纹识别、不收集个人数据、不记录查询参数，所以 Demo 分享链接里的文字不在其中</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-15-csp">2026 年 10 月 15 日（深夜）—— 安全策略从只报告改为拦截</h2>
         <ul class="feature-list">
           <li><strong>强制执行 Content-Security-Policy</strong> —— 9 月 27 日加上的策略此前只报告它会拦截什么。此后每天用它加载全部 Demo 模型的检查一直没有问题，在中国大陆网络下打开 Demo 也没有报错、能正常加载，所以现在浏览器会直接拦截策略不允许的内容</li>
