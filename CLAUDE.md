@@ -98,9 +98,9 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 > 完成：`build.mjs` 的 `versionAssets()` 给页面里所有 `/assets/` 地址加 `?v=<内容哈希前 10 位>`；`_headers` 给 `/assets/css|js|og/*` 一年 `immutable`，`/assets/img/*` 一天（`site.webmanifest` 里的图标没有版本号）。`scripts/serve.mjs` 支持 `/assets/css/*` 这类前缀匹配。`tests/asset-cache.spec.js` 检查页面上没有不带版本号的资源地址、本地响应头正确；`demo-smoke-daily.yml` 的 `headers` 任务检查线上的 Cache-Control。脚本里不要自己去加载 `/assets/` 下的文件（那样拿不到版本号）。
 
-### 7. 给表里有但没有详情页的模型补页面（先 zerank-2、Qwen3-VL）
+### ~~7. 给表里有但没有详情页的模型补页面（先 zerank-2、Qwen3-VL）~~（2026-10-15 已完成）
 
-只用 `data/models.json` 里已核实的数字，页面结构照现有模型页。
+> 完成：新增 `/models/zerank` 和 `/models/qwen3-vl-reranker`（中英文、meta、JSON-LD、社交卡片），结构照现有模型页。所有数字都新进了 `data/models.json`（46 个，来源是 ZeroEntropy 模型卡与文档、Qwen3-VL-Reranker 模型卡，每个 check_pattern 都在抓下来的原文上验证过只命中一次）。模型对比表、页脚、Qwen 页里的链接改指向新页面。zerank-2 的许可证矛盾（模型卡 Apache 2.0，文档仍写非商业）在页面上写明；HF 上 `zeroentropy/zerank-2` 会重定向到 `zerank-2-reranker`，代码用后者。表里其余没有专页的（Contextual、NVIDIA、GTE、LightOn）以后再补。
 
 ### 8. 入门五篇指南加「上一篇 / 下一篇」
 

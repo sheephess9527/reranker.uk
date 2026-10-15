@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-locale="zh" data-prerendered="zh">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <title>zerank-2：ZeroEntropy 的 4B 重排序模型，开源权重与 API | reranker.uk</title>
+  <meta name="description" content="zerank-2 评测（2026 年 10 月）：基于 Qwen3-4B 的 ZeroEntropy 4B 重排序模型，模型卡与官方文档在许可证上的矛盾，ZeroEntropy 自己对比 Cohere rerank-3.5 的分数，API 价格，以及 sentence-transformers 快速上手。" >
+  <link rel="canonical" href="https://reranker.uk/zh/models/zerank" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/models/zerank" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/zerank" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/zerank" >
+  <meta name="theme-color" content="#0b0d17" >
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
+  <meta name="author" content="reranker.uk" >
+  <link rel="icon" href="/assets/img/favicon.svg?v=1bb58b097e" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=6edeebfac7" >
+  <link rel="manifest" href="/site.webmanifest" >
+  <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
+  <meta property="og:type" content="article" >
+  <meta property="og:title" content="zerank-2：ZeroEntropy 的 4B 重排序模型，开源权重与 API | reranker.uk" >
+  <meta property="og:description" content="zerank-2 评测（2026 年 10 月）：基于 Qwen3-4B 的 ZeroEntropy 4B 重排序模型，模型卡与官方文档在许可证上的矛盾，ZeroEntropy 自己对比 Cohere rerank-3.5 的分数，API 价格，以及 sentence-transformers 快速上手。" >
+  <meta property="og:url" content="https://reranker.uk/zh/models/zerank" >
+  <meta property="og:site_name" content="reranker.uk" >
+  <meta property="og:locale" content="zh_CN" >
+  <meta property="og:locale:alternate" content="en_GB" >
+  <meta name="twitter:card" content="summary_large_image" >
+  <meta property="og:image" content="https://reranker.uk/assets/og/zh/models/zerank.jpg?v=8df27d841c" >
+  <meta property="og:image:width" content="1200" >
+  <meta property="og:image:height" content="630" >
+  <meta property="og:image:alt" content="zerank-2：ZeroEntropy 的 4B 重排序模型，开源权重与 API | reranker.uk" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/models/zerank.jpg?v=8df27d841c" >
+  <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
+  <link rel="preload" href="/assets/css/style.css?v=3f9e686d79" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=3f9e686d79" >
+  <!-- seo:jsonld -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"模型对比","item":"https://reranker.uk/zh/models/"},{"@type":"ListItem","position":3,"name":"zerank-2：ZeroEntropy 的 4B 重排序模型，开源权重与 API","item":"https://reranker.uk/zh/models/zerank"}]},{"@type":"Article","headline":"zerank-2：ZeroEntropy 的 4B 重排序模型，开源权重与 API","description":"zerank-2 评测（2026 年 10 月）：基于 Qwen3-4B 的 ZeroEntropy 4B 重排序模型，模型卡与官方文档在许可证上的矛盾，ZeroEntropy 自己对比 Cohere rerank-3.5 的分数，API 价格，以及 sentence-transformers 快速上手。","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"zh-Hans","datePublished":"2026-10-15","dateModified":"2026-10-15","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/zh/"},"mainEntityOfPage":"https://reranker.uk/zh/models/zerank","about":{"@type":"Thing","name":"zerank-2 reranker model"}}]}</script>
+
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="shared.skip">跳到正文</a>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
+        <li><a href="/zh/guides/" data-i18n="shared.nav.guides">指南</a></li>
+        <li><a href="/zh/models/" data-i18n="shared.nav.models" aria-current="page" class="active">模型对比</a></li>
+        <li><a class="nav-cta" href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+      </ul>
+      <div class="nav-right">
+        <button type="button" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="site-search" data-i18n-aria-label="shared.search.open" aria-label="搜索全站（按 /）" title="/">⌕</button>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+        <a class="lang-toggle" href="/models/zerank" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
+      </div>
+    </nav>
+    <div class="site-search" id="site-search" role="search" hidden>
+      <div class="container narrow">
+        <label class="sr-only" for="site-search-input" data-i18n="shared.search.label">搜索 reranker.uk</label>
+        <input id="site-search-input" type="search" autocomplete="off" spellcheck="false" data-i18n-placeholder="shared.search.placeholder" placeholder="搜索指南和模型…" aria-describedby="site-search-status">
+        <p class="search-status" id="site-search-status" aria-live="polite"></p>
+        <ul class="search-results" id="site-search-results"></ul>
+      </div>
+    </div>
+  </header>
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>zerank-2</div>
+      <h1>zerank-2</h1>
+      <p class="meta">开源权重 + 托管 API · ZeroEntropy · <time datetime="2026-10-15">更新于 2026 年 10 月 15 日</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill warn">许可证：先确认</span><span class="pill">托管 API</span><span class="pill">建议用 GPU</span></div>
+      <p class="lead"><strong>zerank-2</strong> 是 ZeroEntropy 的 4B 重排序模型，基于 Qwen3-4B，上下文 32,768 个 token。权重放在 Hugging Face 上，ZeroEntropy 也通过自家 API 提供同一个模型，每百万 token $0.025。它公布的分数来自 ZeroEntropy 自己的七领域测试：成绩不错，但不能和任何人的 BEIR 分数直接比较。</p>
+
+      <div class="toc">
+        <strong>本页目录</strong>
+        <ol>
+          <li><a href="#licence">许可证问题</a></li>
+          <li><a href="#scores">分数，以及是谁测的</a></li>
+          <li><a href="#usage">快速上手</a></li>
+          <li><a href="#api">托管 API</a></li>
+          <li><a href="#when">什么时候选 zerank-2</a></li>
+          <li><a href="#pros-cons">优缺点</a></li>
+        </ol>
+      </div>
+
+      <h2 id="licence">许可证问题</h2>
+      <p><a href="https://huggingface.co/zeroentropy/zerank-2-reranker" rel="noopener noreferrer">Hugging Face 模型卡</a>写的是 Apache 2.0，仓库在 2026 年 7 月改了许可证。但 ZeroEntropy 的<a href="https://docs.zeroentropy.dev/models" rel="noopener noreferrer">模型文档</a>仍然写着 zerank-2 “按非商业许可证”提供下载，并请商业用户联系他们。</p>
+      <p>在两边说法一致之前，如果要在商业产品里自托管，先拿到 ZeroEntropy 的书面确认。通过 API 使用则受 ZeroEntropy 的服务条款约束，不涉及这个问题；更早的 <strong>zerank-1-small</strong> 在两边都是 Apache 2.0。</p>
+
+      <h2 id="scores">分数，以及是谁测的</h2>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="分数，以及是谁测的">
+        <table>
+          <thead>
+            <tr><th>领域</th><th>只用向量检索</th><th>zerank-2</th><th>Cohere rerank-3.5</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>网页</td><td>0.3819*</td><td><strong>0.6346*</strong></td><td>0.5594*</td></tr>
+            <tr><td>对话</td><td>0.4305*</td><td><strong>0.6140*</strong></td><td>0.5648*</td></tr>
+            <tr><td>理工与逻辑</td><td>0.3744*</td><td><strong>0.6521*</strong></td><td>0.5418*</td></tr>
+            <tr><td>代码</td><td>0.4582*</td><td><strong>0.6528*</strong></td><td>0.5364*</td></tr>
+            <tr><td>法律</td><td>0.4101*</td><td><strong>0.6644*</strong></td><td>0.5257*</td></tr>
+            <tr><td>生物医学</td><td>0.4783*</td><td><strong>0.7217*</strong></td><td>0.6246*</td></tr>
+            <tr><td>金融</td><td>0.6232*</td><td><strong>0.7600*</strong></td><td>0.7402*</td></tr>
+            <tr><td><strong>平均</strong></td><td>0.4509*</td><td><strong>0.6714*</strong></td><td>0.5847*</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">ZeroEntropy 自己的测试，数据来自模型卡。指标是 NDCG@10，每个重排序模型重排的都是 OpenAI text-embedding-3-small 召回的同一批前 100 个候选；“只用向量检索”就是第一阶段本身的成绩。数据集是 ZeroEntropy 自己的，不是 BEIR，所以<a href="/zh/models/">模型对比表</a>里 zerank-2 没有 BEIR 分数。</p>
+      <p>同一测试里，更早的 zerank-1 平均 0.6456*，把 Gemini 2.5 Flash 当作列表式重排序模型用是 0.5999*。金融是 zerank-2 唯一没有领先的领域，Gemini 在那里更高。这张表最清楚的结论，是任何一个重排序模型相比只用向量检索带来的提升有多大——这个提升才是你该在自己数据上测的。</p>
+
+      <h2 id="usage">快速上手</h2>
+      <h3>sentence-transformers</h3>
+      <pre tabindex="0"><code>pip install sentence-transformers
+
+from sentence_transformers import CrossEncoder
+
+model = CrossEncoder("zeroentropy/zerank-2-reranker")
+
+rankings = model.rank(
+    "What is 2+2?",
+    ["4", "The answer is definitely 1 million"],
+)
+# [{'corpus_id': 0, 'score': 5.40625}, {'corpus_id': 1, 'score': -4.5}]</code></pre>
+      <p>从 2026 年 5 月起，<code>predict()</code> 和 <code>rank()</code> 返回原始 logit，而不是 0–1 的概率，排序结果不变。需要 0–1 分数时，按模型卡的做法计算 <code>sigmoid(score / 5)</code>。加载时也不再需要 <code>trust_remote_code=True</code>。</p>
+
+      <h2 id="api">托管 API</h2>
+      <pre tabindex="0"><code>pip install zeroentropy
+
+from zeroentropy import ZeroEntropy
+
+zclient = ZeroEntropy()   # reads ZEROENTROPY_API_KEY
+response = zclient.models.rerank(
+    model="zerank-2",
+    query="What is 2+2?",
+    documents=["4", "The answer is definitely 1 million."],
+)</code></pre>
+      <p>API 价格为每百万 token $0.025。ZeroEntropy 文档里 zerank-1 和 zerank-1-small 价格相同，API 部署在美国东部、美国西部和欧洲。速率限制取决于订阅档位，当前数值见<a href="https://docs.zeroentropy.dev/models" rel="noopener noreferrer">文档</a>。这个模型也在 AWS 和 Azure 应用市场上架，部署后运行在你自己的云账号里。</p>
+
+      <h2 id="when">什么时候选 zerank-2</h2>
+      <ul>
+        <li><strong>适合：</strong>想先调用 API，以后再自托管，而且换部署方式时模型行为不变。</li>
+        <li><strong>适合：</strong>你的文档和 ZeroEntropy 测过的领域相近：法律、金融、代码、生物医学、技术文档。</li>
+        <li><strong>先测试：</strong>英语以外的语言。模型卡只列了英语，ZeroEntropy 的发布文章却称它支持多语言。两种说法都别直接信，先用带标注的查询测你要用的语言。</li>
+        <li><strong>可能不适合：</strong>许可证问题解决前的商业自托管（见<a href="#licence">上文</a>），或者只有 CPU 的部署。4B 模型需要 GPU；只有 CPU 的话，先试 <a href="/zh/models/bge-reranker">bge-reranker</a>。</li>
+      </ul>
+
+      <h2 id="pros-cons">优缺点</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 style="color:var(--good);margin-top:0">优点</h3>
+          <ul class="feature-list">
+            <li>同一个模型既有权重也有 API</li>
+            <li>32K 上下文</li>
+            <li>可直接用 sentence-transformers 的 <code>CrossEncoder</code> 加载</li>
+            <li>在 ZeroEntropy 自己的测试里，每个领域都领先 Cohere rerank-3.5</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--danger);margin-top:0">缺点</h3>
+          <ul style="padding-left:1.2rem;color:var(--text-soft)">
+            <li>模型卡和官方文档对许可证说法不一</li>
+            <li>公布的分数是厂商自己用自己的数据集测的</li>
+            <li>4B 参数：要有 GPU 延迟才舒服</li>
+            <li>太大，放不进我们的浏览器内 Demo</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">和你现在用的方案比一比</h2>
+        <p class="soft">用你现有检索器召回的同一批前 100 个结果，分别交给 zerank-2 和你现在的方案重排，在 30 条带标注的查询上比较。</p>
+        <a class="btn btn-primary" href="/zh/guides/evaluate-reranker">评测指南 →</a>
+        <a class="btn btn-ghost" href="/zh/models/" style="margin-left:.5rem">全部模型 →</a>
+      </div>
+
+      <h2>其他模型</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/zh/models/cohere-rerank"><h3>Cohere Rerank</h3><p>zerank-2 拿来对比的那个托管 API。</p></a>
+        <a class="card" href="/zh/models/qwen-reranker"><h3>Qwen3-Reranker</h3><p>0.6B、4B、8B 全部 Apache 2.0。</p></a>
+        <a class="card" href="/zh/models/voyage-rerank"><h3>Voyage rerank-3</h3><p>托管、按 token 计费、32K 上下文。</p></a>
+        <a class="card" href="/zh/guides/self-host-reranker"><h3>自托管指南</h3><p>服务化与运维清单。</p></a>
+      </div>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch" data-i18n="shared.footer.blurb">一个关于检索与 RAG 重排序（reranker）的开放学习资源，外加一个在浏览器里零成本运行的实时 Demo。</p>
+          <p style="margin-top:.6rem"><a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer" data-i18n="shared.footer.github">在 GitHub 上查看源码</a></p>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.guides">指南</h4>
+          <ul>
+            <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/guides/reranking-not-working" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
+            <li><a href="/zh/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
+            <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
+            <li><a href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
+            <li><a href="/zh/privacy" data-i18n="shared.footer.privacy">隐私说明</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.models">模型</h4>
+          <ul>
+            <li><a href="/zh/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank">Voyage Rerank</a></li>
+            <li><a href="/zh/models/zerank">zerank-2</a></li>
+            <li><a href="/zh/models/qwen3-vl-reranker">Qwen3-VL-Reranker</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> reranker.uk</span>
+        <span class="footer-legal muted">
+          <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
+          · <a href="/zh/privacy" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog" data-i18n="shared.footer.changelogShort">更新日志</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js?v=dac3b51d07"></script>
+  
+  <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
+</body>
+</html>

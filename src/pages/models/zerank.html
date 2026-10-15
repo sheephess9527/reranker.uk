@@ -1,0 +1,119 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>zerank-2</div>
+      <h1>zerank-2</h1>
+      <p class="meta">Open weights + hosted API · ZeroEntropy · <time datetime="2026-10-15">Updated 15 Oct 2026</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill warn">Licence: check first</span><span class="pill">Hosted API</span><span class="pill">GPU recommended</span></div>
+      <p class="lead"><strong>zerank-2</strong> is ZeroEntropy’s 4B reranker, built on Qwen3-4B with a {{fact:zerank-2.context_tokens}}-token context. The weights are on Hugging Face, and ZeroEntropy serves the same model through its API at ${{fact:zerank-2.api_usd_per_m}} per million tokens. Its published scores come from ZeroEntropy’s own seven-domain test. They are strong, but they can’t be compared with anyone’s BEIR figures.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#licence">The licence question</a></li>
+          <li><a href="#scores">Scores, and whose they are</a></li>
+          <li><a href="#usage">Quick start</a></li>
+          <li><a href="#api">Hosted API</a></li>
+          <li><a href="#when">When to pick zerank-2</a></li>
+          <li><a href="#pros-cons">Pros and cons</a></li>
+        </ol>
+      </div>
+
+      <h2 id="licence">The licence question</h2>
+      <p>The <a href="https://huggingface.co/zeroentropy/zerank-2-reranker" rel="noopener noreferrer">Hugging Face model card</a> says Apache 2.0; the repository was relicensed in July 2026. ZeroEntropy’s <a href="https://docs.zeroentropy.dev/models" rel="noopener noreferrer">models documentation</a> still says zerank-2 is downloadable “under a non-commercial license” and asks commercial users to get in touch.</p>
+      <p>Until the two agree, get ZeroEntropy’s confirmation in writing before you self-host it in a commercial product. Using it through the API is covered by ZeroEntropy’s terms of service instead, and the older <strong>zerank-1-small</strong> is Apache 2.0 in both places.</p>
+
+      <h2 id="scores">Scores, and whose they are</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Domain</th><th>Embeddings only</th><th>zerank-2</th><th>Cohere rerank-3.5</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Web</td><td>{{fact:zerank-2.web_embed_only}}</td><td><strong>{{fact:zerank-2.web_zerank2}}</strong></td><td>{{fact:zerank-2.web_cohere_3_5}}</td></tr>
+            <tr><td>Conversational</td><td>{{fact:zerank-2.conversational_embed_only}}</td><td><strong>{{fact:zerank-2.conversational_zerank2}}</strong></td><td>{{fact:zerank-2.conversational_cohere_3_5}}</td></tr>
+            <tr><td>STEM and logic</td><td>{{fact:zerank-2.stem_logic_embed_only}}</td><td><strong>{{fact:zerank-2.stem_logic_zerank2}}</strong></td><td>{{fact:zerank-2.stem_logic_cohere_3_5}}</td></tr>
+            <tr><td>Code</td><td>{{fact:zerank-2.code_embed_only}}</td><td><strong>{{fact:zerank-2.code_zerank2}}</strong></td><td>{{fact:zerank-2.code_cohere_3_5}}</td></tr>
+            <tr><td>Legal</td><td>{{fact:zerank-2.legal_embed_only}}</td><td><strong>{{fact:zerank-2.legal_zerank2}}</strong></td><td>{{fact:zerank-2.legal_cohere_3_5}}</td></tr>
+            <tr><td>Biomedical</td><td>{{fact:zerank-2.biomedical_embed_only}}</td><td><strong>{{fact:zerank-2.biomedical_zerank2}}</strong></td><td>{{fact:zerank-2.biomedical_cohere_3_5}}</td></tr>
+            <tr><td>Finance</td><td>{{fact:zerank-2.finance_embed_only}}</td><td><strong>{{fact:zerank-2.finance_zerank2}}</strong></td><td>{{fact:zerank-2.finance_cohere_3_5}}</td></tr>
+            <tr><td><strong>Average</strong></td><td>{{fact:zerank-2.embed_only_avg}}</td><td><strong>{{fact:zerank-2.avg_ndcg10}}</strong></td><td>{{fact:zerank-2.cohere_3_5_same_run}}</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">ZeroEntropy’s own run, from the model card. The metric is NDCG@10, and every reranker reorders the same top 100 candidates from OpenAI’s text-embedding-3-small; “embeddings only” is that first stage on its own. The datasets are ZeroEntropy’s, not BEIR, so the <a href="/models/">models table</a> lists no BEIR figure for zerank-2.</p>
+      <p>The same run puts the older zerank-1 at {{fact:zerank-2.zerank1_same_run}} on average, and Gemini 2.5 Flash, used as a listwise reranker, at {{fact:zerank-2.gemini_flash_same_run}}. Finance is the one domain where zerank-2 doesn’t lead: Gemini scores higher there. What the table shows most clearly is the size of the jump any of these rerankers gives over embeddings alone. That jump is the thing to measure on your own data.</p>
+
+      <h2 id="usage">Quick start</h2>
+      <h3>sentence-transformers</h3>
+      <pre><code>pip install sentence-transformers
+
+from sentence_transformers import CrossEncoder
+
+model = CrossEncoder("zeroentropy/zerank-2-reranker")
+
+rankings = model.rank(
+    "What is 2+2?",
+    ["4", "The answer is definitely 1 million"],
+)
+# [{'corpus_id': 0, 'score': 5.40625}, {'corpus_id': 1, 'score': -4.5}]</code></pre>
+      <p>Since May 2026, <code>predict()</code> and <code>rank()</code> return a raw logit rather than a 0–1 probability. The ranking is the same either way. For a 0–1 score, apply <code>sigmoid(score / 5)</code>, as the model card does. Loading no longer needs <code>trust_remote_code=True</code>.</p>
+
+      <h2 id="api">Hosted API</h2>
+      <pre><code>pip install zeroentropy
+
+from zeroentropy import ZeroEntropy
+
+zclient = ZeroEntropy()   # reads ZEROENTROPY_API_KEY
+response = zclient.models.rerank(
+    model="zerank-2",
+    query="What is 2+2?",
+    documents=["4", "The answer is definitely 1 million."],
+)</code></pre>
+      <p>The API costs ${{fact:zerank-2.api_usd_per_m}} per million tokens. ZeroEntropy’s documentation lists the same price for zerank-1 and zerank-1-small, and serves the API from US-East, US-West and Europe. Rate limits depend on your subscription tier; check the <a href="https://docs.zeroentropy.dev/models" rel="noopener noreferrer">docs</a> for the current figures. The model is also sold through the AWS and Azure marketplaces, where it runs inside your own cloud account.</p>
+
+      <h2 id="when">When to pick zerank-2</h2>
+      <ul>
+        <li><strong>Yes:</strong> you want one model you can call as an API now and self-host later without changing its behaviour.</li>
+        <li><strong>Yes:</strong> your documents look like the domains ZeroEntropy tested: legal, finance, code, biomedical, technical.</li>
+        <li><strong>Check first:</strong> other languages. The model card lists only English, while ZeroEntropy’s launch post calls it multilingual. Test your languages on labelled queries before relying on either.</li>
+        <li><strong>Maybe not:</strong> commercial self-hosting before the licence is settled (<a href="#licence">above</a>), or CPU-only serving. A 4B model wants a GPU; for CPU, start with <a href="/models/bge-reranker.html">bge-reranker</a>.</li>
+      </ul>
+
+      <h2 id="pros-cons">Pros and cons</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 style="color:var(--good);margin-top:0">Pros</h3>
+          <ul class="feature-list">
+            <li>The same model as weights and as an API</li>
+            <li>32K context</li>
+            <li>Loads directly with sentence-transformers’ <code>CrossEncoder</code></li>
+            <li>Leads Cohere rerank-3.5 in every domain of ZeroEntropy’s own test</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--danger);margin-top:0">Cons</h3>
+          <ul style="padding-left:1.2rem;color:var(--text-soft)">
+            <li>Model card and documentation disagree on the licence</li>
+            <li>Published scores are the vendor’s own, on its own datasets</li>
+            <li>4B parameters: GPU required for comfortable latency</li>
+            <li>Too large for our in-browser demo</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">Measure it against what you run now</h2>
+        <p class="soft">Rerank the same top 100 from your current retriever with zerank-2 and with your current setup, on 30 labelled queries.</p>
+        <a class="btn btn-primary" href="/guides/evaluate-reranker.html">Evaluate guide →</a>
+        <a class="btn btn-ghost" href="/models/" style="margin-left:.5rem">All models →</a>
+      </div>
+
+      <h2>Other models</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/models/cohere-rerank.html"><h3>Cohere Rerank</h3><p>The hosted API zerank-2 compares itself with.</p></a>
+        <a class="card" href="/models/qwen-reranker.html"><h3>Qwen3-Reranker</h3><p>Apache 2.0 at 0.6B, 4B and 8B.</p></a>
+        <a class="card" href="/models/voyage-rerank.html"><h3>Voyage rerank-3</h3><p>Hosted, per-token, 32K context.</p></a>
+        <a class="card" href="/guides/self-host-reranker.html"><h3>Self-host guide</h3><p>Serving and ops checklist.</p></a>
+      </div>
+    </article>
+  </main>

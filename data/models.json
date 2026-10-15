@@ -901,6 +901,51 @@
       "check_hint": "MMTEB",
       "protocol_note": "Qwen's own run: the retrieval tasks of MMTEB, from the model card — not BEIR",
       "verified_on": "2026-10-09"
+    },
+    "mmeb_avg": {
+      "value": "79.2",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/raw/main/README.md",
+      "check_pattern": "Qwen3\\-VL\\-Reranker\\-8B\\s*\\|\\s*8B\\s*\\|\\s*{value}\\s*\\|",
+      "check_hint": "MMEB-v2",
+      "protocol_note": "Qwen's own run, from the model card; the card doesn't say which first stage was reranked",
+      "verified_on": "2026-10-15"
+    },
+    "mmeb_image": {
+      "value": "80.7",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/raw/main/README.md",
+      "check_pattern": "Qwen3\\-VL\\-Reranker\\-8B\\s*\\|\\s*8B\\s*\\|(?:[^|]*\\|){1}\\s*{value}\\s*\\|",
+      "check_hint": "MMEB-v2",
+      "protocol_note": "Qwen's own run, from the model card; the card doesn't say which first stage was reranked",
+      "verified_on": "2026-10-15"
+    },
+    "mmeb_video": {
+      "value": "55.8",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/raw/main/README.md",
+      "check_pattern": "Qwen3\\-VL\\-Reranker\\-8B\\s*\\|\\s*8B\\s*\\|(?:[^|]*\\|){2}\\s*{value}\\s*\\|",
+      "check_hint": "MMEB-v2",
+      "protocol_note": "Qwen's own run, from the model card; the card doesn't say which first stage was reranked",
+      "verified_on": "2026-10-15"
+    },
+    "mmeb_visdoc": {
+      "value": "86.3",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/raw/main/README.md",
+      "check_pattern": "Qwen3\\-VL\\-Reranker\\-8B\\s*\\|\\s*8B\\s*\\|(?:[^|]*\\|){3}\\s*{value}\\s*\\|",
+      "check_hint": "MMEB-v2",
+      "protocol_note": "Qwen's own run, from the model card; the card doesn't say which first stage was reranked",
+      "verified_on": "2026-10-15"
+    },
+    "jinavdr": {
+      "value": "83.6",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/raw/main/README.md",
+      "check_pattern": "Qwen3\\-VL\\-Reranker\\-8B\\s*\\|\\s*8B\\s*\\|(?:[^|]*\\|){5}\\s*{value}\\s*\\|",
+      "check_hint": "JinaVDR",
+      "protocol_note": "Qwen's own run, from the model card; the card doesn't say which first stage was reranked",
+      "verified_on": "2026-10-15"
     }
   },
   "qwen3-vl-reranker-2b": {
@@ -920,6 +965,60 @@
       "check_pattern": "Qwen3-VL-Reranker-2B {value}\\.",
       "check_hint": "decontaminated",
       "verified_on": "2026-10-12"
+    },
+    "mmeb_avg": {
+      "value": "75.1",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-2B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/raw/main/README.md",
+      "check_pattern": "Qwen3\\-VL\\-Reranker\\-2B\\s*\\|\\s*2B\\s*\\|\\s*{value}\\s*\\|",
+      "check_hint": "MMEB-v2",
+      "protocol_note": "Qwen's own run, from the model card; the card doesn't say which first stage was reranked",
+      "verified_on": "2026-10-15"
+    },
+    "mmeb_image": {
+      "value": "73.8",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-2B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/raw/main/README.md",
+      "check_pattern": "Qwen3\\-VL\\-Reranker\\-2B\\s*\\|\\s*2B\\s*\\|(?:[^|]*\\|){1}\\s*{value}\\s*\\|",
+      "check_hint": "MMEB-v2",
+      "protocol_note": "Qwen's own run, from the model card; the card doesn't say which first stage was reranked",
+      "verified_on": "2026-10-15"
+    },
+    "mmeb_video": {
+      "value": "52.1",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-2B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/raw/main/README.md",
+      "check_pattern": "Qwen3\\-VL\\-Reranker\\-2B\\s*\\|\\s*2B\\s*\\|(?:[^|]*\\|){2}\\s*{value}\\s*\\|",
+      "check_hint": "MMEB-v2",
+      "protocol_note": "Qwen's own run, from the model card; the card doesn't say which first stage was reranked",
+      "verified_on": "2026-10-15"
+    },
+    "mmeb_visdoc": {
+      "value": "83.4",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-2B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/raw/main/README.md",
+      "check_pattern": "Qwen3\\-VL\\-Reranker\\-2B\\s*\\|\\s*2B\\s*\\|(?:[^|]*\\|){3}\\s*{value}\\s*\\|",
+      "check_hint": "MMEB-v2",
+      "protocol_note": "Qwen's own run, from the model card; the card doesn't say which first stage was reranked",
+      "verified_on": "2026-10-15"
+    },
+    "mmteb_r": {
+      "value": "70.0",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-2B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/raw/main/README.md",
+      "check_pattern": "Qwen3\\-VL\\-Reranker\\-2B\\s*\\|\\s*2B\\s*\\|(?:[^|]*\\|){4}\\s*{value}\\s*\\|",
+      "check_hint": "MMTEB",
+      "protocol_note": "Qwen's own run, from the model card; the card doesn't say which first stage was reranked",
+      "verified_on": "2026-10-15"
+    },
+    "jinavdr": {
+      "value": "80.9",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-2B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/raw/main/README.md",
+      "check_pattern": "Qwen3\\-VL\\-Reranker\\-2B\\s*\\|\\s*2B\\s*\\|(?:[^|]*\\|){5}\\s*{value}\\s*\\|",
+      "check_hint": "JinaVDR",
+      "protocol_note": "Qwen's own run, from the model card; the card doesn't say which first stage was reranked",
+      "verified_on": "2026-10-15"
     }
   },
   "zerank-2": {
@@ -940,6 +1039,238 @@
       "check_hint": "Average",
       "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
       "verified_on": "2026-10-09"
+    },
+    "web_embed_only": {
+      "value": "0.3819",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*Web\\s*\\|(?:[^|]*\\|){0}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Web",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "web_zerank2": {
+      "value": "0.6346",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*Web\\s*\\|(?:[^|]*\\|){1}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Web",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "web_cohere_3_5": {
+      "value": "0.5594",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*Web\\s*\\|(?:[^|]*\\|){4}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Web",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "conversational_embed_only": {
+      "value": "0.4305",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*Conversational\\s*\\|(?:[^|]*\\|){0}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Conversational",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "conversational_zerank2": {
+      "value": "0.6140",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*Conversational\\s*\\|(?:[^|]*\\|){1}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Conversational",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "conversational_cohere_3_5": {
+      "value": "0.5648",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*Conversational\\s*\\|(?:[^|]*\\|){4}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Conversational",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "stem_logic_embed_only": {
+      "value": "0.3744",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*STEM\\ \\&\\ Logic\\s*\\|(?:[^|]*\\|){0}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "STEM & Logic",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "stem_logic_zerank2": {
+      "value": "0.6521",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*STEM\\ \\&\\ Logic\\s*\\|(?:[^|]*\\|){1}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "STEM & Logic",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "stem_logic_cohere_3_5": {
+      "value": "0.5418",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*STEM\\ \\&\\ Logic\\s*\\|(?:[^|]*\\|){4}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "STEM & Logic",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "code_embed_only": {
+      "value": "0.4582",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*Code\\s*\\|(?:[^|]*\\|){0}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Code",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "code_zerank2": {
+      "value": "0.6528",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*Code\\s*\\|(?:[^|]*\\|){1}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Code",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "code_cohere_3_5": {
+      "value": "0.5364",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*Code\\s*\\|(?:[^|]*\\|){4}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Code",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "legal_embed_only": {
+      "value": "0.4101",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*Legal\\s*\\|(?:[^|]*\\|){0}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Legal",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "legal_zerank2": {
+      "value": "0.6644",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*Legal\\s*\\|(?:[^|]*\\|){1}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Legal",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "legal_cohere_3_5": {
+      "value": "0.5257",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*Legal\\s*\\|(?:[^|]*\\|){4}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Legal",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "biomedical_embed_only": {
+      "value": "0.4783",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*Biomedical\\s*\\|(?:[^|]*\\|){0}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Biomedical",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "biomedical_zerank2": {
+      "value": "0.7217",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*Biomedical\\s*\\|(?:[^|]*\\|){1}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Biomedical",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "biomedical_cohere_3_5": {
+      "value": "0.6246",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*Biomedical\\s*\\|(?:[^|]*\\|){4}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Biomedical",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "finance_embed_only": {
+      "value": "0.6232",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*Finance\\s*\\|(?:[^|]*\\|){0}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Finance",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "finance_zerank2": {
+      "value": "0.7600",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*Finance\\s*\\|(?:[^|]*\\|){1}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Finance",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "finance_cohere_3_5": {
+      "value": "0.7402",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*Finance\\s*\\|(?:[^|]*\\|){4}\\s*\\**{value}\\**\\s*\\|",
+      "check_hint": "Finance",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "zerank1_same_run": {
+      "value": "0.6456",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\*\\*Average\\*\\*(?:\\s*\\|\\s*\\*\\*[0-9.]+\\*\\*){2}\\s*\\|\\s*\\*\\*{value}\\*\\*",
+      "check_hint": "Average",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "gemini_flash_same_run": {
+      "value": "0.5999",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\*\\*Average\\*\\*(?:\\s*\\|\\s*\\*\\*[0-9.]+\\*\\*){3}\\s*\\|\\s*\\*\\*{value}\\*\\*",
+      "check_hint": "Average",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "embed_only_avg": {
+      "value": "0.4509",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\*\\*Average\\*\\*(?:\\s*\\|\\s*\\*\\*[0-9.]+\\*\\*){0}\\s*\\|\\s*\\*\\*{value}\\*\\*",
+      "check_hint": "Average",
+      "protocol_note": "ZeroEntropy's own run: NDCG@10 averaged over seven domains (web, conversational, STEM, code, legal, biomedical, finance), reranking the top 100 from OpenAI text-embedding-3-small — not BEIR",
+      "verified_on": "2026-10-15"
+    },
+    "api_usd_per_m": {
+      "value": "0.025",
+      "source_url": "https://docs.zeroentropy.dev/models",
+      "check_url": "https://docs.zeroentropy.dev/models",
+      "check_pattern": "zerank-2\\s+\\$0\\.000025\\s+\\${value}",
+      "check_hint": "Pricing",
+      "verified_on": "2026-10-15"
+    },
+    "context_tokens": {
+      "value": "32,768",
+      "source_url": "https://huggingface.co/zeroentropy/zerank-2-reranker",
+      "check_url": "https://huggingface.co/zeroentropy/zerank-2-reranker/raw/main/README.md",
+      "check_pattern": "Context Length\\s*\\|\\s*{value} tokens",
+      "check_hint": "Context Length",
+      "verified_on": "2026-10-15"
     }
   },
   "mxbai-rerank-v3-listwise": {
@@ -1076,6 +1407,42 @@
       "check_pattern": "jina-reranker-m0 scores {value} decontaminated",
       "check_hint": "decontaminated",
       "verified_on": "2026-10-12"
+    },
+    "qwen_mmeb_image": {
+      "value": "68.2",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/raw/main/README.md",
+      "check_pattern": "jina-reranker-m0\\s*\\|\\s*2B\\s*\\|(?:[^|]*\\|){1}\\s*{value}\\s*\\|",
+      "check_hint": "jina-reranker-m0",
+      "protocol_note": "Qwen's run, from the Qwen3-VL-Reranker model card",
+      "verified_on": "2026-10-15"
+    },
+    "qwen_mmeb_visdoc": {
+      "value": "85.2",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/raw/main/README.md",
+      "check_pattern": "jina-reranker-m0\\s*\\|\\s*2B\\s*\\|(?:[^|]*\\|){3}\\s*{value}\\s*\\|",
+      "check_hint": "jina-reranker-m0",
+      "protocol_note": "Qwen's run, from the Qwen3-VL-Reranker model card",
+      "verified_on": "2026-10-15"
+    },
+    "qwen_jinavdr": {
+      "value": "82.2",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/raw/main/README.md",
+      "check_pattern": "jina-reranker-m0\\s*\\|\\s*2B\\s*\\|(?:[^|]*\\|){5}\\s*{value}\\s*\\|",
+      "check_hint": "jina-reranker-m0",
+      "protocol_note": "Qwen's run, from the Qwen3-VL-Reranker model card",
+      "verified_on": "2026-10-15"
+    },
+    "qwen_vidore_v3": {
+      "value": "57.8",
+      "source_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B",
+      "check_url": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/raw/main/README.md",
+      "check_pattern": "jina-reranker-m0\\s*\\|\\s*2B\\s*\\|(?:[^|]*\\|){6}\\s*{value}\\s*\\|",
+      "check_hint": "jina-reranker-m0",
+      "protocol_note": "Qwen's run, from the Qwen3-VL-Reranker model card",
+      "verified_on": "2026-10-15"
     }
   },
   "llama-nemotron-rerank-1b-v2": {

@@ -397,6 +397,24 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/qwen-reranker" />
   </url>
   <url>
+    <loc>https://reranker.uk/models/qwen3-vl-reranker</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/qwen3-vl-reranker" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/qwen3-vl-reranker" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/qwen3-vl-reranker" />
+  </url>
+  <url>
+    <loc>https://reranker.uk/zh/models/qwen3-vl-reranker</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/qwen3-vl-reranker" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/qwen3-vl-reranker" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/qwen3-vl-reranker" />
+  </url>
+  <url>
     <loc>https://reranker.uk/models/voyage-rerank</loc>
     <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
@@ -413,6 +431,24 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/voyage-rerank" />
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/voyage-rerank" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/voyage-rerank" />
+  </url>
+  <url>
+    <loc>https://reranker.uk/models/zerank</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/zerank" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/zerank" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/zerank" />
+  </url>
+  <url>
+    <loc>https://reranker.uk/zh/models/zerank</loc>
+    <lastmod>2026-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/zerank" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/zerank" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/zerank" />
   </url>
   <url>
     <loc>https://reranker.uk/privacy</loc>

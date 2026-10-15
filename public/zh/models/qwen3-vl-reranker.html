@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-locale="zh" data-prerendered="zh">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <title>Qwen3-VL-Reranker：给图片、截图和视频重排序 | reranker.uk</title>
+  <meta name="description" content="Qwen3-VL-Reranker 评测（2026 年 10 月）：面向页面图片、截图和视频的 2B 与 8B 多模态重排序模型，Qwen 自己公布的 MMEB-v2、JinaVDR、ViDoRe v3 分数及与 jina-reranker-m0 的对比，sentence-transformers 快速上手，以及托管选项。" >
+  <link rel="canonical" href="https://reranker.uk/zh/models/qwen3-vl-reranker" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/models/qwen3-vl-reranker" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/qwen3-vl-reranker" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/qwen3-vl-reranker" >
+  <meta name="theme-color" content="#0b0d17" >
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
+  <meta name="author" content="reranker.uk" >
+  <link rel="icon" href="/assets/img/favicon.svg?v=1bb58b097e" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=6edeebfac7" >
+  <link rel="manifest" href="/site.webmanifest" >
+  <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
+  <meta property="og:type" content="article" >
+  <meta property="og:title" content="Qwen3-VL-Reranker：给图片、截图和视频重排序 | reranker.uk" >
+  <meta property="og:description" content="Qwen3-VL-Reranker 评测（2026 年 10 月）：面向页面图片、截图和视频的 2B 与 8B 多模态重排序模型，Qwen 自己公布的 MMEB-v2、JinaVDR、ViDoRe v3 分数及与 jina-reranker-m0 的对比，sentence-transformers 快速上手，以及托管选项。" >
+  <meta property="og:url" content="https://reranker.uk/zh/models/qwen3-vl-reranker" >
+  <meta property="og:site_name" content="reranker.uk" >
+  <meta property="og:locale" content="zh_CN" >
+  <meta property="og:locale:alternate" content="en_GB" >
+  <meta name="twitter:card" content="summary_large_image" >
+  <meta property="og:image" content="https://reranker.uk/assets/og/zh/models/qwen3-vl-reranker.jpg?v=a290adf222" >
+  <meta property="og:image:width" content="1200" >
+  <meta property="og:image:height" content="630" >
+  <meta property="og:image:alt" content="Qwen3-VL-Reranker：给图片、截图和视频重排序 | reranker.uk" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/models/qwen3-vl-reranker.jpg?v=a290adf222" >
+  <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
+  <link rel="preload" href="/assets/css/style.css?v=3f9e686d79" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=3f9e686d79" >
+  <!-- seo:jsonld -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"模型对比","item":"https://reranker.uk/zh/models/"},{"@type":"ListItem","position":3,"name":"Qwen3-VL-Reranker：给图片、截图和视频重排序","item":"https://reranker.uk/zh/models/qwen3-vl-reranker"}]},{"@type":"Article","headline":"Qwen3-VL-Reranker：给图片、截图和视频重排序","description":"Qwen3-VL-Reranker 评测（2026 年 10 月）：面向页面图片、截图和视频的 2B 与 8B 多模态重排序模型，Qwen 自己公布的 MMEB-v2、JinaVDR、ViDoRe v3 分数及与 jina-reranker-m0 的对比，sentence-transformers 快速上手，以及托管选项。","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"zh-Hans","datePublished":"2026-10-15","dateModified":"2026-10-15","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/zh/"},"mainEntityOfPage":"https://reranker.uk/zh/models/qwen3-vl-reranker","about":{"@type":"Thing","name":"Qwen3-VL-Reranker reranker model"}}]}</script>
+
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="shared.skip">跳到正文</a>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
+        <li><a href="/zh/guides/" data-i18n="shared.nav.guides">指南</a></li>
+        <li><a href="/zh/models/" data-i18n="shared.nav.models" aria-current="page" class="active">模型对比</a></li>
+        <li><a class="nav-cta" href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+      </ul>
+      <div class="nav-right">
+        <button type="button" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="site-search" data-i18n-aria-label="shared.search.open" aria-label="搜索全站（按 /）" title="/">⌕</button>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+        <a class="lang-toggle" href="/models/qwen3-vl-reranker" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
+      </div>
+    </nav>
+    <div class="site-search" id="site-search" role="search" hidden>
+      <div class="container narrow">
+        <label class="sr-only" for="site-search-input" data-i18n="shared.search.label">搜索 reranker.uk</label>
+        <input id="site-search-input" type="search" autocomplete="off" spellcheck="false" data-i18n-placeholder="shared.search.placeholder" placeholder="搜索指南和模型…" aria-describedby="site-search-status">
+        <p class="search-status" id="site-search-status" aria-live="polite"></p>
+        <ul class="search-results" id="site-search-results"></ul>
+      </div>
+    </div>
+  </header>
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>Qwen3-VL-Reranker</div>
+      <h1>Qwen3-VL-Reranker</h1>
+      <p class="meta">开源权重 · 阿里巴巴 Qwen · <time datetime="2026-10-15">更新于 2026 年 10 月 15 日</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Apache 2.0</span><span class="pill info">图片和视频</span><span class="pill">需要 GPU</span></div>
+      <p class="lead"><strong>Qwen3-VL-Reranker</strong>（2B / 8B）给查询和文档打相关性分，文档可以是文字、图片、截图、视频，或它们的组合。扫描页或幻灯片按图片本身来排序，而不是靠 OCR 碰巧识别出来的文字。它基于 Qwen3-VL，32K 上下文，支持 30 多种语言，Apache 2.0 许可。如果文档只有文字，应该看它的同门 <a href="/zh/models/qwen-reranker">Qwen3-Reranker</a>。</p>
+
+      <div class="toc">
+        <strong>本页目录</strong>
+        <ol>
+          <li><a href="#variants">模型版本</a></li>
+          <li><a href="#scores">分数，以及是谁测的</a></li>
+          <li><a href="#usage">快速上手</a></li>
+          <li><a href="#hosted">托管选项</a></li>
+          <li><a href="#when">什么时候选 Qwen3-VL-Reranker</a></li>
+          <li><a href="#pros-cons">优缺点</a></li>
+        </ol>
+      </div>
+
+      <h2 id="variants">模型版本</h2>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="模型版本">
+        <table>
+          <thead>
+            <tr><th>模型</th><th>参数量</th><th>层数</th><th>上下文</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>Qwen/Qwen3-VL-Reranker-2B</code></td><td>2B</td><td>28</td><td>32K</td></tr>
+            <tr><td><code>Qwen/Qwen3-VL-Reranker-8B</code></td><td>8B</td><td>36</td><td>32K</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>两个版本都支持任务指令。Qwen 称加指令通常能提升 1–5%，并建议即使处理其他语言也用英文写指令。这个系列和 Qwen3-VL-Embedding 配套：后者负责同类输入的第一阶段召回。</p>
+
+      <h2 id="scores">分数，以及是谁测的</h2>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="分数，以及是谁测的">
+        <table>
+          <thead>
+            <tr><th>模型</th><th>MMEB-v2 图片</th><th>MMEB-v2 视频</th><th>MMEB-v2 视觉文档</th><th>JinaVDR</th><th>ViDoRe v3</th><th>MMTEB 检索</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>jina-reranker-m0</td><td>68.2*</td><td>—</td><td>85.2*</td><td>82.2*</td><td>57.8*</td><td>—</td></tr>
+            <tr><td>Qwen3-VL-Reranker-2B</td><td>73.8*</td><td>52.1*</td><td>83.4*</td><td>80.9*</td><td>60.8*</td><td>70.0*</td></tr>
+            <tr><td>Qwen3-VL-Reranker-8B</td><td><strong>80.7*</strong></td><td><strong>55.8*</strong></td><td><strong>86.3*</strong></td><td><strong>83.6*</strong></td><td><strong>66.7*</strong></td><td><strong>74.9*</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">Qwen 自己的测试，数据来自模型卡。模型卡没有说明每个重排序模型重排的是哪个第一阶段的结果。MMEB-v2 包括图片、视频和视觉文档检索；JinaVDR 和 ViDoRe v3 是视觉文档（页面图片）基准；MMTEB 检索是纯文本。它们都不是 BEIR。</p>
+      <p>在 Qwen 的表里，2B 和 <a href="/zh/models/jina-reranker">jina-reranker-m0</a> 很接近（m0 是 Jina 的多模态重排序模型，权重只允许非商业使用）：图片和 ViDoRe v3 上领先，视觉文档和 JinaVDR 上落后。8B 每一列都领先。还有一个外部测试：做竞品模型的 LightOn 用 BM25 召回前 100 个结果做 BEIR，取 11 个没进过他们训练数据的数据集平均。在那里 2B 得 49.08，jina-reranker-m0 得 51.97：在这次纯文本测试里，2B 落后于 m0。</p>
+
+      <h2 id="usage">快速上手</h2>
+      <h3>sentence-transformers</h3>
+      <pre tabindex="0"><code>pip install sentence-transformers
+
+from sentence_transformers import CrossEncoder
+
+model = CrossEncoder("Qwen/Qwen3-VL-Reranker-2B")
+
+query = "A woman playing with her dog on a beach at sunset."
+documents = [
+    "A woman shares a joyful moment with her golden retriever on a beach at sunset.",
+    "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg",
+    {"text": "Golden retriever on the beach", "image": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg"},
+]
+
+prompt = "Retrieve images or text relevant to the user's query."
+rankings = model.rank(query, documents, prompt=prompt)</code></pre>
+      <p>文档可以是文字、图片的 URL 或路径，或者同时包含两者的 dict。不传 <code>prompt</code> 时，默认指令是“Retrieve text relevant to the user’s query.”。模型卡还给了直接用 <code>transformers</code> 的写法（需要 <a href="https://github.com/QwenLM/Qwen3-VL-Embedding" rel="noopener noreferrer">Qwen GitHub 仓库</a>里的辅助脚本）和 vLLM 的写法。</p>
+
+      <h2 id="hosted">托管选项</h2>
+      <p>阿里云百炼提供 <code>qwen3-vl-rerank</code>，硅基流动托管了 Qwen3-VL-Reranker-8B，两者在中国大陆都能直接访问；接口地址和价格见<a href="/zh/guides/rerank-in-china">国内重排序指南</a>。阿里云没有公布托管版本的分数。</p>
+
+      <h2 id="when">什么时候选 Qwen3-VL-Reranker</h2>
+      <ul>
+        <li><strong>适合：</strong>文档是页面图片：扫描件、幻灯片、截图、看板。</li>
+        <li><strong>适合：</strong>查询要匹配图片或视频，或者图文混排的文档。</li>
+        <li><strong>可能不适合：</strong>文档是纯文本。用 <a href="/zh/models/qwen-reranker">Qwen3-Reranker</a> 或其他文本重排序模型，同样的活计算量更小。</li>
+        <li><strong>可能不适合：</strong>只有 CPU 的部署。即使是 2B 也需要 GPU，而且有图片时每一对的打分成本都比纯文本高。</li>
+      </ul>
+
+      <h2 id="pros-cons">优缺点</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 style="color:var(--good);margin-top:0">优点</h3>
+          <ul class="feature-list">
+            <li>文字、图片、截图、视频一个模型搞定</li>
+            <li>两个尺寸都是 Apache 2.0</li>
+            <li>支持任务指令</li>
+            <li>可用 sentence-transformers 的 <code>CrossEncoder</code> 加载</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--danger);margin-top:0">缺点</h3>
+          <ul style="padding-left:1.2rem;color:var(--text-soft)">
+            <li>需要 GPU，图片的打分成本比文字高</li>
+            <li>公布的分数是 Qwen 自己测的，没说明第一阶段</li>
+            <li>对纯文本文档来说大材小用</li>
+            <li>太大，放不进我们的浏览器内 Demo</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">要给页面图片选模型？</h2>
+        <p class="soft">按场景选型指南对比了 Qwen3-VL-Reranker、LightOn-rerank 以及处理视觉文档的托管选项。</p>
+        <a class="btn btn-primary" href="/zh/guides/choose-reranker-scenario">按场景选型 →</a>
+        <a class="btn btn-ghost" href="/zh/models/" style="margin-left:.5rem">全部模型 →</a>
+      </div>
+
+      <h2>其他模型</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/zh/models/qwen-reranker"><h3>Qwen3-Reranker</h3><p>纯文本系列：0.6B、4B、8B。</p></a>
+        <a class="card" href="/zh/models/jina-reranker"><h3>Jina Reranker</h3><p>列表式 v3.5，以及多模态的 m0。</p></a>
+        <a class="card" href="/zh/guides/late-interaction-rerank"><h3>Late-interaction（ColBERT）</h3><p>token 级打分，ColBERT 式。</p></a>
+        <a class="card" href="/zh/guides/self-host-reranker"><h3>自托管指南</h3><p>服务化与运维清单。</p></a>
+      </div>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch" data-i18n="shared.footer.blurb">一个关于检索与 RAG 重排序（reranker）的开放学习资源，外加一个在浏览器里零成本运行的实时 Demo。</p>
+          <p style="margin-top:.6rem"><a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer" data-i18n="shared.footer.github">在 GitHub 上查看源码</a></p>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.guides">指南</h4>
+          <ul>
+            <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/guides/reranking-not-working" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
+            <li><a href="/zh/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
+            <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
+            <li><a href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
+            <li><a href="/zh/privacy" data-i18n="shared.footer.privacy">隐私说明</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.models">模型</h4>
+          <ul>
+            <li><a href="/zh/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank">Voyage Rerank</a></li>
+            <li><a href="/zh/models/zerank">zerank-2</a></li>
+            <li><a href="/zh/models/qwen3-vl-reranker">Qwen3-VL-Reranker</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> reranker.uk</span>
+        <span class="footer-legal muted">
+          <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
+          · <a href="/zh/privacy" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog" data-i18n="shared.footer.changelogShort">更新日志</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js?v=dac3b51d07"></script>
+  
+  <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
+</body>
+</html>
