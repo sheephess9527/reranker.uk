@@ -28,7 +28,9 @@ Benchmark figures carry their protocol: rows marked with an asterisk on /models/
 - [Jina Reranker v3.5: listwise, licence and pricing review](https://reranker.uk/models/jina-reranker): Jina Reranker review (Oct 2026): jina-reranker-v3.5 is a 0.6B listwise model scoring 63.20 nDCG@10 on BEIR in Jina's own test.
 - [mxbai-rerank: mixedbread-ai open-weight rerankers, v1 and v2](https://reranker.uk/models/mxbai-rerank): mxbai-rerank review: mixedbread-ai's open-weight rerankers, both generations. v1 (DeBERTa-v3, English-only, browser-runnable xsmall) and v2 (Qwen2.5-based, 100+ languages incl.
 - [Qwen3-Reranker: 0.6B / 4B / 8B open-weight review](https://reranker.uk/models/qwen-reranker): Qwen3-Reranker review (Oct 2026): when to use 0.6B, 4B or 8B, Qwen's own MTEB-R and other scores and how they were measured, task instructions, a sentence-transformers quick start, and trade-offs v…
+- [Qwen3-VL-Reranker: rerank images, screenshots and video](https://reranker.uk/models/qwen3-vl-reranker): Qwen3-VL-Reranker review (Oct 2026): the 2B and 8B multimodal rerankers for page images, screenshots and video, Qwen’s own MMEB-v2, JinaVDR and ViDoRe v3 scores against jina-reranker-m0, a sentence…
 - [Voyage rerank-3: per-token rerank API review](https://reranker.uk/models/voyage-rerank): Voyage rerank-3 review (Oct 2026): rerank-3 and rerank-3-lite, 32K context, per-token pricing with 200M free tokens, how the older rerank-2.5 differs, Python usage, pros and cons for RAG.
+- [zerank-2: ZeroEntropy’s 4B reranker, weights and API](https://reranker.uk/models/zerank): zerank-2 review (Oct 2026): ZeroEntropy’s 4B reranker on Qwen3-4B, the licence conflict between its model card and docs, ZeroEntropy’s own scores against Cohere rerank-3.5, API pricing, and a sente…
 
 ## Tools
 

@@ -6,6 +6,15 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-15-models">15 Oct 2026 — Pages for zerank-2 and Qwen3-VL-Reranker</h2>
+        <ul class="feature-list">
+          <li><strong><a href="/models/zerank.html">zerank-2</a></strong> — ZeroEntropy’s 4B reranker gets its own page: the licence conflict between its model card (Apache 2.0) and ZeroEntropy’s docs (non-commercial), ZeroEntropy’s seven-domain scores against Cohere rerank-3.5, API pricing and a quick start</li>
+          <li><strong><a href="/models/qwen3-vl-reranker.html">Qwen3-VL-Reranker</a></strong> — the 2B and 8B rerankers for page images, screenshots and video, with Qwen’s own scores against jina-reranker-m0 and the hosted options from mainland China</li>
+          <li><strong>Every new figure checked daily</strong> — the 46 scores and prices on the two pages are in the daily source check, like the rest of the site’s numbers</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-15-cache">15 Oct 2026 — Pages load faster on a repeat visit</h2>
         <ul class="feature-list">
           <li><strong>Styles and scripts are cached</strong> — every page view used to ask Cloudflare whether the stylesheet and scripts had changed, one round trip per file, which is slow from mainland China. Each file’s address now carries a fingerprint of its contents, so the browser keeps it for a year and fetches a new copy only when it really changes</li>

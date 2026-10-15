@@ -1,4 +1,12 @@
 window.I18N_PAGE = { zh: {
+  "15 Oct 2026 — Pages for zerank-2 and Qwen3-VL-Reranker":
+    "2026 年 10 月 15 日 —— zerank-2 和 Qwen3-VL-Reranker 有了专页",
+  "<strong><a href=\"/models/zerank.html\">zerank-2</a></strong> — ZeroEntropy’s 4B reranker gets its own page: the licence conflict between its model card (Apache 2.0) and ZeroEntropy’s docs (non-commercial), ZeroEntropy’s seven-domain scores against Cohere rerank-3.5, API pricing and a quick start":
+    "<strong><a href=\"/models/zerank.html\">zerank-2</a></strong> —— ZeroEntropy 的 4B 重排序模型有了单独的页面：模型卡（Apache 2.0）和 ZeroEntropy 文档（非商业）在许可证上的矛盾、ZeroEntropy 七个领域对比 Cohere rerank-3.5 的分数、API 价格和快速上手",
+  "<strong><a href=\"/models/qwen3-vl-reranker.html\">Qwen3-VL-Reranker</a></strong> — the 2B and 8B rerankers for page images, screenshots and video, with Qwen’s own scores against jina-reranker-m0 and the hosted options from mainland China":
+    "<strong><a href=\"/models/qwen3-vl-reranker.html\">Qwen3-VL-Reranker</a></strong> —— 面向页面图片、截图和视频的 2B 与 8B 重排序模型，包括 Qwen 自己对比 jina-reranker-m0 的分数，以及在中国大陆可用的托管选项",
+  "<strong>Every new figure checked daily</strong> — the 46 scores and prices on the two pages are in the daily source check, like the rest of the site’s numbers":
+    "<strong>新增数字每天核对</strong> —— 两个页面上的 46 个分数和价格已加入每日来源核对，和站内其他数字一样",
   "15 Oct 2026 — Pages load faster on a repeat visit":
     "2026 年 10 月 15 日 —— 再次访问时页面打开更快",
   "<strong>Styles and scripts are cached</strong> — every page view used to ask Cloudflare whether the stylesheet and scripts had changed, one round trip per file, which is slow from mainland China. Each file’s address now carries a fingerprint of its contents, so the browser keeps it for a year and fetches a new copy only when it really changes":

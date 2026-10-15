@@ -48,5 +48,9 @@
   "zh/privacy": "4483b9b7833e7713",
   "zh/rerank-cost-calculator": "f39d31b1a2f5fb7b",
   "index": "6dfd54216ee3337a",
-  "zh/index": "5cc89910671221fa"
+  "zh/index": "5cc89910671221fa",
+  "models/qwen3-vl-reranker": "cc4743bc5bde85c9",
+  "models/zerank": "4e6ed0ef930994b8",
+  "zh/models/qwen3-vl-reranker": "e273a14740532888",
+  "zh/models/zerank": "acfad51f60cbec66"
 }

@@ -1,0 +1,118 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Qwen3-VL-Reranker</div>
+      <h1>Qwen3-VL-Reranker</h1>
+      <p class="meta">Open weights · Qwen, Alibaba · <time datetime="2026-10-15">Updated 15 Oct 2026</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Apache 2.0</span><span class="pill info">Images and video</span><span class="pill">GPU required</span></div>
+      <p class="lead"><strong>Qwen3-VL-Reranker</strong> (2B / 8B) scores a query against documents that can be text, images, screenshots, video, or a mix of them. A scanned page or a slide is ranked as the picture it is, not through whatever OCR managed to extract. It is built on Qwen3-VL, with a 32K context, 30+ languages and an Apache 2.0 licence. For text-only documents, its sibling <a href="/models/qwen-reranker.html">Qwen3-Reranker</a> is the one to look at.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#variants">Model variants</a></li>
+          <li><a href="#scores">Scores, and whose they are</a></li>
+          <li><a href="#usage">Quick start</a></li>
+          <li><a href="#hosted">Hosted options</a></li>
+          <li><a href="#when">When to pick Qwen3-VL-Reranker</a></li>
+          <li><a href="#pros-cons">Pros and cons</a></li>
+        </ol>
+      </div>
+
+      <h2 id="variants">Model variants</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Parameters</th><th>Layers</th><th>Context</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>Qwen/Qwen3-VL-Reranker-2B</code></td><td>2B</td><td>28</td><td>32K</td></tr>
+            <tr><td><code>Qwen/Qwen3-VL-Reranker-8B</code></td><td>8B</td><td>36</td><td>32K</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Both take a task instruction. Qwen report that instructions usually add 1–5%, and recommend writing them in English even for other languages. The family pairs with Qwen3-VL-Embedding, the first-stage retriever for the same kinds of input.</p>
+
+      <h2 id="scores">Scores, and whose they are</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>MMEB-v2 image</th><th>MMEB-v2 video</th><th>MMEB-v2 visual docs</th><th>JinaVDR</th><th>ViDoRe v3</th><th>MMTEB retrieval</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>jina-reranker-m0</td><td>{{fact:jina-reranker-m0.qwen_mmeb_image}}</td><td>—</td><td>{{fact:jina-reranker-m0.qwen_mmeb_visdoc}}</td><td>{{fact:jina-reranker-m0.qwen_jinavdr}}</td><td>{{fact:jina-reranker-m0.qwen_vidore_v3}}</td><td>—</td></tr>
+            <tr><td>Qwen3-VL-Reranker-2B</td><td>{{fact:qwen3-vl-reranker-2b.mmeb_image}}</td><td>{{fact:qwen3-vl-reranker-2b.mmeb_video}}</td><td>{{fact:qwen3-vl-reranker-2b.mmeb_visdoc}}</td><td>{{fact:qwen3-vl-reranker-2b.jinavdr}}</td><td>{{fact:qwen3-vl-reranker-2b.vidore_v3}}</td><td>{{fact:qwen3-vl-reranker-2b.mmteb_r}}</td></tr>
+            <tr><td>Qwen3-VL-Reranker-8B</td><td><strong>{{fact:qwen3-vl-reranker-8b.mmeb_image}}</strong></td><td><strong>{{fact:qwen3-vl-reranker-8b.mmeb_video}}</strong></td><td><strong>{{fact:qwen3-vl-reranker-8b.mmeb_visdoc}}</strong></td><td><strong>{{fact:qwen3-vl-reranker-8b.jinavdr}}</strong></td><td><strong>{{fact:qwen3-vl-reranker-8b.vidore_v3}}</strong></td><td><strong>{{fact:qwen3-vl-reranker-8b.mmteb_r}}</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">Qwen’s own runs, from the model card. The card doesn’t say which first stage each reranker reordered. MMEB-v2 covers image, video and visual-document retrieval; JinaVDR and ViDoRe v3 are visual-document benchmarks (page images); MMTEB retrieval is text. None of them is BEIR.</p>
+      <p>In Qwen’s table, the 2B is close to <a href="/models/jina-reranker.html">jina-reranker-m0</a>, Jina’s multimodal reranker, whose weights are licensed for non-commercial use only: ahead on images and ViDoRe v3, behind on visual documents and JinaVDR. The 8B leads every column. One outside run: LightOn, who make a competing model, report BEIR over BM25’s top 100, averaged over 11 datasets kept out of their own training data. There the 2B scores {{fact:qwen3-vl-reranker-2b.beir_lighton}} and jina-reranker-m0 {{fact:jina-reranker-m0.beir_lighton}}: on text, the 2B trails m0 in that run.</p>
+
+      <h2 id="usage">Quick start</h2>
+      <h3>sentence-transformers</h3>
+      <pre><code>pip install sentence-transformers
+
+from sentence_transformers import CrossEncoder
+
+model = CrossEncoder("Qwen/Qwen3-VL-Reranker-2B")
+
+query = "A woman playing with her dog on a beach at sunset."
+documents = [
+    "A woman shares a joyful moment with her golden retriever on a beach at sunset.",
+    "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg",
+    {"text": "Golden retriever on the beach", "image": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg"},
+]
+
+prompt = "Retrieve images or text relevant to the user's query."
+rankings = model.rank(query, documents, prompt=prompt)</code></pre>
+      <p>A document can be text, an image URL or path, or a dict with both. Without <code>prompt</code>, the instruction is “Retrieve text relevant to the user’s query.” The model card also shows a plain <code>transformers</code> path, which needs a helper script from <a href="https://github.com/QwenLM/Qwen3-VL-Embedding" rel="noopener noreferrer">Qwen’s GitHub repository</a>, and a vLLM path.</p>
+
+      <h2 id="hosted">Hosted options</h2>
+      <p>Alibaba Cloud Model Studio sells <code>qwen3-vl-rerank</code>, and SiliconFlow hosts Qwen3-VL-Reranker-8B. Both are reachable from mainland China; see <a href="/guides/rerank-in-china.html">reranking in mainland China</a> for endpoints and prices. Alibaba Cloud publishes no scores for its hosted version.</p>
+
+      <h2 id="when">When to pick Qwen3-VL-Reranker</h2>
+      <ul>
+        <li><strong>Yes:</strong> your documents are page images: scans, slide decks, screenshots, dashboards.</li>
+        <li><strong>Yes:</strong> a query should match images or video, or documents that mix text and pictures.</li>
+        <li><strong>Maybe not:</strong> the documents are plain text. Use <a href="/models/qwen-reranker.html">Qwen3-Reranker</a> or another reranker built for text; it does the same job with less compute.</li>
+        <li><strong>Maybe not:</strong> CPU-only serving. Even the 2B wants a GPU, and images make every pair more expensive to score than text.</li>
+      </ul>
+
+      <h2 id="pros-cons">Pros and cons</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 style="color:var(--good);margin-top:0">Pros</h3>
+          <ul class="feature-list">
+            <li>Text, images, screenshots and video in one model</li>
+            <li>Apache 2.0 at both sizes</li>
+            <li>Takes a task instruction</li>
+            <li>Loads with sentence-transformers’ <code>CrossEncoder</code></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--danger);margin-top:0">Cons</h3>
+          <ul style="padding-left:1.2rem;color:var(--text-soft)">
+            <li>GPU required, and images cost more to score than text</li>
+            <li>Published scores are Qwen’s own, first stage unstated</li>
+            <li>More model than text-only documents need</li>
+            <li>Too large for our in-browser demo</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">Choosing for page images?</h2>
+        <p class="soft">The scenario guide compares Qwen3-VL-Reranker with LightOn-rerank and the hosted options for visual documents.</p>
+        <a class="btn btn-primary" href="/guides/choose-reranker-scenario.html">Choose by scenario →</a>
+        <a class="btn btn-ghost" href="/models/" style="margin-left:.5rem">All models →</a>
+      </div>
+
+      <h2>Other models</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/models/qwen-reranker.html"><h3>Qwen3-Reranker</h3><p>The text-only family: 0.6B, 4B, 8B.</p></a>
+        <a class="card" href="/models/jina-reranker.html"><h3>Jina Reranker</h3><p>Listwise v3.5, and the multimodal m0.</p></a>
+        <a class="card" href="/guides/late-interaction-rerank.html"><h3>Late interaction</h3><p>Token-level scoring, ColBERT style.</p></a>
+        <a class="card" href="/guides/self-host-reranker.html"><h3>Self-host guide</h3><p>Serving and ops checklist.</p></a>
+      </div>
+    </article>
+  </main>
