@@ -88,6 +88,10 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 现在只要 `localStorage` 里没有 `rr_theme`，就一律深色。`src/partials/head-open.html` 里的内联脚本和 `public/assets/js/main.js` 的 `applyTheme` 要一起改：没有存过选择时，跟随 `prefers-color-scheme`。用户点过切换之后仍然以 `rr_theme` 为准，不要把已经存过的人改掉。
 
+### ~~5. CSP 从 report-only 改为强制执行~~（2026-10-15 已完成）
+
+> 完成：用户在国内网络下打开 `/zh/demo`，控制台无 CSP/CORS 报错、Demo 正常加载；每日真实网络检查自 9 月 27 日起一直通过。`build.mjs` 的 `writeHeadersFile()` 现在输出 `Content-Security-Policy`（不再带 `-Report-Only`），策略内容不变。`demo-smoke-daily.yml` 的 `headers` 任务改查强制头，并新增 `live-csp` 任务（`npm run test:live`，`tests/live-csp.real.spec.js`）：每天从线上逐页加载 sitemap 里的所有页面，有任何违规就失败。改 `_headers` 前先用 `headers_base` 指向预览部署跑一次。
+
 ### 明确不要做
 
 - 不要改 `data/models.json` 里的分数，除非 `npm run check:sources` 证明厂商页面上的数字变了。

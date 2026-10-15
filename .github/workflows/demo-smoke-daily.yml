@@ -78,6 +78,28 @@ jobs:
         if: ${{ !cancelled() }}
         run: node scripts/check-external-links.mjs
 
+  # The CSP is enforcing, so anything production adds to a page that the
+  # policy doesn't allow (a Cloudflare-injected script, say) is blocked
+  # silently. This loads every page in the sitemap from the live site and
+  # fails on any violation.
+  live-csp:
+    runs-on: ubuntu-latest
+    env:
+      LIVE_BASE: ${{ inputs.headers_base || 'https://reranker.uk' }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Install Playwright's Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Build the site
+        run: npm run build
+      - name: No CSP violations on any live page
+        run: npm run test:live
+
   # The demo's cross-origin isolation and its looser CSP are set in
   # public/_headers with Cloudflare's "! Name" detach syntax, which only
   # production can confirm. If isolation silently drops, the demo still works
@@ -94,8 +116,9 @@ jobs:
             echo "== $p"; echo "$h"
             echo "$h" | grep -qi '^cross-origin-opener-policy: same-origin$'
             echo "$h" | grep -qi '^cross-origin-embedder-policy: credentialless$'
-            test "$(echo "$h" | grep -ci '^content-security-policy-report-only:')" = 1
-            echo "$h" | grep -i '^content-security-policy-report-only:' | grep -Eq "script-src [^;]* blob:"
+            test "$(echo "$h" | grep -ci '^content-security-policy:')" = 1
+            if echo "$h" | grep -qi '^content-security-policy-report-only:'; then echo "still report-only"; exit 1; fi
+            echo "$h" | grep -i '^content-security-policy:' | grep -Eq "script-src [^;]* blob:"
           done
       - name: other pages are not isolated and keep the stricter CSP
         run: |
@@ -103,4 +126,5 @@ jobs:
           echo "$h"
           # (no "! cmd" here: bash -e ignores a negated command's status)
           if echo "$h" | grep -qi '^cross-origin-embedder-policy:'; then echo "isolated"; exit 1; fi
-          if echo "$h" | grep -i '^content-security-policy-report-only:' | grep -Eq "script-src [^;]* blob:"; then echo "blob: leaked"; exit 1; fi
+          test "$(echo "$h" | grep -ci '^content-security-policy:')" = 1
+          if echo "$h" | grep -i '^content-security-policy:' | grep -Eq "script-src [^;]* blob:"; then echo "blob: leaked"; exit 1; fi

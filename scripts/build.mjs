@@ -769,14 +769,13 @@ function writeSitemap(entries) {
  * here from the partial's actual current content, not hand-copied, so it
  * can't drift out of sync the way the mxbai BEIR figure did.
  *
- * The policy is Content-Security-Policy-Report-Only, not enforcing: this
- * session can't load the demo against real jsDelivr/HuggingFace/hf-mirror
- * traffic to confirm a stricter policy wouldn't break WASM model loading in
- * practice (the sandboxed Playwright tests run against a local static
- * server that doesn't apply _headers at all, so they can't validate this
- * either). Report-only surfaces violations in any tester's browser console
- * without risking breaking the live demo — promote to enforcing once that's
- * been confirmed clean.
+ * The policy is enforcing. It ran report-only from 27 Sep 2026 while the
+ * daily real-network test loaded every demo model through it (that caught
+ * the HuggingFace CDN redirect and the blob: gaps below), and was promoted
+ * on 15 Oct 2026 once the demo had been loaded from a network in mainland
+ * China — the hf-mirror.com path no runner can reach — with no CSP or CORS
+ * errors in the console. tests/live-csp.real.spec.js loads every live page
+ * daily and fails on any violation.
  */
 function writeHeadersFile() {
   const themeScript = partial("head-open.html").match(/<script>([\s\S]*?)<\/script>/)[1];
@@ -812,7 +811,7 @@ function writeHeadersFile() {
     "  X-Frame-Options: DENY",
     "  Referrer-Policy: strict-origin-when-cross-origin",
     "  Permissions-Policy: camera=(), microphone=(), geolocation=()",
-    `  Content-Security-Policy-Report-Only: ${csp}`,
+    `  Content-Security-Policy: ${csp}`,
     "",
     // Cross-origin isolation, on the demo pages only: it unlocks
     // SharedArrayBuffer, which ONNX Runtime Web needs to score on more than
@@ -831,8 +830,8 @@ function writeHeadersFile() {
     // Measured on a 4-vCPU GitHub runner, Oct 2026: scoring ~1.9x faster.
     ...["/demo", "/zh/demo"].flatMap((p) => [
       p,
-      "  ! Content-Security-Policy-Report-Only",
-      `  Content-Security-Policy-Report-Only: ${csp.replace(scriptSrc, `${scriptSrc} blob:`)}`,
+      "  ! Content-Security-Policy",
+      `  Content-Security-Policy: ${csp.replace(scriptSrc, `${scriptSrc} blob:`)}`,
       "  Cross-Origin-Opener-Policy: same-origin",
       "  Cross-Origin-Embedder-Policy: credentialless",
       "",

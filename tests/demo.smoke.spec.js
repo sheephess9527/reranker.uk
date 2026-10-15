@@ -29,7 +29,7 @@ test("reranks candidates end-to-end and renders them in score order", async ({ p
   expect(after[0]).toBe(docs[2]);
   expect(after[2]).toBe(docs[0]);
 
-  // public/_headers ships a report-only CSP; this is the one signal this
+  // public/_headers ships an enforcing CSP; this is the one signal this
   // sandbox has that it doesn't block the demo's own script/style/connect
   // needs (it can't see WASM-specific violations — the mocked model never
   // touches real WASM — but a script-src hash mismatch or a missing

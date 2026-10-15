@@ -1,8 +1,8 @@
 /**
- * Report-only CSP violations don't throw or fail a request — they only fire
- * a `securitypolicyviolation` DOM event and a console message. Without this,
- * a script-src/connect-src/style-src gap in public/_headers would pass every
- * other assertion silently.
+ * CSP violations don't throw — a blocked script or request just doesn't
+ * happen, with a `securitypolicyviolation` DOM event and a console message
+ * as the only trace. Without this, a script-src/connect-src/style-src gap in
+ * public/_headers could pass every other assertion silently.
  */
 export async function watchCspViolations(page) {
   await page.addInitScript(() => {
