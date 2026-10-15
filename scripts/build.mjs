@@ -781,7 +781,11 @@ function writeHeadersFile() {
   const themeScript = partial("head-open.html").match(/<script>([\s\S]*?)<\/script>/)[1];
   const scriptHash = crypto.createHash("sha256").update(themeScript, "utf8").digest("base64");
 
-  const scriptSrc = `script-src 'self' https://cdn.jsdelivr.net 'wasm-unsafe-eval' 'sha256-${scriptHash}'`;
+  // static.cloudflareinsights.com / cloudflareinsights.com: Cloudflare Web
+  // Analytics, which Cloudflare injects into pages on reranker.uk itself (not
+  // on workers.dev previews). The first live-csp run after enforcing caught
+  // it being blocked on every page, 15 Oct 2026.
+  const scriptSrc = `script-src 'self' https://cdn.jsdelivr.net https://static.cloudflareinsights.com 'wasm-unsafe-eval' 'sha256-${scriptHash}'`;
   const csp = [
     "default-src 'self'",
     scriptSrc,
@@ -797,7 +801,7 @@ function writeHeadersFile() {
     // rather than one host). The *.hf-mirror.com entry is defensive — its
     // redirect behaviour is unverified, since CI runs from the US and always
     // wins the race to huggingface.co.
-    "connect-src 'self' https://cdn.jsdelivr.net https://huggingface.co https://*.huggingface.co https://*.hf.co https://hf-mirror.com https://*.hf-mirror.com",
+    "connect-src 'self' https://cloudflareinsights.com https://cdn.jsdelivr.net https://huggingface.co https://*.huggingface.co https://*.hf.co https://hf-mirror.com https://*.hf-mirror.com",
     "worker-src 'self' blob:", // ONNX Runtime Web may run inference off the main thread
     "object-src 'none'",
     "base-uri 'self'",
