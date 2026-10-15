@@ -106,9 +106,11 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 > 完成：`build.mjs` 的 `readingPathPager()` 从 `src/pages/guides/index.html` 的 `ol.reading-path` 读顺序，在这五篇的 `.cta-band` 前插入 `nav.guide-pager`（「阅读路线：第 n 篇，共 5 篇」+ 上一篇/下一篇，最后一篇的下一篇指回 `/guides/`）。标题取相邻页面自己的 h1，中文页用对方词典里的译文；按钮文字是 shared 键 `shared.pager.*`。要改顺序只改指南索引那个列表。样式 `.guide-pager`（≤560px 纵向）。`tests/guide-pager.spec.js` 中英文各走一遍路线。
 
-### 9. 更新日志太长
+### ~~9. 更新日志太长~~（2026-10-15 已完成）
 
-页面只显示近三个月，更早的折叠或放归档页；RSS 不变，`tests/feed.spec.js` 仍要过。
+> 完成：没按「近三个月」做——那样 46 条里只会折叠 6 月的 9 条（10 月一个月就有 29 条）。改为 `build.mjs` 的 `foldChangelog()`：最新 10 条（`CHANGELOG_OPEN`）展开，其余按月份各放进一个 `<details class="changelog-month">`，标题如「Earlier in October 2026 (n entries)」/「2026 年 10 月更早的更新（n 条）」，日期取 h2 的 id。条目仍在页面里、id 不变，所以 RSS 链接照常；`main.js` 在打开 `#id` 或 hash 变化时展开对应月份并滚过去。源文件照旧按时间倒序写，不用手动挪。`tests/changelog.spec.js` 覆盖折叠、链接到旧条目、中文标题；`feed.spec.js` 不受影响。
+>
+> 第三轮四项全部完成。
 
 ### 明确不要做
 

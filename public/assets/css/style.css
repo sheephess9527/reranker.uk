@@ -791,6 +791,13 @@ select { font-family: var(--mono); font-size: 0.85rem; }
 .muted { color: var(--text-mut); }
 .soft { color: var(--text-soft); }
 .stack > * + * { margin-top: 1rem; }
+/* Older changelog months, folded by foldChangelog in scripts/build.mjs. */
+.changelog-month { border-top: 1px solid var(--border); padding: .9rem 0; }
+.changelog-month:last-child { border-bottom: 1px solid var(--border); }
+.changelog-month > summary { cursor: pointer; font-weight: 600; color: var(--text); }
+.changelog-month > summary:hover { color: var(--primary); }
+.changelog-month[open] > summary { margin-bottom: 1.2rem; }
+
 /* Previous / next on the reading-path guides (built by readingPathPager). */
 .guide-pager {
   display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2.5rem 0 0;
