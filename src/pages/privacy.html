@@ -6,7 +6,11 @@
 
     <section class="section container narrow prose">
       <h2>Static pages</h2>
-      <p>Guide and model pages are plain HTML served from Cloudflare. We do not run first-party analytics, tracking pixels, or sign-in flows on this site.</p>
+      <p>Guide and model pages are plain HTML served from Cloudflare. There are no ads, tracking pixels, or sign-in flows on this site.</p>
+
+      <h2>Analytics</h2>
+      <p>We use <a href="https://www.cloudflare.com/web-analytics/" rel="noopener noreferrer">Cloudflare Web Analytics</a> to count page views and see how quickly pages load. Cloudflare adds a small script to each page, which measures load times with your browser’s Performance API and reports them to this site’s own address.</p>
+      <p>According to <a href="https://developers.cloudflare.com/web-analytics/about/" rel="noopener noreferrer">Cloudflare’s documentation</a>, it sets no cookies and uses no local storage, does not fingerprint visitors by IP address or user agent, does not collect visitors’ personal data, and does not record query strings — so the text in a demo share link is not part of it. Ad blockers often block the script; the site works the same either way.</p>
 
       <h2>Live demo</h2>
       <p>The <a href="/demo.html">reranking demo</a> runs entirely in your browser with <a href="https://github.com/huggingface/transformers.js" rel="noopener noreferrer">transformers.js</a>. Your query and candidate passages are processed locally on your device. They are <strong>not</strong> sent to reranker.uk servers or any rerank API.</p>
@@ -14,7 +18,7 @@
 
       <h2>Third parties</h2>
       <ul>
-        <li><strong>Cloudflare</strong> — hosts static files and may log standard request metadata (IP, user agent) per their <a href="https://www.cloudflare.com/privacypolicy/" rel="noopener noreferrer">privacy policy</a>.</li>
+        <li><strong>Cloudflare</strong> — hosts static files, may log standard request metadata (IP, user agent) per their <a href="https://www.cloudflare.com/privacypolicy/" rel="noopener noreferrer">privacy policy</a>, and runs the analytics described above.</li>
         <li><strong>jsDelivr / Hugging Face</strong> — serves transformers.js and ONNX model weights when you open the demo.</li>
         <li><strong>GitHub</strong> — if you follow the “View source” link, GitHub’s terms apply.</li>
       </ul>
@@ -22,6 +26,6 @@
       <h2>Contact</h2>
       <p>Questions or corrections: open an issue on <a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer">GitHub</a>.</p>
 
-      <p class="muted" style="margin-top:2rem">Last updated: 23 June 2026</p>
+      <p class="muted" style="margin-top:2rem">Last updated: 15 October 2026</p>
     </section>
   </main>

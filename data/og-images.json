@@ -21,7 +21,7 @@
   "models/mxbai-rerank": "c735466e6b68df3f",
   "models/qwen-reranker": "fdf58c38095cff35",
   "models/voyage-rerank": "bf8e5381b57285f6",
-  "privacy": "61ebf68cfbdd2859",
+  "privacy": "70679188e763efdb",
   "rerank-cost-calculator": "17a7b96a70c10dd0",
   "zh/changelog": "d2b410c81a35578d",
   "zh/demo": "b7793d3c0af6e752",
@@ -45,7 +45,7 @@
   "zh/models/mxbai-rerank": "26a1b7cd8c28f591",
   "zh/models/qwen-reranker": "116ad97ee1933c31",
   "zh/models/voyage-rerank": "0148fe0429d639a0",
-  "zh/privacy": "7738e17ce69192dc",
+  "zh/privacy": "4483b9b7833e7713",
   "zh/rerank-cost-calculator": "f39d31b1a2f5fb7b",
   "index": "6dfd54216ee3337a",
   "zh/index": "5cc89910671221fa"

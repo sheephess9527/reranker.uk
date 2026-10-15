@@ -375,7 +375,8 @@ fails on any violation — the only way to see something Cloudflare injects
 that the policy would block. Its first run against production did
 exactly that: Cloudflare Web Analytics, which Cloudflare injects on
 reranker.uk but not on previews, was blocked on every page, so
-`script-src` and `connect-src` now allow its two hosts. Pass `headers_base` to point both at a
+`script-src` now allows `static.cloudflareinsights.com` (the injected
+beacon reports to this origin, which `connect-src 'self'` already covers). Pass `headers_base` to point both at a
 preview deployment before merging a `_headers` change.
 
 The CSP's `script-src` includes a `sha256-...` hash instead of

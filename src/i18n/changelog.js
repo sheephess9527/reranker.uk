@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "15 Oct 2026 (late night) — The privacy page names the analytics it runs":
+    "2026 年 10 月 15 日（凌晨）—— 隐私说明写明了所用的访问统计",
+  "<strong>Privacy page corrected</strong> — it said the site ran no analytics, but Cloudflare Web Analytics has been counting page views. The page now says so, and what Cloudflare documents about it: no cookies or local storage, no fingerprinting, no personal data, and no query strings, so demo share-link text isn’t included":
+    "<strong>更正隐私说明</strong> —— 页面原来写着本站不运行任何统计，但 Cloudflare Web Analytics 一直在统计页面浏览量。现在页面如实写明了这一点，并列出 Cloudflare 文档中的说明：不使用 cookie 或本地存储、不做指纹识别、不收集个人数据、不记录查询参数，所以 Demo 分享链接里的文字不在其中",
   "15 Oct 2026 (night) — The security policy now blocks, not just reports":
     "2026 年 10 月 15 日（深夜）—— 安全策略从只报告改为拦截",
   "<strong>Content-Security-Policy enforced</strong> — the policy added on 27 Sep only reported what it would have blocked. The daily runs that load every demo model through it have stayed clean since, and the demo loads without errors from a network in mainland China, so browsers now block anything the policy doesn’t allow":

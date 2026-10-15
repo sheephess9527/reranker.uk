@@ -71,6 +71,13 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-15-privacy">15 Oct 2026 (late night) — The privacy page names the analytics it runs</h2>
+        <ul class="feature-list">
+          <li><strong>Privacy page corrected</strong> — it said the site ran no analytics, but Cloudflare Web Analytics has been counting page views. The page now says so, and what Cloudflare documents about it: no cookies or local storage, no fingerprinting, no personal data, and no query strings, so demo share-link text isn’t included</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-15-csp">15 Oct 2026 (night) — The security policy now blocks, not just reports</h2>
         <ul class="feature-list">
           <li><strong>Content-Security-Policy enforced</strong> — the policy added on 27 Sep only reported what it would have blocked. The daily runs that load every demo model through it have stayed clean since, and the demo loads without errors from a network in mainland China, so browsers now block anything the policy doesn’t allow</li>
