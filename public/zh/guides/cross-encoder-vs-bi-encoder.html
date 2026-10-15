@@ -30,8 +30,8 @@
   <meta property="og:image:alt" content="Cross-encoder vs bi-encoder：区别与实例 | reranker.uk" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/guides/cross-encoder-vs-bi-encoder.jpg?v=0fe6610696" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css?v=3f9e686d79" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css?v=3f9e686d79" >
+  <link rel="preload" href="/assets/css/style.css?v=4a8464cc36" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=4a8464cc36" >
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Cross-encoder vs bi-encoder：区别与实例","description":"通俗讲清 cross-encoder 与 bi-encoder 的区别：bi-encoder 分别嵌入查询和文档（快、可扩展，适合一阶段检索）；cross-encoder 把一对一起打分（准，适合重排序）。何时用哪一个，以及如何在两阶段流水线中结合。","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"zh-Hans","datePublished":"2026-06-20","dateModified":"2026-06-21","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/"},"publisher":{"@type":"Organization","name":"reranker.uk","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"mainEntityOfPage":"https://reranker.uk/zh/guides/cross-encoder-vs-bi-encoder"}</script>
   <!-- seo:jsonld -->
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"Cross-encoder vs bi-encoder：区别与实例","item":"https://reranker.uk/zh/guides/cross-encoder-vs-bi-encoder"}]}]}</script>
@@ -129,6 +129,7 @@ doc   ───▶ [encoder] ───▶ d⃗  ┘</code></pre>
       </ul>
       <p>bi-encoder 可能把 A 排得很高 —— 它密集地围绕“套餐”“定价”这些主题，与查询共享大量词汇。但真正回答了问题的是 B。cross-encoder 把查询和每个候选一起读入，能看出 B 解决了那个具体诉求并把它顶到最前。正是这道鸿沟，构成了 reranker 存在的全部理由。</p>
 
+      <nav class="guide-pager" aria-label="阅读路线：第 2 篇，共 5 篇"><div class="guide-pager-step">阅读路线：第 2 篇，共 5 篇</div><a class="card guide-pager-link guide-pager-prev" href="/zh/guides/what-is-a-reranker" rel="prev"><span class="guide-pager-label">← 上一篇</span><span class="guide-pager-title">什么是 reranker？</span></a><a class="card guide-pager-link guide-pager-next" href="/zh/guides/rerank-rag" rel="next"><span class="guide-pager-label">下一篇 →</span><span class="guide-pager-title">如何为你的 RAG 流水线加重排序</span></a></nav>
       <div class="cta-band">
         <h2 style="margin-top:0">亲自感受这种差别</h2>
         <p class="soft">我们的 Demo 在你的浏览器里运行一个 cross-encoder。粘贴一个刁钻的查询，看它把哪段文本顶上去。</p>

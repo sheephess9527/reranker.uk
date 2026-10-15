@@ -30,8 +30,8 @@
   <meta property="og:image:alt" content="Hybrid retrieval + reranking" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/guides/hybrid-retrieval-rerank.jpg?v=6f9c97d9f9" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css?v=3f9e686d79" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css?v=3f9e686d79" >
+  <link rel="preload" href="/assets/css/style.css?v=4a8464cc36" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=4a8464cc36" >
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Hybrid retrieval + reranking","datePublished":"2026-06-23","dateModified":"2026-10-12","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/hybrid-retrieval-rerank","description":"How to combine BM25 and vector search for better recall, then use a cross-encoder reranker to fix ordering. Fusion strategies, top-k tuning, and when hybrid beats vectors alone.","inLanguage":"en"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://reranker.uk/guides/"},{"@type":"ListItem","position":3,"name":"Hybrid retrieval + reranking","item":"https://reranker.uk/guides/hybrid-retrieval-rerank"}]}</script>
 
@@ -132,6 +132,7 @@ def hybrid_rerank(query, corpus_chunks, vector_hits, bm25_hits, top_n=5):
         <li><strong>Measure on your data.</strong> Hybrid helps most when your eval set has both lexical and semantic queries — see <a href="/guides/evaluate-reranker">evaluate rerankers</a>.</li>
       </ul>
 
+      <nav class="guide-pager" aria-label="Reading path: 4 of 5"><div class="guide-pager-step">Reading path: 4 of 5</div><a class="card guide-pager-link guide-pager-prev" href="/guides/rerank-rag" rel="prev"><span class="guide-pager-label">← Previous</span><span class="guide-pager-title">How to add reranking to your RAG pipeline</span></a><a class="card guide-pager-link guide-pager-next" href="/guides/evaluate-reranker" rel="next"><span class="guide-pager-label">Next →</span><span class="guide-pager-title">How to evaluate rerankers</span></a></nav>
       <div class="cta-band">
         <h2 style="margin-top:0">See reranking fix a messy shortlist</h2>
         <p class="soft">Our demo includes a bi-encoder proxy column — paste distractors and watch the cross-encoder recover.</p>
