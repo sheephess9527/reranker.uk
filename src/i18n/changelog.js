@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "15 Oct 2026 (last) — A shorter changelog":
+    "2026 年 10 月 15 日（最后）—— 更新日志变短了",
+  "<strong>Older months folded</strong> — this page shows the ten newest entries; everything earlier is grouped by month and opens with a click. Links to an older entry, including the ones in the RSS feed, open its month and land on it":
+    "<strong>较早的月份折叠起来</strong> —— 本页只展开最新的十条，更早的按月份分组，点一下就能展开。指向旧条目的链接（包括 RSS 里的）会自动展开对应月份并跳到那一条",
   "15 Oct 2026 (late) — Previous and next on the reading path":
     "2026 年 10 月 15 日（稍晚）—— 阅读路线有了上一篇和下一篇",
   "<strong>Reading-path links</strong> — the five guides in the reading order on the guides page (what a reranker is, cross- vs bi-encoders, adding reranking to RAG, hybrid retrieval, evaluation) now end with links to the guide before and after, and say which step of five you’re on":

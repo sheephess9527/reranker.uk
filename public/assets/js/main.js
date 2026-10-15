@@ -197,3 +197,19 @@
     });
   }
 })();
+
+// The changelog folds older months into <details> (foldChangelog in
+// scripts/build.mjs). A link to an entry inside one — every RSS item links
+// to /changelog#<id> — opens that month and scrolls to the entry.
+(function () {
+  function reveal() {
+    var id = decodeURIComponent(location.hash.slice(1));
+    var el = id && document.getElementById(id);
+    var box = el && el.closest("details");
+    if (!box || box.open) return;
+    box.open = true;
+    el.scrollIntoView();
+  }
+  reveal();
+  window.addEventListener("hashchange", reveal);
+})();

@@ -30,8 +30,8 @@
   <meta property="og:image:alt" content="reranker.uk changelog" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/changelog.jpg?v=36bc070c23" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css?v=4a8464cc36" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css?v=4a8464cc36" >
+  <link rel="preload" href="/assets/css/style.css?v=ff62e57d6c" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=ff62e57d6c" >
   
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://reranker.uk/changelog"}]}</script>
 
@@ -70,6 +70,13 @@
     </section>
 
     <section class="section container narrow">
+      <article class="changelog-entry">
+        <h2 id="2026-10-15-changelog">15 Oct 2026 (last) — A shorter changelog</h2>
+        <ul class="feature-list">
+          <li><strong>Older months folded</strong> — this page shows the ten newest entries; everything earlier is grouped by month and opens with a click. Links to an older entry, including the ones in the RSS feed, open its month and land on it</li>
+        </ul>
+      </article>
+
       <article class="changelog-entry">
         <h2 id="2026-10-15-pager">15 Oct 2026 (late) — Previous and next on the reading path</h2>
         <ul class="feature-list">
@@ -137,38 +144,33 @@
           <li><strong>Side margins on phones</strong> — the homepage, changelog and demo sections had lost their side margins on phones, so the new pipeline diagram touched the screen edges. They’re back</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>Earlier in October 2026 (20 entries)</summary><article class="changelog-entry">
         <h2 id="2026-10-14-home">14 Oct 2026 (night) — Homepage diagram corrected; shortcuts for the job in front of you</h2>
         <ul class="feature-list">
           <li><strong>The pipeline diagram was labelling the wrong arrows</strong> — “top 50–100” sat on the arrow into the retriever, and “top 5–10” sat on the arrow into the reranker. Those counts are what each stage returns, not what it receives. The diagram now shows the retriever returning 50–100 candidates and the reranker keeping the top 5, and on a phone it stacks instead of shrinking the labels until they cannot be read</li>
           <li><strong>Four shortcuts</strong> — choose a model by scenario, rerank from mainland China, the cost calculator, and what to check when reranking didn't help. They were already on the site; the homepage didn't point at them</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-14-cards">14 Oct 2026 (later) — Every page has its own preview card</h2>
         <ul class="feature-list">
           <li><strong>Share previews that say what the page is</strong> — a link to any page used to show the same site-wide cover in WeChat, X or Slack. Each page now has its own card with its title, description and section, in English or Chinese to match the page, and CI checks the cards stay in step with the pages</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-14">14 Oct 2026 — New guide: reranking in mainland China</h2>
         <ul class="feature-list">
           <li><strong>Alibaba Cloud, SiliconFlow or your own server</strong> — a guide for readers whose servers are in mainland China: what each route offers, prices in yuan, Qwen’s Chinese retrieval scores (CMTEB-R) for the open models, working code for Model Studio and SiliconFlow, and how to download weights through hf-mirror.com or ModelScope. Every price and score on it is checked daily against the vendor’s own page</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-12-facts">12 Oct 2026 (later) — Every benchmark figure is now checked daily; Mixedbread v1 figures corrected</h2>
         <ul class="feature-list">
           <li><strong>About 70 more figures under the daily source check</strong> — the benchmark tables on the Jina and Qwen pages, and the third-party figures quoted in the models table’s notes, were typed into the pages, so a vendor revising a number would have gone unnoticed. Each one is now read from the vendor’s own model card and checked against it every day, like the rest of the site’s numbers. The gte-multilingual row also gains the scores Qwen published for it</li>
           <li><strong>Mixedbread v1, corrected</strong> — the Mixedbread page showed xsmall-v1 and base-v1 at ~55.5 and ~59.8 BEIR, and an MS MARCO column from ~38.0 to ~42.3, none of which we could trace. Mixedbread’s own model cards give 43.9 and 46.9 on their 11-dataset BEIR run, with Accuracy@3, and no MS MARCO figures; the table now shows those</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-12">12 Oct 2026 — Older guides brought up to date; framework code re-run</h2>
         <ul class="feature-list">
           <li><strong>Choosing by scenario</strong> — the guide recommended a “Voyage code” and a “legal-tuned” Voyage reranker that don’t exist, and Cohere v3.5 for multilingual work. It now points at current models, with new sections for Chinese and multilingual search (including Alibaba Cloud and SiliconFlow in mainland China) and for scanned PDFs and screenshots (Qwen3-VL-Reranker, LightOn-rerank)</li>
@@ -177,23 +179,20 @@
           <li><strong>Instruction-following</strong> — the guide adds Alibaba Cloud’s <code>instruct</code> parameter and Mixedbread’s listwise model. The ColBERT guide’s “updated” date now shows its 9 October change</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-09-calculator">9 Oct 2026 (night) — The cost calculator covers Google, Alibaba Cloud and SiliconFlow</h2>
         <ul class="feature-list">
           <li><strong>Five more prices in the cost calculator</strong> — Google Vertex AI ranking (per query of up to 100 documents) and Alibaba Cloud’s international qwen3-rerank (per token) join Cohere and Voyage in the dollar table. A new yuan table compares Alibaba Cloud’s Beijing-region qwen3-rerank / qwen3.7-text-rerank with SiliconFlow’s bge-reranker-v2-m3, and warns when your passages are longer than qwen3-rerank accepts. Every price is the same daily-checked figure the models table shows</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-09-china">9 Oct 2026 (evening) — Alibaba Cloud, SiliconFlow and Google’s ranking API in the models table</h2>
         <ul class="feature-list">
           <li><strong>Hosted rerankers you can buy in China, and Google’s</strong> — the models table now lists Alibaba Cloud Model Studio (qwen3-rerank at ¥0.5 per million tokens in China or $0.1 internationally, the 201-language qwen3.7-text-rerank, and qwen3-vl-rerank for images and video), SiliconFlow (bge-reranker-v2-m3 free, Qwen3-Reranker 0.6B / 4B / 8B on the same endpoint) and Google Vertex AI ranking ($1.00 per 1,000 queries). Prices come from each vendor’s price page and are checked daily</li>
           <li><strong>The release watch now catches qwen3.7-text-rerank</strong> — Alibaba’s newest reranker didn’t match the watch’s pattern for Alibaba model names; it does now</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-09-hosted">9 Oct 2026 (later) — Hosted rerankers watched too; Mixedbread’s new listwise model</h2>
         <ul class="feature-list">
           <li><strong>Eleven more vendor pages watched</strong> — the daily release check now also reads the model lists of ZeroEntropy, Mixedbread, Alibaba Cloud Model Studio, SiliconFlow, Pinecone, Contextual AI, Amazon Bedrock, Google Vertex AI and NVIDIA NIM, so hosted-only rerankers are noticed too, including ones sold mainly in China</li>
@@ -201,8 +200,7 @@
           <li><strong>zerank-2’s licence</strong> — the weights on Hugging Face were relicensed to Apache 2.0 in July 2026, while ZeroEntropy’s own docs still call them non-commercial; the models table now notes the conflict. NVIDIA’s smaller llama-nemotron-rerank-500m-v2 is mentioned beside the 1B</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-09">9 Oct 2026 — Three rerankers the release watch had missed; ColBERT through sentence-transformers</h2>
         <ul class="feature-list">
           <li><strong>The release watch was looking in too few places</strong> — it only checked 14 organisations on Hugging Face, and only models with “rerank” in the name. It now checks every model Hugging Face tags as a reranker, whoever published it, plus popular ones the site has never mentioned, and new releases of the libraries the demo and guides use</li>
@@ -211,8 +209,7 @@
           <li><strong>ColBERT code that runs</strong> — the late-interaction guide’s snippet searched a ColBERT index it never built. It now rescores candidates with sentence-transformers 6’s <code>MultiVectorEncoder</code>, which we ran on version 6.1.0</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-05">5 Oct 2026 — Voyage rerank-3, what changed; LightOn-rerank added</h2>
         <ul class="feature-list">
           <li><strong>Voyage rerank-3, from Voyage’s announcement</strong> — the site said Voyage’s docs didn’t say whether rerank-3 takes natural-language instructions. Voyage’s 30 September announcement does: the Rerank 3 series keeps them. The Voyage page now covers what changed — a drop-in upgrade at the same price, scores calibrated to rerank-2.5, the largest gains on long documents and code, and Voyage’s own comparison against Cohere and Qwen3 — with each figure checked daily against the announcement</li>
@@ -220,40 +217,35 @@
           <li><strong>A daily watch for new releases</strong> — every morning the site now checks Hugging Face and the Cohere, Voyage and Jina model pages for rerankers it doesn’t cover yet, and adds them after reading each vendor’s own announcement</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-03">3 Oct 2026 — The RAG guide’s model picks, corrected; the Chinese pages, finished</h2>
         <ul class="feature-list">
           <li><strong>“Which reranker to pick” was out of date</strong> — the RAG guide called bge-reranker-v2-m3 English-only (it’s BAAI’s multilingual model), recommended Cohere Rerank v3.5 for “best multilingual quality” and Voyage Rerank 2. It now points at Cohere Rerank 4 and Voyage rerank-3, describes each by how it bills and what it supports rather than with an unsourced superlative, and its code sample uses Cohere’s current client and model</li>
           <li><strong>English left on the Chinese pages</strong> — five guides’ tables of contents, the RAG pipeline diagram, every source note on the model table’s BEIR column, the demo’s input hints and screen-reader labels, and several badges were still in English. Tables of contents now take their wording from the translated headings, so they can’t fall behind again</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-02">2 Oct 2026 — Structured data that matches the page</h2>
         <ul class="feature-list">
           <li><strong>Hidden FAQs removed</strong> — five pages carried FAQ markup for questions the page never shows, and it had gone stale: it still said Jina v3 beats Qwen3-Reranker-4B and quoted a Hit@1 tie, both withdrawn from the visible pages. Search engines and AI assistants read that markup, so it’s gone (Google stopped showing FAQ results for sites like this in 2023 anyway)</li>
           <li><strong>Chinese pages describe themselves in Chinese</strong> — the /zh/ pages shipped the English structured data verbatim, some declaring their language as English. Headlines, descriptions, language and breadcrumbs now come from each page’s own title and description at build time, so they can’t drift from the page again; a CI check enforces it</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-01h">1 Oct 2026 — The demo recovers when the mirror can’t serve</h2>
         <ul class="feature-list">
           <li><strong>Automatic fallback between model hosts</strong> — the demo picks whichever of huggingface.co and hf-mirror.com answers first. Answering isn’t serving: outside mainland China, hf-mirror.com redirects every file to huggingface.co without the CORS header a browser needs, so if it won the race the model never loaded. A load that fails at the network level is now retried once on the other host</li>
           <li><strong>Tested against the real hosts</strong> — the daily real-network check now also loads each model with hf-mirror.com winning the race, and confirms the fallback ranks correctly. Every page is also checked for CSP violations on every pull request, not just the demo</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-01g">1 Oct 2026 — The demo scores about twice as fast</h2>
         <ul class="feature-list">
           <li><strong>Multi-threaded inference in the demo</strong> — the demo pages are now cross-origin isolated, which lets ONNX Runtime Web score on several threads. Measured A/B on the same 4-vCPU runner: about 1.9× faster for all three models (Jina v1 tiny 424 → 229 ms for 10 passages). Browsers that don't support the isolation header simply stay single-threaded</li>
           <li><strong>Only where it's needed</strong> — isolation and a CSP that also allows blob: scripts (the threaded runtime loads that way) apply to the demo pages alone; every other page keeps the stricter policy. A new daily check confirms both on the live site</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-01f">1 Oct 2026 — Latency figures measured, or sourced, or gone</h2>
         <ul class="feature-list">
           <li><strong>The browser demo, measured</strong> — a new script runs the live demo in Chromium on a 4-vCPU GitHub Actions runner. Scoring 10 passages takes about 430 ms with Jina v1 tiny, 515 ms with ms-marco MiniLM and 1.4 s with mxbai xsmall. The site had claimed 30–80 ms and 50–150 ms</li>
@@ -262,8 +254,7 @@
           <li><strong>Removed where nobody measured</strong> — the CPU/GPU millisecond ranges for bge and mxbai in the models table, Cohere's "~100–200 ms", and the self-hosting guide's T4 figure had no source; they're now described without numbers, and the RAG guide's latency table says which rows are estimates</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-01e">1 Oct 2026 — Qwen3, Contextual AI, GTE and NVIDIA rows checked against their model cards</h2>
         <ul class="feature-list">
           <li><strong>Contextual AI Rerank v2 was described wrongly</strong> — the table called it an English-only hosted API with prices on request. It has shipped open weights on Hugging Face since August 2025 (1B, 2B and 6B), covers 100+ languages with a 32K context, and is licensed CC BY-NC-SA — non-commercial</li>
@@ -272,8 +263,7 @@
           <li><strong>Qwen3 takes instructions</strong> — its page said "maybe not" for instruction-shaped relevance, but the Qwen rerankers are instruction-aware. The quick start now uses the model card's own sentence-transformers code, and the instruction-following guide lists three rerankers that take an instruction, with real usage</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-01d">1 Oct 2026 — Cohere's 500-token rule, and Voyage rerank-3</h2>
         <ul class="feature-list">
           <li><strong>A correction to our own correction</strong> — in September this site called it a myth that Cohere splits documents over 500 tokens into extra billable chunks. Cohere's own pricing FAQ says it does: a document over 500 tokens, query included, counts once per 500-token chunk toward a search's 100 documents. The cost calculator now models that, and the "long passages favour Cohere" rule it used to give is gone</li>
@@ -282,8 +272,7 @@
           <li><strong>Smaller fixes</strong> — Cohere trial keys (1,000 calls a month) may not be used in production, so the scenario guide no longer suggests them for customer support; Cohere's context is 32,768 tokens, not 32,000; the RAG guide's API cost was more than ten times too low; rerank-2-lite's context is 8,000 tokens, not 16,000; Voyage does have a TypeScript library</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-01c">1 Oct 2026 — jina-reranker-v3.5, and Jina's licences spelled out</h2>
         <ul class="feature-list">
           <li><strong>jina-reranker-v3.5 added</strong> — Jina's August 2026 flagship: 0.6B, listwise, a drop-in replacement for v3 and 1.22–1.56× faster. 63.20 BEIR nDCG@10 in Jina's own test. It's in the models table, and the Jina page is rewritten around it</li>
@@ -293,8 +282,7 @@
           <li><strong>Smaller fixes</strong> — parameter counts written as MB on the Jina and mxbai pages (mxbai-rerank-large-v1 is 435M, not the 1.5B its own README states); jina-reranker-v1-base-en, no longer on Hugging Face, removed</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-01b">1 Oct 2026 — bge-reranker's BEIR figure, and a daily check on every source</h2>
         <ul class="feature-list">
           <li><strong>bge-reranker-v2-m3 now reads 55.36</strong> — BAAI's own BEIR figure. The ~60.1 the models table carried could not be traced to anything BAAI or anyone else published</li>
@@ -304,8 +292,7 @@
           <li><strong>A daily check that sources still say what we say</strong> — every figure in the table that is published as text is re-fetched from its source each day and the run fails if the number has gone. Jina's v3 paper has already been revised once (61.85 in the arXiv full text, 61.94 on the model card) — the kind of drift this exists to catch</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-01">1 Oct 2026 — An accessibility pass, and a check to keep it</h2>
         <ul class="feature-list">
           <li><strong>Links in text are underlined</strong> — they were told apart from surrounding text by colour alone; in the dark theme that was a 1.47:1 difference, well under the 3:1 a reader without full colour vision needs. Buttons, cards and navigation are unchanged</li>
@@ -313,9 +300,8 @@
           <li><strong>Code blocks reachable by keyboard</strong> — a code sample wider than the screen scrolls sideways, and could only be scrolled with a mouse</li>
           <li><strong>A check on every page, both themes</strong> — every build now runs axe-core's WCAG 2.1 AA rules across all 48 pages in light and dark; it found over 400 issues the first time and finds none now</li>
         </ul>
-      </article>
-
-      <article class="changelog-entry">
+      </article></details>
+<details class="changelog-month"><summary>September 2026 (5 entries)</summary><article class="changelog-entry">
         <h2 id="2026-09-28">28 Sep 2026 — transformers.js 4.3.0, and what report-only caught</h2>
         <ul class="feature-list">
           <li><strong>The demo runs on transformers.js 4.3.0</strong> — up from 3.5.1, with ONNX Runtime Web 1.22 → 1.31. Verified against live jsDelivr and HuggingFace on all three demo models before merging, not just checked against the source</li>
@@ -324,8 +310,7 @@
           <li><strong>A stricter real-network test</strong> — the daily check now runs every model in the demo's picker, not just the default, and fails if an obviously relevant passage doesn't outrank an unrelated one, so a model that loads but ranks wrong no longer passes</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-09-27">27 Sep 2026 — Security headers, report-only for now</h2>
         <ul class="feature-list">
           <li><strong><code>public/_headers</code> added</strong> — <code>X-Content-Type-Options</code>, <code>X-Frame-Options</code>, <code>Referrer-Policy</code>, <code>Permissions-Policy</code>, and a Content-Security-Policy, generated at build time rather than hand-maintained</li>
@@ -334,15 +319,13 @@
           <li><strong>Both smoke tests now watch for CSP violations</strong> — <code>tests/helpers/csp.mjs</code>, asserted in both the mocked and real-network demo tests; verified the mechanism actually catches something by deliberately breaking <code>style-src</code> locally and watching the test fail</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-09-26b">26 Sep 2026 — ms-marco MiniLM's BEIR figure was never published</h2>
         <ul class="feature-list">
           <li><strong>ms-marco MiniLM-L6 now reads "not published"</strong> — this table carried it at an unsourced ~55.0; sentence-transformers' own docs report NDCG@10 on TREC DL 19 (74.30) and MRR@10 on MS MARCO Dev (39.01) for this model, not a BEIR average. Found while checking the rest of the table after the mxbai correction below — same failure shape, different model</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-09-26">26 Sep 2026 — mxbai-rerank-v2, a corrected BEIR figure, and a demo smoke test</h2>
         <ul class="feature-list">
           <li><strong>mxbai-rerank-large-v1's BEIR score corrected</strong> — this table carried an unsourced ~62.1 for months; mixedbread's own comparison table puts it at 49.32*. A reader flagged the gap between that number and mixedbread's own figures for their newer models, which is what surfaced it</li>
@@ -351,8 +334,7 @@
           <li><strong>A smoke test for the live demo</strong> — <code>npm test</code> runs the demo's load → score → render pipeline against a fake model on every PR; a separate daily job runs it against the real jsDelivr / HuggingFace chain, which is what would actually catch one of those going dark</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-09-18">18 Sep 2026 — URLs without the .html, and two pricing corrections</h2>
         <ul class="feature-list">
           <li><strong>URLs dropped their <code>.html</code></strong> — every internal link, the sitemap, hreflang tags and JSON-LD now point straight at the extensionless URL Cloudflare was already redirecting to, cutting a 307 round-trip off every internal navigation</li>
@@ -362,9 +344,8 @@
           <li><strong>Homepage diagram, now bilingual</strong> — the "Reranking in one diagram" figure was inline SVG the translation pass couldn't see; its labels and caption now render in Chinese on <a href="/zh/">/zh/</a></li>
           <li><strong>Model table accessibility</strong> — the comparison table gets a caption, column/row headers, and a scrollable, keyboard-focusable region for screen readers and narrow viewports</li>
         </ul>
-      </article>
-
-      <article class="changelog-entry">
+      </article></details>
+<details class="changelog-month"><summary>August 2026 (3 entries)</summary><article class="changelog-entry">
         <h2 id="2026-08-25">25 Aug 2026 — Two guides for the questions people actually ask</h2>
         <ul class="feature-list">
           <li><strong><a href="/guides/reranking-not-working">Reranking didn't help</a></strong> — a diagnostic walkthrough of the seven reasons a rerank stage shows no lift, starting with the one that explains most of them: retrieval never returned the right document</li>
@@ -373,8 +354,7 @@
           <li><strong>Feed autodiscovery</strong> — the changelog RSS is now advertised from every page, not just the changelog</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-08-14">14 Aug 2026 — Cost calculator, and demo links that land somewhere</h2>
         <ul class="feature-list">
           <li><strong><a href="/rerank-cost-calculator">Rerank cost calculator</a></strong> — Cohere bills per search, Voyage per token, so the cheaper vendor flips with passage length and top-k. Put your own volume in and see where the line sits</li>
@@ -383,8 +363,7 @@
           <li><strong>Translations survive link edits</strong> — the build now retargets links inside a translation instead of dropping it back to English</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-08-11">11 Aug 2026 — Real Chinese URLs, and a 2026 model refresh</h2>
         <ul class="feature-list">
           <li><strong>Chinese lives at <a href="/zh/">/zh/</a></strong> — every page is now pre-rendered in Chinese at its own URL with a self-referencing canonical, instead of a client-side toggle that left all three hreflang tags pointing at one page</li>
@@ -396,9 +375,8 @@
           <li><strong>Honest Qwen3 rows</strong> — dropped an unverifiable "~75+" figure for the 8B; reports put the 4B slightly ahead of it</li>
           <li><strong>Design refresh</strong> — fluid type scale, a real elevation ramp, and one focus-visible treatment site-wide</li>
         </ul>
-      </article>
-
-      <article class="changelog-entry">
+      </article></details>
+<details class="changelog-month"><summary>June 2026 (9 entries)</summary><article class="changelog-entry">
         <h2 id="2026-06-25e">25 Jun 2026 — Model landscape refresh</h2>
         <ul class="feature-list">
           <li><strong>Qwen3-Reranker</strong> — 0.6B / 4B / 8B rows + <a href="/models/qwen-reranker">deep review page</a></li>
@@ -408,8 +386,7 @@
           <li><strong>Score footnotes</strong> — MTEB-R* vs classic BEIR; next review Oct 2026</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-06-25d">25 Jun 2026 — Minimal polish pack</h2>
         <ul class="feature-list">
           <li><strong>Honest benchmarks</strong> — emerging rows use ≈ / n/a; next review Sep 2026; pricing lag disclaimer</li>
@@ -419,8 +396,7 @@
           <li><strong>Homepage</strong> — beyond five families + links to ColBERT / instruction guides</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-06-25c">25 Jun 2026 — Content expansion &amp; polish</h2>
         <ul class="feature-list">
           <li><strong>Models table</strong> — architecture column; Qwen3-Reranker, Contextual AI, ColBERTv2, ms-marco browser rows</li>
@@ -430,8 +406,7 @@
           <li><strong>Changelog RSS</strong> — <a href="/changelog.rss">/changelog.rss</a> feed</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-06-25b">25 Jun 2026 — i18n &amp; SEO completion</h2>
         <ul class="feature-list">
           <li><strong>Model page i18n</strong> — pills, TOC, meta dates, Pros/Cons, Other models for all five families</li>
@@ -440,8 +415,7 @@
           <li><strong>og:locale:alternate</strong> — swaps with primary locale on language toggle</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-06-25">25 Jun 2026 — Low-priority polish</h2>
         <ul class="feature-list">
           <li><strong>Guide i18n</strong> — full Chinese body for self-host, scenario, hybrid retrieval, and evaluate guides</li>
@@ -451,8 +425,7 @@
           <li><strong>Dual-diff a11y</strong> — table caption, row headers, empty state, <code>aria-labelledby</code></li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-06-23c">23 Jun 2026 — Medium-priority UX &amp; content</h2>
         <ul class="feature-list">
           <li><strong>Self-host guide</strong> — <a href="/guides/self-host-reranker">sentence-transformers, serving, ops</a></li>
@@ -463,8 +436,7 @@
           <li><strong>Light theme</strong> — toggle in nav, persisted in <code>localStorage</code></li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-06-23b">23 Jun 2026 — Demo UX round 2</h2>
         <ul class="feature-list">
           <li><strong>Model loading panel</strong> — progress %, ETA, file name, cache status</li>
@@ -477,8 +449,7 @@
           <li><strong>Nav</strong> — Home and Guides links in the top bar</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-06-23">23 Jun 2026 — Full release (plan items 1–5, 7–10)</h2>
         <ul class="feature-list">
           <li>Build system: <code>src/partials</code> + <code>src/pages</code> → <code>scripts/build.mjs</code></li>
@@ -489,8 +460,7 @@
           <li>Footer GitHub link; sticky nav; aria-live status</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-06-21">21 Jun 2026 — Initial launch</h2>
         <ul class="feature-list">
           <li>Educational guides on rerankers, cross- vs bi-encoder, and RAG</li>
@@ -498,7 +468,82 @@
           <li>In-browser cross-encoder demo with transformers.js</li>
           <li>Deployed on Cloudflare Workers (static assets)</li>
         </ul>
-      </article>
+      </article></details>
+
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
 
       <p class="center" style="margin-top:2.5rem"><a class="btn btn-primary" href="/demo">Try the demo →</a></p>
     </section>
@@ -557,7 +602,7 @@
       </div>
     </div>
   </footer>
-  <script src="/assets/js/main.js?v=dac3b51d07"></script>
+  <script src="/assets/js/main.js?v=56cc3b94c3"></script>
   
   <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
 </body>

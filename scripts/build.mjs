@@ -598,6 +598,42 @@ function readingPathPager(relPath, zh) {
     `<div class="guide-pager-step">${step}</div>${prev}${next}</nav>\n      `;
 }
 
+/**
+ * The changelog keeps its newest entries open and folds the rest into one
+ * <details> per month, so the page stays short as entries pile up (46 by
+ * Oct 2026, 29 of them in October). Entries stay in the DOM with their ids:
+ * RSS links point at /changelog#<id>, and main.js opens the month a linked
+ * entry is in. Dates come from the h2 ids (YYYY-MM-DD…).
+ */
+const CHANGELOG_OPEN = 10;
+const MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+function foldChangelog(root, zh) {
+  const entries = root.querySelectorAll("main article.changelog-entry");
+  if (entries.length <= CHANGELOG_OPEN) return;
+  const monthOf = (el) => (el.querySelector("h2[id]")?.getAttribute("id") || "").slice(0, 7);
+  const shownMonths = new Set(entries.slice(0, CHANGELOG_OPEN).map(monthOf));
+  const groups = [];
+  for (const el of entries.slice(CHANGELOG_OPEN)) {
+    const m = monthOf(el);
+    if (!groups.length || groups.at(-1).month !== m) groups.push({ month: m, items: [] });
+    groups.at(-1).items.push(el);
+  }
+  let html = "";
+  for (const { month, items } of groups) {
+    const [y, mo] = month.split("-").map(Number);
+    const earlier = shownMonths.has(month);
+    const n = items.length;
+    const label = zh
+      ? `${y} 年 ${mo} 月${earlier ? "更早的更新" : ""}（${n} 条）`
+      : `${earlier ? "Earlier in " : ""}${MONTHS_EN[mo - 1]} ${y} (${n} ${n === 1 ? "entry" : "entries"})`;
+    html += `<details class="changelog-month"><summary>${label}</summary>${items.map((el) => el.toString()).join("\n")}</details>\n`;
+  }
+  const last = entries[CHANGELOG_OPEN - 1];
+  for (const el of entries.slice(CHANGELOG_OPEN)) el.remove();
+  last.insertAdjacentHTML("afterend", "\n" + html);
+}
+
 function assemble({ meta, body, relPath, locale, lastmod }) {
   const urlPath = urlPathFor(relPath);
   const enUrl = SITE + urlPath;
@@ -682,6 +718,7 @@ function assemble({ meta, body, relPath, locale, lastmod }) {
   // After localiseLinks: the toggle points at the *other* locale, so it must
   // not be swept up by the /zh prefixing pass.
   setLocaleToggle(root, urlPath, zh ? "zh" : "en");
+  if (relPath === "changelog.html") foldChangelog(root, zh);
 
   const outRel = zh ? path.join("zh", relPath) : relPath;
   const outPath = path.join(PUBLIC, outRel);
