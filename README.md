@@ -385,6 +385,23 @@ one inline `<script>` the site ships (`src/partials/head-open.html`'s
 early theme-detection snippet). Change that script and the hash updates
 with it automatically — nothing to keep in sync by hand.
 
+## Caching
+
+Every `/assets/` URL a built page references carries `?v=<content hash>`,
+added by `versionAssets()` in `scripts/build.mjs`; nothing in the HTML
+sources needs to change. That lets `_headers` cache CSS, JS and preview
+cards for a year (`immutable`): an edited file gets a new URL, and the
+HTML itself is never cached, so it always names the current one. Images
+under `/assets/img/` get a day, because `public/site.webmanifest` names
+its icons without a version. Before this, every page view re-asked
+Cloudflare whether each file had changed, which costs a round trip per file
+and a long one from mainland China.
+
+`tests/asset-cache.spec.js` fails if a page references an `/assets/` URL
+without a version. The daily `headers` job checks the live Cache-Control
+header. Scripts must not load files from `/assets/` themselves: those URLs
+would carry no version.
+
 ## Deploy (Cloudflare Workers)
 
 ```bash

@@ -51,7 +51,10 @@ function loadHeaderRules() {
 function headersFor(urlPath, rules) {
   const out = {};
   for (const rule of rules) {
-    const matches = rule.pattern === "/*" || rule.pattern === urlPath;
+    // "/*" and "/assets/css/*" are prefix splats, as on Cloudflare.
+    const matches = rule.pattern.endsWith("/*")
+      ? urlPath.startsWith(rule.pattern.slice(0, -1))
+      : rule.pattern === urlPath;
     if (!matches) continue;
     for (const name of rule.detach || []) delete out[name];
     Object.assign(out, rule.headers);

@@ -128,3 +128,13 @@ jobs:
           if echo "$h" | grep -qi '^cross-origin-embedder-policy:'; then echo "isolated"; exit 1; fi
           test "$(echo "$h" | grep -ci '^content-security-policy:')" = 1
           if echo "$h" | grep -i '^content-security-policy:' | grep -Eq "script-src [^;]* blob:"; then echo "blob: leaked"; exit 1; fi
+      - name: versioned CSS and JS are cached for a year, pages are not
+        run: |
+          css=$(curl -sS "$BASE/models/" | grep -o 'href="/assets/css/style.css?v=[0-9a-f]*"' | head -1 | cut -d'"' -f2)
+          echo "stylesheet: $css"
+          test -n "$css"
+          h=$(curl -sSI "$BASE$css" | tr -d '\r')
+          echo "$h"
+          test "$(echo "$h" | grep -ci '^cache-control:')" = 1
+          echo "$h" | grep -qi '^cache-control: public, max-age=31536000, immutable$'
+          if curl -sSI "$BASE/models/" | tr -d '\r' | grep -qi '^cache-control:.*immutable'; then echo "page cached as immutable"; exit 1; fi

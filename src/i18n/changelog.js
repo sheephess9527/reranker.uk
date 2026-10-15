@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "15 Oct 2026 — Pages load faster on a repeat visit":
+    "2026 年 10 月 15 日 —— 再次访问时页面打开更快",
+  "<strong>Styles and scripts are cached</strong> — every page view used to ask Cloudflare whether the stylesheet and scripts had changed, one round trip per file, which is slow from mainland China. Each file’s address now carries a fingerprint of its contents, so the browser keeps it for a year and fetches a new copy only when it really changes":
+    "<strong>样式和脚本可以缓存了</strong> —— 以前每打开一个页面，浏览器都要逐个文件去问 Cloudflare 样式表和脚本有没有变，每个文件一次往返，在中国大陆访问时尤其慢。现在每个文件的地址都带上了内容指纹，浏览器可以保留一年，只有文件真正改动时才重新下载",
   "15 Oct 2026 (late night) — The privacy page names the analytics it runs":
     "2026 年 10 月 15 日（凌晨）—— 隐私说明写明了所用的访问统计",
   "<strong>Privacy page corrected</strong> — it said the site ran no analytics, but Cloudflare Web Analytics has been counting page views. The page now says so, and what Cloudflare documents about it: no cookies or local storage, no fingerprinting, no personal data, and no query strings, so demo share-link text isn’t included":
