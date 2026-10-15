@@ -1,4 +1,10 @@
 window.I18N_PAGE = { zh: {
+  "15 Oct 2026 (night) — The security policy now blocks, not just reports":
+    "2026 年 10 月 15 日（深夜）—— 安全策略从只报告改为拦截",
+  "<strong>Content-Security-Policy enforced</strong> — the policy added on 27 Sep only reported what it would have blocked. The daily runs that load every demo model through it have stayed clean since, and the demo loads without errors from a network in mainland China, so browsers now block anything the policy doesn’t allow":
+    "<strong>强制执行 Content-Security-Policy</strong> —— 9 月 27 日加上的策略此前只报告它会拦截什么。此后每天用它加载全部 Demo 模型的检查一直没有问题，在中国大陆网络下打开 Demo 也没有报错、能正常加载，所以现在浏览器会直接拦截策略不允许的内容",
+  "<strong>Every live page checked daily</strong> — a new daily test loads each page from reranker.uk and fails on any policy violation, to catch something added in front of the site that the policy would block":
+    "<strong>每天检查线上所有页面</strong> —— 新增一项每日测试，从 reranker.uk 逐页加载并在出现任何策略违规时失败，用来发现网站前面被额外加入、又会被策略拦下的内容",
   "15 Oct 2026 (evening) — Light or dark, as your system is set":
     "2026 年 10 月 15 日（晚）—— 深色还是浅色，跟随系统设置",
   "<strong>First visit follows your system theme</strong> — the site used to open in the dark theme for everyone. Until you use the theme switch, it now follows your operating system’s light or dark setting, and changes with it; once you’ve picked one with the switch, your choice stays":

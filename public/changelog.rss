@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Thu, 15 Oct 2026 16:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 15 Oct 2026 20:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>15 Oct 2026 (night) — The security policy now blocks, not just reports</title>
+      <link>https://reranker.uk/changelog#2026-10-15-csp</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-15-csp</guid>
+      <pubDate>Thu, 15 Oct 2026 20:00:00 GMT</pubDate>
+      <description>The Content-Security-Policy added on 27 Sep now blocks instead of only reporting, after clean daily runs and a check from mainland China. A new daily test loads every live page and fails on any violation.</description>
+    </item>
     <item>
       <title>15 Oct 2026 (evening) — Light or dark, as your system is set</title>
       <link>https://reranker.uk/changelog#2026-10-15-theme</link>

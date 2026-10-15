@@ -71,6 +71,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-15-csp">2026 年 10 月 15 日（深夜）—— 安全策略从只报告改为拦截</h2>
+        <ul class="feature-list">
+          <li><strong>强制执行 Content-Security-Policy</strong> —— 9 月 27 日加上的策略此前只报告它会拦截什么。此后每天用它加载全部 Demo 模型的检查一直没有问题，在中国大陆网络下打开 Demo 也没有报错、能正常加载，所以现在浏览器会直接拦截策略不允许的内容</li>
+          <li><strong>每天检查线上所有页面</strong> —— 新增一项每日测试，从 reranker.uk 逐页加载并在出现任何策略违规时失败，用来发现网站前面被额外加入、又会被策略拦下的内容</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-15-theme">2026 年 10 月 15 日（晚）—— 深色还是浅色，跟随系统设置</h2>
         <ul class="feature-list">
           <li><strong>首次访问跟随系统主题</strong> —— 以前网站对所有人都默认打开深色主题。现在在你使用主题切换按钮之前，网站会跟随操作系统的浅色或深色设置，系统切换时也会跟着变；一旦你用按钮选过，就以你的选择为准</li>
