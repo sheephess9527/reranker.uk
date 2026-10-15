@@ -12,8 +12,8 @@
   <meta name="theme-color" content="#0b0d17" >
   <meta name="robots" content="index, follow" >
   <meta name="author" content="reranker.uk" >
-  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" >
-  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" >
+  <link rel="icon" href="/assets/img/favicon.svg?v=1bb58b097e" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=6edeebfac7" >
   <link rel="manifest" href="/site.webmanifest" >
   <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
   <meta property="og:type" content="website" >
@@ -24,14 +24,14 @@
   <meta property="og:locale" content="zh_CN" >
   <meta property="og:locale:alternate" content="en_GB" >
   <meta name="twitter:card" content="summary_large_image" >
-  <meta property="og:image" content="https://reranker.uk/assets/og/zh/changelog.jpg" >
+  <meta property="og:image" content="https://reranker.uk/assets/og/zh/changelog.jpg?v=bd81e0c8c5" >
   <meta property="og:image:width" content="1200" >
   <meta property="og:image:height" content="630" >
   <meta property="og:image:alt" content="更新日志 — reranker.uk 版本记录 | reranker.uk" >
-  <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/changelog.jpg" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/changelog.jpg?v=bd81e0c8c5" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css" >
+  <link rel="preload" href="/assets/css/style.css?v=3f9e686d79" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=3f9e686d79" >
   
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"更新日志","item":"https://reranker.uk/zh/changelog"}]}</script>
 
@@ -70,6 +70,13 @@
     </section>
 
     <section class="section container narrow">
+      <article class="changelog-entry">
+        <h2 id="2026-10-15-cache">2026 年 10 月 15 日 —— 再次访问时页面打开更快</h2>
+        <ul class="feature-list">
+          <li><strong>样式和脚本可以缓存了</strong> —— 以前每打开一个页面，浏览器都要逐个文件去问 Cloudflare 样式表和脚本有没有变，每个文件一次往返，在中国大陆访问时尤其慢。现在每个文件的地址都带上了内容指纹，浏览器可以保留一年，只有文件真正改动时才重新下载</li>
+        </ul>
+      </article>
+
       <article class="changelog-entry">
         <h2 id="2026-10-15-privacy">2026 年 10 月 15 日（凌晨）—— 隐私说明写明了所用的访问统计</h2>
         <ul class="feature-list">
@@ -532,8 +539,8 @@
       </div>
     </div>
   </footer>
-  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/main.js?v=dac3b51d07"></script>
   
-  <script src="/assets/js/i18n.js"></script>
+  <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
 </body>
 </html>

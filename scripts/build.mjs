@@ -90,6 +90,27 @@ function monthsSince(dateStr) {
   return (Date.now() - then) / (1000 * 60 * 60 * 24 * 30.44);
 }
 
+/**
+ * Appends ?v=<content hash> to every /assets/ URL a page references, so
+ * _headers can let browsers keep CSS, JS and preview cards for a year: an
+ * edited file gets a new URL, and the HTML (never cached) points at it.
+ * Without this every page view re-asked Cloudflare whether each file had
+ * changed — a round trip per file, and a long one from mainland China.
+ */
+const assetHashes = new Map();
+function versionAssets(html) {
+  return html.replace(/((?:src|href|content)=")((?:https:\/\/reranker\.uk)?\/assets\/([^"?#]+))"/g, (m, attr, url, rel) => {
+    if (!assetHashes.has(rel)) {
+      const file = path.join(PUBLIC, "assets", rel);
+      assetHashes.set(rel, fs.existsSync(file)
+        ? crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex").slice(0, 10)
+        : null);
+    }
+    const v = assetHashes.get(rel);
+    return v ? `${attr}${url}?v=${v}"` : m;
+  });
+}
+
 function resolveFacts(html, srcRelPath) {
   return html.replace(FACT_TOKEN, (match, key) => {
     // Split on the last dot: model ids can contain one (jina-reranker-v3.5),
@@ -621,7 +642,7 @@ function assemble({ meta, body, relPath, locale, lastmod }) {
 
   const outRel = zh ? path.join("zh", relPath) : relPath;
   const outPath = path.join(PUBLIC, outRel);
-  const finalHtml = resolveFacts(root.toString(), outRel);
+  const finalHtml = versionAssets(resolveFacts(root.toString(), outRel));
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, "<!DOCTYPE html>\n" + finalHtml.replace(/^<!DOCTYPE html>\s*/i, ""), "utf8");
 
@@ -820,6 +841,17 @@ function writeHeadersFile() {
     "  Permissions-Policy: camera=(), microphone=(), geolocation=()",
     `  Content-Security-Policy: ${csp}`,
     "",
+    // Every /assets/ URL in the HTML carries ?v=<content hash> (see
+    // versionAssets), so these can be cached for a year. Images stay at a
+    // day: site.webmanifest names its icons without a version.
+    ...["/assets/css/*", "/assets/js/*", "/assets/og/*"].flatMap((p) => [
+      p,
+      "  Cache-Control: public, max-age=31536000, immutable",
+      "",
+    ]),
+    "/assets/img/*",
+    "  Cache-Control: public, max-age=86400",
+    "",
     // Cross-origin isolation, on the demo pages only: it unlocks
     // SharedArrayBuffer, which ONNX Runtime Web needs to score on more than
     // one thread. `credentialless` rather than `require-corp` because the
@@ -852,6 +884,7 @@ function writeHeadersFile() {
  * ------------------------------------------------------------------ */
 
 function buildAll() {
+  assetHashes.clear(); // --watch: an edited asset needs a new hash
   const pages = walk(PAGES);
   const sitemap = [];
   const gaps = [];

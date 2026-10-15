@@ -92,6 +92,24 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 > 完成：用户在国内网络下打开 `/zh/demo`，控制台无 CSP/CORS 报错、Demo 正常加载；每日真实网络检查自 9 月 27 日起一直通过。`build.mjs` 的 `writeHeadersFile()` 现在输出 `Content-Security-Policy`（不再带 `-Report-Only`），策略内容不变。`demo-smoke-daily.yml` 的 `headers` 任务改查强制头，并新增 `live-csp` 任务（`npm run test:live`，`tests/live-csp.real.spec.js`）：每天从线上逐页加载 sitemap 里的所有页面，有任何违规就失败。改 `_headers` 前先用 `headers_base` 指向预览部署跑一次。
 
+## 第三轮（2026-10-15 用户说「都做」，按顺序）
+
+### ~~6. 静态资源缓存~~（2026-10-15 已完成）
+
+> 完成：`build.mjs` 的 `versionAssets()` 给页面里所有 `/assets/` 地址加 `?v=<内容哈希前 10 位>`；`_headers` 给 `/assets/css|js|og/*` 一年 `immutable`，`/assets/img/*` 一天（`site.webmanifest` 里的图标没有版本号）。`scripts/serve.mjs` 支持 `/assets/css/*` 这类前缀匹配。`tests/asset-cache.spec.js` 检查页面上没有不带版本号的资源地址、本地响应头正确；`demo-smoke-daily.yml` 的 `headers` 任务检查线上的 Cache-Control。脚本里不要自己去加载 `/assets/` 下的文件（那样拿不到版本号）。
+
+### 7. 给表里有但没有详情页的模型补页面（先 zerank-2、Qwen3-VL）
+
+只用 `data/models.json` 里已核实的数字，页面结构照现有模型页。
+
+### 8. 入门五篇指南加「上一篇 / 下一篇」
+
+顺序同 `/guides/` 的阅读路线。
+
+### 9. 更新日志太长
+
+页面只显示近三个月，更早的折叠或放归档页；RSS 不变，`tests/feed.spec.js` 仍要过。
+
 ### 明确不要做
 
 - 不要改 `data/models.json` 里的分数，除非 `npm run check:sources` 证明厂商页面上的数字变了。
