@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-locale="zh" data-prerendered="zh">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <title>GTE 重排序模型：阿里巴巴的小型 Apache 2.0 交叉编码器 | reranker.uk</title>
+  <meta name="description" content="GTE 重排序模型评测（2026 年 10 月）：gte-reranker-modernbert-base（149M，英文）和 gte-multilingual-reranker-base（306M，70 多种语言），都支持 8,192 token、Apache 2.0；分数及其出处，以及在 CPU、GPU 或浏览器里运行的方法。" >
+  <link rel="canonical" href="https://reranker.uk/zh/models/gte-reranker" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/models/gte-reranker" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/gte-reranker" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/gte-reranker" >
+  <meta name="theme-color" content="#0b0d17" >
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
+  <meta name="author" content="reranker.uk" >
+  <link rel="icon" href="/assets/img/favicon.svg?v=1bb58b097e" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=6edeebfac7" >
+  <link rel="manifest" href="/site.webmanifest" >
+  <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
+  <meta property="og:type" content="article" >
+  <meta property="og:title" content="GTE 重排序模型：阿里巴巴的小型 Apache 2.0 交叉编码器 | reranker.uk" >
+  <meta property="og:description" content="GTE 重排序模型评测（2026 年 10 月）：gte-reranker-modernbert-base（149M，英文）和 gte-multilingual-reranker-base（306M，70 多种语言），都支持 8,192 token、Apache 2.0；分数及其出处，以及在 CPU、GPU 或浏览器里运行的方法。" >
+  <meta property="og:url" content="https://reranker.uk/zh/models/gte-reranker" >
+  <meta property="og:site_name" content="reranker.uk" >
+  <meta property="og:locale" content="zh_CN" >
+  <meta property="og:locale:alternate" content="en_GB" >
+  <meta name="twitter:card" content="summary_large_image" >
+  <meta property="og:image" content="https://reranker.uk/assets/og/zh/models/gte-reranker.jpg?v=0d49ecce40" >
+  <meta property="og:image:width" content="1200" >
+  <meta property="og:image:height" content="630" >
+  <meta property="og:image:alt" content="GTE 重排序模型：阿里巴巴的小型 Apache 2.0 交叉编码器 | reranker.uk" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/models/gte-reranker.jpg?v=0d49ecce40" >
+  <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
+  <link rel="preload" href="/assets/css/style.css?v=ff62e57d6c" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=ff62e57d6c" >
+  <!-- seo:jsonld -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"模型对比","item":"https://reranker.uk/zh/models/"},{"@type":"ListItem","position":3,"name":"GTE 重排序模型：阿里巴巴的小型 Apache 2.0 交叉编码器","item":"https://reranker.uk/zh/models/gte-reranker"}]},{"@type":"Article","headline":"GTE 重排序模型：阿里巴巴的小型 Apache 2.0 交叉编码器","description":"GTE 重排序模型评测（2026 年 10 月）：gte-reranker-modernbert-base（149M，英文）和 gte-multilingual-reranker-base（306M，70 多种语言），都支持 8,192 token、Apache 2.0；分数及其出处，以及在 CPU、GPU 或浏览器里运行的方法。","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"zh-Hans","datePublished":"2026-10-16","dateModified":"2026-10-16","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/zh/"},"mainEntityOfPage":"https://reranker.uk/zh/models/gte-reranker","about":{"@type":"Thing","name":"GTE rerankers reranker model"}}]}</script>
+
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="shared.skip">跳到正文</a>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
+        <li><a href="/zh/guides/" data-i18n="shared.nav.guides">指南</a></li>
+        <li><a href="/zh/models/" data-i18n="shared.nav.models" aria-current="page" class="active">模型对比</a></li>
+        <li><a class="nav-cta" href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+      </ul>
+      <div class="nav-right">
+        <button type="button" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="site-search" data-i18n-aria-label="shared.search.open" aria-label="搜索全站（按 /）" title="/">⌕</button>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+        <a class="lang-toggle" href="/models/gte-reranker" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
+      </div>
+    </nav>
+    <div class="site-search" id="site-search" role="search" hidden>
+      <div class="container narrow">
+        <label class="sr-only" for="site-search-input" data-i18n="shared.search.label">搜索 reranker.uk</label>
+        <input id="site-search-input" type="search" autocomplete="off" spellcheck="false" data-i18n-placeholder="shared.search.placeholder" placeholder="搜索指南和模型…" aria-describedby="site-search-status">
+        <p class="search-status" id="site-search-status" aria-live="polite"></p>
+        <ul class="search-results" id="site-search-results"></ul>
+      </div>
+    </div>
+  </header>
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>GTE 重排序模型</div>
+      <h1>GTE 重排序模型</h1>
+      <p class="meta">开源权重 · 阿里巴巴通义实验室 · <time datetime="2026-10-16">更新于 2026 年 10 月 16 日</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Apache 2.0</span><span class="pill info">小模型</span><span class="pill">CPU 友好</span></div>
+      <p class="lead">阿里巴巴的两个 <strong>GTE</strong> 重排序模型是小型编码器交叉编码器，不是基于大模型的：<strong>gte-reranker-modernbert-base</strong>（149M，英文）和 <strong>gte-multilingual-reranker-base</strong>（306M，70 多种语言）。两者都能接收 8,192 token，都是 Apache 2.0。它们的体量在 CPU 或小显卡上就能跑，英文模型甚至能在浏览器里运行。</p>
+
+      <div class="toc">
+        <strong>本页目录</strong>
+        <ol>
+          <li><a href="#models">两个模型</a></li>
+          <li><a href="#scores">分数，以及是谁测的</a></li>
+          <li><a href="#usage">快速上手</a></li>
+          <li><a href="#when">什么时候选 GTE</a></li>
+          <li><a href="#pros-cons">优缺点</a></li>
+        </ol>
+      </div>
+
+      <h2 id="models">两个模型</h2>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="两个模型">
+        <table>
+          <thead>
+            <tr><th>模型</th><th>参数量</th><th>语言</th><th>基于</th><th>可用的运行方式</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>Alibaba-NLP/gte-reranker-modernbert-base</code></td><td>149M</td><td>英文</td><td>ModernBERT-base</td><td>transformers、sentence-transformers、transformers.js、Text Embeddings Inference</td></tr>
+            <tr><td><code>Alibaba-NLP/gte-multilingual-reranker-base</code></td><td>306M</td><td>70+</td><td>阿里巴巴自家的编码器</td><td>transformers（自定义代码）、sentence-transformers、Text Embeddings Inference、Infinity</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>阿里云托管的 <code>gte-rerank</code> API 是相关模型，并不是这两份权重；托管版本见<a href="/zh/guides/rerank-in-china">国内重排序指南</a>。</p>
+
+      <h2 id="scores">分数，以及是谁测的</h2>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="分数，以及是谁测的">
+        <table>
+          <thead>
+            <tr><th>模型</th><th>评测</th><th>分数</th><th>测试方</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>gte-reranker-modernbert-base</td><td>BEIR</td><td>56.19*</td><td>阿里巴巴，模型卡</td></tr>
+            <tr><td>gte-reranker-modernbert-base</td><td>LoCo（长文档）</td><td>90.68*</td><td>阿里巴巴，模型卡</td></tr>
+            <tr><td>gte-reranker-modernbert-base</td><td>CoIR（代码）</td><td>79.99*</td><td>阿里巴巴，模型卡</td></tr>
+            <tr><td>gte-multilingual-reranker-base</td><td>MTEB-R（英文）</td><td>59.51</td><td>Qwen，Qwen3-Reranker 模型卡</td></tr>
+            <tr><td>gte-multilingual-reranker-base</td><td>CMTEB-R（中文）</td><td>74.08</td><td>Qwen，Qwen3-Reranker 模型卡</td></tr>
+            <tr><td>gte-multilingual-reranker-base</td><td>MMTEB-R（多语言）</td><td>59.44</td><td>Qwen，Qwen3-Reranker 模型卡</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">ModernBERT 模型的卡片没有说明用了哪些 BEIR 数据集、第一阶段是什么。多语言模型的结果阿里巴巴只以图表形式发布（模型卡和 mGTE 论文里），所以这里用的是 Qwen 的数字：Qwen 把它作为 Qwen3-Reranker 的对照基线，重排的是 Qwen3-Embedding-0.6B 召回的前 100 个结果。两个模型的这几行彼此不可比。</p>
+      <p>和阿里巴巴更新的 Qwen3-Reranker 相比，多语言模型处在低成本那一端：在同一批 Qwen 测试中，0.6B 的 <a href="/zh/models/qwen-reranker">Qwen3-Reranker</a> 在 MTEB-R 上得 65.80*，在 CMTEB-R 上得 71.31，代价是两倍的参数量和大模型式的部署。</p>
+
+      <h2 id="usage">快速上手</h2>
+      <h3>sentence-transformers</h3>
+      <pre tabindex="0"><code>pip install sentence-transformers
+
+from sentence_transformers import CrossEncoder
+
+model = CrossEncoder(
+    "Alibaba-NLP/gte-reranker-modernbert-base",
+    automodel_args={"torch_dtype": "auto"},
+)
+pairs = [
+    ["what is the capital of China?", "Beijing"],
+    ["how to implement quick sort in python?", "Introduction of quick sort"],
+]
+scores = model.predict(pairs)   # 0–1: sentence-transformers applies an activation</code></pre>
+      <p>多语言模型的卡片用普通 <code>transformers</code> 加 <code>trust_remote_code=True</code> 加载，并建议安装 xformers、开启 unpadding 以提速。</p>
+      <h3>作为服务部署</h3>
+      <pre tabindex="0"><code>docker run -p 8080:80 -v $PWD/data:/data \
+  ghcr.io/huggingface/text-embeddings-inference:cpu-1.7 \
+  --model-id Alibaba-NLP/gte-reranker-modernbert-base
+
+curl localhost:8080/rerank -H "Content-Type: application/json" \
+  -d '{"query": "What is the capital of China?", "texts": ["Beijing"]}'</code></pre>
+      <p>Hugging Face 的 Text Embeddings Inference 可以通过 <code>/rerank</code> 接口提供这两个模型，CPU 或 GPU 都行（去掉镜像标签里的 <code>cpu-</code> 并加上 <code>--gpus all</code>）。英文模型还能通过 transformers.js 在浏览器里运行，支持 fp32、fp16、q8、q4、q4f16。</p>
+
+      <h2 id="when">什么时候选 GTE</h2>
+      <ul>
+        <li><strong>适合：</strong>用 CPU 部署，或者显卡预算不够跑基于大模型的重排序。</li>
+        <li><strong>适合：</strong>段落较长：两者都能接收 8,192 token，而很多小型交叉编码器只到 512。</li>
+        <li><strong>适合：</strong>英文代码检索或长文档检索，这是阿里巴巴为 ModernBERT 模型给出成绩的两个方向。</li>
+        <li><strong>可能不适合：</strong>需要指令，或者有 GPU 且要最好的多语言效果：<a href="/zh/models/qwen-reranker">Qwen3-Reranker</a> 支持指令，在 Qwen 的测试里分数也更高。</li>
+      </ul>
+
+      <h2 id="pros-cons">优缺点</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 style="color:var(--good);margin-top:0">优点</h3>
+          <ul class="feature-list">
+            <li>Apache 2.0，参数量 149M 和 306M</li>
+            <li>8,192 token 上下文</li>
+            <li>可用 Text Embeddings Inference 在 CPU 或 GPU 上部署</li>
+            <li>英文模型可通过 transformers.js 在浏览器里运行</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--danger);margin-top:0">缺点</h3>
+          <ul style="padding-left:1.2rem;color:var(--text-soft)">
+            <li>不支持任务指令</li>
+            <li>阿里巴巴的 BEIR 分数没有说明数据集和第一阶段</li>
+            <li>多语言模型在 transformers 里需要自定义代码</li>
+            <li>在 Qwen 的多语言测试里落后于基于大模型的重排序</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">打算自己部署？</h2>
+        <p class="soft">自托管指南讲了什么时候自托管划算、怎么选模型、有哪些部署方式，以及一份运维清单。</p>
+        <a class="btn btn-primary" href="/zh/guides/self-host-reranker">自托管指南 →</a>
+        <a class="btn btn-ghost" href="/zh/models/" style="margin-left:.5rem">全部模型 →</a>
+      </div>
+
+      <h2>其他模型</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/zh/models/bge-reranker"><h3>bge-reranker</h3><p>另一个 CPU 友好的开源默认选择。</p></a>
+        <a class="card" href="/zh/models/qwen-reranker"><h3>Qwen3-Reranker</h3><p>0.6B、4B、8B 全部 Apache 2.0。</p></a>
+        <a class="card" href="/zh/models/mxbai-rerank"><h3>mxbai-rerank</h3><p>Apache 2.0，还有浏览器能跑的 xsmall。</p></a>
+        <a class="card" href="/zh/guides/rerank-in-china"><h3>国内重排序</h3><p>阿里云的托管重排序。</p></a>
+      </div>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch" data-i18n="shared.footer.blurb">一个关于检索与 RAG 重排序（reranker）的开放学习资源，外加一个在浏览器里零成本运行的实时 Demo。</p>
+          <p style="margin-top:.6rem"><a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer" data-i18n="shared.footer.github">在 GitHub 上查看源码</a></p>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.guides">指南</h4>
+          <ul>
+            <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/guides/reranking-not-working" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
+            <li><a href="/zh/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
+            <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
+            <li><a href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
+            <li><a href="/zh/privacy" data-i18n="shared.footer.privacy">隐私说明</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.models">模型</h4>
+          <ul>
+            <li><a href="/zh/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank">Voyage Rerank</a></li>
+            <li><a href="/zh/models/zerank">zerank-2</a></li>
+            <li><a href="/zh/models/qwen3-vl-reranker">Qwen3-VL-Reranker</a></li>
+            <li><a href="/zh/models/lighton-rerank">LightOn-rerank</a></li>
+            <li><a href="/zh/models/gte-reranker">GTE rerankers</a></li>
+            <li><a href="/zh/models/contextual-rerank">Contextual AI</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> reranker.uk</span>
+        <span class="footer-legal muted">
+          <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
+          · <a href="/zh/privacy" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog" data-i18n="shared.footer.changelogShort">更新日志</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js?v=56cc3b94c3"></script>
+  
+  <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
+</body>
+</html>

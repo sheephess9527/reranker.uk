@@ -1,0 +1,123 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>GTE rerankers</div>
+      <h1>GTE rerankers</h1>
+      <p class="meta">Open weights · Tongyi Lab, Alibaba · <time datetime="2026-10-16">Updated 16 Oct 2026</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Apache 2.0</span><span class="pill info">Small</span><span class="pill">CPU-friendly</span></div>
+      <p class="lead">Alibaba’s two <strong>GTE</strong> rerankers are small encoder cross-encoders, not LLM-based ones: <strong>gte-reranker-modernbert-base</strong> (149M, English) and <strong>gte-multilingual-reranker-base</strong> (306M, 70+ languages). Both take 8,192 tokens and are Apache 2.0. They are the size you can serve on a CPU or a small GPU, and the English model even runs in the browser.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#models">The two models</a></li>
+          <li><a href="#scores">Scores, and whose they are</a></li>
+          <li><a href="#usage">Quick start</a></li>
+          <li><a href="#when">When to pick GTE</a></li>
+          <li><a href="#pros-cons">Pros and cons</a></li>
+        </ol>
+      </div>
+
+      <h2 id="models">The two models</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Parameters</th><th>Languages</th><th>Built on</th><th>Runs with</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>Alibaba-NLP/gte-reranker-modernbert-base</code></td><td>149M</td><td>English</td><td>ModernBERT-base</td><td>transformers, sentence-transformers, transformers.js, Text Embeddings Inference</td></tr>
+            <tr><td><code>Alibaba-NLP/gte-multilingual-reranker-base</code></td><td>306M</td><td>70+</td><td>Alibaba’s own encoder</td><td>transformers (custom code), sentence-transformers, Text Embeddings Inference, Infinity</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Alibaba Cloud’s hosted <code>gte-rerank</code> APIs are related models, not these weights; see <a href="/guides/rerank-in-china.html">reranking in mainland China</a> for the hosted ones.</p>
+
+      <h2 id="scores">Scores, and whose they are</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Benchmark</th><th>Score</th><th>Whose run</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>gte-reranker-modernbert-base</td><td>BEIR</td><td>{{fact:gte-reranker-modernbert-base.beir}}</td><td>Alibaba, model card</td></tr>
+            <tr><td>gte-reranker-modernbert-base</td><td>LoCo (long documents)</td><td>{{fact:gte-reranker-modernbert-base.loco}}</td><td>Alibaba, model card</td></tr>
+            <tr><td>gte-reranker-modernbert-base</td><td>CoIR (code)</td><td>{{fact:gte-reranker-modernbert-base.coir}}</td><td>Alibaba, model card</td></tr>
+            <tr><td>gte-multilingual-reranker-base</td><td>MTEB-R (English)</td><td>{{fact:gte-multilingual-reranker-base.qwen_mteb_r}}</td><td>Qwen, Qwen3-Reranker cards</td></tr>
+            <tr><td>gte-multilingual-reranker-base</td><td>CMTEB-R (Chinese)</td><td>{{fact:gte-multilingual-reranker-base.qwen_cmteb_r}}</td><td>Qwen, Qwen3-Reranker cards</td></tr>
+            <tr><td>gte-multilingual-reranker-base</td><td>MMTEB-R (multilingual)</td><td>{{fact:gte-multilingual-reranker-base.qwen_mmteb_r}}</td><td>Qwen, Qwen3-Reranker cards</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">Alibaba’s card for the ModernBERT model doesn’t say which BEIR datasets or which first stage it used. For the multilingual model Alibaba publish results only as a chart (on the card and in the mGTE paper), so the numbers here are Qwen’s, who ran it as a baseline for Qwen3-Reranker, reranking the top 100 from Qwen3-Embedding-0.6B. The two models’ rows aren’t comparable with each other.</p>
+      <p>Next to Alibaba’s newer Qwen3-Reranker, the multilingual model is the cheap end of the scale: on the same Qwen runs the 0.6B <a href="/models/qwen-reranker.html">Qwen3-Reranker</a> scores {{fact:qwen3-reranker-0.6b.mteb_r}} on MTEB-R and {{fact:qwen3-reranker-0.6b.cmteb_r}} on CMTEB-R, for twice the parameters and an LLM-style serving setup.</p>
+
+      <h2 id="usage">Quick start</h2>
+      <h3>sentence-transformers</h3>
+      <pre><code>pip install sentence-transformers
+
+from sentence_transformers import CrossEncoder
+
+model = CrossEncoder(
+    "Alibaba-NLP/gte-reranker-modernbert-base",
+    automodel_args={"torch_dtype": "auto"},
+)
+pairs = [
+    ["what is the capital of China?", "Beijing"],
+    ["how to implement quick sort in python?", "Introduction of quick sort"],
+]
+scores = model.predict(pairs)   # 0–1: sentence-transformers applies an activation</code></pre>
+      <p>The multilingual model’s card loads it with plain <code>transformers</code> and <code>trust_remote_code=True</code>, and recommends installing xformers and enabling unpadding for speed.</p>
+      <h3>As a service</h3>
+      <pre><code>docker run -p 8080:80 -v $PWD/data:/data \
+  ghcr.io/huggingface/text-embeddings-inference:cpu-1.7 \
+  --model-id Alibaba-NLP/gte-reranker-modernbert-base
+
+curl localhost:8080/rerank -H "Content-Type: application/json" \
+  -d '{"query": "What is the capital of China?", "texts": ["Beijing"]}'</code></pre>
+      <p>Hugging Face’s Text Embeddings Inference serves both models behind a <code>/rerank</code> route, on CPU or GPU (drop <code>cpu-</code> from the image tag and add <code>--gpus all</code>). The English model also runs in the browser through transformers.js, in fp32, fp16, q8, q4 or q4f16.</p>
+
+      <h2 id="when">When to pick GTE</h2>
+      <ul>
+        <li><strong>Yes:</strong> CPU serving, or a GPU budget too small for an LLM-based reranker.</li>
+        <li><strong>Yes:</strong> long passages: both take 8,192 tokens, where many small cross-encoders stop at 512.</li>
+        <li><strong>Yes:</strong> English code or long-document search, the two areas Alibaba report for the ModernBERT model.</li>
+        <li><strong>Maybe not:</strong> you need instructions, or the best multilingual quality and have a GPU: <a href="/models/qwen-reranker.html">Qwen3-Reranker</a> takes instructions and scores higher on Qwen’s runs.</li>
+      </ul>
+
+      <h2 id="pros-cons">Pros and cons</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 style="color:var(--good);margin-top:0">Pros</h3>
+          <ul class="feature-list">
+            <li>Apache 2.0, 149M and 306M parameters</li>
+            <li>8,192-token context</li>
+            <li>Served by Text Embeddings Inference on CPU or GPU</li>
+            <li>The English model runs in the browser via transformers.js</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--danger);margin-top:0">Cons</h3>
+          <ul style="padding-left:1.2rem;color:var(--text-soft)">
+            <li>No task instructions</li>
+            <li>Alibaba’s BEIR figure comes without its datasets or first stage</li>
+            <li>The multilingual model needs custom code in transformers</li>
+            <li>Behind LLM-based rerankers on Qwen’s multilingual runs</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">Serving it yourself?</h2>
+        <p class="soft">The self-host guide covers when self-hosting pays off, picking a model, serving options and an ops checklist.</p>
+        <a class="btn btn-primary" href="/guides/self-host-reranker.html">Self-host guide →</a>
+        <a class="btn btn-ghost" href="/models/" style="margin-left:.5rem">All models →</a>
+      </div>
+
+      <h2>Other models</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/models/bge-reranker.html"><h3>bge-reranker</h3><p>The other CPU-friendly open default.</p></a>
+        <a class="card" href="/models/qwen-reranker.html"><h3>Qwen3-Reranker</h3><p>Apache 2.0 at 0.6B, 4B and 8B.</p></a>
+        <a class="card" href="/models/mxbai-rerank.html"><h3>mxbai-rerank</h3><p>Apache 2.0, with a browser-sized xsmall.</p></a>
+        <a class="card" href="/guides/rerank-in-china.html"><h3>Reranking in China</h3><p>Alibaba Cloud’s hosted rerankers.</p></a>
+      </div>
+    </article>
+  </main>

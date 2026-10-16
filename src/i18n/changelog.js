@@ -1,4 +1,12 @@
 window.I18N_PAGE = { zh: {
+  "16 Oct 2026 (evening) — Pages for LightOn-rerank, GTE and Contextual AI":
+    "2026 年 10 月 16 日（晚）—— LightOn-rerank、GTE 和 Contextual AI 有了专页",
+  "<strong>Three more model pages</strong> — <a href=\"/models/lighton-rerank.html\">LightOn-rerank</a> (six Apache 2.0 models for text and page images, pointwise or listwise, with LightOn’s ViDoRe V3 and BEIR runs), <a href=\"/models/gte-reranker.html\">GTE rerankers</a> (Alibaba’s 149M English and 306M multilingual cross-encoders, 8,192 tokens, CPU or browser) and <a href=\"/models/contextual-rerank.html\">Contextual AI Rerank v2</a> (instruction-following; non-commercial weights or a paid API)":
+    "<strong>新增三个模型页面</strong> —— <a href=\"/models/lighton-rerank.html\">LightOn-rerank</a>（六个 Apache 2.0 模型，能处理文本和页面图片，分逐点和列表式，附 LightOn 在 ViDoRe V3 和 BEIR 上的测试）、<a href=\"/models/gte-reranker.html\">GTE 重排序模型</a>（阿里巴巴的 149M 英文和 306M 多语言交叉编码器，8,192 token，CPU 或浏览器都能跑）和 <a href=\"/models/contextual-rerank.html\">Contextual AI Rerank v2</a>（跟随指令；非商用权重或付费 API）",
+  "<strong>On the homepage</strong> — zerank-2 and Qwen3-VL-Reranker join the model cards, and the three new pages are linked below them":
+    "<strong>首页</strong> —— 模型卡片加上了 zerank-2 和 Qwen3-VL-Reranker，三个新页面的链接放在卡片下方",
+  "<strong>Checked daily</strong> — 13 new figures from LightOn’s and Alibaba’s model cards go into the daily source check":
+    "<strong>每天核对</strong> —— 来自 LightOn 和阿里巴巴模型卡的 13 个新数字进了每日来源核对",
   "16 Oct 2026 (afternoon) — Contextual AI’s hosted API":
     "2026 年 10 月 16 日（下午）—— Contextual AI 的托管 API",
   "<strong>The commercial route to Contextual AI Rerank v2</strong> — the site only listed the open weights, which are non-commercial. The <a href=\"/models/#contextual-api\">models table</a> now has Contextual’s hosted API too: ctxl-rerank-v2-instruct-multilingual, its -mini and the older v1, priced per token. The scenario and instruction guides point to it, and the <a href=\"/rerank-cost-calculator.html\">cost calculator</a> includes v2 and v2-mini":

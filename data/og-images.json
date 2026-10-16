@@ -52,5 +52,11 @@
   "models/qwen3-vl-reranker": "cc4743bc5bde85c9",
   "models/zerank": "4e6ed0ef930994b8",
   "zh/models/qwen3-vl-reranker": "e273a14740532888",
-  "zh/models/zerank": "acfad51f60cbec66"
+  "zh/models/zerank": "acfad51f60cbec66",
+  "models/contextual-rerank": "b5ca99aced769882",
+  "models/gte-reranker": "4ccc88ead06f6498",
+  "models/lighton-rerank": "6773767e1c253deb",
+  "zh/models/contextual-rerank": "6bf423cc9c32a09f",
+  "zh/models/gte-reranker": "606f04caee1c2738",
+  "zh/models/lighton-rerank": "92c64788386c1cbe"
 }

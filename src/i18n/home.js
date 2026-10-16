@@ -17,6 +17,14 @@ window.I18N_PAGE = {
     "pipeline.caption": "返回 50–100 个候选的是检索器。把这份名单砍到前 5 个、再送给 LLM 的，是重排序器。",
   },
   zh: {
+  "ZeroEntropy’s 4B reranker, as open weights and as an API. Check the licence first: the model card and the docs disagree.":
+    "ZeroEntropy 的 4B 重排序模型，既有开源权重也有 API。先确认许可证：模型卡和官方文档的说法不一致。",
+  "Reranks page images, screenshots and video, not just text. 2B and 8B, Apache 2.0.":
+    "不只是文本，还能给页面图片、截图和视频重排序。2B 和 8B，Apache 2.0。",
+  "Licence: check first":
+    "许可证：先确认",
+  "Images and video":
+    "图片和视频",
   "0.6B / 4B / 8B Apache 2.0 family — the multilingual GPU self-host pick. Start at 4B, not 8B.":
     "0.6B / 4B / 8B 的 Apache 2.0 家族 —— 多语言 GPU 自托管首选。从 4B 起步，而不是 8B。",
   "Mature hosted API in Pro and Fast variants — 32k context, 100+ languages, billed per search.":
@@ -58,7 +66,7 @@ window.I18N_PAGE = {
 
   "Compare the rerank models": "对比主流重排序模型",
   "2026 open SOTA candidates (<a href=\"/models/qwen-reranker.html\">Qwen3-Reranker</a>), Jina v3.5 listwise, classic bge/mxbai, hosted Cohere/Voyage — plus late-interaction and instruction APIs.": "2026 开源 SOTA 候选（<a href=\"/models/qwen-reranker.html\">Qwen3-Reranker</a>）、Jina v3.5 listwise、经典 bge/mxbai、托管 Cohere/Voyage —— 以及 late-interaction 与指令 API。",
-  "Also: <a href=\"/guides/late-interaction-rerank.html\">ColBERT / late-interaction</a> · <a href=\"/guides/instruction-reranker.html\">instruction-following rerank</a>": "另见：<a href=\"/guides/late-interaction-rerank.html\">ColBERT / late-interaction</a> · <a href=\"/guides/instruction-reranker.html\">指令跟随 rerank</a>",
+  "Also: <a href=\"/models/lighton-rerank.html\">LightOn-rerank</a> · <a href=\"/models/gte-reranker.html\">GTE rerankers</a> · <a href=\"/models/contextual-rerank.html\">Contextual AI</a> · <a href=\"/guides/late-interaction-rerank.html\">ColBERT / late-interaction</a> · <a href=\"/guides/instruction-reranker.html\">instruction-following rerank</a>": "另见：<a href=\"/models/lighton-rerank.html\">LightOn-rerank</a> · <a href=\"/models/gte-reranker.html\">GTE 重排序模型</a> · <a href=\"/models/contextual-rerank.html\">Contextual AI</a> · <a href=\"/guides/late-interaction-rerank.html\">ColBERT / late-interaction</a> · <a href=\"/guides/instruction-reranker.html\">指令跟随 rerank</a>",
   "0.6B / 4B / 8B open family — default GPU self-host pick in 2026 when quality matters.": "0.6B / 4B / 8B 开源家族 —— 2026 质量优先时默认 GPU 自建选择。",
   "Open-weight rerankers from BAAI. Still the best CPU-friendly multilingual default.": "智源（BAAI）开源权重。仍是 CPU 友好的多语言默认。",
   "Listwise long-context flagship; v1-tiny still powers the browser demo.": "Listwise 长上下文旗舰；v1-tiny 仍驱动浏览器 Demo。",

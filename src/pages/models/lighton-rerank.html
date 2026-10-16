@@ -1,0 +1,114 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>LightOn-rerank</div>
+      <h1>LightOn-rerank</h1>
+      <p class="meta">Open weights · LightOn · <time datetime="2026-10-16">Updated 16 Oct 2026</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Apache 2.0</span><span class="pill info">Text and page images</span><span class="pill">GPU required</span></div>
+      <p class="lead"><strong>LightOn-rerank</strong> is a family of six rerankers that score text passages and document page images with the same model, so one second stage covers both a text index and a PDF-page index. It comes in three sizes (0.8B, 2B, 4B), each in a pointwise and a listwise version, built on Qwen3.5 and released under Apache 2.0. On visual documents the listwise 4B is the strongest reranker in LightOn’s own comparison; on text it trails jina-reranker-m0.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#family">Pointwise or listwise</a></li>
+          <li><a href="#scores">Scores, and whose they are</a></li>
+          <li><a href="#usage">Quick start</a></li>
+          <li><a href="#when">When to pick LightOn-rerank</a></li>
+          <li><a href="#pros-cons">Pros and cons</a></li>
+        </ol>
+      </div>
+
+      <h2 id="family">Pointwise or listwise</h2>
+      <p>Each size comes in two versions, and the choice matters more than the size:</p>
+      <ul>
+        <li><strong>PW (pointwise)</strong> scores each candidate on its own, as the difference between the “Yes” and “No” logits. One forward pass per candidate, easy to batch, and it loads into sentence-transformers’ <code>CrossEncoder</code>.</li>
+        <li><strong>LW (listwise)</strong> reads four candidates in one prompt and generates their order, such as <code>[2] &gt; [4] &gt; [1] &gt; [3]</code>. Longer lists are ranked with a sliding window of four, moving two at a time from the bottom up. Seeing candidates side by side makes it stronger on visual documents at every size, at roughly three times the latency of pointwise.</li>
+      </ul>
+      <p>Training data is English only. French works without extra training, through the multilingual backbone, but trails English slightly.</p>
+
+      <h2 id="scores">Scores, and whose they are</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Scoring</th><th>ViDoRe V3 (page images)</th><th>BEIR (text)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>First stage only (ColQwen2.5)</td><td>—</td><td>{{fact:lighton-run.first_stage_vidore_v3}}</td><td>—</td></tr>
+            <tr><td>LightOn-rerank-PW-0.8B</td><td>Pointwise</td><td>{{fact:lighton-rerank-pw-0.8b.vidore_v3}}</td><td>—</td></tr>
+            <tr><td>LightOn-rerank-LW-0.8B</td><td>Listwise</td><td>{{fact:lighton-rerank-lw-0.8b.vidore_v3}}</td><td>—</td></tr>
+            <tr><td>LightOn-rerank-PW-2B</td><td>Pointwise</td><td>{{fact:lighton-rerank-pw-2b.vidore_v3}}</td><td>{{fact:lighton-rerank-pw-2b.beir}}</td></tr>
+            <tr><td>LightOn-rerank-LW-2B</td><td>Listwise</td><td>{{fact:lighton-rerank-lw-2b.vidore_v3}}</td><td>{{fact:lighton-rerank-lw-2b.beir}}</td></tr>
+            <tr><td>LightOn-rerank-PW-4B</td><td>Pointwise</td><td>{{fact:lighton-rerank-pw-4b.vidore_v3}}</td><td>—</td></tr>
+            <tr><td>LightOn-rerank-LW-4B</td><td>Listwise</td><td><strong>{{fact:lighton-rerank-lw-4b.vidore_v3}}</strong></td><td>{{fact:lighton-rerank-lw-4b.beir}}</td></tr>
+            <tr><td>Qwen3-VL-Reranker-2B</td><td>Pointwise</td><td>{{fact:lighton-run.qwen3_vl_2b_vidore_v3}}</td><td>{{fact:qwen3-vl-reranker-2b.beir_lighton}}</td></tr>
+            <tr><td>Qwen3-VL-Reranker-8B</td><td>Pointwise</td><td>{{fact:lighton-run.qwen3_vl_8b_vidore_v3}}</td><td>—</td></tr>
+            <tr><td>jina-reranker-m0</td><td>Pointwise</td><td>{{fact:lighton-run.jina_m0_vidore_v3}}</td><td><strong>{{fact:jina-reranker-m0.beir_lighton}}</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">LightOn’s own runs, from the model cards, with every model re-evaluated under the same protocol. ViDoRe V3: NDCG@10 over the top 100 page images from ColQwen2.5. BEIR: NDCG@10 over BM25’s top 100, averaged over the 11 datasets that weren’t in LightOn’s training data. Neither matches vendors’ own numbers: Qwen’s card, for instance, gives the 8B a higher ViDoRe V3 score from its own setup (see the <a href="/models/qwen3-vl-reranker.html">Qwen3-VL-Reranker page</a>).</p>
+      <p>Three things the table shows. The listwise models gain with size, and LW-4B edges past Qwen3-VL-Reranker-8B at about half the parameters; the pointwise 4B does no better than the pointwise 2B. On text, the three LightOn models with published scores sit three to four points behind jina-reranker-m0, whose weights are non-commercial. And PW-0.8B scores below the first stage it reranks, so don’t use it on page images.</p>
+
+      <h2 id="usage">Quick start</h2>
+      <h3>Pointwise, with sentence-transformers</h3>
+      <pre><code>pip install "sentence-transformers[image]"   # 5.4 or later
+
+from sentence_transformers import CrossEncoder
+
+model = CrossEncoder("lightonai/LightOn-rerank-PW-2B")
+
+query = "What is late interaction in neural information retrieval?"
+documents = [
+    "ColBERT computes token-level query-document interactions at search time...",
+    "https://example.com/page_2.png",   # a page image: URL, path or PIL.Image
+]
+rankings = model.rank(query, documents)</code></pre>
+      <p>Text and image candidates can share a call. The chat template the model was trained with ships inside the checkpoint, so pairs are formatted correctly without extra code.</p>
+      <h3>Listwise models</h3>
+      <p>The LW models don’t load into <code>CrossEncoder</code>: they generate an order rather than a score. The model cards include a short <code>transformers</code> implementation of the four-candidate window and the sliding pass over a longer list. To serve either kind with vLLM, turn thinking off (<code>enable_thinking: False</code>; the Qwen3.5 template has it on by default and it distorts the scores), and allow at least 16,384 tokens of context when ranking full page images.</p>
+
+      <h2 id="when">When to pick LightOn-rerank</h2>
+      <ul>
+        <li><strong>Yes:</strong> you search PDF pages, slides or scans, and want a commercial-friendly licence: LW-2B for the best quality for its cost, LW-4B for the best quality.</li>
+        <li><strong>Yes:</strong> one model has to rerank both a text index and a page-image index.</li>
+        <li><strong>Maybe not:</strong> text only. Text rerankers such as <a href="/models/qwen-reranker.html">Qwen3-Reranker</a> are the more natural fit there.</li>
+        <li><strong>Maybe not:</strong> languages other than English and French, which it wasn’t trained or tested on.</li>
+      </ul>
+
+      <h2 id="pros-cons">Pros and cons</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 style="color:var(--good);margin-top:0">Pros</h3>
+          <ul class="feature-list">
+            <li>Apache 2.0 at every size</li>
+            <li>Text and page images in one model</li>
+            <li>LW-4B leads LightOn’s visual-document comparison</li>
+            <li>Every baseline re-run under one protocol, contamination flagged</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--danger);margin-top:0">Cons</h3>
+          <ul style="padding-left:1.2rem;color:var(--text-soft)">
+            <li>Trained on English only</li>
+            <li>Listwise models need custom code and cost about three times the latency</li>
+            <li>Behind jina-reranker-m0 on text</li>
+            <li>GPU required; too large for our in-browser demo</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">Choosing for page images?</h2>
+        <p class="soft">The scenario guide compares LightOn-rerank with Qwen3-VL-Reranker and the hosted options for visual documents.</p>
+        <a class="btn btn-primary" href="/guides/choose-reranker-scenario.html">Choose by scenario →</a>
+        <a class="btn btn-ghost" href="/models/" style="margin-left:.5rem">All models →</a>
+      </div>
+
+      <h2>Other models</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/models/qwen3-vl-reranker.html"><h3>Qwen3-VL-Reranker</h3><p>Images, screenshots and video; 2B and 8B.</p></a>
+        <a class="card" href="/models/jina-reranker.html"><h3>Jina Reranker</h3><p>Listwise v3.5, and the multimodal m0.</p></a>
+        <a class="card" href="/guides/late-interaction-rerank.html"><h3>Late interaction</h3><p>Token-level scoring, ColBERT style.</p></a>
+        <a class="card" href="/guides/self-host-reranker.html"><h3>Self-host guide</h3><p>Serving and ops checklist.</p></a>
+      </div>
+    </article>
+  </main>

@@ -126,7 +126,9 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 > 完成：真正的缺口比「少两个型号」大——表里只有非商用的开源权重，商用唯一的路（托管 API）没提，选型指南还写着「非商用场景也可用」。加了 `#contextual-api` 一行（v2、v2-mini、v1，$0.05 / $0.02 每百万 token，单次查询+指令+文档 8,000 token），指令跟随指南加一条托管 API，选型指南改成「权重非商用，或用托管 API」，计算器加 v2 和 v2-mini（token 计法同 ZeroEntropy，注明是假设）。4 个新 fact（`contextual-rerank-api`）。API 的 v2 / mini 对应开源的 1B/2B/6B 哪个，官方没说，页面不写。
 
-### 13. Contextual、GTE、LightOn 详情页；首页模型卡片补上 zerank-2、Qwen3-VL
+### ~~13. Contextual、GTE、LightOn 详情页；首页模型卡片补上 zerank-2、Qwen3-VL~~（2026-10-16 已完成）
+
+> 完成：新增 `/models/lighton-rerank`、`/models/gte-reranker`（两个 GTE 合一页）、`/models/contextual-rerank`，中英文、meta、JSON-LD、社交卡片齐全；模型表、页脚、首页「另见」都链过去，首页卡片加 zerank-2 和 Qwen3-VL（共 8 张）。13 个新 fact：LightOn 全家 ViDoRe V3（LightOn 自己同一流程重测，含 Qwen3-VL-8B/2B、jina-m0、第一阶段基线，放在 `lighton-run`）和 LW-2B/LW-4B 的 BEIR，GTE ModernBERT 的 LoCo / CoIR。Contextual 只以图表公布分数，页面写明不标数字。注意：LightOn 测的 Qwen3-VL-8B ViDoRe V3 是 64.23，Qwen 自己卡上是 66.7，两边页面都注明是谁测的。
 
 ### 14. NVIDIA 页（10 月 20 日 Nemotron-3.5-Rerank-8B 正式发布后，连同 VL-1B）
 

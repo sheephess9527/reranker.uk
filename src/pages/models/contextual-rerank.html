@@ -1,0 +1,120 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Contextual AI Rerank</div>
+      <h1>Contextual AI Rerank v2</h1>
+      <p class="meta">Open weights + hosted API · Contextual AI · <time datetime="2026-10-16">Updated 16 Oct 2026</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill info">Instruction-following</span><span class="pill warn">Weights: non-commercial</span><span class="pill">Hosted API</span></div>
+      <p class="lead"><strong>Contextual AI Rerank v2</strong> is built to take an instruction next to the query, such as “prioritise recent internal documents”, and rank by relevance first and the instruction second. It comes as open weights in three sizes (1B, 2B and 6B, 100+ languages, up to 32K tokens) under a non-commercial licence, and as a paid hosted API for commercial use.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#routes">Weights or API</a></li>
+          <li><a href="#instructions">Writing instructions</a></li>
+          <li><a href="#usage">Quick start</a></li>
+          <li><a href="#scores">Scores</a></li>
+          <li><a href="#when">When to pick Contextual AI</a></li>
+          <li><a href="#pros-cons">Pros and cons</a></li>
+        </ol>
+      </div>
+
+      <h2 id="routes">Weights or API</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Route</th><th>Models</th><th>Licence or price</th><th>Limits</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Open weights</td><td>v2 in 1B, 2B and 6B sizes (for example <code>ctxl-rerank-v2-instruct-multilingual-2b</code>), plus quantised versions</td><td>CC BY-NC-SA 4.0: non-commercial only</td><td>Up to 32K tokens</td></tr>
+            <tr><td>Hosted API, v2</td><td><code>ctxl-rerank-v2-instruct-multilingual</code></td><td>${{fact:contextual-rerank-api.v2_usd_per_m}} per 1M tokens</td><td rowspan="2">{{fact:contextual-rerank-api.max_tokens_per_doc}} tokens for query, instruction and each document; {{fact:contextual-rerank-api.max_request_tokens}} per request</td></tr>
+            <tr><td>Hosted API, v2-mini</td><td><code>ctxl-rerank-v2-instruct-multilingual-mini</code></td><td>${{fact:contextual-rerank-api.v2_mini_usd_per_m}} per 1M tokens</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The API also still serves the older <code>ctxl-rerank-v1-instruct</code>. Contextual doesn’t say which open-weight size the API’s v2 and v2-mini correspond to, so don’t assume a benchmark of one carries over to the other.</p>
+
+      <h2 id="instructions">Writing instructions</h2>
+      <p>Contextual evaluated instructions about four things: recency, document type, source and metadata. Some practical points from their documentation:</p>
+      <ul>
+        <li><strong>Relevance still comes first.</strong> The model ranks by relevance to the query and uses the instruction second, so an instruction won’t lift an off-topic document.</li>
+        <li><strong>Give a timeframe, not “this year”.</strong> The model doesn’t know today’s date, so name the dates or range you mean.</li>
+        <li><strong>Pass metadata with the document</strong> if the instruction depends on it (source, type, date); the API takes a <code>metadata</code> list alongside the documents.</li>
+      </ul>
+      <p>For the general pattern and how to evaluate instruction rerankers, see <a href="/guides/instruction-reranker.html">instruction-following rerank</a>.</p>
+
+      <h2 id="usage">Quick start</h2>
+      <h3>Open weights, with sentence-transformers</h3>
+      <pre><code>pip install sentence-transformers
+
+import torch
+from sentence_transformers import CrossEncoder
+
+model = CrossEncoder(
+    "ContextualAI/ctxl-rerank-v2-instruct-multilingual-2b",
+    model_kwargs={"dtype": torch.bfloat16},
+)
+query = "What are the health benefits of exercise?"
+documents = [
+    "Regular exercise reduces risk of heart disease and improves mental health.",
+    "A 2024 study shows exercise enhances cognitive function in older adults.",
+]
+rankings = model.rank(query, documents, prompt="Prioritize recent medical research")</code></pre>
+      <p>The instruction goes in <code>prompt</code> and is optional. Scores are raw logits, higher meaning more relevant. For production serving the model card recommends vLLM.</p>
+      <h3>Hosted API</h3>
+      <pre><code>curl https://api.contextual.ai/v1/rerank \
+  -H "Authorization: Bearer $CONTEXTUAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model": "ctxl-rerank-v2-instruct-multilingual",
+       "query": "What are the health benefits of exercise?",
+       "instruction": "Prioritize recent medical research",
+       "documents": ["...", "..."], "top_n": 5}'</code></pre>
+
+      <h2 id="scores">Scores</h2>
+      <p>Contextual publish their benchmark results only as charts, in their <a href="https://contextual.ai/blog/rerank-v2" rel="noopener noreferrer">launch post</a>: instruction-following, question answering, BEIR, multilingual and product search, each plotted against price. There is no table to cite, so this site shows no number for it. They also released the three instruction-following datasets they used, so you can rerun that part yourself.</p>
+
+      <h2 id="when">When to pick Contextual AI</h2>
+      <ul>
+        <li><strong>Yes:</strong> ranking rules that a query alone can’t express, such as freshness, source priority or document type, especially when the rule changes per product surface.</li>
+        <li><strong>Yes:</strong> research or internal non-commercial use of open weights, with the instruction support included.</li>
+        <li><strong>Check the licence:</strong> a commercial product has to use the hosted API, not the weights.</li>
+        <li><strong>Maybe not:</strong> you need published numbers to compare against. Look at <a href="/models/qwen-reranker.html">Qwen3-Reranker</a>, which also takes instructions and publishes FollowIR scores.</li>
+      </ul>
+
+      <h2 id="pros-cons">Pros and cons</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 style="color:var(--good);margin-top:0">Pros</h3>
+          <ul class="feature-list">
+            <li>Instruction-following, with metadata passed alongside documents</li>
+            <li>100+ languages and up to 32K tokens</li>
+            <li>Three open sizes, plus quantised versions</li>
+            <li>Hosted API priced per token</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--danger);margin-top:0">Cons</h3>
+          <ul style="padding-left:1.2rem;color:var(--text-soft)">
+            <li>Weights are non-commercial (CC BY-NC-SA 4.0)</li>
+            <li>Benchmarks only as charts, no table</li>
+            <li>The API’s models aren’t mapped to the open sizes</li>
+            <li>GPU required; too large for our in-browser demo</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">Test an instruction on your own data</h2>
+        <p class="soft">Rerank the same candidates with and without an instruction, on labelled queries, and check the instruction moves the documents you meant it to.</p>
+        <a class="btn btn-primary" href="/guides/instruction-reranker.html">Instruction rerank guide →</a>
+        <a class="btn btn-ghost" href="/models/" style="margin-left:.5rem">All models →</a>
+      </div>
+
+      <h2>Other models</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/models/qwen-reranker.html"><h3>Qwen3-Reranker</h3><p>Apache 2.0 and instruction-aware.</p></a>
+        <a class="card" href="/models/voyage-rerank.html"><h3>Voyage rerank-3</h3><p>Hosted, takes instructions in the query.</p></a>
+        <a class="card" href="/models/zerank.html"><h3>zerank-2</h3><p>Weights and API from ZeroEntropy.</p></a>
+        <a class="card" href="/models/cohere-rerank.html"><h3>Cohere Rerank</h3><p>Hosted API, priced per search.</p></a>
+      </div>
+    </article>
+  </main>
