@@ -71,6 +71,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-16-calculator">16 Oct 2026 (later) — Three more options in the cost calculator</h2>
+        <ul class="feature-list">
+          <li><strong>ZeroEntropy, Amazon Bedrock and Pinecone in the <a href="/rerank-cost-calculator">cost calculator</a></strong> — zerank-2 per token, Amazon Rerank 1.0 per query of up to 100 documents, and Pinecone’s pinecone-rerank-v0 / bge-reranker-v2-m3 per request of up to 100. Two are left out on purpose: Cohere Rerank 3.5 on Bedrock, because AWS’s page gives two different per-document token limits, and Cohere on Pinecone, because Pinecone doesn’t define its “rerank unit”</li>
+          <li><strong>zerank-2-small and zerank-2-nano</strong> — named on the <a href="/models/zerank">zerank-2 page</a>; ZeroEntropy lists them but publishes no price or model card yet</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-16-hosted">16 Oct 2026 — Pinecone and Amazon Bedrock</h2>
         <ul class="feature-list">
           <li><strong>Two hosted platforms added</strong> — the <a href="/models/">models table</a> gains Amazon Bedrock (Amazon Rerank 1.0 and Cohere Rerank 3.5, priced per 1,000 queries) and Pinecone (its own pinecone-rerank-v0, plus bge-reranker-v2-m3 and cohere-rerank-4-fast). Both were on the release watch but nowhere on the site</li>
@@ -137,15 +145,14 @@
           <li><strong>Site search</strong> — a search button in the header, or press <kbd>/</kbd> on any page, finds guides and model pages by title, section headings and description. It runs in your browser from a small index built with the site, the Chinese pages search the Chinese pages, and it works with the keyboard alone: arrow keys move through the results and <kbd>Esc</kbd> closes it</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>Earlier in October 2026 (22 entries)</summary><article class="changelog-entry">
         <h2 id="2026-10-15">15 Oct 2026 — Guides in reading order; text no longer touches the screen edge on phones</h2>
         <ul class="feature-list">
           <li><strong>A reading order for the guides</strong> — the guides page now starts with the five guides meant to be read in sequence, numbered, then lists the pages for specific jobs: choosing a model, reranking from mainland China, costs, troubleshooting and the rest</li>
           <li><strong>Margins on phones, everywhere</strong> — on every guide and model page, the text ran right up to the edges of a phone screen: a stylesheet rule meant to set top and bottom spacing was also removing the side margins. Fixed, and a new test checks every page at phone width</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>Earlier in October 2026 (21 entries)</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-14-table">14 Oct 2026 (late night) — The models table keeps its first column on a phone</h2>
         <ul class="feature-list">
           <li><strong>Model names stay in view</strong> — on a phone the models table scrolls sideways, and the model name used to scroll away with it, leaving scores with no row label. The name column and the column headings now stay put while you scroll; on a desktop the table is unchanged</li>
@@ -478,6 +485,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 

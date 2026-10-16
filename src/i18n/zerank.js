@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "ZeroEntropy’s site also lists two smaller models, <strong>zerank-2-small</strong> and <strong>zerank-2-nano</strong>, but its documentation gives neither a price nor a model card yet; nano is offered through the AWS Marketplace. To see how zerank-2’s per-token price compares with the other hosted rerankers on your workload, use the <a href=\"/rerank-cost-calculator.html\">cost calculator</a>.":
+    "ZeroEntropy 网站上还列了两个更小的模型 <strong>zerank-2-small</strong> 和 <strong>zerank-2-nano</strong>，但文档里还没有给出价格或模型卡；nano 可以通过 AWS Marketplace 使用。想在你的负载下比较 zerank-2 按 token 计价和其他托管重排序 API 的花费，可以用<a href=\"/rerank-cost-calculator.html\">成本计算器</a>。",
   "_title":
     "zerank-2：ZeroEntropy 的 4B 重排序模型，开源权重与 API | reranker.uk",
   "_desc":

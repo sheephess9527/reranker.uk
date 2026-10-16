@@ -70,6 +70,7 @@ response = zclient.models.rerank(
     documents=["4", "The answer is definitely 1 million."],
 )</code></pre>
       <p>The API costs ${{fact:zerank-2.api_usd_per_m}} per million tokens. ZeroEntropy’s documentation lists the same price for zerank-1 and zerank-1-small, and serves the API from US-East, US-West and Europe. Rate limits depend on your subscription tier; check the <a href="https://docs.zeroentropy.dev/models" rel="noopener noreferrer">docs</a> for the current figures. The model is also sold through the AWS and Azure marketplaces, where it runs inside your own cloud account.</p>
+      <p>ZeroEntropy’s site also lists two smaller models, <strong>zerank-2-small</strong> and <strong>zerank-2-nano</strong>, but its documentation gives neither a price nor a model card yet; nano is offered through the AWS Marketplace. To see how zerank-2’s per-token price compares with the other hosted rerankers on your workload, use the <a href="/rerank-cost-calculator.html">cost calculator</a>.</p>
 
       <h2 id="when">When to pick zerank-2</h2>
       <ul>

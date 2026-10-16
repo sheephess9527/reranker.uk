@@ -9,8 +9,9 @@
  * per 500-token chunk — that's Cohere's own pricing FAQ, and until Oct 2026
  * this script ignored it. Voyage bills per token, with the query counted
  * once per document reranked. Google bills per query of up to 100
- * documents. Alibaba Cloud and SiliconFlow bill input tokens, counted here
- * like Voyage's. Each is modelled as the vendor states it rather than
+ * documents, and so do Amazon Bedrock's Amazon Rerank (per query) and Pinecone
+ * (per request). Alibaba Cloud, SiliconFlow and ZeroEntropy bill input
+ * tokens, counted here like Voyage's. Each is modelled as the vendor states it rather than
  * flattened into one "cost per 1k docs" figure. Yuan-priced options get
  * their own table: converting currencies would add a rate nobody checks.
  */
@@ -83,6 +84,39 @@
       volume: (w) => fmtTokens(tokens(w)),
     },
     {
+      id: "zeroentropy",
+      nameEn: "ZeroEntropy zerank-2",
+      nameZh: "ZeroEntropy zerank-2",
+      unitEn: "per token",
+      unitZh: "按 token",
+      href: "/models/zerank",
+      price: fact("zeroentropyPerM"),
+      cost: (w, o) => (tokens(w) / 1e6) * o.price,
+      volume: (w) => fmtTokens(tokens(w)),
+    },
+    {
+      id: "bedrock-amazon",
+      nameEn: "Amazon Bedrock, Amazon Rerank 1.0",
+      nameZh: "Amazon Bedrock：Amazon Rerank 1.0",
+      unitEn: "per query (≤100 docs)",
+      unitZh: "按查询（每次 ≤100 篇）",
+      href: "/models/#amazon-bedrock",
+      price: fact("bedrockAmazonPerKQueries"),
+      cost: (w, o) => (perHundred(w, fact("bedrockDocsPerQuery")) / 1000) * o.price,
+      volume: (w) => fmtInt(perHundred(w, fact("bedrockDocsPerQuery"))) + L(" queries", " 次查询"),
+    },
+    {
+      id: "pinecone",
+      nameEn: "Pinecone pinecone-rerank-v0 / bge-reranker-v2-m3",
+      nameZh: "Pinecone：pinecone-rerank-v0 / bge-reranker-v2-m3",
+      unitEn: "per request (≤100 docs)",
+      unitZh: "按请求（每次 ≤100 篇）",
+      href: "/guides/rerank-vector-database#pinecone",
+      price: fact("pineconePerKRequests"),
+      cost: (w, o) => (perHundred(w, fact("pineconeDocsPerRequest")) / 1000) * o.price,
+      volume: (w) => fmtInt(perHundred(w, fact("pineconeDocsPerRequest"))) + L(" requests", " 次请求"),
+    },
+    {
       id: "voyage-lite",
       nameEn: "Voyage rerank-3-lite",
       nameZh: "Voyage rerank-3-lite",
@@ -144,6 +178,11 @@
   /** Google: each query counts once per started 100 documents. */
   function googleQueries(w) {
     return w.queries * Math.ceil(w.topk / 100);
+  }
+
+  /** Bedrock and Pinecone bill the same way, with their own batch size. */
+  function perHundred(w, batch) {
+    return w.queries * Math.ceil(w.topk / batch);
   }
 
   /** Voyage: query tokens × documents + sum of document tokens (their formula). */

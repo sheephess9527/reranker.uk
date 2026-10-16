@@ -135,6 +135,7 @@ response = zclient.models.rerank(
     documents=["4", "The answer is definitely 1 million."],
 )</code></pre>
       <p>API 价格为每百万 token $0.025。ZeroEntropy 文档里 zerank-1 和 zerank-1-small 价格相同，API 部署在美国东部、美国西部和欧洲。速率限制取决于订阅档位，当前数值见<a href="https://docs.zeroentropy.dev/models" rel="noopener noreferrer">文档</a>。这个模型也在 AWS 和 Azure 应用市场上架，部署后运行在你自己的云账号里。</p>
+      <p>ZeroEntropy 网站上还列了两个更小的模型 <strong>zerank-2-small</strong> 和 <strong>zerank-2-nano</strong>，但文档里还没有给出价格或模型卡；nano 可以通过 AWS Marketplace 使用。想在你的负载下比较 zerank-2 按 token 计价和其他托管重排序 API 的花费，可以用<a href="/zh/rerank-cost-calculator">成本计算器</a>。</p>
 
       <h2 id="when">什么时候选 zerank-2</h2>
       <ul>
