@@ -71,6 +71,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-16-calculator">2026 年 10 月 16 日（稍晚）—— 成本计算器多了三个选项</h2>
+        <ul class="feature-list">
+          <li><strong><a href="/zh/rerank-cost-calculator">成本计算器</a>加入 ZeroEntropy、Amazon Bedrock 和 Pinecone</strong> —— zerank-2 按 token，Amazon Rerank 1.0 按每次最多 100 篇文档的查询，Pinecone 的 pinecone-rerank-v0 / bge-reranker-v2-m3 按每次最多 100 篇文档的请求计费。有两项是故意不计入的：Bedrock 上的 Cohere Rerank 3.5，因为 AWS 页面给出了两个不同的单文档 token 上限；Pinecone 上的 Cohere，因为 Pinecone 没说明它的“rerank 单位”是什么</li>
+          <li><strong>zerank-2-small 和 zerank-2-nano</strong> —— 已写进 <a href="/zh/models/zerank">zerank-2 页面</a>；ZeroEntropy 列出了这两个模型，但还没公布价格或模型卡</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-16-hosted">2026 年 10 月 16 日 —— Pinecone 和 Amazon Bedrock</h2>
         <ul class="feature-list">
           <li><strong>新增两个托管平台</strong> —— <a href="/zh/models/">模型对比表</a>加入 Amazon Bedrock（Amazon Rerank 1.0 和 Cohere Rerank 3.5，按每 1,000 次查询计价）和 Pinecone（自家的 pinecone-rerank-v0，以及 bge-reranker-v2-m3 和 cohere-rerank-4-fast）。这两家一直在发布监控里，但网站上一处都没提</li>
@@ -137,15 +145,14 @@
           <li><strong>站内搜索</strong> —— 点页头的搜索按钮，或在任意页面按 <kbd>/</kbd>，就能按标题、小节标题和简介找到指南和模型页。搜索在浏览器里运行，用的是随网站一起生成的小索引；中文页面只搜中文页面；只用键盘也能操作：方向键在结果间移动，<kbd>Esc</kbd> 关闭</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>2026 年 10 月更早的更新（22 条）</summary><article class="changelog-entry">
         <h2 id="2026-10-15">2026 年 10 月 15 日 —— 指南有了阅读顺序；手机上文字不再贴着屏幕边</h2>
         <ul class="feature-list">
           <li><strong>指南的阅读顺序</strong> —— 指南页现在先列出五篇需要按顺序读的指南并编了号，然后是解决具体问题的页面：选模型、在国内做重排序、算成本、排查问题等</li>
           <li><strong>手机上的页边距，全站修好</strong> —— 在手机上，每篇指南和模型页的正文都一直贴到屏幕边缘：一条本来只该设置上下间距的样式规则，把左右边距也清掉了。已修复，并新增一项测试，在手机宽度下逐页检查</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>2026 年 10 月更早的更新（21 条）</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-14-table">2026 年 10 月 14 日（深夜）—— 手机上看模型对比表，第一列不再滑走</h2>
         <ul class="feature-list">
           <li><strong>模型名一直可见</strong> —— 在手机上横向滑动模型对比表时，模型名会跟着滑出屏幕，分数就对不上是哪个模型了。现在模型名这一列和表头在滑动时都固定不动；桌面端表格不变</li>
@@ -478,6 +485,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 

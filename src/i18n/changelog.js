@@ -1,4 +1,10 @@
 window.I18N_PAGE = { zh: {
+  "16 Oct 2026 (later) — Three more options in the cost calculator":
+    "2026 年 10 月 16 日（稍晚）—— 成本计算器多了三个选项",
+  "<strong>ZeroEntropy, Amazon Bedrock and Pinecone in the <a href=\"/rerank-cost-calculator.html\">cost calculator</a></strong> — zerank-2 per token, Amazon Rerank 1.0 per query of up to 100 documents, and Pinecone’s pinecone-rerank-v0 / bge-reranker-v2-m3 per request of up to 100. Two are left out on purpose: Cohere Rerank 3.5 on Bedrock, because AWS’s page gives two different per-document token limits, and Cohere on Pinecone, because Pinecone doesn’t define its “rerank unit”":
+    "<strong><a href=\"/rerank-cost-calculator.html\">成本计算器</a>加入 ZeroEntropy、Amazon Bedrock 和 Pinecone</strong> —— zerank-2 按 token，Amazon Rerank 1.0 按每次最多 100 篇文档的查询，Pinecone 的 pinecone-rerank-v0 / bge-reranker-v2-m3 按每次最多 100 篇文档的请求计费。有两项是故意不计入的：Bedrock 上的 Cohere Rerank 3.5，因为 AWS 页面给出了两个不同的单文档 token 上限；Pinecone 上的 Cohere，因为 Pinecone 没说明它的“rerank 单位”是什么",
+  "<strong>zerank-2-small and zerank-2-nano</strong> — named on the <a href=\"/models/zerank.html\">zerank-2 page</a>; ZeroEntropy lists them but publishes no price or model card yet":
+    "<strong>zerank-2-small 和 zerank-2-nano</strong> —— 已写进 <a href=\"/models/zerank.html\">zerank-2 页面</a>；ZeroEntropy 列出了这两个模型，但还没公布价格或模型卡",
   "16 Oct 2026 — Pinecone and Amazon Bedrock":
     "2026 年 10 月 16 日 —— Pinecone 和 Amazon Bedrock",
   "<strong>Two hosted platforms added</strong> — the <a href=\"/models/\">models table</a> gains Amazon Bedrock (Amazon Rerank 1.0 and Cohere Rerank 3.5, priced per 1,000 queries) and Pinecone (its own pinecone-rerank-v0, plus bge-reranker-v2-m3 and cohere-rerank-4-fast). Both were on the release watch but nowhere on the site":

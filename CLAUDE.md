@@ -118,7 +118,9 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 > 完成：模型对比表加 `#amazon-bedrock`、`#pinecone` 两行；向量数据库指南「When the database reranks for you」下加 `#pinecone` 小节（三个模型的限制和套餐、3.5 已由 4-fast 响应、Cohere 跑在 Azure）；Cohere 页加一段云平台渠道。13 个新数字进 `data/models.json`（`amazon-bedrock-rerank`、`pinecone-rerank`）。Bedrock 的 Amazon Rerank 价格在页面上是 JS 渲染的，事实里的 check_url 是 AWS 价目表 JSON（`priceOf` 键 `lCmRnze6…`，每次查询 $0.001），`check_raw`。顺带：`caveman-so/trim-1` 不是重排序模型，进 `hf_seen`；`Alibaba-NLP/core-reranker-*` 读过模型卡，是做图文组合匹配的研究模型（CC-BY-4.0、代码链接是占位符），不收录。
 
-### 11. ZeroEntropy：zerank-2-small / nano，成本计算器加 ZeroEntropy、Bedrock、Pinecone
+### ~~11. ZeroEntropy：zerank-2-small / nano，成本计算器加 ZeroEntropy、Bedrock、Pinecone~~（2026-10-16 已完成）
+
+> 完成：计算器加了 zerank-2（按 token，计法同 Voyage，页面注明是假设）、Bedrock 的 Amazon Rerank 1.0（每次查询 ≤100 篇）、Pinecone 的 v0 / bge（每次请求 ≤100 篇），价格都走 `data-*` 属性里的 fact；`tests/cost-calculator.spec.js` 加了 100 / 250 篇的分段用例。故意不加：Bedrock 上的 Cohere 3.5（AWS 页面同时写 500 和 512 token，自相矛盾）、Pinecone 上的 Cohere（「rerank unit」没有定义）。zerank 页写明 zerank-2-small / nano 已列出但无价格和模型卡。
 
 ### 12. Contextual AI：v2 mini 和 v1
 

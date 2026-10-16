@@ -24,6 +24,9 @@ test("every vendor is priced, in the right table", async ({ page }) => {
       "Google Vertex AI ranking",
       "Voyage rerank-3",
       "Voyage rerank-3-lite",
+      "ZeroEntropy zerank-2",
+      "Amazon Bedrock, Amazon Rerank 1.0",
+      "Pinecone pinecone-rerank-v0 / bge-reranker-v2-m3",
     ].sort()
   );
   expect(cny).toHaveLength(3);
@@ -44,6 +47,19 @@ test("Google counts one query per started 100 documents", async ({ page }) => {
   const at101 = (await rows(page, "calc-rows")).find((r) => r[0].startsWith("Google"));
   expect(at101[2]).toBe("2,000 queries");
   expect(at101[3]).toBe("$2.00");
+});
+
+test("Bedrock and Pinecone count one query or request per started 100 documents", async ({ page }) => {
+  await page.goto("/rerank-cost-calculator");
+  await page.fill("#calc-queries", "1000");
+  await page.fill("#calc-topk", "100");
+  let r = await rows(page, "calc-rows");
+  expect(r.find((x) => x[0].startsWith("Amazon Bedrock")).slice(2)).toEqual(["1,000 queries", "$1.00"]);
+  expect(r.find((x) => x[0].startsWith("Pinecone")).slice(2)).toEqual(["1,000 requests", "$2.00"]);
+  await page.fill("#calc-topk", "250");
+  r = await rows(page, "calc-rows");
+  expect(r.find((x) => x[0].startsWith("Amazon Bedrock")).slice(2)).toEqual(["3,000 queries", "$3.00"]);
+  expect(r.find((x) => x[0].startsWith("Pinecone")).slice(2)).toEqual(["3,000 requests", "$6.00"]);
 });
 
 test("long passages warn about qwen3-rerank's 4,000-token limit", async ({ page }) => {
