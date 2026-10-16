@@ -10,7 +10,7 @@
  * this script ignored it. Voyage bills per token, with the query counted
  * once per document reranked. Google bills per query of up to 100
  * documents, and so do Amazon Bedrock's Amazon Rerank (per query) and Pinecone
- * (per request). Alibaba Cloud, SiliconFlow and ZeroEntropy bill input
+ * (per request). Alibaba Cloud, SiliconFlow, ZeroEntropy and Contextual bill input
  * tokens, counted here like Voyage's. Each is modelled as the vendor states it rather than
  * flattened into one "cost per 1k docs" figure. Yuan-priced options get
  * their own table: converting currencies would add a rate nobody checks.
@@ -91,6 +91,28 @@
       unitZh: "按 token",
       href: "/models/zerank",
       price: fact("zeroentropyPerM"),
+      cost: (w, o) => (tokens(w) / 1e6) * o.price,
+      volume: (w) => fmtTokens(tokens(w)),
+    },
+    {
+      id: "contextual-v2",
+      nameEn: "Contextual AI Rerank v2",
+      nameZh: "Contextual AI Rerank v2",
+      unitEn: "per token",
+      unitZh: "按 token",
+      href: "/models/#contextual-api",
+      price: fact("contextualV2PerM"),
+      cost: (w, o) => (tokens(w) / 1e6) * o.price,
+      volume: (w) => fmtTokens(tokens(w)),
+    },
+    {
+      id: "contextual-mini",
+      nameEn: "Contextual AI Rerank v2-mini",
+      nameZh: "Contextual AI Rerank v2-mini",
+      unitEn: "per token",
+      unitZh: "按 token",
+      href: "/models/#contextual-api",
+      price: fact("contextualMiniPerM"),
       cost: (w, o) => (tokens(w) / 1e6) * o.price,
       volume: (w) => fmtTokens(tokens(w)),
     },

@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "<a href=\"/models/#contextual-api\">Contextual AI Rerank API</a> (hosted) — the commercial route to the v2 family above: <code>ctxl-rerank-v2-instruct-multilingual</code> and its <code>-mini</code> take an <code>instruction</code> field. Contextual tested instructions about recency, document type, source and metadata, and ask for an explicit timeframe rather than “this year”, because the model doesn’t know today’s date.":
+    "<a href=\"/models/#contextual-api\">Contextual AI Rerank API</a>（托管）—— 上面 v2 系列的商用渠道：<code>ctxl-rerank-v2-instruct-multilingual</code> 及其 <code>-mini</code> 接受 <code>instruction</code> 字段。Contextual 测试过关于时效、文档类型、来源和元数据的指令，并建议写明具体时间范围而不是“今年”，因为模型不知道今天是哪天。",
   "Emerging · ~7 min read · <time datetime=\"2026-10-12\">Updated 12 Oct 2026</time>":
     "新兴方向 · 约 7 分钟阅读 · <time datetime=\"2026-10-12\">更新于 2026 年 10 月 12 日</time>",
   "Models that take an instruction today":

@@ -71,6 +71,13 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-16-contextual">2026 年 10 月 16 日（下午）—— Contextual AI 的托管 API</h2>
+        <ul class="feature-list">
+          <li><strong>Contextual AI Rerank v2 的商用渠道</strong> —— 网站之前只列了它的开源权重，而权重只能非商用。现在<a href="/zh/models/#contextual-api">模型对比表</a>加上了 Contextual 的托管 API：ctxl-rerank-v2-instruct-multilingual、它的 -mini 版和较早的 v1，按 token 计费。按场景选型和指令跟随两篇指南都指向了它，<a href="/zh/rerank-cost-calculator">成本计算器</a>也加入了 v2 和 v2-mini</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-16-calculator">2026 年 10 月 16 日（稍晚）—— 成本计算器多了三个选项</h2>
         <ul class="feature-list">
           <li><strong><a href="/zh/rerank-cost-calculator">成本计算器</a>加入 ZeroEntropy、Amazon Bedrock 和 Pinecone</strong> —— zerank-2 按 token，Amazon Rerank 1.0 按每次最多 100 篇文档的查询，Pinecone 的 pinecone-rerank-v0 / bge-reranker-v2-m3 按每次最多 100 篇文档的请求计费。有两项是故意不计入的：Bedrock 上的 Cohere Rerank 3.5，因为 AWS 页面给出了两个不同的单文档 token 上限；Pinecone 上的 Cohere，因为 Pinecone 没说明它的“rerank 单位”是什么</li>
@@ -138,14 +145,13 @@
           <li><strong>首次访问跟随系统主题</strong> —— 以前网站对所有人都默认打开深色主题。现在在你使用主题切换按钮之前，网站会跟随操作系统的浅色或深色设置，系统切换时也会跟着变；一旦你用按钮选过，就以你的选择为准</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>2026 年 10 月更早的更新（23 条）</summary><article class="changelog-entry">
         <h2 id="2026-10-15-search">2026 年 10 月 15 日（稍后）—— 全站搜索</h2>
         <ul class="feature-list">
           <li><strong>站内搜索</strong> —— 点页头的搜索按钮，或在任意页面按 <kbd>/</kbd>，就能按标题、小节标题和简介找到指南和模型页。搜索在浏览器里运行，用的是随网站一起生成的小索引；中文页面只搜中文页面；只用键盘也能操作：方向键在结果间移动，<kbd>Esc</kbd> 关闭</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>2026 年 10 月更早的更新（22 条）</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-15">2026 年 10 月 15 日 —— 指南有了阅读顺序；手机上文字不再贴着屏幕边</h2>
         <ul class="feature-list">
           <li><strong>指南的阅读顺序</strong> —— 指南页现在先列出五篇需要按顺序读的指南并编了号，然后是解决具体问题的页面：选模型、在国内做重排序、算成本、排查问题等</li>
@@ -485,6 +491,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 

@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 16 Oct 2026 04:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 16 Oct 2026 06:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>16 Oct 2026 (afternoon) — Contextual AI’s hosted API</title>
+      <link>https://reranker.uk/changelog#2026-10-16-contextual</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-16-contextual</guid>
+      <pubDate>Fri, 16 Oct 2026 06:00:00 GMT</pubDate>
+      <description>Contextual AI's hosted rerank API, the commercial route to its non-commercial v2 weights, joins the models table, the scenario and instruction guides, and the cost calculator.</description>
+    </item>
     <item>
       <title>16 Oct 2026 (later) — Three more options in the cost calculator</title>
       <link>https://reranker.uk/changelog#2026-10-16-calculator</link>

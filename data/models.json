@@ -1582,5 +1582,39 @@
       "check_hint": "requests/mo",
       "verified_on": "2026-10-16"
     }
+  },
+  "contextual-rerank-api": {
+    "v2_usd_per_m": {
+      "value": "0.05",
+      "source_url": "https://contextual.ai/pricing",
+      "check_url": "https://contextual.ai/pricing",
+      "check_pattern": "Rerank-v2: \\${value} per million tokens",
+      "check_hint": "Rerank-v2",
+      "verified_on": "2026-10-16"
+    },
+    "v2_mini_usd_per_m": {
+      "value": "0.02",
+      "source_url": "https://contextual.ai/pricing",
+      "check_url": "https://contextual.ai/pricing",
+      "check_pattern": "Rerank-v2-mini: \\${value} per million tokens",
+      "check_hint": "Rerank-v2-mini",
+      "verified_on": "2026-10-16"
+    },
+    "max_tokens_per_doc": {
+      "value": "8,000",
+      "source_url": "https://docs.contextual.ai/api-reference/rerank/rerank",
+      "check_url": "https://docs.contextual.ai/api-reference/rerank/rerank",
+      "check_pattern": "any document with its metadata must not exceed {value} tokens",
+      "check_hint": "must not exceed",
+      "verified_on": "2026-10-16"
+    },
+    "max_request_tokens": {
+      "value": "400,000",
+      "source_url": "https://docs.contextual.ai/api-reference/rerank/rerank",
+      "check_url": "https://docs.contextual.ai/api-reference/rerank/rerank",
+      "check_pattern": "The total request cannot exceed {value} tokens",
+      "check_hint": "total request",
+      "verified_on": "2026-10-16"
+    }
   }
 }

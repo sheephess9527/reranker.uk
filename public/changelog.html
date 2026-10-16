@@ -71,6 +71,13 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-16-contextual">16 Oct 2026 (afternoon) — Contextual AI’s hosted API</h2>
+        <ul class="feature-list">
+          <li><strong>The commercial route to Contextual AI Rerank v2</strong> — the site only listed the open weights, which are non-commercial. The <a href="/models/#contextual-api">models table</a> now has Contextual’s hosted API too: ctxl-rerank-v2-instruct-multilingual, its -mini and the older v1, priced per token. The scenario and instruction guides point to it, and the <a href="/rerank-cost-calculator">cost calculator</a> includes v2 and v2-mini</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-16-calculator">16 Oct 2026 (later) — Three more options in the cost calculator</h2>
         <ul class="feature-list">
           <li><strong>ZeroEntropy, Amazon Bedrock and Pinecone in the <a href="/rerank-cost-calculator">cost calculator</a></strong> — zerank-2 per token, Amazon Rerank 1.0 per query of up to 100 documents, and Pinecone’s pinecone-rerank-v0 / bge-reranker-v2-m3 per request of up to 100. Two are left out on purpose: Cohere Rerank 3.5 on Bedrock, because AWS’s page gives two different per-document token limits, and Cohere on Pinecone, because Pinecone doesn’t define its “rerank unit”</li>
@@ -138,14 +145,13 @@
           <li><strong>First visit follows your system theme</strong> — the site used to open in the dark theme for everyone. Until you use the theme switch, it now follows your operating system’s light or dark setting, and changes with it; once you’ve picked one with the switch, your choice stays</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>Earlier in October 2026 (23 entries)</summary><article class="changelog-entry">
         <h2 id="2026-10-15-search">15 Oct 2026 (later) — Search the site</h2>
         <ul class="feature-list">
           <li><strong>Site search</strong> — a search button in the header, or press <kbd>/</kbd> on any page, finds guides and model pages by title, section headings and description. It runs in your browser from a small index built with the site, the Chinese pages search the Chinese pages, and it works with the keyboard alone: arrow keys move through the results and <kbd>Esc</kbd> closes it</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>Earlier in October 2026 (22 entries)</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-15">15 Oct 2026 — Guides in reading order; text no longer touches the screen edge on phones</h2>
         <ul class="feature-list">
           <li><strong>A reading order for the guides</strong> — the guides page now starts with the five guides meant to be read in sequence, numbered, then lists the pages for specific jobs: choosing a model, reranking from mainland China, costs, troubleshooting and the rest</li>
@@ -485,6 +491,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 
