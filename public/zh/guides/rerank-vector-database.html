@@ -162,7 +162,28 @@ top = [h for _s, h in ranked[:5]]</code></pre>
         <li><strong>评测变难</strong> —— 当其中一个 reranker 住在查询引擎内部时，做 A/B 对比要费更多力气。</li>
         <li><strong>你的 API 密钥</strong>和段落内容，现在除了模型厂商，还会流经数据库厂商。</li>
       </ul>
-      <p>上面这套应用层写法在各家之间都是可移植的，所以即便你之后打算把这一步挪进数据库，从它起步也很稳妥。具体支持情况请查阅你所用存储的最新文档 —— 这块变化很快，我们刻意不去维护一张自己没把握保持准确的厂商功能对照表。</p>
+      <p>上面这套应用层写法在各家之间都是可移植的，所以即便你之后打算把这一步挪进数据库，从它起步也很稳妥。具体支持情况请查阅你所用存储的最新文档 —— 这块变化很快，我们不维护各家存储的功能对照表。下面的 Pinecone 是我们唯一跟踪的一家，它的数字每天都会对照 Pinecone 自己的页面重新核对。</p>
+
+      <h3 id="pinecone">以 Pinecone 为例</h3>
+      <p>Pinecone 有两种重排方式：在查询里，给“按文本搜索”调用加一个 <code>rerank</code> 块，返回的结果就已经重排好；或者单独调用 <code>inference.rerank</code>，对任意一组文档重排。它托管了三个重排序模型：</p>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="以 Pinecone 为例">
+        <table>
+          <thead>
+            <tr><th>模型</th><th>最大 token 数</th><th>最大文档数</th><th>套餐</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>pinecone-rerank-v0</code></td><td>查询 + 文档共 512</td><td>100</td><td>付费套餐</td></tr>
+            <tr><td><code>bge-reranker-v2-m3</code></td><td>查询 + 文档共 1024</td><td>100</td><td>所有套餐；Starter 每月含 500 次请求，Builder 含 1,000 次</td></tr>
+            <tr><td><code>cohere-rerank-4-fast</code></td><td>每个文档 8,192</td><td>250</td><td>付费套餐</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>付费套餐里每个模型都是每 1,000 次请求 $2（Cohere 那个按“rerank 单位”计）。基于它开发之前，Pinecone 文档里有两点值得先知道：</p>
+      <ul>
+        <li><strong>cohere-rerank-3.5 已经名存实亡。</strong>Pinecone 在 2026 年 7 月 1 日将它弃用，从 8 月 31 日起，对它的请求都由 cohere-rerank-4-fast 来响应。排序可以沿用，但分数的尺度变了，写死的分数阈值需要重新调。</li>
+        <li><strong>Cohere 的模型跑在 Azure AI 上</strong>，Pinecone 说这类请求可能在美国以外处理。这正是上面说的“你的段落会经过另一家厂商”的具体例子。</li>
+      </ul>
+      <p>pinecone-rerank-v0 的 512 token 上限是查询和文档合起来算的，超出部分默认直接截断、不报错，所以要先把文档切成合适的块。bge-reranker-v2-m3 的默认做法相反：超长时返回错误。</p>
 
       <h2 id="pitfalls">常见坑</h2>
       <div class="table-wrap" tabindex="0" role="region" aria-label="常见坑">

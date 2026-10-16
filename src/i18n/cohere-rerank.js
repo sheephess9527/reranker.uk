@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "<strong>Through a cloud instead:</strong> <a href=\"/models/#amazon-bedrock\">Amazon Bedrock</a> sells Cohere Rerank 3.5 at ${{fact:amazon-bedrock-rerank.cohere_3_5_usd_per_1000_queries}} per 1,000 queries of up to {{fact:amazon-bedrock-rerank.docs_per_query}} documents. <a href=\"/guides/rerank-vector-database.html#pinecone\">Pinecone</a> serves cohere-rerank-4-fast inside its vector database, and since 31 August 2026 has answered requests for cohere-rerank-3.5 with 4-fast.":
+    "<strong>也可以通过云平台用：</strong><a href=\"/models/#amazon-bedrock\">Amazon Bedrock</a> 提供 Cohere Rerank 3.5，每 1,000 次查询 ${{fact:amazon-bedrock-rerank.cohere_3_5_usd_per_1000_queries}}，每次查询最多 {{fact:amazon-bedrock-rerank.docs_per_query}} 个文档。<a href=\"/guides/rerank-vector-database.html#pinecone\">Pinecone</a> 在自家向量数据库里提供 cohere-rerank-4-fast，并且从 2026 年 8 月 31 日起，对 cohere-rerank-3.5 的请求都改由 4-fast 响应。",
   "Cohere Rerank 4":
     "Cohere Rerank 4",
   "Hosted API · Cohere · <time datetime=\"2026-08-11\">Updated 11 Aug 2026</time>":

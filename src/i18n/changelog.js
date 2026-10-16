@@ -1,4 +1,12 @@
 window.I18N_PAGE = { zh: {
+  "16 Oct 2026 — Pinecone and Amazon Bedrock":
+    "2026 年 10 月 16 日 —— Pinecone 和 Amazon Bedrock",
+  "<strong>Two hosted platforms added</strong> — the <a href=\"/models/\">models table</a> gains Amazon Bedrock (Amazon Rerank 1.0 and Cohere Rerank 3.5, priced per 1,000 queries) and Pinecone (its own pinecone-rerank-v0, plus bge-reranker-v2-m3 and cohere-rerank-4-fast). Both were on the release watch but nowhere on the site":
+    "<strong>新增两个托管平台</strong> —— <a href=\"/models/\">模型对比表</a>加入 Amazon Bedrock（Amazon Rerank 1.0 和 Cohere Rerank 3.5，按每 1,000 次查询计价）和 Pinecone（自家的 pinecone-rerank-v0，以及 bge-reranker-v2-m3 和 cohere-rerank-4-fast）。这两家一直在发布监控里，但网站上一处都没提",
+  "<strong>Pinecone in the vector database guide</strong> — <a href=\"/guides/rerank-vector-database.html#pinecone\">a worked example</a> of reranking inside the database: the three models, their limits and plans, and two things Pinecone’s docs say that are easy to miss (cohere-rerank-3.5 is now answered by 4-fast; Cohere’s model runs on Azure)":
+    "<strong>向量数据库指南加了 Pinecone</strong> —— <a href=\"/guides/rerank-vector-database.html#pinecone\">一个在数据库里重排的完整例子</a>：三个模型、各自的限制和套餐，以及 Pinecone 文档里两条容易漏看的说明（cohere-rerank-3.5 现在由 4-fast 响应；Cohere 的模型跑在 Azure 上）",
+  "<strong>Checked daily</strong> — the 13 new prices and limits are in the daily source check, including Bedrock’s, which AWS’s pricing page only renders from its price list":
+    "<strong>每天核对</strong> —— 新增的 13 个价格和限制都进了每日来源核对，包括 AWS 价格页只从其价目表动态渲染的 Bedrock 价格",
   "15 Oct 2026 (last) — A shorter changelog":
     "2026 年 10 月 15 日（最后）—— 更新日志变短了",
   "<strong>Older months folded</strong> — this page shows the ten newest entries; everything earlier is grouped by month and opens with a click. Links to an older entry, including the ones in the RSS feed, open its month and land on it":

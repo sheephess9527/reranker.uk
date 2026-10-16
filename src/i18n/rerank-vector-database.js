@@ -1,4 +1,36 @@
 window.I18N_PAGE = { zh: {
+  "The application-layer pattern above stays portable across all of them, so it is a sound place to start even if you later move the stage into the database. Check your store's current documentation for what it supports — this area moves quickly, and we don't keep a feature matrix across stores. Pinecone, below, is the one store we track; its figures are re-checked against Pinecone’s own pages every day.":
+    "上面这套应用层写法在各家之间都是可移植的，所以即便你之后打算把这一步挪进数据库，从它起步也很稳妥。具体支持情况请查阅你所用存储的最新文档 —— 这块变化很快，我们不维护各家存储的功能对照表。下面的 Pinecone 是我们唯一跟踪的一家，它的数字每天都会对照 Pinecone 自己的页面重新核对。",
+  "Pinecone, as a worked example":
+    "以 Pinecone 为例",
+  "Pinecone reranks in two ways: inside a query, by adding a <code>rerank</code> block to its search-with-text call so results come back already reordered, or as a separate <code>inference.rerank</code> call on any list of documents. It hosts three rerankers:":
+    "Pinecone 有两种重排方式：在查询里，给“按文本搜索”调用加一个 <code>rerank</code> 块，返回的结果就已经重排好；或者单独调用 <code>inference.rerank</code>，对任意一组文档重排。它托管了三个重排序模型：",
+  "Model":
+    "模型",
+  "Max tokens":
+    "最大 token 数",
+  "Max documents":
+    "最大文档数",
+  "Plans":
+    "套餐",
+  "{{fact:pinecone-rerank.v0_max_tokens}} per query + document":
+    "查询 + 文档共 {{fact:pinecone-rerank.v0_max_tokens}}",
+  "Paid plans":
+    "付费套餐",
+  "{{fact:pinecone-rerank.bge_max_tokens}} per query + document":
+    "查询 + 文档共 {{fact:pinecone-rerank.bge_max_tokens}}",
+  "Every plan; Starter includes {{fact:pinecone-rerank.starter_bge_requests_per_month}} requests a month, Builder {{fact:pinecone-rerank.builder_bge_requests_per_month}}":
+    "所有套餐；Starter 每月含 {{fact:pinecone-rerank.starter_bge_requests_per_month}} 次请求，Builder 含 {{fact:pinecone-rerank.builder_bge_requests_per_month}} 次",
+  "{{fact:pinecone-rerank.cohere_4_fast_max_tokens_per_doc}} per document":
+    "每个文档 {{fact:pinecone-rerank.cohere_4_fast_max_tokens_per_doc}}",
+  "On the paid plans each costs ${{fact:pinecone-rerank.usd_per_1000_requests}} per 1,000 requests (Cohere’s is counted in “rerank units”). Two details from Pinecone’s documentation are worth knowing before you build on it:":
+    "付费套餐里每个模型都是每 1,000 次请求 ${{fact:pinecone-rerank.usd_per_1000_requests}}（Cohere 那个按“rerank 单位”计）。基于它开发之前，Pinecone 文档里有两点值得先知道：",
+  "<strong>cohere-rerank-3.5 is gone in all but name.</strong> Pinecone deprecated it on 1 July 2026 and has answered requests for it with cohere-rerank-4-fast since 31 August. Rankings carry over, but the scores are on a different scale, so any fixed score threshold needs re-tuning.":
+    "<strong>cohere-rerank-3.5 已经名存实亡。</strong>Pinecone 在 2026 年 7 月 1 日将它弃用，从 8 月 31 日起，对它的请求都由 cohere-rerank-4-fast 来响应。排序可以沿用，但分数的尺度变了，写死的分数阈值需要重新调。",
+  "<strong>Cohere’s model runs on Azure AI</strong>, and Pinecone says its requests may be processed outside the United States. That is the “your passages flow through another vendor” trade-off above, made concrete.":
+    "<strong>Cohere 的模型跑在 Azure AI 上</strong>，Pinecone 说这类请求可能在美国以外处理。这正是上面说的“你的段落会经过另一家厂商”的具体例子。",
+  "pinecone-rerank-v0’s {{fact:pinecone-rerank.v0_max_tokens}}-token limit counts the query and the document together, and by default anything longer is cut at the limit without an error, so chunk documents to fit. bge-reranker-v2-m3 defaults the other way and returns an error instead.":
+    "pinecone-rerank-v0 的 {{fact:pinecone-rerank.v0_max_tokens}} token 上限是查询和文档合起来算的，超出部分默认直接截断、不报错，所以要先把文档切成合适的块。bge-reranker-v2-m3 的默认做法相反：超长时返回错误。",
   "_title": "为 pgvector、Qdrant、Elasticsearch 加上重排序 | reranker.uk",
   "_desc": "如何在向量数据库之上加一层重排序。「宽召回—打分—截断」模式，含 pgvector、Qdrant 与 Elasticsearch 的可用代码，以及 HNSW ef_search、过滤顺序等让重排序看起来没用的坑。",
 

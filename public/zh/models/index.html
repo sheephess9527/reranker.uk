@@ -301,6 +301,28 @@
               <td class="muted" title="硅基流动托管的是其他厂商的开源模型，分数就是这些模型自己的 —— 见对应的行。它的价格页没有列出 Qwen3-Reranker 的价格">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
+            <tr id="amazon-bedrock" data-name="amazon-bedrock" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+              <th scope="row"><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html" rel="noopener noreferrer">Amazon Bedrock 重排序</a> <span class="muted">（AWS）</span></th>
+              <td><span class="pill">重排序 API</span></td>
+              <td><span class="pill">托管 API</span></td>
+              <td>通过 Bedrock Rerank API 调用 Amazon Rerank 1.0 和 Cohere Rerank 3.5，也可以作为 Bedrock 知识库的重排序模型；只支持文本。Amazon Rerank 1.0 在美国东部（弗吉尼亚北部）区域不提供</td>
+              <td>取决于所选模型</td>
+              <td>API</td>
+              <td>每 1,000 次查询 $1.00（Amazon）或 $2.00（Cohere）†</td>
+              <td class="muted" title="Amazon 没有公布 Rerank 1.0 的评测分数；Cohere Rerank 3.5 是 Cohere 的模型。一次查询最多算 100 个文档，每多 100 个算一次新查询">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr id="pinecone" data-name="pinecone" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="">
+              <th scope="row"><a href="https://docs.pinecone.io/guides/search/rerank-results" rel="noopener noreferrer">Pinecone 重排序</a> <span class="muted">（托管，内置于向量数据库）</span></th>
+              <td><span class="pill">重排序 API</span></td>
+              <td><span class="pill">托管 API</span></td>
+              <td>在 Pinecone 查询里直接重排，或单独调用：Pinecone 自家的 pinecone-rerank-v0（每对 512 token）、bge-reranker-v2-m3 和 cohere-rerank-4-fast。详见<a href="/zh/guides/rerank-vector-database#pinecone">向量数据库指南</a></td>
+              <td>取决于所选模型</td>
+              <td>API</td>
+              <td>免费版只能用 bge-reranker-v2-m3，每月 500 次请求；付费版每 1,000 次请求 $2†</td>
+              <td class="muted" title="Pinecone 没有公布 pinecone-rerank-v0 的评测分数；另外两个是 BAAI 和 Cohere 的模型，见它们各自那一行">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
             <tr id="vertex-ai-ranking" data-name="vertex-ai-ranking" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
               <th scope="row"><a href="https://docs.cloud.google.com/generative-ai-app-builder/docs/ranking" rel="noopener noreferrer">Google Vertex AI 排序</a> <span class="muted">（semantic-ranker）</span></th>
               <td><span class="pill">重排序 API</span></td>

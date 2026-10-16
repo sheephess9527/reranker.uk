@@ -112,6 +112,20 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 >
 > 第三轮四项全部完成。
 
+## 第四轮（2026-10-16 用户说「好的」：把监控里有、网站上没有的补上，按顺序）
+
+### ~~10. Pinecone 和 Amazon Bedrock~~（2026-10-16 已完成）
+
+> 完成：模型对比表加 `#amazon-bedrock`、`#pinecone` 两行；向量数据库指南「When the database reranks for you」下加 `#pinecone` 小节（三个模型的限制和套餐、3.5 已由 4-fast 响应、Cohere 跑在 Azure）；Cohere 页加一段云平台渠道。13 个新数字进 `data/models.json`（`amazon-bedrock-rerank`、`pinecone-rerank`）。Bedrock 的 Amazon Rerank 价格在页面上是 JS 渲染的，事实里的 check_url 是 AWS 价目表 JSON（`priceOf` 键 `lCmRnze6…`，每次查询 $0.001），`check_raw`。顺带：`caveman-so/trim-1` 不是重排序模型，进 `hf_seen`；`Alibaba-NLP/core-reranker-*` 读过模型卡，是做图文组合匹配的研究模型（CC-BY-4.0、代码链接是占位符），不收录。
+
+### 11. ZeroEntropy：zerank-2-small / nano，成本计算器加 ZeroEntropy、Bedrock、Pinecone
+
+### 12. Contextual AI：v2 mini 和 v1
+
+### 13. Contextual、GTE、LightOn 详情页；首页模型卡片补上 zerank-2、Qwen3-VL
+
+### 14. NVIDIA 页（10 月 20 日 Nemotron-3.5-Rerank-8B 正式发布后，连同 VL-1B）
+
 ### 明确不要做
 
 - 不要改 `data/models.json` 里的分数，除非 `npm run check:sources` 证明厂商页面上的数字变了。
