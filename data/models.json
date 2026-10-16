@@ -814,6 +814,24 @@
       "check_hint": "BEIR",
       "protocol_note": "Alibaba's own figure from the model card; the card doesn't state which BEIR datasets or which first-stage retriever",
       "verified_on": "2026-10-01"
+    },
+    "loco": {
+      "value": "90.68",
+      "source_url": "https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base",
+      "check_url": "https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base/raw/main/README.md",
+      "check_pattern": "gte-reranker-modernbert-base`\\]\\([^)]*\\)\\s*\\|[^|]*\\|[^|]*\\|[^|]*149M[^|]*\\|[^|]*8192[^|]*\\|[^|]*\\|[^|]*\\|\\s*56\\.19\\s*\\|\\s*{value}",
+      "check_hint": "LoCo",
+      "protocol_note": "Alibaba's own figure from the model card; LoCo is a long-document retrieval benchmark",
+      "verified_on": "2026-10-16"
+    },
+    "coir": {
+      "value": "79.99",
+      "source_url": "https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base",
+      "check_url": "https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base/raw/main/README.md",
+      "check_pattern": "gte-reranker-modernbert-base`\\]\\([^)]*\\)\\s*\\|[^|]*\\|[^|]*\\|[^|]*149M[^|]*\\|[^|]*8192[^|]*\\|[^|]*\\|[^|]*\\|\\s*56\\.19\\s*\\|\\s*90\\.68\\s*\\|\\s*{value}",
+      "check_hint": "CoIR",
+      "protocol_note": "Alibaba's own figure from the model card; CoIR is a code retrieval benchmark",
+      "verified_on": "2026-10-16"
     }
   },
   "mxbai-rerank-xsmall-v1": {
@@ -871,6 +889,15 @@
       "check_hint": "Decontaminated",
       "protocol_note": "LightOn's own run: 11 BEIR datasets not in the training mix, reranking BM25's top 100",
       "verified_on": "2026-10-05"
+    },
+    "vidore_v3": {
+      "value": "59.87",
+      "source_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B",
+      "check_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B/raw/main/README.md",
+      "check_pattern": "\\[LightOn\\-rerank\\-PW\\-2B\\]\\([^)]*\\) \\| Qwen3\\.5\\-2B \\| pointwise \\| \\**{value}\\**",
+      "check_hint": "ViDoRe",
+      "protocol_note": "LightOn's run: ViDoRe V3 overall NDCG@10, reranking the top 100 from ColQwen2.5-v0.2, every model re-evaluated under the same protocol",
+      "verified_on": "2026-10-16"
     }
   },
   "lighton-rerank-lw-4b": {
@@ -880,7 +907,17 @@
       "check_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B/raw/main/README.md",
       "check_pattern": "LightOn-rerank-LW-4B\\]\\([^)]*\\) \\| 4\\.5B \\| listwise \\| {value}",
       "check_hint": "ViDoRe",
-      "verified_on": "2026-10-05"
+      "verified_on": "2026-10-05",
+      "protocol_note": "LightOn's run: ViDoRe V3 overall NDCG@10, reranking the top 100 from ColQwen2.5-v0.2, every model re-evaluated under the same protocol"
+    },
+    "beir": {
+      "value": "48.33",
+      "source_url": "https://huggingface.co/lightonai/LightOn-rerank-LW-4B",
+      "check_url": "https://huggingface.co/lightonai/LightOn-rerank-LW-4B/raw/main/README.md",
+      "check_pattern": "Decontaminated mean[^|]*\\|\\s*\\*\\*{value}\\*\\*",
+      "check_hint": "Decontaminated",
+      "protocol_note": "LightOn's own run: 11 BEIR datasets not in the training mix, reranking BM25's top 100",
+      "verified_on": "2026-10-16"
     }
   },
   "qwen3-vl-reranker-8b": {
@@ -1614,6 +1651,97 @@
       "check_url": "https://docs.contextual.ai/api-reference/rerank/rerank",
       "check_pattern": "The total request cannot exceed {value} tokens",
       "check_hint": "total request",
+      "verified_on": "2026-10-16"
+    }
+  },
+  "lighton-rerank-pw-0.8b": {
+    "vidore_v3": {
+      "value": "48.20",
+      "source_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B",
+      "check_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B/raw/main/README.md",
+      "check_pattern": "\\[LightOn\\-rerank\\-PW\\-0\\.8B\\]\\([^)]*\\) \\| Qwen3\\.5\\-0\\.8B \\| pointwise \\| \\**{value}\\**",
+      "check_hint": "ViDoRe",
+      "protocol_note": "LightOn's run: ViDoRe V3 overall NDCG@10, reranking the top 100 from ColQwen2.5-v0.2, every model re-evaluated under the same protocol",
+      "verified_on": "2026-10-16"
+    }
+  },
+  "lighton-rerank-lw-0.8b": {
+    "vidore_v3": {
+      "value": "58.25",
+      "source_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B",
+      "check_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B/raw/main/README.md",
+      "check_pattern": "\\[LightOn\\-rerank\\-LW\\-0\\.8B\\]\\([^)]*\\) \\| Qwen3\\.5\\-0\\.8B \\| listwise \\| \\**{value}\\**",
+      "check_hint": "ViDoRe",
+      "protocol_note": "LightOn's run: ViDoRe V3 overall NDCG@10, reranking the top 100 from ColQwen2.5-v0.2, every model re-evaluated under the same protocol",
+      "verified_on": "2026-10-16"
+    }
+  },
+  "lighton-rerank-lw-2b": {
+    "vidore_v3": {
+      "value": "62.66",
+      "source_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B",
+      "check_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B/raw/main/README.md",
+      "check_pattern": "\\[LightOn\\-rerank\\-LW\\-2B\\]\\([^)]*\\) \\| Qwen3\\.5\\-2B \\| listwise \\| \\**{value}\\**",
+      "check_hint": "ViDoRe",
+      "protocol_note": "LightOn's run: ViDoRe V3 overall NDCG@10, reranking the top 100 from ColQwen2.5-v0.2, every model re-evaluated under the same protocol",
+      "verified_on": "2026-10-16"
+    },
+    "beir": {
+      "value": "48.12",
+      "source_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B",
+      "check_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B/raw/main/README.md",
+      "check_pattern": "\\(LW-2B: {value}\\)",
+      "check_hint": "LW-2B",
+      "protocol_note": "LightOn's own run: 11 BEIR datasets not in the training mix, reranking BM25's top 100",
+      "verified_on": "2026-10-16"
+    }
+  },
+  "lighton-rerank-pw-4b": {
+    "vidore_v3": {
+      "value": "59.80",
+      "source_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B",
+      "check_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B/raw/main/README.md",
+      "check_pattern": "\\[LightOn\\-rerank\\-PW\\-4B\\]\\([^)]*\\) \\| Qwen3\\.5\\-4B \\| pointwise \\| \\**{value}\\**",
+      "check_hint": "ViDoRe",
+      "protocol_note": "LightOn's run: ViDoRe V3 overall NDCG@10, reranking the top 100 from ColQwen2.5-v0.2, every model re-evaluated under the same protocol",
+      "verified_on": "2026-10-16"
+    }
+  },
+  "lighton-run": {
+    "first_stage_vidore_v3": {
+      "value": "55.60",
+      "source_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B",
+      "check_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B/raw/main/README.md",
+      "check_pattern": "\\*First-stage only \\(ColQwen2\\.5, no rerank\\)\\* \\| — \\| — \\| \\*{value}\\*",
+      "check_hint": "ViDoRe",
+      "protocol_note": "LightOn's run: ViDoRe V3 overall NDCG@10, reranking the top 100 from ColQwen2.5-v0.2, every model re-evaluated under the same protocol",
+      "verified_on": "2026-10-16"
+    },
+    "qwen3_vl_8b_vidore_v3": {
+      "value": "64.23",
+      "source_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B",
+      "check_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B/raw/main/README.md",
+      "check_pattern": "\\*Qwen3\\-VL\\-Reranker\\-8B\\* \\| \\*8B\\* \\| \\*pointwise\\ \\(pooling\\)\\* \\| \\*{value}\\*",
+      "check_hint": "ViDoRe",
+      "protocol_note": "LightOn's run: ViDoRe V3 overall NDCG@10, reranking the top 100 from ColQwen2.5-v0.2, every model re-evaluated under the same protocol",
+      "verified_on": "2026-10-16"
+    },
+    "qwen3_vl_2b_vidore_v3": {
+      "value": "59.18",
+      "source_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B",
+      "check_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B/raw/main/README.md",
+      "check_pattern": "\\*Qwen3\\-VL\\-Reranker\\-2B\\* \\| \\*2B\\* \\| \\*pointwise\\ \\(pooling\\)\\* \\| \\*{value}\\*",
+      "check_hint": "ViDoRe",
+      "protocol_note": "LightOn's run: ViDoRe V3 overall NDCG@10, reranking the top 100 from ColQwen2.5-v0.2, every model re-evaluated under the same protocol",
+      "verified_on": "2026-10-16"
+    },
+    "jina_m0_vidore_v3": {
+      "value": "59.40",
+      "source_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B",
+      "check_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B/raw/main/README.md",
+      "check_pattern": "\\*jina\\-reranker\\-m0\\* \\| \\*2\\.4B\\* \\| \\*pointwise\\* \\| \\*{value}\\*",
+      "check_hint": "ViDoRe",
+      "protocol_note": "LightOn's run: ViDoRe V3 overall NDCG@10, reranking the top 100 from ColQwen2.5-v0.2, every model re-evaluated under the same protocol",
       "verified_on": "2026-10-16"
     }
   }

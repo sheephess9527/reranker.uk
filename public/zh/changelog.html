@@ -71,6 +71,15 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-16-pages">2026 年 10 月 16 日（晚）—— LightOn-rerank、GTE 和 Contextual AI 有了专页</h2>
+        <ul class="feature-list">
+          <li><strong>新增三个模型页面</strong> —— <a href="/zh/models/lighton-rerank">LightOn-rerank</a>（六个 Apache 2.0 模型，能处理文本和页面图片，分逐点和列表式，附 LightOn 在 ViDoRe V3 和 BEIR 上的测试）、<a href="/zh/models/gte-reranker">GTE 重排序模型</a>（阿里巴巴的 149M 英文和 306M 多语言交叉编码器，8,192 token，CPU 或浏览器都能跑）和 <a href="/zh/models/contextual-rerank">Contextual AI Rerank v2</a>（跟随指令；非商用权重或付费 API）</li>
+          <li><strong>首页</strong> —— 模型卡片加上了 zerank-2 和 Qwen3-VL-Reranker，三个新页面的链接放在卡片下方</li>
+          <li><strong>每天核对</strong> —— 来自 LightOn 和阿里巴巴模型卡的 13 个新数字进了每日来源核对</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-16-contextual">2026 年 10 月 16 日（下午）—— Contextual AI 的托管 API</h2>
         <ul class="feature-list">
           <li><strong>Contextual AI Rerank v2 的商用渠道</strong> —— 网站之前只列了它的开源权重，而权重只能非商用。现在<a href="/zh/models/#contextual-api">模型对比表</a>加上了 Contextual 的托管 API：ctxl-rerank-v2-instruct-multilingual、它的 -mini 版和较早的 v1，按 token 计费。按场景选型和指令跟随两篇指南都指向了它，<a href="/zh/rerank-cost-calculator">成本计算器</a>也加入了 v2 和 v2-mini</li>
@@ -138,14 +147,13 @@
           <li><strong>每天检查线上所有页面</strong> —— 新增一项每日测试，从 reranker.uk 逐页加载并在出现任何策略违规时失败，用来发现网站前面被额外加入、又会被策略拦下的内容</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>2026 年 10 月更早的更新（24 条）</summary><article class="changelog-entry">
         <h2 id="2026-10-15-theme">2026 年 10 月 15 日（晚）—— 深色还是浅色，跟随系统设置</h2>
         <ul class="feature-list">
           <li><strong>首次访问跟随系统主题</strong> —— 以前网站对所有人都默认打开深色主题。现在在你使用主题切换按钮之前，网站会跟随操作系统的浅色或深色设置，系统切换时也会跟着变；一旦你用按钮选过，就以你的选择为准</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>2026 年 10 月更早的更新（23 条）</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-15-search">2026 年 10 月 15 日（稍后）—— 全站搜索</h2>
         <ul class="feature-list">
           <li><strong>站内搜索</strong> —— 点页头的搜索按钮，或在任意页面按 <kbd>/</kbd>，就能按标题、小节标题和简介找到指南和模型页。搜索在浏览器里运行，用的是随网站一起生成的小索引；中文页面只搜中文页面；只用键盘也能操作：方向键在结果间移动，<kbd>Esc</kbd> 关闭</li>
@@ -572,6 +580,8 @@
 
       
 
+      
+
       <p class="center" style="margin-top:2.5rem"><a class="btn btn-primary" href="/zh/demo">试用 Demo →</a></p>
     </section>
   </main>
@@ -616,6 +626,9 @@
             <li><a href="/zh/models/voyage-rerank">Voyage Rerank</a></li>
             <li><a href="/zh/models/zerank">zerank-2</a></li>
             <li><a href="/zh/models/qwen3-vl-reranker">Qwen3-VL-Reranker</a></li>
+            <li><a href="/zh/models/lighton-rerank">LightOn-rerank</a></li>
+            <li><a href="/zh/models/gte-reranker">GTE rerankers</a></li>
+            <li><a href="/zh/models/contextual-rerank">Contextual AI</a></li>
           </ul>
         </div>
       </div>

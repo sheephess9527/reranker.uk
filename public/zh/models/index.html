@@ -335,7 +335,7 @@
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="gte-reranker-modernbert" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="56.19*">
-              <th scope="row"><a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">gte-reranker-modernbert-base</a></th>
+              <th scope="row"><a href="/zh/models/gte-reranker">gte-reranker-modernbert-base</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">开源权重</span><span class="pill info">轻量</span></td>
               <td>1.49 亿参数、8K 上下文；也能在 transformers.js 里运行</td>
@@ -346,7 +346,7 @@
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr id="gte-multilingual-reranker-base" data-name="gte-multilingual-reranker-base" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-beir="">
-              <th scope="row"><a href="https://huggingface.co/Alibaba-NLP/gte-multilingual-reranker-base" rel="noopener noreferrer">gte-multilingual-reranker-base</a></th>
+              <th scope="row"><a href="/zh/models/gte-reranker">gte-multilingual-reranker-base</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">开源权重</span><span class="pill info">轻量</span></td>
               <td>306M，8K 上下文；小巧的多语言默认之选，可用 Text Embeddings Inference 部署</td>
@@ -401,18 +401,18 @@
               <td class="demo-link-cell"></td>
             </tr>
             <tr id="lighton-rerank" data-name="lighton-rerank" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="">
-              <th scope="row"><a href="https://huggingface.co/lightonai/LightOn-rerank-PW-2B" rel="noopener noreferrer">LightOn-rerank</a></th>
+              <th scope="row"><a href="/zh/models/lighton-rerank">LightOn-rerank</a></th>
               <td><span class="pill">Cross-encoder</span><span class="pill info">Listwise</span></td>
               <td><span class="pill good">开源权重</span><span class="pill good">Apache 2.0</span></td>
               <td>一个模型同时给文本和文档页面图片打分；0.8B / 2B / 4B，逐点或列表式</td>
               <td>英语 · 法语</td>
               <td>GPU</td>
               <td>免费（自建）</td>
-              <td title="LightOn 自己的测试（PW-2B）：对 BM25 召回的前 100 条重排序，取训练中没用到的 11 个 BEIR 数据集的平均分 —— 与对稠密检索结果重排序的行不可比。同一测试中：jina-reranker-m0 51.97，Qwen3-VL-Reranker-2B 49.08。它的强项是视觉文档：在 ViDoRe V3 上，列表式 4B 得分 64.69">49.13*</td>
+              <td title="LightOn 自己的测试（PW-2B）：对 BM25 召回的前 100 条重排序，取训练中没用到的 11 个 BEIR 数据集的平均分 —— 与对稠密检索结果重排序的行不可比。同一测试中：jina-reranker-m0 51.97，Qwen3-VL-Reranker-2B 49.08。它的强项是视觉文档：在 ViDoRe V3 上，列表式 4B 得分 64.69*">49.13*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr data-name="contextual-rerank-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="">
-              <th scope="row"><a href="https://huggingface.co/ContextualAI/ctxl-rerank-v2-instruct-multilingual-2b" rel="noopener noreferrer">Contextual AI Rerank v2</a></th>
+              <th scope="row"><a href="/zh/models/contextual-rerank">Contextual AI Rerank v2</a></th>
               <td><span class="pill">Instruction</span></td>
               <td><span class="pill">开源权重</span><span class="pill warn">权重：仅限非商用</span></td>
               <td>指令跟随；1B / 2B / 6B 三种尺寸</td>
@@ -423,7 +423,7 @@
               <td class="demo-link-cell muted">—</td>
             </tr>
             <tr id="contextual-api" data-name="contextual-rerank-api" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
-              <th scope="row"><a href="https://docs.contextual.ai/api-reference/rerank/rerank" rel="noopener noreferrer">Contextual AI Rerank API</a></th>
+              <th scope="row"><a href="/zh/models/contextual-rerank#routes">Contextual AI Rerank API</a></th>
               <td><span class="pill">Instruction</span></td>
               <td><span class="pill">托管 API</span></td>
               <td>v2 系列的商用渠道：ctxl-rerank-v2-instruct-multilingual 及其 -mini，另有较早的 ctxl-rerank-v1-instruct；查询、指令和文档合计最多 8,000 token</td>
@@ -612,6 +612,9 @@
             <li><a href="/zh/models/voyage-rerank">Voyage Rerank</a></li>
             <li><a href="/zh/models/zerank">zerank-2</a></li>
             <li><a href="/zh/models/qwen3-vl-reranker">Qwen3-VL-Reranker</a></li>
+            <li><a href="/zh/models/lighton-rerank">LightOn-rerank</a></li>
+            <li><a href="/zh/models/gte-reranker">GTE rerankers</a></li>
+            <li><a href="/zh/models/contextual-rerank">Contextual AI</a></li>
           </ul>
         </div>
       </div>

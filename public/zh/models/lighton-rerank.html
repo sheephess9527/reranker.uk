@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-locale="zh" data-prerendered="zh">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <title>LightOn-rerank：文本和页面图片共用一个重排序模型 | reranker.uk</title>
+  <meta name="description" content="LightOn-rerank 评测（2026 年 10 月）：六个 Apache 2.0 重排序模型（0.8B、2B、4B，各有逐点和列表式两种），能给文本和文档页面图片打分；LightOn 在 ViDoRe V3 和 BEIR 上对比 Qwen3-VL-Reranker 与 jina-reranker-m0 的结果，以及使用方法。" >
+  <link rel="canonical" href="https://reranker.uk/zh/models/lighton-rerank" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/models/lighton-rerank" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/lighton-rerank" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/lighton-rerank" >
+  <meta name="theme-color" content="#0b0d17" >
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
+  <meta name="author" content="reranker.uk" >
+  <link rel="icon" href="/assets/img/favicon.svg?v=1bb58b097e" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=6edeebfac7" >
+  <link rel="manifest" href="/site.webmanifest" >
+  <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
+  <meta property="og:type" content="article" >
+  <meta property="og:title" content="LightOn-rerank：文本和页面图片共用一个重排序模型 | reranker.uk" >
+  <meta property="og:description" content="LightOn-rerank 评测（2026 年 10 月）：六个 Apache 2.0 重排序模型（0.8B、2B、4B，各有逐点和列表式两种），能给文本和文档页面图片打分；LightOn 在 ViDoRe V3 和 BEIR 上对比 Qwen3-VL-Reranker 与 jina-reranker-m0 的结果，以及使用方法。" >
+  <meta property="og:url" content="https://reranker.uk/zh/models/lighton-rerank" >
+  <meta property="og:site_name" content="reranker.uk" >
+  <meta property="og:locale" content="zh_CN" >
+  <meta property="og:locale:alternate" content="en_GB" >
+  <meta name="twitter:card" content="summary_large_image" >
+  <meta property="og:image" content="https://reranker.uk/assets/og/zh/models/lighton-rerank.jpg?v=d3db2cad33" >
+  <meta property="og:image:width" content="1200" >
+  <meta property="og:image:height" content="630" >
+  <meta property="og:image:alt" content="LightOn-rerank：文本和页面图片共用一个重排序模型 | reranker.uk" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/models/lighton-rerank.jpg?v=d3db2cad33" >
+  <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
+  <link rel="preload" href="/assets/css/style.css?v=ff62e57d6c" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=ff62e57d6c" >
+  <!-- seo:jsonld -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"模型对比","item":"https://reranker.uk/zh/models/"},{"@type":"ListItem","position":3,"name":"LightOn-rerank：文本和页面图片共用一个重排序模型","item":"https://reranker.uk/zh/models/lighton-rerank"}]},{"@type":"Article","headline":"LightOn-rerank：文本和页面图片共用一个重排序模型","description":"LightOn-rerank 评测（2026 年 10 月）：六个 Apache 2.0 重排序模型（0.8B、2B、4B，各有逐点和列表式两种），能给文本和文档页面图片打分；LightOn 在 ViDoRe V3 和 BEIR 上对比 Qwen3-VL-Reranker 与 jina-reranker-m0 的结果，以及使用方法。","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"zh-Hans","datePublished":"2026-10-16","dateModified":"2026-10-16","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/zh/"},"mainEntityOfPage":"https://reranker.uk/zh/models/lighton-rerank","about":{"@type":"Thing","name":"LightOn-rerank reranker model"}}]}</script>
+
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="shared.skip">跳到正文</a>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
+        <li><a href="/zh/guides/" data-i18n="shared.nav.guides">指南</a></li>
+        <li><a href="/zh/models/" data-i18n="shared.nav.models" aria-current="page" class="active">模型对比</a></li>
+        <li><a class="nav-cta" href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+      </ul>
+      <div class="nav-right">
+        <button type="button" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="site-search" data-i18n-aria-label="shared.search.open" aria-label="搜索全站（按 /）" title="/">⌕</button>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+        <a class="lang-toggle" href="/models/lighton-rerank" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
+      </div>
+    </nav>
+    <div class="site-search" id="site-search" role="search" hidden>
+      <div class="container narrow">
+        <label class="sr-only" for="site-search-input" data-i18n="shared.search.label">搜索 reranker.uk</label>
+        <input id="site-search-input" type="search" autocomplete="off" spellcheck="false" data-i18n-placeholder="shared.search.placeholder" placeholder="搜索指南和模型…" aria-describedby="site-search-status">
+        <p class="search-status" id="site-search-status" aria-live="polite"></p>
+        <ul class="search-results" id="site-search-results"></ul>
+      </div>
+    </div>
+  </header>
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>LightOn-rerank</div>
+      <h1>LightOn-rerank</h1>
+      <p class="meta">开源权重 · LightOn · <time datetime="2026-10-16">更新于 2026 年 10 月 16 日</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Apache 2.0</span><span class="pill info">文本和页面图片</span><span class="pill">需要 GPU</span></div>
+      <p class="lead"><strong>LightOn-rerank</strong> 是一组六个重排序模型，用同一个模型给文本段落和文档页面图片打分，所以一个第二阶段就能同时服务文本索引和 PDF 页面索引。它有三个尺寸（0.8B、2B、4B），每个尺寸都有逐点和列表式两个版本，基于 Qwen3.5，Apache 2.0 许可。在视觉文档上，列表式 4B 是 LightOn 自己对比里最强的；在文本上它落后于 jina-reranker-m0。</p>
+
+      <div class="toc">
+        <strong>本页目录</strong>
+        <ol>
+          <li><a href="#family">逐点还是列表式</a></li>
+          <li><a href="#scores">分数，以及是谁测的</a></li>
+          <li><a href="#usage">快速上手</a></li>
+          <li><a href="#when">什么时候选 LightOn-rerank</a></li>
+          <li><a href="#pros-cons">优缺点</a></li>
+        </ol>
+      </div>
+
+      <h2 id="family">逐点还是列表式</h2>
+      <p>每个尺寸都有两个版本，而选哪个版本比选尺寸更重要：</p>
+      <ul>
+        <li><strong>PW（逐点）</strong>单独给每个候选打分，分数是“Yes”和“No”两个 logit 之差。每个候选一次前向计算，便于批处理，可以直接用 sentence-transformers 的 <code>CrossEncoder</code> 加载。</li>
+        <li><strong>LW（列表式）</strong>在一个提示里同时读四个候选，生成它们的顺序，比如 <code>[2] &gt; [4] &gt; [1] &gt; [3]</code>。更长的列表用宽度为四、每次移动两个的滑动窗口从下往上排。能同时看到多个候选，让它在每个尺寸上处理视觉文档都更强，代价是延迟大约是逐点的三倍。</li>
+      </ul>
+      <p>训练数据只有英文。借助多语言底座，法语不需要额外训练也能用，但比英文略差。</p>
+
+      <h2 id="scores">分数，以及是谁测的</h2>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="分数，以及是谁测的">
+        <table>
+          <thead>
+            <tr><th>模型</th><th>打分方式</th><th>ViDoRe V3（页面图片）</th><th>BEIR（文本）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>只用第一阶段（ColQwen2.5）</td><td>—</td><td>55.60*</td><td>—</td></tr>
+            <tr><td>LightOn-rerank-PW-0.8B</td><td>逐点</td><td>48.20*</td><td>—</td></tr>
+            <tr><td>LightOn-rerank-LW-0.8B</td><td>列表式</td><td>58.25*</td><td>—</td></tr>
+            <tr><td>LightOn-rerank-PW-2B</td><td>逐点</td><td>59.87*</td><td>49.13*</td></tr>
+            <tr><td>LightOn-rerank-LW-2B</td><td>列表式</td><td>62.66*</td><td>48.12*</td></tr>
+            <tr><td>LightOn-rerank-PW-4B</td><td>逐点</td><td>59.80*</td><td>—</td></tr>
+            <tr><td>LightOn-rerank-LW-4B</td><td>列表式</td><td><strong>64.69*</strong></td><td>48.33*</td></tr>
+            <tr><td>Qwen3-VL-Reranker-2B</td><td>逐点</td><td>59.18*</td><td>49.08</td></tr>
+            <tr><td>Qwen3-VL-Reranker-8B</td><td>逐点</td><td>64.23*</td><td>—</td></tr>
+            <tr><td>jina-reranker-m0</td><td>逐点</td><td>59.40*</td><td><strong>51.97</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">LightOn 自己的测试，数据来自模型卡，所有模型都在同一套流程下重新评测。ViDoRe V3：对 ColQwen2.5 召回的前 100 张页面图片重排，指标 NDCG@10。BEIR：对 BM25 召回的前 100 个结果重排，指标 NDCG@10，取 11 个没进过 LightOn 训练数据的数据集平均。两者都和厂商自己公布的数字对不上：比如 Qwen 的模型卡按自己的设置给 8B 的 ViDoRe V3 分数更高（见 <a href="/zh/models/qwen3-vl-reranker">Qwen3-VL-Reranker 页面</a>）。</p>
+      <p>这张表说明三件事。列表式模型越大越强，LW-4B 以大约一半的参数略微超过 Qwen3-VL-Reranker-8B；逐点 4B 并不比逐点 2B 好。在文本上，三个公布了分数的 LightOn 模型比 jina-reranker-m0 低三到四分，而 m0 的权重只能非商用。另外，PW-0.8B 的分数比它重排的第一阶段还低，所以不要拿它处理页面图片。</p>
+
+      <h2 id="usage">快速上手</h2>
+      <h3>逐点模型，用 sentence-transformers</h3>
+      <pre tabindex="0"><code>pip install "sentence-transformers[image]"   # 5.4 or later
+
+from sentence_transformers import CrossEncoder
+
+model = CrossEncoder("lightonai/LightOn-rerank-PW-2B")
+
+query = "What is late interaction in neural information retrieval?"
+documents = [
+    "ColBERT computes token-level query-document interactions at search time...",
+    "https://example.com/page_2.png",   # a page image: URL, path or PIL.Image
+]
+rankings = model.rank(query, documents)</code></pre>
+      <p>文本候选和图片候选可以放在同一次调用里。模型训练时用的对话模板已经打包在检查点里，不需要额外代码就能正确格式化输入。</p>
+      <h3>列表式模型</h3>
+      <p>LW 模型不能用 <code>CrossEncoder</code> 加载：它们生成的是顺序而不是分数。模型卡里附了一段简短的 <code>transformers</code> 实现，包括四候选窗口和在长列表上的滑动。用 vLLM 部署任何一种时，都要关掉思考模式（<code>enable_thinking: False</code>；Qwen3.5 的模板默认开启，会扭曲分数），给整页图片排序时上下文至少留 16,384 token。</p>
+
+      <h2 id="when">什么时候选 LightOn-rerank</h2>
+      <ul>
+        <li><strong>适合：</strong>你检索的是 PDF 页面、幻灯片或扫描件，并且需要能商用的许可：要性价比选 LW-2B，要最好效果选 LW-4B。</li>
+        <li><strong>适合：</strong>一个模型要同时给文本索引和页面图片索引重排序。</li>
+        <li><strong>可能不适合：</strong>只有文本。这时 <a href="/zh/models/qwen-reranker">Qwen3-Reranker</a> 这类文本重排序模型更合适。</li>
+        <li><strong>可能不适合：</strong>英语和法语以外的语言，它既没在这些语言上训练过，也没测过。</li>
+      </ul>
+
+      <h2 id="pros-cons">优缺点</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 style="color:var(--good);margin-top:0">优点</h3>
+          <ul class="feature-list">
+            <li>每个尺寸都是 Apache 2.0</li>
+            <li>文本和页面图片一个模型搞定</li>
+            <li>LW-4B 在 LightOn 的视觉文档对比里领先</li>
+            <li>所有基线都在同一流程下重测，并标出了训练数据污染</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:var(--danger);margin-top:0">缺点</h3>
+          <ul style="padding-left:1.2rem;color:var(--text-soft)">
+            <li>只用英文训练</li>
+            <li>列表式模型需要自定义代码，延迟约为三倍</li>
+            <li>文本上落后于 jina-reranker-m0</li>
+            <li>需要 GPU；太大，放不进我们的浏览器内 Demo</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">要给页面图片选模型？</h2>
+        <p class="soft">按场景选型指南对比了 LightOn-rerank、Qwen3-VL-Reranker 以及处理视觉文档的托管选项。</p>
+        <a class="btn btn-primary" href="/zh/guides/choose-reranker-scenario">按场景选型 →</a>
+        <a class="btn btn-ghost" href="/zh/models/" style="margin-left:.5rem">全部模型 →</a>
+      </div>
+
+      <h2>其他模型</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/zh/models/qwen3-vl-reranker"><h3>Qwen3-VL-Reranker</h3><p>图片、截图和视频；2B 和 8B。</p></a>
+        <a class="card" href="/zh/models/jina-reranker"><h3>Jina Reranker</h3><p>列表式 v3.5，以及多模态的 m0。</p></a>
+        <a class="card" href="/zh/guides/late-interaction-rerank"><h3>Late-interaction（ColBERT）</h3><p>token 级打分，ColBERT 式。</p></a>
+        <a class="card" href="/zh/guides/self-host-reranker"><h3>自托管指南</h3><p>服务化与运维清单。</p></a>
+      </div>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch" data-i18n="shared.footer.blurb">一个关于检索与 RAG 重排序（reranker）的开放学习资源，外加一个在浏览器里零成本运行的实时 Demo。</p>
+          <p style="margin-top:.6rem"><a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer" data-i18n="shared.footer.github">在 GitHub 上查看源码</a></p>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.guides">指南</h4>
+          <ul>
+            <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/guides/reranking-not-working" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
+            <li><a href="/zh/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
+            <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
+            <li><a href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
+            <li><a href="/zh/privacy" data-i18n="shared.footer.privacy">隐私说明</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.models">模型</h4>
+          <ul>
+            <li><a href="/zh/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank">Voyage Rerank</a></li>
+            <li><a href="/zh/models/zerank">zerank-2</a></li>
+            <li><a href="/zh/models/qwen3-vl-reranker">Qwen3-VL-Reranker</a></li>
+            <li><a href="/zh/models/lighton-rerank">LightOn-rerank</a></li>
+            <li><a href="/zh/models/gte-reranker">GTE rerankers</a></li>
+            <li><a href="/zh/models/contextual-rerank">Contextual AI</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> reranker.uk</span>
+        <span class="footer-legal muted">
+          <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
+          · <a href="/zh/privacy" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog" data-i18n="shared.footer.changelogShort">更新日志</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js?v=56cc3b94c3"></script>
+  
+  <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
+</body>
+</html>
