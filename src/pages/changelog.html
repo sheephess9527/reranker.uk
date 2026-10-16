@@ -6,6 +6,13 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-16-contextual">16 Oct 2026 (afternoon) — Contextual AI’s hosted API</h2>
+        <ul class="feature-list">
+          <li><strong>The commercial route to Contextual AI Rerank v2</strong> — the site only listed the open weights, which are non-commercial. The <a href="/models/#contextual-api">models table</a> now has Contextual’s hosted API too: ctxl-rerank-v2-instruct-multilingual, its -mini and the older v1, priced per token. The scenario and instruction guides point to it, and the <a href="/rerank-cost-calculator.html">cost calculator</a> includes v2 and v2-mini</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-16-calculator">16 Oct 2026 (later) — Three more options in the cost calculator</h2>
         <ul class="feature-list">
           <li><strong>ZeroEntropy, Amazon Bedrock and Pinecone in the <a href="/rerank-cost-calculator.html">cost calculator</a></strong> — zerank-2 per token, Amazon Rerank 1.0 per query of up to 100 documents, and Pinecone’s pinecone-rerank-v0 / bge-reranker-v2-m3 per request of up to 100. Two are left out on purpose: Cohere Rerank 3.5 on Bedrock, because AWS’s page gives two different per-document token limits, and Cohere on Pinecone, because Pinecone doesn’t define its “rerank unit”</li>

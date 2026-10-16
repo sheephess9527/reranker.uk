@@ -122,7 +122,9 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 > 完成：计算器加了 zerank-2（按 token，计法同 Voyage，页面注明是假设）、Bedrock 的 Amazon Rerank 1.0（每次查询 ≤100 篇）、Pinecone 的 v0 / bge（每次请求 ≤100 篇），价格都走 `data-*` 属性里的 fact；`tests/cost-calculator.spec.js` 加了 100 / 250 篇的分段用例。故意不加：Bedrock 上的 Cohere 3.5（AWS 页面同时写 500 和 512 token，自相矛盾）、Pinecone 上的 Cohere（「rerank unit」没有定义）。zerank 页写明 zerank-2-small / nano 已列出但无价格和模型卡。
 
-### 12. Contextual AI：v2 mini 和 v1
+### ~~12. Contextual AI：v2 mini 和 v1~~（2026-10-16 已完成）
+
+> 完成：真正的缺口比「少两个型号」大——表里只有非商用的开源权重，商用唯一的路（托管 API）没提，选型指南还写着「非商用场景也可用」。加了 `#contextual-api` 一行（v2、v2-mini、v1，$0.05 / $0.02 每百万 token，单次查询+指令+文档 8,000 token），指令跟随指南加一条托管 API，选型指南改成「权重非商用，或用托管 API」，计算器加 v2 和 v2-mini（token 计法同 ZeroEntropy，注明是假设）。4 个新 fact（`contextual-rerank-api`）。API 的 v2 / mini 对应开源的 1B/2B/6B 哪个，官方没说，页面不写。
 
 ### 13. Contextual、GTE、LightOn 详情页；首页模型卡片补上 zerank-2、Qwen3-VL
 

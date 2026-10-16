@@ -68,7 +68,7 @@
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span>重排序成本计算器</div>
       <h1>重排序成本计算器</h1>
       <p class="meta">工具 · <time datetime="2026-10-09">更新于 2026 年 10 月 9 日</time></p>
-      <p class="lead">托管重排序服务的计费方式各不相同。Cohere 按<strong>检索次数</strong>收费 —— 一次检索包含一个 query 和最多 100 篇文档，超过 500 token 的文档按多篇计。Google 和 Amazon Bedrock 按<strong>查询次数</strong>收费、Pinecone 按<strong>请求次数</strong>收费，每次最多 100 篇文档，不管长短。Voyage、ZeroEntropy 和阿里云按 <strong>token</strong> 收费，国内以人民币计价的服务也是如此。哪家最便宜取决于你的段落长度怎么取整。填入你自己的数字试试。</p>
+      <p class="lead">托管重排序服务的计费方式各不相同。Cohere 按<strong>检索次数</strong>收费 —— 一次检索包含一个 query 和最多 100 篇文档，超过 500 token 的文档按多篇计。Google 和 Amazon Bedrock 按<strong>查询次数</strong>收费、Pinecone 按<strong>请求次数</strong>收费，每次最多 100 篇文档，不管长短。Voyage、ZeroEntropy、Contextual AI 和阿里云按 <strong>token</strong> 收费，国内以人民币计价的服务也是如此。哪家最便宜取决于你的段落长度怎么取整。填入你自己的数字试试。</p>
 
       <section class="demo-panel" aria-labelledby="calc-head">
         <h2 id="calc-head" class="mt-0" style="margin-bottom:1rem">你的负载</h2>
@@ -100,7 +100,7 @@
 
       <h2 id="results">每月成本</h2>
       <div class="table-wrap" tabindex="0" role="region" aria-label="按上面填写的用量，估算各厂商每月的重排序费用">
-        <table id="calc-table" data-zeroentropy-per-m="0.025" data-bedrock-amazon-per-k-queries="1.00" data-bedrock-docs-per-query="100" data-pinecone-per-k-requests="2" data-pinecone-docs-per-request="100" data-docs-per-search="100" data-chunk-tokens="500" data-cohere-pro-per-search="0.0025" data-cohere-fast-per-search="0.002" data-voyage-per-m="0.05" data-voyage-lite-per-m="0.02" data-google-per-k-queries="1.00" data-alibaba-intl-per-m="0.1" data-alibaba-cn-per-m="0.5" data-siliconflow-pro-per-m="0.07">
+        <table id="calc-table" data-contextual-v2-per-m="0.05" data-contextual-mini-per-m="0.02" data-zeroentropy-per-m="0.025" data-bedrock-amazon-per-k-queries="1.00" data-bedrock-docs-per-query="100" data-pinecone-per-k-requests="2" data-pinecone-docs-per-request="100" data-docs-per-search="100" data-chunk-tokens="500" data-cohere-pro-per-search="0.0025" data-cohere-fast-per-search="0.002" data-voyage-per-m="0.05" data-voyage-lite-per-m="0.02" data-google-per-k-queries="1.00" data-alibaba-intl-per-m="0.1" data-alibaba-cn-per-m="0.5" data-siliconflow-pro-per-m="0.07">
           <caption class="sr-only">按上面填写的用量，估算各厂商每月的重排序费用</caption>
           <thead>
             <tr>
@@ -160,6 +160,7 @@
         <li><strong>阿里云百炼</strong> —— qwen3-rerank 国际版每百万输入 token $0.1，北京地域 ¥0.5，qwen3.7-text-rerank 在北京地域同价（<a href="https://help.aliyun.com/zh/model-studio/model-pricing" rel="noopener noreferrer">价格页</a>）。阿里云按输入 token 计费，单次请求上限按 query token × 文档数 + 文档 token 总和计算，所以本页和 Voyage 用同一种方式数 token。qwen3-rerank 遇到单篇超过 4,000 token 的文档会直接报错，不会截断。</li>
         <li><strong>硅基流动</strong> —— 价格页上 bge-reranker-v2-m3 免费，Pro 版每百万 token ¥0.07（<a href="https://siliconflow.cn/pricing" rel="noopener noreferrer">价格页</a>）。硅基流动没有说明重排序怎么数 token，本页假定与阿里云、Voyage 的算法相同。它同时提供的 Qwen3-Reranker 在价格页上没有标价。</li>
         <li><strong>ZeroEntropy zerank-2</strong> —— 每 100 万 token $0.025（<a href="https://docs.zeroentropy.dev/models" rel="noopener noreferrer">ZeroEntropy 文档</a>）。文档没有说明一次重排请求的 token 怎么计；本页按 Voyage 的方式算，即每个文档都把查询算一遍——ZeroEntropy 计算速率限制时也是这样算一次请求的。</li>
+        <li><strong>Contextual AI Rerank API</strong> —— v2 每 100 万 token $0.05，v2-mini $0.02（<a href="https://contextual.ai/pricing" rel="noopener noreferrer">Contextual 价格</a>）。和 ZeroEntropy 一样按每个文档都算一遍查询来计；Contextual 没有说明他们怎么计。</li>
         <li><strong>Amazon Bedrock：Amazon Rerank 1.0</strong> —— 每 1,000 次查询 $1.00；一次查询最多 100 个文档，超出部分算作新的查询（<a href="https://aws.amazon.com/bedrock/pricing/" rel="noopener noreferrer">Bedrock 价格</a>）。Bedrock 上的 Cohere Rerank 3.5 没有计入：同一页面一边说每个文档最多 500 token，一边说超过 512 token 才拆分，两个数字对不上。</li>
         <li><strong>Pinecone</strong> —— 付费套餐里 pinecone-rerank-v0 和 bge-reranker-v2-m3 都是每 1,000 次请求 $2；一次请求最多 100 个文档，更多就要多发请求（<a href="https://www.pinecone.io/pricing/" rel="noopener noreferrer">Pinecone 价格</a>）。没有计入套餐自带的免费请求；cohere-rerank-4-fast 没有计入，因为 Pinecone 没说明它计费用的“rerank 单位”是什么。</li>
         <li>token 数为近似值 —— 各家分词方式不同，本页是用你填的平均值相乘，而非对真实文本做分词。</li>
@@ -234,7 +235,7 @@
     </div>
   </footer>
   <script src="/assets/js/main.js?v=56cc3b94c3"></script>
-  <script src="/assets/js/cost-calculator.js?v=971ba8591b"></script>
+  <script src="/assets/js/cost-calculator.js?v=0d079fc2a6"></script>
   <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
 </body>
 </html>

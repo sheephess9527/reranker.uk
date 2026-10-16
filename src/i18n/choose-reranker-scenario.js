@@ -17,8 +17,8 @@ window.I18N_PAGE = { zh: {
     "英文场景用 <a href=\"/models/jina-reranker.html\">jina-reranker-v1-tiny-en</a> 或 ms-marco MiniLM，托管 API 用 <a href=\"/models/cohere-rerank.html\">Cohere Rerank 4 Fast</a>",
   "CPU, browser or API":
     "CPU、浏览器或 API",
-  "An <a href=\"/guides/instruction-reranker.html\">instruction-following reranker</a>: Qwen3-Reranker, Voyage rerank-3, or Contextual AI Rerank v2 for non-commercial use":
-    "<a href=\"/guides/instruction-reranker.html\">能跟随指令的重排序模型</a>：Qwen3-Reranker、Voyage rerank-3，非商用场景也可用 Contextual AI Rerank v2",
+  "An <a href=\"/guides/instruction-reranker.html\">instruction-following reranker</a>: Qwen3-Reranker, Voyage rerank-3, or Contextual AI Rerank v2 (weights for non-commercial use, or its hosted API)":
+    "<a href=\"/guides/instruction-reranker.html\">能跟随指令的重排序模型</a>：Qwen3-Reranker、Voyage rerank-3，或 Contextual AI Rerank v2（权重仅限非商用，商用可走它的托管 API）",
   "<a href=\"/guides/hybrid-retrieval-rerank.html\">Hybrid BM25 + vector retrieval</a>, then Qwen3-Reranker or Voyage rerank-3":
     "<a href=\"/guides/hybrid-retrieval-rerank.html\">BM25 + 向量混合检索</a>，再用 Qwen3-Reranker 或 Voyage rerank-3 重排序",
   "Scanned PDFs, slides, screenshots":

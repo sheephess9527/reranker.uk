@@ -111,6 +111,7 @@ results = client.rerank(
         <li><a href="https://huggingface.co/ContextualAI/ctxl-rerank-v2-instruct-multilingual-2b" rel="noopener noreferrer">Contextual AI Rerank v2</a>（1B / 2B / 6B，CC BY-NC-SA —— 仅限非商用）—— 把指令作为 <code>prompt=</code> 传给 <code>predict</code> 或 <code>rank</code>。</li>
         <li><a href="/zh/models/voyage-rerank">Voyage rerank-3</a>（托管）—— 把指令加在 query 的前面或后面。Voyage 从 rerank-2.5 开始支持指令，并表示 Rerank 3 系列保留了这一能力。</li>
         <li><a href="/zh/models/#alibaba-model-studio">阿里云百炼</a>（托管）—— <code>qwen3-rerank</code>、<code>qwen3.7-text-rerank</code> 和 <code>qwen3-vl-rerank</code> 支持 <code>instruct</code> 参数。不传时默认按问答检索排序（“Given a web search query, retrieve relevant passages that answer the query.”）；阿里云建议用英文写指令。</li>
+        <li><a href="/zh/models/#contextual-api">Contextual AI Rerank API</a>（托管）—— 上面 v2 系列的商用渠道：<code>ctxl-rerank-v2-instruct-multilingual</code> 及其 <code>-mini</code> 接受 <code>instruction</code> 字段。Contextual 测试过关于时效、文档类型、来源和元数据的指令，并建议写明具体时间范围而不是“今年”，因为模型不知道今天是哪天。</li>
         <li><a href="/zh/models/mxbai-rerank#api">Mixedbread mxbai-rerank-v3.1-listwise</a>（托管，只能在 Mixedbread Search 里用）—— 列表式模型，把整个候选集一起读，所以“后来的修订取代先前的”这类指令可以让文档之间互相比较。权重未公开。</li>
       </ul>
       <pre tabindex="0"><code># Contextual AI Rerank v2, from its model card

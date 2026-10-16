@@ -4,6 +4,14 @@ window.I18N_PAGE = {
     "models.tableCaption": "重排序模型对比：架构、类型、适用场景、语言、延迟、价格与 BEIR 分数",
   },
   zh: {
+  "<a href=\"https://docs.contextual.ai/api-reference/rerank/rerank\" rel=\"noopener noreferrer\">Contextual AI Rerank API</a>":
+    "<a href=\"https://docs.contextual.ai/api-reference/rerank/rerank\" rel=\"noopener noreferrer\">Contextual AI Rerank API</a>",
+  "The commercial route to the v2 family: ctxl-rerank-v2-instruct-multilingual and its -mini, plus the older ctxl-rerank-v1-instruct; up to {{fact:contextual-rerank-api.max_tokens_per_doc}} tokens per query, instruction and document":
+    "v2 系列的商用渠道：ctxl-rerank-v2-instruct-multilingual 及其 -mini，另有较早的 ctxl-rerank-v1-instruct；查询、指令和文档合计最多 {{fact:contextual-rerank-api.max_tokens_per_doc}} token",
+  "${{fact:contextual-rerank-api.v2_usd_per_m}}/M tokens (v2), ${{fact:contextual-rerank-api.v2_mini_usd_per_m}}/M (mini)†":
+    "${{fact:contextual-rerank-api.v2_usd_per_m}}/百万 token（v2），${{fact:contextual-rerank-api.v2_mini_usd_per_m}}/百万 token（mini）†",
+  "Contextual AI publish BEIR results only as a chart in their blog post":
+    "Contextual AI 只在博客里用图表给出 BEIR 结果",
   "<a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html\" rel=\"noopener noreferrer\">Amazon Bedrock rerank</a> <span class=\"muted\">(AWS)</span>":
     "<a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html\" rel=\"noopener noreferrer\">Amazon Bedrock 重排序</a> <span class=\"muted\">（AWS）</span>",
   "Amazon Rerank 1.0 and Cohere Rerank 3.5 through the Bedrock Rerank API, or as the reranker of a Bedrock Knowledge Base; text only. Amazon Rerank 1.0 isn’t offered in US East (N. Virginia)":
