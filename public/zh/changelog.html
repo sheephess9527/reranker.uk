@@ -71,6 +71,15 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-16-hosted">2026 年 10 月 16 日 —— Pinecone 和 Amazon Bedrock</h2>
+        <ul class="feature-list">
+          <li><strong>新增两个托管平台</strong> —— <a href="/zh/models/">模型对比表</a>加入 Amazon Bedrock（Amazon Rerank 1.0 和 Cohere Rerank 3.5，按每 1,000 次查询计价）和 Pinecone（自家的 pinecone-rerank-v0，以及 bge-reranker-v2-m3 和 cohere-rerank-4-fast）。这两家一直在发布监控里，但网站上一处都没提</li>
+          <li><strong>向量数据库指南加了 Pinecone</strong> —— <a href="/zh/guides/rerank-vector-database#pinecone">一个在数据库里重排的完整例子</a>：三个模型、各自的限制和套餐，以及 Pinecone 文档里两条容易漏看的说明（cohere-rerank-3.5 现在由 4-fast 响应；Cohere 的模型跑在 Azure 上）</li>
+          <li><strong>每天核对</strong> —— 新增的 13 个价格和限制都进了每日来源核对，包括 AWS 价格页只从其价目表动态渲染的 Bedrock 价格</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-15-changelog">2026 年 10 月 15 日（最后）—— 更新日志变短了</h2>
         <ul class="feature-list">
           <li><strong>较早的月份折叠起来</strong> —— 本页只展开最新的十条，更早的按月份分组，点一下就能展开。指向旧条目的链接（包括 RSS 里的）会自动展开对应月份并跳到那一条</li>
@@ -136,15 +145,14 @@
           <li><strong>手机上的页边距，全站修好</strong> —— 在手机上，每篇指南和模型页的正文都一直贴到屏幕边缘：一条本来只该设置上下间距的样式规则，把左右边距也清掉了。已修复，并新增一项测试，在手机宽度下逐页检查</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>2026 年 10 月更早的更新（21 条）</summary><article class="changelog-entry">
         <h2 id="2026-10-14-table">2026 年 10 月 14 日（深夜）—— 手机上看模型对比表，第一列不再滑走</h2>
         <ul class="feature-list">
           <li><strong>模型名一直可见</strong> —— 在手机上横向滑动模型对比表时，模型名会跟着滑出屏幕，分数就对不上是哪个模型了。现在模型名这一列和表头在滑动时都固定不动；桌面端表格不变</li>
           <li><strong>手机上的左右边距</strong> —— 首页、更新日志和 Demo 页的几个区块在手机上丢了左右边距，新的流程图因此贴着屏幕边缘。现在边距恢复了</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>2026 年 10 月更早的更新（20 条）</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-14-home">2026 年 10 月 14 日（夜）—— 更正首页流程图；常用任务直接能点到</h2>
         <ul class="feature-list">
           <li><strong>流程图把数字标在了错误的箭头上</strong> —— “top 50–100”写在进入检索器的箭头上，“top 5–10”写在进入重排序器的箭头上。这两个数字是每一级返回的结果，不是它收到的输入。现在图上写的是：检索器返回 50–100 个候选，重排序器只留下前 5 个。手机上改为纵向排列，不再把字缩到看不清</li>
@@ -470,6 +478,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 

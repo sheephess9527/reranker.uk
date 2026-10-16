@@ -48,6 +48,8 @@
       </div>
       <p class="muted" style="font-size:.85rem">Prices from <a href="https://cohere.com/pricing" rel="noopener noreferrer">cohere.com/pricing</a> ($2.50 and $2 per 1,000 searches) and Cohere’s <a href="https://docs.cohere.com/docs/rate-limits" rel="noopener noreferrer">rate-limit docs</a>, verified 1 October 2026 and re-checked daily by this site’s source check. The {{fact:cohere-rerank.billing_chunk_tokens}}-token rule matters: see the <a href="/rerank-cost-calculator.html">cost calculator</a> for what it does to a real workload.</p>
 
+      <p><strong>Through a cloud instead:</strong> <a href="/models/#amazon-bedrock">Amazon Bedrock</a> sells Cohere Rerank 3.5 at ${{fact:amazon-bedrock-rerank.cohere_3_5_usd_per_1000_queries}} per 1,000 queries of up to {{fact:amazon-bedrock-rerank.docs_per_query}} documents. <a href="/guides/rerank-vector-database.html#pinecone">Pinecone</a> serves cohere-rerank-4-fast inside its vector database, and since 31 August 2026 has answered requests for cohere-rerank-3.5 with 4-fast.</p>
+
       <h2 id="usage">Quick start</h2>
       <h3>Python</h3>
       <pre><code>pip install cohere</code></pre>

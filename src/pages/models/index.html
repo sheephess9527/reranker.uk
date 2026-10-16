@@ -236,6 +236,28 @@
               <td class="muted" title="SiliconFlow serve other vendors’ open models, so the scores are those models’ own — see their rows. Its price page lists no price for the Qwen3-Reranker models">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
+            <tr id="amazon-bedrock" data-name="amazon-bedrock" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+              <th scope="row"><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html" rel="noopener noreferrer">Amazon Bedrock rerank</a> <span class="muted">(AWS)</span></th>
+              <td><span class="pill">Reranker API</span></td>
+              <td><span class="pill">Hosted API</span></td>
+              <td>Amazon Rerank 1.0 and Cohere Rerank 3.5 through the Bedrock Rerank API, or as the reranker of a Bedrock Knowledge Base; text only. Amazon Rerank 1.0 isn’t offered in US East (N. Virginia)</td>
+              <td>Model-dependent</td>
+              <td>API</td>
+              <td>${{fact:amazon-bedrock-rerank.amazon_rerank_usd_per_1000_queries}} (Amazon) or ${{fact:amazon-bedrock-rerank.cohere_3_5_usd_per_1000_queries}} (Cohere) per 1,000 queries†</td>
+              <td class="muted" title="Amazon publish no benchmark for Rerank 1.0; Cohere Rerank 3.5 is Cohere’s model. A query counts up to {{fact:amazon-bedrock-rerank.docs_per_query}} documents; each further {{fact:amazon-bedrock-rerank.docs_per_query}} counts as another query">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr id="pinecone" data-name="pinecone" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="">
+              <th scope="row"><a href="https://docs.pinecone.io/guides/search/rerank-results" rel="noopener noreferrer">Pinecone rerank</a> <span class="muted">(hosted, in the vector DB)</span></th>
+              <td><span class="pill">Reranker API</span></td>
+              <td><span class="pill">Hosted API</span></td>
+              <td>Rerank inside a Pinecone query, or as a separate call: Pinecone’s own pinecone-rerank-v0 ({{fact:pinecone-rerank.v0_max_tokens}} tokens per pair), bge-reranker-v2-m3 and cohere-rerank-4-fast. See the <a href="/guides/rerank-vector-database.html#pinecone">vector database guide</a></td>
+              <td>Model-dependent</td>
+              <td>API</td>
+              <td>Free plan: bge-reranker-v2-m3 only, {{fact:pinecone-rerank.starter_bge_requests_per_month}} requests a month; paid plans ${{fact:pinecone-rerank.usd_per_1000_requests}} per 1,000 requests†</td>
+              <td class="muted" title="Pinecone publish no benchmark for pinecone-rerank-v0; the other two are BAAI’s and Cohere’s models — see their rows">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
             <tr id="vertex-ai-ranking" data-name="vertex-ai-ranking" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
               <th scope="row"><a href="https://docs.cloud.google.com/generative-ai-app-builder/docs/ranking" rel="noopener noreferrer">Google Vertex AI ranking</a> <span class="muted">(semantic-ranker)</span></th>
               <td><span class="pill">Reranker API</span></td>

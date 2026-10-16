@@ -1472,5 +1472,115 @@
       "check_hint": "Accuracy",
       "verified_on": "2026-10-12"
     }
+  },
+  "amazon-bedrock-rerank": {
+    "amazon_rerank_usd_per_1000_queries": {
+      "value": "1.00",
+      "source_url": "https://aws.amazon.com/bedrock/pricing/",
+      "check_url": "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/bedrock/USD/current/bedrock.json",
+      "check_raw": true,
+      "check_pattern": "\"lCmRnze6dXKPa-Tm8cwVBOROuTxOHzb1yjUhE-3flng\":\\{\"rateCode\":\"[^\"]+\",\"price\":\"0\\.0010000000\"",
+      "check_hint": "lCmRnze6dXKPa",
+      "check_note": "The pricing page renders this price client-side from AWS's price list (priceOf key lCmRnze6…, $0.001 per query × 1,000); the pattern pins that key's price in the JSON",
+      "verified_on": "2026-10-16"
+    },
+    "cohere_3_5_usd_per_1000_queries": {
+      "value": "2.00",
+      "source_url": "https://aws.amazon.com/bedrock/pricing/",
+      "check_url": "https://aws.amazon.com/bedrock/pricing/",
+      "check_pattern": "Cohere models Price per 1,000 queries\\*\\* Rerank 3\\.5 \\${value}",
+      "check_hint": "Rerank 3\\.5",
+      "verified_on": "2026-10-16"
+    },
+    "docs_per_query": {
+      "value": "100",
+      "source_url": "https://aws.amazon.com/bedrock/pricing/",
+      "check_url": "https://aws.amazon.com/bedrock/pricing/",
+      "check_pattern": "a query can contain up to {value} document chunks",
+      "check_hint": "document chunks",
+      "verified_on": "2026-10-16"
+    }
+  },
+  "pinecone-rerank": {
+    "usd_per_1000_requests": {
+      "value": "2",
+      "source_url": "https://www.pinecone.io/pricing/",
+      "check_url": "https://www.pinecone.io/pricing/",
+      "check_pattern": "pinecone-rerank-v0 Unlimited \\${value}/1k requests",
+      "check_hint": "pinecone-rerank-v0",
+      "verified_on": "2026-10-16"
+    },
+    "cohere_4_fast_usd_per_1000_units": {
+      "value": "2",
+      "source_url": "https://www.pinecone.io/pricing/",
+      "check_url": "https://www.pinecone.io/pricing/",
+      "check_pattern": "cohere-rerank-4-fast Unlimited \\${value}/1k rerank units",
+      "check_hint": "cohere-rerank-4-fast",
+      "verified_on": "2026-10-16"
+    },
+    "starter_bge_requests_per_month": {
+      "value": "500",
+      "source_url": "https://www.pinecone.io/pricing/",
+      "check_url": "https://www.pinecone.io/pricing/",
+      "check_pattern": "bge-reranker-v2-m3 {value} requests/mo included",
+      "check_hint": "requests/mo",
+      "verified_on": "2026-10-16"
+    },
+    "v0_max_tokens": {
+      "value": "512",
+      "source_url": "https://docs.pinecone.io/guides/search/rerank-results",
+      "check_url": "https://docs.pinecone.io/guides/search/rerank-results",
+      "check_pattern": "pinecone-rerank-v0 is a reranking model that can handle chunks up to {value} tokens",
+      "check_hint": "pinecone-rerank-v0",
+      "verified_on": "2026-10-16"
+    },
+    "bge_max_tokens": {
+      "value": "1024",
+      "source_url": "https://docs.pinecone.io/guides/search/rerank-results",
+      "check_url": "https://docs.pinecone.io/guides/search/rerank-results",
+      "check_pattern": "bge-reranker-v2-m3 is a high-performance[\\s\\S]{0,300}?Max tokens per query and document pair: {value}",
+      "check_hint": "bge-reranker-v2-m3 is",
+      "verified_on": "2026-10-16"
+    },
+    "cohere_4_fast_max_docs": {
+      "value": "250",
+      "source_url": "https://docs.pinecone.io/guides/search/rerank-results",
+      "check_url": "https://docs.pinecone.io/guides/search/rerank-results",
+      "check_pattern": "cohere-rerank-4-fast is Cohere.s latest[\\s\\S]{0,600}?Max documents: {value}",
+      "check_hint": "cohere-rerank-4-fast is",
+      "verified_on": "2026-10-16"
+    },
+    "v0_max_docs": {
+      "value": "100",
+      "source_url": "https://docs.pinecone.io/guides/search/rerank-results",
+      "check_url": "https://docs.pinecone.io/guides/search/rerank-results",
+      "check_pattern": "pinecone-rerank-v0 is a reranking model that can handle chunks[\\s\\S]{0,200}?Max documents: {value}",
+      "check_hint": "pinecone-rerank-v0 is",
+      "verified_on": "2026-10-16"
+    },
+    "bge_max_docs": {
+      "value": "100",
+      "source_url": "https://docs.pinecone.io/guides/search/rerank-results",
+      "check_url": "https://docs.pinecone.io/guides/search/rerank-results",
+      "check_pattern": "bge-reranker-v2-m3 is a high-performance[\\s\\S]{0,350}?Max documents: {value}",
+      "check_hint": "bge-reranker-v2-m3 is",
+      "verified_on": "2026-10-16"
+    },
+    "cohere_4_fast_max_tokens_per_doc": {
+      "value": "8,192",
+      "source_url": "https://docs.pinecone.io/guides/search/rerank-results",
+      "check_url": "https://docs.pinecone.io/guides/search/rerank-results",
+      "check_pattern": "cohere-rerank-4-fast is Cohere.s latest[\\s\\S]{0,500}?Max tokens per document: {value}",
+      "check_hint": "cohere-rerank-4-fast is",
+      "verified_on": "2026-10-16"
+    },
+    "builder_bge_requests_per_month": {
+      "value": "1,000",
+      "source_url": "https://www.pinecone.io/pricing/",
+      "check_url": "https://www.pinecone.io/pricing/",
+      "check_pattern": "bge-reranker-v2-m3 500 requests/mo included {value} requests/mo included",
+      "check_hint": "requests/mo",
+      "verified_on": "2026-10-16"
+    }
   }
 }

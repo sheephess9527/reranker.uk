@@ -4,6 +4,22 @@ window.I18N_PAGE = {
     "models.tableCaption": "重排序模型对比：架构、类型、适用场景、语言、延迟、价格与 BEIR 分数",
   },
   zh: {
+  "<a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html\" rel=\"noopener noreferrer\">Amazon Bedrock rerank</a> <span class=\"muted\">(AWS)</span>":
+    "<a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html\" rel=\"noopener noreferrer\">Amazon Bedrock 重排序</a> <span class=\"muted\">（AWS）</span>",
+  "Amazon Rerank 1.0 and Cohere Rerank 3.5 through the Bedrock Rerank API, or as the reranker of a Bedrock Knowledge Base; text only. Amazon Rerank 1.0 isn’t offered in US East (N. Virginia)":
+    "通过 Bedrock Rerank API 调用 Amazon Rerank 1.0 和 Cohere Rerank 3.5，也可以作为 Bedrock 知识库的重排序模型；只支持文本。Amazon Rerank 1.0 在美国东部（弗吉尼亚北部）区域不提供",
+  "${{fact:amazon-bedrock-rerank.amazon_rerank_usd_per_1000_queries}} (Amazon) or ${{fact:amazon-bedrock-rerank.cohere_3_5_usd_per_1000_queries}} (Cohere) per 1,000 queries†":
+    "每 1,000 次查询 ${{fact:amazon-bedrock-rerank.amazon_rerank_usd_per_1000_queries}}（Amazon）或 ${{fact:amazon-bedrock-rerank.cohere_3_5_usd_per_1000_queries}}（Cohere）†",
+  "Amazon publish no benchmark for Rerank 1.0; Cohere Rerank 3.5 is Cohere’s model. A query counts up to {{fact:amazon-bedrock-rerank.docs_per_query}} documents; each further {{fact:amazon-bedrock-rerank.docs_per_query}} counts as another query":
+    "Amazon 没有公布 Rerank 1.0 的评测分数；Cohere Rerank 3.5 是 Cohere 的模型。一次查询最多算 {{fact:amazon-bedrock-rerank.docs_per_query}} 个文档，每多 {{fact:amazon-bedrock-rerank.docs_per_query}} 个算一次新查询",
+  "<a href=\"https://docs.pinecone.io/guides/search/rerank-results\" rel=\"noopener noreferrer\">Pinecone rerank</a> <span class=\"muted\">(hosted, in the vector DB)</span>":
+    "<a href=\"https://docs.pinecone.io/guides/search/rerank-results\" rel=\"noopener noreferrer\">Pinecone 重排序</a> <span class=\"muted\">（托管，内置于向量数据库）</span>",
+  "Rerank inside a Pinecone query, or as a separate call: Pinecone’s own pinecone-rerank-v0 ({{fact:pinecone-rerank.v0_max_tokens}} tokens per pair), bge-reranker-v2-m3 and cohere-rerank-4-fast. See the <a href=\"/guides/rerank-vector-database.html#pinecone\">vector database guide</a>":
+    "在 Pinecone 查询里直接重排，或单独调用：Pinecone 自家的 pinecone-rerank-v0（每对 {{fact:pinecone-rerank.v0_max_tokens}} token）、bge-reranker-v2-m3 和 cohere-rerank-4-fast。详见<a href=\"/guides/rerank-vector-database.html#pinecone\">向量数据库指南</a>",
+  "Free plan: bge-reranker-v2-m3 only, {{fact:pinecone-rerank.starter_bge_requests_per_month}} requests a month; paid plans ${{fact:pinecone-rerank.usd_per_1000_requests}} per 1,000 requests†":
+    "免费版只能用 bge-reranker-v2-m3，每月 {{fact:pinecone-rerank.starter_bge_requests_per_month}} 次请求；付费版每 1,000 次请求 ${{fact:pinecone-rerank.usd_per_1000_requests}}†",
+  "Pinecone publish no benchmark for pinecone-rerank-v0; the other two are BAAI’s and Cohere’s models — see their rows":
+    "Pinecone 没有公布 pinecone-rerank-v0 的评测分数；另外两个是 BAAI 和 Cohere 的模型，见它们各自那一行",
   "Alibaba publish its reranking results only as a chart on the model card and in the mGTE paper (EMNLP 2024). Third-party: Qwen’s run on the Qwen3-Reranker cards puts it at {{fact:gte-multilingual-reranker-base.qwen_mteb_r}} on MTEB-R, {{fact:gte-multilingual-reranker-base.qwen_cmteb_r}} on CMTEB-R and {{fact:gte-multilingual-reranker-base.qwen_mmteb_r}} on MMTEB-R. Alibaba Cloud's hosted rerankers are related models, not the same one, per the card":
     "阿里巴巴只在模型卡的图表和 mGTE 论文（EMNLP 2024）里公布了它的重排序结果。第三方数据：Qwen3-Reranker 模型卡里 Qwen 的测试中，它在 MTEB-R 上为 {{fact:gte-multilingual-reranker-base.qwen_mteb_r}}，CMTEB-R 上为 {{fact:gte-multilingual-reranker-base.qwen_cmteb_r}}，MMTEB-R 上为 {{fact:gte-multilingual-reranker-base.qwen_mmteb_r}}。据模型卡说明，阿里云托管的重排序模型是相关模型，但不是同一个",
   "Reranker API":

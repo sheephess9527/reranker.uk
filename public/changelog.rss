@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Thu, 15 Oct 2026 23:55:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 16 Oct 2026 02:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>16 Oct 2026 — Pinecone and Amazon Bedrock</title>
+      <link>https://reranker.uk/changelog#2026-10-16-hosted</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-16-hosted</guid>
+      <pubDate>Fri, 16 Oct 2026 02:00:00 GMT</pubDate>
+      <description>Amazon Bedrock and Pinecone join the models table, and the vector database guide gains a worked Pinecone example. All 13 new prices and limits are checked daily.</description>
+    </item>
     <item>
       <title>15 Oct 2026 (last) — A shorter changelog</title>
       <link>https://reranker.uk/changelog#2026-10-15-changelog</link>
