@@ -58,8 +58,23 @@
         "rerank-multilingual-v3.0",
         "rerank-v3.5",
         "rerank-v4.0-fast",
-        "rerank-v4.0-pro"
+        "rerank-v4.0-pro",
+        "rerank-v5",
+        "rerank-v5-fast",
+        "rerank-v5-pro",
+        "rerank-v5.0-fast",
+        "rerank-v5.0-pro"
       ]
+    },
+    {
+      "name": "Cohere pricing",
+      "url": "https://cohere.com/pricing",
+      "pattern": "Rerank \\d+(?:\\.\\d+)? (?:Pro|Fast)",
+      "known": [
+        "rerank 4 fast",
+        "rerank 4 pro"
+      ],
+      "why": "Rerank 5 launched on 21 Oct 2026 without a listed price; a new name here means Cohere has priced it, so add the price fact, the cost calculator option and the pricing row"
     },
     {
       "name": "Voyage rerankers",

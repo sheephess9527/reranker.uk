@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "Classic MiniLM-style rerankers cap at <strong>512 tokens</strong> for the pair. Modern hosted models are far roomier — <a href=\"/models/cohere-rerank.html\">Cohere Rerank 4 and 5</a> and <a href=\"/models/voyage-rerank.html\">Voyage rerank-3</a> all take 32,000 — so a model swap can fix this outright. If you are self-hosting a 512-token model, check where your passages actually land:":
+    "经典的 MiniLM 类重排序模型，一对查询和段落最多只能放 <strong>512 token</strong>。现代托管模型宽裕得多——<a href=\"/models/cohere-rerank.html\">Cohere Rerank 4 和 5</a> 以及 <a href=\"/models/voyage-rerank.html\">Voyage rerank-3</a> 都能接收 32,000 token——所以换个模型就能直接解决。如果你自托管的是 512 token 的模型，先看看你的段落实际落在哪儿：",
   "Troubleshooting · ~9 min read · <time datetime=\"2026-10-12\">Updated 12 Oct 2026</time>":
     "排障 · 约 9 分钟阅读 · <time datetime=\"2026-10-12\">更新于 2026 年 10 月 12 日</time>",
   "Classic MiniLM-style rerankers cap at <strong>512 tokens</strong> for the pair. Modern hosted models are far roomier — <a href=\"/models/cohere-rerank.html\">Cohere Rerank 4</a> and <a href=\"/models/voyage-rerank.html\">Voyage rerank-3</a> both take 32,000 — so a model swap can fix this outright. If you are self-hosting a 512-token model, check where your passages actually land:":

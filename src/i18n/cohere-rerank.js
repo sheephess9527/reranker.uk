@@ -1,4 +1,40 @@
 window.I18N_PAGE = { zh: {
+  "Cohere Rerank 5":
+    "Cohere Rerank 5",
+  "Hosted API · Cohere · <time datetime=\"2026-10-21\">Updated 21 Oct 2026</time>":
+    "托管 API · Cohere · <time datetime=\"2026-10-21\">更新于 2026 年 10 月 21 日</time>",
+  "Cohere Rerank was one of the first commercial reranking APIs and remains among the most widely deployed. The current generation, <strong>Rerank 5</strong>, was released on 21 October 2026 in two variants: <code>rerank-v5.0-pro</code> (about {{fact:cohere-rerank-5.pro_params}} parameters) for quality and <code>rerank-v5.0-fast</code> (about {{fact:cohere-rerank-5.fast_params}}) for throughput. Both take {{fact:cohere-rerank-5.context_tokens}} tokens and 100+ languages, return calibrated scores, and can point to the passages that matter inside each document. Rerank 4 remains available.":
+    "Cohere Rerank 是最早的商用重排序 API 之一，至今仍是部署最广的之一。当前一代 <strong>Rerank 5</strong> 于 2026 年 10 月 21 日发布，分两个版本：重质量的 <code>rerank-v5.0-pro</code>（约 {{fact:cohere-rerank-5.pro_params}} 参数）和重吞吐的 <code>rerank-v5.0-fast</code>（约 {{fact:cohere-rerank-5.fast_params}}）。两者都支持 {{fact:cohere-rerank-5.context_tokens}} token 和 100 多种语言，返回校准过的分数，还能指出每篇文档里真正相关的段落。Rerank 4 仍可继续使用。",
+  "What’s new in Rerank 5":
+    "Rerank 5 有什么新东西",
+  "Previous flagship (April 2026)":
+    "上一代旗舰（2026 年 4 月）",
+  "Current flagship, about {{fact:cohere-rerank-5.pro_params}} parameters; best for reasoning-heavy queries and long or domain-specific documents":
+    "当前旗舰，约 {{fact:cohere-rerank-5.pro_params}} 参数；最适合需要推理的查询和长篇或专业领域文档",
+  "About {{fact:cohere-rerank-5.fast_params}} parameters; for high-volume search and agent loops":
+    "约 {{fact:cohere-rerank-5.fast_params}} 参数；适合高并发搜索和智能体循环调用",
+  "For new work, start with <code>rerank-v5.0-pro</code>, or <code>rerank-v5.0-fast</code> when throughput or tail latency matters more; Cohere say Rerank 5 Fast outperforms Rerank 4 Pro. Upgrading is a change to the <code>model</code> parameter: a reranker reads raw text at query time, so nothing needs re-indexing. Cohere hadn’t listed a Rerank 5 price on their pricing page by 21 October, so budget against Rerank 4’s until they do.":
+    "新项目先用 <code>rerank-v5.0-pro</code>；更看重吞吐或尾延迟时用 <code>rerank-v5.0-fast</code>。Cohere 称 Rerank 5 Fast 胜过 Rerank 4 Pro。升级只需改 <code>model</code> 参数：重排序模型在查询时直接读原文，所以什么都不用重建索引。到 10 月 21 日为止，Cohere 的价格页还没有列出 Rerank 5 的价格，在那之前先按 Rerank 4 的价格做预算。",
+  "<strong>Calibrated scores.</strong> Each result’s score runs from 0 to 1 and is meant to mean the same thing across queries and domains, so one threshold can decide what reaches your LLM, or when to search again or answer “I don’t know”. Check any threshold tuned on Rerank 4 before reusing it.":
+    "<strong>校准过的分数。</strong>每个结果的分数在 0 到 1 之间，并且在不同查询、不同领域之间含义一致，所以可以用一个阈值决定哪些结果交给 LLM，或者什么时候重新检索、回答“不知道”。在 Rerank 4 上调好的阈值，复用前要重新检查。",
+  "<strong>Context Focus.</strong> Optional, and off by default. Add <code>relevant_spans</code> to the request and each result also returns the passages inside the document that answer the query, as scored character offsets, so you can send only those to your LLM or highlight them for users.":
+    "<strong>Context Focus。</strong>可选功能，默认关闭。在请求里加上 <code>relevant_spans</code>，每个结果还会返回文档内回答了查询的段落（带分数的字符偏移），这样可以只把这些段落交给 LLM，或者在界面上高亮给用户看。",
+  "<strong>Semi-structured data.</strong> Pass JSON, tables or records as YAML strings.":
+    "<strong>半结构化数据。</strong>JSON、表格或记录以 YAML 字符串的形式传入。",
+  "A higher <code>threshold</code> keeps less text, and <code>max_spans</code> caps the passages per document. Cohere note that Context Focus suits targeted questions; summarisation needs the whole document, and tables, forms and code split less cleanly than prose. It is available through Cohere’s own API.":
+    "<code>threshold</code> 越高，保留的文字越少；<code>max_spans</code> 限制每篇文档返回的段落数。Cohere 提醒，Context Focus 适合针对性的问题；总结类请求需要整篇文档，表格、表单和代码也不如普通文字切得干净。这个功能通过 Cohere 自己的 API 提供。",
+  "<strong>What it doesn’t do:</strong> Rerank 5 takes text only, and it doesn’t accept instructions that change how relevance is judged. For that, see <a href=\"/guides/instruction-reranker.html\">instruction-following rerankers</a> such as Voyage rerank-3 or Qwen3-Reranker.":
+    "<strong>它做不到的：</strong>Rerank 5 只接收文本，也不接受改变相关性判断方式的指令。需要指令的话，看 Voyage rerank-3 或 Qwen3-Reranker 这类<a href=\"/guides/instruction-reranker.html\">能跟随指令的重排序模型</a>。",
+  "<strong>Where it runs:</strong> the Cohere API, Cohere’s Model Vault, Microsoft Foundry and Amazon SageMaker, or a private deployment. Amazon Bedrock’s rerank API still lists only Rerank 3.5.":
+    "<strong>在哪里能用：</strong>Cohere API、Cohere 的 Model Vault、Microsoft Foundry 和 Amazon SageMaker，或者私有部署。Amazon Bedrock 的重排序 API 仍然只有 Rerank 3.5。",
+  "Not yet listed":
+    "尚未公布",
+  "No Rerank 5 price on cohere.com/pricing as of 21 October 2026":
+    "截至 2026 年 10 月 21 日，cohere.com/pricing 上还没有 Rerank 5 的价格",
+  "Rerank 5: calibrated scores and Context Focus":
+    "Rerank 5：校准过的分数和 Context Focus",
+  "No task instructions, even in Rerank 5":
+    "不支持任务指令，Rerank 5 也不支持",
   "<strong>Through a cloud instead:</strong> <a href=\"/models/#amazon-bedrock\">Amazon Bedrock</a> sells Cohere Rerank 3.5 at ${{fact:amazon-bedrock-rerank.cohere_3_5_usd_per_1000_queries}} per 1,000 queries of up to {{fact:amazon-bedrock-rerank.docs_per_query}} documents. <a href=\"/guides/rerank-vector-database.html#pinecone\">Pinecone</a> serves cohere-rerank-4-fast inside its vector database, and since 31 August 2026 has answered requests for cohere-rerank-3.5 with 4-fast.":
     "<strong>也可以通过云平台用：</strong><a href=\"/models/#amazon-bedrock\">Amazon Bedrock</a> 提供 Cohere Rerank 3.5，每 1,000 次查询 ${{fact:amazon-bedrock-rerank.cohere_3_5_usd_per_1000_queries}}，每次查询最多 {{fact:amazon-bedrock-rerank.docs_per_query}} 个文档。<a href=\"/guides/rerank-vector-database.html#pinecone\">Pinecone</a> 在自家向量数据库里提供 cohere-rerank-4-fast，并且从 2026 年 8 月 31 日起，对 cohere-rerank-3.5 的请求都改由 4-fast 响应。",
   "Cohere Rerank 4":
@@ -23,8 +59,8 @@ window.I18N_PAGE = { zh: {
     "32,000 token 上下文窗口",
   "Consistent quality across 100+ languages":
     "在 100+ 语言上质量稳定",
-  "_title": "Cohere Rerank 4：托管重排序 API 评测 | reranker.uk",
-  "_desc": "Cohere Rerank 4 评测：对比 rerank-v4.0-pro 与 rerank-v4.0-fast —— 32k 上下文、100+ 语言、按次检索计费，含 Python 与 Node SDK 用法及为 RAG 加重排序的优缺点。",
+  "_title": "Cohere Rerank 5：托管重排序 API 评测 | reranker.uk",
+  "_desc": "Cohere Rerank 5 评测（2026 年 10 月）：rerank-v5.0-pro 与 rerank-v5.0-fast、校准过的分数和 Context Focus、相比 Rerank 4 有什么变化、价格、Python 与 Node SDK 用法，以及为 RAG 选型的优缺点。",
 
   "<a href=\"/\">Home</a><span>/</span><a href=\"/models/\">Models</a><span>/</span>Cohere Rerank": "<a href=\"/\">首页</a><span>/</span><a href=\"/models/\">模型对比</a><span>/</span>Cohere Rerank",
   "Cohere Rerank": "Cohere Rerank",

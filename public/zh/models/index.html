@@ -213,6 +213,28 @@
               <td title="Jina 自己的测试：17 个 BEIR 数据集，出自 jina-reranker-v1 的模型卡">48.54*</td>
               <td class="demo-link-cell"></td>
             </tr>
+            <tr id="cohere-rerank-5" data-name="cohere-rerank-5-pro" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
+              <th scope="row"><a href="/zh/models/cohere-rerank">Cohere Rerank 5 Pro</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill">托管 API</span></td>
+              <td>2026 年 10 月 21 日新发布；约 2B 参数，32,768 token，校准过的分数，Context Focus</td>
+              <td>100+ 种语言</td>
+              <td>API</td>
+              <td>尚未公布</td>
+              <td class="muted" title="Cohere 没有公布 Rerank 5 的评测表">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr data-name="cohere-rerank-5-fast" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
+              <th scope="row"><a href="/zh/models/cohere-rerank">Cohere Rerank 5 Fast</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill">托管 API</span></td>
+              <td>约 500M 参数；Cohere 称它胜过 Rerank 4 Pro</td>
+              <td>100+ 种语言</td>
+              <td>API</td>
+              <td>尚未公布</td>
+              <td class="muted" title="Cohere 没有公布 Rerank 5 的评测表">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
             <tr data-name="cohere-rerank-4-pro" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
               <th scope="row"><a href="/zh/models/cohere-rerank">Cohere Rerank 4 Pro</a></th>
               <td><span class="pill">Cross-encoder</span></td>
@@ -465,9 +487,9 @@
           <p>智源开源权重。仍是 CPU 友好默认（v2-m3）。有 GPU 余量时与 Qwen3 对比。</p>
         </a>
         <a class="card" href="/zh/models/cohere-rerank">
-          <h3>Cohere Rerank 4</h3>
+          <h3>Cohere Rerank 5</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill">托管 API</span><span class="pill">多语言</span></div>
-          <p>Pro 与 Fast 两个版本，32k 上下文，100+ 种语言。按检索次数计费：一个 query 加最多 100 篇文档，每篇按每 500 token 计一次。</p>
+          <p>2026 年 10 月 21 日新发布，分 Pro 和 Fast 两档：32k 上下文、100 多种语言、校准过的分数，以及只返回回答了查询的段落的 Context Focus。Rerank 4 仍按次检索计费。</p>
         </a>
         <a class="card" href="/zh/models/jina-reranker">
           <h3>Jina Reranker v3.5</h3>
@@ -522,12 +544,12 @@
         </div>
         <div class="chooser-card">
           <div class="chooser-badge chooser-api">API</div>
-          <h3><a href="/zh/models/cohere-rerank">Cohere Rerank 4</a></h3>
+          <h3><a href="/zh/models/cohere-rerank">Cohere Rerank 5</a></h3>
           <p class="chooser-tagline">最省事的托管 API；在 Pro 与 Fast 间二选一</p>
           <ul class="feature-list">
             <li>Python、Node、Java、Go 官方 SDK —— 一行代码接入</li>
             <li>两个版本都是 32k 上下文、100+ 语言</li>
-            <li>Pro 重精度，Fast 重吞吐 —— 每次检索 $0.0025 对 $0.002</li>
+            <li>Pro 重精度，Fast 重吞吐；Rerank 4 每次检索 $0.0025 对 $0.002，Rerank 5 还没定价</li>
           </ul>
         </div>
         <div class="chooser-card">

@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 16 Oct 2026 08:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2026 02:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>21 Oct 2026 — Cohere Rerank 5</title>
+      <link>https://reranker.uk/changelog#2026-10-21-cohere</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-21-cohere</guid>
+      <pubDate>Wed, 21 Oct 2026 02:00:00 GMT</pubDate>
+      <description>Cohere released Rerank 5 (Pro and Fast) with calibrated scores and Context Focus. Prices aren't published yet; the site says so and watches Cohere's pricing page for them.</description>
+    </item>
     <item>
       <title>16 Oct 2026 (evening) — Pages for LightOn-rerank, GTE and Contextual AI</title>
       <link>https://reranker.uk/changelog#2026-10-16-pages</link>

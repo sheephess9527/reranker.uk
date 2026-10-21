@@ -117,7 +117,7 @@ print(f"recall@50 = {hits / len(labelled):.2f}")</code></pre>
 
       <h2 id="truncation">3. Passages are being silently truncated</h2>
       <p>Every cross-encoder has a maximum input length, and the query plus the passage share it. Exceed it and the tail of your passage is cut off — often the part that actually answers the question. Nothing errors; the score just comes back meaningless.</p>
-      <p>Classic MiniLM-style rerankers cap at <strong>512 tokens</strong> for the pair. Modern hosted models are far roomier — <a href="/models/cohere-rerank">Cohere Rerank 4</a> and <a href="/models/voyage-rerank">Voyage rerank-3</a> both take 32,000 — so a model swap can fix this outright. If you are self-hosting a 512-token model, check where your passages actually land:</p>
+      <p>Classic MiniLM-style rerankers cap at <strong>512 tokens</strong> for the pair. Modern hosted models are far roomier — <a href="/models/cohere-rerank">Cohere Rerank 4 and 5</a> and <a href="/models/voyage-rerank">Voyage rerank-3</a> all take 32,000 — so a model swap can fix this outright. If you are self-hosting a 512-token model, check where your passages actually land:</p>
       <pre tabindex="0"><code>lengths = [len(tok.encode(d)) for d in passages]
 over = sum(1 for n in lengths if n > 480)   # leave room for the query
 print(f"{over}/{len(lengths)} passages will be truncated")</code></pre>

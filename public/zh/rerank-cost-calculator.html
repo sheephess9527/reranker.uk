@@ -163,6 +163,7 @@
         <li><strong>Contextual AI Rerank API</strong> —— v2 每 100 万 token $0.05，v2-mini $0.02（<a href="https://contextual.ai/pricing" rel="noopener noreferrer">Contextual 价格</a>）。和 ZeroEntropy 一样按每个文档都算一遍查询来计；Contextual 没有说明他们怎么计。</li>
         <li><strong>Amazon Bedrock：Amazon Rerank 1.0</strong> —— 每 1,000 次查询 $1.00；一次查询最多 100 个文档，超出部分算作新的查询（<a href="https://aws.amazon.com/bedrock/pricing/" rel="noopener noreferrer">Bedrock 价格</a>）。Bedrock 上的 Cohere Rerank 3.5 没有计入：同一页面一边说每个文档最多 500 token，一边说超过 512 token 才拆分，两个数字对不上。</li>
         <li><strong>Pinecone</strong> —— 付费套餐里 pinecone-rerank-v0 和 bge-reranker-v2-m3 都是每 1,000 次请求 $2；一次请求最多 100 个文档，更多就要多发请求（<a href="https://www.pinecone.io/pricing/" rel="noopener noreferrer">Pinecone 价格</a>）。没有计入套餐自带的免费请求；cohere-rerank-4-fast 没有计入，因为 Pinecone 没说明它计费用的“rerank 单位”是什么。</li>
+        <li><strong>Cohere Rerank 5</strong>（2026 年 10 月 21 日发布）还没加入计算器：本站添加它时，Cohere 还没有公布价格。</li>
         <li>token 数为近似值 —— 各家分词方式不同，本页是用你填的平均值相乘，而非对真实文本做分词。</li>
         <li>价格于 2026 年 10 月核对，本站的来源检查每天都会和各厂商的价格页重新核对。做预算前请再确认一次。</li>
       </ul>

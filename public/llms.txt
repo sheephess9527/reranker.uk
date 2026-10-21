@@ -24,7 +24,7 @@ Benchmark figures carry their protocol: rows marked with an asterisk on /models/
 ## Model reviews
 
 - [bge-reranker: BAAI open-weight rerank models review](https://reranker.uk/models/bge-reranker): bge-reranker review: BAAI's open-weight cross-encoder rerankers. Covers bge-reranker-base, bge-reranker-large, and the multilingual bge-reranker-v2-m3.
-- [Cohere Rerank 4: hosted rerank API review](https://reranker.uk/models/cohere-rerank): Cohere Rerank 4 review: rerank-v4.0-pro and rerank-v4.0-fast compared — 32k context, 100+ languages, per-search pricing, Python and Node SDK usage, pros and cons for RAG.
+- [Cohere Rerank 5: hosted rerank API review](https://reranker.uk/models/cohere-rerank): Cohere Rerank 5 review (Oct 2026): rerank-v5.0-pro and rerank-v5.0-fast, calibrated scores and Context Focus, what changed from Rerank 4, pricing, Python and Node SDK usage, pros and cons for RAG.
 - [Contextual AI Rerank v2: instruction-following reranker](https://reranker.uk/models/contextual-rerank): Contextual AI Rerank v2 review (Oct 2026): an instruction-following reranker as non-commercial open weights (1B, 2B, 6B) or a paid hosted API, how to write instructions, API prices and limits, and…
 - [GTE rerankers: small Apache 2.0 cross-encoders from Alibaba](https://reranker.uk/models/gte-reranker): GTE reranker review (Oct 2026): gte-reranker-modernbert-base (149M, English) and gte-multilingual-reranker-base (306M, 70+ languages), both 8,192 tokens and Apache 2.0, their scores and whose they…
 - [Jina Reranker v3.5: listwise, licence and pricing review](https://reranker.uk/models/jina-reranker): Jina Reranker review (Oct 2026): jina-reranker-v3.5 is a 0.6B listwise model scoring 63.20 nDCG@10 on BEIR in Jina's own test.

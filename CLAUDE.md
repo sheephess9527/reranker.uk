@@ -132,6 +132,11 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 ### 14. NVIDIA 页（10 月 20 日 Nemotron-3.5-Rerank-8B 正式发布后，连同 VL-1B）
 
+## 发布监控处理记录
+
+- **2026-10-21 Cohere Rerank 5**：Cohere 当天发布（changelog「Announcing Cohere's Rerank 5 Models」）。Cohere 页改为 Rerank 5（新增「What's new in Rerank 5」：校准分数、Context Focus、只支持文本、不支持指令、可用渠道），模型表加 v5 Pro / Fast 两行，首页和表里的卡片更新，代码示例改用 `rerank-v5.0-pro`。3 个新 fact（`cohere-rerank-5`）。**价格还没公布**：页面写「尚未公布」，计算器暂不加；`data/release-watch.json` 新增「Cohere pricing」页面监控（`Rerank N Pro|Fast`，已知 Rerank 4），价格一出现就会报到 release-watch issue，届时补 price fact、计算器选项和价格表行。
+- **NVIDIA Nemotron-3.5-Rerank-8B**：模型卡写 10 月 20 日发布，但 10 月 21 日再看仍无任何分数，NIM 也未收录，继续等（issue #47 保持打开）。
+
 ### 明确不要做
 
 - 不要改 `data/models.json` 里的分数，除非 `npm run check:sources` 证明厂商页面上的数字变了。

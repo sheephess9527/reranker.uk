@@ -71,6 +71,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-21-cohere">2026 年 10 月 21 日 —— Cohere Rerank 5</h2>
+        <ul class="feature-list">
+          <li><strong>今天发布的 <a href="/zh/models/cohere-rerank">Cohere Rerank 5</a></strong> —— rerank-v5.0-pro（约 2B 参数）和 rerank-v5.0-fast（约 500M），都支持 32,768 token 和 100 多种语言。新功能：校准过的 0–1 分数，一个阈值就能适用于各种查询；以及 Context Focus，可以返回每篇文档里回答了查询的段落。仍然只支持文本，也仍然不支持任务指令</li>
+          <li><strong>还没有价格</strong> —— Cohere 的价格页还没列出 Rerank 5 的价格，所以模型对比表如实写明，成本计算器暂时仍用 Rerank 4。发布监控现在也会读 Cohere 的价格页，价格一出现就会提醒</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-16-pages">2026 年 10 月 16 日（晚）—— LightOn-rerank、GTE 和 Contextual AI 有了专页</h2>
         <ul class="feature-list">
           <li><strong>新增三个模型页面</strong> —— <a href="/zh/models/lighton-rerank">LightOn-rerank</a>（六个 Apache 2.0 模型，能处理文本和页面图片，分逐点和列表式，附 LightOn 在 ViDoRe V3 和 BEIR 上的测试）、<a href="/zh/models/gte-reranker">GTE 重排序模型</a>（阿里巴巴的 149M 英文和 306M 多语言交叉编码器，8,192 token，CPU 或浏览器都能跑）和 <a href="/zh/models/contextual-rerank">Contextual AI Rerank v2</a>（跟随指令；非商用权重或付费 API）</li>
@@ -139,15 +147,14 @@
           <li><strong>更正隐私说明</strong> —— 页面原来写着本站不运行任何统计，但 Cloudflare Web Analytics 一直在统计页面浏览量。现在页面如实写明了这一点，并列出 Cloudflare 文档中的说明：不使用 cookie 或本地存储、不做指纹识别、不收集个人数据、不记录查询参数，所以 Demo 分享链接里的文字不在其中</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>2026 年 10 月更早的更新（25 条）</summary><article class="changelog-entry">
         <h2 id="2026-10-15-csp">2026 年 10 月 15 日（深夜）—— 安全策略从只报告改为拦截</h2>
         <ul class="feature-list">
           <li><strong>强制执行 Content-Security-Policy</strong> —— 9 月 27 日加上的策略此前只报告它会拦截什么。此后每天用它加载全部 Demo 模型的检查一直没有问题，在中国大陆网络下打开 Demo 也没有报错、能正常加载，所以现在浏览器会直接拦截策略不允许的内容</li>
           <li><strong>每天检查线上所有页面</strong> —— 新增一项每日测试，从 reranker.uk 逐页加载并在出现任何策略违规时失败，用来发现网站前面被额外加入、又会被策略拦下的内容</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>2026 年 10 月更早的更新（24 条）</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-15-theme">2026 年 10 月 15 日（晚）—— 深色还是浅色，跟随系统设置</h2>
         <ul class="feature-list">
           <li><strong>首次访问跟随系统主题</strong> —— 以前网站对所有人都默认打开深色主题。现在在你使用主题切换按钮之前，网站会跟随操作系统的浅色或深色设置，系统切换时也会跟着变；一旦你用按钮选过，就以你的选择为准</li>
@@ -499,6 +506,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 
