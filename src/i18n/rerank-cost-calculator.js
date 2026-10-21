@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "<strong>Cohere Rerank 5</strong> (released 21 October 2026) isn’t in the calculator yet: Cohere hadn’t published its price when it was added to this site.":
+    "<strong>Cohere Rerank 5</strong>（2026 年 10 月 21 日发布）还没加入计算器：本站添加它时，Cohere 还没有公布价格。",
   "<strong>Contextual AI Rerank API</strong> — ${{fact:contextual-rerank-api.v2_usd_per_m}} per 1M tokens for v2 and ${{fact:contextual-rerank-api.v2_mini_usd_per_m}} for v2-mini (<a href=\"https://contextual.ai/pricing\" rel=\"noopener noreferrer\">Contextual pricing</a>). As with ZeroEntropy, the query is counted once per document; Contextual don’t say how they count it.":
     "<strong>Contextual AI Rerank API</strong> —— v2 每 100 万 token ${{fact:contextual-rerank-api.v2_usd_per_m}}，v2-mini ${{fact:contextual-rerank-api.v2_mini_usd_per_m}}（<a href=\"https://contextual.ai/pricing\" rel=\"noopener noreferrer\">Contextual 价格</a>）。和 ZeroEntropy 一样按每个文档都算一遍查询来计；Contextual 没有说明他们怎么计。",
   "<strong>ZeroEntropy zerank-2</strong> — ${{fact:zerank-2.api_usd_per_m}} per 1M tokens (<a href=\"https://docs.zeroentropy.dev/models\" rel=\"noopener noreferrer\">ZeroEntropy’s docs</a>). The docs don’t say how a rerank request’s tokens are counted; this page counts them like Voyage’s, the query once per document, which is also how ZeroEntropy counts a request against its rate limits.":

@@ -213,6 +213,28 @@
               <td title="Jina's own run: 17 BEIR datasets, from the jina-reranker-v1 model card">48.54*</td>
               <td class="demo-link-cell"></td>
             </tr>
+            <tr id="cohere-rerank-5" data-name="cohere-rerank-5-pro" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
+              <th scope="row"><a href="/models/cohere-rerank">Cohere Rerank 5 Pro</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill">Hosted API</span></td>
+              <td>New 21 Oct 2026; about 2B parameters, 32,768 tokens, calibrated scores, Context Focus</td>
+              <td>100+ langs</td>
+              <td>API</td>
+              <td>Not yet listed</td>
+              <td class="muted" title="Cohere publish no benchmark table for Rerank 5">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr data-name="cohere-rerank-5-fast" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
+              <th scope="row"><a href="/models/cohere-rerank">Cohere Rerank 5 Fast</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill">Hosted API</span></td>
+              <td>About 500M parameters; Cohere say it beats Rerank 4 Pro</td>
+              <td>100+ langs</td>
+              <td>API</td>
+              <td>Not yet listed</td>
+              <td class="muted" title="Cohere publish no benchmark table for Rerank 5">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
             <tr data-name="cohere-rerank-4-pro" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
               <th scope="row"><a href="/models/cohere-rerank">Cohere Rerank 4 Pro</a></th>
               <td><span class="pill">Cross-encoder</span></td>
@@ -465,9 +487,9 @@
           <p>Open-weight rerankers from BAAI. Still the best CPU-friendly default (v2-m3). Pair with Qwen3 when you have GPU headroom.</p>
         </a>
         <a class="card" href="/models/cohere-rerank">
-          <h3>Cohere Rerank 4</h3>
+          <h3>Cohere Rerank 5</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill">Hosted API</span><span class="pill">Multilingual</span></div>
-          <p>Pro and Fast variants, 32k context, 100+ languages. Billed per search: one query plus up to 100 documents, each counted once per 500 tokens.</p>
+          <p>New on 21 October 2026, in Pro and Fast variants: 32k context, 100+ languages, calibrated scores, and Context Focus to return only the passages that answer the query. Rerank 4 is still billed per search.</p>
         </a>
         <a class="card" href="/models/jina-reranker">
           <h3>Jina Reranker v3.5</h3>
@@ -522,12 +544,12 @@
         </div>
         <div class="chooser-card">
           <div class="chooser-badge chooser-api">API</div>
-          <h3><a href="/models/cohere-rerank">Cohere Rerank 4</a></h3>
+          <h3><a href="/models/cohere-rerank">Cohere Rerank 5</a></h3>
           <p class="chooser-tagline">Easiest hosted API; pick Pro or Fast</p>
           <ul class="feature-list">
             <li>Official SDK for Python, Node, Java, Go — one-liner integration</li>
             <li>32k context and 100+ languages on both variants</li>
-            <li>Pro for precision, Fast for throughput — $0.0025 vs $0.002 a search</li>
+            <li>Pro for precision, Fast for throughput; Rerank 4 costs $0.0025 vs $0.002 a search, Rerank 5 isn’t priced yet</li>
           </ul>
         </div>
         <div class="chooser-card">

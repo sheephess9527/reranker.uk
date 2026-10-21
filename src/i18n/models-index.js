@@ -4,6 +4,24 @@ window.I18N_PAGE = {
     "models.tableCaption": "重排序模型对比：架构、类型、适用场景、语言、延迟、价格与 BEIR 分数",
   },
   zh: {
+  "<a href=\"/models/cohere-rerank.html\">Cohere Rerank 5 Pro</a>":
+    "<a href=\"/models/cohere-rerank.html\">Cohere Rerank 5 Pro</a>",
+  "New 21 Oct 2026; about {{fact:cohere-rerank-5.pro_params}} parameters, {{fact:cohere-rerank-5.context_tokens}} tokens, calibrated scores, Context Focus":
+    "2026 年 10 月 21 日新发布；约 {{fact:cohere-rerank-5.pro_params}} 参数，{{fact:cohere-rerank-5.context_tokens}} token，校准过的分数，Context Focus",
+  "Not yet listed":
+    "尚未公布",
+  "<a href=\"/models/cohere-rerank.html\">Cohere Rerank 5 Fast</a>":
+    "<a href=\"/models/cohere-rerank.html\">Cohere Rerank 5 Fast</a>",
+  "About {{fact:cohere-rerank-5.fast_params}} parameters; Cohere say it beats Rerank 4 Pro":
+    "约 {{fact:cohere-rerank-5.fast_params}} 参数；Cohere 称它胜过 Rerank 4 Pro",
+  "Cohere Rerank 5":
+    "Cohere Rerank 5",
+  "New on 21 October 2026, in Pro and Fast variants: 32k context, 100+ languages, calibrated scores, and Context Focus to return only the passages that answer the query. Rerank 4 is still billed per search.":
+    "2026 年 10 月 21 日新发布，分 Pro 和 Fast 两档：32k 上下文、100 多种语言、校准过的分数，以及只返回回答了查询的段落的 Context Focus。Rerank 4 仍按次检索计费。",
+  "Pro for precision, Fast for throughput; Rerank 4 costs ${{fact:cohere-rerank-4-pro.price_per_search}} vs ${{fact:cohere-rerank-4-fast.price_per_search}} a search, Rerank 5 isn’t priced yet":
+    "Pro 重精度，Fast 重吞吐；Rerank 4 每次检索 ${{fact:cohere-rerank-4-pro.price_per_search}} 对 ${{fact:cohere-rerank-4-fast.price_per_search}}，Rerank 5 还没定价",
+  "Cohere publish no benchmark table for Rerank 5":
+    "Cohere 没有公布 Rerank 5 的评测表",
   "<a href=\"https://docs.contextual.ai/api-reference/rerank/rerank\" rel=\"noopener noreferrer\">Contextual AI Rerank API</a>":
     "<a href=\"https://docs.contextual.ai/api-reference/rerank/rerank\" rel=\"noopener noreferrer\">Contextual AI Rerank API</a>",
   "The commercial route to the v2 family: ctxl-rerank-v2-instruct-multilingual and its -mini, plus the older ctxl-rerank-v1-instruct; up to {{fact:contextual-rerank-api.max_tokens_per_doc}} tokens per query, instruction and document":

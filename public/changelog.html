@@ -71,6 +71,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-21-cohere">21 Oct 2026 — Cohere Rerank 5</h2>
+        <ul class="feature-list">
+          <li><strong><a href="/models/cohere-rerank">Cohere Rerank 5</a>, released today</strong> — rerank-v5.0-pro (about 2B parameters) and rerank-v5.0-fast (about 500M), both with 32,768 tokens and 100+ languages. New: calibrated 0–1 scores, so one threshold works across queries, and Context Focus, which returns the passages inside each document that answer the query. Still text only, still no task instructions</li>
+          <li><strong>Not yet priced</strong> — Cohere’s pricing page lists no Rerank 5 price yet, so the models table says so and the cost calculator keeps Rerank 4 for now. The release watch now also reads Cohere’s pricing page and will flag the price when it appears</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-16-pages">16 Oct 2026 (evening) — Pages for LightOn-rerank, GTE and Contextual AI</h2>
         <ul class="feature-list">
           <li><strong>Three more model pages</strong> — <a href="/models/lighton-rerank">LightOn-rerank</a> (six Apache 2.0 models for text and page images, pointwise or listwise, with LightOn’s ViDoRe V3 and BEIR runs), <a href="/models/gte-reranker">GTE rerankers</a> (Alibaba’s 149M English and 306M multilingual cross-encoders, 8,192 tokens, CPU or browser) and <a href="/models/contextual-rerank">Contextual AI Rerank v2</a> (instruction-following; non-commercial weights or a paid API)</li>
@@ -139,15 +147,14 @@
           <li><strong>Privacy page corrected</strong> — it said the site ran no analytics, but Cloudflare Web Analytics has been counting page views. The page now says so, and what Cloudflare documents about it: no cookies or local storage, no fingerprinting, no personal data, and no query strings, so demo share-link text isn’t included</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>Earlier in October 2026 (25 entries)</summary><article class="changelog-entry">
         <h2 id="2026-10-15-csp">15 Oct 2026 (night) — The security policy now blocks, not just reports</h2>
         <ul class="feature-list">
           <li><strong>Content-Security-Policy enforced</strong> — the policy added on 27 Sep only reported what it would have blocked. The daily runs that load every demo model through it have stayed clean since, and the demo loads without errors from a network in mainland China, so browsers now block anything the policy doesn’t allow</li>
           <li><strong>Every live page checked daily</strong> — a new daily test loads each page from reranker.uk and fails on any policy violation, to catch something added in front of the site that the policy would block</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>Earlier in October 2026 (24 entries)</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-15-theme">15 Oct 2026 (evening) — Light or dark, as your system is set</h2>
         <ul class="feature-list">
           <li><strong>First visit follows your system theme</strong> — the site used to open in the dark theme for everyone. Until you use the theme switch, it now follows your operating system’s light or dark setting, and changes with it; once you’ve picked one with the switch, your choice stays</li>
@@ -499,6 +506,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 

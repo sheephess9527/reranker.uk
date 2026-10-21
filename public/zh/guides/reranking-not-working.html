@@ -117,7 +117,7 @@ print(f"recall@50 = {hits / len(labelled):.2f}")</code></pre>
 
       <h2 id="truncation">3. 段落被静默截断了</h2>
       <p>每个 cross-encoder 都有输入长度上限，而且查询和段落共用这个额度。超了，段落尾部就会被切掉 —— 而那往往正是真正回答问题的部分。不会报任何错，只是分数变得没有意义。</p>
-      <p>经典的 MiniLM 系 reranker 对「查询+段落」整体上限是 <strong>512 token</strong>。现在的托管模型宽裕得多 —— <a href="/zh/models/cohere-rerank">Cohere Rerank 4</a> 和 <a href="/zh/models/voyage-rerank">Voyage rerank-3</a> 都是 32,000 —— 所以换个模型就能直接解决。如果你自托管的是 512 token 的模型，先看看你的段落实际落在哪个区间：</p>
+      <p>经典的 MiniLM 类重排序模型，一对查询和段落最多只能放 <strong>512 token</strong>。现代托管模型宽裕得多——<a href="/zh/models/cohere-rerank">Cohere Rerank 4 和 5</a> 以及 <a href="/zh/models/voyage-rerank">Voyage rerank-3</a> 都能接收 32,000 token——所以换个模型就能直接解决。如果你自托管的是 512 token 的模型，先看看你的段落实际落在哪儿：</p>
       <pre tabindex="0"><code>lengths = [len(tok.encode(d)) for d in passages]
 over = sum(1 for n in lengths if n > 480)   # leave room for the query
 print(f"{over}/{len(lengths)} passages will be truncated")</code></pre>

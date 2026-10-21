@@ -1744,5 +1744,31 @@
       "protocol_note": "LightOn's run: ViDoRe V3 overall NDCG@10, reranking the top 100 from ColQwen2.5-v0.2, every model re-evaluated under the same protocol",
       "verified_on": "2026-10-16"
     }
+  },
+  "cohere-rerank-5": {
+    "context_tokens": {
+      "value": "32,768",
+      "source_url": "https://docs.cohere.com/docs/rerank",
+      "check_url": "https://docs.cohere.com/docs/rerank",
+      "check_pattern": "Context length\\s*:\\s*{value} tokens",
+      "check_hint": "Context length",
+      "verified_on": "2026-10-21"
+    },
+    "pro_params": {
+      "value": "2B",
+      "source_url": "https://docs.cohere.com/docs/rerank",
+      "check_url": "https://docs.cohere.com/docs/rerank",
+      "check_pattern": "Number of parameters\\s*:\\s*~{value} \\(Pro\\)",
+      "check_hint": "Number of parameters",
+      "verified_on": "2026-10-21"
+    },
+    "fast_params": {
+      "value": "500M",
+      "source_url": "https://docs.cohere.com/docs/rerank",
+      "check_url": "https://docs.cohere.com/docs/rerank",
+      "check_pattern": "Number of parameters\\s*:\\s*~2B \\(Pro\\), ~{value} \\(Fast\\)",
+      "check_hint": "Number of parameters",
+      "verified_on": "2026-10-21"
+    }
   }
 }

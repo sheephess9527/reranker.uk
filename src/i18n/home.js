@@ -17,6 +17,10 @@ window.I18N_PAGE = {
     "pipeline.caption": "返回 50–100 个候选的是检索器。把这份名单砍到前 5 个、再送给 LLM 的，是重排序器。",
   },
   zh: {
+  "Cohere Rerank 5":
+    "Cohere Rerank 5",
+  "Mature hosted API, new generation on 21 October 2026: Pro and Fast, 32k context, 100+ languages, calibrated scores and Context Focus.":
+    "成熟的托管 API，2026 年 10 月 21 日发布新一代：Pro 和 Fast 两档，32k 上下文、100 多种语言、校准过的分数和 Context Focus。",
   "ZeroEntropy’s 4B reranker, as open weights and as an API. Check the licence first: the model card and the docs disagree.":
     "ZeroEntropy 的 4B 重排序模型，既有开源权重也有 API。先确认许可证：模型卡和官方文档的说法不一致。",
   "Reranks page images, screenshots and video, not just text. 2B and 8B, Apache 2.0.":

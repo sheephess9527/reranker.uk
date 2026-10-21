@@ -1,4 +1,10 @@
 window.I18N_PAGE = { zh: {
+  "21 Oct 2026 — Cohere Rerank 5":
+    "2026 年 10 月 21 日 —— Cohere Rerank 5",
+  "<strong><a href=\"/models/cohere-rerank.html\">Cohere Rerank 5</a>, released today</strong> — rerank-v5.0-pro (about 2B parameters) and rerank-v5.0-fast (about 500M), both with 32,768 tokens and 100+ languages. New: calibrated 0–1 scores, so one threshold works across queries, and Context Focus, which returns the passages inside each document that answer the query. Still text only, still no task instructions":
+    "<strong>今天发布的 <a href=\"/models/cohere-rerank.html\">Cohere Rerank 5</a></strong> —— rerank-v5.0-pro（约 2B 参数）和 rerank-v5.0-fast（约 500M），都支持 32,768 token 和 100 多种语言。新功能：校准过的 0–1 分数，一个阈值就能适用于各种查询；以及 Context Focus，可以返回每篇文档里回答了查询的段落。仍然只支持文本，也仍然不支持任务指令",
+  "<strong>Not yet priced</strong> — Cohere’s pricing page lists no Rerank 5 price yet, so the models table says so and the cost calculator keeps Rerank 4 for now. The release watch now also reads Cohere’s pricing page and will flag the price when it appears":
+    "<strong>还没有价格</strong> —— Cohere 的价格页还没列出 Rerank 5 的价格，所以模型对比表如实写明，成本计算器暂时仍用 Rerank 4。发布监控现在也会读 Cohere 的价格页，价格一出现就会提醒",
   "16 Oct 2026 (evening) — Pages for LightOn-rerank, GTE and Contextual AI":
     "2026 年 10 月 16 日（晚）—— LightOn-rerank、GTE 和 Contextual AI 有了专页",
   "<strong>Three more model pages</strong> — <a href=\"/models/lighton-rerank.html\">LightOn-rerank</a> (six Apache 2.0 models for text and page images, pointwise or listwise, with LightOn’s ViDoRe V3 and BEIR runs), <a href=\"/models/gte-reranker.html\">GTE rerankers</a> (Alibaba’s 149M English and 306M multilingual cross-encoders, 8,192 tokens, CPU or browser) and <a href=\"/models/contextual-rerank.html\">Contextual AI Rerank v2</a> (instruction-following; non-commercial weights or a paid API)":
