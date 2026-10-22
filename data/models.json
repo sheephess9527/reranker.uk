@@ -548,7 +548,9 @@
       "check_pattern": "Rerank 4 Pro[\\s\\S]{0,3000}?inputPrice\\W{1,6}2\\.5,[\\s\\S]{0,80}?1K searches",
       "check_hint": "1K searches",
       "verified_on": "2026-10-01",
-      "note": "cohere.com/pricing renders its price cards client-side; the figures are in the page's embedded JSON as a price per 1K searches ($2.50 per 1K = $0.0025 per search)"
+      "note": "cohere.com/pricing renders its price cards client-side; the figures are in the page's embedded JSON as a price per 1K searches ($2.50 per 1K = $0.0025 per search)",
+      "check": "manual",
+      "check_note": "Last listed price. cohere.com/pricing showed it from at least 1 Oct 2026 (this check matched it daily until 21 Oct); on 21 Oct 2026, when Cohere priced Rerank 5 per token, the page dropped the Rerank 4 price cards. Rerank 4 is still served (docs.cohere.com/docs/rerank) and not on Cohere's deprecations page, and the pricing FAQ still defines the search unit. The site labels this price 'last listed'. Re-check if Cohere publishes a Rerank 4 price again or deprecates it."
     }
   },
   "cohere-rerank-4-fast": {
@@ -559,7 +561,9 @@
       "check_pattern": "Rerank 4 Fast[\\s\\S]{0,3000}?inputPrice\\W{1,6}2,[\\s\\S]{0,80}?1K searches",
       "check_hint": "1K searches",
       "verified_on": "2026-10-01",
-      "note": "cohere.com/pricing renders its price cards client-side; the figures are in the page's embedded JSON as a price per 1K searches ($2 per 1K = $0.002 per search)"
+      "note": "cohere.com/pricing renders its price cards client-side; the figures are in the page's embedded JSON as a price per 1K searches ($2 per 1K = $0.002 per search)",
+      "check": "manual",
+      "check_note": "Last listed price. cohere.com/pricing showed it from at least 1 Oct 2026 (this check matched it daily until 21 Oct); on 21 Oct 2026, when Cohere priced Rerank 5 per token, the page dropped the Rerank 4 price cards. Rerank 4 is still served (docs.cohere.com/docs/rerank) and not on Cohere's deprecations page, and the pricing FAQ still defines the search unit. The site labels this price 'last listed'. Re-check if Cohere publishes a Rerank 4 price again or deprecates it."
     }
   },
   "cohere-rerank": {
@@ -1769,6 +1773,39 @@
       "check_pattern": "Number of parameters\\s*:\\s*~2B \\(Pro\\), ~{value} \\(Fast\\)",
       "check_hint": "Number of parameters",
       "verified_on": "2026-10-21"
+    },
+    "pro_usd_per_m": {
+      "value": "0.05",
+      "source_url": "https://cohere.com/pricing",
+      "check_raw": true,
+      "check_pattern": "Rerank 5 Pro\\W{1,12}per\\W{1,12}1M tokens[\\s\\S]{0,4000}?inputPrice\\W{1,6}{value}\\}",
+      "check_hint": "1M tokens",
+      "verified_on": "2026-10-22",
+      "note": "cohere.com/pricing renders its price cards client-side; the figure is in the page's embedded JSON as inputPrice per \"1M tokens\". Cohere's Rerank 5 launch post (cohere.com/blog/rerank-5) says the same: \"$0.05 per 1M tokens for Pro and $0.02 for Fast\"."
+    },
+    "fast_usd_per_m": {
+      "value": "0.02",
+      "source_url": "https://cohere.com/pricing",
+      "check_raw": true,
+      "check_pattern": "Rerank 5 Fast\\W{1,12}per\\W{1,12}1M tokens[\\s\\S]{0,4000}?inputPrice\\W{1,6}{value}\\}",
+      "check_hint": "1M tokens",
+      "verified_on": "2026-10-22",
+      "note": "cohere.com/pricing renders its price cards client-side; the figure is in the page's embedded JSON as inputPrice per \"1M tokens\". Cohere's Rerank 5 launch post (cohere.com/blog/rerank-5) says the same: \"$0.05 per 1M tokens for Pro and $0.02 for Fast\"."
+    },
+    "vault_usd_per_hour": {
+      "value": "4.00",
+      "source_url": "https://cohere.com/pricing",
+      "check_pattern": "Rerank 5 Pro Medium \\${value} \\$2,500",
+      "check_hint": "Model Vault",
+      "verified_on": "2026-10-22",
+      "note": "Model Vault table: Rerank 5 Fast and Pro, Medium tier, $4.00 an hour or $2,500 a month per instance"
+    },
+    "vault_usd_per_month": {
+      "value": "2,500",
+      "source_url": "https://cohere.com/pricing",
+      "check_pattern": "Rerank 5 Pro Medium \\$4\\.00 \\${value}",
+      "check_hint": "Model Vault",
+      "verified_on": "2026-10-22"
     }
   }
 }

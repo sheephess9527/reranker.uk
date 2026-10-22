@@ -71,6 +71,16 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-22-cohere-pricing">2026 年 10 月 22 日 —— Cohere Rerank 5 的价格</h2>
+        <ul class="feature-list">
+          <li><strong>Rerank 5 按 token 计价</strong> —— Cohere 昨夜公布了价格：<a href="/zh/models/cohere-rerank#pricing">Pro</a> 每 100 万 token $0.05，Fast $0.02，和 Voyage rerank-3、rerank-3-lite 的标价相同。模型对比表和 Cohere 页面已经写上，Model Vault 的 Rerank 5 实例现在是每小时 $4</li>
+          <li><strong>加入<a href="/zh/rerank-cost-calculator">成本计算器</a></strong> —— Rerank 5 Pro 和 Fast 已加入，按 token 计算，算法同 Voyage，因为 Cohere 没说明查询怎么计入</li>
+          <li><strong>Rerank 4 价格改标「最后公布价」</strong> —— 同一次更新把 Rerank 4 从 Cohere 价格页上撤了下来，不过模型仍在提供服务。它按次检索的价格继续留在站内，标明是 Cohere 最后公布的价格</li>
+          <li><strong>sentence-transformers 6.2.0</strong> —— 自建快速上手、GTE 和 mxbai 的示例以及 ColBERT 代码片段，在新版本上不用改就能跑通</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-21-cohere">2026 年 10 月 21 日 —— Cohere Rerank 5</h2>
         <ul class="feature-list">
           <li><strong>今天发布的 <a href="/zh/models/cohere-rerank">Cohere Rerank 5</a></strong> —— rerank-v5.0-pro（约 2B 参数）和 rerank-v5.0-fast（约 500M），都支持 32,768 token 和 100 多种语言。新功能：校准过的 0–1 分数，一个阈值就能适用于各种查询；以及 Context Focus，可以返回每篇文档里回答了查询的段落。仍然只支持文本，也仍然不支持任务指令</li>
@@ -140,14 +150,13 @@
           <li><strong>样式和脚本可以缓存了</strong> —— 以前每打开一个页面，浏览器都要逐个文件去问 Cloudflare 样式表和脚本有没有变，每个文件一次往返，在中国大陆访问时尤其慢。现在每个文件的地址都带上了内容指纹，浏览器可以保留一年，只有文件真正改动时才重新下载</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>2026 年 10 月更早的更新（26 条）</summary><article class="changelog-entry">
         <h2 id="2026-10-15-privacy">2026 年 10 月 15 日（凌晨）—— 隐私说明写明了所用的访问统计</h2>
         <ul class="feature-list">
           <li><strong>更正隐私说明</strong> —— 页面原来写着本站不运行任何统计，但 Cloudflare Web Analytics 一直在统计页面浏览量。现在页面如实写明了这一点，并列出 Cloudflare 文档中的说明：不使用 cookie 或本地存储、不做指纹识别、不收集个人数据、不记录查询参数，所以 Demo 分享链接里的文字不在其中</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>2026 年 10 月更早的更新（25 条）</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-15-csp">2026 年 10 月 15 日（深夜）—— 安全策略从只报告改为拦截</h2>
         <ul class="feature-list">
           <li><strong>强制执行 Content-Security-Policy</strong> —— 9 月 27 日加上的策略此前只报告它会拦截什么。此后每天用它加载全部 Demo 模型的检查一直没有问题，在中国大陆网络下打开 Demo 也没有报错、能正常加载，所以现在浏览器会直接拦截策略不允许的内容</li>
@@ -506,6 +515,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 

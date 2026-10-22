@@ -29,7 +29,7 @@
             <tr>
               <td>RAG pipeline</td>
               <td>Noisy vector recall, need top-5 precision</td>
-              <td><a href="/models/bge-reranker.html">bge-reranker-v2-m3</a> or <a href="/models/qwen-reranker.html">Qwen3-Reranker-4B</a> (self-host), <a href="/models/cohere-rerank.html">Cohere Rerank 4</a> or <a href="/models/voyage-rerank.html">Voyage rerank-3</a> (API)</td>
+              <td><a href="/models/bge-reranker.html">bge-reranker-v2-m3</a> or <a href="/models/qwen-reranker.html">Qwen3-Reranker-4B</a> (self-host), <a href="/models/cohere-rerank.html">Cohere Rerank 5</a> or <a href="/models/voyage-rerank.html">Voyage rerank-3</a> (API)</td>
               <td>CPU or GPU / hosted API</td>
             </tr>
             <tr>
@@ -41,7 +41,7 @@
             <tr>
               <td>Customer support</td>
               <td>Many similar FAQ lines, fast response</td>
-              <td><a href="/models/jina-reranker.html">jina-reranker-v1-tiny-en</a> or ms-marco MiniLM (English), <a href="/models/cohere-rerank.html">Cohere Rerank 4 Fast</a></td>
+              <td><a href="/models/jina-reranker.html">jina-reranker-v1-tiny-en</a> or ms-marco MiniLM (English), <a href="/models/cohere-rerank.html">Cohere Rerank 5 Fast</a></td>
               <td>CPU, browser or API</td>
             </tr>
             <tr>
@@ -68,7 +68,7 @@
       <p class="muted" style="font-size:.85rem">Each pick links to its page or row, where the vendor’s own figures are shown with how they were measured. None of them replaces a test on your own queries — see <a href="/guides/evaluate-reranker.html">evaluating a reranker</a>.</p>
 
       <h2 id="rag">RAG &amp; knowledge bases</h2>
-      <p>Retrieve 50–100 chunks, rerank to 5–10, then prompt. Without a GPU, <strong>bge-reranker-v2-m3</strong> is the usual self-hosted default; with one, <strong>Qwen3-Reranker-4B</strong>, which in Qwen’s own tests beats the 8B on English. As a hosted API, <strong>Cohere Rerank 4</strong> bills per search and <strong>Voyage rerank-3</strong> per token — the <a href="/rerank-cost-calculator.html">cost calculator</a> shows which is cheaper for your volume. See <a href="/guides/rerank-rag.html">rerank for RAG</a> and <a href="/guides/hybrid-retrieval-rerank.html">hybrid retrieval</a> when lexical matches matter.</p>
+      <p>Retrieve 50–100 chunks, rerank to 5–10, then prompt. Without a GPU, <strong>bge-reranker-v2-m3</strong> is the usual self-hosted default; with one, <strong>Qwen3-Reranker-4B</strong>, which in Qwen’s own tests beats the 8B on English. As a hosted API, <strong>Cohere Rerank 5</strong> and <strong>Voyage rerank-3</strong> both bill per token, at the same list price — the <a href="/rerank-cost-calculator.html">cost calculator</a> compares them with the other APIs at your volume. See <a href="/guides/rerank-rag.html">rerank for RAG</a> and <a href="/guides/hybrid-retrieval-rerank.html">hybrid retrieval</a> when lexical matches matter.</p>
       <blockquote>Rule of thumb: if bi-encoder recall is already good, a mid-size reranker is enough. If recall is messy, fix retrieval width first.</blockquote>
 
       <h2 id="multilingual">Chinese and multilingual</h2>

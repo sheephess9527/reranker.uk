@@ -67,7 +67,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>Cohere Rerank</div>
       <h1>Cohere Rerank 5</h1>
-      <p class="meta">托管 API · Cohere · <time datetime="2026-10-21">更新于 2026 年 10 月 21 日</time></p>
+      <p class="meta">托管 API · Cohere · <time datetime="2026-10-22">更新于 2026 年 10 月 22 日</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">托管 API</span><span class="pill">多语言</span><span class="pill info">免费试用 key</span></div>
       <p class="lead">Cohere Rerank 是最早的商用重排序 API 之一，至今仍是部署最广的之一。当前一代 <strong>Rerank 5</strong> 于 2026 年 10 月 21 日发布，分两个版本：重质量的 <code>rerank-v5.0-pro</code>（约 2B 参数）和重吞吐的 <code>rerank-v5.0-fast</code>（约 500M）。两者都支持 32,768 token 和 100 多种语言，返回校准过的分数，还能指出每篇文档里真正相关的段落。Rerank 4 仍可继续使用。</p>
 
@@ -97,7 +97,7 @@
           </tbody>
         </table>
       </div>
-      <p>新项目先用 <code>rerank-v5.0-pro</code>；更看重吞吐或尾延迟时用 <code>rerank-v5.0-fast</code>。Cohere 称 Rerank 5 Fast 胜过 Rerank 4 Pro。升级只需改 <code>model</code> 参数：重排序模型在查询时直接读原文，所以什么都不用重建索引。到 10 月 21 日为止，Cohere 的价格页还没有列出 Rerank 5 的价格，在那之前先按 Rerank 4 的价格做预算。</p>
+      <p>新项目先用 <code>rerank-v5.0-pro</code>；更看重吞吐或尾延迟时用 <code>rerank-v5.0-fast</code>。Cohere 称 Rerank 5 Fast 胜过 Rerank 4 Pro。升级只需改 <code>model</code> 参数：重排序模型在查询时直接读原文，所以什么都不用重建索引。Rerank 5 按 token 计费，每 100 万 token $0.05（Pro）或 $0.02（Fast），不再像 Rerank 4 那样按次检索计费：见<a href="#pricing">价格</a>。</p>
 
       <h2 id="rerank-5">Rerank 5 有什么新东西</h2>
       <ul>
@@ -117,16 +117,17 @@
             <tr><th>档位</th><th>价格</th><th>限制</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>rerank-v5.0-pro</code> / <code>-fast</code></td><td>尚未公布</td><td>截至 2026 年 10 月 21 日，cohere.com/pricing 上还没有 Rerank 5 的价格</td></tr>
+            <tr><td><code>rerank-v5.0-pro</code></td><td>每 100 万 token $0.05</td><td>按 token 计费，不按次检索；Cohere 没说明查询怎么计入</td></tr>
+            <tr><td><code>rerank-v5.0-fast</code></td><td>每 100 万 token $0.02</td><td>计费单位相同</td></tr>
             <tr><td>试用 key</td><td>$0</td><td>每月 1,000 次 API 调用；Rerank 每分钟限 10 次请求；不得用于生产或商业用途</td></tr>
-            <tr><td><code>rerank-v4.0-pro</code></td><td>$0.0025 / search</td><td>一次检索 = 1 个 query + 最多 100 篇文档；文档（连同 query）超过 500 token 时，每 500 token 一块，每块算一篇</td></tr>
-            <tr><td><code>rerank-v4.0-fast</code></td><td>$0.002 / search</td><td>计费单位相同</td></tr>
-            <tr><td>Model Vault（专属实例）</td><td>每小时 $5 起</td><td>专属实例：Rerank 4 Fast 或 Pro（Medium）每小时 $5，Pro（Large）每小时 $10</td></tr>
+            <tr><td><code>rerank-v4.0-pro</code></td><td>每次检索 $0.0025（最后公布价）</td><td>一次检索 = 1 个 query + 最多 100 篇文档；文档（连同 query）超过 500 token 时，每 500 token 一块，每块算一篇</td></tr>
+            <tr><td><code>rerank-v4.0-fast</code></td><td>每次检索 $0.002（最后公布价）</td><td>计费单位相同</td></tr>
+            <tr><td>Model Vault（专属实例）</td><td>每小时 $4.00 起</td><td>专属实例：Rerank 5 Fast 或 Pro（Medium）每小时 $4.00，或每月 $2,500</td></tr>
             <tr><td>私有部署</td><td>定制</td><td>本地部署或隔离的 VPC</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="muted" style="font-size:.85rem">价格取自 <a href="https://cohere.com/pricing" rel="noopener noreferrer">cohere.com/pricing</a>（每千次检索 $2.50 和 $2）和 Cohere 的<a href="https://docs.cohere.com/docs/rate-limits" rel="noopener noreferrer">速率限制文档</a>，2026 年 10 月 1 日核对，本站来源检查每天复核。500 token 规则影响不小：它对真实负载意味着什么，见<a href="/zh/rerank-cost-calculator">成本计算器</a>。</p>
+      <p class="muted" style="font-size:.85rem">价格取自 <a href="https://cohere.com/pricing" rel="noopener noreferrer">cohere.com/pricing</a> 和 Cohere 的<a href="https://docs.cohere.com/docs/rate-limits" rel="noopener noreferrer">速率限制文档</a>，本站来源检查每天复核；Cohere 的 <a href="https://cohere.com/blog/rerank-5" rel="noopener noreferrer">Rerank 5 发布文章</a>给出的按 token 价格相同。2026 年 10 月 21 日 Cohere 公布 Rerank 5 价格时，价格页不再列出 Rerank 4，但 Rerank 4 仍在提供服务。上表的 Rerank 4 价格（每千次检索 $2.50 和 $2）是它最后一次公布的价格，10 月 1 日至 21 日每天核对。500 token 规则适用于这种按次检索的价格：它对真实负载意味着什么，见<a href="/zh/rerank-cost-calculator">成本计算器</a>。</p>
 
       <p><strong>也可以通过云平台用：</strong><a href="/zh/models/#amazon-bedrock">Amazon Bedrock</a> 提供 Cohere Rerank 3.5，每 1,000 次查询 $2.00，每次查询最多 100 个文档。<a href="/zh/guides/rerank-vector-database#pinecone">Pinecone</a> 在自家向量数据库里提供 cohere-rerank-4-fast，并且从 2026 年 8 月 31 日起，对 cohere-rerank-3.5 的请求都改由 4-fast 响应。</p>
 
@@ -188,16 +189,16 @@ result.results.forEach((r) => console.log(r.relevanceScore, documents[r.index]))
             <li>在 100+ 语言上质量稳定</li>
             <li>SDK 支持：Python、Node、Java、Go、curl</li>
             <li>免费试用 key 适合原型开发（每月 1,000 次调用）</li>
-            <li>32,768-token context window</li>
+            <li>32,768 token 上下文窗口</li>
             <li>Rerank 5：校准过的分数和 Context Focus</li>
-            <li>段落较短时，按次计费很容易预估</li>
+            <li>Rerank 5 按 token 计费，段落越短越便宜</li>
           </ul>
         </div>
         <div class="card">
           <h3 style="color:var(--danger);margin-top:0">缺点</h3>
           <ul style="padding-left:1.2rem;color:var(--text-soft)">
             <li>权重闭源 —— 你依赖于 Cohere</li>
-            <li>超过 500 token 的段落会按多篇文档计费</li>
+            <li>Rerank 4 按次检索计费时，超过 500 token 的段落按多篇文档计</li>
             <li>想自建部署需要签私有部署合同</li>
             <li>不支持任务指令，Rerank 5 也不支持</li>
             <li>每次调用都要走一趟网络 —— 请从你自己所在的区域实测</li>

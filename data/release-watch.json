@@ -72,9 +72,11 @@
       "pattern": "Rerank \\d+(?:\\.\\d+)? (?:Pro|Fast)",
       "known": [
         "rerank 4 fast",
-        "rerank 4 pro"
+        "rerank 4 pro",
+        "rerank 5 fast",
+        "rerank 5 pro"
       ],
-      "why": "Rerank 5 launched on 21 Oct 2026 without a listed price; a new name here means Cohere has priced it, so add the price fact, the cost calculator option and the pricing row"
+      "why": "a new model name here means Cohere has priced a new reranker: add the price facts, the cost calculator option and the pricing row (Rerank 5 was priced on 21 Oct 2026, per token; the same update removed the Rerank 4 price cards)"
     },
     {
       "name": "Voyage rerankers",
@@ -246,7 +248,7 @@
     },
     {
       "repo": "UKPLab/sentence-transformers",
-      "known": "v6.1.0",
+      "known": "v6.2.0",
       "why": "the self-host guide's quick start and the cross-encoder examples use it"
     },
     {

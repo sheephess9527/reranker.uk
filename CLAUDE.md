@@ -135,6 +135,7 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 ## 发布监控处理记录
 
 - **2026-10-21 Cohere Rerank 5**：Cohere 当天发布（changelog「Announcing Cohere's Rerank 5 Models」）。Cohere 页改为 Rerank 5（新增「What's new in Rerank 5」：校准分数、Context Focus、只支持文本、不支持指令、可用渠道），模型表加 v5 Pro / Fast 两行，首页和表里的卡片更新，代码示例改用 `rerank-v5.0-pro`。3 个新 fact（`cohere-rerank-5`）。**价格还没公布**：页面写「尚未公布」，计算器暂不加；`data/release-watch.json` 新增「Cohere pricing」页面监控（`Rerank N Pro|Fast`，已知 Rerank 4），价格一出现就会报到 release-watch issue，届时补 price fact、计算器选项和价格表行。
+- **2026-10-22 Cohere Rerank 5 定价 + Rerank 4 下架价格**：cohere.com/pricing（10 月 21 日 15:03 UTC 更新）给 Rerank 5 标了按 token 的价格：Pro $0.05、Fast $0.02 每百万 token（发布博客同样写明）；同一次更新撤掉了 Rerank 4 的价格卡片（模型仍在 docs 里、未进 deprecations，价格 FAQ 的 search unit 定义还在）。Wayback 快照里没有价格数据，找不到存档出处。处理：新增 `cohere-rerank-5.pro_usd_per_m` / `fast_usd_per_m`（check_raw，内嵌 JSON 里的 inputPrice）和 Model Vault 的 `vault_usd_per_hour` / `vault_usd_per_month`（Rerank 5 Medium $4.00 / $2,500）；`cohere-rerank-4-*.price_per_search` 改为 `check: "manual"` 并写明原因，页面上一律标「last listed / 最后公布价」。计算器加 Rerank 5 Pro/Fast（按 token，计法同 Voyage，注明是假设），Rerank 4 两项保留并改名带「(last listed)」。顺带：sentence-transformers 6.2.0 在 runner 上实跑了自建快速上手（bge-reranker-v2-m3）、GTE、mxbai 和 ColBERT 片段，全部通过，late-interaction 指南改为「在 6.2.0 上跑过」，watch 的 known 改为 v6.2.0。
 - **NVIDIA Nemotron-3.5-Rerank-8B**：模型卡写 10 月 20 日发布，但 10 月 21 日再看仍无任何分数，NIM 也未收录，继续等（issue #47 保持打开）。
 
 ### 明确不要做

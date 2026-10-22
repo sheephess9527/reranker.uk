@@ -19,8 +19,10 @@ test("every vendor is priced, in the right table", async ({ page }) => {
   expect(usd.map((r) => r[0].replace(/\s*cheapest$/, "")).sort()).toEqual(
     [
       "Alibaba Cloud qwen3-rerank (international)",
-      "Cohere Rerank 4 Fast",
-      "Cohere Rerank 4 Pro",
+      "Cohere Rerank 4 Fast (last listed)",
+      "Cohere Rerank 4 Pro (last listed)",
+      "Cohere Rerank 5 Fast",
+      "Cohere Rerank 5 Pro",
       "Google Vertex AI ranking",
       "Voyage rerank-3",
       "Voyage rerank-3-lite",
@@ -62,6 +64,21 @@ test("Bedrock and Pinecone count one query or request per started 100 documents"
   r = await rows(page, "calc-rows");
   expect(r.find((x) => x[0].startsWith("Amazon Bedrock")).slice(2)).toEqual(["3,000 queries", "$3.00"]);
   expect(r.find((x) => x[0].startsWith("Pinecone")).slice(2)).toEqual(["3,000 requests", "$6.00"]);
+});
+
+test("Cohere Rerank 5 bills tokens like Voyage, at the same list prices", async ({ page }) => {
+  await page.goto("/rerank-cost-calculator");
+  await page.fill("#calc-queries", "1000");
+  await page.fill("#calc-topk", "100");
+  await page.fill("#calc-passage", "485");
+  await page.fill("#calc-query-tokens", "15");
+  // 1,000 × 100 × 500 = 50M tokens: $2.50 at $0.05 per 1M, $1.00 at $0.02
+  const r = await rows(page, "calc-rows");
+  const cost = (name) => r.find((x) => x[0].replace(/\s*cheapest$/, "") === name).slice(2);
+  expect(cost("Cohere Rerank 5 Pro")).toEqual(["50.0M tokens", "$2.50"]);
+  expect(cost("Cohere Rerank 5 Fast")).toEqual(["50.0M tokens", "$1.00"]);
+  expect(cost("Voyage rerank-3")).toEqual(cost("Cohere Rerank 5 Pro"));
+  expect(cost("Voyage rerank-3-lite")).toEqual(cost("Cohere Rerank 5 Fast"));
 });
 
 test("long passages warn about qwen3-rerank's 4,000-token limit", async ({ page }) => {
