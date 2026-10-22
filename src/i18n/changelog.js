@@ -1,4 +1,14 @@
 window.I18N_PAGE = { zh: {
+  "22 Oct 2026 — Cohere Rerank 5 prices":
+    "2026 年 10 月 22 日 —— Cohere Rerank 5 的价格",
+  "<strong>Rerank 5 is priced per token</strong> — Cohere listed it overnight: $0.05 per million tokens for <a href=\"/models/cohere-rerank.html#pricing\">Pro</a> and $0.02 for Fast, the same list prices as Voyage rerank-3 and rerank-3-lite. The models table and the Cohere page show them, and Model Vault is now $4 an hour for a Rerank 5 instance":
+    "<strong>Rerank 5 按 token 计价</strong> —— Cohere 昨夜公布了价格：<a href=\"/models/cohere-rerank.html#pricing\">Pro</a> 每 100 万 token $0.05，Fast $0.02，和 Voyage rerank-3、rerank-3-lite 的标价相同。模型对比表和 Cohere 页面已经写上，Model Vault 的 Rerank 5 实例现在是每小时 $4",
+  "<strong>In the <a href=\"/rerank-cost-calculator.html\">cost calculator</a></strong> — Rerank 5 Pro and Fast are in, counted per token like Voyage, since Cohere don’t say how the query is counted":
+    "<strong>加入<a href=\"/rerank-cost-calculator.html\">成本计算器</a></strong> —— Rerank 5 Pro 和 Fast 已加入，按 token 计算，算法同 Voyage，因为 Cohere 没说明查询怎么计入",
+  "<strong>Rerank 4 prices are now “last listed”</strong> — the same update took Rerank 4 off Cohere’s pricing page, though the model is still served. Its per-search prices stay on the site, labelled as the last ones Cohere listed":
+    "<strong>Rerank 4 价格改标「最后公布价」</strong> —— 同一次更新把 Rerank 4 从 Cohere 价格页上撤了下来，不过模型仍在提供服务。它按次检索的价格继续留在站内，标明是 Cohere 最后公布的价格",
+  "<strong>sentence-transformers 6.2.0</strong> — the self-hosting quick start, the GTE and mxbai examples and the ColBERT snippet all run unchanged on the new release":
+    "<strong>sentence-transformers 6.2.0</strong> —— 自建快速上手、GTE 和 mxbai 的示例以及 ColBERT 代码片段，在新版本上不用改就能跑通",
   "21 Oct 2026 — Cohere Rerank 5":
     "2026 年 10 月 21 日 —— Cohere Rerank 5",
   "<strong><a href=\"/models/cohere-rerank.html\">Cohere Rerank 5</a>, released today</strong> — rerank-v5.0-pro (about 2B parameters) and rerank-v5.0-fast (about 500M), both with 32,768 tokens and 100+ languages. New: calibrated 0–1 scores, so one threshold works across queries, and Context Focus, which returns the passages inside each document that answer the query. Still text only, still no task instructions":

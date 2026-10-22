@@ -96,7 +96,7 @@ window.I18N_PAGE = {
   "Reranking in mainland China": "在国内做重排序",
   "Alibaba Cloud, SiliconFlow, or your own GPU — prices in yuan, and how to get the weights.": "阿里云百炼、硅基流动，或自己的 GPU —— 人民币价格，以及怎么拿到权重。",
   "What will it cost?": "一个月要花多少？",
-  "Cohere per search, Voyage per token, plus Alibaba Cloud and SiliconFlow in yuan.": "Cohere 按次检索、Voyage 按 token，外加阿里云和硅基流动的人民币价格。",
+  "Per token, per search or per query, plus Alibaba Cloud and SiliconFlow in yuan.": "按 token、按次检索或按查询计费，外加阿里云和硅基流动的人民币价格。",
   "Reranking didn't help": "重排序没起作用",
   "Seven usual causes — recall, pool size, truncation — and how to tell which one you have.": "七个常见原因 —— 召回不够、候选池太小、被截断 —— 以及怎么判断是哪一个。",
   "Decision": "选型",

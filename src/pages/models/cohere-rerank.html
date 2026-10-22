@@ -2,7 +2,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Cohere Rerank</div>
       <h1>Cohere Rerank 5</h1>
-      <p class="meta">Hosted API · Cohere · <time datetime="2026-10-21">Updated 21 Oct 2026</time></p>
+      <p class="meta">Hosted API · Cohere · <time datetime="2026-10-22">Updated 22 Oct 2026</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">Hosted API</span><span class="pill">Multilingual</span><span class="pill info">Free trial key</span></div>
       <p class="lead">Cohere Rerank was one of the first commercial reranking APIs and remains among the most widely deployed. The current generation, <strong>Rerank 5</strong>, was released on 21 October 2026 in two variants: <code>rerank-v5.0-pro</code> (about {{fact:cohere-rerank-5.pro_params}} parameters) for quality and <code>rerank-v5.0-fast</code> (about {{fact:cohere-rerank-5.fast_params}}) for throughput. Both take {{fact:cohere-rerank-5.context_tokens}} tokens and 100+ languages, return calibrated scores, and can point to the passages that matter inside each document. Rerank 4 remains available.</p>
 
@@ -32,7 +32,7 @@
           </tbody>
         </table>
       </div>
-      <p>For new work, start with <code>rerank-v5.0-pro</code>, or <code>rerank-v5.0-fast</code> when throughput or tail latency matters more; Cohere say Rerank 5 Fast outperforms Rerank 4 Pro. Upgrading is a change to the <code>model</code> parameter: a reranker reads raw text at query time, so nothing needs re-indexing. Cohere hadn’t listed a Rerank 5 price on their pricing page by 21 October, so budget against Rerank 4’s until they do.</p>
+      <p>For new work, start with <code>rerank-v5.0-pro</code>, or <code>rerank-v5.0-fast</code> when throughput or tail latency matters more; Cohere say Rerank 5 Fast outperforms Rerank 4 Pro. Upgrading is a change to the <code>model</code> parameter: a reranker reads raw text at query time, so nothing needs re-indexing. Rerank 5 is billed per token, at ${{fact:cohere-rerank-5.pro_usd_per_m}} (Pro) or ${{fact:cohere-rerank-5.fast_usd_per_m}} (Fast) per million tokens, rather than per search like Rerank 4: see <a href="#pricing">pricing</a>.</p>
 
       <h2 id="rerank-5">What’s new in Rerank 5</h2>
       <ul>
@@ -52,16 +52,17 @@
             <tr><th>Tier</th><th>Price</th><th>Limits</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>rerank-v5.0-pro</code> / <code>-fast</code></td><td>Not yet listed</td><td>No Rerank 5 price on cohere.com/pricing as of 21 October 2026</td></tr>
+            <tr><td><code>rerank-v5.0-pro</code></td><td>${{fact:cohere-rerank-5.pro_usd_per_m}} / 1M tokens</td><td>Billed per token, not per search; Cohere don’t say how the query is counted</td></tr>
+            <tr><td><code>rerank-v5.0-fast</code></td><td>${{fact:cohere-rerank-5.fast_usd_per_m}} / 1M tokens</td><td>Same billing unit</td></tr>
             <tr><td>Trial key</td><td>$0</td><td>{{fact:cohere-rerank.trial_calls_per_month}} API calls a month; Rerank limited to 10 requests a minute; not for production or commercial use</td></tr>
-            <tr><td><code>rerank-v4.0-pro</code></td><td>${{fact:cohere-rerank-4-pro.price_per_search}} / search</td><td>A search = 1 query + up to {{fact:cohere-rerank.docs_per_search}} documents; a document over {{fact:cohere-rerank.billing_chunk_tokens}} tokens (query included) counts as one per {{fact:cohere-rerank.billing_chunk_tokens}}-token chunk</td></tr>
-            <tr><td><code>rerank-v4.0-fast</code></td><td>${{fact:cohere-rerank-4-fast.price_per_search}} / search</td><td>Same billing unit</td></tr>
-            <tr><td>Model Vault</td><td>From $5 / hour</td><td>Dedicated instances: Rerank 4 Fast or Pro (Medium) $5 an hour, Pro (Large) $10 an hour</td></tr>
+            <tr><td><code>rerank-v4.0-pro</code></td><td>${{fact:cohere-rerank-4-pro.price_per_search}} / search (last listed)</td><td>A search = 1 query + up to {{fact:cohere-rerank.docs_per_search}} documents; a document over {{fact:cohere-rerank.billing_chunk_tokens}} tokens (query included) counts as one per {{fact:cohere-rerank.billing_chunk_tokens}}-token chunk</td></tr>
+            <tr><td><code>rerank-v4.0-fast</code></td><td>${{fact:cohere-rerank-4-fast.price_per_search}} / search (last listed)</td><td>Same billing unit</td></tr>
+            <tr><td>Model Vault</td><td>From ${{fact:cohere-rerank-5.vault_usd_per_hour}} / hour</td><td>Dedicated instances: Rerank 5 Fast or Pro (Medium) ${{fact:cohere-rerank-5.vault_usd_per_hour}} an hour, or ${{fact:cohere-rerank-5.vault_usd_per_month}} a month</td></tr>
             <tr><td>Private deployment</td><td>Custom</td><td>On-premises or isolated VPC</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="muted" style="font-size:.85rem">Prices from <a href="https://cohere.com/pricing" rel="noopener noreferrer">cohere.com/pricing</a> ($2.50 and $2 per 1,000 searches) and Cohere’s <a href="https://docs.cohere.com/docs/rate-limits" rel="noopener noreferrer">rate-limit docs</a>, verified 1 October 2026 and re-checked daily by this site’s source check. The {{fact:cohere-rerank.billing_chunk_tokens}}-token rule matters: see the <a href="/rerank-cost-calculator.html">cost calculator</a> for what it does to a real workload.</p>
+      <p class="muted" style="font-size:.85rem">Prices from <a href="https://cohere.com/pricing" rel="noopener noreferrer">cohere.com/pricing</a> and Cohere’s <a href="https://docs.cohere.com/docs/rate-limits" rel="noopener noreferrer">rate-limit docs</a>, re-checked daily by this site’s source check; Cohere’s <a href="https://cohere.com/blog/rerank-5" rel="noopener noreferrer">Rerank 5 launch post</a> gives the same per-token prices. When Cohere priced Rerank 5 on 21 October 2026, its pricing page stopped listing Rerank 4, which is still served. The Rerank 4 prices above ($2.50 and $2 per 1,000 searches) are the last it listed, verified daily from 1 to 21 October. The {{fact:cohere-rerank.billing_chunk_tokens}}-token rule applies to those per-search prices: see the <a href="/rerank-cost-calculator.html">cost calculator</a> for what it does to a real workload.</p>
 
       <p><strong>Through a cloud instead:</strong> <a href="/models/#amazon-bedrock">Amazon Bedrock</a> sells Cohere Rerank 3.5 at ${{fact:amazon-bedrock-rerank.cohere_3_5_usd_per_1000_queries}} per 1,000 queries of up to {{fact:amazon-bedrock-rerank.docs_per_query}} documents. <a href="/guides/rerank-vector-database.html#pinecone">Pinecone</a> serves cohere-rerank-4-fast inside its vector database, and since 31 August 2026 has answered requests for cohere-rerank-3.5 with 4-fast.</p>
 
@@ -125,14 +126,14 @@ result.results.forEach((r) => console.log(r.relevanceScore, documents[r.index]))
             <li>Free trial key for prototyping ({{fact:cohere-rerank.trial_calls_per_month}} calls a month)</li>
             <li>{{fact:cohere-rerank-5.context_tokens}}-token context window</li>
             <li>Rerank 5: calibrated scores and Context Focus</li>
-            <li>Per-search pricing is easy to forecast for short passages</li>
+            <li>Rerank 5 bills per token, so short passages cost less</li>
           </ul>
         </div>
         <div class="card">
           <h3 style="color:var(--danger);margin-top:0">Cons</h3>
           <ul style="padding-left:1.2rem;color:var(--text-soft)">
             <li>Closed weights — you depend on Cohere</li>
-            <li>Passages over {{fact:cohere-rerank.billing_chunk_tokens}} tokens are billed as several documents</li>
+            <li>Rerank 4’s per-search billing counts passages over {{fact:cohere-rerank.billing_chunk_tokens}} tokens as several documents</li>
             <li>Self-hosting means a private-deployment contract</li>
             <li>No task instructions, even in Rerank 5</li>
             <li>Every call is a network round trip — measure from your own region</li>

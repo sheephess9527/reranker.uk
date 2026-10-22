@@ -71,6 +71,16 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-22-cohere-pricing">22 Oct 2026 — Cohere Rerank 5 prices</h2>
+        <ul class="feature-list">
+          <li><strong>Rerank 5 is priced per token</strong> — Cohere listed it overnight: $0.05 per million tokens for <a href="/models/cohere-rerank#pricing">Pro</a> and $0.02 for Fast, the same list prices as Voyage rerank-3 and rerank-3-lite. The models table and the Cohere page show them, and Model Vault is now $4 an hour for a Rerank 5 instance</li>
+          <li><strong>In the <a href="/rerank-cost-calculator">cost calculator</a></strong> — Rerank 5 Pro and Fast are in, counted per token like Voyage, since Cohere don’t say how the query is counted</li>
+          <li><strong>Rerank 4 prices are now “last listed”</strong> — the same update took Rerank 4 off Cohere’s pricing page, though the model is still served. Its per-search prices stay on the site, labelled as the last ones Cohere listed</li>
+          <li><strong>sentence-transformers 6.2.0</strong> — the self-hosting quick start, the GTE and mxbai examples and the ColBERT snippet all run unchanged on the new release</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-21-cohere">21 Oct 2026 — Cohere Rerank 5</h2>
         <ul class="feature-list">
           <li><strong><a href="/models/cohere-rerank">Cohere Rerank 5</a>, released today</strong> — rerank-v5.0-pro (about 2B parameters) and rerank-v5.0-fast (about 500M), both with 32,768 tokens and 100+ languages. New: calibrated 0–1 scores, so one threshold works across queries, and Context Focus, which returns the passages inside each document that answer the query. Still text only, still no task instructions</li>
@@ -140,14 +150,13 @@
           <li><strong>Styles and scripts are cached</strong> — every page view used to ask Cloudflare whether the stylesheet and scripts had changed, one round trip per file, which is slow from mainland China. Each file’s address now carries a fingerprint of its contents, so the browser keeps it for a year and fetches a new copy only when it really changes</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>Earlier in October 2026 (26 entries)</summary><article class="changelog-entry">
         <h2 id="2026-10-15-privacy">15 Oct 2026 (late night) — The privacy page names the analytics it runs</h2>
         <ul class="feature-list">
           <li><strong>Privacy page corrected</strong> — it said the site ran no analytics, but Cloudflare Web Analytics has been counting page views. The page now says so, and what Cloudflare documents about it: no cookies or local storage, no fingerprinting, no personal data, and no query strings, so demo share-link text isn’t included</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>Earlier in October 2026 (25 entries)</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-15-csp">15 Oct 2026 (night) — The security policy now blocks, not just reports</h2>
         <ul class="feature-list">
           <li><strong>Content-Security-Policy enforced</strong> — the policy added on 27 Sep only reported what it would have blocked. The daily runs that load every demo model through it have stayed clean since, and the demo loads without errors from a network in mainland China, so browsers now block anything the policy doesn’t allow</li>
@@ -506,6 +515,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 

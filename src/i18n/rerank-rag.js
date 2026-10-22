@@ -1,6 +1,6 @@
 window.I18N_PAGE = { zh: {
-  "<strong>Want a hosted API billed per search:</strong> <a href=\"/models/cohere-rerank.html\">Cohere Rerank</a> — 100+ languages, {{fact:cohere-rerank.context_tokens}}-token context.":
-    "<strong>想要按次检索计费的托管 API：</strong><a href=\"/models/cohere-rerank.html\">Cohere Rerank</a> —— 100 多种语言，{{fact:cohere-rerank.context_tokens}} token 上下文。",
+  "<strong>Want a hosted API with calibrated scores:</strong> <a href=\"/models/cohere-rerank.html\">Cohere Rerank 5</a> — 100+ languages, {{fact:cohere-rerank-5.context_tokens}}-token context.":
+    "<strong>想要分数经过校准的托管 API：</strong><a href=\"/models/cohere-rerank.html\">Cohere Rerank 5</a> —— 100 多种语言，{{fact:cohere-rerank-5.context_tokens}} token 上下文。",
   "Practical · ~10 min read · <time datetime=\"2026-10-12\">Updated 12 Oct 2026</time>":
     "实践 · 约 10 分钟阅读 · <time datetime=\"2026-10-12\">更新于 2026 年 10 月 12 日</time>",
   "All three accept hosted rerankers too (Cohere, Jina, Voyage) via their respective integration packages — swap the component, keep the pipeline. We ran these three snippets in October 2026 on LangChain 1.4, LlamaIndex core 0.14 and Haystack 3.3. Two things moved since the versions most tutorials show: LangChain 1.0 took the retriever classes out of <code>langchain</code> into <code>langchain-classic</code>, and Haystack 3 has no cross-encoder ranker in its core package — it is in the <code>sentence-transformers-haystack</code> integration. <code>langchain-community</code> still works but now warns that it is being retired in favour of standalone integration packages.":

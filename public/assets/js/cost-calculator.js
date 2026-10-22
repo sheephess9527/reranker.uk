@@ -4,14 +4,15 @@
  * the page, the table and this script can't disagree and the daily source
  * check covers all three. See the assumptions section on the page.
  *
- * Cohere bills per search: one query plus up to 100 documents, where any
- * document longer than 500 tokens (query included) counts as one document
+ * Cohere Rerank 4 bills per search: one query plus up to 100 documents, where
+ * any document longer than 500 tokens (query included) counts as one document
  * per 500-token chunk — that's Cohere's own pricing FAQ, and until Oct 2026
- * this script ignored it. Voyage bills per token, with the query counted
- * once per document reranked. Google bills per query of up to 100
+ * this script ignored it. Its prices are the last Cohere listed (the pricing
+ * page dropped them on 21 Oct 2026). Voyage bills per token, with the query
+ * counted once per document reranked. Google bills per query of up to 100
  * documents, and so do Amazon Bedrock's Amazon Rerank (per query) and Pinecone
- * (per request). Alibaba Cloud, SiliconFlow, ZeroEntropy and Contextual bill input
- * tokens, counted here like Voyage's. Each is modelled as the vendor states it rather than
+ * (per request). Cohere Rerank 5, Alibaba Cloud, SiliconFlow, ZeroEntropy and
+ * Contextual bill input tokens, counted here like Voyage's. Each is modelled as the vendor states it rather than
  * flattened into one "cost per 1k docs" figure. Yuan-priced options get
  * their own table: converting currencies would add a rate nobody checks.
  */
@@ -29,9 +30,31 @@
 
   const OPTIONS = [
     {
+      id: "cohere5-pro",
+      nameEn: "Cohere Rerank 5 Pro",
+      nameZh: "Cohere Rerank 5 Pro",
+      unitEn: "per token",
+      unitZh: "按 token",
+      href: "/models/cohere-rerank",
+      price: fact("cohere5ProPerM"),
+      cost: (w, o) => (tokens(w) / 1e6) * o.price,
+      volume: (w) => fmtTokens(tokens(w)),
+    },
+    {
+      id: "cohere5-fast",
+      nameEn: "Cohere Rerank 5 Fast",
+      nameZh: "Cohere Rerank 5 Fast",
+      unitEn: "per token",
+      unitZh: "按 token",
+      href: "/models/cohere-rerank",
+      price: fact("cohere5FastPerM"),
+      cost: (w, o) => (tokens(w) / 1e6) * o.price,
+      volume: (w) => fmtTokens(tokens(w)),
+    },
+    {
       id: "cohere-pro",
-      nameEn: "Cohere Rerank 4 Pro",
-      nameZh: "Cohere Rerank 4 Pro",
+      nameEn: "Cohere Rerank 4 Pro (last listed)",
+      nameZh: "Cohere Rerank 4 Pro（最后公布价）",
       unitEn: "per search",
       unitZh: "按次检索",
       href: "/models/cohere-rerank",
@@ -41,8 +64,8 @@
     },
     {
       id: "cohere-fast",
-      nameEn: "Cohere Rerank 4 Fast",
-      nameZh: "Cohere Rerank 4 Fast",
+      nameEn: "Cohere Rerank 4 Fast (last listed)",
+      nameZh: "Cohere Rerank 4 Fast（最后公布价）",
       unitEn: "per search",
       unitZh: "按次检索",
       href: "/models/cohere-rerank",
@@ -187,7 +210,7 @@
     },
   ].filter((o) => isFinite(o.price));
 
-  /** Documents Cohere bills per candidate: one per started 500-token chunk. */
+  /** Documents Cohere Rerank 4 bills per candidate: one per started 500-token chunk. */
   function cohereDocsPerCandidate(w) {
     return Math.max(1, Math.ceil((w.queryTokens + w.passageTokens) / CHUNK_TOKENS));
   }
@@ -329,16 +352,16 @@
       const docs = cohereDocsPerCandidate(w);
       const used = Math.round((perCand / (docs * CHUNK_TOKENS)) * 100);
       els.billing.textContent = L(
-        `Each candidate is ${fmtInt(perCand)} tokens with the query. Cohere bills that as ${fmtInt(docs)} document${
+        `Each candidate is ${fmtInt(perCand)} tokens with the query. Cohere Rerank 4 bills that as ${fmtInt(docs)} document${
           docs === 1 ? "" : "s"
         } (one per ${fmtInt(CHUNK_TOKENS)} tokens started), so you pay for ${fmtInt(
           docs * CHUNK_TOKENS
-        )} tokens' worth and use ${used}% of it. Voyage bills the ${fmtInt(perCand)} you send.`,
-        `每个候选连同 query 共 ${fmtInt(perCand)} token。Cohere 按每满 ${fmtInt(
+        )} tokens' worth and use ${used}% of it. Per-token vendors, Cohere Rerank 5 included, bill the ${fmtInt(perCand)} you send.`,
+        `每个候选连同 query 共 ${fmtInt(perCand)} token。Cohere Rerank 4 按每满 ${fmtInt(
           CHUNK_TOKENS
         )} token（不足也算）计一篇，所以算作 ${fmtInt(docs)} 篇文档，相当于为 ${fmtInt(
           docs * CHUNK_TOKENS
-        )} token 付费，实际只用了其中 ${used}%。Voyage 只按你发送的 ${fmtInt(perCand)} token 计费。`
+        )} token 付费，实际只用了其中 ${used}%。按 token 计费的厂商（包括 Cohere Rerank 5）只按你发送的 ${fmtInt(perCand)} token 计费。`
       );
     }
   }

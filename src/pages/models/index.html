@@ -155,7 +155,7 @@
               <td>New 21 Oct 2026; about {{fact:cohere-rerank-5.pro_params}} parameters, {{fact:cohere-rerank-5.context_tokens}} tokens, calibrated scores, Context Focus</td>
               <td>100+ langs</td>
               <td>API</td>
-              <td>Not yet listed</td>
+              <td>${{fact:cohere-rerank-5.pro_usd_per_m}}/M tokens†</td>
               <td class="muted" title="Cohere publish no benchmark table for Rerank 5">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
@@ -166,7 +166,7 @@
               <td>About {{fact:cohere-rerank-5.fast_params}} parameters; Cohere say it beats Rerank 4 Pro</td>
               <td>100+ langs</td>
               <td>API</td>
-              <td>Not yet listed</td>
+              <td>${{fact:cohere-rerank-5.fast_usd_per_m}}/M tokens†</td>
               <td class="muted" title="Cohere publish no benchmark table for Rerank 5">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
@@ -177,7 +177,7 @@
               <td>Mature multilingual API; 32k ctx</td>
               <td>100+ langs</td>
               <td>API</td>
-              <td>${{fact:cohere-rerank-4-pro.price_per_search}}/search†</td>
+              <td>${{fact:cohere-rerank-4-pro.price_per_search}}/search† (last listed)</td>
               <td class="muted" title="Cohere does not publish a classic BEIR 18-dataset average for Rerank 4">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
@@ -188,7 +188,7 @@
               <td>Throughput / latency-tuned sibling</td>
               <td>100+ langs</td>
               <td>API</td>
-              <td>${{fact:cohere-rerank-4-fast.price_per_search}}/search†</td>
+              <td>${{fact:cohere-rerank-4-fast.price_per_search}}/search† (last listed)</td>
               <td class="muted" title="Vendor does not publish a classic BEIR average">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
@@ -405,7 +405,7 @@
         </table>
       </div>
       <div class="benchmark-meta callout" style="margin-top:.8rem;padding:.85rem 1rem">
-        <p class="muted" style="font-size:.82rem;margin:0"><strong>Last verified:</strong> October 2026 (added Qwen3-VL-Reranker, zerank-2 and gte-multilingual-reranker-base; added jina-reranker-v3.5; Jina rows now share one 2026 protocol; bge-reranker-v2-m3 corrected from an untraceable ~60.1 to BAAI's own {{fact:bge-reranker-v2-m3.beir}}; Jina v1 tiny and ms-marco MiniLM-L6 now show the BEIR figures Jina published for them; in September, mxbai-rerank-large-v1 was corrected from an unsourced ~62.1) · <strong>Next review:</strong> Nov 2026. <strong>*</strong> No two vendors run BEIR the same way — BAAI average 15 datasets over bge-large-en-v1.5's top 100, Jina 13 datasets over jina-embeddings-v5-text-small's top 100, mixedbread their own set — so every BEIR figure here carries a * and its protocol on hover. The differences are not small: Jina's run puts bge-reranker-v2-m3 at {{fact:bge-reranker-v2-m3.beir_jina_2025}} against BAAI's own {{fact:bge-reranker-v2-m3.beir}}, and mxbai-rerank-large-v2 at {{fact:mxbai-rerank-large-v2.beir_jina_2025}} against mixedbread's {{fact:mxbai-rerank-large-v2.beir}}. Read the column as rough tiers, not decimals. Other * cells use MTEB-R or task-specific metrics. Where a vendor publishes no comparable number we say <em>not published</em> rather than guess. <strong>†</strong> Note the differing units: Cohere bills per <em>search</em> (one query + up to 100 docs, each counted once per {{fact:cohere-rerank.billing_chunk_tokens}} tokens), Voyage per <em>token</em>. Our <a href="/rerank-cost-calculator.html">cost calculator</a> works out which is cheaper for your volume. Demo-capable models only: mxbai xsmall, Jina tiny, ms-marco MiniLM.</p>
+        <p class="muted" style="font-size:.82rem;margin:0"><strong>Last verified:</strong> October 2026 (added Qwen3-VL-Reranker, zerank-2 and gte-multilingual-reranker-base; added jina-reranker-v3.5; Jina rows now share one 2026 protocol; bge-reranker-v2-m3 corrected from an untraceable ~60.1 to BAAI's own {{fact:bge-reranker-v2-m3.beir}}; Jina v1 tiny and ms-marco MiniLM-L6 now show the BEIR figures Jina published for them; in September, mxbai-rerank-large-v1 was corrected from an unsourced ~62.1) · <strong>Next review:</strong> Nov 2026. <strong>*</strong> No two vendors run BEIR the same way — BAAI average 15 datasets over bge-large-en-v1.5's top 100, Jina 13 datasets over jina-embeddings-v5-text-small's top 100, mixedbread their own set — so every BEIR figure here carries a * and its protocol on hover. The differences are not small: Jina's run puts bge-reranker-v2-m3 at {{fact:bge-reranker-v2-m3.beir_jina_2025}} against BAAI's own {{fact:bge-reranker-v2-m3.beir}}, and mxbai-rerank-large-v2 at {{fact:mxbai-rerank-large-v2.beir_jina_2025}} against mixedbread's {{fact:mxbai-rerank-large-v2.beir}}. Read the column as rough tiers, not decimals. Other * cells use MTEB-R or task-specific metrics. Where a vendor publishes no comparable number we say <em>not published</em> rather than guess. <strong>†</strong> Note the differing units: Cohere Rerank 4 was billed per <em>search</em> (one query + up to 100 docs, each counted once per {{fact:cohere-rerank.billing_chunk_tokens}} tokens), Cohere Rerank 5 and Voyage per <em>token</em>. Cohere’s pricing page stopped listing Rerank 4 on 21 October 2026, so its prices here are the last listed. Our <a href="/rerank-cost-calculator.html">cost calculator</a> works out which is cheaper for your volume. Demo-capable models only: mxbai xsmall, Jina tiny, ms-marco MiniLM.</p>
         <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">Sources: <a href="https://huggingface.co/Qwen" rel="noopener noreferrer">Qwen3-Reranker</a> · <a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">jina-reranker-v3.5</a> · <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">jina-reranker-v3 paper</a> · <a href="https://huggingface.co/jinaai/jina-reranker-v1-tiny-en" rel="noopener noreferrer">jina-reranker-v1</a> · <a href="https://docs.voyageai.com/docs/reranker" rel="noopener noreferrer">Voyage rerankers</a> · <a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">mxbai-rerank</a> · <a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">nemotron-rerank</a> · <a href="https://huggingface.co/spaces/mteb/leaderboard" rel="noopener noreferrer">MTEB</a> · <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR</a> · <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker" rel="noopener noreferrer">BAAI evals</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">GTE ModernBERT</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-multilingual-reranker-base" rel="noopener noreferrer">mGTE reranker</a> · <a href="https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B" rel="noopener noreferrer">Qwen3-VL-Reranker</a> · <a href="https://huggingface.co/zeroentropy/zerank-2-reranker" rel="noopener noreferrer">zerank-2</a> · <a href="/models/qwen-reranker.html">Qwen guide</a> · <a href="/guides/instruction-reranker.html">instruction</a> · <a href="/guides/late-interaction-rerank.html">ColBERT</a></p>
         <p class="muted" style="font-size:.82rem;margin:.5rem 0 0"><strong>Tagged as a reranker, but not one for RAG:</strong> <a href="https://huggingface.co/Contrastive-LM/CLM-v0.1-8B" rel="noopener noreferrer">CLM-v0.1-8B</a> from Contrastive-LM (September 2026) was the most-liked <code>text-ranking</code> model on Hugging Face by early October. It scores candidate actions and answers for agents — two small heads on a frozen Qwen3-8B, which you serve separately for its embeddings — and its headline results are agent benchmarks with fine-tuned heads, not retrieval. That is why it isn’t in this table.</p>
       </div>
@@ -424,7 +424,7 @@
         <a class="card" href="/models/cohere-rerank.html">
           <h3>Cohere Rerank 5</h3>
           <div class="tag-row" style="margin-bottom:.8rem"><span class="pill">Hosted API</span><span class="pill">Multilingual</span></div>
-          <p>New on 21 October 2026, in Pro and Fast variants: 32k context, 100+ languages, calibrated scores, and Context Focus to return only the passages that answer the query. Rerank 4 is still billed per search.</p>
+          <p>New on 21 October 2026, in Pro and Fast variants: 32k context, 100+ languages, calibrated scores, and Context Focus to return only the passages that answer the query. Rerank 5 is priced per token, where Rerank 4 was priced per search.</p>
         </a>
         <a class="card" href="/models/jina-reranker.html">
           <h3>Jina Reranker v3.5</h3>
@@ -484,7 +484,7 @@
           <ul class="feature-list">
             <li>Official SDK for Python, Node, Java, Go — one-liner integration</li>
             <li>32k context and 100+ languages on both variants</li>
-            <li>Pro for precision, Fast for throughput; Rerank 4 costs ${{fact:cohere-rerank-4-pro.price_per_search}} vs ${{fact:cohere-rerank-4-fast.price_per_search}} a search, Rerank 5 isn’t priced yet</li>
+            <li>Pro for precision, Fast for throughput; ${{fact:cohere-rerank-5.pro_usd_per_m}} vs ${{fact:cohere-rerank-5.fast_usd_per_m}} per 1M tokens</li>
           </ul>
         </div>
         <div class="chooser-card">

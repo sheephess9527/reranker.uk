@@ -117,6 +117,6 @@ window.I18N_PAGE = { zh: {
     "托管，指令写在查询里。",
   "Weights and API from ZeroEntropy.":
     "ZeroEntropy 的权重和 API。",
-  "Hosted API, priced per search.":
-    "托管 API，按检索次数计费。",
+  "Hosted API, Pro and Fast.":
+    "托管 API，分 Pro 和 Fast 两档。",
 }};

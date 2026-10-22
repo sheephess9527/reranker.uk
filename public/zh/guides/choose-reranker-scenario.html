@@ -94,7 +94,7 @@
             <tr>
               <td>RAG 流水线</td>
               <td>向量召回噪声大，需要 top-5 精度</td>
-              <td>自建可用 <a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a> 或 <a href="/zh/models/qwen-reranker">Qwen3-Reranker-4B</a>；托管 API 可用 <a href="/zh/models/cohere-rerank">Cohere Rerank 4</a> 或 <a href="/zh/models/voyage-rerank">Voyage rerank-3</a></td>
+              <td>自建可用 <a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a> 或 <a href="/zh/models/qwen-reranker">Qwen3-Reranker-4B</a>；托管 API 可用 <a href="/zh/models/cohere-rerank">Cohere Rerank 5</a> 或 <a href="/zh/models/voyage-rerank">Voyage rerank-3</a></td>
               <td>CPU 或 GPU / 托管 API</td>
             </tr>
             <tr>
@@ -106,7 +106,7 @@
             <tr>
               <td>客服工单</td>
               <td>大量相似 FAQ，要求快速响应</td>
-              <td>英文场景用 <a href="/zh/models/jina-reranker">jina-reranker-v1-tiny-en</a> 或 ms-marco MiniLM，托管 API 用 <a href="/zh/models/cohere-rerank">Cohere Rerank 4 Fast</a></td>
+              <td>英文场景用 <a href="/zh/models/jina-reranker">jina-reranker-v1-tiny-en</a> 或 ms-marco MiniLM，托管 API 用 <a href="/zh/models/cohere-rerank">Cohere Rerank 5 Fast</a></td>
               <td>CPU、浏览器或 API</td>
             </tr>
             <tr>
@@ -133,7 +133,7 @@
       <p class="muted" style="font-size:.85rem">每个推荐都链接到对应的页面或表格行，那里列有厂商自己的数字和测试方法。但这些都替代不了用你自己的查询做测试 —— 见<a href="/zh/guides/evaluate-reranker">如何评估重排序模型</a>。</p>
 
       <h2 id="rag">RAG 与知识库</h2>
-      <p>先召回 50–100 个分块，重排序后留 5–10 个，再交给大模型。没有 GPU 时，自建通常默认用 <strong>bge-reranker-v2-m3</strong>；有 GPU 就用 <strong>Qwen3-Reranker-4B</strong>，在 Qwen 自己的测试里它在英文上比 8B 还好。托管 API 方面，<strong>Cohere Rerank 4</strong> 按检索次数计费，<strong>Voyage rerank-3</strong> 按 token 计费 —— <a href="/zh/rerank-cost-calculator">成本计算器</a>能算出在你的量级下哪个更便宜。需要关键词精确匹配时，见<a href="/zh/guides/rerank-rag">RAG 中的重排序</a>和<a href="/zh/guides/hybrid-retrieval-rerank">混合检索</a>。</p>
+      <p>先召回 50–100 个分块，重排序后留 5–10 个，再交给大模型。没有 GPU 时，自建通常默认用 <strong>bge-reranker-v2-m3</strong>；有 GPU 就用 <strong>Qwen3-Reranker-4B</strong>，在 Qwen 自己的测试里它在英文上比 8B 还好。托管 API 方面，<strong>Cohere Rerank 5</strong> 和 <strong>Voyage rerank-3</strong> 都按 token 计费，标价相同 —— <a href="/zh/rerank-cost-calculator">成本计算器</a>能在你的量级下把它们和其他 API 放在一起比较。需要关键词精确匹配时，见<a href="/zh/guides/rerank-rag">RAG 中的重排序</a>和<a href="/zh/guides/hybrid-retrieval-rerank">混合检索</a>。</p>
       <blockquote>经验法则：bi-encoder 召回已经够好，中等 reranker 即可；召回很乱时，先加宽检索。</blockquote>
 
       <h2 id="multilingual">中文与多语言</h2>

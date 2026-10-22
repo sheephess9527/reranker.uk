@@ -38,7 +38,7 @@ Benchmark figures carry their protocol: rows marked with an asterisk on /models/
 ## Tools
 
 - [Live reranker demo — cross-encoder reranking in your browser](https://reranker.uk/demo): Try a rerank model live in your browser. Paste a query and candidate passages and a cross-encoder scores and reorders them in real time — 100% client-side with transformers.js, no API key and no cost.
-- [Rerank cost calculator — Cohere vs Voyage pricing](https://reranker.uk/rerank-cost-calculator): Estimate what reranking costs per month. Cohere Rerank 4 bills per search, counting long documents once per 500 tokens; Voyage rerank-3 bills per token.
+- [Rerank cost calculator — Cohere vs Voyage pricing](https://reranker.uk/rerank-cost-calculator): Estimate what reranking costs per month. Cohere Rerank 5 and Voyage rerank-3 bill per token; Cohere Rerank 4 bills per search, counting long documents once per 500 tokens.
 
 ## Index pages
 

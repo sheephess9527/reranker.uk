@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Wed, 21 Oct 2026 02:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 22 Oct 2026 02:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>22 Oct 2026 — Cohere Rerank 5 prices</title>
+      <link>https://reranker.uk/changelog#2026-10-22-cohere-pricing</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-22-cohere-pricing</guid>
+      <pubDate>Thu, 22 Oct 2026 02:00:00 GMT</pubDate>
+      <description>Cohere priced Rerank 5 per token ($0.05 per million for Pro, $0.02 for Fast) and took Rerank 4 off its pricing page. Both are on the site and in the cost calculator, Rerank 4 marked as last listed.</description>
+    </item>
     <item>
       <title>21 Oct 2026 — Cohere Rerank 5</title>
       <link>https://reranker.uk/changelog#2026-10-21-cohere</link>
