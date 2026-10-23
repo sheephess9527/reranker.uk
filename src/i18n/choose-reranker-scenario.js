@@ -25,8 +25,8 @@ window.I18N_PAGE = { zh: {
     "扫描 PDF、幻灯片、截图",
   "The text is in an image, or the layout carries meaning":
     "文字在图片里，或版面本身带有信息",
-  "<a href=\"/models/#qwen3-vl-reranker\">Qwen3-VL-Reranker</a> or <a href=\"/models/#lighton-rerank\">LightOn-rerank</a>":
-    "<a href=\"/models/#qwen3-vl-reranker\">Qwen3-VL-Reranker</a> 或 <a href=\"/models/#lighton-rerank\">LightOn-rerank</a>",
+  "<a href=\"/models/#qwen3-vl-reranker\">Qwen3-VL-Reranker</a>, <a href=\"/models/#lighton-rerank\">LightOn-rerank</a> or <a href=\"/models/nvidia-rerank.html\">NVIDIA Nemotron</a>":
+    "<a href=\"/models/#qwen3-vl-reranker\">Qwen3-VL-Reranker</a>、<a href=\"/models/#lighton-rerank\">LightOn-rerank</a> 或 <a href=\"/models/nvidia-rerank.html\">NVIDIA Nemotron</a>",
   "GPU":
     "GPU",
   "Each pick links to its page or row, where the vendor’s own figures are shown with how they were measured. None of them replaces a test on your own queries — see <a href=\"/guides/evaluate-reranker.html\">evaluating a reranker</a>.":
@@ -43,8 +43,8 @@ window.I18N_PAGE = { zh: {
     "单靠向量检索会漏掉精确的函数名；单靠 BM25 会漏掉换了说法的“怎么……”类问题。先做<strong>混合检索</strong>，再重排序。Qwen 公布了 Qwen3-Reranker 的代码检索分数（见 <a href=\"/models/qwen-reranker.html#scores\">Qwen 页面</a>），Voyage 也公布了 rerank-3 在自家代码数据集上相对 rerank-2.5 的提升（见 <a href=\"/models/voyage-rerank.html\">Voyage 页面</a>）。Demo 预设：<strong>技术文档</strong>和<strong>代码搜索</strong>。",
   "Scanned PDFs, slides and screenshots":
     "扫描 PDF、幻灯片和截图",
-  "If your documents are page images — scans, slide decks, dashboards — a text reranker only sees whatever OCR extracted. <strong>Qwen3-VL-Reranker</strong> (2B / 8B) and <strong>LightOn-rerank</strong> score page images directly, both under Apache 2.0, and Alibaba Cloud sells <strong>qwen3-vl-rerank</strong> as an API. Their published scores are on ViDoRe, a visual-document benchmark, so compare them with each other rather than with the BEIR column.":
-    "如果你的文档是页面图片 —— 扫描件、幻灯片、仪表盘 —— 文本重排序模型只能看到 OCR 提取出来的内容。<strong>Qwen3-VL-Reranker</strong>（2B / 8B）和 <strong>LightOn-rerank</strong> 直接给页面图片打分，都是 Apache 2.0 许可，阿里云还以 API 形式提供 <strong>qwen3-vl-rerank</strong>。它们公布的分数来自视觉文档基准 ViDoRe，所以应该互相比较，而不是和 BEIR 那一列比。",
+  "If your documents are page images — scans, slide decks, dashboards — a text reranker only sees whatever OCR extracted. <strong>Qwen3-VL-Reranker</strong> (2B / 8B) and <strong>LightOn-rerank</strong> score page images directly, both under Apache 2.0, and Alibaba Cloud sells <strong>qwen3-vl-rerank</strong> as an API. NVIDIA’s <a href=\"/models/nvidia-rerank.html\">Nemotron-3.5-Rerank-8B</a> and the smaller llama-nemotron-rerank-vl-1b-v2 do the same under licences that allow commercial use, and take a page’s image and its extracted text together. Their published scores are on ViDoRe, a visual-document benchmark, so compare them with each other rather than with the BEIR column.":
+    "如果你的文档是页面图片 —— 扫描件、幻灯片、仪表盘 —— 文本重排序模型只能看到 OCR 提取出来的内容。<strong>Qwen3-VL-Reranker</strong>（2B / 8B）和 <strong>LightOn-rerank</strong> 直接给页面图片打分，都是 Apache 2.0 许可，阿里云还以 API 形式提供 <strong>qwen3-vl-rerank</strong>。NVIDIA 的 <a href=\"/models/nvidia-rerank.html\">Nemotron-3.5-Rerank-8B</a> 和更小的 llama-nemotron-rerank-vl-1b-v2 也能这样做，许可证允许商用，而且能把页面图片和提取出的文本一起输入。它们公布的分数来自视觉文档基准 ViDoRe，所以应该互相比较，而不是和 BEIR 那一列比。",
   "Compare every model and hosted API in one table, then jump into the demo with one click.":
     "在一张表里对比所有模型和托管 API，一键跳转到 Demo。",
   "Decision guide · ~8 min read · <time datetime=\"2026-10-12\">Updated 12 Oct 2026</time>":

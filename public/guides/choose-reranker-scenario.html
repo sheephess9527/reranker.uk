@@ -124,7 +124,7 @@
             <tr>
               <td>Scanned PDFs, slides, screenshots</td>
               <td>The text is in an image, or the layout carries meaning</td>
-              <td><a href="/models/#qwen3-vl-reranker">Qwen3-VL-Reranker</a> or <a href="/models/#lighton-rerank">LightOn-rerank</a></td>
+              <td><a href="/models/#qwen3-vl-reranker">Qwen3-VL-Reranker</a>, <a href="/models/#lighton-rerank">LightOn-rerank</a> or <a href="/models/nvidia-rerank">NVIDIA Nemotron</a></td>
               <td>GPU</td>
             </tr>
           </tbody>
@@ -149,7 +149,7 @@
       <p>Vector search alone misses exact function names; BM25 alone misses paraphrased “how do I…” questions. Use <strong>hybrid retrieval</strong>, then rerank. Qwen publish code-retrieval scores for Qwen3-Reranker (see the <a href="/models/qwen-reranker#scores">Qwen page</a>), and Voyage report rerank-3’s gain over rerank-2.5 on their code datasets (see the <a href="/models/voyage-rerank">Voyage page</a>). Demo presets: <strong>Technical docs</strong> and <strong>Code search</strong>.</p>
 
       <h2 id="visual">Scanned PDFs, slides and screenshots</h2>
-      <p>If your documents are page images — scans, slide decks, dashboards — a text reranker only sees whatever OCR extracted. <strong>Qwen3-VL-Reranker</strong> (2B / 8B) and <strong>LightOn-rerank</strong> score page images directly, both under Apache 2.0, and Alibaba Cloud sells <strong>qwen3-vl-rerank</strong> as an API. Their published scores are on ViDoRe, a visual-document benchmark, so compare them with each other rather than with the BEIR column.</p>
+      <p>If your documents are page images — scans, slide decks, dashboards — a text reranker only sees whatever OCR extracted. <strong>Qwen3-VL-Reranker</strong> (2B / 8B) and <strong>LightOn-rerank</strong> score page images directly, both under Apache 2.0, and Alibaba Cloud sells <strong>qwen3-vl-rerank</strong> as an API. NVIDIA’s <a href="/models/nvidia-rerank">Nemotron-3.5-Rerank-8B</a> and the smaller llama-nemotron-rerank-vl-1b-v2 do the same under licences that allow commercial use, and take a page’s image and its extracted text together. Their published scores are on ViDoRe, a visual-document benchmark, so compare them with each other rather than with the BEIR column.</p>
 
       <h2 id="try">Try it in the demo</h2>
       <p>Each scenario below maps to a built-in preset — load it, hit Rerank, and watch the bi-encoder proxy column mis-order before the cross-encoder fixes it.</p>
@@ -217,6 +217,7 @@
             <li><a href="/models/lighton-rerank">LightOn-rerank</a></li>
             <li><a href="/models/gte-reranker">GTE rerankers</a></li>
             <li><a href="/models/contextual-rerank">Contextual AI</a></li>
+            <li><a href="/models/nvidia-rerank">NVIDIA Nemotron</a></li>
           </ul>
         </div>
       </div>

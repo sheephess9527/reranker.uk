@@ -130,13 +130,15 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 > 完成：新增 `/models/lighton-rerank`、`/models/gte-reranker`（两个 GTE 合一页）、`/models/contextual-rerank`，中英文、meta、JSON-LD、社交卡片齐全；模型表、页脚、首页「另见」都链过去，首页卡片加 zerank-2 和 Qwen3-VL（共 8 张）。13 个新 fact：LightOn 全家 ViDoRe V3（LightOn 自己同一流程重测，含 Qwen3-VL-8B/2B、jina-m0、第一阶段基线，放在 `lighton-run`）和 LW-2B/LW-4B 的 BEIR，GTE ModernBERT 的 LoCo / CoIR。Contextual 只以图表公布分数，页面写明不标数字。注意：LightOn 测的 Qwen3-VL-8B ViDoRe V3 是 64.23，Qwen 自己卡上是 66.7，两边页面都注明是谁测的。
 
-### 14. NVIDIA 页（10 月 20 日 Nemotron-3.5-Rerank-8B 正式发布后，连同 VL-1B）
+### ~~14. NVIDIA 页（10 月 20 日 Nemotron-3.5-Rerank-8B 正式发布后，连同 VL-1B）~~（2026-10-23 已完成）
+
+> 完成：新增 `/models/nvidia-rerank`（中英文、meta、JSON-LD、社交卡片），四个模型一页：Nemotron-3.5-Rerank-8B（8.38B，Ministral-3-8B，文本/页面图片/两者，32,768 token，OpenMDW-1.1）、llama-nemotron-rerank-vl-1b-v2（约 1.7B，NVIDIA Open Model License）、llama-nemotron-rerank-1b-v2（文本，26 种语言，8192 token，OpenMDW-1.1）、500M（只有 NIM，无 HF 模型卡）。31 个新 fact（`nemotron-3.5-rerank-8b`、`nvidia-rerank-run`、`llama-nemotron-rerank-vl-1b-v2`，以及 `llama-nemotron-rerank-1b-v2` 补 5 个），来源是三张模型卡、NVIDIA 博客（ViDoRe v3.1 排行榜 60.49 / 59.17）和 NIM 支持矩阵；每个 check_pattern 都在抓下来的原文上验证过只命中一次。模型表加两行（`#nvidia-rerank`），1B 行改链到新页；选型指南「扫描件」一节、页脚、首页「另见」都加了。注意：同一个 Qwen3-VL-Reranker-8B 的 ViDoRe V3，Qwen 自测 66.7、LightOn 64.23、NVIDIA 66.02（图片），页面写明谁测的；1B 流水线的 MLDR 在两张 NVIDIA 卡上不一致（70.69 / 68.49），没有收录。8B 的 NIM 博客里有链接，但 10 月 23 日 NIM 支持矩阵仍未列出。
 
 ## 发布监控处理记录
 
 - **2026-10-21 Cohere Rerank 5**：Cohere 当天发布（changelog「Announcing Cohere's Rerank 5 Models」）。Cohere 页改为 Rerank 5（新增「What's new in Rerank 5」：校准分数、Context Focus、只支持文本、不支持指令、可用渠道），模型表加 v5 Pro / Fast 两行，首页和表里的卡片更新，代码示例改用 `rerank-v5.0-pro`。3 个新 fact（`cohere-rerank-5`）。**价格还没公布**：页面写「尚未公布」，计算器暂不加；`data/release-watch.json` 新增「Cohere pricing」页面监控（`Rerank N Pro|Fast`，已知 Rerank 4），价格一出现就会报到 release-watch issue，届时补 price fact、计算器选项和价格表行。
 - **2026-10-22 Cohere Rerank 5 定价 + Rerank 4 下架价格**：cohere.com/pricing（10 月 21 日 15:03 UTC 更新）给 Rerank 5 标了按 token 的价格：Pro $0.05、Fast $0.02 每百万 token（发布博客同样写明）；同一次更新撤掉了 Rerank 4 的价格卡片（模型仍在 docs 里、未进 deprecations，价格 FAQ 的 search unit 定义还在）。Wayback 快照里没有价格数据，找不到存档出处。处理：新增 `cohere-rerank-5.pro_usd_per_m` / `fast_usd_per_m`（check_raw，内嵌 JSON 里的 inputPrice）和 Model Vault 的 `vault_usd_per_hour` / `vault_usd_per_month`（Rerank 5 Medium $4.00 / $2,500）；`cohere-rerank-4-*.price_per_search` 改为 `check: "manual"` 并写明原因，页面上一律标「last listed / 最后公布价」。计算器加 Rerank 5 Pro/Fast（按 token，计法同 Voyage，注明是假设），Rerank 4 两项保留并改名带「(last listed)」。顺带：sentence-transformers 6.2.0 在 runner 上实跑了自建快速上手（bge-reranker-v2-m3）、GTE、mxbai 和 ColBERT 片段，全部通过，late-interaction 指南改为「在 6.2.0 上跑过」，watch 的 known 改为 v6.2.0。
-- **NVIDIA Nemotron-3.5-Rerank-8B**：模型卡写 10 月 20 日发布，但 10 月 21 日再看仍无任何分数，NIM 也未收录，继续等（issue #47 保持打开）。
+- **NVIDIA Nemotron-3.5-Rerank-8B**：评测结果其实在 10 月 20 日 21:28 UTC 就加进了模型卡（commit「add evaluation results」），10 月 21 日那次复查漏看了。10 月 23 日补上，见上面第 14 项；进 `hf_seen`，issue #47 关闭。
 
 ### 明确不要做
 

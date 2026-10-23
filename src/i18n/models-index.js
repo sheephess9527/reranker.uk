@@ -4,6 +4,22 @@ window.I18N_PAGE = {
     "models.tableCaption": "重排序模型对比：架构、类型、适用场景、语言、延迟、价格与 BEIR 分数",
   },
   zh: {
+  "New 20 Oct 2026: text, page images or both; {{fact:nemotron-3.5-rerank-8b.params}}, {{fact:nemotron-3.5-rerank-8b.context_tokens}} tokens, OpenMDW licence (commercial use)":
+    "2026 年 10 月 20 日新发布：文本、页面图片或两者一起；{{fact:nemotron-3.5-rerank-8b.params}}，{{fact:nemotron-3.5-rerank-8b.context_tokens}} token，OpenMDW 许可证（可商用）",
+  "34 langs evaluated (text)":
+    "文本评测过 34 种语言",
+  "Free (self-host) / hosted":
+    "免费（自建）/ 托管",
+  "NVIDIA publish no BEIR average for it. Their own run, from the model card: ViDoRe V3 {{fact:nemotron-3.5-rerank-8b.vidore_v3_image_text}} (image + text) and MIRACL-VISION {{fact:nemotron-3.5-rerank-8b.miracl_vision}}, NDCG@10 over Nemotron-3.5-Embed-1B's top 50":
+    "NVIDIA 没有公布它的 BEIR 平均分。NVIDIA 自己的测试（取自模型卡）：ViDoRe V3 {{fact:nemotron-3.5-rerank-8b.vidore_v3_image_text}}（图片 + 文本）、MIRACL-VISION {{fact:nemotron-3.5-rerank-8b.miracl_vision}}，NDCG@10，对 Nemotron-3.5-Embed-1B 的前 50 条重排",
+  "About {{fact:llama-nemotron-rerank-vl-1b-v2.params}}: text, page images or both; NVIDIA Open Model License (commercial use)":
+    "约 {{fact:llama-nemotron-rerank-vl-1b-v2.params}}：文本、页面图片或两者一起；NVIDIA Open Model License（可商用）",
+  "Not stated":
+    "未说明",
+  "NVIDIA report average Recall@5 over ViDoRe V1–V3 and two internal sets ({{fact:llama-nemotron-rerank-vl-1b-v2.recall5_image_text}}% with image + text), not a BEIR NDCG":
+    "NVIDIA 报告的是 ViDoRe V1–V3 和两个内部数据集上的平均 Recall@5（图片 + 文本时为 {{fact:llama-nemotron-rerank-vl-1b-v2.recall5_image_text}}%），不是 BEIR NDCG",
+  "Images":
+    "图片",
   "${{fact:cohere-rerank-5.fast_usd_per_m}}/M tokens†":
     "${{fact:cohere-rerank-5.fast_usd_per_m}}/M token†",
   "${{fact:cohere-rerank-4-pro.price_per_search}}/search† (last listed)":

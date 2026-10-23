@@ -58,5 +58,7 @@
   "models/lighton-rerank": "6773767e1c253deb",
   "zh/models/contextual-rerank": "6bf423cc9c32a09f",
   "zh/models/gte-reranker": "606f04caee1c2738",
-  "zh/models/lighton-rerank": "92c64788386c1cbe"
+  "zh/models/lighton-rerank": "92c64788386c1cbe",
+  "models/nvidia-rerank": "12a71ecf750730c2",
+  "zh/models/nvidia-rerank": "641520fed4f51d2d"
 }

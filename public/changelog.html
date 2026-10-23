@@ -71,6 +71,15 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-23-nvidia">23 Oct 2026 — NVIDIA Nemotron rerankers</h2>
+        <ul class="feature-list">
+          <li><strong>A page for <a href="/models/nvidia-rerank">NVIDIA’s rerankers</a></strong> — Nemotron-3.5-Rerank-8B, released on 20 October, scores text, page images or both under a licence that allows commercial use. The page also covers the older llama-nemotron rerankers: the 1.7B vision-language model and the 1B and 500M text models, which NVIDIA also serves as NIM containers</li>
+          <li><strong>Scores, and whose they are</strong> — NVIDIA’s model card puts the 8B ahead of Qwen3-VL-Reranker-8B by one to two points on ViDoRe V3 and nearly four on MIRACL-VISION, in NVIDIA’s own run. The page sets that next to Qwen’s and LightOn’s different figures for the same Qwen model</li>
+          <li><strong>In the <a href="/models/#nvidia-rerank">models table</a> and the <a href="/guides/choose-reranker-scenario#visual">scenario guide</a></strong> — two new rows, Nemotron-3.5-Rerank-8B and llama-nemotron-rerank-vl-1b-v2, and NVIDIA joins the options for scanned PDFs and slides</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-22-cohere-pricing">22 Oct 2026 — Cohere Rerank 5 prices</h2>
         <ul class="feature-list">
           <li><strong>Rerank 5 is priced per token</strong> — Cohere listed it overnight: $0.05 per million tokens for <a href="/models/cohere-rerank#pricing">Pro</a> and $0.02 for Fast, the same list prices as Voyage rerank-3 and rerank-3-lite. The models table and the Cohere page show them, and Model Vault is now $4 an hour for a Rerank 5 instance</li>
@@ -143,14 +152,13 @@
           <li><strong>Every new figure checked daily</strong> — the 46 scores and prices on the two pages are in the daily source check, like the rest of the site’s numbers</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>Earlier in October 2026 (27 entries)</summary><article class="changelog-entry">
         <h2 id="2026-10-15-cache">15 Oct 2026 — Pages load faster on a repeat visit</h2>
         <ul class="feature-list">
           <li><strong>Styles and scripts are cached</strong> — every page view used to ask Cloudflare whether the stylesheet and scripts had changed, one round trip per file, which is slow from mainland China. Each file’s address now carries a fingerprint of its contents, so the browser keeps it for a year and fetches a new copy only when it really changes</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>Earlier in October 2026 (26 entries)</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-15-privacy">15 Oct 2026 (late night) — The privacy page names the analytics it runs</h2>
         <ul class="feature-list">
           <li><strong>Privacy page corrected</strong> — it said the site ran no analytics, but Cloudflare Web Analytics has been counting page views. The page now says so, and what Cloudflare documents about it: no cookies or local storage, no fingerprinting, no personal data, and no query strings, so demo share-link text isn’t included</li>
@@ -602,6 +610,8 @@
 
       
 
+      
+
       <p class="center" style="margin-top:2.5rem"><a class="btn btn-primary" href="/demo">Try the demo →</a></p>
     </section>
   </main>
@@ -649,6 +659,7 @@
             <li><a href="/models/lighton-rerank">LightOn-rerank</a></li>
             <li><a href="/models/gte-reranker">GTE rerankers</a></li>
             <li><a href="/models/contextual-rerank">Contextual AI</a></li>
+            <li><a href="/models/nvidia-rerank">NVIDIA Nemotron</a></li>
           </ul>
         </div>
       </div>
