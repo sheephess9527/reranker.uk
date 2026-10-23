@@ -1,4 +1,12 @@
 window.I18N_PAGE = { zh: {
+  "23 Oct 2026 — NVIDIA Nemotron rerankers":
+    "2026 年 10 月 23 日 —— NVIDIA Nemotron 重排序模型",
+  "<strong>A page for <a href=\"/models/nvidia-rerank.html\">NVIDIA’s rerankers</a></strong> — Nemotron-3.5-Rerank-8B, released on 20 October, scores text, page images or both under a licence that allows commercial use. The page also covers the older llama-nemotron rerankers: the 1.7B vision-language model and the 1B and 500M text models, which NVIDIA also serves as NIM containers":
+    "<strong>新增 <a href=\"/models/nvidia-rerank.html\">NVIDIA 重排序模型</a>页面</strong> —— 10 月 20 日发布的 Nemotron-3.5-Rerank-8B 能给文本、页面图片或两者一起打分，许可证允许商用。页面也介绍了更早的 llama-nemotron 系列：1.7B 的视觉语言模型，以及 1B 和 500M 两个文本模型，NVIDIA 也以 NIM 容器提供它们",
+  "<strong>Scores, and whose they are</strong> — NVIDIA’s model card puts the 8B ahead of Qwen3-VL-Reranker-8B by one to two points on ViDoRe V3 and nearly four on MIRACL-VISION, in NVIDIA’s own run. The page sets that next to Qwen’s and LightOn’s different figures for the same Qwen model":
+    "<strong>分数及其出处</strong> —— 按 NVIDIA 模型卡上自己的测试，8B ViDoRe V3 上比 Qwen3-VL-Reranker-8B 高一到两分，MIRACL-VISION 上高近四分。页面把它和 Qwen、LightOn 给同一个 Qwen 模型测出的不同分数放在一起",
+  "<strong>In the <a href=\"/models/#nvidia-rerank\">models table</a> and the <a href=\"/guides/choose-reranker-scenario.html#visual\">scenario guide</a></strong> — two new rows, Nemotron-3.5-Rerank-8B and llama-nemotron-rerank-vl-1b-v2, and NVIDIA joins the options for scanned PDFs and slides":
+    "<strong>加入<a href=\"/models/#nvidia-rerank\">模型对比表</a>和<a href=\"/guides/choose-reranker-scenario.html#visual\">选型指南</a></strong> —— 新增 Nemotron-3.5-Rerank-8B 和 llama-nemotron-rerank-vl-1b-v2 两行，扫描件和幻灯片的选项里也加上了 NVIDIA",
   "22 Oct 2026 — Cohere Rerank 5 prices":
     "2026 年 10 月 22 日 —— Cohere Rerank 5 的价格",
   "<strong>Rerank 5 is priced per token</strong> — Cohere listed it overnight: $0.05 per million tokens for <a href=\"/models/cohere-rerank.html#pricing\">Pro</a> and $0.02 for Fast, the same list prices as Voyage rerank-3 and rerank-3-lite. The models table and the Cohere page show them, and Model Vault is now $4 an hour for a Rerank 5 instance":

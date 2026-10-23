@@ -1494,6 +1494,50 @@
       "check_pattern": "\\+ llama-nemotron-rerank-1b-v2\\s*\\|\\s*{value}%",
       "check_hint": "Recall",
       "verified_on": "2026-10-12"
+    },
+    "embed_only_recall5": {
+      "value": "68.60",
+      "source_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2",
+      "check_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2/raw/main/README.md",
+      "check_pattern": "\\| llama-nemotron-embed-1b-v2 \\| {value}% \\|",
+      "check_hint": "Recall",
+      "verified_on": "2026-10-23",
+      "note": "llama-nemotron-embed-1b-v2 alone, same NQ/HotpotQA/FiQA/TechQA run as pipeline_recall5"
+    },
+    "miracl_recall5": {
+      "value": "65.80",
+      "source_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2",
+      "check_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2/raw/main/README.md",
+      "check_pattern": "\\| llama-nemotron-embed-1b-v2 \\+ llama-nemotron-rerank-1b-v2 \\| {value}% \\|",
+      "check_hint": "MIRACL",
+      "verified_on": "2026-10-23",
+      "note": "Average Recall@5 over NVIDIA's subsampled MIRACL (15 languages plus 11 translated)"
+    },
+    "mlqa_recall5": {
+      "value": "86.83",
+      "source_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2",
+      "check_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2/raw/main/README.md",
+      "check_pattern": "\\| llama-nemotron-embed-1b-v2 \\+ llama-nemotron-rerank-1b-v2 \\| {value}% \\|",
+      "check_hint": "MLQA",
+      "verified_on": "2026-10-23",
+      "note": "cross-lingual MLQA, 42 language pairs"
+    },
+    "max_tokens": {
+      "value": "8,192",
+      "source_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2",
+      "check_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2/raw/main/README.md",
+      "check_pattern": "long documents \\(up to 8192 tokens\\)",
+      "check_hint": "8192",
+      "verified_on": "2026-10-23",
+      "note": "the card writes 8192"
+    },
+    "languages": {
+      "value": "26",
+      "source_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2",
+      "check_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2/raw/main/README.md",
+      "check_pattern": "This model was evaluated on {value} languages",
+      "check_hint": "languages",
+      "verified_on": "2026-10-23"
     }
   },
   "mxbai-rerank-base-v1": {
@@ -1806,6 +1850,240 @@
       "check_pattern": "Rerank 5 Pro Medium \\$4\\.00 \\${value}",
       "check_hint": "Model Vault",
       "verified_on": "2026-10-22"
+    }
+  },
+  "nemotron-3.5-rerank-8b": {
+    "params": {
+      "value": "8.38B",
+      "source_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+      "check_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16/raw/main/README.md",
+      "check_pattern": "Number of Model Parameters:\\*\\* {value}",
+      "check_hint": "Parameters",
+      "verified_on": "2026-10-23"
+    },
+    "context_tokens": {
+      "value": "32,768",
+      "source_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+      "check_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16/raw/main/README.md",
+      "check_pattern": "The maximum context length is {value} tokens",
+      "check_hint": "context",
+      "verified_on": "2026-10-23"
+    },
+    "vidore_v3_image": {
+      "value": "67.22",
+      "source_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+      "check_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16/raw/main/README.md",
+      "check_pattern": "Nemotron-3\\.5-Rerank-8B-BF16 {value} [\\d.]+ [\\d.]+ [\\d.]+",
+      "check_hint": "ViDoRe",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's own run, from the model card: NDCG@10, reranking the top 50 from Nemotron-3.5-Embed-1B-BF16; ViDoRe V3 image / text / image+text, then MIRACL-VISION"
+    },
+    "vidore_v3_text": {
+      "value": "66.89",
+      "source_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+      "check_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16/raw/main/README.md",
+      "check_pattern": "Nemotron-3\\.5-Rerank-8B-BF16 [\\d.]+ {value} [\\d.]+ [\\d.]+",
+      "check_hint": "ViDoRe",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's own run, from the model card: NDCG@10, reranking the top 50 from Nemotron-3.5-Embed-1B-BF16; ViDoRe V3 image / text / image+text, then MIRACL-VISION"
+    },
+    "vidore_v3_image_text": {
+      "value": "67.56",
+      "source_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+      "check_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16/raw/main/README.md",
+      "check_pattern": "Nemotron-3\\.5-Rerank-8B-BF16 [\\d.]+ [\\d.]+ {value} [\\d.]+",
+      "check_hint": "ViDoRe",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's own run, from the model card: NDCG@10, reranking the top 50 from Nemotron-3.5-Embed-1B-BF16; ViDoRe V3 image / text / image+text, then MIRACL-VISION"
+    },
+    "miracl_vision": {
+      "value": "78.69",
+      "source_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+      "check_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16/raw/main/README.md",
+      "check_pattern": "Nemotron-3\\.5-Rerank-8B-BF16 [\\d.]+ [\\d.]+ [\\d.]+ {value}",
+      "check_hint": "ViDoRe",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's own run, from the model card: NDCG@10, reranking the top 50 from Nemotron-3.5-Embed-1B-BF16; ViDoRe V3 image / text / image+text, then MIRACL-VISION"
+    },
+    "vidore_v31_leaderboard": {
+      "value": "60.49",
+      "source_url": "https://huggingface.co/blog/nvidia/nemotron-retriever-world-class-agentic-retrieval",
+      "check_pattern": "achieves {value} nDCG@10 with combined image-and-text inputs",
+      "check_hint": "ViDoRe v3.1",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's blog: the ViDoRe v3.1 reranking leaderboard (MTEB), image-and-text inputs; a different setup from the model card's table"
+    }
+  },
+  "nvidia-rerank-run": {
+    "qwen3_vl_8b_vidore_v3_image": {
+      "value": "66.02",
+      "source_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+      "check_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16/raw/main/README.md",
+      "check_pattern": "Qwen3-VL-Reranker-8B {value} [\\d.]+ [\\d.]+ [\\d.]+",
+      "check_hint": "ViDoRe",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's own run, from the model card: NDCG@10, reranking the top 50 from Nemotron-3.5-Embed-1B-BF16; ViDoRe V3 image / text / image+text, then MIRACL-VISION"
+    },
+    "qwen3_vl_8b_vidore_v3_text": {
+      "value": "64.88",
+      "source_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+      "check_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16/raw/main/README.md",
+      "check_pattern": "Qwen3-VL-Reranker-8B [\\d.]+ {value} [\\d.]+ [\\d.]+",
+      "check_hint": "ViDoRe",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's own run, from the model card: NDCG@10, reranking the top 50 from Nemotron-3.5-Embed-1B-BF16; ViDoRe V3 image / text / image+text, then MIRACL-VISION"
+    },
+    "qwen3_vl_8b_vidore_v3_image_text": {
+      "value": "66.03",
+      "source_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+      "check_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16/raw/main/README.md",
+      "check_pattern": "Qwen3-VL-Reranker-8B [\\d.]+ [\\d.]+ {value} [\\d.]+",
+      "check_hint": "ViDoRe",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's own run, from the model card: NDCG@10, reranking the top 50 from Nemotron-3.5-Embed-1B-BF16; ViDoRe V3 image / text / image+text, then MIRACL-VISION"
+    },
+    "qwen3_vl_8b_miracl_vision": {
+      "value": "75.06",
+      "source_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+      "check_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16/raw/main/README.md",
+      "check_pattern": "Qwen3-VL-Reranker-8B [\\d.]+ [\\d.]+ [\\d.]+ {value}",
+      "check_hint": "ViDoRe",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's own run, from the model card: NDCG@10, reranking the top 50 from Nemotron-3.5-Embed-1B-BF16; ViDoRe V3 image / text / image+text, then MIRACL-VISION"
+    },
+    "embed_1b_vidore_v3_image": {
+      "value": "58.02",
+      "source_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+      "check_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16/raw/main/README.md",
+      "check_pattern": "Nemotron-3\\.5-Embed-1B-BF16 {value} [\\d.]+ [\\d.]+ [\\d.]+",
+      "check_hint": "ViDoRe",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's own run, from the model card: NDCG@10, reranking the top 50 from Nemotron-3.5-Embed-1B-BF16; ViDoRe V3 image / text / image+text, then MIRACL-VISION"
+    },
+    "embed_1b_vidore_v3_text": {
+      "value": "57.80",
+      "source_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+      "check_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16/raw/main/README.md",
+      "check_pattern": "Nemotron-3\\.5-Embed-1B-BF16 [\\d.]+ {value} [\\d.]+ [\\d.]+",
+      "check_hint": "ViDoRe",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's own run, from the model card: NDCG@10, reranking the top 50 from Nemotron-3.5-Embed-1B-BF16; ViDoRe V3 image / text / image+text, then MIRACL-VISION"
+    },
+    "embed_1b_vidore_v3_image_text": {
+      "value": "58.82",
+      "source_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+      "check_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16/raw/main/README.md",
+      "check_pattern": "Nemotron-3\\.5-Embed-1B-BF16 [\\d.]+ [\\d.]+ {value} [\\d.]+",
+      "check_hint": "ViDoRe",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's own run, from the model card: NDCG@10, reranking the top 50 from Nemotron-3.5-Embed-1B-BF16; ViDoRe V3 image / text / image+text, then MIRACL-VISION"
+    },
+    "embed_1b_miracl_vision": {
+      "value": "68.93",
+      "source_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+      "check_url": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16/raw/main/README.md",
+      "check_pattern": "Nemotron-3\\.5-Embed-1B-BF16 [\\d.]+ [\\d.]+ [\\d.]+ {value}",
+      "check_hint": "ViDoRe",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's own run, from the model card: NDCG@10, reranking the top 50 from Nemotron-3.5-Embed-1B-BF16; ViDoRe V3 image / text / image+text, then MIRACL-VISION"
+    },
+    "qwen3_vl_8b_vidore_v31_leaderboard": {
+      "value": "59.17",
+      "source_url": "https://huggingface.co/blog/nvidia/nemotron-retriever-world-class-agentic-retrieval",
+      "check_pattern": "compared with Qwen-3-VL-Reranker-8B\\W{1,8}s {value}",
+      "check_hint": "ViDoRe v3.1",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's blog, same leaderboard as nemotron-3.5-rerank-8b.vidore_v31_leaderboard"
+    }
+  },
+  "llama-nemotron-rerank-vl-1b-v2": {
+    "params": {
+      "value": "1.7B",
+      "source_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-vl-1b-v2",
+      "check_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-vl-1b-v2/raw/main/README.md",
+      "check_pattern": "cross-encoder model with approximately {value} parameters",
+      "check_hint": "parameters",
+      "verified_on": "2026-10-23"
+    },
+    "recall5_text": {
+      "value": "76.12",
+      "source_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-vl-1b-v2",
+      "check_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-vl-1b-v2/raw/main/README.md",
+      "check_pattern": "\\+ llama-nemotron-rerank-vl-1b-v2 {value}% [\\d.]+% [\\d.]+%",
+      "check_hint": "Recall@5",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's own run: average Recall@5 over DigitalCorpora-10k, Earnings V2, ViDoRe V1, V2 and V3, reranking llama-nemotron-embed-vl-1b-v2's candidates; text / image / image+text input"
+    },
+    "recall5_image": {
+      "value": "76.12",
+      "source_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-vl-1b-v2",
+      "check_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-vl-1b-v2/raw/main/README.md",
+      "check_pattern": "\\+ llama-nemotron-rerank-vl-1b-v2 [\\d.]+% {value}% [\\d.]+%",
+      "check_hint": "Recall@5",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's own run: average Recall@5 over DigitalCorpora-10k, Earnings V2, ViDoRe V1, V2 and V3, reranking llama-nemotron-embed-vl-1b-v2's candidates; text / image / image+text input"
+    },
+    "recall5_image_text": {
+      "value": "77.64",
+      "source_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-vl-1b-v2",
+      "check_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-vl-1b-v2/raw/main/README.md",
+      "check_pattern": "\\+ llama-nemotron-rerank-vl-1b-v2 [\\d.]+% [\\d.]+% {value}%",
+      "check_hint": "Recall@5",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's own run: average Recall@5 over DigitalCorpora-10k, Earnings V2, ViDoRe V1, V2 and V3, reranking llama-nemotron-embed-vl-1b-v2's candidates; text / image / image+text input"
+    },
+    "embed_recall5_text": {
+      "value": "71.04",
+      "source_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-vl-1b-v2",
+      "check_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-vl-1b-v2/raw/main/README.md",
+      "check_pattern": "llama-nemotron-embed-vl-1b-v2 {value}% [\\d.]+% [\\d.]+%",
+      "check_hint": "Recall@5",
+      "verified_on": "2026-10-23",
+      "note": "first stage alone, same run"
+    },
+    "embed_recall5_image": {
+      "value": "71.20",
+      "source_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-vl-1b-v2",
+      "check_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-vl-1b-v2/raw/main/README.md",
+      "check_pattern": "llama-nemotron-embed-vl-1b-v2 [\\d.]+% {value}% [\\d.]+%",
+      "check_hint": "Recall@5",
+      "verified_on": "2026-10-23",
+      "note": "first stage alone, same run"
+    },
+    "embed_recall5_image_text": {
+      "value": "73.24",
+      "source_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-vl-1b-v2",
+      "check_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-vl-1b-v2/raw/main/README.md",
+      "check_pattern": "llama-nemotron-embed-vl-1b-v2 [\\d.]+% [\\d.]+% {value}%",
+      "check_hint": "Recall@5",
+      "verified_on": "2026-10-23",
+      "note": "first stage alone, same run"
+    },
+    "jina_m0_recall5_text": {
+      "value": "69.31",
+      "source_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-vl-1b-v2",
+      "check_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-vl-1b-v2/raw/main/README.md",
+      "check_pattern": "jina-reranker-m0 {value}% [\\d.]+% NA",
+      "check_hint": "Recall@5",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's run of jina-reranker-m0 in the same comparison"
+    },
+    "jina_m0_recall5_image": {
+      "value": "78.33",
+      "source_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-vl-1b-v2",
+      "check_url": "https://huggingface.co/nvidia/llama-nemotron-rerank-vl-1b-v2/raw/main/README.md",
+      "check_pattern": "jina-reranker-m0 [\\d.]+% {value}% NA",
+      "check_hint": "Recall@5",
+      "verified_on": "2026-10-23",
+      "note": "NVIDIA's run of jina-reranker-m0 in the same comparison"
+    },
+    "nim_max_tokens": {
+      "value": "8,192",
+      "source_url": "https://docs.nvidia.com/nim/nemo-retriever/text-reranking/latest/support-matrix.html",
+      "check_pattern": "nvidia/llama-nemotron-rerank-vl-1b-v2 Model card 8192",
+      "check_hint": "Max Tokens",
+      "verified_on": "2026-10-23",
+      "note": "the NIM support matrix writes 8192"
     }
   }
 }

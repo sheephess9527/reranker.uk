@@ -400,8 +400,30 @@
               <td class="muted" title="ZeroEntropy publish their own NDCG@10 over seven domains, reranking the top 100 from OpenAI text-embedding-3-small: 0.6714* on average, against 0.5847* for Cohere rerank-3.5 in the same run. Not a BEIR average">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
+            <tr id="nvidia-rerank" data-name="nemotron-3.5-rerank-8b" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="">
+              <th scope="row"><a href="/models/nvidia-rerank">Nemotron-3.5-Rerank-8B</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill good">Open weights</span><span class="pill info">Images</span></td>
+              <td>New 20 Oct 2026: text, page images or both; 8.38B, 32,768 tokens, OpenMDW licence (commercial use)</td>
+              <td>34 langs evaluated (text)</td>
+              <td>GPU</td>
+              <td>Free (self-host) / hosted</td>
+              <td class="muted" title="NVIDIA publish no BEIR average for it. Their own run, from the model card: ViDoRe V3 67.56 (image + text) and MIRACL-VISION 78.69, NDCG@10 over Nemotron-3.5-Embed-1B's top 50">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr data-name="llama-nemotron-rerank-vl-1b-v2" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="">
+              <th scope="row"><a href="/models/nvidia-rerank">llama-nemotron-rerank-vl-1b-v2</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill">Open + NIM API</span></td>
+              <td>About 1.7B: text, page images or both; NVIDIA Open Model License (commercial use)</td>
+              <td>Not stated</td>
+              <td>GPU / NIM</td>
+              <td>NIM / self-host</td>
+              <td class="muted" title="NVIDIA report average Recall@5 over ViDoRe V1–V3 and two internal sets (77.64% with image + text), not a BEIR NDCG">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
             <tr data-name="llama-nemotron-rerank-1b-v2" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="">
-              <th scope="row"><a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">llama-nemotron-rerank-1b-v2</a></th>
+              <th scope="row"><a href="/models/nvidia-rerank">llama-nemotron-rerank-1b-v2</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Open + NIM API</span></td>
               <td>1.2B, 8K context; licensed for commercial use. NIM also serves a smaller llama-nemotron-rerank-500m-v2</td>
@@ -637,6 +659,7 @@
             <li><a href="/models/lighton-rerank">LightOn-rerank</a></li>
             <li><a href="/models/gte-reranker">GTE rerankers</a></li>
             <li><a href="/models/contextual-rerank">Contextual AI</a></li>
+            <li><a href="/models/nvidia-rerank">NVIDIA Nemotron</a></li>
           </ul>
         </div>
       </div>

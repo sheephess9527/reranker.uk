@@ -46,7 +46,8 @@
     "lightblue/lb-reranker-0.5B-v1.0",
     "naver/provence-reranker-debertav3-v1",
     "nvidia/llama-nemotron-rerank-vl-1b-v2",
-    "caveman-so/trim-1"
+    "caveman-so/trim-1",
+    "nvidia/Nemotron-3.5-Rerank-8B-BF16"
   ],
   "pages": [
     {

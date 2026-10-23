@@ -400,8 +400,30 @@
               <td class="muted" title="ZeroEntropy 公布的是自己在七个领域上的 NDCG@10，对 OpenAI text-embedding-3-small 召回的前 100 条重排序：平均 0.6714*，同一测试中 Cohere rerank-3.5 为 0.5847*。不是 BEIR 平均分">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
+            <tr id="nvidia-rerank" data-name="nemotron-3.5-rerank-8b" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="">
+              <th scope="row"><a href="/zh/models/nvidia-rerank">Nemotron-3.5-Rerank-8B</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill good">开源权重</span><span class="pill info">图片</span></td>
+              <td>2026 年 10 月 20 日新发布：文本、页面图片或两者一起；8.38B，32,768 token，OpenMDW 许可证（可商用）</td>
+              <td>文本评测过 34 种语言</td>
+              <td>GPU</td>
+              <td>免费（自建）/ 托管</td>
+              <td class="muted" title="NVIDIA 没有公布它的 BEIR 平均分。NVIDIA 自己的测试（取自模型卡）：ViDoRe V3 67.56（图片 + 文本）、MIRACL-VISION 78.69，NDCG@10，对 Nemotron-3.5-Embed-1B 的前 50 条重排">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr data-name="llama-nemotron-rerank-vl-1b-v2" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="">
+              <th scope="row"><a href="/zh/models/nvidia-rerank">llama-nemotron-rerank-vl-1b-v2</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill">开源 + NIM API</span></td>
+              <td>约 1.7B：文本、页面图片或两者一起；NVIDIA Open Model License（可商用）</td>
+              <td>未说明</td>
+              <td>GPU / NIM</td>
+              <td>NIM / 自建</td>
+              <td class="muted" title="NVIDIA 报告的是 ViDoRe V1–V3 和两个内部数据集上的平均 Recall@5（图片 + 文本时为 77.64%），不是 BEIR NDCG">not published*</td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
             <tr data-name="llama-nemotron-rerank-1b-v2" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="">
-              <th scope="row"><a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">llama-nemotron-rerank-1b-v2</a></th>
+              <th scope="row"><a href="/zh/models/nvidia-rerank">llama-nemotron-rerank-1b-v2</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">开源 + NIM API</span></td>
               <td>1.2B，8K 上下文；许可允许商用。NIM 还提供更小的 llama-nemotron-rerank-500m-v2</td>
@@ -637,6 +659,7 @@
             <li><a href="/zh/models/lighton-rerank">LightOn-rerank</a></li>
             <li><a href="/zh/models/gte-reranker">GTE rerankers</a></li>
             <li><a href="/zh/models/contextual-rerank">Contextual AI</a></li>
+            <li><a href="/zh/models/nvidia-rerank">NVIDIA Nemotron</a></li>
           </ul>
         </div>
       </div>

@@ -124,7 +124,7 @@
             <tr>
               <td>扫描 PDF、幻灯片、截图</td>
               <td>文字在图片里，或版面本身带有信息</td>
-              <td><a href="/zh/models/#qwen3-vl-reranker">Qwen3-VL-Reranker</a> 或 <a href="/zh/models/#lighton-rerank">LightOn-rerank</a></td>
+              <td><a href="/zh/models/#qwen3-vl-reranker">Qwen3-VL-Reranker</a>、<a href="/zh/models/#lighton-rerank">LightOn-rerank</a> 或 <a href="/zh/models/nvidia-rerank">NVIDIA Nemotron</a></td>
               <td>GPU</td>
             </tr>
           </tbody>
@@ -149,7 +149,7 @@
       <p>单靠向量检索会漏掉精确的函数名；单靠 BM25 会漏掉换了说法的“怎么……”类问题。先做<strong>混合检索</strong>，再重排序。Qwen 公布了 Qwen3-Reranker 的代码检索分数（见 <a href="/zh/models/qwen-reranker#scores">Qwen 页面</a>），Voyage 也公布了 rerank-3 在自家代码数据集上相对 rerank-2.5 的提升（见 <a href="/zh/models/voyage-rerank">Voyage 页面</a>）。Demo 预设：<strong>技术文档</strong>和<strong>代码搜索</strong>。</p>
 
       <h2 id="visual">扫描 PDF、幻灯片和截图</h2>
-      <p>如果你的文档是页面图片 —— 扫描件、幻灯片、仪表盘 —— 文本重排序模型只能看到 OCR 提取出来的内容。<strong>Qwen3-VL-Reranker</strong>（2B / 8B）和 <strong>LightOn-rerank</strong> 直接给页面图片打分，都是 Apache 2.0 许可，阿里云还以 API 形式提供 <strong>qwen3-vl-rerank</strong>。它们公布的分数来自视觉文档基准 ViDoRe，所以应该互相比较，而不是和 BEIR 那一列比。</p>
+      <p>如果你的文档是页面图片 —— 扫描件、幻灯片、仪表盘 —— 文本重排序模型只能看到 OCR 提取出来的内容。<strong>Qwen3-VL-Reranker</strong>（2B / 8B）和 <strong>LightOn-rerank</strong> 直接给页面图片打分，都是 Apache 2.0 许可，阿里云还以 API 形式提供 <strong>qwen3-vl-rerank</strong>。NVIDIA 的 <a href="/zh/models/nvidia-rerank">Nemotron-3.5-Rerank-8B</a> 和更小的 llama-nemotron-rerank-vl-1b-v2 也能这样做，许可证允许商用，而且能把页面图片和提取出的文本一起输入。它们公布的分数来自视觉文档基准 ViDoRe，所以应该互相比较，而不是和 BEIR 那一列比。</p>
 
       <h2 id="try">在 Demo 中试用</h2>
       <p>下列场景对应内置预设 —— 载入后点重排序，看 bi-encoder 代理列先排错，再由 cross-encoder 纠正。</p>
@@ -217,6 +217,7 @@
             <li><a href="/zh/models/lighton-rerank">LightOn-rerank</a></li>
             <li><a href="/zh/models/gte-reranker">GTE rerankers</a></li>
             <li><a href="/zh/models/contextual-rerank">Contextual AI</a></li>
+            <li><a href="/zh/models/nvidia-rerank">NVIDIA Nemotron</a></li>
           </ul>
         </div>
       </div>
