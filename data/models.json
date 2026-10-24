@@ -398,6 +398,15 @@
       "check_pattern": "cross-encoder/ms-marco-MiniLM-L6-v2\\s*\\|\\s*74\\.30\\s*\\|\\s*{value}\\s*\\|",
       "check_hint": "MARCO",
       "verified_on": "2026-10-12"
+    },
+    "docs_per_sec": {
+      "value": "1,800",
+      "source_url": "https://huggingface.co/cross-encoder/ms-marco-MiniLM-L4-v2",
+      "check_url": "https://huggingface.co/cross-encoder/ms-marco-MiniLM-L4-v2/raw/main/README.md",
+      "check_pattern": "cross-encoder/ms-marco-MiniLM-L6-v2\\s*\\|\\s*74\\.30\\s*\\|\\s*39\\.01\\s*\\|\\s*1800\\b",
+      "check_hint": "Docs / Sec",
+      "verified_on": "2026-10-24",
+      "note": "sentence-transformers' own table on the cross-encoder model cards: documents a second on a V100 GPU; the card writes the figure without a thousands separator"
     }
   },
   "jina-reranker-v3.5": {
@@ -2084,6 +2093,25 @@
       "check_hint": "Max Tokens",
       "verified_on": "2026-10-23",
       "note": "the NIM support matrix writes 8192"
+    }
+  },
+  "ms-marco-minilm-l4-v2": {
+    "trec_dl19": {
+      "value": "73.04",
+      "source_url": "https://huggingface.co/cross-encoder/ms-marco-MiniLM-L4-v2",
+      "check_url": "https://huggingface.co/cross-encoder/ms-marco-MiniLM-L4-v2/raw/main/README.md",
+      "check_pattern": "cross-encoder/ms-marco-MiniLM-L4-v2\\s*\\|\\s*{value}\\s*\\|",
+      "check_hint": "TREC",
+      "verified_on": "2026-10-24"
+    },
+    "docs_per_sec": {
+      "value": "2,500",
+      "source_url": "https://huggingface.co/cross-encoder/ms-marco-MiniLM-L4-v2",
+      "check_url": "https://huggingface.co/cross-encoder/ms-marco-MiniLM-L4-v2/raw/main/README.md",
+      "check_pattern": "cross-encoder/ms-marco-MiniLM-L4-v2\\s*\\|\\s*73\\.04\\s*\\|\\s*37\\.70\\s*\\|\\s*2500\\b",
+      "check_hint": "Docs / Sec",
+      "verified_on": "2026-10-24",
+      "note": "sentence-transformers' own table on the cross-encoder model cards: documents a second on a V100 GPU; the card writes the figure without a thousands separator"
     }
   }
 }

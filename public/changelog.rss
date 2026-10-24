@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 23 Oct 2026 02:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 24 Oct 2026 02:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>24 Oct 2026 — A faster ms-marco MiniLM</title>
+      <link>https://reranker.uk/changelog#2026-10-24-minilm</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-10-24-minilm</guid>
+      <pubDate>Sat, 24 Oct 2026 02:00:00 GMT</pubDate>
+      <description>The scenario guide now mentions cross-encoder/ms-marco-MiniLM-L4-v2, the faster four-layer sibling of the MiniLM-L6 model in our demo, with sentence-transformers' own quality and speed figures.</description>
+    </item>
     <item>
       <title>23 Oct 2026 — NVIDIA Nemotron rerankers</title>
       <link>https://reranker.uk/changelog#2026-10-23-nvidia</link>

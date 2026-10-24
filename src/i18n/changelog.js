@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "24 Oct 2026 — A faster ms-marco MiniLM":
+    "2026 年 10 月 24 日 —— 更快的 ms-marco MiniLM",
+  "<strong><code>cross-encoder/ms-marco-MiniLM-L4-v2</code> in the <a href=\"/guides/choose-reranker-scenario.html#support\">scenario guide</a></strong> — the release watch flagged it as popular (over five million downloads) but never mentioned here. It is the four-layer sibling of the MiniLM-L6 model in our demo: slightly lower on TREC DL 19, faster per document, by sentence-transformers’ own figures":
+    "<strong><code>cross-encoder/ms-marco-MiniLM-L4-v2</code> 写进<a href=\"/guides/choose-reranker-scenario.html#support\">选型指南</a></strong> —— 发布监控发现它下载量超过五百万，本站却从没提过。它是 Demo 里 MiniLM-L6 的四层版本：按 sentence-transformers 自己的数据，TREC DL 19 上略低，每篇文档更快",
   "23 Oct 2026 — NVIDIA Nemotron rerankers":
     "2026 年 10 月 23 日 —— NVIDIA Nemotron 重排序模型",
   "<strong>A page for <a href=\"/models/nvidia-rerank.html\">NVIDIA’s rerankers</a></strong> — Nemotron-3.5-Rerank-8B, released on 20 October, scores text, page images or both under a licence that allows commercial use. The page also covers the older llama-nemotron rerankers: the 1.7B vision-language model and the 1B and 500M text models, which NVIDIA also serves as NIM containers":
