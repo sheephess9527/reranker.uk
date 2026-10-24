@@ -71,6 +71,13 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-10-24-minilm">24 Oct 2026 — A faster ms-marco MiniLM</h2>
+        <ul class="feature-list">
+          <li><strong><code>cross-encoder/ms-marco-MiniLM-L4-v2</code> in the <a href="/guides/choose-reranker-scenario#support">scenario guide</a></strong> — the release watch flagged it as popular (over five million downloads) but never mentioned here. It is the four-layer sibling of the MiniLM-L6 model in our demo: slightly lower on TREC DL 19, faster per document, by sentence-transformers’ own figures</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-23-nvidia">23 Oct 2026 — NVIDIA Nemotron rerankers</h2>
         <ul class="feature-list">
           <li><strong>A page for <a href="/models/nvidia-rerank">NVIDIA’s rerankers</a></strong> — Nemotron-3.5-Rerank-8B, released on 20 October, scores text, page images or both under a licence that allows commercial use. The page also covers the older llama-nemotron rerankers: the 1.7B vision-language model and the 1B and 500M text models, which NVIDIA also serves as NIM containers</li>
@@ -143,8 +150,7 @@
           <li><strong>Reading-path links</strong> — the five guides in the reading order on the guides page (what a reranker is, cross- vs bi-encoders, adding reranking to RAG, hybrid retrieval, evaluation) now end with links to the guide before and after, and say which step of five you’re on</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>Earlier in October 2026 (28 entries)</summary><article class="changelog-entry">
         <h2 id="2026-10-15-models">15 Oct 2026 — Pages for zerank-2 and Qwen3-VL-Reranker</h2>
         <ul class="feature-list">
           <li><strong><a href="/models/zerank">zerank-2</a></strong> — ZeroEntropy’s 4B reranker gets its own page: the licence conflict between its model card (Apache 2.0) and ZeroEntropy’s docs (non-commercial), ZeroEntropy’s seven-domain scores against Cohere rerank-3.5, API pricing and a quick start</li>
@@ -152,7 +158,7 @@
           <li><strong>Every new figure checked daily</strong> — the 46 scores and prices on the two pages are in the daily source check, like the rest of the site’s numbers</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>Earlier in October 2026 (27 entries)</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-15-cache">15 Oct 2026 — Pages load faster on a repeat visit</h2>
         <ul class="feature-list">
           <li><strong>Styles and scripts are cached</strong> — every page view used to ask Cloudflare whether the stylesheet and scripts had changed, one round trip per file, which is slow from mainland China. Each file’s address now carries a fingerprint of its contents, so the browser keeps it for a year and fetches a new copy only when it really changes</li>
@@ -523,6 +529,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 

@@ -140,7 +140,7 @@
       <p>经典的小模型 —— ms-marco MiniLM、Jina v1、mxbai v1 —— 只用英文训练。Qwen3-Reranker（100 多种语言）、bge-reranker-v2-m3 和 306M 的 <strong>gte-multilingual-reranker-base</strong>（70 多种语言）是为多语言训练的。如果服务器在国内、又不想自己部署模型，<strong>阿里云百炼</strong>按 token 以人民币出售 qwen3-rerank，<strong>硅基流动</strong>用同一个接口提供 bge-reranker-v2-m3 和 Qwen3-Reranker；两者都在<a href="/zh/models/">模型对比表</a>和成本计算器的人民币表里。在国内下载开源权重，可以用 Hugging Face 的镜像 <a href="https://hf-mirror.com" rel="noopener noreferrer">hf-mirror.com</a>。<a href="/zh/guides/rerank-in-china">国内选型指南</a>详细对比了这三条路。</p>
 
       <h2 id="support">客服工单</h2>
-      <p>查询很短，段落只有 FAQ 那么长，延迟决定体验。英文场景下，一个<strong>极小</strong>的 cross-encoder（Jina v1 tiny、ms-marco MiniLM）往往就够了 —— 你是在几条相似答案里挑一条，而不是读 100 页的 PDF。其他语言先从 bge-reranker-v2-m3 开始。可以在 <a href="/zh/demo?s=support">Demo</a> 里试试<strong>客服</strong>预设。</p>
+      <p>查询很短，段落只有 FAQ 那么长，延迟决定体验。英文场景下，一个<strong>极小</strong>的 cross-encoder（Jina v1 tiny、ms-marco MiniLM）往往就够了 —— 你是在几条相似答案里挑一条，而不是读 100 页的 PDF。如果 MiniLM-L6 还是太慢，同系列的 <code>cross-encoder/ms-marco-MiniLM-L4-v2</code> 少两层：按 sentence-transformers 自己的数据，TREC DL 19 上 NDCG@10 是 73.04（L6 是 74.30），在 V100 上每秒处理 2,500 篇文档（L6 是 1,800）。其他语言先从 bge-reranker-v2-m3 开始。可以在 <a href="/zh/demo?s=support">Demo</a> 里试试<strong>客服</strong>预设。</p>
 
       <h2 id="legal">法律与合规</h2>
       <p>干扰项和正确答案用词相同（“终止”“通知期”“违约”）。bi-encoder 容易混淆它们；cross-encoder 能分辨细微差别，而<strong>能跟随指令</strong>的重排序模型还能让你说明什么才算相关 —— 例如“规定无故终止的条款”“后来的修订取代先前的”。Qwen3-Reranker 和 Voyage rerank-3 支持指令；Contextual AI Rerank v2 的权重仅限非商用。为更大的模型预留延迟，并把段落切成单条条款。Demo 预设：<strong>法律条款</strong>。</p>
