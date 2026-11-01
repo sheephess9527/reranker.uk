@@ -173,7 +173,7 @@ resp = requests.post(
 
 for r in resp["results"]:
     print(r["index"], r["relevance_score"])</code></pre>
-      <p>有两个参数只对部分模型有效。<code>instruction</code> 只支持 Qwen3-Reranker 系列。对于 bge-reranker-v2-m3 和 bce-reranker-base_v1，硅基流动会自己把长文档切成片段（<code>max_chunks_per_doc</code>、<code>overlap_tokens</code>），取得分最高的片段作为整篇文档的分数 —— 很方便，但意味着一篇长文档只凭其中最好的一段胜出。Qwen3-VL-Reranker-8B 有自己的多模态请求格式。详见<a href="https://docs.siliconflow.cn/docs/api/rerank-post" rel="noopener noreferrer">硅基流动重排序 API 文档</a>。</p>
+      <p>有两个参数只对部分模型有效。<code>instruction</code> 只支持 Qwen3-Reranker 系列。对于 bge-reranker-v2-m3 和 bce-reranker-base_v1，硅基流动会自己把长文档切成片段（<code>max_chunks_per_doc</code>、<code>overlap_tokens</code>），取得分最高的片段作为整篇文档的分数 —— 很方便，但意味着一篇长文档只凭其中最好的一段胜出。Qwen3-VL-Reranker-8B 有自己的多模态请求格式。详见<a href="https://docs.siliconflow.com/cn/api-reference/rerank/create-rerank" rel="noopener noreferrer">硅基流动重排序 API 文档</a>。</p>
 
       <h2 id="self-host">自己部署：怎么下载权重</h2>
       <p>这些模型都是开源的，但在国内访问 huggingface.co 经常很慢甚至连不上。有两个办法：</p>

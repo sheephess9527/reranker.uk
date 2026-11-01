@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "<strong>A dead link replaced</strong> — SiliconFlow’s <code>docs.siliconflow.cn</code> site stopped responding, so the <a href=\"/guides/rerank-in-china.html\">China guide</a> now links to the same rerank API page on <code>docs.siliconflow.com</code>, in Chinese":
+    "<strong>换掉一个失效链接</strong> —— 硅基流动的 <code>docs.siliconflow.cn</code> 站点无法访问，<a href=\"/guides/rerank-in-china.html\">国内重排序指南</a>改为链接 <code>docs.siliconflow.com</code> 上同一个重排序 API 页面的中文版",
   "1 Nov 2026 — Vendor updates: Pinecone and NVIDIA NIM":
     "2026 年 11 月 1 日 —— 厂商更新：Pinecone 和 NVIDIA NIM",
   "<strong>Pinecone halved a limit</strong> — <code>cohere-rerank-4-fast</code> on Pinecone now takes {{fact:pinecone-rerank.cohere_4_fast_max_tokens_per_doc}} tokens per document, down from 8,192; the <a href=\"/guides/rerank-vector-database.html#pinecone\">vector database guide</a> shows the new figure. This site’s daily source check caught the change":
