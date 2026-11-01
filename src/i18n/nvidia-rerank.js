@@ -7,8 +7,8 @@ window.I18N_PAGE = { zh: {
     "<a href=\"/\">首页</a><span>/</span><a href=\"/models/\">模型</a><span>/</span>NVIDIA Nemotron 重排序模型",
   "NVIDIA Nemotron rerankers":
     "NVIDIA Nemotron 重排序模型",
-  "Open weights + NIM · NVIDIA · <time datetime=\"2026-10-23\">Updated 23 Oct 2026</time>":
-    "开放权重 + NIM · NVIDIA · <time datetime=\"2026-10-23\">更新于 2026 年 10 月 23 日</time>",
+  "Open weights + NIM · NVIDIA · <time datetime=\"2026-11-01\">Updated 1 Nov 2026</time>":
+    "开放权重 + NIM · NVIDIA · <time datetime=\"2026-11-01\">更新于 2026 年 11 月 1 日</time>",
   "Commercial use":
     "可商用",
   "Text and page images":
@@ -65,8 +65,8 @@ window.I18N_PAGE = { zh: {
     "NIM 中 {{fact:llama-nemotron-rerank-1b-v2.max_tokens}} token",
   "NIM only; no Hugging Face card":
     "仅 NIM；没有 Hugging Face 模型卡",
-  "All four are cross-encoders that return a raw logit per query–document pair: higher means more relevant, and it isn’t a probability. The OpenMDW licence allows commercial use; the vision-language model’s NVIDIA Open Model License does too, with the Llama 3.2 licence on top. The 500M has no Hugging Face card; it is available only as a NIM. NVIDIA also sells the 8B through Baseten, DeepInfra, FriendliAI and OpenRouter, and announced a NIM for it. On 23 October the reranking NIM’s support matrix still listed only the three llama-nemotron models.":
-    "四个都是交叉编码器，对每个查询–文档对输出一个原始 logit：越高越相关，但它不是概率。OpenMDW 许可证允许商用；视觉语言模型用的 NVIDIA Open Model License 也允许，另外还要遵守 Llama 3.2 许可证。500M 没有 Hugging Face 模型卡，只以 NIM 提供。NVIDIA 还通过 Baseten、DeepInfra、FriendliAI 和 OpenRouter 提供 8B，并宣布了它的 NIM；不过 10 月 23 日重排序 NIM 的支持矩阵里仍只有三个 llama-nemotron 模型。",
+  "All four are cross-encoders that return a raw logit per query–document pair: higher means more relevant, and it isn’t a probability. The OpenMDW licence allows commercial use; the vision-language model’s NVIDIA Open Model License does too, with the Llama 3.2 licence on top. The 500M has no Hugging Face card; it is available only as a NIM. NVIDIA also sells the 8B through Baseten, DeepInfra, FriendliAI and OpenRouter, and since NIM release 2.4 as a NIM container, <code>nemotron-rerank</code>. That NIM caps each query–passage pair at {{fact:nemotron-3.5-rerank-8b.nim_default_tokens}} tokens by default; set <code>NIM_PIPELINE_MAX_SEQ_LEN</code> to allow the model’s full {{fact:nemotron-3.5-rerank-8b.context_tokens}}. The three llama-nemotron models stay on NIM release 2.3.":
+    "四个都是交叉编码器，对每个查询–文档对输出一个原始 logit：越高越相关，但它不是概率。OpenMDW 许可证允许商用；视觉语言模型用的 NVIDIA Open Model License 也允许，另外还要遵守 Llama 3.2 许可证。500M 没有 Hugging Face 模型卡，只以 NIM 提供。NVIDIA 还通过 Baseten、DeepInfra、FriendliAI 和 OpenRouter 提供 8B；从 NIM 2.4 版起，它也有了 NIM 容器 <code>nemotron-rerank</code>。这个 NIM 默认把每个查询–段落对限制在 {{fact:nemotron-3.5-rerank-8b.nim_default_tokens}} token，设置 <code>NIM_PIPELINE_MAX_SEQ_LEN</code> 才能用满模型的 {{fact:nemotron-3.5-rerank-8b.context_tokens}}。三个 llama-nemotron 模型仍留在 NIM 2.3 版。",
   "Scores, and whose they are":
     "分数，以及是谁测的",
   "ViDoRe V3, page image":
@@ -105,8 +105,8 @@ window.I18N_PAGE = { zh: {
     "模型卡用 <code>vllm serve --runner pooling</code> 加上检查点自带的聊天模板来部署，通过 <code>/classify</code> 接口给每一对打分。不要用 <code>/score</code> 或 <code>/rerank</code>：NVIDIA 说明这两个接口可能处理错模型的图片占位符。每个文档最多一张图片。",
   "The llama-nemotron models through NIM":
     "通过 NIM 使用 llama-nemotron 模型",
-  "Both open llama-nemotron models load from Hugging Face with <code>transformers</code>, and the vision-language one also with sentence-transformers’ <code>CrossEncoder</code>. For production, NVIDIA package them, and the 500M, as NIM containers, supported on A100, H100, B200, RTX PRO 6000 Blackwell and DGX Spark. The 1B is also callable as a hosted API on build.nvidia.com.":
-    "两个公开权重的 llama-nemotron 模型都能从 Hugging Face 用 <code>transformers</code> 加载，视觉语言那个也能用 sentence-transformers 的 <code>CrossEncoder</code>。生产环境里，NVIDIA 把它们和 500M 一起打包成 NIM 容器，支持 A100、H100、B200、RTX PRO 6000 Blackwell 和 DGX Spark。1B 还可以在 build.nvidia.com 上作为托管 API 调用。",
+  "Both open llama-nemotron models load from Hugging Face with <code>transformers</code>, and the vision-language one also with sentence-transformers’ <code>CrossEncoder</code>. For production, NVIDIA package them, and the 500M, as NIM containers (release 2.3), supported on A100, H100, B200, RTX PRO 6000 Blackwell and DGX Spark. The 1B is also callable as a hosted API on build.nvidia.com.":
+    "两个公开权重的 llama-nemotron 模型都能从 Hugging Face 用 <code>transformers</code> 加载，视觉语言那个也能用 sentence-transformers 的 <code>CrossEncoder</code>。生产环境里，NVIDIA 把它们和 500M 一起打包成 NIM 容器（2.3 版），支持 A100、H100、B200、RTX PRO 6000 Blackwell 和 DGX Spark。1B 还可以在 build.nvidia.com 上作为托管 API 调用。",
   "When to pick NVIDIA":
     "什么时候选 NVIDIA",
   "<strong>Yes:</strong> you rerank PDF pages, slides or scans, possibly with their extracted text, and need a commercial licence: Nemotron-3.5-Rerank-8B if you have the GPU, llama-nemotron-rerank-vl-1b-v2 if you don’t.":

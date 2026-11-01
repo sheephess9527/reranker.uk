@@ -33,7 +33,7 @@
   <link rel="preload" href="/assets/css/style.css?v=ff62e57d6c" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css?v=ff62e57d6c" >
   <!-- seo:jsonld -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://reranker.uk/models/"},{"@type":"ListItem","position":3,"name":"NVIDIA Nemotron rerankers","item":"https://reranker.uk/models/nvidia-rerank"}]},{"@type":"Article","headline":"NVIDIA Nemotron rerankers — text and page images, commercial use","description":"NVIDIA reranker review (Oct 2026): Nemotron-3.5-Rerank-8B for text and page images, llama-nemotron-rerank-vl-1b-v2, and the 1B and 500M text rerankers. Licences, NVIDIA's own scores and whose they are, sentence-transformers, vLLM and NIM.","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"en","datePublished":"2026-10-23","dateModified":"2026-10-23","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/"},"mainEntityOfPage":"https://reranker.uk/models/nvidia-rerank","about":{"@type":"Thing","name":"NVIDIA Nemotron reranker models"}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://reranker.uk/models/"},{"@type":"ListItem","position":3,"name":"NVIDIA Nemotron rerankers","item":"https://reranker.uk/models/nvidia-rerank"}]},{"@type":"Article","headline":"NVIDIA Nemotron rerankers — text and page images, commercial use","description":"NVIDIA reranker review (Oct 2026): Nemotron-3.5-Rerank-8B for text and page images, llama-nemotron-rerank-vl-1b-v2, and the 1B and 500M text rerankers. Licences, NVIDIA's own scores and whose they are, sentence-transformers, vLLM and NIM.","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"en","datePublished":"2026-10-23","dateModified":"2026-11-01","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/"},"mainEntityOfPage":"https://reranker.uk/models/nvidia-rerank","about":{"@type":"Thing","name":"NVIDIA Nemotron reranker models"}}]}</script>
 
 </head>
 <body>
@@ -67,7 +67,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>NVIDIA Nemotron rerankers</div>
       <h1>NVIDIA Nemotron rerankers</h1>
-      <p class="meta">Open weights + NIM · NVIDIA · <time datetime="2026-10-23">Updated 23 Oct 2026</time></p>
+      <p class="meta">Open weights + NIM · NVIDIA · <time datetime="2026-11-01">Updated 1 Nov 2026</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">Commercial use</span><span class="pill info">Text and page images</span><span class="pill">GPU required</span></div>
       <p class="lead">NVIDIA offers four rerankers for commercial use, three of them as open weights. The newest, <strong>Nemotron-3.5-Rerank-8B</strong> (20 October 2026), scores text, page images or both with one 8.38B-parameter model and a 32,768-token context. The older <strong>llama-nemotron</strong> family is much smaller: a 1.7B vision-language reranker and 1B and 500M text rerankers, all three served as NVIDIA NIM containers.</p>
 
@@ -96,7 +96,7 @@
           </tbody>
         </table>
       </div>
-      <p>All four are cross-encoders that return a raw logit per query–document pair: higher means more relevant, and it isn’t a probability. The OpenMDW licence allows commercial use; the vision-language model’s NVIDIA Open Model License does too, with the Llama 3.2 licence on top. The 500M has no Hugging Face card; it is available only as a NIM. NVIDIA also sells the 8B through Baseten, DeepInfra, FriendliAI and OpenRouter, and announced a NIM for it. On 23 October the reranking NIM’s support matrix still listed only the three llama-nemotron models.</p>
+      <p>All four are cross-encoders that return a raw logit per query–document pair: higher means more relevant, and it isn’t a probability. The OpenMDW licence allows commercial use; the vision-language model’s NVIDIA Open Model License does too, with the Llama 3.2 licence on top. The 500M has no Hugging Face card; it is available only as a NIM. NVIDIA also sells the 8B through Baseten, DeepInfra, FriendliAI and OpenRouter, and since NIM release 2.4 as a NIM container, <code>nemotron-rerank</code>. That NIM caps each query–passage pair at 10,240 tokens by default; set <code>NIM_PIPELINE_MAX_SEQ_LEN</code> to allow the model’s full 32,768. The three llama-nemotron models stay on NIM release 2.3.</p>
 
       <h2 id="scores">Scores, and whose they are</h2>
       <h3>Nemotron-3.5-Rerank-8B</h3>
@@ -157,7 +157,7 @@ rankings = model.rank(query, documents, batch_size=1)</code></pre>
       <h3>Serving the 8B with vLLM</h3>
       <p>The card serves it with <code>vllm serve --runner pooling</code> and the chat template that ships with the checkpoint, and scores each pair through the <code>/classify</code> endpoint. Don’t use <code>/score</code> or <code>/rerank</code>: NVIDIA note they can mishandle the model’s image placeholders. Each document takes at most one image.</p>
       <h3>The llama-nemotron models through NIM</h3>
-      <p>Both open llama-nemotron models load from Hugging Face with <code>transformers</code>, and the vision-language one also with sentence-transformers’ <code>CrossEncoder</code>. For production, NVIDIA package them, and the 500M, as NIM containers, supported on A100, H100, B200, RTX PRO 6000 Blackwell and DGX Spark. The 1B is also callable as a hosted API on build.nvidia.com.</p>
+      <p>Both open llama-nemotron models load from Hugging Face with <code>transformers</code>, and the vision-language one also with sentence-transformers’ <code>CrossEncoder</code>. For production, NVIDIA package them, and the 500M, as NIM containers (release 2.3), supported on A100, H100, B200, RTX PRO 6000 Blackwell and DGX Spark. The 1B is also callable as a hosted API on build.nvidia.com.</p>
 
       <h2 id="when">When to pick NVIDIA</h2>
       <ul>

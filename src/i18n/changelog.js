@@ -1,4 +1,10 @@
 window.I18N_PAGE = { zh: {
+  "1 Nov 2026 — Vendor updates: Pinecone and NVIDIA NIM":
+    "2026 年 11 月 1 日 —— 厂商更新：Pinecone 和 NVIDIA NIM",
+  "<strong>Pinecone halved a limit</strong> — <code>cohere-rerank-4-fast</code> on Pinecone now takes {{fact:pinecone-rerank.cohere_4_fast_max_tokens_per_doc}} tokens per document, down from 8,192; the <a href=\"/guides/rerank-vector-database.html#pinecone\">vector database guide</a> shows the new figure. This site’s daily source check caught the change":
+    "<strong>Pinecone 把一个限制减半了</strong> —— Pinecone 上的 <code>cohere-rerank-4-fast</code> 现在每个文档最多 {{fact:pinecone-rerank.cohere_4_fast_max_tokens_per_doc}} token，原来是 8,192；<a href=\"/guides/rerank-vector-database.html#pinecone\">向量数据库指南</a>已改成新数字。这次变化是本站每天的来源核对发现的",
+  "<strong>Nemotron-3.5-Rerank-8B is now a NIM</strong> — NVIDIA’s NIM release 2.4 serves it as <code>nemotron-rerank</code>, capped at {{fact:nemotron-3.5-rerank-8b.nim_default_tokens}} tokens per pair unless you raise the limit. The llama-nemotron rerankers stay on NIM 2.3. The <a href=\"/models/nvidia-rerank.html\">NVIDIA page</a> is updated":
+    "<strong>Nemotron-3.5-Rerank-8B 有了 NIM</strong> —— NVIDIA 的 NIM 2.4 版以 <code>nemotron-rerank</code> 提供它，默认每对限制 {{fact:nemotron-3.5-rerank-8b.nim_default_tokens}} token，可以手动调高。llama-nemotron 系列仍留在 NIM 2.3 版。<a href=\"/models/nvidia-rerank.html\">NVIDIA 页面</a>已更新",
   "24 Oct 2026 — A faster ms-marco MiniLM":
     "2026 年 10 月 24 日 —— 更快的 ms-marco MiniLM",
   "<strong><code>cross-encoder/ms-marco-MiniLM-L4-v2</code> in the <a href=\"/guides/choose-reranker-scenario.html#support\">scenario guide</a></strong> — the release watch flagged it as popular (over five million downloads) but never mentioned here. It is the four-layer sibling of the MiniLM-L6 model in our demo: slightly lower on TREC DL 19, faster per document, by sentence-transformers’ own figures":
