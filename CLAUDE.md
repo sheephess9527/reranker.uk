@@ -134,6 +134,24 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 > 完成：新增 `/models/nvidia-rerank`（中英文、meta、JSON-LD、社交卡片），四个模型一页：Nemotron-3.5-Rerank-8B（8.38B，Ministral-3-8B，文本/页面图片/两者，32,768 token，OpenMDW-1.1）、llama-nemotron-rerank-vl-1b-v2（约 1.7B，NVIDIA Open Model License）、llama-nemotron-rerank-1b-v2（文本，26 种语言，8192 token，OpenMDW-1.1）、500M（只有 NIM，无 HF 模型卡）。31 个新 fact（`nemotron-3.5-rerank-8b`、`nvidia-rerank-run`、`llama-nemotron-rerank-vl-1b-v2`，以及 `llama-nemotron-rerank-1b-v2` 补 5 个），来源是三张模型卡、NVIDIA 博客（ViDoRe v3.1 排行榜 60.49 / 59.17）和 NIM 支持矩阵；每个 check_pattern 都在抓下来的原文上验证过只命中一次。模型表加两行（`#nvidia-rerank`），1B 行改链到新页；选型指南「扫描件」一节、页脚、首页「另见」都加了。注意：同一个 Qwen3-VL-Reranker-8B 的 ViDoRe V3，Qwen 自测 66.7、LightOn 64.23、NVIDIA 66.02（图片），页面写明谁测的；1B 流水线的 MLDR 在两张 NVIDIA 卡上不一致（70.69 / 68.49），没有收录。8B 的 NIM 博客里有链接，但 10 月 23 日 NIM 支持矩阵仍未列出。
 
+## 第五轮（2026-11-01 用户选了四项：「做完照旧验证后自动合并」）
+
+### ~~15. 链接检查扛住临时故障~~（2026-11-01 已完成）
+
+> 完成：`check-external-links.mjs` 把 5xx / 429 / 网络错误（重试后仍失败）记为警告（GitHub 上是 `::warning::` 注释），同一个链接连续 `TRANSIENT_DAYS`（默认 3）天都这样才算失败；4xx 仍立即失败，厂商数字检查（`check-sources`）不受影响。首次失败日期存在 `.link-health.json`（`LINK_HEALTH_FILE`），`demo-smoke-daily.yml` 的 `sources` 任务用 `actions/cache/restore|save@v5` 在每天之间传递（key 带 run_id，restore-keys 取最新一份）。判定逻辑是导出的 `judge()`，`tests/link-health.spec.js` 已加进 `npm test`。
+
+### ~~16. 补齐中文页漏译~~（2026-11-01 已完成）
+
+> 完成：真正漏的是 20 处短文本（`check-zh-coverage` 只看 40 字以上，所以没报）：模型表的 Voyage 价格（两个旧键是写死数字的，源文件改用 fact 后失配）和「not published*」「GPU required」「(browser)」，Cohere / Voyage / mxbai 页的 token 上限，Qwen 页的「GPU recommended」，三篇指南的「Keep reading」。之前说的「mxbai 三处」是 `check:i18n`（正则粗查）的误报，那三处早就译了。`check-zh-coverage` 现在第二遍逐个比对表格单元格 / 标题 / pill / 列表项：和英文页一字不差、又含普通小写英文单词的就报；故意保留英文的名字（「v3.5 listwise」）在词典里写成键=值即可。CJK 标点也算中文，原来 5 条误报清零。仍然只是提示，不是失败门。Voyage 免费额度在中文里写成「2 亿」（没有 zh 版 fact，沿用已有做法）。
+
+### 17. 旧 PR #2（Cloudflare 自动配置）——等用户决定
+
+> 看过：Cloudflare 机器人 6 月 20 日开的，只加 `.gitignore` 和 `wrangler.jsonc`，后者 `assets.directory` 是 `.`（会把整个仓库，包括 `src/`、`scripts/`、`data/` 当静态文件发布）。main 上早有自己的 `wrangler.jsonc`（`./public`、`404-page`、`auto-trailing-slash`），两个文件都会冲突。建议关闭，用户还没表态，没动。
+
+### ~~18. 盯 pinecone-rerank-v0~~（2026-11-01 已完成）
+
+> 完成：`watch-releases.mjs` 的 vendor 页面支持反向检查：`expect`（站上推荐的型号必须还在页面上）和 `retired`（`{id}` 附近出现 deprecated / retired / end of life 就报，ID 取 `retired_ids` 或 `expect`）；页面一个 ID 都没匹配到时不做反向检查（页面挪了不等于下架）。「Pinecone hosted rerankers」加了 `expect` 三个型号；新增「Pinecone changelog」（`/release-notes/2026`，Pinecone 7 月就是在这里宣布 cohere-rerank-3.5 弃用的），只查 `retired`。**这个 URL 按年份，2027 年 1 月要改成 `/release-notes/2027`。** 模型总览页已经没有 v0，不监控它。实跑 baseline：两页都没有缺失 / 弃用。处理办法写在 issue 里：改站点后把型号从 `expect` / `retired_ids` 删掉。
+
 ## 发布监控处理记录
 
 - **2026-10-21 Cohere Rerank 5**：Cohere 当天发布（changelog「Announcing Cohere's Rerank 5 Models」）。Cohere 页改为 Rerank 5（新增「What's new in Rerank 5」：校准分数、Context Focus、只支持文本、不支持指令、可用渠道），模型表加 v5 Pro / Fast 两行，首页和表里的卡片更新，代码示例改用 `rerank-v5.0-pro`。3 个新 fact（`cohere-rerank-5`）。**价格还没公布**：页面写「尚未公布」，计算器暂不加；`data/release-watch.json` 新增「Cohere pricing」页面监控（`Rerank N Pro|Fast`，已知 Rerank 4），价格一出现就会报到 release-watch issue，届时补 price fact、计算器选项和价格表行。

@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "{{fact:cohere-rerank-5.context_tokens}} tokens":
+    "{{fact:cohere-rerank-5.context_tokens}} token",
+  "{{fact:cohere-rerank.context_tokens}} tokens":
+    "{{fact:cohere-rerank.context_tokens}} token",
   "${{fact:cohere-rerank-5.fast_usd_per_m}} / 1M tokens":
     "每 100 万 token ${{fact:cohere-rerank-5.fast_usd_per_m}}",
   "${{fact:cohere-rerank-4-pro.price_per_search}} / search (last listed)":

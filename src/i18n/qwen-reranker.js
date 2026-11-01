@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "GPU recommended":
+    "建议用 GPU",
   "Open weights · Qwen, Alibaba · <time datetime=\"2026-10-12\">Updated 12 Oct 2026</time>":
     "开源权重 · 阿里巴巴 Qwen · <time datetime=\"2026-10-12\">更新于 2026 年 10 月 12 日</time>",
   "For images, screenshots and video there is a separate family, <a href=\"/models/qwen3-vl-reranker.html\">Qwen3-VL-Reranker</a> (2B / 8B, 32K context, 30+ languages, Apache 2.0). In Qwen’s own runs on ViDoRe v3, a visual-document retrieval benchmark, the 8B scores {{fact:qwen3-vl-reranker-8b.vidore_v3}} and the 2B {{fact:qwen3-vl-reranker-2b.vidore_v3}}; it is in the <a href=\"/models/\">models table</a> alongside LightOn-rerank, which also scores page images.":

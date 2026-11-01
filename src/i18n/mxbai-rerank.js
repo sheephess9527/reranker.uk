@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "512 tokens":
+    "512 token",
   "Open weights · mixedbread-ai · <time datetime=\"2026-10-12\">Updated 12 Oct 2026</time>":
     "开源权重 · mixedbread-ai · <time datetime=\"2026-10-12\">更新于 2026 年 10 月 12 日</time>",
   "BEIR, mixedbread’s 2026 table":

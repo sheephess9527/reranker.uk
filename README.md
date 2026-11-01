@@ -86,7 +86,10 @@ carry hreflang pointing at each other.
 Because translation happens at build time, the dictionaries never reach the
 browser. When you change an English string you orphan its translation — run
 `node scripts/check-zh-coverage.mjs` after content edits and add the missing
-key to the relevant `src/i18n/<page>.js`. The dictionary key is the element's
+key to the relevant `src/i18n/<page>.js`. It reports long English prose,
+and any table cell, heading, pill or list item that reads the same as on
+the English page and still has a plain English word in it; a name that
+should stay English is marked by mapping it to itself in the dictionary. The dictionary key is the element's
 **normalised inner HTML** from the English build.
 
 Changing only a link *target* is handled for you: the build retries the lookup
@@ -309,8 +312,18 @@ any other official page from a runner and posts its text on an issue; and
 `check-sources.mjs` reports every miss as a GitHub annotation
 (`check-runs/<job id>/annotations` in the REST API).
 
+A page entry can also watch the other way: `expect` lists models the site
+recommends that must stay on that page, and `retired` is a pattern
+(`{id}` stands for each ID in `retired_ids`, or in `expect`) that finds
+one next to "deprecated", "retired" or "end of life". Either opens an
+issue; once the site is updated, take the model out of those lists. The
+Pinecone entries use both — `pinecone-rerank-v0` had already left
+Pinecone's models overview on 1 Nov 2026 — and the Pinecone changelog URL
+is per year, so it moves to `/release-notes/2027` in January.
+
 `node scripts/watch-releases.mjs --baseline` prints what each vendor page
-lists today; `RELEASE_WATCH_SINCE=2026-06-01T00:00:00Z` looks further
+lists today (and, for pages with `expect` or `retired_ids`, which are
+missing or marked retired); `RELEASE_WATCH_SINCE=2026-06-01T00:00:00Z` looks further
 back on Hugging Face.
 
 `npm run check:external` fetches every external link in `src/pages` and
@@ -318,7 +331,13 @@ back on Hugging Face.
 2026) and fails on any that no longer resolves; a 429 or 5xx is retried
 first, and a link that only works by redirecting elsewhere is reported
 without failing. It needs open internet, so it runs in the daily
-workflow's `sources` job rather than in PR CI.
+workflow's `sources` job rather than in PR CI. A link still answering
+5xx / 429 / nothing after the retries is a warning, not a failure, until
+it has done so on every run for three days (`TRANSIENT_DAYS`): on 1 Nov
+2026 one vendor's docs host returned 502 for hours and held up an
+unrelated merge. The workflow keeps the first-failure dates in
+`.link-health.json` (`LINK_HEALTH_FILE`) in the Actions cache; a 404 or
+other 4xx still fails at once.
 
 `npm run check:ld` checks the JSON-LD in every built page: it parses, has
 no FAQPage/HowTo (the FAQs were never visible on the page and had gone

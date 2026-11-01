@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "Keep reading":
+    "继续阅读",
   "<strong>Want a hosted API with calibrated scores:</strong> <a href=\"/models/cohere-rerank.html\">Cohere Rerank 5</a> — 100+ languages, {{fact:cohere-rerank-5.context_tokens}}-token context.":
     "<strong>想要分数经过校准的托管 API：</strong><a href=\"/models/cohere-rerank.html\">Cohere Rerank 5</a> —— 100 多种语言，{{fact:cohere-rerank-5.context_tokens}} token 上下文。",
   "Practical · ~10 min read · <time datetime=\"2026-10-12\">Updated 12 Oct 2026</time>":

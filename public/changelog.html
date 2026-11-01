@@ -71,6 +71,15 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-01-checks">1 Nov 2026 — Chinese pages and site checks</h2>
+        <ul class="feature-list">
+          <li><strong>Chinese pages, finished</strong> — about twenty short labels on the <a href="/zh/models/">Chinese</a> pages were still in English: the Voyage prices and the “not published” cells in the models table, token limits on the Cohere, Voyage and mxbai pages, and three “Keep reading” headings. The coverage check used to look only at longer text; it now also compares every table cell, heading and label with the English page</li>
+          <li><strong>A vendor outage no longer fails the daily check</strong> — an external link that answers with a server error, or not at all, is a warning until it has stayed that way for three days. A page that is gone (404) still fails at once</li>
+          <li><strong>Watching for Pinecone retirements</strong> — <code>pinecone-rerank-v0</code> has dropped off Pinecone’s models overview, though its docs and price list still offer it. The release watch now reads Pinecone’s changelog as well as the rerank docs, and opens an issue if it is deprecated or disappears, so the <a href="/models/#pinecone">models table</a> and the <a href="/guides/rerank-vector-database#pinecone">vector database guide</a> can follow</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-11-01-vendors">1 Nov 2026 — Vendor updates: Pinecone and NVIDIA NIM</h2>
         <ul class="feature-list">
           <li><strong>Pinecone halved a limit</strong> — <code>cohere-rerank-4-fast</code> on Pinecone now takes 4,096 tokens per document, down from 8,192; the <a href="/guides/rerank-vector-database#pinecone">vector database guide</a> shows the new figure. This site’s daily source check caught the change</li>
@@ -145,14 +154,13 @@
           <li><strong>Checked daily</strong> — the 13 new prices and limits are in the daily source check, including Bedrock’s, which AWS’s pricing page only renders from its price list</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>Earlier in October 2026 (30 entries)</summary><article class="changelog-entry">
         <h2 id="2026-10-15-changelog">15 Oct 2026 (last) — A shorter changelog</h2>
         <ul class="feature-list">
           <li><strong>Older months folded</strong> — this page shows the ten newest entries; everything earlier is grouped by month and opens with a click. Links to an older entry, including the ones in the RSS feed, open its month and land on it</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>Earlier in October 2026 (29 entries)</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-15-pager">15 Oct 2026 (late) — Previous and next on the reading path</h2>
         <ul class="feature-list">
           <li><strong>Reading-path links</strong> — the five guides in the reading order on the guides page (what a reranker is, cross- vs bi-encoders, adding reranking to RAG, hybrid retrieval, evaluation) now end with links to the guide before and after, and say which step of five you’re on</li>
@@ -537,6 +545,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 
