@@ -79,7 +79,7 @@ jobs:
       # each one started failing, carried between runs in the Actions cache.
       - name: Restore link-health record
         if: ${{ !cancelled() }}
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: .link-health.json
           key: link-health-${{ github.run_id }}-${{ github.run_attempt }}
@@ -91,7 +91,7 @@ jobs:
         run: node scripts/check-external-links.mjs
       - name: Save link-health record
         if: ${{ !cancelled() }}
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: .link-health.json
           key: link-health-${{ github.run_id }}-${{ github.run_attempt }}

@@ -138,7 +138,7 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 ### ~~15. 链接检查扛住临时故障~~（2026-11-01 已完成）
 
-> 完成：`check-external-links.mjs` 把 5xx / 429 / 网络错误（重试后仍失败）记为警告（GitHub 上是 `::warning::` 注释），同一个链接连续 `TRANSIENT_DAYS`（默认 3）天都这样才算失败；4xx 仍立即失败，厂商数字检查（`check-sources`）不受影响。首次失败日期存在 `.link-health.json`（`LINK_HEALTH_FILE`），`demo-smoke-daily.yml` 的 `sources` 任务用 `actions/cache/restore|save@v4` 在每天之间传递（key 带 run_id，restore-keys 取最新一份）。判定逻辑是导出的 `judge()`，`tests/link-health.spec.js` 已加进 `npm test`。
+> 完成：`check-external-links.mjs` 把 5xx / 429 / 网络错误（重试后仍失败）记为警告（GitHub 上是 `::warning::` 注释），同一个链接连续 `TRANSIENT_DAYS`（默认 3）天都这样才算失败；4xx 仍立即失败，厂商数字检查（`check-sources`）不受影响。首次失败日期存在 `.link-health.json`（`LINK_HEALTH_FILE`），`demo-smoke-daily.yml` 的 `sources` 任务用 `actions/cache/restore|save@v5` 在每天之间传递（key 带 run_id，restore-keys 取最新一份）。判定逻辑是导出的 `judge()`，`tests/link-health.spec.js` 已加进 `npm test`。
 
 ### ~~16. 补齐中文页漏译~~（2026-11-01 已完成）
 
