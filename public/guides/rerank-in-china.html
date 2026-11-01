@@ -173,7 +173,7 @@ resp = requests.post(
 
 for r in resp["results"]:
     print(r["index"], r["relevance_score"])</code></pre>
-      <p>Two options are model-specific. <code>instruction</code> works only with the Qwen3-Reranker models. For bge-reranker-v2-m3 and bce-reranker-base_v1, SiliconFlow splits a long document into chunks itself (<code>max_chunks_per_doc</code>, <code>overlap_tokens</code>) and scores the document by its best chunk — convenient, but it means a long document wins on its single best passage. Qwen3-VL-Reranker-8B has its own multimodal request format. Details are on the <a href="https://docs.siliconflow.cn/docs/api/rerank-post" rel="noopener noreferrer">SiliconFlow rerank API page</a>.</p>
+      <p>Two options are model-specific. <code>instruction</code> works only with the Qwen3-Reranker models. For bge-reranker-v2-m3 and bce-reranker-base_v1, SiliconFlow splits a long document into chunks itself (<code>max_chunks_per_doc</code>, <code>overlap_tokens</code>) and scores the document by its best chunk — convenient, but it means a long document wins on its single best passage. Qwen3-VL-Reranker-8B has its own multimodal request format. Details are on the <a href="https://docs.siliconflow.com/cn/api-reference/rerank/create-rerank" rel="noopener noreferrer">SiliconFlow rerank API page</a>.</p>
 
       <h2 id="self-host">Self-hosting: getting the weights</h2>
       <p>The models are open, but huggingface.co is often slow or unreachable from mainland China. Two ways around it:</p>

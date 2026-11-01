@@ -233,19 +233,21 @@
     },
     {
       "name": "NVIDIA NIM rerankers",
-      "url": "https://docs.nvidia.com/nim/nemo-retriever/reranking/latest/support-matrix.html",
-      "pattern": "(?:llama-(?:\\d+\\.\\d+-)?nemotron-rerank(?:-vl)?-\\d+[mb]-v\\d+|nv-rerankqa-[a-z0-9-]+?-v\\d+)(?![\\w-]|\\.\\w)",
+      "url": "https://docs.nvidia.com/nim/nemo-retriever/text-reranking/latest/support-matrix.html",
+      "pattern": "(?:llama-(?:\\d+\\.\\d+-)?nemotron-rerank(?:-vl)?-\\d+[mb]-v\\d+|nv-rerankqa-[a-z0-9-]+?-v\\d+|nemotron-\\d+(?:\\.\\d+)?-rerank-\\d+[mb](?:-(?:bf16|fp8|nvfp4))?)(?![\\w-]|\\.\\w)",
       "known": [
         "llama-nemotron-rerank-1b-v2",
         "llama-nemotron-rerank-500m-v2",
-        "llama-nemotron-rerank-vl-1b-v2"
-      ]
+        "llama-nemotron-rerank-vl-1b-v2",
+        "nemotron-3.5-rerank-8b-bf16"
+      ],
+      "why": "NIM 2.4 (late Oct 2026) serves only Nemotron-3.5-Rerank-8B; the llama-nemotron models stay on the 2.3 docs (reranking/2.3/support-matrix.html). A new ID here is a new NIM reranker"
     }
   ],
   "libraries": [
     {
       "repo": "huggingface/transformers.js",
-      "known": "4.3.1",
+      "known": "4.3.2",
       "why": "the browser demo loads it (public/assets/js/demo.js)"
     },
     {

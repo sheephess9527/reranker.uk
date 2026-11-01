@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Sat, 24 Oct 2026 02:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 01 Nov 2026 02:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>1 Nov 2026 — Vendor updates: Pinecone and NVIDIA NIM</title>
+      <link>https://reranker.uk/changelog#2026-11-01-vendors</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-11-01-vendors</guid>
+      <pubDate>Sun, 01 Nov 2026 02:00:00 GMT</pubDate>
+      <description>Pinecone cut cohere-rerank-4-fast's per-document limit to 4,096 tokens, and NVIDIA's NIM 2.4 now serves Nemotron-3.5-Rerank-8B, capped at 10,240 tokens per pair by default. Both pages are updated. The China guide's SiliconFlow docs link moves to docs.siliconflow.com, as docs.siliconflow.cn is down.</description>
+    </item>
     <item>
       <title>24 Oct 2026 — A faster ms-marco MiniLM</title>
       <link>https://reranker.uk/changelog#2026-10-24-minilm</link>

@@ -1661,12 +1661,13 @@
       "verified_on": "2026-10-16"
     },
     "cohere_4_fast_max_tokens_per_doc": {
-      "value": "8,192",
+      "value": "4,096",
       "source_url": "https://docs.pinecone.io/guides/search/rerank-results",
       "check_url": "https://docs.pinecone.io/guides/search/rerank-results",
       "check_pattern": "cohere-rerank-4-fast is Cohere.s latest[\\s\\S]{0,500}?Max tokens per document: {value}",
       "check_hint": "cohere-rerank-4-fast is",
-      "verified_on": "2026-10-16"
+      "verified_on": "2026-11-01",
+      "note": "Pinecone lowered this from 8,192 (verified 16 Oct 2026) to 4,096 by 30 Oct 2026; the max_tokens_per_doc parameter now defaults to 1,024 and caps at 4,096"
     },
     "builder_bge_requests_per_month": {
       "value": "1,000",
@@ -1921,6 +1922,14 @@
       "check_hint": "ViDoRe v3.1",
       "verified_on": "2026-10-23",
       "note": "NVIDIA's blog: the ViDoRe v3.1 reranking leaderboard (MTEB), image-and-text inputs; a different setup from the model card's table"
+    },
+    "nim_default_tokens": {
+      "value": "10,240",
+      "source_url": "https://docs.nvidia.com/nim/nemo-retriever/text-reranking/latest/support-matrix.html",
+      "check_pattern": "the NIM limits each query and passage pair to 10240 tokens by default",
+      "check_hint": "NIM_PIPELINE_MAX_SEQ_LEN",
+      "verified_on": "2026-11-01",
+      "note": "NIM release 2.4 support matrix; the page writes 10240"
     }
   },
   "nvidia-rerank-run": {
@@ -2088,11 +2097,11 @@
     },
     "nim_max_tokens": {
       "value": "8,192",
-      "source_url": "https://docs.nvidia.com/nim/nemo-retriever/text-reranking/latest/support-matrix.html",
+      "source_url": "https://docs.nvidia.com/nim/nemo-retriever/reranking/2.3/support-matrix.html",
       "check_pattern": "nvidia/llama-nemotron-rerank-vl-1b-v2 Model card 8192",
       "check_hint": "Max Tokens",
-      "verified_on": "2026-10-23",
-      "note": "the NIM support matrix writes 8192"
+      "verified_on": "2026-11-01",
+      "note": "the NIM 2.3 support matrix writes 8192; from NIM 2.4 (late October 2026) the 'latest' support matrix lists only Nemotron-3.5-Rerank-8B, and the llama-nemotron models stay on release 2.3"
     }
   },
   "ms-marco-minilm-l4-v2": {

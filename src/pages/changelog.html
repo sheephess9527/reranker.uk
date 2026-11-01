@@ -6,6 +6,15 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-01-vendors">1 Nov 2026 — Vendor updates: Pinecone and NVIDIA NIM</h2>
+        <ul class="feature-list">
+          <li><strong>Pinecone halved a limit</strong> — <code>cohere-rerank-4-fast</code> on Pinecone now takes {{fact:pinecone-rerank.cohere_4_fast_max_tokens_per_doc}} tokens per document, down from 8,192; the <a href="/guides/rerank-vector-database.html#pinecone">vector database guide</a> shows the new figure. This site’s daily source check caught the change</li>
+          <li><strong>Nemotron-3.5-Rerank-8B is now a NIM</strong> — NVIDIA’s NIM release 2.4 serves it as <code>nemotron-rerank</code>, capped at {{fact:nemotron-3.5-rerank-8b.nim_default_tokens}} tokens per pair unless you raise the limit. The llama-nemotron rerankers stay on NIM 2.3. The <a href="/models/nvidia-rerank.html">NVIDIA page</a> is updated</li>
+          <li><strong>A dead link replaced</strong> — SiliconFlow’s <code>docs.siliconflow.cn</code> site stopped responding, so the <a href="/guides/rerank-in-china.html">China guide</a> now links to the same rerank API page on <code>docs.siliconflow.com</code>, in Chinese</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-10-24-minilm">24 Oct 2026 — A faster ms-marco MiniLM</h2>
         <ul class="feature-list">
           <li><strong><code>cross-encoder/ms-marco-MiniLM-L4-v2</code> in the <a href="/guides/choose-reranker-scenario.html#support">scenario guide</a></strong> — the release watch flagged it as popular (over five million downloads) but never mentioned here. It is the four-layer sibling of the MiniLM-L6 model in our demo: slightly lower on TREC DL 19, faster per document, by sentence-transformers’ own figures</li>
