@@ -144,9 +144,11 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 > 完成：真正漏的是 20 处短文本（`check-zh-coverage` 只看 40 字以上，所以没报）：模型表的 Voyage 价格（两个旧键是写死数字的，源文件改用 fact 后失配）和「not published*」「GPU required」「(browser)」，Cohere / Voyage / mxbai 页的 token 上限，Qwen 页的「GPU recommended」，三篇指南的「Keep reading」。之前说的「mxbai 三处」是 `check:i18n`（正则粗查）的误报，那三处早就译了。`check-zh-coverage` 现在第二遍逐个比对表格单元格 / 标题 / pill / 列表项：和英文页一字不差、又含普通小写英文单词的就报；故意保留英文的名字（「v3.5 listwise」）在词典里写成键=值即可。CJK 标点也算中文，原来 5 条误报清零。仍然只是提示，不是失败门。Voyage 免费额度在中文里写成「2 亿」（没有 zh 版 fact，沿用已有做法）。
 
-### 17. 旧 PR #2（Cloudflare 自动配置）——等用户决定
+### ~~17. 旧 PR #2（Cloudflare 自动配置）~~（2026-11-01 已关闭）
 
-> 看过：Cloudflare 机器人 6 月 20 日开的，只加 `.gitignore` 和 `wrangler.jsonc`，后者 `assets.directory` 是 `.`（会把整个仓库，包括 `src/`、`scripts/`、`data/` 当静态文件发布）。main 上早有自己的 `wrangler.jsonc`（`./public`、`404-page`、`auto-trailing-slash`），两个文件都会冲突。建议关闭，用户还没表态，没动。
+> Cloudflare 机器人 6 月 20 日开的，只加 `.gitignore` 和 `wrangler.jsonc`，后者 `assets.directory` 是 `.`（会把整个仓库，包括 `src/`、`scripts/`、`data/` 当静态文件发布）。main 上早有自己的 `wrangler.jsonc`（`./public`、`404-page`、`auto-trailing-slash`），两个文件都会冲突。用户同意后关闭，PR 里留了原因；`cloudflare/workers-autoconfig` 分支没删。只是仓库清理，网站没变，所以不写 changelog。
+>
+> 第五轮四项全部完成。
 
 ### ~~18. 盯 pinecone-rerank-v0~~（2026-11-01 已完成）
 
