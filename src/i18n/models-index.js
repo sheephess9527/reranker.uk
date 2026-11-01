@@ -4,6 +4,18 @@ window.I18N_PAGE = {
     "models.tableCaption": "重排序模型对比：架构、类型、适用场景、语言、延迟、价格与 BEIR 分数",
   },
   zh: {
+  "${{fact:voyage-rerank-2.5.price_per_m_tokens}}/M tokens†":
+    "${{fact:voyage-rerank-2.5.price_per_m_tokens}}/M token†",
+  "$0.02/M tokens†":
+    "$0.02/M token†",
+  "GPU required":
+    "需要 GPU",
+  "not published*":
+    "未公布*",
+  "ms-marco MiniLM-L6 <span class=\"muted\">(browser)</span>":
+    "ms-marco MiniLM-L6 <span class=\"muted\">（浏览器）</span>",
+  "<a href=\"/models/jina-reranker.html\">jina-reranker v1 tiny</a>":
+    "<a href=\"/models/jina-reranker.html\">jina-reranker v1 tiny</a>",
   "New 20 Oct 2026: text, page images or both; {{fact:nemotron-3.5-rerank-8b.params}}, {{fact:nemotron-3.5-rerank-8b.context_tokens}} tokens, OpenMDW licence (commercial use)":
     "2026 年 10 月 20 日新发布：文本、页面图片或两者一起；{{fact:nemotron-3.5-rerank-8b.params}}，{{fact:nemotron-3.5-rerank-8b.context_tokens}} token，OpenMDW 许可证（可商用）",
   "34 langs evaluated (text)":
@@ -196,8 +208,8 @@ window.I18N_PAGE = {
     "预览版",
   "Preview successor to 2.5; carries the free-token grant":
     "2.5 的预览版继任者；带免费 token 额度",
-  "$0.05/M tokens† <span class=\"muted\">(200M free)</span>":
-    "$0.05/M token† <span class=\"muted\">（前 2 亿免费）</span>",
+  "${{fact:voyage-rerank-3.price_per_m_tokens}}/M tokens† <span class=\"muted\">(200M free)</span>":
+    "${{fact:voyage-rerank-3.price_per_m_tokens}}/M token† <span class=\"muted\">（前 2 亿免费）</span>",
   "<a href=\"/models/voyage-rerank\">Voyage rerank-3-lite</a>":
     "<a href=\"/models/voyage-rerank\">Voyage rerank-3-lite</a>",
   "Cheaper preview tier; same 32k ctx":
@@ -206,8 +218,8 @@ window.I18N_PAGE = {
     "<a href=\"/models/mxbai-rerank.html\">mxbai-rerank-large-v2</a>",
   "<a href=\"/models/mxbai-rerank.html\">mxbai-rerank-base-v2</a>":
     "<a href=\"/models/mxbai-rerank.html\">mxbai-rerank-base-v2</a>",
-  "$0.02/M tokens† <span class=\"muted\">(200M free)</span>":
-    "$0.02/M token† <span class=\"muted\">（前 2 亿免费）</span>",
+  "${{fact:voyage-rerank-3-lite.price_per_m_tokens}}/M tokens† <span class=\"muted\">(200M free)</span>":
+    "${{fact:voyage-rerank-3-lite.price_per_m_tokens}}/M token† <span class=\"muted\">（前 2 亿免费）</span>",
   "<strong>Last verified:</strong> September 2026 (added Voyage rerank-3 preview; corrected Voyage free-tier and Cohere chunking claims) · <strong>Next review:</strong> Nov 2026. Columns marked <strong>*</strong> use MTEB-R, vendor, or task-specific protocols — <em>not</em> the same classic BEIR 18-dataset avg as the bge/mxbai/Jina rows. Where a vendor publishes no comparable number we say <em>not published</em> rather than guess. <strong>†</strong> Note the differing units: Cohere bills per <em>search</em> (one query + up to 100 docs), Voyage per <em>token</em>. Our <a href=\"/rerank-cost-calculator\">cost calculator</a> works out which is cheaper for your volume. Demo-capable models only: mxbai xsmall, Jina tiny, ms-marco MiniLM.":
     "<strong>最近核对：</strong>2026 年 9 月（新增 Voyage rerank-3 预览版；修正了 Voyage 免费额度与 Cohere 分块两处说法）· <strong>下次复核：</strong>2026 年 11 月。标 <strong>*</strong> 的列使用 MTEB-R、厂商或任务特定协议，<em>不同于</em> bge / mxbai / Jina 行所用的经典 BEIR 18 数据集均值。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档）计费，Voyage 按 <em>token</em> 计费。我们的<a href=\"/rerank-cost-calculator\">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。",
   "<strong>Last verified:</strong> September 2026 (added mxbai-rerank-v2; corrected mxbai-rerank-large-v1's BEIR figure, which this table carried at an unsourced ~62.1 — mixedbread's own comparison table puts it at {{fact:mxbai-rerank-large-v1.beir}}) · <strong>Next review:</strong> Nov 2026. Columns marked <strong>*</strong> use MTEB-R, vendor, or task-specific protocols — <em>not</em> the same classic BEIR 18-dataset avg as the bge/Jina rows. Where a vendor publishes no comparable number we say <em>not published</em> rather than guess. <strong>†</strong> Note the differing units: Cohere bills per <em>search</em> (one query + up to 100 docs), Voyage per <em>token</em>. Our <a href=\"/rerank-cost-calculator.html\">cost calculator</a> works out which is cheaper for your volume. Demo-capable models only: mxbai xsmall, Jina tiny, ms-marco MiniLM.":

@@ -13,7 +13,11 @@
  *   - vendor pages for hosted APIs (Cohere, Voyage, Jina, ZeroEntropy,
  *     Mixedbread, Alibaba Cloud, SiliconFlow, Pinecone, Contextual AI,
  *     Amazon Bedrock, Google Vertex AI, NVIDIA NIM): model IDs matching each
- *     page's `pattern` that aren't in its `known` list;
+ *     page's `pattern` that aren't in its `known` list — and, the other way
+ *     round, IDs in a page's `expect` list (models the site tells people to
+ *     use) that are no longer on it, or that a page's `retired` pattern finds
+ *     next to words like "deprecated" (`{id}` stands for each ID in
+ *     `retired_ids`, or in `expect` if there's no such list);
  *   - GitHub releases of the libraries the site's code and guides depend on
  *     (`libraries`): a stable release newer than `known`.
  *
@@ -153,14 +157,44 @@ for (const page of CONFIG.pages) {
   try {
     const text = (await get(page.url)).replace(/&(#?\w+);/g, (m, e) => ENTITIES[e] ?? m);
     const ids = [...new Set([...text.matchAll(new RegExp(page.pattern, "gi"))].map((m) => m[0].toLowerCase()))].sort();
+    const expect = (page.expect || []).map((e) => e.toLowerCase());
+    const retireIds = (page.retired_ids || page.expect || []).map((e) => e.toLowerCase());
+    const retired = page.retired
+      ? retireIds.filter((id) => new RegExp(page.retired.replaceAll("{id}", id.replace(/[.]/g, "\\.")), "i").test(text))
+      : [];
     if (BASELINE) {
       console.log(`${page.name} (${page.url}):\n  ${JSON.stringify(ids)}`);
+      if (expect.length || retireIds.length) {
+        const gone = expect.filter((id) => !ids.includes(id));
+        console.log(`  expected but missing: ${JSON.stringify(gone)}; marked retired: ${JSON.stringify(retired)}`);
+      }
       continue;
     }
-    if (!ids.length) warnings.push(`${page.name}: no IDs matched ${page.pattern} — page moved or pattern stale?`);
+    if (!ids.length) {
+      warnings.push(`${page.name}: no IDs matched ${page.pattern} — page moved or pattern stale?`);
+      continue; // an empty or moved page says nothing about which models are gone
+    }
     const known = new Set(page.known.map((k) => k.toLowerCase()));
     for (const id of ids.filter((i) => !known.has(i))) {
       found.push({ key: `${page.name}: ${id}`, source: page.name, title: id, url: page.url, detail: "new model ID on the vendor's page" });
+    }
+    for (const id of expect.filter((i) => !ids.includes(i))) {
+      found.push({
+        key: `${page.name}: ${id} gone`,
+        source: page.name,
+        title: `${id} is no longer listed`,
+        url: page.url,
+        detail: `the site still recommends it — ${page.why_expect || "check whether it was retired"}`,
+      });
+    }
+    for (const id of retired) {
+      found.push({
+        key: `${page.name}: ${id} retired`,
+        source: page.name,
+        title: `${id} marked as deprecated or retired`,
+        url: page.url,
+        detail: `the site still recommends it — ${page.why_expect || "check the retirement date"}`,
+      });
     }
   } catch (err) {
     warnings.push(`${page.name}: ${err.message}`);
@@ -240,7 +274,8 @@ const gh = async (method, endpoint, body) => {
 const [open] = await gh("GET", `/issues?labels=${LABEL}&state=open&per_page=1`);
 const howTo =
   "Verify each against the vendor's own announcement before touching the site. Once handled (added, or judged not worth adding), " +
-  "append it to `hf_seen` or the page's `known` list in `data/release-watch.json` so it isn't reported again, then close this issue.";
+  "append it to `hf_seen` or the page's `known` list in `data/release-watch.json` so it isn't reported again, then close this issue. " +
+  "For a model that is gone or retired, update the pages that recommend it and take it out of that page's `expect` list.";
 if (!open) {
   const issue = await gh("POST", "/issues", {
     title: `Release watch: ${found.length} new reranker release${found.length > 1 ? "s" : ""}`,

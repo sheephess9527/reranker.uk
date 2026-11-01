@@ -1,4 +1,12 @@
 window.I18N_PAGE = { zh: {
+  "{{fact:voyage-rerank-3.context_tokens}} tokens":
+    "{{fact:voyage-rerank-3.context_tokens}} token",
+  "32,000 tokens":
+    "32,000 token",
+  "16,000 / 8,000 tokens":
+    "16,000 / 8,000 token",
+  "{{fact:voyage-rerank-3.free_tokens}}":
+    "2 亿",
   "What changed in rerank-3":
     "rerank-3 有哪些变化",
   "Voyage released <code>rerank-3</code> and <code>rerank-3-lite</code> on 30 September 2026 as a drop-in upgrade to the 2.5 series: same API, context length, instruction support and price, and relevance scores calibrated to match the 2.5 models, so thresholds you tuned on 2.5 should still hold. <code>rerank-2.5</code> remains available.":

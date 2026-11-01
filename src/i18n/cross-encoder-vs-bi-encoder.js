@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "Keep reading":
+    "继续阅读",
   "Architecture · ~8 min read · <time datetime=\"2026-06-21\">Updated 21 Jun 2026</time>":
     "架构 · 约 8 分钟阅读 · <time datetime=\"2026-06-21\">更新于 2026 年 6 月 21 日</time>",
   "_title": "Cross-encoder vs bi-encoder：区别与实例 | reranker.uk",

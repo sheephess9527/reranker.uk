@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "Keep reading":
+    "继续阅读",
   "Fundamentals · ~7 min read · <time datetime=\"2026-06-21\">Updated 21 Jun 2026</time>":
     "基础 · 约 7 分钟阅读 · <time datetime=\"2026-06-21\">更新于 2026 年 6 月 21 日</time>",
   "_title": "什么是 reranker？rerank 模型通俗指南 | reranker.uk",

@@ -74,9 +74,27 @@ jobs:
           node-version: 24
       - name: Every models.json figure still appears at its source
         run: node scripts/check-sources.mjs --verbose
+      # A link that answers 5xx / 429 / nothing is only a warning until it
+      # has done so for 3 days in a row; .link-health.json remembers when
+      # each one started failing, carried between runs in the Actions cache.
+      - name: Restore link-health record
+        if: ${{ !cancelled() }}
+        uses: actions/cache/restore@v4
+        with:
+          path: .link-health.json
+          key: link-health-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: link-health-
       - name: Every external link in the pages still resolves
         if: ${{ !cancelled() }}
+        env:
+          LINK_HEALTH_FILE: .link-health.json
         run: node scripts/check-external-links.mjs
+      - name: Save link-health record
+        if: ${{ !cancelled() }}
+        uses: actions/cache/save@v4
+        with:
+          path: .link-health.json
+          key: link-health-${{ github.run_id }}-${{ github.run_attempt }}
 
   # The CSP is enforcing, so anything production adds to a page that the
   # policy doesn't allow (a Cloudflare-injected script, say) is blocked

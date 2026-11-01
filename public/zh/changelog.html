@@ -71,6 +71,15 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-01-checks">2026 年 11 月 1 日 —— 中文页与站点检查</h2>
+        <ul class="feature-list">
+          <li><strong>中文页补齐</strong> —— <a href="/zh/models/">中文</a>页面上还有大约二十处短标签是英文：模型对比表里的 Voyage 价格和「not published」单元格，Cohere、Voyage、mxbai 页面上的 token 上限，以及三处「Keep reading」标题。覆盖率检查以前只看较长的文字，现在还会把每个表格单元格、标题和标签与英文页逐一比对</li>
+          <li><strong>厂商网站临时故障不再让每日检查失败</strong> —— 外部链接返回服务器错误或完全无响应时，先记为警告，连续三天仍是这样才算失败。页面已删除（404）的仍然立即失败</li>
+          <li><strong>盯住 Pinecone 的下架</strong> —— <code>pinecone-rerank-v0</code> 已经从 Pinecone 的模型总览页消失，但文档和价目表上仍然提供。发布监控现在除了重排序文档，还会读 Pinecone 的更新日志；一旦它被标为弃用或从页面上消失，就会开 issue，好让<a href="/zh/models/#pinecone">模型对比表</a>和<a href="/zh/guides/rerank-vector-database#pinecone">向量数据库指南</a>跟着改</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-11-01-vendors">2026 年 11 月 1 日 —— 厂商更新：Pinecone 和 NVIDIA NIM</h2>
         <ul class="feature-list">
           <li><strong>Pinecone 把一个限制减半了</strong> —— Pinecone 上的 <code>cohere-rerank-4-fast</code> 现在每个文档最多 4,096 token，原来是 8,192；<a href="/zh/guides/rerank-vector-database#pinecone">向量数据库指南</a>已改成新数字。这次变化是本站每天的来源核对发现的</li>
@@ -145,14 +154,13 @@
           <li><strong>每天核对</strong> —— 新增的 13 个价格和限制都进了每日来源核对，包括 AWS 价格页只从其价目表动态渲染的 Bedrock 价格</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>2026 年 10 月更早的更新（30 条）</summary><article class="changelog-entry">
         <h2 id="2026-10-15-changelog">2026 年 10 月 15 日（最后）—— 更新日志变短了</h2>
         <ul class="feature-list">
           <li><strong>较早的月份折叠起来</strong> —— 本页只展开最新的十条，更早的按月份分组，点一下就能展开。指向旧条目的链接（包括 RSS 里的）会自动展开对应月份并跳到那一条</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>2026 年 10 月更早的更新（29 条）</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-15-pager">2026 年 10 月 15 日（稍晚）—— 阅读路线有了上一篇和下一篇</h2>
         <ul class="feature-list">
           <li><strong>阅读路线导航</strong> —— 指南页阅读路线上的五篇（什么是 reranker、Cross- 与 Bi-encoder、为 RAG 加重排序、混合检索、评测）末尾现在有上一篇和下一篇的链接，并标明你读到了五篇中的第几篇</li>
@@ -537,6 +545,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 

@@ -1,4 +1,12 @@
 window.I18N_PAGE = { zh: {
+  "1 Nov 2026 — Chinese pages and site checks":
+    "2026 年 11 月 1 日 —— 中文页与站点检查",
+  "<strong>Chinese pages, finished</strong> — about twenty short labels on the <a href=\"/zh/models/\">Chinese</a> pages were still in English: the Voyage prices and the “not published” cells in the models table, token limits on the Cohere, Voyage and mxbai pages, and three “Keep reading” headings. The coverage check used to look only at longer text; it now also compares every table cell, heading and label with the English page":
+    "<strong>中文页补齐</strong> —— <a href=\"/zh/models/\">中文</a>页面上还有大约二十处短标签是英文：模型对比表里的 Voyage 价格和「not published」单元格，Cohere、Voyage、mxbai 页面上的 token 上限，以及三处「Keep reading」标题。覆盖率检查以前只看较长的文字，现在还会把每个表格单元格、标题和标签与英文页逐一比对",
+  "<strong>A vendor outage no longer fails the daily check</strong> — an external link that answers with a server error, or not at all, is a warning until it has stayed that way for three days. A page that is gone (404) still fails at once":
+    "<strong>厂商网站临时故障不再让每日检查失败</strong> —— 外部链接返回服务器错误或完全无响应时，先记为警告，连续三天仍是这样才算失败。页面已删除（404）的仍然立即失败",
+  "<strong>Watching for Pinecone retirements</strong> — <code>pinecone-rerank-v0</code> has dropped off Pinecone’s models overview, though its docs and price list still offer it. The release watch now reads Pinecone’s changelog as well as the rerank docs, and opens an issue if it is deprecated or disappears, so the <a href=\"/models/#pinecone\">models table</a> and the <a href=\"/guides/rerank-vector-database.html#pinecone\">vector database guide</a> can follow":
+    "<strong>盯住 Pinecone 的下架</strong> —— <code>pinecone-rerank-v0</code> 已经从 Pinecone 的模型总览页消失，但文档和价目表上仍然提供。发布监控现在除了重排序文档，还会读 Pinecone 的更新日志；一旦它被标为弃用或从页面上消失，就会开 issue，好让<a href=\"/models/#pinecone\">模型对比表</a>和<a href=\"/guides/rerank-vector-database.html#pinecone\">向量数据库指南</a>跟着改",
   "<strong>A dead link replaced</strong> — SiliconFlow’s <code>docs.siliconflow.cn</code> site stopped responding, so the <a href=\"/guides/rerank-in-china.html\">China guide</a> now links to the same rerank API page on <code>docs.siliconflow.com</code>, in Chinese":
     "<strong>换掉一个失效链接</strong> —— 硅基流动的 <code>docs.siliconflow.cn</code> 站点无法访问，<a href=\"/guides/rerank-in-china.html\">国内重排序指南</a>改为链接 <code>docs.siliconflow.com</code> 上同一个重排序 API 页面的中文版",
   "1 Nov 2026 — Vendor updates: Pinecone and NVIDIA NIM":
