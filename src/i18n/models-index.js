@@ -74,8 +74,8 @@ window.I18N_PAGE = {
     "Amazon 没有公布 Rerank 1.0 的评测分数；Cohere Rerank 3.5 是 Cohere 的模型。一次查询最多算 {{fact:amazon-bedrock-rerank.docs_per_query}} 个文档，每多 {{fact:amazon-bedrock-rerank.docs_per_query}} 个算一次新查询",
   "<a href=\"https://docs.pinecone.io/guides/search/rerank-results\" rel=\"noopener noreferrer\">Pinecone rerank</a> <span class=\"muted\">(hosted, in the vector DB)</span>":
     "<a href=\"https://docs.pinecone.io/guides/search/rerank-results\" rel=\"noopener noreferrer\">Pinecone 重排序</a> <span class=\"muted\">（托管，内置于向量数据库）</span>",
-  "Rerank inside a Pinecone query, or as a separate call: Pinecone’s own pinecone-rerank-v0 ({{fact:pinecone-rerank.v0_max_tokens}} tokens per pair), bge-reranker-v2-m3 and cohere-rerank-4-fast. See the <a href=\"/guides/rerank-vector-database.html#pinecone\">vector database guide</a>":
-    "在 Pinecone 查询里直接重排，或单独调用：Pinecone 自家的 pinecone-rerank-v0（每对 {{fact:pinecone-rerank.v0_max_tokens}} token）、bge-reranker-v2-m3 和 cohere-rerank-4-fast。详见<a href=\"/guides/rerank-vector-database.html#pinecone\">向量数据库指南</a>",
+  "Rerank inside a Pinecone query, or as a separate call: Pinecone’s own pinecone-rerank-v0 ({{fact:pinecone-rerank.v0_max_tokens}} tokens per pair; {{fact:pinecone-rerank.v0_status}} since November 2026, so not for new projects), bge-reranker-v2-m3 and cohere-rerank-4-fast. See the <a href=\"/guides/rerank-vector-database.html#pinecone\">vector database guide</a>":
+    "在 Pinecone 查询里直接重排，或单独调用：Pinecone 自家的 pinecone-rerank-v0（每对 {{fact:pinecone-rerank.v0_max_tokens}} token；2026 年 11 月起已弃用，新项目不要再用）、bge-reranker-v2-m3 和 cohere-rerank-4-fast。详见<a href=\"/guides/rerank-vector-database.html#pinecone\">向量数据库指南</a>",
   "Free plan: bge-reranker-v2-m3 only, {{fact:pinecone-rerank.starter_bge_requests_per_month}} requests a month; paid plans ${{fact:pinecone-rerank.usd_per_1000_requests}} per 1,000 requests†":
     "免费版只能用 bge-reranker-v2-m3，每月 {{fact:pinecone-rerank.starter_bge_requests_per_month}} 次请求；付费版每 1,000 次请求 ${{fact:pinecone-rerank.usd_per_1000_requests}}†",
   "Pinecone publish no benchmark for pinecone-rerank-v0; the other two are BAAI’s and Cohere’s models — see their rows":

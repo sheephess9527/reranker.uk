@@ -163,7 +163,7 @@
         <li><strong>ZeroEntropy zerank-2</strong> — $0.025 per 1M tokens (<a href="https://docs.zeroentropy.dev/models" rel="noopener noreferrer">ZeroEntropy’s docs</a>). The docs don’t say how a rerank request’s tokens are counted; this page counts them like Voyage’s, the query once per document, which is also how ZeroEntropy counts a request against its rate limits.</li>
         <li><strong>Contextual AI Rerank API</strong> — $0.05 per 1M tokens for v2 and $0.02 for v2-mini (<a href="https://contextual.ai/pricing" rel="noopener noreferrer">Contextual pricing</a>). As with ZeroEntropy, the query is counted once per document; Contextual don’t say how they count it.</li>
         <li><strong>Amazon Bedrock, Amazon Rerank 1.0</strong> — $1.00 per 1,000 queries; a query covers up to 100 documents, and more count as further queries (<a href="https://aws.amazon.com/bedrock/pricing/" rel="noopener noreferrer">Bedrock pricing</a>). Cohere Rerank 3.5 on Bedrock is left out: the same page says a document holds up to 500 tokens and that one over 512 is split, and the two figures don’t agree.</li>
-        <li><strong>Pinecone</strong> — pinecone-rerank-v0 and bge-reranker-v2-m3 at $2 per 1,000 requests on the paid plans; a request takes up to 100 documents, so more need further requests (<a href="https://www.pinecone.io/pricing/" rel="noopener noreferrer">Pinecone pricing</a>). The included free requests aren’t applied, and cohere-rerank-4-fast is left out because Pinecone doesn’t define the “rerank unit” it bills it in.</li>
+        <li><strong>Pinecone</strong> — bge-reranker-v2-m3 and the deprecated pinecone-rerank-v0 at $2 per 1,000 requests on the paid plans; a request takes up to 100 documents, so more need further requests (<a href="https://www.pinecone.io/pricing/" rel="noopener noreferrer">Pinecone pricing</a>). The included free requests aren’t applied, and cohere-rerank-4-fast is left out because Pinecone doesn’t define the “rerank unit” it bills it in.</li>
         <li><strong>Cohere Rerank 5</strong> — $0.05 per 1M tokens (Pro) and $0.02 (Fast), from <a href="https://cohere.com/pricing" rel="noopener noreferrer">cohere.com/pricing</a>. Cohere don’t say how a rerank request’s tokens are counted; this page counts them like Voyage’s, the query once per document.</li>
         <li>Token counts are approximate — every vendor tokenises differently, and this page multiplies your averages rather than tokenising real text.</li>
         <li>Rates verified in October 2026 and re-checked daily against each vendor’s price page by this site’s source check. Confirm before committing to a budget.</li>
@@ -241,7 +241,7 @@
     </div>
   </footer>
   <script src="/assets/js/main.js?v=56cc3b94c3"></script>
-  <script src="/assets/js/cost-calculator.js?v=e0b18df0fa"></script>
+  <script src="/assets/js/cost-calculator.js?v=fc6806f4b1"></script>
   <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
 </body>
 </html>

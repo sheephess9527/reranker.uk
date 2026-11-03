@@ -71,6 +71,13 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-03-pinecone">2026 年 11 月 3 日 —— Pinecone 弃用 pinecone-rerank-v0</h2>
+        <ul class="feature-list">
+          <li><strong>Pinecone 自家的重排序模型已弃用</strong> —— Pinecone 文档现在写明，<code>pinecone-rerank-v0</code> 仍然响应重排序请求，但新项目不要再用，也没给停用日期。<a href="/zh/models/#pinecone">模型对比表</a>、<a href="/zh/guides/rerank-vector-database#pinecone">向量数据库指南</a>和<a href="/zh/rerank-cost-calculator">成本计算器</a>都已注明，并改为推荐 bge-reranker-v2-m3 或 cohere-rerank-4-fast。文档改动后的第二天早上，发布监控就发现了</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-11-01-checks">2026 年 11 月 1 日 —— 中文页与站点检查</h2>
         <ul class="feature-list">
           <li><strong>中文页补齐</strong> —— <a href="/zh/models/">中文</a>页面上还有大约二十处短标签是英文：模型对比表里的 Voyage 价格和「not published」单元格，Cohere、Voyage、mxbai 页面上的 token 上限，以及三处「Keep reading」标题。覆盖率检查以前只看较长的文字，现在还会把每个表格单元格、标题和标签与英文页逐一比对</li>
@@ -145,8 +152,7 @@
           <li><strong>zerank-2-small 和 zerank-2-nano</strong> —— 已写进 <a href="/zh/models/zerank">zerank-2 页面</a>；ZeroEntropy 列出了这两个模型，但还没公布价格或模型卡</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>2026 年 10 月更早的更新（31 条）</summary><article class="changelog-entry">
         <h2 id="2026-10-16-hosted">2026 年 10 月 16 日 —— Pinecone 和 Amazon Bedrock</h2>
         <ul class="feature-list">
           <li><strong>新增两个托管平台</strong> —— <a href="/zh/models/">模型对比表</a>加入 Amazon Bedrock（Amazon Rerank 1.0 和 Cohere Rerank 3.5，按每 1,000 次查询计价）和 Pinecone（自家的 pinecone-rerank-v0，以及 bge-reranker-v2-m3 和 cohere-rerank-4-fast）。这两家一直在发布监控里，但网站上一处都没提</li>
@@ -154,7 +160,7 @@
           <li><strong>每天核对</strong> —— 新增的 13 个价格和限制都进了每日来源核对，包括 AWS 价格页只从其价目表动态渲染的 Bedrock 价格</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>2026 年 10 月更早的更新（30 条）</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-15-changelog">2026 年 10 月 15 日（最后）—— 更新日志变短了</h2>
         <ul class="feature-list">
           <li><strong>较早的月份折叠起来</strong> —— 本页只展开最新的十条，更早的按月份分组，点一下就能展开。指向旧条目的链接（包括 RSS 里的）会自动展开对应月份并跳到那一条</li>
@@ -545,6 +551,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 
