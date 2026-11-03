@@ -163,7 +163,7 @@
         <li><strong>ZeroEntropy zerank-2</strong> —— 每 100 万 token $0.025（<a href="https://docs.zeroentropy.dev/models" rel="noopener noreferrer">ZeroEntropy 文档</a>）。文档没有说明一次重排请求的 token 怎么计；本页按 Voyage 的方式算，即每个文档都把查询算一遍——ZeroEntropy 计算速率限制时也是这样算一次请求的。</li>
         <li><strong>Contextual AI Rerank API</strong> —— v2 每 100 万 token $0.05，v2-mini $0.02（<a href="https://contextual.ai/pricing" rel="noopener noreferrer">Contextual 价格</a>）。和 ZeroEntropy 一样按每个文档都算一遍查询来计；Contextual 没有说明他们怎么计。</li>
         <li><strong>Amazon Bedrock：Amazon Rerank 1.0</strong> —— 每 1,000 次查询 $1.00；一次查询最多 100 个文档，超出部分算作新的查询（<a href="https://aws.amazon.com/bedrock/pricing/" rel="noopener noreferrer">Bedrock 价格</a>）。Bedrock 上的 Cohere Rerank 3.5 没有计入：同一页面一边说每个文档最多 500 token，一边说超过 512 token 才拆分，两个数字对不上。</li>
-        <li><strong>Pinecone</strong> —— 付费套餐里 pinecone-rerank-v0 和 bge-reranker-v2-m3 都是每 1,000 次请求 $2；一次请求最多 100 个文档，更多就要多发请求（<a href="https://www.pinecone.io/pricing/" rel="noopener noreferrer">Pinecone 价格</a>）。没有计入套餐自带的免费请求；cohere-rerank-4-fast 没有计入，因为 Pinecone 没说明它计费用的“rerank 单位”是什么。</li>
+        <li><strong>Pinecone</strong> —— 付费套餐里 bge-reranker-v2-m3 和已弃用的 pinecone-rerank-v0 都是每 1,000 次请求 $2；一次请求最多 100 个文档，更多就要多发请求（<a href="https://www.pinecone.io/pricing/" rel="noopener noreferrer">Pinecone 价格</a>）。没有计入套餐自带的免费请求；cohere-rerank-4-fast 没有计入，因为 Pinecone 没说明它计费用的“rerank 单位”是什么。</li>
         <li><strong>Cohere Rerank 5</strong> —— 每 100 万 token $0.05（Pro）和 $0.02（Fast），取自 <a href="https://cohere.com/pricing" rel="noopener noreferrer">cohere.com/pricing</a>。Cohere 没有说明一次重排请求的 token 怎么计；本页按 Voyage 的方式算，即每个文档都把查询算一遍。</li>
         <li>token 数为近似值 —— 各家分词方式不同，本页是用你填的平均值相乘，而非对真实文本做分词。</li>
         <li>价格于 2026 年 10 月核对，本站的来源检查每天都会和各厂商的价格页重新核对。做预算前请再确认一次。</li>
@@ -241,7 +241,7 @@
     </div>
   </footer>
   <script src="/assets/js/main.js?v=56cc3b94c3"></script>
-  <script src="/assets/js/cost-calculator.js?v=e0b18df0fa"></script>
+  <script src="/assets/js/cost-calculator.js?v=fc6806f4b1"></script>
   <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
 </body>
 </html>

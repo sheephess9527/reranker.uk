@@ -48,7 +48,8 @@
     "nvidia/llama-nemotron-rerank-vl-1b-v2",
     "caveman-so/trim-1",
     "nvidia/Nemotron-3.5-Rerank-8B-BF16",
-    "cross-encoder/ms-marco-MiniLM-L4-v2"
+    "cross-encoder/ms-marco-MiniLM-L4-v2",
+    "cross-encoder/merged-bge-reranker-large"
   ],
   "pages": [
     {
@@ -196,15 +197,16 @@
         "pinecone-rerank-v0"
       ],
       "expect": ["pinecone-rerank-v0", "bge-reranker-v2-m3", "cohere-rerank-4-fast"],
+      "retired_ids": ["bge-reranker-v2-m3", "cohere-rerank-4-fast"],
       "retired": "{id}[^.`]{0,120}?\\b(?:is|are|will be|has been)[ -](?:deprecated|retired|removed)|\\b(?:deprecat\\w*|end[ -]of[ -]life|retir\\w*)\\b[:\\s-][^.`]{0,60}?{id}",
-      "why_expect": "on 1 Nov 2026 pinecone-rerank-v0 had already dropped off Pinecone's models overview while this page and the price list still offered it; when it goes, update the models table row, the vector-database guide's Pinecone section and the cost calculator"
+      "why_expect": "pinecone-rerank-v0 was marked deprecated here on 3 Nov 2026 (still served, no shutdown date; the site now says so) and is left out of retired_ids. When it disappears from this page, take it out of the models table row, the vector-database guide's Pinecone section and the cost calculator"
     },
     {
       "name": "Pinecone changelog",
       "url": "https://docs.pinecone.io/release-notes/2026",
       "pattern": "(?:pinecone-rerank-v\\d+|bge-reranker-v\\d+-m\\d+|cohere-rerank-\\d+(?:\\.\\d+)?(?:-(?:fast|pro))?)(?![\\w-]|\\.\\w)",
       "known": ["cohere-rerank-3.5", "cohere-rerank-4-fast"],
-      "retired_ids": ["pinecone-rerank-v0", "bge-reranker-v2-m3", "cohere-rerank-4-fast"],
+      "retired_ids": ["bge-reranker-v2-m3", "cohere-rerank-4-fast"],
       "retired": "{id}[^.`]{0,120}?\\b(?:is|are|will be|has been)[ -](?:deprecated|retired|removed)|\\b(?:deprecat\\w*|end[ -]of[ -]life|retir\\w*)\\b[:\\s-][^.`]{0,60}?{id}",
       "why": "Pinecone announce deprecations here first (\"cohere-rerank-3.5 is deprecated\", 1 Jul 2026). The URL is per year: move it to /release-notes/2027 in January",
       "why_expect": "update the models table row, the vector-database guide's Pinecone section and the cost calculator; keep the model listed until Pinecone's removal date"

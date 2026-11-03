@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 01 Nov 2026 10:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 03 Nov 2026 02:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>3 Nov 2026 — Pinecone deprecates pinecone-rerank-v0</title>
+      <link>https://reranker.uk/changelog#2026-11-03-pinecone</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-11-03-pinecone</guid>
+      <pubDate>Tue, 03 Nov 2026 02:00:00 GMT</pubDate>
+      <description>Pinecone now marks its own pinecone-rerank-v0 as deprecated: still served, but not for new projects, with no shutdown date. The models table, vector database guide and cost calculator say so and point to bge-reranker-v2-m3 or cohere-rerank-4-fast.</description>
+    </item>
     <item>
       <title>1 Nov 2026 — Chinese pages and site checks</title>
       <link>https://reranker.uk/changelog#2026-11-01-checks</link>

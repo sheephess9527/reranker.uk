@@ -152,8 +152,8 @@
     },
     {
       id: "pinecone",
-      nameEn: "Pinecone pinecone-rerank-v0 / bge-reranker-v2-m3",
-      nameZh: "Pinecone：pinecone-rerank-v0 / bge-reranker-v2-m3",
+      nameEn: "Pinecone bge-reranker-v2-m3 / pinecone-rerank-v0 (deprecated)",
+      nameZh: "Pinecone：bge-reranker-v2-m3 / pinecone-rerank-v0（已弃用）",
       unitEn: "per request (≤100 docs)",
       unitZh: "按请求（每次 ≤100 篇）",
       href: "/guides/rerank-vector-database#pinecone",

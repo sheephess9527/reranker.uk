@@ -172,14 +172,15 @@ top = [h for _s, h in ranked[:5]]</code></pre>
             <tr><th>Model</th><th>Max tokens</th><th>Max documents</th><th>Plans</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>pinecone-rerank-v0</code></td><td>512 per query + document</td><td>100</td><td>Paid plans</td></tr>
+            <tr><td><code>pinecone-rerank-v0</code> (deprecated)</td><td>512 per query + document</td><td>100</td><td>Paid plans</td></tr>
             <tr><td><code>bge-reranker-v2-m3</code></td><td>1024 per query + document</td><td>100</td><td>Every plan; Starter includes 500 requests a month, Builder 1,000</td></tr>
             <tr><td><code>cohere-rerank-4-fast</code></td><td>4,096 per document</td><td>250</td><td>Paid plans</td></tr>
           </tbody>
         </table>
       </div>
-      <p>On the paid plans each costs $2 per 1,000 requests (Cohere’s is counted in “rerank units”). Two details from Pinecone’s documentation are worth knowing before you build on it:</p>
+      <p>On the paid plans each costs $2 per 1,000 requests (Cohere’s is counted in “rerank units”). Three details from Pinecone’s documentation are worth knowing before you build on it:</p>
       <ul>
+        <li><strong>pinecone-rerank-v0 is deprecated.</strong> Since November 2026 Pinecone’s docs say it still serves rerank requests but shouldn’t be used for new projects, and give no date for switching it off. Start with bge-reranker-v2-m3 or cohere-rerank-4-fast instead.</li>
         <li><strong>cohere-rerank-3.5 is gone in all but name.</strong> Pinecone deprecated it on 1 July 2026 and has answered requests for it with cohere-rerank-4-fast since 31 August. Rankings carry over, but the scores are on a different scale, so any fixed score threshold needs re-tuning.</li>
         <li><strong>Cohere’s model runs on Azure AI</strong>, and Pinecone says its requests may be processed outside the United States. That is the “your passages flow through another vendor” trade-off above, made concrete.</li>
       </ul>

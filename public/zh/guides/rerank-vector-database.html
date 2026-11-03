@@ -172,14 +172,15 @@ top = [h for _s, h in ranked[:5]]</code></pre>
             <tr><th>模型</th><th>最大 token 数</th><th>最大文档数</th><th>套餐</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>pinecone-rerank-v0</code></td><td>查询 + 文档共 512</td><td>100</td><td>付费套餐</td></tr>
+            <tr><td><code>pinecone-rerank-v0</code>（已弃用）</td><td>查询 + 文档共 512</td><td>100</td><td>付费套餐</td></tr>
             <tr><td><code>bge-reranker-v2-m3</code></td><td>查询 + 文档共 1024</td><td>100</td><td>所有套餐；Starter 每月含 500 次请求，Builder 含 1,000 次</td></tr>
             <tr><td><code>cohere-rerank-4-fast</code></td><td>每个文档 4,096</td><td>250</td><td>付费套餐</td></tr>
           </tbody>
         </table>
       </div>
-      <p>付费套餐里每个模型都是每 1,000 次请求 $2（Cohere 那个按“rerank 单位”计）。基于它开发之前，Pinecone 文档里有两点值得先知道：</p>
+      <p>付费套餐里每个模型都是每 1,000 次请求 $2（Cohere 那个按“rerank 单位”计）。基于它开发之前，Pinecone 文档里有三点值得先知道：</p>
       <ul>
+        <li><strong>pinecone-rerank-v0 已弃用。</strong>从 2026 年 11 月起，Pinecone 文档写明它仍然响应重排序请求，但新项目不要再用，也没有给出停用日期。新项目请从 bge-reranker-v2-m3 或 cohere-rerank-4-fast 开始。</li>
         <li><strong>cohere-rerank-3.5 已经名存实亡。</strong>Pinecone 在 2026 年 7 月 1 日将它弃用，从 8 月 31 日起，对它的请求都由 cohere-rerank-4-fast 来响应。排序可以沿用，但分数的尺度变了，写死的分数阈值需要重新调。</li>
         <li><strong>Cohere 的模型跑在 Azure AI 上</strong>，Pinecone 说这类请求可能在美国以外处理。这正是上面说的“你的段落会经过另一家厂商”的具体例子。</li>
       </ul>

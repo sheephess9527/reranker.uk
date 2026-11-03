@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "3 Nov 2026 — Pinecone deprecates pinecone-rerank-v0":
+    "2026 年 11 月 3 日 —— Pinecone 弃用 pinecone-rerank-v0",
+  "<strong>Pinecone’s own reranker is deprecated</strong> — Pinecone’s docs now say <code>pinecone-rerank-v0</code> still serves rerank requests but shouldn’t be used for new projects; no shutdown date is given. The <a href=\"/models/#pinecone\">models table</a>, the <a href=\"/guides/rerank-vector-database.html#pinecone\">vector database guide</a> and the <a href=\"/rerank-cost-calculator.html\">cost calculator</a> say so and point to bge-reranker-v2-m3 or cohere-rerank-4-fast. The release watch caught it the morning after it changed":
+    "<strong>Pinecone 自家的重排序模型已弃用</strong> —— Pinecone 文档现在写明，<code>pinecone-rerank-v0</code> 仍然响应重排序请求，但新项目不要再用，也没给停用日期。<a href=\"/models/#pinecone\">模型对比表</a>、<a href=\"/guides/rerank-vector-database.html#pinecone\">向量数据库指南</a>和<a href=\"/rerank-cost-calculator.html\">成本计算器</a>都已注明，并改为推荐 bge-reranker-v2-m3 或 cohere-rerank-4-fast。文档改动后的第二天早上，发布监控就发现了",
   "1 Nov 2026 — Chinese pages and site checks":
     "2026 年 11 月 1 日 —— 中文页与站点检查",
   "<strong>Chinese pages, finished</strong> — about twenty short labels on the <a href=\"/zh/models/\">Chinese</a> pages were still in English: the Voyage prices and the “not published” cells in the models table, token limits on the Cohere, Voyage and mxbai pages, and three “Keep reading” headings. The coverage check used to look only at longer text; it now also compares every table cell, heading and label with the English page":

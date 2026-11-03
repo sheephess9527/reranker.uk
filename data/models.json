@@ -1628,6 +1628,14 @@
       "check_hint": "pinecone-rerank-v0",
       "verified_on": "2026-10-16"
     },
+    "v0_status": {
+      "value": "deprecated",
+      "source_url": "https://docs.pinecone.io/guides/search/rerank-results",
+      "check_url": "https://docs.pinecone.io/guides/search/rerank-results",
+      "check_pattern": "pinecone-rerank-v0 is {value}\\. It still serves rerank requests, but don.t use it for new projects",
+      "check_hint": "pinecone-rerank-v0",
+      "verified_on": "2026-11-03"
+    },
     "bge_max_tokens": {
       "value": "1024",
       "source_url": "https://docs.pinecone.io/guides/search/rerank-results",
