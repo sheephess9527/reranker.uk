@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "Deciding between them? <a href=\"/guides/compare-rerankers.html\">Compare the rerankers on the same benchmarks →</a>":
+    "正在几个模型之间犹豫？<a href=\"/guides/compare-rerankers.html\">在同一评测下对比这些 reranker →</a>",
   "_title":
     "GTE 重排序模型：阿里巴巴的小型 Apache 2.0 交叉编码器 | reranker.uk",
   "_desc":

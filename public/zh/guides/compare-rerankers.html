@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-locale="zh" data-prerendered="zh">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <title>2026 年最好的 reranker：Qwen3、bge、mxbai、Jina、GTE、Cohere 横向对比 | reranker.uk</title>
+  <meta name="description" content="在同一评测下横向对比 reranker，而不是各家厂商自己的表：Qwen3-Reranker 对比 bge-reranker-v2-m3，mxbai 和 Jina 的同一次评测，以及规模、许可证、托管 API 价格和选型方法。" >
+  <link rel="canonical" href="https://reranker.uk/zh/guides/compare-rerankers" >
+  <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/compare-rerankers" >
+  <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/compare-rerankers" >
+  <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/compare-rerankers" >
+  <meta name="theme-color" content="#0b0d17" >
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
+  <meta name="author" content="reranker.uk" >
+  <link rel="icon" href="/assets/img/favicon.svg?v=1bb58b097e" type="image/svg+xml" >
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=6edeebfac7" >
+  <link rel="manifest" href="/site.webmanifest" >
+  <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
+  <meta property="og:type" content="article" >
+  <meta property="og:title" content="2026 年最好的 reranker：Qwen3、bge、mxbai、Jina、GTE、Cohere 横向对比 | reranker.uk" >
+  <meta property="og:description" content="在同一评测下横向对比 reranker，而不是各家厂商自己的表：Qwen3-Reranker 对比 bge-reranker-v2-m3，mxbai 和 Jina 的同一次评测，以及规模、许可证、托管 API 价格和选型方法。" >
+  <meta property="og:url" content="https://reranker.uk/zh/guides/compare-rerankers" >
+  <meta property="og:site_name" content="reranker.uk" >
+  <meta property="og:locale" content="zh_CN" >
+  <meta property="og:locale:alternate" content="en_GB" >
+  <meta name="twitter:card" content="summary_large_image" >
+  <meta property="og:image" content="https://reranker.uk/assets/og/zh/guides/compare-rerankers.jpg?v=cedcbeef79" >
+  <meta property="og:image:width" content="1200" >
+  <meta property="og:image:height" content="630" >
+  <meta property="og:image:alt" content="2026 年最好的 reranker：Qwen3、bge、mxbai、Jina、GTE、Cohere 横向对比 | reranker.uk" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/guides/compare-rerankers.jpg?v=cedcbeef79" >
+  <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
+  <link rel="preload" href="/assets/css/style.css?v=ff62e57d6c" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=ff62e57d6c" >
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"2026 年最好的 reranker：Qwen3、bge、mxbai、Jina、GTE、Cohere 横向对比","datePublished":"2026-11-05","dateModified":"2026-11-05","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/compare-rerankers","description":"在同一评测下横向对比 reranker，而不是各家厂商自己的表：Qwen3-Reranker 对比 bge-reranker-v2-m3，mxbai 和 Jina 的同一次评测，以及规模、许可证、托管 API 价格和选型方法。","inLanguage":"zh-Hans"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://reranker.uk/zh/guides/"},{"@type":"ListItem","position":3,"name":"2026 年最好的 reranker：Qwen3、bge、mxbai、Jina、GTE、Cohere 横向对比","item":"https://reranker.uk/zh/guides/compare-rerankers"}]}</script>
+
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="shared.skip">跳到正文</a>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links">
+        <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
+        <li><a href="/zh/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">指南</a></li>
+        <li><a href="/zh/models/" data-i18n="shared.nav.models">模型对比</a></li>
+        <li><a class="nav-cta" href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+      </ul>
+      <div class="nav-right">
+        <button type="button" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="site-search" data-i18n-aria-label="shared.search.open" aria-label="搜索全站（按 /）" title="/">⌕</button>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+        <a class="lang-toggle" href="/guides/compare-rerankers" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
+      </div>
+    </nav>
+    <div class="site-search" id="site-search" role="search" hidden>
+      <div class="container narrow">
+        <label class="sr-only" for="site-search-input" data-i18n="shared.search.label">搜索 reranker.uk</label>
+        <input id="site-search-input" type="search" autocomplete="off" spellcheck="false" data-i18n-placeholder="shared.search.placeholder" placeholder="搜索指南和模型…" aria-describedby="site-search-status">
+        <p class="search-status" id="site-search-status" aria-live="polite"></p>
+        <ul class="search-results" id="site-search-results"></ul>
+      </div>
+    </div>
+  </header>
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/guides/">指南</a><span>/</span>对比 reranker</div>
+      <h1>2026 年最好的 reranker：Qwen3、bge、mxbai、Jina、GTE 和托管 API 横向对比</h1>
+      <p class="meta">横向对比 · 约 7 分钟阅读 · <time datetime="2026-11-05">更新于 2026 年 11 月 5 日</time></p>
+      <p class="lead">每家 reranker 厂商公布的表格里，赢的都是自己的模型，而且各家用的数据集不同，数字没法跨厂商直接对齐。本页只在分数来自<strong>同一次评测</strong>时才把它们并排放，并写明是谁跑的；没有可比数字的模型，也会直接说明。</p>
+
+      <div class="toc">
+        <strong>本页目录</strong>
+        <ol>
+          <li><a href="#short">先说结论</a></li>
+          <li><a href="#rule">哪些数字能比</a></li>
+          <li><a href="#qwen-run">Qwen3 对比 bge-reranker-v2-m3</a></li>
+          <li><a href="#jina-run">同一次 BEIR 评测里的 Qwen3、mxbai 和 Jina</a></li>
+          <li><a href="#practical">规模、许可证和运行环境</a></li>
+          <li><a href="#hosted">托管 API</a></li>
+          <li><a href="#decide">怎么选</a></li>
+        </ol>
+      </div>
+
+      <h2 id="short">先说结论</h2>
+      <ul>
+        <li><strong>自托管、有 GPU、想要最好的开源模型：</strong><a href="/zh/models/qwen-reranker">Qwen3-Reranker-4B</a>。下面两次评测里它都在榜首或接近榜首，而且是 Apache 2.0 协议。</li>
+        <li><strong>要小、能在 CPU 上跑、支持多语言：</strong><a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a> 是通行的基线；<a href="/zh/models/gte-reranker">GTE reranker</a> 还要更小。</li>
+        <li><strong>没有 GPU，也不想运维：</strong>用托管 API。<a href="/zh/models/cohere-rerank">Cohere Rerank 5</a> 和 <a href="/zh/models/voyage-rerank">Voyage rerank-3</a> 是老牌选择，<a href="/zh/models/zerank">zerank-2</a> 按 token 算最便宜。</li>
+        <li><strong>商用产品、想用开源权重：</strong>先看许可证。<a href="/zh/models/jina-reranker">Jina</a> 的权重是非商用的。</li>
+      </ul>
+
+      <h2 id="rule">哪些数字能比</h2>
+      <p>分数只有和同一次评测里的分数放在一起才有意义：同样的数据集、同一个第一阶段检索器给出的同样的候选列表、同样的截断位置。两家厂商页面上的数字不在同一把尺子上，哪怕两边都写着“nDCG@10”或“BEIR”。本页用的两次评测都一次覆盖了好几个模型，但两次都是由表里有自家模型的厂商来跑的，所以只能当作有力的线索，最终还要在你自己标注的查询上验证（<a href="/zh/guides/evaluate-reranker">怎么做</a>）。</p>
+      <p>有两类模型没有可放进来的评测。<strong>GTE</strong>：阿里只以图表形式公布 reranker 结果，没有可以对齐的表格。<strong>Cohere</strong>：Rerank 5 没有公布过评测表。下面改从规模、许可证、价格和适用场景来比较它们。</p>
+
+      <h2 id="qwen-run">Qwen3 对比 bge-reranker-v2-m3</h2>
+      <p>这是 Qwen 自己跑的评测，来自 Qwen3-Reranker 的模型卡：MTEB 的检索子集（英文、中文、多语言和代码）以及用于长文档的 MLDR，每项都对同一批前 100 个候选重排。</p>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Qwen3 对比 bge-reranker-v2-m3">
+        <table>
+          <thead>
+            <tr><th>模型</th><th>MTEB-R</th><th>CMTEB-R</th><th>MMTEB-R</th><th>MLDR</th><th>MTEB-Code</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Qwen3-Reranker-8B</td><td>69.02*</td><td>77.45</td><td>72.94</td><td>70.19</td><td>81.22</td></tr>
+            <tr><td>Qwen3-Reranker-4B</td><td>69.76*</td><td>75.94</td><td>72.74</td><td>69.97</td><td>81.20</td></tr>
+            <tr><td>Qwen3-Reranker-0.6B</td><td>65.80*</td><td>71.31</td><td>66.36</td><td>67.28</td><td>73.42</td></tr>
+            <tr><td>bge-reranker-v2-m3</td><td>57.03</td><td>72.16</td><td>58.36</td><td>59.51</td><td>41.38</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>4B 和 8B 在每一列上都领先 bge-reranker-v2-m3，差距最大的是代码。如果你做中文，0.6B 是需要留意的例外：它在 CMTEB-R 上是 71.31，而 bge 是 72.16，缩到 0.6B 就丢掉了中文上的领先。8B 也不比 4B 明显更好：只有中文上领先，多语言、长文档和代码基本持平，英文上反而落后。</p>
+
+      <h2 id="jina-run">同一次 BEIR 评测里的 Qwen3、mxbai 和 Jina</h2>
+      <p>这是 Jina 的 2026 年评测，来自 jina-reranker-v3.5 的模型卡。Jina 在同一套协议下重跑了六个模型（nDCG@10）：13 个 BEIR 数据集、用于多语言检索的 MIRACL、用于专业领域（法律、金融、代码、医学）的 RTEB，以及用于结构化数据的 Struct-IR，每项都对 jina-embeddings-v5-text-small 给出的前 100 个候选重排。下表列出其中四个；这次评测里没有 bge-reranker-v2-m3。</p>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="同一次 BEIR 评测里的 Qwen3、mxbai 和 Jina">
+        <table>
+          <thead>
+            <tr><th>模型</th><th>BEIR</th><th>MIRACL</th><th>RTEB</th><th>Struct-IR</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>jina-reranker-v3.5（0.6B）</td><td>63.20</td><td>74.11</td><td>70.95</td><td>48.3</td></tr>
+            <tr><td>mxbai-rerank-large-v2（1.5B）</td><td>62.45</td><td>69.65</td><td>70.81</td><td>43.0</td></tr>
+            <tr><td>Qwen3-Reranker-4B</td><td>62.28</td><td>76.56</td><td>77.68</td><td>55.6</td></tr>
+            <tr><td>Qwen3-Reranker-0.6B</td><td>56.94</td><td>67.12</td><td>68.41</td><td>41.9</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>在纯英文的 BEIR 上，前三名相差不到一分，这个基准分不出高下。差别出现在别处：Qwen3-Reranker-4B 在多语言、专业领域和结构化检索上领先得很明显。Jina 自家的模型在 Jina 自己的评测里拿下 BEIR 第一；它的权重是非商用的，所以做产品时实际要比的是 Qwen3 和 mxbai。</p>
+
+      <h2 id="practical">规模、许可证和运行环境</h2>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="规模、许可证和运行环境">
+        <table>
+          <thead>
+            <tr><th>模型</th><th>规模</th><th>许可证</th><th>语言</th><th>运行环境</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><a href="/zh/models/qwen-reranker">Qwen3-Reranker</a></td><td>0.6B / 4B / 8B</td><td>Apache 2.0</td><td>100+</td><td>建议用 GPU</td></tr>
+            <tr><td><a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a></td><td>568M</td><td>开源权重</td><td>100+</td><td>CPU 或 GPU</td></tr>
+            <tr><td><a href="/zh/models/mxbai-rerank">mxbai-rerank-large-v2</a></td><td>1.5B</td><td>Apache 2.0</td><td>100+</td><td>建议用 GPU</td></tr>
+            <tr><td><a href="/zh/models/jina-reranker">jina-reranker-v3.5</a></td><td>0.6B</td><td>非商用权重</td><td>多语言</td><td>托管 API，或仅用于研究的权重</td></tr>
+            <tr><td><a href="/zh/models/gte-reranker">GTE reranker</a></td><td>149M / 306M</td><td>Apache 2.0</td><td>英文 / 70+ 种语言</td><td>CPU、小 GPU 或浏览器（英文模型）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">规模和许可证取自本站各模型页，那些页面引用的是厂商的模型卡。“开源权重”表示本页没有复述它的许可证；上线前请去看模型卡。</p>
+
+      <h2 id="hosted">托管 API</h2>
+      <p>按 token 付费，不用自己养 GPU。这几家都没有公布可比的评测，所以表里只列能核对的：价格和上下文长度。</p>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="托管 API">
+        <table>
+          <thead>
+            <tr><th>API</th><th>每百万 token 价格</th><th>上下文</th><th>评测</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><a href="/zh/models/cohere-rerank">Cohere Rerank 5</a> Pro / Fast</td><td>$0.05 / $0.02</td><td>32,768 token</td><td>未公布</td></tr>
+            <tr><td><a href="/zh/models/voyage-rerank">Voyage rerank-3</a> / lite</td><td>$0.05 / $0.02</td><td>32,000 token</td><td>仅有 Voyage 自己的评测</td></tr>
+            <tr><td><a href="/zh/models/zerank">zerank-2</a></td><td>$0.025</td><td>32,768 token</td><td>仅有 ZeroEntropy 自己的评测</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>按 token 计费和按次计费的算法不同，所以标价最低的不一定账单最低。<a href="/zh/rerank-cost-calculator">成本计算器</a>可以按你每次查询的文档数和每月查询量算出来。</p>
+
+      <h2 id="decide">怎么选</h2>
+      <ol>
+        <li><strong>先从本页挑两个候选</strong>：一个你能自己部署的开源模型，一个托管 API。</li>
+        <li><strong>标注 30–50 条真实查询</strong>：取自你自己的用户，并标出能回答它们的段落。</li>
+        <li><strong>两个都跑一遍，比较 nDCG@10</strong>，用你的标注和同一份候选列表。这是唯一能预测你实际效果的比较；<a href="/zh/guides/evaluate-reranker">评测指南</a>里有完整步骤。</li>
+        <li><strong>确认瓶颈真的是重排序。</strong>如果正确的段落根本没进候选，换什么 reranker 都没用；见<a href="/zh/guides/reranking-not-working">为什么重排序没起作用</a>。</li>
+      </ol>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">一张表看完整个市场</h2>
+        <p class="soft">每个模型和托管 API，附上每个分数背后的评测方法，还能一键跳到浏览器 Demo。</p>
+        <a class="btn btn-primary" href="/zh/models/">对比全部模型 →</a>
+        <a class="btn btn-ghost" href="/zh/guides/choose-reranker-scenario" style="margin-left:.5rem">按场景选型 →</a>
+      </div>
+
+      <h2>继续阅读</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/zh/guides/evaluate-reranker"><h3>评测 reranker</h3><p>用你的数据验证选择。</p></a>
+        <a class="card" href="/zh/rerank-cost-calculator"><h3>成本计算器</h3><p>按 token 和按次计费的价格并排对比。</p></a>
+      </div>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/zh/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
+          <p class="muted" style="margin-top:.8rem;max-width:34ch" data-i18n="shared.footer.blurb">一个关于检索与 RAG 重排序（reranker）的开放学习资源，外加一个在浏览器里零成本运行的实时 Demo。</p>
+          <p style="margin-top:.6rem"><a href="https://github.com/sheephess9527/reranker.uk" rel="noopener noreferrer" data-i18n="shared.footer.github">在 GitHub 上查看源码</a></p>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.guides">指南</h4>
+          <ul>
+            <li><a href="/zh/guides/" data-i18n="shared.footer.allGuides">全部指南</a></li>
+            <li><a href="/zh/guides/what-is-a-reranker" data-i18n="shared.nav.whatIs">什么是 reranker</a></li>
+            <li><a href="/zh/guides/cross-encoder-vs-bi-encoder" data-i18n="shared.nav.crossVsBi">Cross- vs Bi-encoder</a></li>
+            <li><a href="/zh/guides/rerank-rag" data-i18n="shared.nav.rerankRag">为 RAG 加重排序</a></li>
+            <li><a href="/zh/guides/hybrid-retrieval-rerank" data-i18n="shared.footer.hybrid">混合检索 + 重排序</a></li>
+            <li><a href="/zh/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
+            <li><a href="/zh/guides/self-host-reranker" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
+            <li><a href="/zh/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/compare-rerankers" data-i18n="shared.footer.compare">横向对比 reranker</a></li>
+            <li><a href="/zh/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
+            <li><a href="/zh/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
+            <li><a href="/zh/guides/reranking-not-working" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
+            <li><a href="/zh/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
+            <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
+            <li><a href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/changelog" data-i18n="shared.footer.changelog">更新日志</a></li>
+            <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
+            <li><a href="/zh/privacy" data-i18n="shared.footer.privacy">隐私说明</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.models">模型</h4>
+          <ul>
+            <li><a href="/zh/models/qwen-reranker">Qwen3-Reranker</a></li>
+            <li><a href="/zh/models/bge-reranker">bge-reranker</a></li>
+            <li><a href="/zh/models/cohere-rerank">Cohere Rerank</a></li>
+            <li><a href="/zh/models/jina-reranker">Jina Reranker</a></li>
+            <li><a href="/zh/models/mxbai-rerank">mxbai-rerank</a></li>
+            <li><a href="/zh/models/voyage-rerank">Voyage Rerank</a></li>
+            <li><a href="/zh/models/zerank">zerank-2</a></li>
+            <li><a href="/zh/models/qwen3-vl-reranker">Qwen3-VL-Reranker</a></li>
+            <li><a href="/zh/models/lighton-rerank">LightOn-rerank</a></li>
+            <li><a href="/zh/models/gte-reranker">GTE rerankers</a></li>
+            <li><a href="/zh/models/contextual-rerank">Contextual AI</a></li>
+            <li><a href="/zh/models/nvidia-rerank">NVIDIA Nemotron</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> reranker.uk</span>
+        <span class="footer-legal muted">
+          <span data-i18n="shared.footer.disclaimer">开放教育资源 · 与任何模型厂商无关</span>
+          · <a href="/zh/privacy" data-i18n="shared.footer.privacyShort">隐私</a>
+          · <a href="/zh/changelog" data-i18n="shared.footer.changelogShort">更新日志</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+  <script src="/assets/js/main.js?v=56cc3b94c3"></script>
+  
+  <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
+</body>
+</html>

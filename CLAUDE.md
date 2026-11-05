@@ -154,6 +154,16 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 > 完成：`watch-releases.mjs` 的 vendor 页面支持反向检查：`expect`（站上推荐的型号必须还在页面上）和 `retired`（`{id}` 附近出现 deprecated / retired / end of life 就报，ID 取 `retired_ids` 或 `expect`）；页面一个 ID 都没匹配到时不做反向检查（页面挪了不等于下架）。「Pinecone hosted rerankers」加了 `expect` 三个型号；新增「Pinecone changelog」（`/release-notes/2026`，Pinecone 7 月就是在这里宣布 cohere-rerank-3.5 弃用的），只查 `retired`。**这个 URL 按年份，2027 年 1 月要改成 `/release-notes/2027`。** 模型总览页已经没有 v0，不监控它。实跑 baseline：两页都没有缺失 / 弃用。处理办法写在 issue 里：改站点后把型号从 `expect` / `retired_ids` 删掉。
 
+## 第六轮（2026-11-05 用户问「还有什么可以提升流量和粘性」，给了 Cloudflare Core Web Vitals 截图）
+
+数据只有 19 个样本（CWV 只统计部分 Chromium 访问，不是访客数）：美国 13、厄瓜多尔 3、乌克兰 1、法国 1、委内瑞拉 1；入口页是 `/models/qwen-reranker`、`/guides/rerank-rag`、`/models/gte-reranker`、`/zh/models/`、`/models/cohere-rerank`。LCP 84% 好 / 16% 需改进 / 0% 差，**那 16% 恰好是厄瓜多尔和委内瑞拉的 3 个样本**，美欧样本全部达标，所以性能不用动。结论：访客以英文、美国为主，入口是具体模型页和 RAG 指南。中文专项（bce-reranker 等）优先级下调（中国访问可能被统计脚本漏掉，这个数据不能证明没有）。
+
+建议清单（用户说「按 1、2、3 开工」后的顺序）：① 对比页 ✅ ② 「重排序动态」页 + 单独 RSS（只放厂商发布和弃用）③ 选型向导 ④ 中文专项 ⑤ 代码块复制按钮、Demo 和计算器的 WebApplication 结构化数据、确认 Google / Bing / 百度站长平台已提交 ⑥ 浏览器里的 NDCG 评测小工具。分发渠道（HN、Reddit、知乎、掘金、V2EX、HF 讨论区）要用户自己发，可以代写稿。
+
+### ~~19. 对比页 `/guides/compare-rerankers`~~（2026-11-05 已完成）
+
+> 完成：新增 `/guides/compare-rerankers`（中英文、meta、JSON-LD、社交卡片）。只在分数来自**同一次评测**时并排：Qwen 自己的评测（Qwen3 0.6B/4B/8B 对 bge-reranker-v2-m3，MTEB-R / CMTEB-R / MMTEB-R / MLDR / MTEB-Code）和 Jina 2026 年的评测（jina-v3.5、mxbai-large-v2、Qwen3 4B / 0.6B，BEIR / MIRACL / RTEB / Struct-IR）；GTE 和 Cohere 没有可对齐的数字，页面直说。所有数字都是已有 fact（没有新增）；规模、许可证、语言来自各模型页已有的文字；托管 API 一表只列价格和上下文（Cohere / Voyage / zerank-2）。一个模型页里没写透的发现：Qwen3-0.6B 的 CMTEB-R 比 bge-v2-m3 低（用 fact 写，不手写数字）。指南目录、页脚、八个模型页（qwen、bge、mxbai、jina、gte、cohere、voyage、zerank）的「Other models」下加了入口。更新日志 `#2026-11-05-compare`。
+
 ## 发布监控处理记录
 
 - **2026-10-21 Cohere Rerank 5**：Cohere 当天发布（changelog「Announcing Cohere's Rerank 5 Models」）。Cohere 页改为 Rerank 5（新增「What's new in Rerank 5」：校准分数、Context Focus、只支持文本、不支持指令、可用渠道），模型表加 v5 Pro / Fast 两行，首页和表里的卡片更新，代码示例改用 `rerank-v5.0-pro`。3 个新 fact（`cohere-rerank-5`）。**价格还没公布**：页面写「尚未公布」，计算器暂不加；`data/release-watch.json` 新增「Cohere pricing」页面监控（`Rerank N Pro|Fast`，已知 Rerank 4），价格一出现就会报到 release-watch issue，届时补 price fact、计算器选项和价格表行。

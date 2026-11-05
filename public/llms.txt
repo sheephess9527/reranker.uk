@@ -9,6 +9,7 @@ Benchmark figures carry their protocol: rows marked with an asterisk on /models/
 ## Guides
 
 - [Choose a reranker by scenario — RAG, support, legal, code](https://reranker.uk/guides/choose-reranker-scenario): Decision guide: which rerank model fits RAG pipelines, customer support, legal search, or code retrieval.
+- [Best reranker 2026: Qwen3, bge, mxbai, Jina, GTE, Cohere compared](https://reranker.uk/guides/compare-rerankers): Rerankers compared on the same benchmarks, not each vendor's own table: Qwen3-Reranker vs bge-reranker-v2-m3, mxbai and Jina on one run, plus size, licence, hosted API prices and how to decide.
 - [Cross-encoder vs bi-encoder: the difference, with examples](https://reranker.uk/guides/cross-encoder-vs-bi-encoder): Cross-encoder vs bi-encoder explained: bi-encoders embed query and document separately (fast, scalable retrieval); cross-encoders score the pair together (accurate reranking).
 - [How to evaluate rerankers — NDCG, MRR, and labelled queries](https://reranker.uk/guides/evaluate-reranker): Practical guide to evaluating rerank models: build a labelled query set, measure NDCG@k and MRR, compare before/after reranking, and regression-test pipeline changes.
 - [Hybrid retrieval + reranking — BM25, vectors, then rerank](https://reranker.uk/guides/hybrid-retrieval-rerank): How to combine BM25 and vector search for better recall, then use a cross-encoder reranker to fix ordering.

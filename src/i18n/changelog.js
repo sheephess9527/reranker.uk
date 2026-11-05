@@ -1,4 +1,10 @@
 window.I18N_PAGE = { zh: {
+  "5 Nov 2026 — A comparison of the rerankers":
+    "2026 年 11 月 5 日 —— reranker 横向对比",
+  "<strong>A <a href=\"/guides/compare-rerankers.html\">head-to-head guide</a></strong> — Qwen3, bge, mxbai, Jina, GTE and the hosted APIs, with scores set side by side only where they come from one run: Qwen’s own run for Qwen3 against bge-reranker-v2-m3, and Jina’s 2026 run for Qwen3, mxbai and Jina. It says whose run each is, and says plainly that GTE and Cohere have no number that can be lined up. One finding that the model pages bury: Qwen3-Reranker-0.6B trails bge-reranker-v2-m3 on Chinese retrieval":
+    "<strong><a href=\"/guides/compare-rerankers.html\">横向对比指南</a></strong> —— Qwen3、bge、mxbai、Jina、GTE 和托管 API，只在分数来自同一次评测时才并排放：Qwen3 对比 bge-reranker-v2-m3 用的是 Qwen 自己的评测，Qwen3、mxbai 和 Jina 用的是 Jina 的 2026 年评测。每一项都写明是谁跑的，也直说 GTE 和 Cohere 没有可以对齐的数字。还有一个藏在各模型页里的发现：Qwen3-Reranker-0.6B 在中文检索上落后于 bge-reranker-v2-m3",
+  "<strong>Linked from every model page</strong> — the eight model reviews now point to it from their “Other models” section, and it is in the <a href=\"/guides/\">guides list</a> and the footer":
+    "<strong>每个模型页都能跳转过来</strong> —— 八个模型评测页的“其他模型”部分都加了入口，指南列表和页脚里也有",
   "3 Nov 2026 — Pinecone deprecates pinecone-rerank-v0":
     "2026 年 11 月 3 日 —— Pinecone 弃用 pinecone-rerank-v0",
   "<strong>Pinecone’s own reranker is deprecated</strong> — Pinecone’s docs now say <code>pinecone-rerank-v0</code> still serves rerank requests but shouldn’t be used for new projects; no shutdown date is given. The <a href=\"/models/#pinecone\">models table</a>, the <a href=\"/guides/rerank-vector-database.html#pinecone\">vector database guide</a> and the <a href=\"/rerank-cost-calculator.html\">cost calculator</a> say so and point to bge-reranker-v2-m3 or cohere-rerank-4-fast. The release watch caught it the morning after it changed":

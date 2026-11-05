@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "Deciding between them? <a href=\"/guides/compare-rerankers.html\">Compare the rerankers on the same benchmarks →</a>":
+    "正在几个模型之间犹豫？<a href=\"/guides/compare-rerankers.html\">在同一评测下对比这些 reranker →</a>",
   "512 tokens":
     "512 token",
   "Open weights · mixedbread-ai · <time datetime=\"2026-10-12\">Updated 12 Oct 2026</time>":

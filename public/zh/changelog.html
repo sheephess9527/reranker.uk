@@ -71,6 +71,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-05-compare">2026 年 11 月 5 日 —— reranker 横向对比</h2>
+        <ul class="feature-list">
+          <li><strong><a href="/zh/guides/compare-rerankers">横向对比指南</a></strong> —— Qwen3、bge、mxbai、Jina、GTE 和托管 API，只在分数来自同一次评测时才并排放：Qwen3 对比 bge-reranker-v2-m3 用的是 Qwen 自己的评测，Qwen3、mxbai 和 Jina 用的是 Jina 的 2026 年评测。每一项都写明是谁跑的，也直说 GTE 和 Cohere 没有可以对齐的数字。还有一个藏在各模型页里的发现：Qwen3-Reranker-0.6B 在中文检索上落后于 bge-reranker-v2-m3</li>
+          <li><strong>每个模型页都能跳转过来</strong> —— 八个模型评测页的“其他模型”部分都加了入口，指南列表和页脚里也有</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-11-03-pinecone">2026 年 11 月 3 日 —— Pinecone 弃用 pinecone-rerank-v0</h2>
         <ul class="feature-list">
           <li><strong>Pinecone 自家的重排序模型已弃用</strong> —— Pinecone 文档现在写明，<code>pinecone-rerank-v0</code> 仍然响应重排序请求，但新项目不要再用，也没给停用日期。<a href="/zh/models/#pinecone">模型对比表</a>、<a href="/zh/guides/rerank-vector-database#pinecone">向量数据库指南</a>和<a href="/zh/rerank-cost-calculator">成本计算器</a>都已注明，并改为推荐 bge-reranker-v2-m3 或 cohere-rerank-4-fast。文档改动后的第二天早上，发布监控就发现了</li>
@@ -144,15 +152,14 @@
           <li><strong>Contextual AI Rerank v2 的商用渠道</strong> —— 网站之前只列了它的开源权重，而权重只能非商用。现在<a href="/zh/models/#contextual-api">模型对比表</a>加上了 Contextual 的托管 API：ctxl-rerank-v2-instruct-multilingual、它的 -mini 版和较早的 v1，按 token 计费。按场景选型和指令跟随两篇指南都指向了它，<a href="/zh/rerank-cost-calculator">成本计算器</a>也加入了 v2 和 v2-mini</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>2026 年 10 月更早的更新（32 条）</summary><article class="changelog-entry">
         <h2 id="2026-10-16-calculator">2026 年 10 月 16 日（稍晚）—— 成本计算器多了三个选项</h2>
         <ul class="feature-list">
           <li><strong><a href="/zh/rerank-cost-calculator">成本计算器</a>加入 ZeroEntropy、Amazon Bedrock 和 Pinecone</strong> —— zerank-2 按 token，Amazon Rerank 1.0 按每次最多 100 篇文档的查询，Pinecone 的 pinecone-rerank-v0 / bge-reranker-v2-m3 按每次最多 100 篇文档的请求计费。有两项是故意不计入的：Bedrock 上的 Cohere Rerank 3.5，因为 AWS 页面给出了两个不同的单文档 token 上限；Pinecone 上的 Cohere，因为 Pinecone 没说明它的“rerank 单位”是什么</li>
           <li><strong>zerank-2-small 和 zerank-2-nano</strong> —— 已写进 <a href="/zh/models/zerank">zerank-2 页面</a>；ZeroEntropy 列出了这两个模型，但还没公布价格或模型卡</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>2026 年 10 月更早的更新（31 条）</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-16-hosted">2026 年 10 月 16 日 —— Pinecone 和 Amazon Bedrock</h2>
         <ul class="feature-list">
           <li><strong>新增两个托管平台</strong> —— <a href="/zh/models/">模型对比表</a>加入 Amazon Bedrock（Amazon Rerank 1.0 和 Cohere Rerank 3.5，按每 1,000 次查询计价）和 Pinecone（自家的 pinecone-rerank-v0，以及 bge-reranker-v2-m3 和 cohere-rerank-4-fast）。这两家一直在发布监控里，但网站上一处都没提</li>
@@ -648,6 +655,8 @@
 
       
 
+      
+
       <p class="center" style="margin-top:2.5rem"><a class="btn btn-primary" href="/zh/demo">试用 Demo →</a></p>
     </section>
   </main>
@@ -670,6 +679,7 @@
             <li><a href="/zh/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
             <li><a href="/zh/guides/self-host-reranker" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
             <li><a href="/zh/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/compare-rerankers" data-i18n="shared.footer.compare">横向对比 reranker</a></li>
             <li><a href="/zh/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
             <li><a href="/zh/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
             <li><a href="/zh/guides/reranking-not-working" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
