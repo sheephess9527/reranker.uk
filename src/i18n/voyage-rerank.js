@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "Deciding between them? <a href=\"/guides/compare-rerankers.html\">Compare the rerankers on the same benchmarks →</a>":
+    "正在几个模型之间犹豫？<a href=\"/guides/compare-rerankers.html\">在同一评测下对比这些 reranker →</a>",
   "{{fact:voyage-rerank-3.context_tokens}} tokens":
     "{{fact:voyage-rerank-3.context_tokens}} token",
   "32,000 tokens":

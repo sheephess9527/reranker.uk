@@ -1,0 +1,121 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Compare rerankers</div>
+      <h1>Best reranker in 2026: Qwen3, bge, mxbai, Jina, GTE and the hosted APIs compared</h1>
+      <p class="meta">Comparison · ~7 min read · <time datetime="2026-11-05">Updated 5 Nov 2026</time></p>
+      <p class="lead">Every reranker vendor publishes a table in which its own model wins, and the tables use different datasets, so the numbers cannot be lined up across vendors. This page only sets scores side by side when they come from <strong>one run</strong>, says whose run it was, and says plainly which models have no number that can be compared.</p>
+
+      <div class="toc">
+        <strong>On this page</strong>
+        <ol>
+          <li><a href="#short">The short answer</a></li>
+          <li><a href="#rule">Which numbers can be compared</a></li>
+          <li><a href="#qwen-run">Qwen3 against bge-reranker-v2-m3</a></li>
+          <li><a href="#jina-run">Qwen3, mxbai and Jina on one BEIR run</a></li>
+          <li><a href="#practical">Size, licence and where each runs</a></li>
+          <li><a href="#hosted">Hosted APIs</a></li>
+          <li><a href="#decide">How to decide</a></li>
+        </ol>
+      </div>
+
+      <h2 id="short">The short answer</h2>
+      <ul>
+        <li><strong>Self-hosting on a GPU and want the best open model:</strong> <a href="/models/qwen-reranker.html">Qwen3-Reranker-4B</a>. In both runs below it is at or near the top, and it is Apache 2.0.</li>
+        <li><strong>Small, CPU-friendly, multilingual:</strong> <a href="/models/bge-reranker.html">bge-reranker-v2-m3</a> is the standard baseline; the <a href="/models/gte-reranker.html">GTE rerankers</a> are smaller still.</li>
+        <li><strong>No GPU and no ops:</strong> a hosted API. <a href="/models/cohere-rerank.html">Cohere Rerank 5</a> and <a href="/models/voyage-rerank.html">Voyage rerank-3</a> are the established ones, <a href="/models/zerank.html">zerank-2</a> the cheapest per token.</li>
+        <li><strong>Commercial product, open weights:</strong> check the licence first. <a href="/models/jina-reranker.html">Jina’s</a> weights are non-commercial.</li>
+      </ul>
+
+      <h2 id="rule">Which numbers can be compared</h2>
+      <p>A score only means something next to scores from the same run: the same datasets, the same candidate lists from the same first-stage retriever, the same cut-off. Two numbers from two vendors’ pages are not on one scale, even when both say “nDCG@10” or “BEIR”. This page uses two runs that cover several models at once, and both were run by a vendor with a model of its own in the table, so read them as strong hints and confirm on your own labelled queries (<a href="/guides/evaluate-reranker.html">how</a>).</p>
+      <p>Two families have no run to put here. <strong>GTE</strong>: Alibaba publishes its reranking results as a chart, so there is no table to line up. <strong>Cohere</strong>: no benchmark table has been published for Rerank 5. They are compared below on size, licence, price and fit instead.</p>
+
+      <h2 id="qwen-run">Qwen3 against bge-reranker-v2-m3</h2>
+      <p>This is Qwen’s own run, from the Qwen3-Reranker model cards: the retrieval subsets of MTEB (English, Chinese, multilingual and code) and MLDR for long documents, each reranking the same top 100 candidates.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>MTEB-R</th><th>CMTEB-R</th><th>MMTEB-R</th><th>MLDR</th><th>MTEB-Code</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Qwen3-Reranker-8B</td><td>{{fact:qwen3-reranker-8b.mteb_r}}</td><td>{{fact:qwen3-reranker-8b.cmteb_r}}</td><td>{{fact:qwen3-reranker-8b.mmteb_r}}</td><td>{{fact:qwen3-reranker-8b.mldr}}</td><td>{{fact:qwen3-reranker-8b.mteb_code}}</td></tr>
+            <tr><td>Qwen3-Reranker-4B</td><td>{{fact:qwen3-reranker-4b.mteb_r}}</td><td>{{fact:qwen3-reranker-4b.cmteb_r}}</td><td>{{fact:qwen3-reranker-4b.mmteb_r}}</td><td>{{fact:qwen3-reranker-4b.mldr}}</td><td>{{fact:qwen3-reranker-4b.mteb_code}}</td></tr>
+            <tr><td>Qwen3-Reranker-0.6B</td><td>{{fact:qwen3-reranker-0.6b.mteb_r}}</td><td>{{fact:qwen3-reranker-0.6b.cmteb_r}}</td><td>{{fact:qwen3-reranker-0.6b.mmteb_r}}</td><td>{{fact:qwen3-reranker-0.6b.mldr}}</td><td>{{fact:qwen3-reranker-0.6b.mteb_code}}</td></tr>
+            <tr><td>bge-reranker-v2-m3</td><td>{{fact:bge-reranker-v2-m3.qwen_mteb_r}}</td><td>{{fact:bge-reranker-v2-m3.qwen_cmteb_r}}</td><td>{{fact:bge-reranker-v2-m3.qwen_mmteb_r}}</td><td>{{fact:bge-reranker-v2-m3.qwen_mldr}}</td><td>{{fact:bge-reranker-v2-m3.qwen_mteb_code}}</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The 4B and 8B lead bge-reranker-v2-m3 on every column, and the gap is widest on code. The 0.6B is the exception that matters if you work in Chinese: on CMTEB-R it scores {{fact:qwen3-reranker-0.6b.cmteb_r}} against bge’s {{fact:bge-reranker-v2-m3.qwen_cmteb_r}}, so shrinking to 0.6B costs the lead there. The 8B is not clearly better than the 4B: it is ahead only on Chinese, level on multilingual, long documents and code, and behind on English.</p>
+
+      <h2 id="jina-run">Qwen3, mxbai and Jina on one BEIR run</h2>
+      <p>This is Jina’s 2026 evaluation, from the jina-reranker-v3.5 model card. Jina re-ran six models under one protocol (nDCG@10): 13 BEIR datasets, MIRACL for multilingual retrieval, RTEB for professional domains (legal, finance, code, medical) and Struct-IR for structured data, each reranking the top 100 candidates from jina-embeddings-v5-text-small. The table shows four of them; bge-reranker-v2-m3 was not in the run.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>BEIR</th><th>MIRACL</th><th>RTEB</th><th>Struct-IR</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>jina-reranker-v3.5 (0.6B)</td><td>{{fact:jina-reranker-v3.5.jina2026_beir}}</td><td>{{fact:jina-reranker-v3.5.jina2026_miracl}}</td><td>{{fact:jina-reranker-v3.5.jina2026_rteb}}</td><td>{{fact:jina-reranker-v3.5.jina2026_structir}}</td></tr>
+            <tr><td>mxbai-rerank-large-v2 (1.5B)</td><td>{{fact:mxbai-rerank-large-v2.jina2026_beir}}</td><td>{{fact:mxbai-rerank-large-v2.jina2026_miracl}}</td><td>{{fact:mxbai-rerank-large-v2.jina2026_rteb}}</td><td>{{fact:mxbai-rerank-large-v2.jina2026_structir}}</td></tr>
+            <tr><td>Qwen3-Reranker-4B</td><td>{{fact:qwen3-reranker-4b.jina2026_beir}}</td><td>{{fact:qwen3-reranker-4b.jina2026_miracl}}</td><td>{{fact:qwen3-reranker-4b.jina2026_rteb}}</td><td>{{fact:qwen3-reranker-4b.jina2026_structir}}</td></tr>
+            <tr><td>Qwen3-Reranker-0.6B</td><td>{{fact:qwen3-reranker-0.6b.jina2026_beir}}</td><td>{{fact:qwen3-reranker-0.6b.jina2026_miracl}}</td><td>{{fact:qwen3-reranker-0.6b.jina2026_rteb}}</td><td>{{fact:qwen3-reranker-0.6b.jina2026_structir}}</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>On plain English BEIR the top three are within a point of each other, so that benchmark cannot pick between them. The differences show up elsewhere: Qwen3-Reranker-4B leads on multilingual, professional-domain and structured retrieval by clear margins. Jina’s own model tops BEIR in Jina’s own run; its weights are non-commercial, so for a product the practical comparison is Qwen3 against mxbai.</p>
+
+      <h2 id="practical">Size, licence and where each runs</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Model</th><th>Size</th><th>Licence</th><th>Languages</th><th>Run it on</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><a href="/models/qwen-reranker.html">Qwen3-Reranker</a></td><td>0.6B / 4B / 8B</td><td>Apache 2.0</td><td>100+</td><td>GPU recommended</td></tr>
+            <tr><td><a href="/models/bge-reranker.html">bge-reranker-v2-m3</a></td><td>568M</td><td>Open weights</td><td>100+</td><td>CPU or GPU</td></tr>
+            <tr><td><a href="/models/mxbai-rerank.html">mxbai-rerank-large-v2</a></td><td>1.5B</td><td>Apache 2.0</td><td>100+</td><td>GPU recommended</td></tr>
+            <tr><td><a href="/models/jina-reranker.html">jina-reranker-v3.5</a></td><td>0.6B</td><td>Non-commercial weights</td><td>Multilingual</td><td>Hosted API, or weights for research</td></tr>
+            <tr><td><a href="/models/gte-reranker.html">GTE rerankers</a></td><td>149M / 306M</td><td>Apache 2.0</td><td>English / 70+</td><td>CPU, small GPU or browser (English)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.85rem">Sizes and licences are from each model’s own page here, which cite the vendors’ model cards. “Open weights” means the licence is not restated on this page; check the card before shipping.</p>
+
+      <h2 id="hosted">Hosted APIs</h2>
+      <p>You pay per token instead of running a GPU. None of these vendors publishes a comparable benchmark, so the table gives what can be checked: the price and the context length.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>API</th><th>Price per million tokens</th><th>Context</th><th>Benchmark</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><a href="/models/cohere-rerank.html">Cohere Rerank 5</a> Pro / Fast</td><td>${{fact:cohere-rerank-5.pro_usd_per_m}} / ${{fact:cohere-rerank-5.fast_usd_per_m}}</td><td>{{fact:cohere-rerank-5.context_tokens}} tokens</td><td>None published</td></tr>
+            <tr><td><a href="/models/voyage-rerank.html">Voyage rerank-3</a> / lite</td><td>${{fact:voyage-rerank-3.price_per_m_tokens}} / ${{fact:voyage-rerank-3-lite.price_per_m_tokens}}</td><td>{{fact:voyage-rerank-3.context_tokens}} tokens</td><td>Voyage’s own evaluations only</td></tr>
+            <tr><td><a href="/models/zerank.html">zerank-2</a></td><td>${{fact:zerank-2.api_usd_per_m}}</td><td>{{fact:zerank-2.context_tokens}} tokens</td><td>ZeroEntropy’s own run only</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Per-token and per-search prices are billed differently, so the cheapest sticker price is not always the cheapest bill. The <a href="/rerank-cost-calculator.html">cost calculator</a> works it out for your documents per query and queries per month.</p>
+
+      <h2 id="decide">How to decide</h2>
+      <ol>
+        <li><strong>Pick two candidates from this page</strong>: one open model you could host and one hosted API.</li>
+        <li><strong>Label 30–50 real queries</strong> from your own users with the passages that answer them.</li>
+        <li><strong>Run both and compare nDCG@10</strong> on your labels, with the same candidate list. This is the only comparison that predicts your result; <a href="/guides/evaluate-reranker.html">the evaluation guide</a> walks through it.</li>
+        <li><strong>Check that reranking is the bottleneck.</strong> If the right passage is never in the candidates, no reranker helps; see <a href="/guides/reranking-not-working.html">why reranking didn’t help</a>.</li>
+      </ol>
+
+      <div class="cta-band">
+        <h2 style="margin-top:0">See the whole market in one table</h2>
+        <p class="soft">Every model and hosted API, with the protocol behind each score, and a one-click jump to the browser demo.</p>
+        <a class="btn btn-primary" href="/models/">Compare all models →</a>
+        <a class="btn btn-ghost" href="/guides/choose-reranker-scenario.html" style="margin-left:.5rem">Choose by scenario →</a>
+      </div>
+
+      <h2>Keep reading</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/guides/evaluate-reranker.html"><h3>Evaluate rerankers</h3><p>Prove the choice on your data.</p></a>
+        <a class="card" href="/rerank-cost-calculator.html"><h3>Cost calculator</h3><p>Per-token and per-search pricing side by side.</p></a>
+      </div>
+    </article>
+  </main>

@@ -122,7 +122,7 @@
             <tr><td>试用 key</td><td>$0</td><td>每月 1,000 次 API 调用；Rerank 每分钟限 10 次请求；不得用于生产或商业用途</td></tr>
             <tr><td><code>rerank-v4.0-pro</code></td><td>每次检索 $0.0025（最后公布价）</td><td>一次检索 = 1 个 query + 最多 100 篇文档；文档（连同 query）超过 500 token 时，每 500 token 一块，每块算一篇</td></tr>
             <tr><td><code>rerank-v4.0-fast</code></td><td>每次检索 $0.002（最后公布价）</td><td>计费单位相同</td></tr>
-            <tr><td>Model Vault（专属实例）</td><td>每小时 $4.00 起</td><td>专属实例：Rerank 5 Fast 或 Pro（Medium）每小时 $4.00，或每月 $2,500</td></tr>
+            <tr><td>Model Vault（专属实例）</td><td>每 GPU 小时 $3.00 起</td><td>专属实例，按 GPU 型号和副本数计费，而不是按模型计费；这个数字是 L4 的按需价格</td></tr>
             <tr><td>私有部署</td><td>定制</td><td>本地部署或隔离的 VPC</td></tr>
           </tbody>
         </table>
@@ -213,6 +213,7 @@ result.results.forEach((r) => console.log(r.relevanceScore, documents[r.index]))
       </div>
 
       <h2>其他模型</h2>
+      <p>正在几个模型之间犹豫？<a href="/zh/guides/compare-rerankers">在同一评测下对比这些 reranker →</a></p>
       <div class="grid grid-2">
         <a class="card" href="/zh/models/bge-reranker"><h3>bge-reranker</h3><p>免费的开源权重替代品。</p></a>
         <a class="card" href="/zh/models/jina-reranker"><h3>Jina Reranker</h3><p>开源权重 + 托管 API。</p></a>
@@ -240,6 +241,7 @@ result.results.forEach((r) => console.log(r.relevanceScore, documents[r.index]))
             <li><a href="/zh/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">评测 reranker</a></li>
             <li><a href="/zh/guides/self-host-reranker" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
             <li><a href="/zh/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">按场景选型</a></li>
+            <li><a href="/zh/guides/compare-rerankers" data-i18n="shared.footer.compare">横向对比 reranker</a></li>
             <li><a href="/zh/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
             <li><a href="/zh/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
             <li><a href="/zh/guides/reranking-not-working" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>

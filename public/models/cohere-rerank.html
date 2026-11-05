@@ -122,7 +122,7 @@
             <tr><td>Trial key</td><td>$0</td><td>1,000 API calls a month; Rerank limited to 10 requests a minute; not for production or commercial use</td></tr>
             <tr><td><code>rerank-v4.0-pro</code></td><td>$0.0025 / search (last listed)</td><td>A search = 1 query + up to 100 documents; a document over 500 tokens (query included) counts as one per 500-token chunk</td></tr>
             <tr><td><code>rerank-v4.0-fast</code></td><td>$0.002 / search (last listed)</td><td>Same billing unit</td></tr>
-            <tr><td>Model Vault</td><td>From $4.00 / hour</td><td>Dedicated instances: Rerank 5 Fast or Pro (Medium) $4.00 an hour, or $2,500 a month</td></tr>
+            <tr><td>Model Vault</td><td>From $3.00 per GPU-hour</td><td>Dedicated instances, billed by GPU type and number of replicas rather than by model; the figure is the on-demand rate for an L4</td></tr>
             <tr><td>Private deployment</td><td>Custom</td><td>On-premises or isolated VPC</td></tr>
           </tbody>
         </table>
@@ -213,6 +213,7 @@ result.results.forEach((r) => console.log(r.relevanceScore, documents[r.index]))
       </div>
 
       <h2>Other models</h2>
+      <p>Deciding between them? <a href="/guides/compare-rerankers">Compare the rerankers on the same benchmarks →</a></p>
       <div class="grid grid-2">
         <a class="card" href="/models/bge-reranker"><h3>bge-reranker</h3><p>Free, open-weight alternative.</p></a>
         <a class="card" href="/models/jina-reranker"><h3>Jina Reranker</h3><p>Open weights + hosted API.</p></a>
@@ -240,6 +241,7 @@ result.results.forEach((r) => console.log(r.relevanceScore, documents[r.index]))
             <li><a href="/guides/evaluate-reranker" data-i18n="shared.footer.evaluate">Evaluate rerankers</a></li>
             <li><a href="/guides/self-host-reranker" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
             <li><a href="/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
+            <li><a href="/guides/compare-rerankers" data-i18n="shared.footer.compare">Compare rerankers</a></li>
             <li><a href="/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
             <li><a href="/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
             <li><a href="/guides/reranking-not-working" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>

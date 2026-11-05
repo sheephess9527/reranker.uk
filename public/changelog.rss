@@ -5,8 +5,22 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Tue, 03 Nov 2026 02:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2026 04:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>5 Nov 2026 — Vendor docs reorganised: Pinecone and Cohere</title>
+      <link>https://reranker.uk/changelog#2026-11-05-vendors</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-11-05-vendors</guid>
+      <pubDate>Thu, 05 Nov 2026 04:00:00 GMT</pubDate>
+      <description>Pinecone moved each reranker's limits onto its own page (the figures are unchanged), and Cohere now prices Model Vault per GPU per hour instead of listing per-model rates. The Cohere page and the daily source checks are updated.</description>
+    </item>
+    <item>
+      <title>5 Nov 2026 — A comparison of the rerankers</title>
+      <link>https://reranker.uk/changelog#2026-11-05-compare</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-11-05-compare</guid>
+      <pubDate>Thu, 05 Nov 2026 02:00:00 GMT</pubDate>
+      <description>A new guide compares Qwen3, bge, mxbai, Jina, GTE and the hosted APIs, setting scores side by side only where they come from one run and saying whose run it was. All eight model reviews link to it.</description>
+    </item>
     <item>
       <title>3 Nov 2026 — Pinecone deprecates pinecone-rerank-v0</title>
       <link>https://reranker.uk/changelog#2026-11-03-pinecone</link>

@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "Deciding between them? <a href=\"/guides/compare-rerankers.html\">Compare the rerankers on the same benchmarks →</a>":
+    "正在几个模型之间犹豫？<a href=\"/guides/compare-rerankers.html\">在同一评测下对比这些 reranker →</a>",
   "Open weights · BAAI · free to self-host · <time datetime=\"2026-10-12\">Updated 12 Oct 2026</time>":
     "开源权重 · 智源 BAAI · 可免费自建 · <time datetime=\"2026-10-12\">更新于 2026 年 10 月 12 日</time>",
   "_title": "bge-reranker：智源 BAAI 开源重排序模型评测 | reranker.uk",

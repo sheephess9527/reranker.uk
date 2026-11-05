@@ -1622,60 +1622,60 @@
     },
     "v0_max_tokens": {
       "value": "512",
-      "source_url": "https://docs.pinecone.io/guides/search/rerank-results",
-      "check_url": "https://docs.pinecone.io/guides/search/rerank-results",
-      "check_pattern": "pinecone-rerank-v0 is a reranking model that can handle chunks up to {value} tokens",
-      "check_hint": "pinecone-rerank-v0",
-      "verified_on": "2026-10-16"
+      "source_url": "https://docs.pinecone.io/models/pinecone-rerank-v0",
+      "check_url": "https://docs.pinecone.io/models/pinecone-rerank-v0",
+      "check_pattern": "Text {value} tokens per query and document pair, \\d+ documents per request",
+      "check_hint": "Inputs, limits, and pricing",
+      "verified_on": "2026-11-05"
     },
     "v0_status": {
       "value": "deprecated",
-      "source_url": "https://docs.pinecone.io/guides/search/rerank-results",
-      "check_url": "https://docs.pinecone.io/guides/search/rerank-results",
+      "source_url": "https://docs.pinecone.io/models/pinecone-rerank-v0",
+      "check_url": "https://docs.pinecone.io/models/pinecone-rerank-v0",
       "check_pattern": "pinecone-rerank-v0 is {value}\\. It still serves rerank requests, but don.t use it for new projects",
       "check_hint": "pinecone-rerank-v0",
-      "verified_on": "2026-11-03"
+      "verified_on": "2026-11-05"
     },
     "bge_max_tokens": {
       "value": "1024",
-      "source_url": "https://docs.pinecone.io/guides/search/rerank-results",
-      "check_url": "https://docs.pinecone.io/guides/search/rerank-results",
-      "check_pattern": "bge-reranker-v2-m3 is a high-performance[\\s\\S]{0,300}?Max tokens per query and document pair: {value}",
-      "check_hint": "bge-reranker-v2-m3 is",
-      "verified_on": "2026-10-16"
+      "source_url": "https://docs.pinecone.io/models/bge-reranker-v2-m3",
+      "check_url": "https://docs.pinecone.io/models/bge-reranker-v2-m3",
+      "check_pattern": "Text {value} tokens per query and document pair, \\d+ documents per request",
+      "check_hint": "Inputs, limits, and pricing",
+      "verified_on": "2026-11-05"
     },
     "cohere_4_fast_max_docs": {
       "value": "250",
-      "source_url": "https://docs.pinecone.io/guides/search/rerank-results",
-      "check_url": "https://docs.pinecone.io/guides/search/rerank-results",
-      "check_pattern": "cohere-rerank-4-fast is Cohere.s latest[\\s\\S]{0,600}?Max documents: {value}",
-      "check_hint": "cohere-rerank-4-fast is",
-      "verified_on": "2026-10-16"
+      "source_url": "https://docs.pinecone.io/models/cohere-rerank-4-fast",
+      "check_url": "https://docs.pinecone.io/models/cohere-rerank-4-fast",
+      "check_pattern": "Text \\d+ tokens per document, {value} documents per request",
+      "check_hint": "Inputs, limits, and pricing",
+      "verified_on": "2026-11-05"
     },
     "v0_max_docs": {
       "value": "100",
-      "source_url": "https://docs.pinecone.io/guides/search/rerank-results",
-      "check_url": "https://docs.pinecone.io/guides/search/rerank-results",
-      "check_pattern": "pinecone-rerank-v0 is a reranking model that can handle chunks[\\s\\S]{0,200}?Max documents: {value}",
-      "check_hint": "pinecone-rerank-v0 is",
-      "verified_on": "2026-10-16"
+      "source_url": "https://docs.pinecone.io/models/pinecone-rerank-v0",
+      "check_url": "https://docs.pinecone.io/models/pinecone-rerank-v0",
+      "check_pattern": "Text \\d+ tokens per query and document pair, {value} documents per request",
+      "check_hint": "Inputs, limits, and pricing",
+      "verified_on": "2026-11-05"
     },
     "bge_max_docs": {
       "value": "100",
-      "source_url": "https://docs.pinecone.io/guides/search/rerank-results",
-      "check_url": "https://docs.pinecone.io/guides/search/rerank-results",
-      "check_pattern": "bge-reranker-v2-m3 is a high-performance[\\s\\S]{0,350}?Max documents: {value}",
-      "check_hint": "bge-reranker-v2-m3 is",
-      "verified_on": "2026-10-16"
+      "source_url": "https://docs.pinecone.io/models/bge-reranker-v2-m3",
+      "check_url": "https://docs.pinecone.io/models/bge-reranker-v2-m3",
+      "check_pattern": "Text \\d+ tokens per query and document pair, {value} documents per request",
+      "check_hint": "Inputs, limits, and pricing",
+      "verified_on": "2026-11-05"
     },
     "cohere_4_fast_max_tokens_per_doc": {
       "value": "4,096",
-      "source_url": "https://docs.pinecone.io/guides/search/rerank-results",
-      "check_url": "https://docs.pinecone.io/guides/search/rerank-results",
-      "check_pattern": "cohere-rerank-4-fast is Cohere.s latest[\\s\\S]{0,500}?Max tokens per document: {value}",
-      "check_hint": "cohere-rerank-4-fast is",
-      "verified_on": "2026-11-01",
-      "note": "Pinecone lowered this from 8,192 (verified 16 Oct 2026) to 4,096 by 30 Oct 2026; the max_tokens_per_doc parameter now defaults to 1,024 and caps at 4,096"
+      "source_url": "https://docs.pinecone.io/models/cohere-rerank-4-fast",
+      "check_url": "https://docs.pinecone.io/models/cohere-rerank-4-fast",
+      "check_pattern": "Text 4096 tokens per document, \\d+ documents per request",
+      "check_hint": "Inputs, limits, and pricing",
+      "verified_on": "2026-11-05",
+      "note": "Pinecone lowered this from 8,192 (verified 16 Oct 2026) to 4,096 by 30 Oct 2026; the max_tokens_per_doc parameter now defaults to 1,024 and caps at 4,096. On 5 Nov 2026 Pinecone moved every model's limits from the rerank-results page to the model's own page, which writes this one as 4096 (no comma)"
     },
     "builder_bge_requests_per_month": {
       "value": "1,000",
@@ -1854,20 +1854,13 @@
       "verified_on": "2026-10-22",
       "note": "cohere.com/pricing renders its price cards client-side; the figure is in the page's embedded JSON as inputPrice per \"1M tokens\". Cohere's Rerank 5 launch post (cohere.com/blog/rerank-5) says the same: \"$0.05 per 1M tokens for Pro and $0.02 for Fast\"."
     },
-    "vault_usd_per_hour": {
-      "value": "4.00",
+    "vault_l4_usd_per_gpu_hour": {
+      "value": "3.00",
       "source_url": "https://cohere.com/pricing",
-      "check_pattern": "Rerank 5 Pro Medium \\${value} \\$2,500",
-      "check_hint": "Model Vault",
-      "verified_on": "2026-10-22",
-      "note": "Model Vault table: Rerank 5 Fast and Pro, Medium tier, $4.00 an hour or $2,500 a month per instance"
-    },
-    "vault_usd_per_month": {
-      "value": "2,500",
-      "source_url": "https://cohere.com/pricing",
-      "check_pattern": "Rerank 5 Pro Medium \\$4\\.00 \\${value}",
-      "check_hint": "Model Vault",
-      "verified_on": "2026-10-22"
+      "check_pattern": "L4 24GB\\* \\${value} \\$1\\.00 A100 40GB",
+      "check_hint": "Model Vault Pricing",
+      "verified_on": "2026-11-05",
+      "note": "Model Vault is now priced per GPU per hour (L4 24GB $3.00 on demand, $1.00 promotional through 31 March 2027; up to $12.50 for a GB200 on demand) and by replicas; the Rerank 5 Fast/Pro Medium rows ($4.00 an hour, $2,500 a month) that this site cited on 22 Oct 2026 are gone from the page"
     }
   },
   "nemotron-3.5-rerank-8b": {

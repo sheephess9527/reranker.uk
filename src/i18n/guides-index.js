@@ -1,4 +1,10 @@
 window.I18N_PAGE = { zh: {
+  "Compare the rerankers":
+    "对比各个 reranker",
+  "Qwen3, bge, mxbai, Jina, GTE and the hosted APIs, set side by side only where the numbers come from one run.":
+    "Qwen3、bge、mxbai、Jina、GTE 和托管 API，只在数字来自同一次评测时才并排放。",
+  "Comparison":
+    "横向对比",
   "Read these in order":
     "按这个顺序读",
   "Five guides that build on each other, from what a reranker does to measuring one on your own data.":

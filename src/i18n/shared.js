@@ -24,6 +24,7 @@ window.I18N_SHARED = {
     "shared.footer.evaluate": "评测 reranker",
     "shared.footer.selfHost": "自托管 reranker",
     "shared.footer.scenario": "按场景选型",
+    "shared.footer.compare": "横向对比 reranker",
     "shared.footer.lateInteraction": "Late-interaction（ColBERT）",
     "shared.footer.instructionRerank": "指令跟随 rerank",
     "shared.footer.models": "模型",
