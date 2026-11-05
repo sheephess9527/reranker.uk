@@ -71,6 +71,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-05-vendors">2026 年 11 月 5 日 —— 厂商文档改版：Pinecone 和 Cohere</h2>
+        <ul class="feature-list">
+          <li><strong>Pinecone 把每个 reranker 的限制挪到了各自的页面</strong> —— 数字没有变（<code>pinecone-rerank-v0</code> 每对 512 token，<code>bge-reranker-v2-m3</code> 1024，<code>cohere-rerank-4-fast</code> 每篇文档 4,096），但每日的来源核对已经找不到它们。现在改为读每个模型自己的页面</li>
+          <li><strong>Cohere 的 Model Vault 改按 GPU 计价</strong> —— 价格页现在列的是每种 GPU 的每小时价格，L4 按需价从每小时 $3.00 起，另按副本数计费。本站 10 月 22 日引用的 Rerank 5 单模型价格（每小时 $4.00、每月 $2,500）已不再公布，所以 <a href="/zh/models/cohere-rerank#pricing">Cohere 页</a>改为写页面现在列出的内容</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-11-05-compare">2026 年 11 月 5 日 —— reranker 横向对比</h2>
         <ul class="feature-list">
           <li><strong><a href="/zh/guides/compare-rerankers">横向对比指南</a></strong> —— Qwen3、bge、mxbai、Jina、GTE 和托管 API，只在分数来自同一次评测时才并排放：Qwen3 对比 bge-reranker-v2-m3 用的是 Qwen 自己的评测，Qwen3、mxbai 和 Jina 用的是 Jina 的 2026 年评测。每一项都写明是谁跑的，也直说 GTE 和 Cohere 没有可以对齐的数字。还有一个藏在各模型页里的发现：Qwen3-Reranker-0.6B 在中文检索上落后于 bge-reranker-v2-m3</li>
@@ -145,14 +153,13 @@
           <li><strong>每天核对</strong> —— 来自 LightOn 和阿里巴巴模型卡的 13 个新数字进了每日来源核对</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>2026 年 10 月更早的更新（33 条）</summary><article class="changelog-entry">
         <h2 id="2026-10-16-contextual">2026 年 10 月 16 日（下午）—— Contextual AI 的托管 API</h2>
         <ul class="feature-list">
           <li><strong>Contextual AI Rerank v2 的商用渠道</strong> —— 网站之前只列了它的开源权重，而权重只能非商用。现在<a href="/zh/models/#contextual-api">模型对比表</a>加上了 Contextual 的托管 API：ctxl-rerank-v2-instruct-multilingual、它的 -mini 版和较早的 v1，按 token 计费。按场景选型和指令跟随两篇指南都指向了它，<a href="/zh/rerank-cost-calculator">成本计算器</a>也加入了 v2 和 v2-mini</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>2026 年 10 月更早的更新（32 条）</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-16-calculator">2026 年 10 月 16 日（稍晚）—— 成本计算器多了三个选项</h2>
         <ul class="feature-list">
           <li><strong><a href="/zh/rerank-cost-calculator">成本计算器</a>加入 ZeroEntropy、Amazon Bedrock 和 Pinecone</strong> —— zerank-2 按 token，Amazon Rerank 1.0 按每次最多 100 篇文档的查询，Pinecone 的 pinecone-rerank-v0 / bge-reranker-v2-m3 按每次最多 100 篇文档的请求计费。有两项是故意不计入的：Bedrock 上的 Cohere Rerank 3.5，因为 AWS 页面给出了两个不同的单文档 token 上限；Pinecone 上的 Cohere，因为 Pinecone 没说明它的“rerank 单位”是什么</li>
@@ -558,6 +565,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 

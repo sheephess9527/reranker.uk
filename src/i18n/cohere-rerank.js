@@ -163,10 +163,10 @@ window.I18N_PAGE = { zh: {
     "一次检索 = 1 个 query + 最多 {{fact:cohere-rerank.docs_per_search}} 篇文档；文档（连同 query）超过 {{fact:cohere-rerank.billing_chunk_tokens}} token 时，每 {{fact:cohere-rerank.billing_chunk_tokens}} token 一块，每块算一篇",
   "Model Vault":
     "Model Vault（专属实例）",
-  "From ${{fact:cohere-rerank-5.vault_usd_per_hour}} / hour":
-    "每小时 ${{fact:cohere-rerank-5.vault_usd_per_hour}} 起",
-  "Dedicated instances: Rerank 5 Fast or Pro (Medium) ${{fact:cohere-rerank-5.vault_usd_per_hour}} an hour, or ${{fact:cohere-rerank-5.vault_usd_per_month}} a month":
-    "专属实例：Rerank 5 Fast 或 Pro（Medium）每小时 ${{fact:cohere-rerank-5.vault_usd_per_hour}}，或每月 ${{fact:cohere-rerank-5.vault_usd_per_month}}",
+  "From ${{fact:cohere-rerank-5.vault_l4_usd_per_gpu_hour}} per GPU-hour":
+    "每 GPU 小时 ${{fact:cohere-rerank-5.vault_l4_usd_per_gpu_hour}} 起",
+  "Dedicated instances, billed by GPU type and number of replicas rather than by model; the figure is the on-demand rate for an L4":
+    "专属实例，按 GPU 型号和副本数计费，而不是按模型计费；这个数字是 L4 的按需价格",
   "Private deployment":
     "私有部署",
   "On-premises or isolated VPC":

@@ -71,6 +71,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-05-vendors">5 Nov 2026 — Vendor docs reorganised: Pinecone and Cohere</h2>
+        <ul class="feature-list">
+          <li><strong>Pinecone moved every reranker’s limits onto its own page</strong> — the figures are unchanged (512 tokens per pair for <code>pinecone-rerank-v0</code>, 1024 for <code>bge-reranker-v2-m3</code>, 4,096 per document for <code>cohere-rerank-4-fast</code>), but the daily source check had stopped finding them. It now reads each model’s page</li>
+          <li><strong>Cohere priced Model Vault by the GPU</strong> — its pricing page now lists an hourly rate per GPU type, from $3.00 an hour for an L4 on demand, plus replicas. The per-model rates this site quoted for Rerank 5 on 22 October ($4.00 an hour, $2,500 a month) are no longer published, so the <a href="/models/cohere-rerank#pricing">Cohere page</a> says what the page now lists instead</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-11-05-compare">5 Nov 2026 — A comparison of the rerankers</h2>
         <ul class="feature-list">
           <li><strong>A <a href="/guides/compare-rerankers">head-to-head guide</a></strong> — Qwen3, bge, mxbai, Jina, GTE and the hosted APIs, with scores set side by side only where they come from one run: Qwen’s own run for Qwen3 against bge-reranker-v2-m3, and Jina’s 2026 run for Qwen3, mxbai and Jina. It says whose run each is, and says plainly that GTE and Cohere have no number that can be lined up. One finding that the model pages bury: Qwen3-Reranker-0.6B trails bge-reranker-v2-m3 on Chinese retrieval</li>
@@ -145,14 +153,13 @@
           <li><strong>Checked daily</strong> — 13 new figures from LightOn’s and Alibaba’s model cards go into the daily source check</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>Earlier in October 2026 (33 entries)</summary><article class="changelog-entry">
         <h2 id="2026-10-16-contextual">16 Oct 2026 (afternoon) — Contextual AI’s hosted API</h2>
         <ul class="feature-list">
           <li><strong>The commercial route to Contextual AI Rerank v2</strong> — the site only listed the open weights, which are non-commercial. The <a href="/models/#contextual-api">models table</a> now has Contextual’s hosted API too: ctxl-rerank-v2-instruct-multilingual, its -mini and the older v1, priced per token. The scenario and instruction guides point to it, and the <a href="/rerank-cost-calculator">cost calculator</a> includes v2 and v2-mini</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>Earlier in October 2026 (32 entries)</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-16-calculator">16 Oct 2026 (later) — Three more options in the cost calculator</h2>
         <ul class="feature-list">
           <li><strong>ZeroEntropy, Amazon Bedrock and Pinecone in the <a href="/rerank-cost-calculator">cost calculator</a></strong> — zerank-2 per token, Amazon Rerank 1.0 per query of up to 100 documents, and Pinecone’s pinecone-rerank-v0 / bge-reranker-v2-m3 per request of up to 100. Two are left out on purpose: Cohere Rerank 3.5 on Bedrock, because AWS’s page gives two different per-document token limits, and Cohere on Pinecone, because Pinecone doesn’t define its “rerank unit”</li>
@@ -558,6 +565,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 

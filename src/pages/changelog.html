@@ -6,6 +6,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-05-vendors">5 Nov 2026 — Vendor docs reorganised: Pinecone and Cohere</h2>
+        <ul class="feature-list">
+          <li><strong>Pinecone moved every reranker’s limits onto its own page</strong> — the figures are unchanged ({{fact:pinecone-rerank.v0_max_tokens}} tokens per pair for <code>pinecone-rerank-v0</code>, {{fact:pinecone-rerank.bge_max_tokens}} for <code>bge-reranker-v2-m3</code>, {{fact:pinecone-rerank.cohere_4_fast_max_tokens_per_doc}} per document for <code>cohere-rerank-4-fast</code>), but the daily source check had stopped finding them. It now reads each model’s page</li>
+          <li><strong>Cohere priced Model Vault by the GPU</strong> — its pricing page now lists an hourly rate per GPU type, from ${{fact:cohere-rerank-5.vault_l4_usd_per_gpu_hour}} an hour for an L4 on demand, plus replicas. The per-model rates this site quoted for Rerank 5 on 22 October ($4.00 an hour, $2,500 a month) are no longer published, so the <a href="/models/cohere-rerank.html#pricing">Cohere page</a> says what the page now lists instead</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-11-05-compare">5 Nov 2026 — A comparison of the rerankers</h2>
         <ul class="feature-list">
           <li><strong>A <a href="/guides/compare-rerankers.html">head-to-head guide</a></strong> — Qwen3, bge, mxbai, Jina, GTE and the hosted APIs, with scores set side by side only where they come from one run: Qwen’s own run for Qwen3 against bge-reranker-v2-m3, and Jina’s 2026 run for Qwen3, mxbai and Jina. It says whose run each is, and says plainly that GTE and Cohere have no number that can be lined up. One finding that the model pages bury: Qwen3-Reranker-0.6B trails bge-reranker-v2-m3 on Chinese retrieval</li>
