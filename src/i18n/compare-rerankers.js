@@ -1,10 +1,18 @@
 window.I18N_PAGE = { zh: {
+  "MIT":
+    "MIT",
+  "<a href=\"https://huggingface.co/hindsight-ai/hs-rerank-1\" rel=\"noopener noreferrer\">hs-rerank-1</a>":
+    "<a href=\"https://huggingface.co/hindsight-ai/hs-rerank-1\" rel=\"noopener noreferrer\">hs-rerank-1</a>",
+  "8, incl. Chinese, Japanese and Korean":
+    "8 种，含中文、日语和韩语",
+  "CPU (int8 ONNX) or GPU":
+    "CPU（int8 ONNX）或 GPU",
   "<a href=\"/\">Home</a><span>/</span><a href=\"/guides/\">Guides</a><span>/</span>Compare rerankers":
     "<a href=\"/\">首页</a><span>/</span><a href=\"/guides/\">指南</a><span>/</span>对比 reranker",
   "Best reranker in 2026: Qwen3, bge, mxbai, Jina, GTE and the hosted APIs compared":
     "2026 年最好的 reranker：Qwen3、bge、mxbai、Jina、GTE 和托管 API 横向对比",
-  "Comparison · ~7 min read · <time datetime=\"2026-11-05\">Updated 5 Nov 2026</time>":
-    "横向对比 · 约 7 分钟阅读 · <time datetime=\"2026-11-05\">更新于 2026 年 11 月 5 日</time>",
+  "Comparison · ~7 min read · <time datetime=\"2026-11-10\">Updated 10 Nov 2026</time>":
+    "横向对比 · 约 7 分钟阅读 · <time datetime=\"2026-11-10\">更新于 2026 年 11 月 10 日</time>",
   "Every reranker vendor publishes a table in which its own model wins, and the tables use different datasets, so the numbers cannot be lined up across vendors. This page only sets scores side by side when they come from <strong>one run</strong>, says whose run it was, and says plainly which models have no number that can be compared.":
     "每家 reranker 厂商公布的表格里，赢的都是自己的模型，而且各家用的数据集不同，数字没法跨厂商直接对齐。本页只在分数来自<strong>同一次评测</strong>时才把它们并排放，并写明是谁跑的；没有可比数字的模型，也会直接说明。",
   "On this page":
@@ -27,8 +35,8 @@ window.I18N_PAGE = { zh: {
     "先说结论",
   "<strong>Self-hosting on a GPU and want the best open model:</strong> <a href=\"/models/qwen-reranker.html\">Qwen3-Reranker-4B</a>. In both runs below it is at or near the top, and it is Apache 2.0.":
     "<strong>自托管、有 GPU、想要最好的开源模型：</strong><a href=\"/models/qwen-reranker.html\">Qwen3-Reranker-4B</a>。下面两次评测里它都在榜首或接近榜首，而且是 Apache 2.0 协议。",
-  "<strong>Small, CPU-friendly, multilingual:</strong> <a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> is the standard baseline; the <a href=\"/models/gte-reranker.html\">GTE rerankers</a> are smaller still.":
-    "<strong>要小、能在 CPU 上跑、支持多语言：</strong><a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> 是通行的基线；<a href=\"/models/gte-reranker.html\">GTE reranker</a> 还要更小。",
+  "<strong>Small, CPU-friendly, multilingual:</strong> <a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> is the standard baseline; the <a href=\"/models/gte-reranker.html\">GTE rerankers</a> are smaller still, and Hindsight’s <a href=\"https://huggingface.co/hindsight-ai/hs-rerank-1\" rel=\"noopener noreferrer\">hs-rerank-1</a> (MIT, {{fact:hs-rerank-1.params}}) is smaller again but comes with no scores we can quote.":
+    "<strong>要小、能在 CPU 上跑、支持多语言：</strong><a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> 是通行的基线；<a href=\"/models/gte-reranker.html\">GTE reranker</a> 还要更小，Hindsight 的 <a href=\"https://huggingface.co/hindsight-ai/hs-rerank-1\" rel=\"noopener noreferrer\">hs-rerank-1</a>（MIT，{{fact:hs-rerank-1.params}}）更小，但没有可以引用的分数。",
   "<strong>No GPU and no ops:</strong> a hosted API. <a href=\"/models/cohere-rerank.html\">Cohere Rerank 5</a> and <a href=\"/models/voyage-rerank.html\">Voyage rerank-3</a> are the established ones, <a href=\"/models/zerank.html\">zerank-2</a> the cheapest per token.":
     "<strong>没有 GPU，也不想运维：</strong>用托管 API。<a href=\"/models/cohere-rerank.html\">Cohere Rerank 5</a> 和 <a href=\"/models/voyage-rerank.html\">Voyage rerank-3</a> 是老牌选择，<a href=\"/models/zerank.html\">zerank-2</a> 按 token 算最便宜。",
   "<strong>Commercial product, open weights:</strong> check the licence first. <a href=\"/models/jina-reranker.html\">Jina’s</a> weights are non-commercial.":
@@ -37,8 +45,8 @@ window.I18N_PAGE = { zh: {
     "哪些数字能比",
   "A score only means something next to scores from the same run: the same datasets, the same candidate lists from the same first-stage retriever, the same cut-off. Two numbers from two vendors’ pages are not on one scale, even when both say “nDCG@10” or “BEIR”. This page uses two runs that cover several models at once, and both were run by a vendor with a model of its own in the table, so read them as strong hints and confirm on your own labelled queries (<a href=\"/guides/evaluate-reranker.html\">how</a>).":
     "分数只有和同一次评测里的分数放在一起才有意义：同样的数据集、同一个第一阶段检索器给出的同样的候选列表、同样的截断位置。两家厂商页面上的数字不在同一把尺子上，哪怕两边都写着“nDCG@10”或“BEIR”。本页用的两次评测都一次覆盖了好几个模型，但两次都是由表里有自家模型的厂商来跑的，所以只能当作有力的线索，最终还要在你自己标注的查询上验证（<a href=\"/guides/evaluate-reranker.html\">怎么做</a>）。",
-  "Two families have no run to put here. <strong>GTE</strong>: Alibaba publishes its reranking results as a chart, so there is no table to line up. <strong>Cohere</strong>: no benchmark table has been published for Rerank 5. They are compared below on size, licence, price and fit instead.":
-    "有两类模型没有可放进来的评测。<strong>GTE</strong>：阿里只以图表形式公布 reranker 结果，没有可以对齐的表格。<strong>Cohere</strong>：Rerank 5 没有公布过评测表。下面改从规模、许可证、价格和适用场景来比较它们。",
+  "Three families have no run to put here. <strong>GTE</strong>: Alibaba publishes its reranking results as a chart, so there is no table to line up. <strong>Cohere</strong>: no benchmark table has been published for Rerank 5. <strong>hs-rerank-1</strong>: Hindsight’s model card shows its results as an image only. They are compared below on size, licence, price and fit instead.":
+    "有三类模型没有可放进来的评测。<strong>GTE</strong>：阿里只以图表形式公布 reranker 结果，没有可以对齐的表格。<strong>Cohere</strong>：Rerank 5 没有公布过评测表。<strong>hs-rerank-1</strong>：Hindsight 的模型卡只以图片形式展示结果。下面改从规模、许可证、价格和适用场景来比较它们。",
   "Qwen3 against bge-reranker-v2-m3":
     "Qwen3 对比 bge-reranker-v2-m3",
   "This is Qwen’s own run, from the Qwen3-Reranker model cards: the retrieval subsets of MTEB (English, Chinese, multilingual and code) and MLDR for long documents, each reranking the same top 100 candidates.":
@@ -121,8 +129,8 @@ window.I18N_PAGE = { zh: {
     "英文 / 70+ 种语言",
   "CPU, small GPU or browser (English)":
     "CPU、小 GPU 或浏览器（英文模型）",
-  "Sizes and licences are from each model’s own page here, which cite the vendors’ model cards. “Open weights” means the licence is not restated on this page; check the card before shipping.":
-    "规模和许可证取自本站各模型页，那些页面引用的是厂商的模型卡。“开源权重”表示本页没有复述它的许可证；上线前请去看模型卡。",
+  "Sizes and licences are from each model’s own page here, which cite the vendors’ model cards; hs-rerank-1 has no page of its own, so its row comes straight from its model card. “Open weights” means the licence is not restated on this page; check the card before shipping.":
+    "规模和许可证取自本站各模型页，那些页面引用的是厂商的模型卡；hs-rerank-1 没有自己的页面，它那一行直接来自它的模型卡。“开源权重”表示本页没有复述它的许可证；上线前请去看模型卡。",
   "Hosted APIs":
     "托管 API",
   "You pay per token instead of running a GPU. None of these vendors publishes a comparable benchmark, so the table gives what can be checked: the price and the context length.":

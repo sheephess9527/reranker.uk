@@ -281,8 +281,10 @@ doesn't cover yet, from official channels only:
 - **new on Hugging Face** — anything the organisations in
   `data/release-watch.json` (`hf_authors`) publish, and any model tagged
   `text-ranking` (the Hub's task tag for rerankers) with at least
-  `hf_new_min_likes` likes, whoever published it; community GGUF/MLX/AWQ
-  copies of other people's models are left out;
+  `hf_new_min_likes` likes **or** `hf_new_min_downloads` downloads, whoever
+  published it (a reranker nobody had starred yet, hs-rerank-1, was
+  downloaded 600,000 times in two weeks and sat under the likes bar alone);
+  community GGUF/MLX/AWQ copies of other people's models are left out;
 - **catch-up** — `text-ranking` models with at least `hf_catchup_min_likes`
   likes, however old, that no page on the site mentions. Until 9 Oct 2026
   the watch only looked at 14 organisations and names containing

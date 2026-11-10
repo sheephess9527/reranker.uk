@@ -6,6 +6,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-10-hs-rerank">10 Nov 2026 — A small multilingual reranker, and a hole in the release watch</h2>
+        <ul class="feature-list">
+          <li><strong>hs-rerank-1 in the <a href="/models/#hs-rerank-1">models table</a> and the <a href="/guides/compare-rerankers.html">comparison guide</a></strong> — Hindsight’s cross-encoder is {{fact:hs-rerank-1.params}} (a {{fact:hs-rerank-1.transformer_params}}-parameter transformer on top of a {{fact:hs-rerank-1.embedding_params}} embedding table), takes {{fact:hs-rerank-1.context_tokens}} tokens, covers English, Spanish, French, German, Portuguese, Chinese, Japanese and Korean, is MIT-licensed and ships an int8 ONNX file for CPUs. Its model card shows results only as an image, so the site quotes no scores for it</li>
+          <li><strong>The release watch had missed it</strong> — hs-rerank-1 came out on 28 October and had 600,000 downloads within two weeks, but only 5 likes, under the bar of 10 for models from organisations we don’t track. The watch now also reports any new reranker with 5,000 or more downloads. Two other new models were read and left out: a non-commercial 4B reranker with 28 downloads, and a research LoRA adapter that isn’t a standalone model</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-11-05-vendors">5 Nov 2026 — Vendor docs reorganised: Pinecone and Cohere</h2>
         <ul class="feature-list">
           <li><strong>Pinecone moved every reranker’s limits onto its own page</strong> — the figures are unchanged ({{fact:pinecone-rerank.v0_max_tokens}} tokens per pair for <code>pinecone-rerank-v0</code>, {{fact:pinecone-rerank.bge_max_tokens}} for <code>bge-reranker-v2-m3</code>, {{fact:pinecone-rerank.cohere_4_fast_max_tokens_per_doc}} per document for <code>cohere-rerank-4-fast</code>), but the daily source check had stopped finding them. It now reads each model’s page</li>

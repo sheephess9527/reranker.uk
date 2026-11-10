@@ -18,6 +18,7 @@
     "Cohere"
   ],
   "hf_new_min_likes": 10,
+  "hf_new_min_downloads": 5000,
   "hf_catchup_min_likes": 50,
   "hf_seen": [
     "Alibaba-NLP/core-reranker-2b",
@@ -50,7 +51,10 @@
     "nvidia/Nemotron-3.5-Rerank-8B-BF16",
     "cross-encoder/ms-marco-MiniLM-L4-v2",
     "cross-encoder/merged-bge-reranker-large",
-    "hindsight-ai/hs-decide-1-flash"
+    "hindsight-ai/hs-decide-1-flash",
+    "hindsight-ai/hs-rerank-1",
+    "Asteromorph/AsteroRank-Lepton",
+    "airun-ai/GlanceRAG-MiMo-9B-Reranker"
   ],
   "pages": [
     {
