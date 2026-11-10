@@ -2123,5 +2123,39 @@
       "verified_on": "2026-10-24",
       "note": "sentence-transformers' own table on the cross-encoder model cards: documents a second on a V100 GPU; the card writes the figure without a thousands separator"
     }
+  },
+  "hs-rerank-1": {
+    "params": {
+      "value": "114M",
+      "source_url": "https://huggingface.co/hindsight-ai/hs-rerank-1",
+      "check_url": "https://huggingface.co/hindsight-ai/hs-rerank-1/raw/main/README.md",
+      "check_pattern": "\\| Parameters \\| {value} \\|",
+      "check_hint": "Parameters",
+      "verified_on": "2026-11-10"
+    },
+    "embedding_params": {
+      "value": "98M",
+      "source_url": "https://huggingface.co/hindsight-ai/hs-rerank-1",
+      "check_url": "https://huggingface.co/hindsight-ai/hs-rerank-1/raw/main/README.md",
+      "check_pattern": "{value} of them are the token embedding table",
+      "check_hint": "embedding table",
+      "verified_on": "2026-11-10"
+    },
+    "transformer_params": {
+      "value": "15M",
+      "source_url": "https://huggingface.co/hindsight-ai/hs-rerank-1",
+      "check_url": "https://huggingface.co/hindsight-ai/hs-rerank-1/raw/main/README.md",
+      "check_pattern": "runs a {value}-parameter transformer",
+      "check_hint": "parameter transformer",
+      "verified_on": "2026-11-10"
+    },
+    "context_tokens": {
+      "value": "8,192",
+      "source_url": "https://huggingface.co/hindsight-ai/hs-rerank-1",
+      "check_url": "https://huggingface.co/hindsight-ai/hs-rerank-1/raw/main/README.md",
+      "check_pattern": "up to {value} tokens per query and document pair",
+      "check_hint": "tokens per query",
+      "verified_on": "2026-11-10"
+    }
   }
 }

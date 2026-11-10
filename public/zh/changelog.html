@@ -71,6 +71,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-10-hs-rerank">2026 年 11 月 10 日 —— 一个小型多语言 reranker，和发布监控的一个漏洞</h2>
+        <ul class="feature-list">
+          <li><strong>hs-rerank-1 进了<a href="/zh/models/#hs-rerank-1">模型对比表</a>和<a href="/zh/guides/compare-rerankers">横向对比指南</a></strong> —— Hindsight 的 cross-encoder 是 114M（98M 的词嵌入表上只有 15M 参数的 transformer），支持 8,192 token，覆盖英、西、法、德、葡、中、日、韩八种语言，MIT 许可证，还提供给 CPU 用的 int8 ONNX 文件。它的模型卡只以图片展示结果，所以本站不引用它的分数</li>
+          <li><strong>发布监控当时漏掉了它</strong> —— hs-rerank-1 在 10 月 28 日发布，两周内下载了 60 万次，却只有 5 个赞，没达到「不在跟踪名单里的机构要 10 个赞」的门槛。监控现在也会报告下载量达到 5,000 的新 reranker。另外两个新模型读过后没收录：一个下载只有 28 次的非商用 4B reranker，和一个不能单独使用的研究用 LoRA 适配器</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-11-05-vendors">2026 年 11 月 5 日 —— 厂商文档改版：Pinecone 和 Cohere</h2>
         <ul class="feature-list">
           <li><strong>Pinecone 把每个 reranker 的限制挪到了各自的页面</strong> —— 数字没有变（<code>pinecone-rerank-v0</code> 每对 512 token，<code>bge-reranker-v2-m3</code> 1024，<code>cohere-rerank-4-fast</code> 每篇文档 4,096），但每日的来源核对已经找不到它们。现在改为读每个模型自己的页面</li>
@@ -144,8 +152,7 @@
           <li><strong>还没有价格</strong> —— Cohere 的价格页还没列出 Rerank 5 的价格，所以模型对比表如实写明，成本计算器暂时仍用 Rerank 4。发布监控现在也会读 Cohere 的价格页，价格一出现就会提醒</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>2026 年 10 月更早的更新（34 条）</summary><article class="changelog-entry">
         <h2 id="2026-10-16-pages">2026 年 10 月 16 日（晚）—— LightOn-rerank、GTE 和 Contextual AI 有了专页</h2>
         <ul class="feature-list">
           <li><strong>新增三个模型页面</strong> —— <a href="/zh/models/lighton-rerank">LightOn-rerank</a>（六个 Apache 2.0 模型，能处理文本和页面图片，分逐点和列表式，附 LightOn 在 ViDoRe V3 和 BEIR 上的测试）、<a href="/zh/models/gte-reranker">GTE 重排序模型</a>（阿里巴巴的 149M 英文和 306M 多语言交叉编码器，8,192 token，CPU 或浏览器都能跑）和 <a href="/zh/models/contextual-rerank">Contextual AI Rerank v2</a>（跟随指令；非商用权重或付费 API）</li>
@@ -153,7 +160,7 @@
           <li><strong>每天核对</strong> —— 来自 LightOn 和阿里巴巴模型卡的 13 个新数字进了每日来源核对</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>2026 年 10 月更早的更新（33 条）</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-16-contextual">2026 年 10 月 16 日（下午）—— Contextual AI 的托管 API</h2>
         <ul class="feature-list">
           <li><strong>Contextual AI Rerank v2 的商用渠道</strong> —— 网站之前只列了它的开源权重，而权重只能非商用。现在<a href="/zh/models/#contextual-api">模型对比表</a>加上了 Contextual 的托管 API：ctxl-rerank-v2-instruct-multilingual、它的 -mini 版和较早的 v1，按 token 计费。按场景选型和指令跟随两篇指南都指向了它，<a href="/zh/rerank-cost-calculator">成本计算器</a>也加入了 v2 和 v2-mini</li>
@@ -565,6 +572,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 

@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Thu, 05 Nov 2026 04:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 10 Nov 2026 02:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>10 Nov 2026 — A small multilingual reranker, and a hole in the release watch</title>
+      <link>https://reranker.uk/changelog#2026-11-10-hs-rerank</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-11-10-hs-rerank</guid>
+      <pubDate>Tue, 10 Nov 2026 02:00:00 GMT</pubDate>
+      <description>Hindsight's hs-rerank-1, a 114M multilingual cross-encoder under the MIT licence, is now in the models table and the comparison guide. The release watch had missed it because it had few likes despite 600,000 downloads, and now also reports new rerankers by download count.</description>
+    </item>
     <item>
       <title>5 Nov 2026 — Vendor docs reorganised: Pinecone and Cohere</title>
       <link>https://reranker.uk/changelog#2026-11-05-vendors</link>

@@ -4,6 +4,18 @@ window.I18N_PAGE = {
     "models.tableCaption": "重排序模型对比：架构、类型、适用场景、语言、延迟、价格与 BEIR 分数",
   },
   zh: {
+  "<a href=\"https://huggingface.co/hindsight-ai/hs-rerank-1\" rel=\"noopener noreferrer\">hs-rerank-1</a>":
+    "<a href=\"https://huggingface.co/hindsight-ai/hs-rerank-1\" rel=\"noopener noreferrer\">hs-rerank-1</a>",
+  "MIT":
+    "MIT",
+  "{{fact:hs-rerank-1.params}}, {{fact:hs-rerank-1.context_tokens}} tokens; a {{fact:hs-rerank-1.transformer_params}}-parameter transformer plus a large embedding table; int8 ONNX for CPU; built for Hindsight, a vectorize-io project":
+    "{{fact:hs-rerank-1.params}}，{{fact:hs-rerank-1.context_tokens}} token；{{fact:hs-rerank-1.transformer_params}} 参数的 transformer 加一张很大的词嵌入表；有 int8 ONNX 版可在 CPU 上跑；为 vectorize-io 的 Hindsight 项目而做",
+  "8 langs incl. zh, ja, ko":
+    "8 种语言，含中文、日语、韩语",
+  "CPU-friendly (int8 ONNX)":
+    "CPU 友好（int8 ONNX）",
+  "Hindsight show hs-rerank-1’s results only as an image on the model card, so there is no number to quote":
+    "Hindsight 只在模型卡上以图片形式展示 hs-rerank-1 的结果，没有可以引用的数字",
   "${{fact:voyage-rerank-2.5.price_per_m_tokens}}/M tokens†":
     "${{fact:voyage-rerank-2.5.price_per_m_tokens}}/M token†",
   "$0.02/M tokens†":

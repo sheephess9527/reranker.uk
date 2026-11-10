@@ -2,7 +2,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Compare rerankers</div>
       <h1>Best reranker in 2026: Qwen3, bge, mxbai, Jina, GTE and the hosted APIs compared</h1>
-      <p class="meta">Comparison · ~7 min read · <time datetime="2026-11-05">Updated 5 Nov 2026</time></p>
+      <p class="meta">Comparison · ~7 min read · <time datetime="2026-11-10">Updated 10 Nov 2026</time></p>
       <p class="lead">Every reranker vendor publishes a table in which its own model wins, and the tables use different datasets, so the numbers cannot be lined up across vendors. This page only sets scores side by side when they come from <strong>one run</strong>, says whose run it was, and says plainly which models have no number that can be compared.</p>
 
       <div class="toc">
@@ -21,14 +21,14 @@
       <h2 id="short">The short answer</h2>
       <ul>
         <li><strong>Self-hosting on a GPU and want the best open model:</strong> <a href="/models/qwen-reranker.html">Qwen3-Reranker-4B</a>. In both runs below it is at or near the top, and it is Apache 2.0.</li>
-        <li><strong>Small, CPU-friendly, multilingual:</strong> <a href="/models/bge-reranker.html">bge-reranker-v2-m3</a> is the standard baseline; the <a href="/models/gte-reranker.html">GTE rerankers</a> are smaller still.</li>
+        <li><strong>Small, CPU-friendly, multilingual:</strong> <a href="/models/bge-reranker.html">bge-reranker-v2-m3</a> is the standard baseline; the <a href="/models/gte-reranker.html">GTE rerankers</a> are smaller still, and Hindsight’s <a href="https://huggingface.co/hindsight-ai/hs-rerank-1" rel="noopener noreferrer">hs-rerank-1</a> (MIT, {{fact:hs-rerank-1.params}}) is smaller again but comes with no scores we can quote.</li>
         <li><strong>No GPU and no ops:</strong> a hosted API. <a href="/models/cohere-rerank.html">Cohere Rerank 5</a> and <a href="/models/voyage-rerank.html">Voyage rerank-3</a> are the established ones, <a href="/models/zerank.html">zerank-2</a> the cheapest per token.</li>
         <li><strong>Commercial product, open weights:</strong> check the licence first. <a href="/models/jina-reranker.html">Jina’s</a> weights are non-commercial.</li>
       </ul>
 
       <h2 id="rule">Which numbers can be compared</h2>
       <p>A score only means something next to scores from the same run: the same datasets, the same candidate lists from the same first-stage retriever, the same cut-off. Two numbers from two vendors’ pages are not on one scale, even when both say “nDCG@10” or “BEIR”. This page uses two runs that cover several models at once, and both were run by a vendor with a model of its own in the table, so read them as strong hints and confirm on your own labelled queries (<a href="/guides/evaluate-reranker.html">how</a>).</p>
-      <p>Two families have no run to put here. <strong>GTE</strong>: Alibaba publishes its reranking results as a chart, so there is no table to line up. <strong>Cohere</strong>: no benchmark table has been published for Rerank 5. They are compared below on size, licence, price and fit instead.</p>
+      <p>Three families have no run to put here. <strong>GTE</strong>: Alibaba publishes its reranking results as a chart, so there is no table to line up. <strong>Cohere</strong>: no benchmark table has been published for Rerank 5. <strong>hs-rerank-1</strong>: Hindsight’s model card shows its results as an image only. They are compared below on size, licence, price and fit instead.</p>
 
       <h2 id="qwen-run">Qwen3 against bge-reranker-v2-m3</h2>
       <p>This is Qwen’s own run, from the Qwen3-Reranker model cards: the retrieval subsets of MTEB (English, Chinese, multilingual and code) and MLDR for long documents, each reranking the same top 100 candidates.</p>
@@ -75,11 +75,12 @@
             <tr><td><a href="/models/bge-reranker.html">bge-reranker-v2-m3</a></td><td>568M</td><td>Open weights</td><td>100+</td><td>CPU or GPU</td></tr>
             <tr><td><a href="/models/mxbai-rerank.html">mxbai-rerank-large-v2</a></td><td>1.5B</td><td>Apache 2.0</td><td>100+</td><td>GPU recommended</td></tr>
             <tr><td><a href="/models/jina-reranker.html">jina-reranker-v3.5</a></td><td>0.6B</td><td>Non-commercial weights</td><td>Multilingual</td><td>Hosted API, or weights for research</td></tr>
+            <tr><td><a href="https://huggingface.co/hindsight-ai/hs-rerank-1" rel="noopener noreferrer">hs-rerank-1</a></td><td>{{fact:hs-rerank-1.params}}</td><td>MIT</td><td>8, incl. Chinese, Japanese and Korean</td><td>CPU (int8 ONNX) or GPU</td></tr>
             <tr><td><a href="/models/gte-reranker.html">GTE rerankers</a></td><td>149M / 306M</td><td>Apache 2.0</td><td>English / 70+</td><td>CPU, small GPU or browser (English)</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="muted" style="font-size:.85rem">Sizes and licences are from each model’s own page here, which cite the vendors’ model cards. “Open weights” means the licence is not restated on this page; check the card before shipping.</p>
+      <p class="muted" style="font-size:.85rem">Sizes and licences are from each model’s own page here, which cite the vendors’ model cards; hs-rerank-1 has no page of its own, so its row comes straight from its model card. “Open weights” means the licence is not restated on this page; check the card before shipping.</p>
 
       <h2 id="hosted">Hosted APIs</h2>
       <p>You pay per token instead of running a GPU. None of these vendors publishes a comparable benchmark, so the table gives what can be checked: the price and the context length.</p>

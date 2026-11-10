@@ -32,7 +32,7 @@
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
   <link rel="preload" href="/assets/css/style.css?v=ff62e57d6c" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css?v=ff62e57d6c" >
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"2026 年最好的 reranker：Qwen3、bge、mxbai、Jina、GTE、Cohere 横向对比","datePublished":"2026-11-05","dateModified":"2026-11-05","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/compare-rerankers","description":"在同一评测下横向对比 reranker，而不是各家厂商自己的表：Qwen3-Reranker 对比 bge-reranker-v2-m3，mxbai 和 Jina 的同一次评测，以及规模、许可证、托管 API 价格和选型方法。","inLanguage":"zh-Hans"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"2026 年最好的 reranker：Qwen3、bge、mxbai、Jina、GTE、Cohere 横向对比","datePublished":"2026-11-05","dateModified":"2026-11-10","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/compare-rerankers","description":"在同一评测下横向对比 reranker，而不是各家厂商自己的表：Qwen3-Reranker 对比 bge-reranker-v2-m3，mxbai 和 Jina 的同一次评测，以及规模、许可证、托管 API 价格和选型方法。","inLanguage":"zh-Hans"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://reranker.uk/zh/guides/"},{"@type":"ListItem","position":3,"name":"2026 年最好的 reranker：Qwen3、bge、mxbai、Jina、GTE、Cohere 横向对比","item":"https://reranker.uk/zh/guides/compare-rerankers"}]}</script>
 
 </head>
@@ -67,7 +67,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/guides/">指南</a><span>/</span>对比 reranker</div>
       <h1>2026 年最好的 reranker：Qwen3、bge、mxbai、Jina、GTE 和托管 API 横向对比</h1>
-      <p class="meta">横向对比 · 约 7 分钟阅读 · <time datetime="2026-11-05">更新于 2026 年 11 月 5 日</time></p>
+      <p class="meta">横向对比 · 约 7 分钟阅读 · <time datetime="2026-11-10">更新于 2026 年 11 月 10 日</time></p>
       <p class="lead">每家 reranker 厂商公布的表格里，赢的都是自己的模型，而且各家用的数据集不同，数字没法跨厂商直接对齐。本页只在分数来自<strong>同一次评测</strong>时才把它们并排放，并写明是谁跑的；没有可比数字的模型，也会直接说明。</p>
 
       <div class="toc">
@@ -86,14 +86,14 @@
       <h2 id="short">先说结论</h2>
       <ul>
         <li><strong>自托管、有 GPU、想要最好的开源模型：</strong><a href="/zh/models/qwen-reranker">Qwen3-Reranker-4B</a>。下面两次评测里它都在榜首或接近榜首，而且是 Apache 2.0 协议。</li>
-        <li><strong>要小、能在 CPU 上跑、支持多语言：</strong><a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a> 是通行的基线；<a href="/zh/models/gte-reranker">GTE reranker</a> 还要更小。</li>
+        <li><strong>要小、能在 CPU 上跑、支持多语言：</strong><a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a> 是通行的基线；<a href="/zh/models/gte-reranker">GTE reranker</a> 还要更小，Hindsight 的 <a href="https://huggingface.co/hindsight-ai/hs-rerank-1" rel="noopener noreferrer">hs-rerank-1</a>（MIT，114M）更小，但没有可以引用的分数。</li>
         <li><strong>没有 GPU，也不想运维：</strong>用托管 API。<a href="/zh/models/cohere-rerank">Cohere Rerank 5</a> 和 <a href="/zh/models/voyage-rerank">Voyage rerank-3</a> 是老牌选择，<a href="/zh/models/zerank">zerank-2</a> 按 token 算最便宜。</li>
         <li><strong>商用产品、想用开源权重：</strong>先看许可证。<a href="/zh/models/jina-reranker">Jina</a> 的权重是非商用的。</li>
       </ul>
 
       <h2 id="rule">哪些数字能比</h2>
       <p>分数只有和同一次评测里的分数放在一起才有意义：同样的数据集、同一个第一阶段检索器给出的同样的候选列表、同样的截断位置。两家厂商页面上的数字不在同一把尺子上，哪怕两边都写着“nDCG@10”或“BEIR”。本页用的两次评测都一次覆盖了好几个模型，但两次都是由表里有自家模型的厂商来跑的，所以只能当作有力的线索，最终还要在你自己标注的查询上验证（<a href="/zh/guides/evaluate-reranker">怎么做</a>）。</p>
-      <p>有两类模型没有可放进来的评测。<strong>GTE</strong>：阿里只以图表形式公布 reranker 结果，没有可以对齐的表格。<strong>Cohere</strong>：Rerank 5 没有公布过评测表。下面改从规模、许可证、价格和适用场景来比较它们。</p>
+      <p>有三类模型没有可放进来的评测。<strong>GTE</strong>：阿里只以图表形式公布 reranker 结果，没有可以对齐的表格。<strong>Cohere</strong>：Rerank 5 没有公布过评测表。<strong>hs-rerank-1</strong>：Hindsight 的模型卡只以图片形式展示结果。下面改从规模、许可证、价格和适用场景来比较它们。</p>
 
       <h2 id="qwen-run">Qwen3 对比 bge-reranker-v2-m3</h2>
       <p>这是 Qwen 自己跑的评测，来自 Qwen3-Reranker 的模型卡：MTEB 的检索子集（英文、中文、多语言和代码）以及用于长文档的 MLDR，每项都对同一批前 100 个候选重排。</p>
@@ -140,11 +140,12 @@
             <tr><td><a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a></td><td>568M</td><td>开源权重</td><td>100+</td><td>CPU 或 GPU</td></tr>
             <tr><td><a href="/zh/models/mxbai-rerank">mxbai-rerank-large-v2</a></td><td>1.5B</td><td>Apache 2.0</td><td>100+</td><td>建议用 GPU</td></tr>
             <tr><td><a href="/zh/models/jina-reranker">jina-reranker-v3.5</a></td><td>0.6B</td><td>非商用权重</td><td>多语言</td><td>托管 API，或仅用于研究的权重</td></tr>
+            <tr><td><a href="https://huggingface.co/hindsight-ai/hs-rerank-1" rel="noopener noreferrer">hs-rerank-1</a></td><td>114M</td><td>MIT</td><td>8 种，含中文、日语和韩语</td><td>CPU（int8 ONNX）或 GPU</td></tr>
             <tr><td><a href="/zh/models/gte-reranker">GTE reranker</a></td><td>149M / 306M</td><td>Apache 2.0</td><td>英文 / 70+ 种语言</td><td>CPU、小 GPU 或浏览器（英文模型）</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="muted" style="font-size:.85rem">规模和许可证取自本站各模型页，那些页面引用的是厂商的模型卡。“开源权重”表示本页没有复述它的许可证；上线前请去看模型卡。</p>
+      <p class="muted" style="font-size:.85rem">规模和许可证取自本站各模型页，那些页面引用的是厂商的模型卡；hs-rerank-1 没有自己的页面，它那一行直接来自它的模型卡。“开源权重”表示本页没有复述它的许可证；上线前请去看模型卡。</p>
 
       <h2 id="hosted">托管 API</h2>
       <p>按 token 付费，不用自己养 GPU。这几家都没有公布可比的评测，所以表里只列能核对的：价格和上下文长度。</p>

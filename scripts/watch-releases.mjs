@@ -5,7 +5,8 @@
  *
  *   - Hugging Face, new: rerankers created after `hf_since` — any model the
  *     organisations in `hf_authors` publish, plus any `text-ranking` model on
- *     the Hub with at least `hf_new_min_likes` likes (community re-uploads
+ *     the Hub with at least `hf_new_min_likes` likes or `hf_new_min_downloads`
+ *     downloads (community re-uploads
  *     and quantisations of other people's models are left out);
  *   - Hugging Face, catch-up: `text-ranking` models with at least
  *     `hf_catchup_min_likes` likes, whenever they came out, that no page
@@ -94,7 +95,11 @@ try {
   for (const m of await get(`${HF}&pipeline_tag=text-ranking&sort=createdAt&direction=-1&limit=500`, "json")) {
     if (Date.parse(m.createdAt) <= since) break;
     const author = m.id.split("/")[0].toLowerCase();
-    if ((m.likes ?? 0) < CONFIG.hf_new_min_likes || (isRepack(m.id) && !tracked.has(author))) continue;
+    // Liked by at least hf_new_min_likes people, or downloaded at least
+    // hf_new_min_downloads times: hindsight-ai/hs-rerank-1 had 5 likes and
+    // 600,000 downloads within two weeks and sat under the likes bar alone.
+    const popular = (m.likes ?? 0) >= CONFIG.hf_new_min_likes || (m.downloads ?? 0) >= (CONFIG.hf_new_min_downloads ?? Infinity);
+    if (!popular || (isRepack(m.id) && !tracked.has(author))) continue;
     hfModel(m, "Hugging Face · new text-ranking model", `${stats(m)} — not from a tracked organisation; check who published it`);
   }
 } catch (err) {
