@@ -64,5 +64,7 @@
   "guides/compare-rerankers": "f8a248629b4c8e6e",
   "zh/guides/compare-rerankers": "c98650a5148ed4aa",
   "news": "85d2db9acc64fe39",
-  "zh/news": "4d7b159ba34bbec3"
+  "zh/news": "4d7b159ba34bbec3",
+  "reranker-picker": "963040a1835d677f",
+  "zh/reranker-picker": "306e916e4707418d"
 }
