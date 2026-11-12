@@ -272,7 +272,7 @@
     },
     {
       "repo": "UKPLab/sentence-transformers",
-      "known": "v6.2.0",
+      "known": "v6.3.0",
       "why": "the self-host guide's quick start and the cross-encoder examples use it"
     },
     {
