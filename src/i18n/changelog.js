@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "12 Nov 2026 (night) — Copy buttons on code":
+    "2026 年 11 月 12 日（夜）—— 代码块加了复制按钮",
+  "<strong>Every code block has a Copy button</strong> — the snippets in the guides and model pages can be copied in one click, without selecting around the line wraps":
+    "<strong>每个代码块都有复制按钮</strong> —— 指南和模型页里的代码片段可以一键复制，不用再绕着换行去选",
   "12 Nov 2026 (later) — A four-question reranker picker":
     "2026 年 11 月 12 日（稍后）—— 四个问题的 reranker 选型向导",
   "<strong><a href=\"/reranker-picker.html\">Which reranker should I use?</a></strong> — say what you are ranking, where it will run, which languages and whether you need instructions, and the page narrows this site’s recommendations to the ones that fit, each linked to the review or guide behind it. It is the <a href=\"/guides/choose-reranker-scenario.html\">scenario guide</a> as a tool, and works without JavaScript as a plain list":
