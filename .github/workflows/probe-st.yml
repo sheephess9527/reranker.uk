@@ -1,0 +1,29 @@
+name: Probe ST
+on: workflow_dispatch
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install "sentence-transformers==6.3.0" torch --extra-index-url https://download.pytorch.org/whl/cpu
+      - name: Run snippets
+        run: |
+          cat > p.py <<'PY'
+          import sentence_transformers as st
+          print("version", st.__version__)
+          from sentence_transformers import CrossEncoder, MultiVectorEncoder
+          q = "How do I add reranking to RAG?"
+          docs = ["Retrieve 50–100 candidates, rerank with a cross-encoder, keep top 5.", "London is the capital of the United Kingdom."]
+          m = CrossEncoder("BAAI/bge-reranker-v2-m3", max_length=512)
+          print("bge", m.predict([(q, d) for d in docs]))
+          g = CrossEncoder("Alibaba-NLP/gte-reranker-modernbert-base", automodel_args={"torch_dtype": "auto"})
+          print("gte", g.predict([["what is the capital of China?", "Beijing"], ["how to implement quick sort in python?", "Introduction of quick sort"]]))
+          x = CrossEncoder("mixedbread-ai/mxbai-rerank-base-v1")
+          print("mxbai", x.predict([(q, d) for d in docs]))
+          c = MultiVectorEncoder("colbert-ir/colbertv2.0")
+          qq = c.encode_query(["reset API key"]); dd = c.encode_document(["rotate your key in settings", "London is a city"])
+          s = c.similarity(qq, dd)[0]
+          print("colbert", s, s.argsort(descending=True)[:50].tolist())
+          PY
+          python p.py
