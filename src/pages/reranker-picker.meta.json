@@ -1,0 +1,11 @@
+{
+  "title": "Which reranker should I use? A four-question picker | reranker.uk",
+  "description": "Answer four questions (what you rank, where it runs, which languages, whether you need instructions) and get a starting point: Cohere, Voyage, Qwen3, bge, GTE, a visual reranker, or a hosted API in China.",
+  "canonical": "https://reranker.uk/reranker-picker.html",
+  "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  "og_type": "website",
+  "og_title": "Which reranker should I use?",
+  "og_description": "Four questions, one starting point, with links to the reasoning.",
+  "head_extra": "<script type=\"application/ld+json\">\n  {\"@context\": \"https://schema.org\", \"@type\": \"WebApplication\", \"name\": \"Reranker picker\", \"url\": \"https://reranker.uk/reranker-picker.html\", \"applicationCategory\": \"DeveloperApplication\", \"operatingSystem\": \"Any browser\", \"offers\": {\"@type\": \"Offer\", \"price\": \"0\", \"priceCurrency\": \"GBP\"}, \"description\": \"Answer four questions about content, hosting, languages and instructions to get a starting reranker recommendation.\"}\n  </script>",
+  "page_scripts": "<script src=\"/assets/js/i18n/reranker-picker.js\"></script>\n  <script src=\"/assets/js/picker.js\"></script>"
+}

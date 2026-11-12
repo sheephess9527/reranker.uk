@@ -873,3 +873,13 @@ input[type="number"] {
   display: block; font-size: 0.82rem; color: var(--text-soft); margin-top: 0.15rem;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
+
+/* Reranker picker */
+.picker-q { margin-bottom: 1.1rem; }
+.picker-q:last-child { margin-bottom: 0; }
+.picker-legend { font-weight: 600; font-size: 0.9rem; margin: 0 0 0.45rem; color: var(--text); }
+.picker-options { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; }
+.picker-opt { display: inline-flex; align-items: center; gap: 0.4rem; }
+.picker-opt label { cursor: pointer; }
+.picker-result { margin-bottom: 1rem; }
+.picker-result[hidden] { display: none; }

@@ -30,8 +30,8 @@
   <meta property="og:image:alt" content="reranker.uk changelog" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/changelog.jpg?v=36bc070c23" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css?v=ff62e57d6c" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css?v=ff62e57d6c" >
+  <link rel="preload" href="/assets/css/style.css?v=621df9b1bc" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=621df9b1bc" >
   
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://reranker.uk/changelog"}]}</script>
 
@@ -70,6 +70,13 @@
     </section>
 
     <section class="section container narrow">
+      <article class="changelog-entry">
+        <h2 id="2026-11-12-picker">12 Nov 2026 (later) — A four-question reranker picker</h2>
+        <ul class="feature-list">
+          <li><strong><a href="/reranker-picker">Which reranker should I use?</a></strong> — say what you are ranking, where it will run, which languages and whether you need instructions, and the page narrows this site’s recommendations to the ones that fit, each linked to the review or guide behind it. It is the <a href="/guides/choose-reranker-scenario">scenario guide</a> as a tool, and works without JavaScript as a plain list</li>
+        </ul>
+      </article>
+
       <article class="changelog-entry">
         <h2 id="2026-11-12-news">12 Nov 2026 — Reranker news, on its own page</h2>
         <ul class="feature-list">
@@ -141,8 +148,7 @@
           <li><strong>In the <a href="/models/#nvidia-rerank">models table</a> and the <a href="/guides/choose-reranker-scenario#visual">scenario guide</a></strong> — two new rows, Nemotron-3.5-Rerank-8B and llama-nemotron-rerank-vl-1b-v2, and NVIDIA joins the options for scanned PDFs and slides</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>Earlier in October 2026 (36 entries)</summary><article class="changelog-entry">
         <h2 id="2026-10-22-cohere-pricing">22 Oct 2026 — Cohere Rerank 5 prices</h2>
         <ul class="feature-list">
           <li><strong>Rerank 5 is priced per token</strong> — Cohere listed it overnight: $0.05 per million tokens for <a href="/models/cohere-rerank#pricing">Pro</a> and $0.02 for Fast, the same list prices as Voyage rerank-3 and rerank-3-lite. The models table and the Cohere page show them, and Model Vault is now $4 an hour for a Rerank 5 instance</li>
@@ -151,7 +157,7 @@
           <li><strong>sentence-transformers 6.2.0</strong> — the self-hosting quick start, the GTE and mxbai examples and the ColBERT snippet all run unchanged on the new release</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>Earlier in October 2026 (35 entries)</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-21-cohere">21 Oct 2026 — Cohere Rerank 5</h2>
         <ul class="feature-list">
           <li><strong><a href="/models/cohere-rerank">Cohere Rerank 5</a>, released today</strong> — rerank-v5.0-pro (about 2B parameters) and rerank-v5.0-fast (about 500M), both with 32,768 tokens and 100+ languages. New: calibrated 0–1 scores, so one threshold works across queries, and Context Focus, which returns the passages inside each document that answer the query. Still text only, still no task instructions</li>
@@ -683,6 +689,8 @@
 
       
 
+      
+
       <p class="center" style="margin-top:2.5rem"><a class="btn btn-primary" href="/demo">Try the demo →</a></p>
     </section>
   </main>
@@ -710,6 +718,7 @@
             <li><a href="/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
             <li><a href="/guides/reranking-not-working" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
             <li><a href="/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
+            <li><a href="/reranker-picker" data-i18n="shared.footer.picker">Reranker picker</a></li>
             <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
             <li><a href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
             <li><a href="/news" data-i18n="shared.footer.news">Reranker news</a></li>

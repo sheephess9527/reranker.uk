@@ -169,6 +169,10 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 > 完成：新增 `/news`（`src/pages/news.html`、`src/i18n/news.js`、meta、社交卡片），只放厂商的发布 / 调价 / 下线，每条一小段 + 出处（厂商自己的页面）+ 本站对应页面，从 9 月 30 日 Voyage rerank-3 起共 9 条，数字全走已有 fact。单独的 `public/news.rss`（手改，和 changelog.rss 一样；已进 `LOCALE_NEUTRAL`、llms.txt、页脚，页面 head 里有 alternate）。`tests/feed.spec.js` 现在两个 feed 都核对（条目用同一个 `.changelog-entry h2[id]` 结构，最新条目必须在最上面）。**以后发布监控里凡是厂商动作（新模型、价格、弃用），除了 changelog 还要在 `/news` 加一条：`news.html` + `news.js` + `news.rss` 三处；纯站点维护不放。** 更新日志 `#2026-11-12-news`。剩下：③ 选型向导 ④ 中文专项 ⑤ 复制按钮 / WebApplication 结构化数据 ⑥ NDCG 小工具。
 
+### ~~21. 选型向导 `/reranker-picker`~~（2026-11-12 已完成）
+
+> 完成：新增 `/reranker-picker`（中英文、meta、WebApplication JSON-LD、社交卡片）。四个问题（内容 / 运行位置 / 语言 / 要不要指令），十条建议全部写在 HTML 里（`section.picker-result`，`data-content|run|lang|instr` 列出适用的答案，缺省 = 都适用），`public/assets/js/picker.js` 只负责显示 / 隐藏，所以中文走词典预渲染、不开 JS 时是完整列表。建议的说法都取自场景指南和模型页，没有新数字。**场景指南的推荐变了，这里要跟着改。** 入口：页脚、场景指南开头、llms.txt 的 Tools。`tests/picker.spec.js`（已进 `npm test`）：几组答案对应的建议，48 种组合每种至少一条。更新日志 `#2026-11-12-picker`。剩下：④ 中文专项 ⑤ 复制按钮 / WebApplication 结构化数据 ⑥ NDCG 小工具。
+
 ## 发布监控处理记录
 
 - **2026-10-21 Cohere Rerank 5**：Cohere 当天发布（changelog「Announcing Cohere's Rerank 5 Models」）。Cohere 页改为 Rerank 5（新增「What's new in Rerank 5」：校准分数、Context Focus、只支持文本、不支持指令、可用渠道），模型表加 v5 Pro / Fast 两行，首页和表里的卡片更新，代码示例改用 `rerank-v5.0-pro`。3 个新 fact（`cohere-rerank-5`）。**价格还没公布**：页面写「尚未公布」，计算器暂不加；`data/release-watch.json` 新增「Cohere pricing」页面监控（`Rerank N Pro|Fast`，已知 Rerank 4），价格一出现就会报到 release-watch issue，届时补 price fact、计算器选项和价格表行。
