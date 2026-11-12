@@ -6,6 +6,13 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-12-news">12 Nov 2026 — Reranker news, on its own page</h2>
+        <ul class="feature-list">
+          <li><strong>A <a href="/news.html">news page</a> for what the vendors do</strong> — new rerankers, price changes and retirements, one short entry each with the vendor’s own page as the source, starting from Voyage rerank-3 in September. It has its own <a href="/news.rss">RSS feed</a>, separate from this changelog, which stays about the site itself</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-11-10-hs-rerank">10 Nov 2026 — A small multilingual reranker, and a hole in the release watch</h2>
         <ul class="feature-list">
           <li><strong>hs-rerank-1 in the <a href="/models/#hs-rerank-1">models table</a> and the <a href="/guides/compare-rerankers.html">comparison guide</a></strong> — Hindsight’s cross-encoder is {{fact:hs-rerank-1.params}} (a {{fact:hs-rerank-1.transformer_params}}-parameter transformer on top of a {{fact:hs-rerank-1.embedding_params}} embedding table), takes {{fact:hs-rerank-1.context_tokens}} tokens, covers English, Spanish, French, German, Portuguese, Chinese, Japanese and Korean, is MIT-licensed and ships an int8 ONNX file for CPUs. Its model card shows results only as an image, so the site quotes no scores for it</li>

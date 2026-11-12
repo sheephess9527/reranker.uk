@@ -10,6 +10,7 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 - 改了英文句子，必须在对应的 `src/i18n/<page>.js` 里加译文。键是该元素**规范化后的 inner HTML**（旧页面）或 `data-i18n-html` 的 key（首页流程图）。漏译跑 `node scripts/check-zh-coverage.mjs` 能看出来。
 - 数字不手写进页面。带出处的数走 `data/models.json` 的 `{{fact:...}}`，见 README「Maintaining benchmarks」。
 - 提交前：`npm run build && npm run check:links && npm run check:ld && npm test`。`check:zh` 是提示，不是失败门，但新增正文不能留英文。
+- 厂商动作（新模型、调价、弃用）还要在 `/news` 加一条：`src/pages/news.html`、`src/i18n/news.js`、`public/news.rss` 三处一起改，规则同 changelog。
 - 改 changelog 时三处一起改：`src/pages/changelog.html`、`src/i18n/changelog.js`（键必须和英文 inner HTML 逐字相同，含弯引号 `“”` 和 `—`）、`public/changelog.rss`（最新条目放最上面，`guid` 用页面上那个 `h2` 的 id）。`tests/feed.spec.js` 会核对。
 
 ## 已完成（不要重做）
@@ -163,6 +164,10 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 ### ~~19. 对比页 `/guides/compare-rerankers`~~（2026-11-05 已完成）
 
 > 完成：新增 `/guides/compare-rerankers`（中英文、meta、JSON-LD、社交卡片）。只在分数来自**同一次评测**时并排：Qwen 自己的评测（Qwen3 0.6B/4B/8B 对 bge-reranker-v2-m3，MTEB-R / CMTEB-R / MMTEB-R / MLDR / MTEB-Code）和 Jina 2026 年的评测（jina-v3.5、mxbai-large-v2、Qwen3 4B / 0.6B，BEIR / MIRACL / RTEB / Struct-IR）；GTE 和 Cohere 没有可对齐的数字，页面直说。所有数字都是已有 fact（没有新增）；规模、许可证、语言来自各模型页已有的文字；托管 API 一表只列价格和上下文（Cohere / Voyage / zerank-2）。一个模型页里没写透的发现：Qwen3-0.6B 的 CMTEB-R 比 bge-v2-m3 低（用 fact 写，不手写数字）。指南目录、页脚、八个模型页（qwen、bge、mxbai、jina、gte、cohere、voyage、zerank）的「Other models」下加了入口。更新日志 `#2026-11-05-compare`。
+
+### ~~20. 「重排序动态」页 `/news` + 单独 RSS~~（2026-11-12 已完成，用户说「做」= ②–⑥ 全做，按顺序）
+
+> 完成：新增 `/news`（`src/pages/news.html`、`src/i18n/news.js`、meta、社交卡片），只放厂商的发布 / 调价 / 下线，每条一小段 + 出处（厂商自己的页面）+ 本站对应页面，从 9 月 30 日 Voyage rerank-3 起共 9 条，数字全走已有 fact。单独的 `public/news.rss`（手改，和 changelog.rss 一样；已进 `LOCALE_NEUTRAL`、llms.txt、页脚，页面 head 里有 alternate）。`tests/feed.spec.js` 现在两个 feed 都核对（条目用同一个 `.changelog-entry h2[id]` 结构，最新条目必须在最上面）。**以后发布监控里凡是厂商动作（新模型、价格、弃用），除了 changelog 还要在 `/news` 加一条：`news.html` + `news.js` + `news.rss` 三处；纯站点维护不放。** 更新日志 `#2026-11-12-news`。剩下：③ 选型向导 ④ 中文专项 ⑤ 复制按钮 / WebApplication 结构化数据 ⑥ NDCG 小工具。
 
 ## 发布监控处理记录
 

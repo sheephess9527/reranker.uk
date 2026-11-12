@@ -23,7 +23,7 @@ node scripts/check-zh-coverage.mjs   # report English prose left on /zh/ pages
 **Rule:** edit `src/` only. Everything in `public/*.html`, `public/sitemap.xml`
 and `public/llms.txt` is generated — hand edits are overwritten on the next
 build. Static assets under `public/assets/`, plus `robots.txt` and
-`changelog.rss`, are the exception and are edited directly.
+`changelog.rss` and `news.rss`, are the exception and are edited directly.
 
 ### How a page is assembled
 

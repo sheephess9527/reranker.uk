@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Reranker news — reranker.uk</title>
+    <link>https://reranker.uk/news</link>
+    <description>Releases, price changes and retirements from reranker vendors, each sourced to the vendor's own page.</description>
+    <language>en-gb</language>
+    <lastBuildDate>Wed, 11 Nov 2026 12:00:00 GMT</lastBuildDate>
+    <atom:link href="https://reranker.uk/news.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>11 Nov 2026 — sentence-transformers 6.3.0</title>
+      <link>https://reranker.uk/news#2026-11-11-sentence-transformers</link>
+      <guid isPermaLink="true">https://reranker.uk/news#2026-11-11-sentence-transformers</guid>
+      <pubDate>Wed, 11 Nov 2026 12:00:00 GMT</pubDate>
+      <description>sentence-transformers 6.3.0 is out; it is mostly multi-vector training, and this site's CrossEncoder and ColBERT examples run on it unchanged.</description>
+    </item>
+    <item>
+      <title>5 Nov 2026 — Cohere prices Model Vault by the GPU</title>
+      <link>https://reranker.uk/news#2026-11-05-cohere-vault</link>
+      <guid isPermaLink="true">https://reranker.uk/news#2026-11-05-cohere-vault</guid>
+      <pubDate>Thu, 05 Nov 2026 04:00:00 GMT</pubDate>
+      <description>Cohere now prices Model Vault per GPU per hour instead of per model. Pay-as-you-go Rerank 5 prices are unchanged.</description>
+    </item>
+    <item>
+      <title>3 Nov 2026 — Pinecone deprecates pinecone-rerank-v0</title>
+      <link>https://reranker.uk/news#2026-11-03-pinecone-v0</link>
+      <guid isPermaLink="true">https://reranker.uk/news#2026-11-03-pinecone-v0</guid>
+      <pubDate>Tue, 03 Nov 2026 02:00:00 GMT</pubDate>
+      <description>Pinecone marks its own pinecone-rerank-v0 as deprecated: still served, not for new projects, no shutdown date.</description>
+    </item>
+    <item>
+      <title>30 Oct 2026 — Pinecone halves a limit on cohere-rerank-4-fast</title>
+      <link>https://reranker.uk/news#2026-10-30-pinecone-cohere-limit</link>
+      <guid isPermaLink="true">https://reranker.uk/news#2026-10-30-pinecone-cohere-limit</guid>
+      <pubDate>Fri, 30 Oct 2026 12:00:00 GMT</pubDate>
+      <description>cohere-rerank-4-fast on Pinecone now takes half as many tokens per document as before.</description>
+    </item>
+    <item>
+      <title>29 Oct 2026 — Nemotron-3.5-Rerank-8B becomes a NIM</title>
+      <link>https://reranker.uk/news#2026-10-29-nvidia-nim</link>
+      <guid isPermaLink="true">https://reranker.uk/news#2026-10-29-nvidia-nim</guid>
+      <pubDate>Thu, 29 Oct 2026 12:00:00 GMT</pubDate>
+      <description>NVIDIA NIM 2.4 serves Nemotron-3.5-Rerank-8B as the nemotron-rerank container.</description>
+    </item>
+    <item>
+      <title>28 Oct 2026 — Hindsight releases hs-rerank-1</title>
+      <link>https://reranker.uk/news#2026-10-28-hs-rerank</link>
+      <guid isPermaLink="true">https://reranker.uk/news#2026-10-28-hs-rerank</guid>
+      <pubDate>Wed, 28 Oct 2026 12:00:00 GMT</pubDate>
+      <description>Hindsight's hs-rerank-1 is a 114M multilingual cross-encoder under the MIT licence, with an ONNX build for CPUs and no published scores yet.</description>
+    </item>
+    <item>
+      <title>21 Oct 2026 — Cohere releases Rerank 5</title>
+      <link>https://reranker.uk/news#2026-10-21-cohere-rerank-5</link>
+      <guid isPermaLink="true">https://reranker.uk/news#2026-10-21-cohere-rerank-5</guid>
+      <pubDate>Wed, 21 Oct 2026 15:00:00 GMT</pubDate>
+      <description>Cohere Rerank 5: Pro and Fast models with calibrated scores and Context Focus, priced per token instead of per search.</description>
+    </item>
+    <item>
+      <title>20 Oct 2026 — NVIDIA releases Nemotron-3.5-Rerank-8B</title>
+      <link>https://reranker.uk/news#2026-10-20-nemotron</link>
+      <guid isPermaLink="true">https://reranker.uk/news#2026-10-20-nemotron</guid>
+      <pubDate>Tue, 20 Oct 2026 21:00:00 GMT</pubDate>
+      <description>NVIDIA's Nemotron-3.5-Rerank-8B scores text, page images or both, under a licence that allows commercial use.</description>
+    </item>
+    <item>
+      <title>30 Sep 2026 — Voyage releases rerank-3</title>
+      <link>https://reranker.uk/news#2026-09-30-voyage-rerank-3</link>
+      <guid isPermaLink="true">https://reranker.uk/news#2026-09-30-voyage-rerank-3</guid>
+      <pubDate>Wed, 30 Sep 2026 12:00:00 GMT</pubDate>
+      <description>Voyage rerank-3 is a drop-in upgrade from rerank-2.5 at the same price, with the largest gains on long documents.</description>
+    </item>
+  </channel>
+</rss>

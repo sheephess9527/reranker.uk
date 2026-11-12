@@ -2,14 +2,14 @@
 import { test, expect } from "@playwright/test";
 
 /**
- * public/changelog.rss is hand-edited alongside the changelog page, and one
+ * public/changelog.rss and public/news.rss are hand-edited alongside the changelog page, and one
  * of those edits (Oct 2026) dropped two <item> open tags: the feed stopped
  * being XML and nothing noticed. This parses it the way a reader would and
  * checks it still lines up with the page it summarises.
  */
-test("changelog.rss is well-formed and matches the changelog page", async ({ page, request }) => {
-  const xml = await (await request.get("/changelog.rss")).text();
-  await page.goto("/changelog");
+for (const name of ["changelog", "news"]) test(`${name}.rss is well-formed and matches the ${name} page`, async ({ page, request }) => {
+  const xml = await (await request.get(`/${name}.rss`)).text();
+  await page.goto(`/${name}`);
 
   const feed = await page.evaluate((src) => {
     const doc = new DOMParser().parseFromString(src, "application/xml");
@@ -24,7 +24,7 @@ test("changelog.rss is well-formed and matches the changelog page", async ({ pag
       })),
     };
   }, xml);
-  expect(feed.error, "changelog.rss is not well-formed XML").toBeUndefined();
+  expect(feed.error, `${name}.rss is not well-formed XML`).toBeUndefined();
 
   const items = feed.items || [];
   expect(items.length).toBeGreaterThan(0);

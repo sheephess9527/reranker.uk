@@ -31,6 +31,8 @@ window.I18N_SHARED = {
     "shared.footer.notWorking": "重排序没起作用",
     "shared.footer.vectorDb": "在向量数据库上重排序",
     "shared.footer.costCalc": "重排序成本计算器",
+    "shared.footer.news": "重排序动态",
+    "shared.footer.newsRss": "动态 RSS",
     "shared.footer.changelogRss": "更新日志 RSS",
     "shared.footer.changelog": "更新日志",
     "shared.footer.changelogShort": "更新日志",

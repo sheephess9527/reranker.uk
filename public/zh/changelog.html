@@ -71,6 +71,13 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-12-news">2026 年 11 月 12 日 —— 重排序动态，单独一页</h2>
+        <ul class="feature-list">
+          <li><strong>新增<a href="/zh/news">动态页</a>，记录厂商的动作</strong> —— 新 reranker、调价和下线，每条一小段，以厂商自己的页面为出处，从 9 月的 Voyage rerank-3 开始。它有单独的 <a href="/news.rss">RSS</a>，和这份更新日志分开；更新日志仍然只讲本站自己</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-11-10-hs-rerank">2026 年 11 月 10 日 —— 一个小型多语言 reranker，和发布监控的一个漏洞</h2>
         <ul class="feature-list">
           <li><strong>hs-rerank-1 进了<a href="/zh/models/#hs-rerank-1">模型对比表</a>和<a href="/zh/guides/compare-rerankers">横向对比指南</a></strong> —— Hindsight 的 cross-encoder 是 114M（98M 的词嵌入表上只有 15M 参数的 transformer），支持 8,192 token，覆盖英、西、法、德、葡、中、日、韩八种语言，MIT 许可证，还提供给 CPU 用的 int8 ONNX 文件。它的模型卡只以图片展示结果，所以本站不引用它的分数</li>
@@ -144,15 +151,14 @@
           <li><strong>sentence-transformers 6.2.0</strong> —— 自建快速上手、GTE 和 mxbai 的示例以及 ColBERT 代码片段，在新版本上不用改就能跑通</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>2026 年 10 月更早的更新（35 条）</summary><article class="changelog-entry">
         <h2 id="2026-10-21-cohere">2026 年 10 月 21 日 —— Cohere Rerank 5</h2>
         <ul class="feature-list">
           <li><strong>今天发布的 <a href="/zh/models/cohere-rerank">Cohere Rerank 5</a></strong> —— rerank-v5.0-pro（约 2B 参数）和 rerank-v5.0-fast（约 500M），都支持 32,768 token 和 100 多种语言。新功能：校准过的 0–1 分数，一个阈值就能适用于各种查询；以及 Context Focus，可以返回每篇文档里回答了查询的段落。仍然只支持文本，也仍然不支持任务指令</li>
           <li><strong>还没有价格</strong> —— Cohere 的价格页还没列出 Rerank 5 的价格，所以模型对比表如实写明，成本计算器暂时仍用 Rerank 4。发布监控现在也会读 Cohere 的价格页，价格一出现就会提醒</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>2026 年 10 月更早的更新（34 条）</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-16-pages">2026 年 10 月 16 日（晚）—— LightOn-rerank、GTE 和 Contextual AI 有了专页</h2>
         <ul class="feature-list">
           <li><strong>新增三个模型页面</strong> —— <a href="/zh/models/lighton-rerank">LightOn-rerank</a>（六个 Apache 2.0 模型，能处理文本和页面图片，分逐点和列表式，附 LightOn 在 ViDoRe V3 和 BEIR 上的测试）、<a href="/zh/models/gte-reranker">GTE 重排序模型</a>（阿里巴巴的 149M 英文和 306M 多语言交叉编码器，8,192 token，CPU 或浏览器都能跑）和 <a href="/zh/models/contextual-rerank">Contextual AI Rerank v2</a>（跟随指令；非商用权重或付费 API）</li>
@@ -675,6 +681,8 @@
 
       
 
+      
+
       <p class="center" style="margin-top:2.5rem"><a class="btn btn-primary" href="/zh/demo">试用 Demo →</a></p>
     </section>
   </main>
@@ -704,6 +712,8 @@
             <li><a href="/zh/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
             <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
             <li><a href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/news" data-i18n="shared.footer.news">重排序动态</a></li>
+            <li><a href="/news.rss" data-i18n="shared.footer.newsRss">动态 RSS</a></li>
             <li><a href="/zh/changelog" data-i18n="shared.footer.changelog">更新日志</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">更新日志 RSS</a></li>
             <li><a href="/zh/privacy" data-i18n="shared.footer.privacy">隐私说明</a></li>
