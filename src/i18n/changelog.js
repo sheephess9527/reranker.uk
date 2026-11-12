@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "12 Nov 2026 (later) — A four-question reranker picker":
+    "2026 年 11 月 12 日（稍后）—— 四个问题的 reranker 选型向导",
+  "<strong><a href=\"/reranker-picker.html\">Which reranker should I use?</a></strong> — say what you are ranking, where it will run, which languages and whether you need instructions, and the page narrows this site’s recommendations to the ones that fit, each linked to the review or guide behind it. It is the <a href=\"/guides/choose-reranker-scenario.html\">scenario guide</a> as a tool, and works without JavaScript as a plain list":
+    "<strong><a href=\"/reranker-picker.html\">我该用哪个 reranker？</a></strong> —— 说明你要排序什么、在哪里运行、哪些语言、要不要指令，页面就把本站的推荐缩小到符合的那几条，每条都链到背后的评测或指南。它就是<a href=\"/guides/choose-reranker-scenario.html\">场景指南</a>的工具版，不开 JavaScript 时是一份普通列表",
   "12 Nov 2026 — Reranker news, on its own page":
     "2026 年 11 月 12 日 —— 重排序动态，单独一页",
   "<strong>A <a href=\"/news.html\">news page</a> for what the vendors do</strong> — new rerankers, price changes and retirements, one short entry each with the vendor’s own page as the source, starting from Voyage rerank-3 in September. It has its own <a href=\"/news.rss\">RSS feed</a>, separate from this changelog, which stays about the site itself":

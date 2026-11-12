@@ -54,7 +54,7 @@ function cardFor(file) {
   const bare = zh ? rel.slice(3) : rel;
   const section = bare.startsWith("guides/") && bare !== "guides/index" ? "guides"
     : bare.startsWith("models/") ? "models"
-    : /calculator|demo/.test(bare) ? "tool"
+    : /calculator|demo|picker/.test(bare) ? "tool"
     : bare === "changelog" ? "changelog" : "page";
   const title = root.querySelector("main h1")?.text.replace(/\s+/g, " ").trim();
   const description = root.querySelector('meta[name="description"]')?.getAttribute("content") || "";

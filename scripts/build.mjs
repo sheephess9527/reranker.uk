@@ -788,7 +788,7 @@ function writeLlmsTxt(entries) {
   const SECTIONS = [
     ["Guides", (e) => e.urlPath.startsWith("/guides/") && e.urlPath !== "/guides/"],
     ["Model reviews", (e) => e.urlPath.startsWith("/models/") && e.urlPath !== "/models/"],
-    ["Tools", (e) => e.urlPath === "/demo" || e.urlPath === "/rerank-cost-calculator"],
+    ["Tools", (e) => ["/demo", "/rerank-cost-calculator", "/reranker-picker"].includes(e.urlPath)],
     ["Index pages", (e) => ["/", "/guides/", "/models/"].includes(e.urlPath)],
     ["About", (e) => ["/news", "/changelog", "/privacy"].includes(e.urlPath)],
   ];

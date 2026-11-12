@@ -1,0 +1,93 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span>Reranker picker</div>
+      <h1>Which reranker should I use?</h1>
+      <p class="meta">Tool · <time datetime="2026-11-12">Updated 12 Nov 2026</time></p>
+      <p class="lead">Four questions, and a starting point. The answers come from this site’s model reviews and guides; none of them replaces a test on your own queries.</p>
+
+      <section class="demo-panel" aria-labelledby="picker-head">
+        <h2 id="picker-head" class="mt-0" style="margin-bottom:1rem">Your situation</h2>
+        <form id="picker" class="picker">
+          <div class="picker-q" role="radiogroup" aria-labelledby="pq-content">
+            <p class="picker-legend" id="pq-content">What are you ranking?</p>
+            <div class="picker-options">
+              <span class="picker-opt"><input type="radio" name="content" id="p-content-text" value="text" checked /><label for="p-content-text">Text passages</label></span>
+              <span class="picker-opt"><input type="radio" name="content" id="p-content-code" value="code" /><label for="p-content-code">Code and API docs</label></span>
+              <span class="picker-opt"><input type="radio" name="content" id="p-content-images" value="images" /><label for="p-content-images">Page images: scans, slides, screenshots</label></span>
+            </div>
+          </div>
+          <div class="picker-q" role="radiogroup" aria-labelledby="pq-run">
+            <p class="picker-legend" id="pq-run">Where will it run?</p>
+            <div class="picker-options">
+              <span class="picker-opt"><input type="radio" name="run" id="p-run-api" value="api" checked /><label for="p-run-api">A hosted API</label></span>
+              <span class="picker-opt"><input type="radio" name="run" id="p-run-gpu" value="gpu" /><label for="p-run-gpu">My own servers, with a GPU</label></span>
+              <span class="picker-opt"><input type="radio" name="run" id="p-run-cpu" value="cpu" /><label for="p-run-cpu">My own servers, CPU only</label></span>
+              <span class="picker-opt"><input type="radio" name="run" id="p-run-china" value="china" /><label for="p-run-china">A hosted API inside mainland China</label></span>
+            </div>
+          </div>
+          <div class="picker-q" role="radiogroup" aria-labelledby="pq-lang">
+            <p class="picker-legend" id="pq-lang">Which languages?</p>
+            <div class="picker-options">
+              <span class="picker-opt"><input type="radio" name="lang" id="p-lang-en" value="en" checked /><label for="p-lang-en">English only</label></span>
+              <span class="picker-opt"><input type="radio" name="lang" id="p-lang-multi" value="multi" /><label for="p-lang-multi">Chinese or several languages</label></span>
+            </div>
+          </div>
+          <div class="picker-q" role="radiogroup" aria-labelledby="pq-instr">
+            <p class="picker-legend" id="pq-instr">Do you need to tell it what counts as relevant?</p>
+            <div class="picker-options">
+              <span class="picker-opt"><input type="radio" name="instr" id="p-instr-no" value="no" checked /><label for="p-instr-no">No, the query is enough</label></span>
+              <span class="picker-opt"><input type="radio" name="instr" id="p-instr-yes" value="yes" /><label for="p-instr-yes">Yes, with a written instruction</label></span>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <h2 id="results">Start with</h2>
+      <p class="muted picker-noscript" id="picker-hint">Every suggestion is listed below; with JavaScript on, the list narrows to the ones that match your answers.</p>
+      <div id="picker-results" aria-live="polite">
+        <section class="callout picker-result" data-content="text code" data-run="api" data-instr="no">
+          <h3 class="mt-0">A hosted API: Cohere Rerank 5 or Voyage rerank-3</h3>
+          <p>Both bill per token, at the same list price. <a href="/models/cohere-rerank.html">Cohere Rerank 5</a> returns calibrated scores, so one threshold works across queries. <a href="/models/voyage-rerank.html">Voyage rerank-3</a> also takes instructions if you need them later. The <a href="/rerank-cost-calculator.html">cost calculator</a> compares them with the other APIs at your volume.</p>
+        </section>
+        <section class="callout picker-result" data-content="text code" data-run="api" data-instr="yes">
+          <h3 class="mt-0">An API that takes instructions: Voyage rerank-3 or Contextual AI</h3>
+          <p><a href="/models/voyage-rerank.html">Voyage rerank-3</a> takes natural-language instructions; Cohere Rerank 5 does not. <a href="/models/contextual-rerank.html">Contextual AI Rerank v2</a> is built around instructions and is sold as an API (its open weights are for non-commercial use). The <a href="/guides/instruction-reranker.html">instruction guide</a> shows what to write.</p>
+        </section>
+        <section class="callout picker-result" data-content="text code" data-run="china">
+          <h3 class="mt-0">In mainland China: Alibaba Cloud Model Studio or SiliconFlow</h3>
+          <p>Alibaba Cloud Model Studio sells <a href="/models/#alibaba-model-studio">qwen3-rerank</a> by the token in yuan, and <a href="/models/#siliconflow">SiliconFlow</a> serves bge-reranker-v2-m3 and Qwen3-Reranker behind one endpoint. The <a href="/guides/rerank-in-china.html">mainland China guide</a> compares them with hosting the weights yourself.</p>
+        </section>
+        <section class="callout picker-result" data-content="text code" data-run="gpu">
+          <h3 class="mt-0">On your own GPU: Qwen3-Reranker-4B</h3>
+          <p><a href="/models/qwen-reranker.html">Qwen3-Reranker</a> covers 100+ languages and takes instructions. In Qwen’s own tests the 4B beats the 8B on English, so the largest model is not the automatic choice. The <a href="/guides/self-host-reranker.html">self-hosting guide</a> has code that runs.</p>
+        </section>
+        <section class="callout picker-result" data-content="text code" data-run="cpu" data-lang="multi">
+          <h3 class="mt-0">On CPU, multilingual: bge-reranker-v2-m3</h3>
+          <p><a href="/models/bge-reranker.html">bge-reranker-v2-m3</a> is the usual self-hosted default without a GPU. <a href="/models/gte-reranker.html">gte-multilingual-reranker-base</a> is a smaller alternative that covers 70+ languages. The classic small models (ms-marco MiniLM, Jina v1, mxbai v1) were trained on English only.</p>
+        </section>
+        <section class="callout picker-result" data-content="text code" data-run="cpu" data-lang="en">
+          <h3 class="mt-0">On CPU, English: ms-marco MiniLM or jina-reranker-v1-tiny-en</h3>
+          <p>A tiny cross-encoder is often enough when passages are short and latency matters; both run in the browser too, so you can <a href="/demo.html">try them in the demo</a> first. For longer passages, look at the English <a href="/models/gte-reranker.html">GTE reranker</a>.</p>
+        </section>
+        <section class="callout picker-result" data-content="text code" data-run="cpu" data-instr="yes">
+          <h3 class="mt-0">Instructions on CPU are a stretch</h3>
+          <p>The small CPU models above don’t take instructions. <a href="/models/qwen-reranker.html">Qwen3-Reranker-0.6B</a> does, but a GPU is recommended for it. If you can’t add one, an API that takes instructions is the simpler route.</p>
+        </section>
+        <section class="callout picker-result" data-content="images" data-run="gpu cpu">
+          <h3 class="mt-0">Page images, self-hosted: Qwen3-VL-Reranker, LightOn-rerank or NVIDIA Nemotron</h3>
+          <p>A text reranker only sees what OCR extracted; these score the page image itself, and all of them need a GPU. <a href="/models/qwen3-vl-reranker.html">Qwen3-VL-Reranker</a> and <a href="/models/lighton-rerank.html">LightOn-rerank</a> are Apache 2.0. <a href="/models/nvidia-rerank.html">NVIDIA’s Nemotron rerankers</a> allow commercial use and can read a page’s image and its extracted text together.</p>
+        </section>
+        <section class="callout picker-result" data-content="images" data-run="api china">
+          <h3 class="mt-0">Page images, hosted: Alibaba Cloud’s qwen3-vl-rerank</h3>
+          <p>Alibaba Cloud Model Studio sells <a href="/models/#alibaba-model-studio">qwen3-vl-rerank</a> as an API for images and video. The other visual rerankers on this site are open weights you host yourself, on a GPU: see the <a href="/guides/choose-reranker-scenario.html#visual">scenario guide</a>.</p>
+        </section>
+        <section class="callout picker-result" data-content="code">
+          <h3 class="mt-0">For code, fix retrieval first</h3>
+          <p>Vector search alone misses exact function names, and BM25 alone misses paraphrased questions. Use <a href="/guides/hybrid-retrieval-rerank.html">hybrid retrieval</a>, then rerank. Qwen and Voyage both publish code-retrieval results for their rerankers.</p>
+        </section>
+      </div>
+
+      <h2 id="next">Then check it</h2>
+      <p>A suggestion is where to start, not the answer. Line the candidates up in the <a href="/guides/compare-rerankers.html">comparison guide</a> or the <a href="/models/">models table</a>, then <a href="/guides/evaluate-reranker.html">evaluate</a> two of them on fifty of your own queries. The <a href="/guides/choose-reranker-scenario.html">scenario guide</a> explains the reasoning behind each pick.</p>
+    </article>
+  </main>
