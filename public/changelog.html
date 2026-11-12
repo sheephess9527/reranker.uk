@@ -71,6 +71,13 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-12-news">12 Nov 2026 — Reranker news, on its own page</h2>
+        <ul class="feature-list">
+          <li><strong>A <a href="/news">news page</a> for what the vendors do</strong> — new rerankers, price changes and retirements, one short entry each with the vendor’s own page as the source, starting from Voyage rerank-3 in September. It has its own <a href="/news.rss">RSS feed</a>, separate from this changelog, which stays about the site itself</li>
+        </ul>
+      </article>
+
+      <article class="changelog-entry">
         <h2 id="2026-11-10-hs-rerank">10 Nov 2026 — A small multilingual reranker, and a hole in the release watch</h2>
         <ul class="feature-list">
           <li><strong>hs-rerank-1 in the <a href="/models/#hs-rerank-1">models table</a> and the <a href="/guides/compare-rerankers">comparison guide</a></strong> — Hindsight’s cross-encoder is 114M (a 15M-parameter transformer on top of a 98M embedding table), takes 8,192 tokens, covers English, Spanish, French, German, Portuguese, Chinese, Japanese and Korean, is MIT-licensed and ships an int8 ONNX file for CPUs. Its model card shows results only as an image, so the site quotes no scores for it</li>
@@ -144,15 +151,14 @@
           <li><strong>sentence-transformers 6.2.0</strong> — the self-hosting quick start, the GTE and mxbai examples and the ColBERT snippet all run unchanged on the new release</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>Earlier in October 2026 (35 entries)</summary><article class="changelog-entry">
         <h2 id="2026-10-21-cohere">21 Oct 2026 — Cohere Rerank 5</h2>
         <ul class="feature-list">
           <li><strong><a href="/models/cohere-rerank">Cohere Rerank 5</a>, released today</strong> — rerank-v5.0-pro (about 2B parameters) and rerank-v5.0-fast (about 500M), both with 32,768 tokens and 100+ languages. New: calibrated 0–1 scores, so one threshold works across queries, and Context Focus, which returns the passages inside each document that answer the query. Still text only, still no task instructions</li>
           <li><strong>Not yet priced</strong> — Cohere’s pricing page lists no Rerank 5 price yet, so the models table says so and the cost calculator keeps Rerank 4 for now. The release watch now also reads Cohere’s pricing page and will flag the price when it appears</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>Earlier in October 2026 (34 entries)</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-16-pages">16 Oct 2026 (evening) — Pages for LightOn-rerank, GTE and Contextual AI</h2>
         <ul class="feature-list">
           <li><strong>Three more model pages</strong> — <a href="/models/lighton-rerank">LightOn-rerank</a> (six Apache 2.0 models for text and page images, pointwise or listwise, with LightOn’s ViDoRe V3 and BEIR runs), <a href="/models/gte-reranker">GTE rerankers</a> (Alibaba’s 149M English and 306M multilingual cross-encoders, 8,192 tokens, CPU or browser) and <a href="/models/contextual-rerank">Contextual AI Rerank v2</a> (instruction-following; non-commercial weights or a paid API)</li>
@@ -675,6 +681,8 @@
 
       
 
+      
+
       <p class="center" style="margin-top:2.5rem"><a class="btn btn-primary" href="/demo">Try the demo →</a></p>
     </section>
   </main>
@@ -704,6 +712,8 @@
             <li><a href="/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
             <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
             <li><a href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
+            <li><a href="/news" data-i18n="shared.footer.news">Reranker news</a></li>
+            <li><a href="/news.rss" data-i18n="shared.footer.newsRss">News RSS</a></li>
             <li><a href="/changelog" data-i18n="shared.footer.changelog">Changelog</a></li>
             <li><a href="/changelog.rss" data-i18n="shared.footer.changelogRss">Changelog RSS</a></li>
             <li><a href="/privacy" data-i18n="shared.footer.privacy">Privacy</a></li>

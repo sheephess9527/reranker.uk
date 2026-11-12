@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "12 Nov 2026 — Reranker news, on its own page":
+    "2026 年 11 月 12 日 —— 重排序动态，单独一页",
+  "<strong>A <a href=\"/news.html\">news page</a> for what the vendors do</strong> — new rerankers, price changes and retirements, one short entry each with the vendor’s own page as the source, starting from Voyage rerank-3 in September. It has its own <a href=\"/news.rss\">RSS feed</a>, separate from this changelog, which stays about the site itself":
+    "<strong>新增<a href=\"/news.html\">动态页</a>，记录厂商的动作</strong> —— 新 reranker、调价和下线，每条一小段，以厂商自己的页面为出处，从 9 月的 Voyage rerank-3 开始。它有单独的 <a href=\"/news.rss\">RSS</a>，和这份更新日志分开；更新日志仍然只讲本站自己",
   "10 Nov 2026 — A small multilingual reranker, and a hole in the release watch":
     "2026 年 11 月 10 日 —— 一个小型多语言 reranker，和发布监控的一个漏洞",
   "<strong>hs-rerank-1 in the <a href=\"/models/#hs-rerank-1\">models table</a> and the <a href=\"/guides/compare-rerankers.html\">comparison guide</a></strong> — Hindsight’s cross-encoder is {{fact:hs-rerank-1.params}} (a {{fact:hs-rerank-1.transformer_params}}-parameter transformer on top of a {{fact:hs-rerank-1.embedding_params}} embedding table), takes {{fact:hs-rerank-1.context_tokens}} tokens, covers English, Spanish, French, German, Portuguese, Chinese, Japanese and Korean, is MIT-licensed and ships an int8 ONNX file for CPUs. Its model card shows results only as an image, so the site quotes no scores for it":

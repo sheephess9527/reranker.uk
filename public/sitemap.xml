@@ -541,6 +541,24 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/zerank" />
   </url>
   <url>
+    <loc>https://reranker.uk/news</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/news" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/news" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/news" />
+  </url>
+  <url>
+    <loc>https://reranker.uk/zh/news</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/news" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/news" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/news" />
+  </url>
+  <url>
     <loc>https://reranker.uk/privacy</loc>
     <lastmod>2026-10-15</lastmod>
     <changefreq>yearly</changefreq>

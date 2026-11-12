@@ -40,6 +40,7 @@ const LOCALE_NEUTRAL = [
   "/robots.txt",
   "/site.webmanifest",
   "/changelog.rss",
+  "/news.rss",
   "/llms.txt",
   "/search-index.json",
 ];
@@ -63,6 +64,7 @@ function sitemapHints(urlPath) {
   if (urlPath === "/guides/" || urlPath === "/models/")
     return { changefreq: "monthly", priority: "0.9" };
   if (urlPath === "/privacy") return { changefreq: "yearly", priority: "0.3" };
+  if (urlPath === "/news") return { changefreq: "weekly", priority: "0.8" };
   if (urlPath === "/changelog") return { changefreq: "monthly", priority: "0.5" };
   if (urlPath.startsWith("/guides/")) return { changefreq: "monthly", priority: "0.8" };
   if (urlPath.startsWith("/models/")) return { changefreq: "monthly", priority: "0.7" };
@@ -788,7 +790,7 @@ function writeLlmsTxt(entries) {
     ["Model reviews", (e) => e.urlPath.startsWith("/models/") && e.urlPath !== "/models/"],
     ["Tools", (e) => e.urlPath === "/demo" || e.urlPath === "/rerank-cost-calculator"],
     ["Index pages", (e) => ["/", "/guides/", "/models/"].includes(e.urlPath)],
-    ["About", (e) => ["/changelog", "/privacy"].includes(e.urlPath)],
+    ["About", (e) => ["/news", "/changelog", "/privacy"].includes(e.urlPath)],
   ];
 
   // Enough leading sentences to be informative, capped so each line stays
@@ -828,7 +830,7 @@ function writeLlmsTxt(entries) {
     out.push("");
   }
 
-  out.push("## Also", "", "- [Changelog feed](https://reranker.uk/changelog.rss): RSS of site updates.", "");
+  out.push("## Also", "", "- [Reranker news feed](https://reranker.uk/news.rss): RSS of vendor releases, price changes and retirements.", "- [Changelog feed](https://reranker.uk/changelog.rss): RSS of site updates.", "");
   fs.writeFileSync(path.join(PUBLIC, "llms.txt"), out.join("\n"), "utf8");
   return used.size;
 }

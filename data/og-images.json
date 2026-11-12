@@ -62,5 +62,7 @@
   "models/nvidia-rerank": "12a71ecf750730c2",
   "zh/models/nvidia-rerank": "641520fed4f51d2d",
   "guides/compare-rerankers": "f8a248629b4c8e6e",
-  "zh/guides/compare-rerankers": "c98650a5148ed4aa"
+  "zh/guides/compare-rerankers": "c98650a5148ed4aa",
+  "news": "85d2db9acc64fe39",
+  "zh/news": "4d7b159ba34bbec3"
 }

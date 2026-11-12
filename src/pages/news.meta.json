@@ -1,0 +1,11 @@
+{
+  "title": "Reranker news: new models, price changes, deprecations | reranker.uk",
+  "description": "New reranker releases, price changes and retirements from Cohere, Voyage, NVIDIA, Pinecone and others. Short entries, each sourced to the vendor's own page. RSS feed available.",
+  "canonical": "https://reranker.uk/news.html",
+  "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  "og_type": "website",
+  "og_title": "Reranker news",
+  "og_description": "New rerankers, price changes and retirements, each sourced to the vendor's own page.",
+  "head_extra": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Reranker news\" href=\"https://reranker.uk/news.rss\" />",
+  "page_scripts": "<script src=\"/assets/js/i18n/news.js\"></script>"
+}
