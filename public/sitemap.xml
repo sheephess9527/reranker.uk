@@ -541,6 +541,24 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/models/zerank" />
   </url>
   <url>
+    <loc>https://reranker.uk/ndcg-calculator</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/ndcg-calculator" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/ndcg-calculator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/ndcg-calculator" />
+  </url>
+  <url>
+    <loc>https://reranker.uk/zh/ndcg-calculator</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/ndcg-calculator" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/ndcg-calculator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reranker.uk/ndcg-calculator" />
+  </url>
+  <url>
     <loc>https://reranker.uk/news</loc>
     <lastmod>2026-11-12</lastmod>
     <changefreq>weekly</changefreq>

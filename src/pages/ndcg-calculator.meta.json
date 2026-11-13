@@ -1,0 +1,11 @@
+{
+  "title": "NDCG and MRR calculator: did your reranker help? | reranker.uk",
+  "description": "Paste the relevance labels of each query's candidates before and after reranking and read off NDCG@k, MRR and Hit@1. Runs in your browser; nothing is uploaded.",
+  "canonical": "https://reranker.uk/ndcg-calculator.html",
+  "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  "og_type": "website",
+  "og_title": "NDCG and MRR calculator",
+  "og_description": "Did the reranker help? Paste labels before and after, get NDCG@k, MRR and Hit@1.",
+  "head_extra": "<script type=\"application/ld+json\">\n  {\"@context\": \"https://schema.org\", \"@type\": \"WebApplication\", \"name\": \"NDCG and MRR calculator\", \"url\": \"https://reranker.uk/ndcg-calculator.html\", \"applicationCategory\": \"DeveloperApplication\", \"operatingSystem\": \"Any browser\", \"offers\": {\"@type\": \"Offer\", \"price\": \"0\", \"priceCurrency\": \"GBP\"}, \"description\": \"Paste relevance labels for each query's ranked candidates before and after reranking and get NDCG@k, MRR and Hit@1, computed in the browser.\"}\n  </script>",
+  "page_scripts": "<script src=\"/assets/js/i18n/ndcg-calculator.js\"></script>\n  <script src=\"/assets/js/ndcg-calculator.js\"></script>"
+}
