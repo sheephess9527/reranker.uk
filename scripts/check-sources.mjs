@@ -10,6 +10,12 @@
  *
  *   node scripts/check-sources.mjs            # report; exit 1 on any miss
  *   node scripts/check-sources.mjs --verbose  # also print where each hit is
+ *   STRICT_FETCH=1 node scripts/check-sources.mjs  # also fail on 429/5xx
+ *
+ * A source that is still 429/5xx (or unreachable) after every retry is
+ * reported as a warning and skipped, not a failure: an outage says nothing
+ * about the figure. A 404 or other non-OK status, and any "not found", still
+ * exit 1. Set STRICT_FETCH=1 to treat transient errors as failures too.
  *
  * Needs open internet (HuggingFace, arXiv, GitHub), so it runs in the daily
  * real-network workflow rather than in PR CI.
@@ -59,8 +65,9 @@ function snippets(text, re, max = 3, pad = 140) {
 
 // A 429 or 5xx says nothing about the figure, only that the host was busy
 // (HuggingFace rate-limits runner IPs; docs.voyageai.com has had brief 500s),
-// so those are retried a couple of times before counting as a miss.
-const RETRY_WAITS_MS = (process.env.RETRY_WAITS_MS ?? "5000,20000").split(",").map(Number);
+// so those are retried a few times before giving up. A 504 from GitHub once
+// failed the whole daily run (42471623555), hence the third, longer wait.
+const RETRY_WAITS_MS = (process.env.RETRY_WAITS_MS ?? "5000,20000,60000").split(",").map(Number);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const pageCache = new Map();
@@ -76,7 +83,11 @@ async function fetchPage(url) {
             return { raw, text: pageText(raw) };
           }
           const transient = res.status === 429 || res.status >= 500;
-          if (!transient || attempt >= RETRY_WAITS_MS.length) throw new Error(`HTTP ${res.status}`);
+          if (!transient || attempt >= RETRY_WAITS_MS.length) {
+            const err = new Error(`HTTP ${res.status}`);
+            err.transient = transient;
+            throw err;
+          }
           const retryAfter = Number(res.headers.get("retry-after")) * 1000;
           const wait = Math.min(Math.max(RETRY_WAITS_MS[attempt], retryAfter || 0), 60_000);
           console.log(`  (HTTP ${res.status} from ${url}; retrying in ${Math.round(wait / 1000)} s)`);
@@ -93,8 +104,12 @@ const escRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 // In GitHub Actions each miss is also an error annotation, which the REST API
 // serves (check-runs/<job id>/annotations) to clients that can't read raw logs.
 const annotate = (msg) => process.env.GITHUB_ACTIONS && console.log(`::error title=check-sources::${msg}`);
+const warn = (msg) => process.env.GITHUB_ACTIONS && console.log(`::warning title=check-sources::${msg}`);
+const STRICT_FETCH = process.env.STRICT_FETCH === "1";
 
 let failed = 0;
+// Facts skipped because their source was down — reported, but not a failure.
+const unreachable = [];
 for (const [id, fields] of Object.entries(DATA)) {
   if (id.startsWith("_")) continue;
   for (const [field, fact] of Object.entries(fields)) {
@@ -110,6 +125,13 @@ for (const [id, fields] of Object.entries(DATA)) {
     try {
       page = await fetchPage(url);
     } catch (err) {
+      // No flag means fetch itself threw (DNS, reset, timeout): also transient.
+      if (err.transient !== false && !STRICT_FETCH) {
+        console.log(`⚠ ${key} = ${value}: could not fetch ${url} (${err.message}); skipped`);
+        warn(`${key} = ${value}: could not fetch ${url} (${err.message}); skipped`);
+        unreachable.push(key);
+        continue;
+      }
       console.log(`✗ ${key} = ${value}: could not fetch ${url} (${err.message})`);
       annotate(`${key} = ${value}: could not fetch ${url} (${err.message})`);
       failed++;
@@ -137,6 +159,9 @@ for (const [id, fields] of Object.entries(DATA)) {
   }
 }
 
+if (unreachable.length) {
+  console.log(`\n⚠ ${unreachable.length} fact(s) skipped, source unreachable: ${unreachable.join(", ")}`);
+}
 if (failed) {
   console.log(`\n${failed} fact(s) need a look — update data/models.json (value, source_url, verified_on) or the check fields.`);
   process.exit(1);
