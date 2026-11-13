@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Thu, 12 Nov 2026 15:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 12 Nov 2026 22:30:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>12 Nov 2026 (night) — Copy buttons on code</title>
+      <link>https://reranker.uk/changelog#2026-11-12-copy</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-11-12-copy</guid>
+      <pubDate>Thu, 12 Nov 2026 22:30:00 GMT</pubDate>
+      <description>Every code block in the guides and model pages now has a Copy button.</description>
+    </item>
     <item>
       <title>12 Nov 2026 (later) — A four-question reranker picker</title>
       <link>https://reranker.uk/changelog#2026-11-12-picker</link>

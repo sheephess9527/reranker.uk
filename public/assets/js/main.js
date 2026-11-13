@@ -213,3 +213,30 @@
   reveal();
   window.addEventListener("hashchange", reveal);
 })();
+
+// A "Copy" button on every code block in the article. The button sits in a
+// wrapper, not in the <pre>, so it stays put when long lines scroll sideways.
+(function () {
+  if (!navigator.clipboard) return;
+  var zh = (document.documentElement.lang || "").toLowerCase().indexOf("zh") === 0;
+  var COPY = zh ? "复制" : "Copy";
+  var DONE = zh ? "已复制" : "Copied";
+  Array.prototype.forEach.call(document.querySelectorAll("main pre"), function (pre) {
+    var wrap = document.createElement("div");
+    wrap.className = "code-wrap";
+    pre.parentNode.insertBefore(wrap, pre);
+    wrap.appendChild(pre);
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "code-copy";
+    btn.textContent = COPY;
+    btn.setAttribute("aria-label", zh ? "复制代码" : "Copy code");
+    btn.addEventListener("click", function () {
+      navigator.clipboard.writeText(pre.textContent.replace(/\n$/, "")).then(function () {
+        btn.textContent = DONE;
+        setTimeout(function () { btn.textContent = COPY; }, 1600);
+      }, function () {});
+    });
+    wrap.appendChild(btn);
+  });
+})();

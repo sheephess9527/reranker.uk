@@ -173,6 +173,10 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 > 完成：新增 `/reranker-picker`（中英文、meta、WebApplication JSON-LD、社交卡片）。四个问题（内容 / 运行位置 / 语言 / 要不要指令），十条建议全部写在 HTML 里（`section.picker-result`，`data-content|run|lang|instr` 列出适用的答案，缺省 = 都适用），`public/assets/js/picker.js` 只负责显示 / 隐藏，所以中文走词典预渲染、不开 JS 时是完整列表。建议的说法都取自场景指南和模型页，没有新数字。**场景指南的推荐变了，这里要跟着改。** 入口：页脚、场景指南开头、llms.txt 的 Tools。`tests/picker.spec.js`（已进 `npm test`）：几组答案对应的建议，48 种组合每种至少一条。更新日志 `#2026-11-12-picker`。剩下：④ 中文专项 ⑤ 复制按钮 / WebApplication 结构化数据 ⑥ NDCG 小工具。
 
+### ~~22. 代码块复制按钮~~（2026-11-12 已完成）
+
+> 完成：`main.js` 给 `main pre` 套一层 `.code-wrap` 并加 `.code-copy` 按钮（中文页显示「复制 / 已复制」；按钮在外层，代码横向滚动时不跟着走；没有 `navigator.clipboard` 时不加）。`tests/code-copy.spec.js` 已进 `npm test`，a11y 仍过。⑤ 里的 WebApplication 结构化数据原来就有（Demo、计算器），选型向导也带了，不用再做。**站长平台（Google Search Console / Bing / 百度）是否提交过 sitemap 要用户自己确认，我这边查不了。** 更新日志 `#2026-11-12-copy`。剩下：⑥ NDCG 小工具、④ 中文专项。
+
 ## 发布监控处理记录
 
 - **2026-10-21 Cohere Rerank 5**：Cohere 当天发布（changelog「Announcing Cohere's Rerank 5 Models」）。Cohere 页改为 Rerank 5（新增「What's new in Rerank 5」：校准分数、Context Focus、只支持文本、不支持指令、可用渠道），模型表加 v5 Pro / Fast 两行，首页和表里的卡片更新，代码示例改用 `rerank-v5.0-pro`。3 个新 fact（`cohere-rerank-5`）。**价格还没公布**：页面写「尚未公布」，计算器暂不加；`data/release-watch.json` 新增「Cohere pricing」页面监控（`Rerank N Pro|Fast`，已知 Rerank 4），价格一出现就会报到 release-watch issue，届时补 price fact、计算器选项和价格表行。
