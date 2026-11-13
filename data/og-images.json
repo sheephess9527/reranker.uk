@@ -66,5 +66,7 @@
   "news": "85d2db9acc64fe39",
   "zh/news": "4d7b159ba34bbec3",
   "reranker-picker": "963040a1835d677f",
-  "zh/reranker-picker": "306e916e4707418d"
+  "zh/reranker-picker": "306e916e4707418d",
+  "ndcg-calculator": "6a9da54f26416011",
+  "zh/ndcg-calculator": "209766269451cade"
 }

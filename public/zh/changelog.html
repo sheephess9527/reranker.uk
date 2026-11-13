@@ -30,8 +30,8 @@
   <meta property="og:image:alt" content="更新日志 — reranker.uk 版本记录 | reranker.uk" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/changelog.jpg?v=bd81e0c8c5" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css?v=882c8a3f3b" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css?v=882c8a3f3b" >
+  <link rel="preload" href="/assets/css/style.css?v=704baf0dee" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=704baf0dee" >
   
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"更新日志","item":"https://reranker.uk/zh/changelog"}]}</script>
 
@@ -70,6 +70,13 @@
     </section>
 
     <section class="section container narrow">
+      <article class="changelog-entry">
+        <h2 id="2026-11-13-ndcg">2026 年 11 月 13 日 —— NDCG 与 MRR 计算器</h2>
+        <ul class="feature-list">
+          <li><strong><a href="/zh/ndcg-calculator">reranker 有没有帮上忙？</a></strong> —— 粘贴每条查询候选在重排序前后的相关度标签，就能读出 NDCG@k、MRR 和 Hit@1，还有逐条查询的表。全部在浏览器里计算，不发送任何数据；<a href="/zh/guides/evaluate-reranker">评测指南</a>里有它的入口</li>
+        </ul>
+      </article>
+
       <article class="changelog-entry">
         <h2 id="2026-11-12-copy">2026 年 11 月 12 日（夜）—— 代码块加了复制按钮</h2>
         <ul class="feature-list">
@@ -139,14 +146,13 @@
           <li><strong>换掉一个失效链接</strong> —— 硅基流动的 <code>docs.siliconflow.cn</code> 站点无法访问，<a href="/zh/guides/rerank-in-china">国内重排序指南</a>改为链接 <code>docs.siliconflow.com</code> 上同一个重排序 API 页面的中文版</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>2026 年 10 月（38 条）</summary><article class="changelog-entry">
         <h2 id="2026-10-24-minilm">2026 年 10 月 24 日 —— 更快的 ms-marco MiniLM</h2>
         <ul class="feature-list">
           <li><strong><code>cross-encoder/ms-marco-MiniLM-L4-v2</code> 写进<a href="/zh/guides/choose-reranker-scenario#support">选型指南</a></strong> —— 发布监控发现它下载量超过五百万，本站却从没提过。它是 Demo 里 MiniLM-L6 的四层版本：按 sentence-transformers 自己的数据，TREC DL 19 上略低，每篇文档更快</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>2026 年 10 月更早的更新（37 条）</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-23-nvidia">2026 年 10 月 23 日 —— NVIDIA Nemotron 重排序模型</h2>
         <ul class="feature-list">
           <li><strong>新增 <a href="/zh/models/nvidia-rerank">NVIDIA 重排序模型</a>页面</strong> —— 10 月 20 日发布的 Nemotron-3.5-Rerank-8B 能给文本、页面图片或两者一起打分，许可证允许商用。页面也介绍了更早的 llama-nemotron 系列：1.7B 的视觉语言模型，以及 1B 和 500M 两个文本模型，NVIDIA 也以 NIM 容器提供它们</li>
@@ -699,6 +705,8 @@
 
       
 
+      
+
       <p class="center" style="margin-top:2.5rem"><a class="btn btn-primary" href="/zh/demo">试用 Demo →</a></p>
     </section>
   </main>
@@ -727,6 +735,7 @@
             <li><a href="/zh/guides/reranking-not-working" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
             <li><a href="/zh/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
             <li><a href="/zh/reranker-picker" data-i18n="shared.footer.picker">选型向导</a></li>
+            <li><a href="/zh/ndcg-calculator" data-i18n="shared.footer.ndcg">NDCG 计算器</a></li>
             <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
             <li><a href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
             <li><a href="/zh/news" data-i18n="shared.footer.news">重排序动态</a></li>

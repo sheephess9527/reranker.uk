@@ -894,3 +894,8 @@ input[type="number"] {
   cursor: pointer; opacity: 0.85;
 }
 .code-copy:hover, .code-copy:focus-visible { opacity: 1; border-color: var(--primary); }
+
+/* NDCG calculator */
+#ndcg-table td:not(:first-child), #ndcg-table th:not(:first-child),
+#ndcg-table-q td:not(:first-child), #ndcg-table-q th:not(:first-child) { text-align: right; }
+#ndcg-before, #ndcg-after { font-family: var(--mono); font-size: 0.85rem; }

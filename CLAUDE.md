@@ -177,6 +177,10 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 > 完成：`main.js` 给 `main pre` 套一层 `.code-wrap` 并加 `.code-copy` 按钮（中文页显示「复制 / 已复制」；按钮在外层，代码横向滚动时不跟着走；没有 `navigator.clipboard` 时不加）。`tests/code-copy.spec.js` 已进 `npm test`，a11y 仍过。⑤ 里的 WebApplication 结构化数据原来就有（Demo、计算器），选型向导也带了，不用再做。**站长平台（Google Search Console / Bing / 百度）是否提交过 sitemap 要用户自己确认，我这边查不了。** 更新日志 `#2026-11-12-copy`。剩下：⑥ NDCG 小工具、④ 中文专项。
 
+### ~~23. NDCG / MRR 计算器 `/ndcg-calculator`~~（2026-11-13 已完成）
+
+> 完成：新增 `/ndcg-calculator`（中英文、meta、WebApplication JSON-LD、社交卡片）。两个文本框（重排序前 / 后，每行一条查询，按名次写相关度标签，空格或逗号分隔，支持 0/1/2/3 分级）+ k，算 NDCG@k（增益取标签本身、折损 1/log2(名次+1)、理想排序取该行自己的标签）、MRR@k、Hit@1，再给逐条查询表。没有相关候选的查询不计入平均并提示；两行标签不一致、行数不等、含非数字都会说明原因。纯前端（`public/assets/js/ndcg-calculator.js`），不上传。评测指南、页脚、llms.txt 的 Tools 都链到它。`tests/ndcg-calculator.spec.js`（已进 `npm test`）用手算的值核对（0.631 / 0.860 等），中文页也测。更新日志 `#2026-11-13-ndcg`。**第六轮只剩 ④ 中文专项**（bce-reranker 等，优先级低，等用户确认再做）。
+
 ## 发布监控处理记录
 
 - **2026-10-21 Cohere Rerank 5**：Cohere 当天发布（changelog「Announcing Cohere's Rerank 5 Models」）。Cohere 页改为 Rerank 5（新增「What's new in Rerank 5」：校准分数、Context Focus、只支持文本、不支持指令、可用渠道），模型表加 v5 Pro / Fast 两行，首页和表里的卡片更新，代码示例改用 `rerank-v5.0-pro`。3 个新 fact（`cohere-rerank-5`）。**价格还没公布**：页面写「尚未公布」，计算器暂不加；`data/release-watch.json` 新增「Cohere pricing」页面监控（`Rerank N Pro|Fast`，已知 Rerank 4），价格一出现就会报到 release-watch issue，届时补 price fact、计算器选项和价格表行。

@@ -1,0 +1,74 @@
+<main id="main">
+    <article class="article container narrow">
+      <div class="breadcrumb"><a href="/">Home</a><span>/</span>NDCG and MRR calculator</div>
+      <h1>NDCG and MRR calculator</h1>
+      <p class="meta">Tool · <time datetime="2026-11-13">Updated 13 Nov 2026</time></p>
+      <p class="lead">Did the reranker help? Paste the relevance labels of each query’s candidates in the order they were returned, once before reranking and once after, and read off NDCG@k, MRR and Hit@1. It runs in your browser: nothing you type is sent anywhere. The <a href="/guides/evaluate-reranker.html">evaluation guide</a> explains how to build the labels.</p>
+
+      <section class="demo-panel" aria-labelledby="ndcg-head">
+        <h2 id="ndcg-head" class="mt-0" style="margin-bottom:1rem">Your rankings</h2>
+        <div class="demo-input-grid">
+          <div>
+            <div class="field">
+              <label for="ndcg-before">Before reranking <span class="hint">one query per line</span></label>
+              <textarea id="ndcg-before" rows="6" spellcheck="false">0 0 1 0 0 0 0 0
+0 1 0 0 0 0 0 0
+0 0 0 0 2 0 1 0
+1 0 0 0 0 0 0 0</textarea>
+            </div>
+          </div>
+          <div>
+            <div class="field">
+              <label for="ndcg-after">After reranking <span class="hint">same queries, same order</span></label>
+              <textarea id="ndcg-after" rows="6" spellcheck="false">1 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+2 1 0 0 0 0 0 0
+1 0 0 0 0 0 0 0</textarea>
+            </div>
+          </div>
+        </div>
+        <div class="field" style="max-width:14rem">
+          <label for="ndcg-k">Cut-off k <span class="hint">top results that count</span></label>
+          <input type="number" id="ndcg-k" value="5" min="1" step="1" inputmode="numeric" />
+        </div>
+        <div class="calc-summary" id="ndcg-status" aria-live="polite"></div>
+      </section>
+
+      <h2 id="results">Results</h2>
+      <div class="table-wrap">
+        <table id="ndcg-table">
+          <caption class="sr-only">Average ranking quality before and after reranking</caption>
+          <thead><tr><th>Metric</th><th>Before</th><th>After</th><th>Change</th></tr></thead>
+          <tbody id="ndcg-rows"></tbody>
+        </table>
+      </div>
+      <h3 id="per-query">Per query</h3>
+      <div class="table-wrap">
+        <table id="ndcg-table-q">
+          <caption class="sr-only">NDCG and reciprocal rank for each query</caption>
+          <thead><tr><th>Query</th><th>NDCG before</th><th>NDCG after</th><th>Rank of first relevant</th></tr></thead>
+          <tbody id="ndcg-rows-q"></tbody>
+        </table>
+      </div>
+
+      <h2 id="format">How to enter the labels</h2>
+      <p>Each line is one query. Write one number per candidate, in ranked order, separated by spaces or commas: <code>0</code> for not relevant, <code>1</code> for relevant, and <code>2</code> or <code>3</code> if you grade relevance. “Before” is the order your retriever returned; “after” is the same candidates in the order the reranker put them. The two lines for a query must hold the same labels, just in a different order.</p>
+      <h2 id="how">What the numbers mean</h2>
+      <ul>
+        <li><strong>NDCG@k</strong> — discounted cumulative gain of the top k results, divided by the best score those same candidates could have reached. 1.0 means the best candidates are on top. Gain is the label itself and the discount is 1 / log2(rank + 1).</li>
+        <li><strong>MRR</strong> — the average of 1 / rank of the first relevant result within the top k, counting 0 when there is none.</li>
+        <li><strong>Hit@1</strong> — the share of queries whose top result is relevant.</li>
+      </ul>
+      <p>Queries with no relevant candidate at all are left out of the averages, because no reranker can fix them; if there are many, the problem is retrieval, not reranking. Only the candidates you list are scored, so this measures reordering, not recall. With 30 queries a small difference can be noise: treat gains of a point or two as a tie and look at the per-query table before trusting them.</p>
+      <div class="cta-band">
+        <h2 style="margin-top:0">Need candidates to label?</h2>
+        <p class="soft">The live demo shows how a cross-encoder reorders a shortlist — a quick way to see which ranking is better before you label a real set.</p>
+        <a class="btn btn-primary" href="/demo.html">Open the live demo →</a>
+      </div>
+      <h2>Keep reading</h2>
+      <div class="grid grid-2">
+        <a class="card" href="/guides/evaluate-reranker.html"><h3>Evaluate rerankers</h3><p>Build the labelled set, run the protocol, regression-test.</p></a>
+        <a class="card" href="/guides/reranking-not-working.html"><h3>Reranking didn’t help</h3><p>What to check when the numbers don’t move.</p></a>
+      </div>
+    </article>
+  </main>

@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "13 Nov 2026 — An NDCG and MRR calculator":
+    "2026 年 11 月 13 日 —— NDCG 与 MRR 计算器",
+  "<strong><a href=\"/ndcg-calculator.html\">Did the reranker help?</a></strong> — paste the relevance labels of each query’s candidates before and after reranking and read off NDCG@k, MRR and Hit@1, with a per-query table. It runs in the browser and sends nothing anywhere, and the <a href=\"/guides/evaluate-reranker.html\">evaluation guide</a> links to it":
+    "<strong><a href=\"/ndcg-calculator.html\">reranker 有没有帮上忙？</a></strong> —— 粘贴每条查询候选在重排序前后的相关度标签，就能读出 NDCG@k、MRR 和 Hit@1，还有逐条查询的表。全部在浏览器里计算，不发送任何数据；<a href=\"/guides/evaluate-reranker.html\">评测指南</a>里有它的入口",
   "12 Nov 2026 (night) — Copy buttons on code":
     "2026 年 11 月 12 日（夜）—— 代码块加了复制按钮",
   "<strong>Every code block has a Copy button</strong> — the snippets in the guides and model pages can be copied in one click, without selecting around the line wraps":

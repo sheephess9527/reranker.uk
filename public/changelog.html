@@ -30,8 +30,8 @@
   <meta property="og:image:alt" content="reranker.uk changelog" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/changelog.jpg?v=36bc070c23" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css?v=882c8a3f3b" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css?v=882c8a3f3b" >
+  <link rel="preload" href="/assets/css/style.css?v=704baf0dee" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=704baf0dee" >
   
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://reranker.uk/changelog"}]}</script>
 
@@ -70,6 +70,13 @@
     </section>
 
     <section class="section container narrow">
+      <article class="changelog-entry">
+        <h2 id="2026-11-13-ndcg">13 Nov 2026 — An NDCG and MRR calculator</h2>
+        <ul class="feature-list">
+          <li><strong><a href="/ndcg-calculator">Did the reranker help?</a></strong> — paste the relevance labels of each query’s candidates before and after reranking and read off NDCG@k, MRR and Hit@1, with a per-query table. It runs in the browser and sends nothing anywhere, and the <a href="/guides/evaluate-reranker">evaluation guide</a> links to it</li>
+        </ul>
+      </article>
+
       <article class="changelog-entry">
         <h2 id="2026-11-12-copy">12 Nov 2026 (night) — Copy buttons on code</h2>
         <ul class="feature-list">
@@ -139,14 +146,13 @@
           <li><strong>A dead link replaced</strong> — SiliconFlow’s <code>docs.siliconflow.cn</code> site stopped responding, so the <a href="/guides/rerank-in-china">China guide</a> now links to the same rerank API page on <code>docs.siliconflow.com</code>, in Chinese</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>October 2026 (38 entries)</summary><article class="changelog-entry">
         <h2 id="2026-10-24-minilm">24 Oct 2026 — A faster ms-marco MiniLM</h2>
         <ul class="feature-list">
           <li><strong><code>cross-encoder/ms-marco-MiniLM-L4-v2</code> in the <a href="/guides/choose-reranker-scenario#support">scenario guide</a></strong> — the release watch flagged it as popular (over five million downloads) but never mentioned here. It is the four-layer sibling of the MiniLM-L6 model in our demo: slightly lower on TREC DL 19, faster per document, by sentence-transformers’ own figures</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>Earlier in October 2026 (37 entries)</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-10-23-nvidia">23 Oct 2026 — NVIDIA Nemotron rerankers</h2>
         <ul class="feature-list">
           <li><strong>A page for <a href="/models/nvidia-rerank">NVIDIA’s rerankers</a></strong> — Nemotron-3.5-Rerank-8B, released on 20 October, scores text, page images or both under a licence that allows commercial use. The page also covers the older llama-nemotron rerankers: the 1.7B vision-language model and the 1B and 500M text models, which NVIDIA also serves as NIM containers</li>
@@ -699,6 +705,8 @@
 
       
 
+      
+
       <p class="center" style="margin-top:2.5rem"><a class="btn btn-primary" href="/demo">Try the demo →</a></p>
     </section>
   </main>
@@ -727,6 +735,7 @@
             <li><a href="/guides/reranking-not-working" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
             <li><a href="/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
             <li><a href="/reranker-picker" data-i18n="shared.footer.picker">Reranker picker</a></li>
+            <li><a href="/ndcg-calculator" data-i18n="shared.footer.ndcg">NDCG calculator</a></li>
             <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
             <li><a href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
             <li><a href="/news" data-i18n="shared.footer.news">Reranker news</a></li>

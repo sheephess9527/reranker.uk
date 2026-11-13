@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "Want a number without installing anything? The <a href=\"/ndcg-calculator.html\">NDCG and MRR calculator</a> takes the labels before and after reranking and works out NDCG@k, MRR and Hit@1 in your browser.":
+    "不想装任何东西就想要一个数字？<a href=\"/ndcg-calculator.html\">NDCG 与 MRR 计算器</a>接收重排序前后的标签，在浏览器里算出 NDCG@k、MRR 和 Hit@1。",
   "_title": "如何评测 reranker — NDCG、MRR 与标注查询 | reranker.uk",
   "_desc": "评测重排序模型的实用指南：构建标注查询集、衡量 NDCG@k 与 MRR、对比重排前后效果，并对流水线变更做回归测试。",
 
