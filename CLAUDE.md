@@ -234,3 +234,9 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 - 不要为了「好看」重写 `public/assets/css/style.css` 的 token。对比度是用 axe 卡过的（浅色主题的 `--accent` 特意用了 teal-700）。
 - 不要把 Demo 的打分数学改了。`public/assets/js/demo.js` 里的 token-overlap 和 cross-encoder 路径有 `tests/demo.smoke.spec.js`（mock）和 `tests/demo.smoke.real.spec.js`（真模型，要联网）。
 - 不要新增 npm 依赖，除非这一项离开它就做不了。构建只用 `node-html-parser`。
+
+## 2026-11-14 搜索与手机导航
+
+- [x] 搜索索引加载时显示状态；HTTP 错误、无效 JSON 和无效索引不再伪装为零结果；修改查询或重开面板可重试，成功后复用索引。中英文提示同步。
+- [x] 手机菜单增加 aria-controls，Escape 关闭并还焦点，点击外部、焦点移出、打开搜索时收起。输入法组合期间不处理搜索快捷键。
+- 更新日志：`#2026-11-14-search-recovery`，中英文及 RSS 同步。

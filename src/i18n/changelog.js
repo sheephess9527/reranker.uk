@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "14 Nov 2026 — Search recovery and keyboard-friendly mobile navigation": "2026 年 11 月 14 日 —— 搜索失败可重试，手机菜单支持键盘操作",
+  "Search now distinguishes a loading failure from an empty result and retries when you edit the query or reopen the panel. The mobile menu closes with Escape, a click outside, or keyboard focus moving away; opening search closes it too.": "搜索现在会区分加载失败与没有匹配结果，修改搜索词或重新打开面板即可重试。手机菜单支持按 Escape 关闭，点击菜单外部或将键盘焦点移出菜单也会关闭；打开搜索时同样会收起菜单。",
   "14 Nov 2026 — Filters for input and licence, Jina's price, and two Chinese-side gaps":
     "2026 年 11 月 14 日 —— 按输入类型和许可证筛选、Jina 的价格，以及中文侧补上的两处缺口",
   "<strong>Two more filters on the <a href=\"/models/\">models table</a></strong> — one for what a model ranks (<em>text only</em>, or <em>text + images</em>: Qwen3-VL-Reranker, LightOn-rerank, Nemotron-3.5-Rerank-8B, llama-nemotron-rerank-vl-1b-v2, and Alibaba Cloud's hosted qwen3-vl-rerank), one for what an open-weights licence allows, which separates the Apache 2.0 / MIT / OpenMDW rows from Jina v3.5, v3 and Contextual AI's CC BY-NC weights. Hosted-only rows answer neither licence, because a hosted API has no weights to licence. LightOn's row also answers both architecture filters now — it reranks pointwise or listwise, and only appeared under cross-encoder":

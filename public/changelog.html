@@ -41,8 +41,8 @@
   <header class="site-header">
     <nav class="nav container">
       <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
-      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-      <ul class="nav-links">
+      <button type="button" class="nav-toggle" aria-controls="primary-navigation" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links" id="primary-navigation">
         <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
         <li><a href="/guides/" data-i18n="shared.nav.guides">Guides</a></li>
         <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
@@ -70,6 +70,10 @@
     </section>
 
     <section class="section container narrow">
+      <article class="changelog-entry">
+        <h2 id="2026-11-14-search-recovery">14 Nov 2026 — Search recovery and keyboard-friendly mobile navigation</h2>
+        <p>Search now distinguishes a loading failure from an empty result and retries when you edit the query or reopen the panel. The mobile menu closes with Escape, a click outside, or keyboard focus moving away; opening search closes it too.</p>
+      </article>
       <article class="changelog-entry">
         <h2 id="2026-11-14-filters">14 Nov 2026 — Filters for input and licence, Jina's price, and two Chinese-side gaps</h2>
         <ul class="feature-list">
@@ -138,8 +142,7 @@
           <li><strong>Pinecone’s own reranker is deprecated</strong> — Pinecone’s docs now say <code>pinecone-rerank-v0</code> still serves rerank requests but shouldn’t be used for new projects; no shutdown date is given. The <a href="/models/#pinecone">models table</a>, the <a href="/guides/rerank-vector-database#pinecone">vector database guide</a> and the <a href="/rerank-cost-calculator">cost calculator</a> say so and point to bge-reranker-v2-m3 or cohere-rerank-4-fast. The release watch caught it the morning after it changed</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>Earlier in November 2026 (2 entries)</summary><article class="changelog-entry">
         <h2 id="2026-11-01-checks">1 Nov 2026 — Chinese pages and site checks</h2>
         <ul class="feature-list">
           <li><strong>Chinese pages, finished</strong> — about twenty short labels on the <a href="/zh/models/">Chinese</a> pages were still in English: the Voyage prices and the “not published” cells in the models table, token limits on the Cohere, Voyage and mxbai pages, and three “Keep reading” headings. The coverage check used to look only at longer text; it now also compares every table cell, heading and label with the English page</li>
@@ -147,7 +150,7 @@
           <li><strong>Watching for Pinecone retirements</strong> — <code>pinecone-rerank-v0</code> has dropped off Pinecone’s models overview, though its docs and price list still offer it. The release watch now reads Pinecone’s changelog as well as the rerank docs, and opens an issue if it is deprecated or disappears, so the <a href="/models/#pinecone">models table</a> and the <a href="/guides/rerank-vector-database#pinecone">vector database guide</a> can follow</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>Earlier in November 2026 (1 entry)</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-11-01-vendors">1 Nov 2026 — Vendor updates: Pinecone and NVIDIA NIM</h2>
         <ul class="feature-list">
           <li><strong>Pinecone halved a limit</strong> — <code>cohere-rerank-4-fast</code> on Pinecone now takes 4,096 tokens per document, down from 8,192; the <a href="/guides/rerank-vector-database#pinecone">vector database guide</a> shows the new figure. This site’s daily source check caught the change</li>
@@ -718,6 +721,8 @@
 
       
 
+      
+
       <p class="center" style="margin-top:2.5rem"><a class="btn btn-primary" href="/demo">Try the demo →</a></p>
     </section>
   </main>
@@ -784,7 +789,7 @@
       </div>
     </div>
   </footer>
-  <script src="/assets/js/main.js?v=8e785706b2"></script>
+  <script src="/assets/js/main.js?v=c84d5fd363"></script>
   
   <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
 </body>

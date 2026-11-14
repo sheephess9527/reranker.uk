@@ -36,3 +36,90 @@ test("typing “/” inside a field doesn’t open search", async ({ page }) => 
   await page.keyboard.press("/");
   await expect(page.locator("#site-search")).toBeHidden();
 });
+
+for (const locale of ["en", "zh"]) {
+  for (const failure of ["http", "json", "shape"]) {
+    test(`${locale} search recovers from ${failure} errors without a reload`, async ({ page }) => {
+      let requests = 0;
+      await page.route("**/search-index.json", async (route) => {
+        requests++;
+        if (requests === 1) {
+          await route.fulfill({
+            status: failure === "http" ? 503 : 200,
+            contentType: "application/json",
+            body: failure === "json" ? "invalid json" : "{}",
+          });
+        } else await route.continue();
+      });
+      await page.goto(locale === "zh" ? "/zh/" : "/");
+      await page.locator("#search-toggle").click();
+      await expect(page.locator("#site-search-status")).toContainText(locale === "zh" ? "暂时无法加载" : "could not load");
+      await page.locator("#site-search-input").fill("Cohere");
+      await expect(page.locator("#site-search-results a").first()).toHaveAttribute("href", `${locale === "zh" ? "/zh" : ""}/models/cohere-rerank`);
+      await page.locator("#site-search-input").fill("Voyage");
+      await expect(page.locator("#site-search-results a").first()).toHaveAttribute("href", `${locale === "zh" ? "/zh" : ""}/models/voyage-rerank`);
+      expect(requests).toBe(2);
+    });
+  }
+}
+
+test("search announces loading and coalesces requests while typing", async ({ page }) => {
+  let requests = 0;
+  let release;
+  const pending = new Promise((resolve) => { release = resolve; });
+  await page.route("**/search-index.json", async (route) => {
+    requests++;
+    await pending;
+    await route.continue();
+  });
+  await page.goto("/");
+  await page.locator("#search-toggle").click();
+  await expect(page.locator("#site-search-status")).toHaveText("Loading search…");
+  await page.locator("#site-search-input").fill("Cohere");
+  await page.locator("#site-search-input").fill("Voyage");
+  await expect(page.locator("#site-search-results")).toHaveAttribute("aria-busy", "true");
+  release();
+  await expect(page.locator("#site-search-results a").first()).toHaveAttribute("href", "/models/voyage-rerank");
+  await expect(page.locator("#site-search-results")).toHaveAttribute("aria-busy", "false");
+  expect(requests).toBe(1);
+});
+
+test("reopening search retries after a network failure", async ({ page }) => {
+  let requests = 0;
+  await page.route("**/search-index.json", async (route) => {
+    if (++requests === 1) await route.abort();
+    else await route.continue();
+  });
+  await page.goto("/");
+  await page.locator("#search-toggle").click();
+  await expect(page.locator("#site-search-status")).toContainText("could not load");
+  await page.keyboard.press("Escape");
+  await page.locator("#search-toggle").click();
+  await page.locator("#site-search-input").fill("Cohere");
+  await expect(page.locator("#site-search-results a").first()).toHaveAttribute("href", "/models/cohere-rerank");
+  expect(requests).toBe(2);
+});
+
+for (const locale of ["en", "zh"]) {
+  test(`${locale} mobile menu closes with Escape, outside click, focus exit and search`, async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(locale === "zh" ? "/zh/" : "/");
+    const toggle = page.locator(".nav-toggle");
+    await expect(toggle).toHaveAttribute("aria-controls", "primary-navigation");
+    await toggle.click();
+    await page.locator(".nav-links a").first().focus();
+    await page.keyboard.press("Escape");
+    await expect(toggle).toBeFocused();
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await toggle.click();
+    await page.locator("main h1").click();
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await toggle.click();
+    await page.locator("#theme-toggle").focus();
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await toggle.click();
+    await page.keyboard.press("/");
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await expect(page.locator("#site-search-input")).toBeFocused();
+  });
+}
