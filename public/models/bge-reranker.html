@@ -41,8 +41,8 @@
   <header class="site-header">
     <nav class="nav container">
       <a class="brand" href="/"><span class="logo">R</span>reranker<span class="tld">.uk</span></a>
-      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-      <ul class="nav-links">
+      <button type="button" class="nav-toggle" aria-controls="primary-navigation" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <ul class="nav-links" id="primary-navigation">
         <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
         <li><a href="/guides/" data-i18n="shared.nav.guides">Guides</a></li>
         <li><a href="/models/" data-i18n="shared.nav.models" aria-current="page" class="active">Models</a></li>
@@ -254,7 +254,7 @@ def rag_answer(query: str, vector_db, llm) -> str:
       </div>
     </div>
   </footer>
-  <script src="/assets/js/main.js?v=8e785706b2"></script>
+  <script src="/assets/js/main.js?v=c84d5fd363"></script>
   
   <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
 </body>

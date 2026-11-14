@@ -11,17 +11,28 @@
       return open ? "Close menu" : "Open menu";
     }
     toggle.setAttribute("aria-label", menuLabel(false));
-    toggle.addEventListener("click", function () {
-      var open = links.classList.toggle("open");
+    function setMenu(open) {
+      links.classList.toggle("open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
       toggle.setAttribute("aria-label", menuLabel(open));
+    }
+    toggle.addEventListener("click", function () {
+      setMenu(!links.classList.contains("open"));
     });
     links.addEventListener("click", function (e) {
-      if (e.target.tagName === "A") {
-        links.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
-        toggle.setAttribute("aria-label", menuLabel(false));
+      if (e.target.closest("a")) setMenu(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && links.classList.contains("open")) {
+        setMenu(false);
+        toggle.focus();
       }
+    });
+    document.addEventListener("click", function (e) {
+      if (!links.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
+    });
+    document.addEventListener("focusin", function (e) {
+      if (!links.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
     });
   }
 
@@ -102,15 +113,34 @@
   if (searchBtn && panel && input && list) {
     var index = null;
     var loading = null;
+    var failed = false;
     var locale = zh ? "zh" : "en";
 
     function load() {
-      if (!loading) {
-        loading = fetch("/search-index.json")
-          .then(function (r) { return r.json(); })
-          .then(function (all) { index = all.filter(function (e) { return e.l === locale; }); })
-          .catch(function () { index = []; });
-      }
+      if (index) return Promise.resolve();
+      if (loading) return loading;
+      failed = false;
+      list.setAttribute("aria-busy", "true");
+      status.textContent = zh ? "正在加载搜索…" : "Loading search…";
+      loading = fetch("/search-index.json")
+        .then(function (r) {
+          if (!r.ok) throw new Error("Search index unavailable");
+          return r.json();
+        })
+        .then(function (all) {
+          // Validate before caching: an error page or malformed response must
+          // remain retryable, rather than breaking every subsequent search.
+          if (!Array.isArray(all) || !all.every(function (e) {
+            return e && typeof e.l === "string" && typeof e.u === "string" &&
+              typeof e.t === "string" && typeof e.d === "string" && Array.isArray(e.h);
+          })) throw new Error("Invalid search index");
+          index = all.filter(function (e) { return e.l === locale; });
+        })
+        .catch(function () { failed = true; })
+        .finally(function () {
+          loading = null;
+          list.setAttribute("aria-busy", "false");
+        });
       return loading;
     }
 
@@ -156,12 +186,16 @@
         li.appendChild(a);
         list.appendChild(li);
       });
-      if (!q) status.textContent = "";
+      if (failed) status.textContent = zh
+        ? "搜索暂时无法加载。请修改搜索词或重新打开搜索以重试。"
+        : "Search could not load. Edit your query or reopen search to retry.";
+      else if (!q) status.textContent = "";
       else if (!hits.length) status.textContent = zh ? "没有找到相关页面。" : "No pages match.";
       else status.textContent = zh ? "找到 " + hits.length + " 个页面" : hits.length + (hits.length === 1 ? " page" : " pages");
     }
 
     function open() {
+      if (toggle && links && links.classList.contains("open")) toggle.click();
       panel.hidden = false;
       searchBtn.setAttribute("aria-expanded", "true");
       input.focus();
@@ -180,6 +214,7 @@
     input.addEventListener("input", function () { load().then(render); });
 
     document.addEventListener("keydown", function (e) {
+      if (e.isComposing) return;
       var typing = /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) || e.target.isContentEditable;
       if (e.key === "/" && !typing && !e.ctrlKey && !e.metaKey && !e.altKey) {
         e.preventDefault();
