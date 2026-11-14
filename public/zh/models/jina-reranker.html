@@ -67,7 +67,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>Jina Reranker</div>
       <h1>Jina Reranker</h1>
-      <p class="meta">权重 + 托管 API · Jina AI（现属 Elastic）· <time datetime="2026-10-12">更新于 2026 年 10 月 12 日</time></p>
+      <p class="meta">权重 + 托管 API · Jina AI（现属 Elastic）· <time datetime="2026-11-14">更新于 2026 年 11 月 14 日</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">托管 API</span><span class="pill warn">权重：仅限非商用</span><span class="pill info">v3.5 listwise</span><span class="pill">浏览器 tiny</span></div>
       <p class="lead">Jina 目前的旗舰是 2026 年 8 月发布的 <strong>jina-reranker-v3.5</strong>：一个基于 Qwen3-0.6B 的 <strong>0.6B</strong> <em>listwise</em> 重排序器，可直接替换 v3 —— API 相同、131K token 上下文，速度快 1.22–1.56 倍。在 Jina 自己的评测里，它的 <strong>BEIR nDCG@10 为 63.20*</strong>，以约七分之一的体量略高于 Qwen3-Reranker-4B；不过在多语言、专业领域和结构化数据检索上，仍是 4B 领先。自建部署要注意：v2、v3 和 v3.5 的权重采用 <strong>CC BY-NC 4.0 —— 仅限非商用</strong>。<strong>v1-tiny</strong>（Apache 2.0）仍是<a href="/zh/demo?m=jinaai/jina-reranker-v1-tiny-en">本站浏览器 Demo</a> 所用的模型。</p>
 
@@ -132,7 +132,7 @@
       <p>如果你需要水平相近、又允许商用的开源权重，<a href="/zh/models/qwen-reranker">Qwen3-Reranker</a>、<a href="/zh/models/mxbai-rerank">mxbai-rerank-v2</a> 和 <a href="/zh/models/bge-reranker">bge-reranker-v2</a> 都是 Apache 2.0。</p>
 
       <h2 id="pricing">价格</h2>
-      <p>Jina 的重排序 API 按 token 计费，和他们的其他 API 共用同一个余额。新的 API key 附带免费 token 供试用；之后需要购买 token 包。Jina 在 2025 年 5 月 6 日调整过定价，而且他们网站上的当前价格要在浏览器里加载完页面才显示，所以这里不写具体数字 —— 做预算前请到 <a href="https://jina.ai/reranker" rel="noopener noreferrer">jina.ai/reranker</a> 查看。</p>
+      <p>Jina 的重排序 API 按 token 计费，和他们的其他 API 共用同一个余额，<strong>每 100 万 token $0.05</strong> —— 这是 Jina 的模型发现接口（<a href="https://api.jina.ai/v1/models" rel="noopener noreferrer">api.jina.ai/v1/models</a>）为 <code>jina-ai/jina-reranker-v3.5</code> 列出的单价，v3、m0、v2-base-multilingual 和 v1 各型号同价。新的 API key 附带免费 token 供试用；之后需要购买 token 包，包的价格他们网站上要在浏览器里渲染完才显示，所以这里不写包的总价。Jina 在 2025 年 5 月 6 日调整过定价。计算器按 Jina 自己写的口径数 token —— 整个输入请求的 token，所以 listwise 请求里 query 只算一遍，而不是每篇文档算一遍，见<a href="/zh/rerank-cost-calculator">成本计算器</a>。</p>
       <div class="table-wrap" tabindex="0" role="region" aria-label="价格">
         <table>
           <thead>

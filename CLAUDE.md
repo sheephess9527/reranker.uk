@@ -199,6 +199,8 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 >
 > 计费口径：Jina 对 Reranker API 的用量说明是「输入请求里的 token 数」，v3.5 的上下文是「query 加全部候选合计」，所以是 **listwise 口径 —— query 每次查询只算一遍**，与 Voyage「每篇文档都算一遍 query」不同。`cost-calculator.js` 为此加了 `listwiseTokens()`，选项的计费单位写「per token (one listwise request)」。`tests/cost-calculator.spec.js` 用 1,000 查询 × 100 候选 × 485 token 段落核对：Jina 48.5M token / $2.43 对 Voyage 50.0M / $2.50。
 >
+> Jina 自己的模型页 `src/pages/models/jina-reranker.html` 的「Pricing」一节原本写「我们不在这里写数字」，现在改成给出这个每百万 token 单价并说明数字来自 models API、包价仍在浏览器里渲染，否则它会和模型表、计算器互相矛盾。
+>
 > 同时把 `/models/` 两行 Jina 的价格格从「Free trial tokens, then token packages」改成「送试用 token，之后 $0.05/M token†」，并把这些单位的 † 脚注补上 Jina。`/models/` 与计算器的价格因此不会各说各话。
 
 ### ~~26. 中文专项：bce-reranker-base_v1 进表与国内指南，hs-rerank-1 进自建指南~~（2026-11-14 已完成）

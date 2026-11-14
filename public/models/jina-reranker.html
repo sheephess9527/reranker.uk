@@ -67,7 +67,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/models/">Models</a><span>/</span>Jina Reranker</div>
       <h1>Jina Reranker</h1>
-      <p class="meta">Weights + hosted API · Jina AI, now part of Elastic · <time datetime="2026-10-12">Updated 12 Oct 2026</time></p>
+      <p class="meta">Weights + hosted API · Jina AI, now part of Elastic · <time datetime="2026-11-14">Updated 14 Nov 2026</time></p>
       <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill">Hosted API</span><span class="pill warn">Weights: non-commercial</span><span class="pill info">v3.5 listwise</span><span class="pill">Browser tiny</span></div>
       <p class="lead">Jina’s current flagship is <strong>jina-reranker-v3.5</strong>, announced August 2026: a <strong>0.6B</strong> <em>listwise</em> reranker built on Qwen3-0.6B and a drop-in upgrade to v3 — same API, 131K-token context, and 1.22–1.56× faster. In Jina’s own evaluation it scores <strong>63.20* nDCG@10 on BEIR</strong>, just above Qwen3-Reranker-4B at about a seventh of the size, though the 4B still leads on multilingual, professional-domain and structured retrieval. The catch for self-hosting: the v2, v3 and v3.5 weights are <strong>CC BY-NC 4.0 — non-commercial</strong>. <strong>v1-tiny</strong> (Apache 2.0) is still what runs in <a href="/demo?m=jinaai/jina-reranker-v1-tiny-en">our browser demo</a>.</p>
 
@@ -132,7 +132,7 @@
       <p>If you need commercially permissive open weights at a similar level, <a href="/models/qwen-reranker">Qwen3-Reranker</a>, <a href="/models/mxbai-rerank">mxbai-rerank-v2</a> and <a href="/models/bge-reranker">bge-reranker-v2</a> are all Apache 2.0.</p>
 
       <h2 id="pricing">Pricing</h2>
-      <p>Jina bill the reranker by token, from the same balance as their other APIs. New API keys come with free tokens to try it; after that you buy token packages. Jina changed their pricing on 6 May 2025, and their site shows current package prices only once the page has loaded in a browser, so we don’t quote a figure here — check <a href="https://jina.ai/reranker" rel="noopener noreferrer">jina.ai/reranker</a> before you budget.</p>
+      <p>Jina bill the reranker by token, from the same balance as their other APIs, at <strong>$0.05 per 1M tokens</strong> — the rate Jina’s model-discovery API (<a href="https://api.jina.ai/v1/models" rel="noopener noreferrer">api.jina.ai/v1/models</a>) lists for <code>jina-ai/jina-reranker-v3.5</code>, and the same rate for v3, m0, v2-base-multilingual and the v1 models. New API keys come with free tokens to try it; after that you buy token packages, whose totals their site renders in the browser, so no package total is quoted here. Jina changed their pricing on 6 May 2025. The calculator counts a request the way Jina describe it — the tokens of the whole input, so a listwise request pays for the query once rather than once per document; see the <a href="/rerank-cost-calculator">cost calculator</a>.</p>
       <div class="table-wrap" tabindex="0" role="region" aria-label="Pricing">
         <table>
           <thead>
