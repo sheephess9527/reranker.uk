@@ -30,8 +30,8 @@
   <meta property="og:image:alt" content="如何自托管 reranker — sentence-transformers、GPU、部署 | reranker.uk" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/guides/self-host-reranker.jpg?v=9e20f8d037" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css?v=704baf0dee" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css?v=704baf0dee" >
+  <link rel="preload" href="/assets/css/style.css?v=71c7ffaf81" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=71c7ffaf81" >
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"如何自托管 reranker — sentence-transformers、GPU、部署","datePublished":"2026-06-23","dateModified":"2026-10-12","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/self-host-reranker","description":"自托管 cross-encoder reranker 实战指南：模型选择（bge、mxbai、Jina）、sentence-transformers 快速上手、FastAPI 服务化与运维清单。","inLanguage":"zh-Hans"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://reranker.uk/zh/guides/"},{"@type":"ListItem","position":3,"name":"如何自托管 reranker","item":"https://reranker.uk/zh/guides/self-host-reranker"}]}</script>
 
@@ -67,7 +67,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/guides/">指南</a><span>/</span>自托管 reranker</div>
       <h1>如何自托管 reranker</h1>
-      <p class="meta">生产实践 · 约 10 分钟阅读 · <time datetime="2026-10-12">更新于 2026 年 10 月 12 日</time></p>
+      <p class="meta">生产环境 · 约 10 分钟阅读 · <time datetime="2026-11-14">更新于 2026 年 11 月 14 日</time></p>
       <p class="lead">托管 rerank API 很方便，但<strong>自托管</strong>能带来零按次成本、数据完全可控，以及在自己 GPU/CPU 集群上的可预测延迟。本文从第一次 <code>CrossEncoder</code> 调用，到生产级微服务的实操路径。</p>
 
       <div class="toc">
@@ -99,10 +99,12 @@
             <tr><td><a href="/zh/models/qwen-reranker">Qwen3-Reranker-4B</a></td><td>~4B</td><td>Apache 2.0</td><td><strong>有 GPU 时的默认之选</strong> —— 在 Qwen 的测试中，三个尺寸里英文和指令跟随表现最好</td></tr>
             <tr><td><a href="/zh/models/mxbai-rerank">mxbai-rerank-base-v2</a></td><td>~494M</td><td>Apache 2.0</td><td>多语言（含中文）；mxbai v2 里体量与质量最均衡的一款</td></tr>
             <tr><td><a href="/zh/models/jina-reranker">jina-reranker-v3.5</a></td><td>~0.6B</td><td>CC BY-NC 4.0</td><td>Listwise、长上下文 —— 未获许可时<strong>仅限非商用</strong></td></tr>
+            <tr><td><a href="/zh/models/#hs-rerank-1">hs-rerank-1</a></td><td>114M</td><td>MIT</td><td><strong>最轻的 CPU 方案</strong> —— int8 ONNX，8,192 token，支持英语、西班牙语、法语、德语、葡萄牙语、中文、日语、韩语</td></tr>
           </tbody>
         </table>
       </div>
       <p>先用 <strong>bge-reranker-v2-m3</strong>，它在 CPU 上就能跑。有 GPU 时，在你的标注数据上把 <strong>Qwen3-Reranker-4B</strong> 和它或 <strong>mxbai-rerank-base-v2</strong> 做 A/B 对比 —— 不要以为排行榜上的顺序能照搬到你的数据。2026 年 10 月之前，这张表推荐的是 bge-reranker-base，那是 BAAI 2023 年只支持中英文的模型。</p>
+      <p>如果完全没有 GPU，最小的选择是 <strong>hs-rerank-1</strong>：总共 114M，其中 98M 是词嵌入表，transformer 只有 15M；每对 query 加段落 8,192 token，MIT 许可，带 CPU 用的 int8 ONNX 版本，也有 Text Embeddings Inference 需要的部署配置。Hindsight 只在模型卡上以图片形式给出结果，所以这里没有可比的分数 —— 在拿它替代 bge-reranker-v2-m3 之前，请先在你自己的查询上测一遍。</p>
 
       <h2 id="quickstart">sentence-transformers 快速上手</h2>
       <pre tabindex="0"><code>pip install sentence-transformers torch

@@ -30,8 +30,8 @@
   <meta property="og:image:alt" content="Rerank cost calculator — Cohere vs Voyage" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/rerank-cost-calculator.jpg?v=f6cccef1c9" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css?v=704baf0dee" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css?v=704baf0dee" >
+  <link rel="preload" href="/assets/css/style.css?v=71c7ffaf81" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=71c7ffaf81" >
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Rerank cost calculator","url":"https://reranker.uk/rerank-cost-calculator","applicationCategory":"BusinessApplication","operatingSystem":"Any browser","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"description":"Estimate what reranking costs per month. Cohere Rerank 5 and Voyage rerank-3 bill per token; Cohere Rerank 4 bills per search, counting long documents once per 500 tokens. Enter your own volume and compare.","inLanguage":"en"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Rerank cost calculator","item":"https://reranker.uk/rerank-cost-calculator"}]}</script>
 
@@ -67,8 +67,8 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span>Rerank cost calculator</div>
       <h1>Rerank cost calculator</h1>
-      <p class="meta">Tool · <time datetime="2026-10-22">Updated 22 Oct 2026</time></p>
-      <p class="lead">Hosted rerankers do not bill the same way. Cohere Rerank 4 is priced per <strong>search</strong> — one query plus up to 100 documents, with any document over 500 tokens counted as several. Google and Amazon Bedrock charge per <strong>query</strong> of up to 100 documents, and Pinecone per <strong>request</strong> of up to 100, whatever their length. Cohere Rerank 5, Voyage, ZeroEntropy, Contextual AI and Alibaba Cloud charge per <strong>token</strong>, and so do the yuan-priced services in mainland China. Which is cheapest depends on how your passages round. Put your own numbers in.</p>
+      <p class="meta">Tool · <time datetime="2026-11-14">Updated 14 Nov 2026</time></p>
+      <p class="lead">Hosted rerankers do not bill the same way. Cohere Rerank 4 is priced per <strong>search</strong> — one query plus up to 100 documents, with any document over 500 tokens counted as several. Google and Amazon Bedrock charge per <strong>query</strong> of up to 100 documents, and Pinecone per <strong>request</strong> of up to 100, whatever their length. Cohere Rerank 5, Voyage, Jina, ZeroEntropy, Contextual AI and Alibaba Cloud charge per <strong>token</strong> — Jina counting one request's tokens, the query plus every candidate — and so do the yuan-priced services in mainland China. Which is cheapest depends on how your passages round. Put your own numbers in.</p>
 
       <section class="demo-panel" aria-labelledby="calc-head">
         <h2 id="calc-head" class="mt-0" style="margin-bottom:1rem">Your workload</h2>
@@ -100,7 +100,7 @@
 
       <h2 id="results">Monthly cost</h2>
       <div class="table-wrap" tabindex="0" role="region" aria-label="Estimated monthly rerank cost by vendor for the workload entered above">
-        <table id="calc-table" data-contextual-v2-per-m="0.05" data-contextual-mini-per-m="0.02" data-zeroentropy-per-m="0.025" data-bedrock-amazon-per-k-queries="1.00" data-bedrock-docs-per-query="100" data-pinecone-per-k-requests="2" data-pinecone-docs-per-request="100" data-docs-per-search="100" data-chunk-tokens="500" data-cohere5-pro-per-m="0.05" data-cohere5-fast-per-m="0.02" data-cohere-pro-per-search="0.0025" data-cohere-fast-per-search="0.002" data-voyage-per-m="0.05" data-voyage-lite-per-m="0.02" data-google-per-k-queries="1.00" data-alibaba-intl-per-m="0.1" data-alibaba-cn-per-m="0.5" data-siliconflow-pro-per-m="0.07">
+        <table id="calc-table" data-contextual-v2-per-m="0.05" data-contextual-mini-per-m="0.02" data-zeroentropy-per-m="0.025" data-bedrock-amazon-per-k-queries="1.00" data-bedrock-docs-per-query="100" data-pinecone-per-k-requests="2" data-pinecone-docs-per-request="100" data-docs-per-search="100" data-chunk-tokens="500" data-cohere5-pro-per-m="0.05" data-cohere5-fast-per-m="0.02" data-cohere-pro-per-search="0.0025" data-cohere-fast-per-search="0.002" data-voyage-per-m="0.05" data-voyage-lite-per-m="0.02" data-jina-per-m="0.05" data-google-per-k-queries="1.00" data-alibaba-intl-per-m="0.1" data-alibaba-cn-per-m="0.5" data-siliconflow-pro-per-m="0.07">
           <caption class="sr-only">Estimated monthly rerank cost by vendor for the workload entered above</caption>
           <thead>
             <tr>
@@ -142,6 +142,7 @@
         <li><strong>Cohere Rerank 4 Fast vs Voyage rerank-3</strong> — Fast is cheaper only when query plus passage fills more than 80% of its last chunk. The <code>-lite</code> tier is cheaper than both on any workload.</li>
       </ul>
       <p>Rerank 5 removes the rounding: Cohere bill it per token, at the same list prices as Voyage — $0.05 per 1M tokens for Pro against $0.05 for rerank-3, and $0.02 for Fast against $0.02 for rerank-3-lite. Cohere don’t say how the query is counted, so the calculator counts it as Voyage does, and the two pairs come out level. Choose between them on quality, not price.</p>
+      <p><strong>Jina</strong> charges the same $0.05 per 1M tokens, but counts them differently again: v3.5 is listwise, so the query and every candidate share one 131K-token context and the query is paid for once per query, not once per document. On a long candidate list that is a small saving — and it is not why you would pick Jina. What it buys you is the listwise comparison itself; the tokens are the cheaper part of the story.</p>
       <div class="callout">
         <p><strong>Correction, October 2026:</strong> until now this page said Cohere’s 500-token splitting was a myth and that per-search pricing ignores passage length. Cohere’s own pricing FAQ says otherwise: a document over 500 tokens, counting the query, is split, and every chunk counts toward the 100 documents in a search. The calculator now models that, which removes the long-passage advantage the old version showed for Cohere.</p>
       </div>
@@ -157,6 +158,7 @@
       <ul>
         <li><strong>Cohere Rerank 4</strong> — $0.0025 per search (Pro) and $0.002 per search (Fast). A search is one query plus up to 100 documents; per Cohere’s pricing FAQ, a document longer than 500 tokens including the query is split, and each chunk counts as a document. These are the last prices Cohere listed ($2.50 and $2 per 1,000 searches): its <a href="https://cohere.com/pricing" rel="noopener noreferrer">pricing page</a> stopped showing Rerank 4 on 21 October 2026, when Rerank 5 was priced, though Rerank 4 is still served.</li>
         <li><strong>Voyage rerank-3</strong> — $0.05 per 1M tokens, and $0.02 for <code>rerank-3-lite</code>. Billable tokens are the query counted once per document, plus every document token you send — so 50 candidates means the query is billed 50 times. The older <code>rerank-2.5</code> and <code>-lite</code> cost the same per token. Free tokens and the Batch API discount are not applied here — see the <a href="/models/voyage-rerank">Voyage page</a> for which models they cover.</li>
+        <li><strong>Jina Reranker v3.5</strong> — $0.05 per 1M tokens, from Jina’s model-discovery API (<a href="https://api.jina.ai/v1/models" rel="noopener noreferrer">api.jina.ai/v1/models</a>), which lists the rate for <code>jina-ai/jina-reranker-v3.5</code> as a price per token; jina.ai’s own pages quote no figure and sell prepaid token packages instead. Jina describe the Reranker API’s usage as “the number of tokens in the input request”, and v3.5 takes the query and all candidates in one context window, so this page counts the query once per request rather than once per document. The free trial tokens a new key comes with are not applied.</li>
         <li><strong>Google Vertex AI ranking</strong> — $1.00 per 1,000 queries; a query covers up to 100 documents, and each further 100 counts as another query (<a href="https://cloud.google.com/generative-ai-app-builder/pricing" rel="noopener noreferrer">Google’s pricing</a>). Passage length doesn’t change the price, but the models read only 1,024 tokens per record.</li>
         <li><strong>Alibaba Cloud Model Studio</strong> — qwen3-rerank at $0.1 per 1M input tokens internationally and ¥0.5 in the Beijing region, where qwen3.7-text-rerank costs the same (<a href="https://help.aliyun.com/zh/model-studio/model-pricing" rel="noopener noreferrer">price list</a>). Alibaba bills input tokens and caps a request at query tokens × documents + document tokens, so this page counts tokens the way it does for Voyage. qwen3-rerank rejects any single document over 4,000 tokens rather than truncating it.</li>
         <li><strong>SiliconFlow</strong> — bge-reranker-v2-m3 is listed free and its Pro tier at ¥0.07 per 1M tokens (<a href="https://siliconflow.cn/pricing" rel="noopener noreferrer">price list</a>). SiliconFlow doesn’t say how it counts rerank tokens; this page assumes the same formula as Alibaba and Voyage. Its price list gives no price for the Qwen3-Reranker models it also serves.</li>
@@ -246,7 +248,7 @@
     </div>
   </footer>
   <script src="/assets/js/main.js?v=8e785706b2"></script>
-  <script src="/assets/js/cost-calculator.js?v=fc6806f4b1"></script>
+  <script src="/assets/js/cost-calculator.js?v=4f1775a384"></script>
   <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
 </body>
 </html>

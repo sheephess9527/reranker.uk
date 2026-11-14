@@ -2,7 +2,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Self-host a reranker</div>
       <h1>How to self-host a reranker</h1>
-      <p class="meta">Production · ~10 min read · <time datetime="2026-10-12">Updated 12 Oct 2026</time></p>
+      <p class="meta">Production · ~10 min read · <time datetime="2026-11-14">Updated 14 Nov 2026</time></p>
       <p class="lead">Hosted rerank APIs are convenient, but <strong>self-hosting</strong> gives you zero per-call cost, full data control, and predictable latency on your own GPU or CPU fleet. Here’s a practical path from a first <code>CrossEncoder</code> call to a production microservice.</p>
 
       <div class="toc">
@@ -34,10 +34,12 @@
             <tr><td><a href="/models/qwen-reranker.html">Qwen3-Reranker-4B</a></td><td>~4B</td><td>Apache 2.0</td><td><strong>Default GPU pick</strong> — in Qwen’s tests, the best of its three sizes on English and instruction-following</td></tr>
             <tr><td><a href="/models/mxbai-rerank.html">mxbai-rerank-base-v2</a></td><td>~494M</td><td>Apache 2.0</td><td>Multilingual incl. Chinese; best size/quality balance of mxbai v2</td></tr>
             <tr><td><a href="/models/jina-reranker.html">jina-reranker-v3.5</a></td><td>~0.6B</td><td>CC BY-NC 4.0</td><td>Listwise, long context — <strong>non-commercial</strong> unless licensed</td></tr>
+            <tr><td><a href="/models/#hs-rerank-1">hs-rerank-1</a></td><td>{{fact:hs-rerank-1.params}}</td><td>MIT</td><td><strong>Lightest CPU option</strong> — int8 ONNX, {{fact:hs-rerank-1.context_tokens}} tokens, English / Spanish / French / German / Portuguese / Chinese / Japanese / Korean</td></tr>
           </tbody>
         </table>
       </div>
       <p>Start with <strong>bge-reranker-v2-m3</strong>, which runs on CPU. On GPU, A/B <strong>Qwen3-Reranker-4B</strong> against it or <strong>mxbai-rerank-base-v2</strong> on your labelled set — do not assume leaderboard order transfers. Until October 2026 this table recommended bge-reranker-base, BAAI’s 2023 model for Chinese and English only.</p>
+      <p>If there is no GPU at all, the smallest option is <strong>hs-rerank-1</strong>: {{fact:hs-rerank-1.params}} in total, of which {{fact:hs-rerank-1.embedding_params}} are the embedding table and only {{fact:hs-rerank-1.transformer_params}} the transformer, {{fact:hs-rerank-1.context_tokens}} tokens per query-and-passage pair, MIT-licensed, with an int8 ONNX build for CPUs and the deployment config Text Embeddings Inference needs. Hindsight publish its results only as an image on the model card, so there is no score here to compare it by — measure it on your own queries before choosing it over bge-reranker-v2-m3.</p>
 
       <h2 id="quickstart">Quick start with sentence-transformers</h2>
       <pre><code>pip install sentence-transformers torch

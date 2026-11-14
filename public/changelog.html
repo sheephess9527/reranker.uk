@@ -30,8 +30,8 @@
   <meta property="og:image:alt" content="reranker.uk changelog" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/changelog.jpg?v=36bc070c23" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css?v=704baf0dee" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css?v=704baf0dee" >
+  <link rel="preload" href="/assets/css/style.css?v=71c7ffaf81" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=71c7ffaf81" >
   
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://reranker.uk/changelog"}]}</script>
 
@@ -70,6 +70,16 @@
     </section>
 
     <section class="section container narrow">
+      <article class="changelog-entry">
+        <h2 id="2026-11-14-filters">14 Nov 2026 — Filters for input and licence, Jina's price, and two Chinese-side gaps</h2>
+        <ul class="feature-list">
+          <li><strong>Two more filters on the <a href="/models/">models table</a></strong> — one for what a model ranks (<em>text only</em>, or <em>text + images</em>: Qwen3-VL-Reranker, LightOn-rerank, Nemotron-3.5-Rerank-8B, llama-nemotron-rerank-vl-1b-v2, and Alibaba Cloud's hosted qwen3-vl-rerank), one for what an open-weights licence allows, which separates the Apache 2.0 / MIT / OpenMDW rows from Jina v3.5, v3 and Contextual AI's CC BY-NC weights. Hosted-only rows answer neither licence, because a hosted API has no weights to licence. LightOn's row also answers both architecture filters now — it reranks pointwise or listwise, and only appeared under cross-encoder</li>
+          <li><strong>Jina in the <a href="/rerank-cost-calculator">cost calculator</a>, at $0.05 per 1M tokens</strong> — jina.ai itself quotes no figure (its token packages render client-side), but its model-discovery API lists the rate per token, and that is what the daily source check follows. v3.5 is listwise, so the calculator counts the query once per request rather than once per document as Voyage does</li>
+          <li><strong>bce-reranker-base_v1 in the <a href="/models/#bce-reranker-base_v1">table</a> and the <a href="/guides/rerank-in-china#bce">mainland China guide</a></strong> — NetEase Youdao's Chinese-first XLM-R cross-encoder: 279M, 512 tokens per pair, Apache 2.0, CPU-capable, and trained for Chinese, English, Japanese and Korean plus the pairs between them. Its scores are absolute, so 0.35 works as a cut-off. Scores it 61.29 on the 12 Reranking datasets of MTEB / C-MTEB in the multilingual setting — Youdao's own run, not BEIR or CMTEB-R, so the table marks it as such</li>
+          <li><strong>hs-rerank-1 in the <a href="/guides/self-host-reranker">self-hosting guide</a></strong> — the pick-a-model table now names the lightest CPU option: 114M in total, of which 15M is the transformer, 8,192 tokens, MIT, with an int8 ONNX build and a Text Embeddings Inference config</li>
+        </ul>
+      </article>
+
       <article class="changelog-entry">
         <h2 id="2026-11-13-ndcg">13 Nov 2026 — An NDCG and MRR calculator</h2>
         <ul class="feature-list">
@@ -137,15 +147,14 @@
           <li><strong>Watching for Pinecone retirements</strong> — <code>pinecone-rerank-v0</code> has dropped off Pinecone’s models overview, though its docs and price list still offer it. The release watch now reads Pinecone’s changelog as well as the rerank docs, and opens an issue if it is deprecated or disappears, so the <a href="/models/#pinecone">models table</a> and the <a href="/guides/rerank-vector-database#pinecone">vector database guide</a> can follow</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>Earlier in November 2026 (1 entry)</summary><article class="changelog-entry">
         <h2 id="2026-11-01-vendors">1 Nov 2026 — Vendor updates: Pinecone and NVIDIA NIM</h2>
         <ul class="feature-list">
           <li><strong>Pinecone halved a limit</strong> — <code>cohere-rerank-4-fast</code> on Pinecone now takes 4,096 tokens per document, down from 8,192; the <a href="/guides/rerank-vector-database#pinecone">vector database guide</a> shows the new figure. This site’s daily source check caught the change</li>
           <li><strong>Nemotron-3.5-Rerank-8B is now a NIM</strong> — NVIDIA’s NIM release 2.4 serves it as <code>nemotron-rerank</code>, capped at 10,240 tokens per pair unless you raise the limit. The llama-nemotron rerankers stay on NIM 2.3. The <a href="/models/nvidia-rerank">NVIDIA page</a> is updated</li>
           <li><strong>A dead link replaced</strong> — SiliconFlow’s <code>docs.siliconflow.cn</code> site stopped responding, so the <a href="/guides/rerank-in-china">China guide</a> now links to the same rerank API page on <code>docs.siliconflow.com</code>, in Chinese</li>
         </ul>
-      </article>
+      </article></details>
 <details class="changelog-month"><summary>October 2026 (38 entries)</summary><article class="changelog-entry">
         <h2 id="2026-10-24-minilm">24 Oct 2026 — A faster ms-marco MiniLM</h2>
         <ul class="feature-list">
@@ -596,6 +605,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 

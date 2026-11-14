@@ -30,8 +30,8 @@
   <meta property="og:image:alt" content="重排序成本计算器 —— Cohere 与 Voyage 价格对比 | reranker.uk" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/rerank-cost-calculator.jpg?v=d4f17145bd" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css?v=704baf0dee" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css?v=704baf0dee" >
+  <link rel="preload" href="/assets/css/style.css?v=71c7ffaf81" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=71c7ffaf81" >
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"重排序成本计算器 —— Cohere 与 Voyage 价格对比","url":"https://reranker.uk/zh/rerank-cost-calculator","applicationCategory":"BusinessApplication","operatingSystem":"Any browser","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"description":"估算重排序每月要花多少钱。Cohere Rerank 5 和 Voyage rerank-3 按 token 计费；Cohere Rerank 4 按次检索计费，长文档每 500 token 算一篇。输入你自己的量级来对比。","inLanguage":"zh-Hans"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"重排序成本计算器","item":"https://reranker.uk/zh/rerank-cost-calculator"}]}</script>
 
@@ -67,8 +67,8 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span>重排序成本计算器</div>
       <h1>重排序成本计算器</h1>
-      <p class="meta">工具 · <time datetime="2026-10-22">更新于 2026 年 10 月 22 日</time></p>
-      <p class="lead">托管重排序服务的计费方式各不相同。Cohere Rerank 4 按<strong>检索次数</strong>计价 —— 一次检索包含一个 query 和最多 100 篇文档，超过 500 token 的文档按多篇计。Google 和 Amazon Bedrock 按<strong>查询次数</strong>收费、Pinecone 按<strong>请求次数</strong>收费，每次最多 100 篇文档，不管长短。Cohere Rerank 5、Voyage、ZeroEntropy、Contextual AI 和阿里云按 <strong>token</strong> 收费，国内以人民币计价的服务也是如此。哪家最便宜取决于你的段落长度怎么取整。填入你自己的数字试试。</p>
+      <p class="meta">工具 · <time datetime="2026-11-14">更新于 2026 年 11 月 14 日</time></p>
+      <p class="lead">托管重排序服务的计费方式各不相同。Cohere Rerank 4 按<strong>检索次数</strong>计价 —— 一次检索包含一个 query 和最多 100 篇文档，超过 500 token 的文档按多篇计。Google 和 Amazon Bedrock 按<strong>查询次数</strong>收费、Pinecone 按<strong>请求次数</strong>收费，每次最多 100 篇文档，不管长短。Cohere Rerank 5、Voyage、Jina、ZeroEntropy、Contextual AI 和阿里云按 <strong>token</strong> 收费（Jina 按一次请求的全部 token 计，query 加所有候选），国内以人民币计价的服务也是如此。哪家最便宜取决于你的段落长度怎么取整。填入你自己的数字试试。</p>
 
       <section class="demo-panel" aria-labelledby="calc-head">
         <h2 id="calc-head" class="mt-0" style="margin-bottom:1rem">你的负载</h2>
@@ -100,7 +100,7 @@
 
       <h2 id="results">每月成本</h2>
       <div class="table-wrap" tabindex="0" role="region" aria-label="按上面填写的用量，估算各厂商每月的重排序费用">
-        <table id="calc-table" data-contextual-v2-per-m="0.05" data-contextual-mini-per-m="0.02" data-zeroentropy-per-m="0.025" data-bedrock-amazon-per-k-queries="1.00" data-bedrock-docs-per-query="100" data-pinecone-per-k-requests="2" data-pinecone-docs-per-request="100" data-docs-per-search="100" data-chunk-tokens="500" data-cohere5-pro-per-m="0.05" data-cohere5-fast-per-m="0.02" data-cohere-pro-per-search="0.0025" data-cohere-fast-per-search="0.002" data-voyage-per-m="0.05" data-voyage-lite-per-m="0.02" data-google-per-k-queries="1.00" data-alibaba-intl-per-m="0.1" data-alibaba-cn-per-m="0.5" data-siliconflow-pro-per-m="0.07">
+        <table id="calc-table" data-contextual-v2-per-m="0.05" data-contextual-mini-per-m="0.02" data-zeroentropy-per-m="0.025" data-bedrock-amazon-per-k-queries="1.00" data-bedrock-docs-per-query="100" data-pinecone-per-k-requests="2" data-pinecone-docs-per-request="100" data-docs-per-search="100" data-chunk-tokens="500" data-cohere5-pro-per-m="0.05" data-cohere5-fast-per-m="0.02" data-cohere-pro-per-search="0.0025" data-cohere-fast-per-search="0.002" data-voyage-per-m="0.05" data-voyage-lite-per-m="0.02" data-jina-per-m="0.05" data-google-per-k-queries="1.00" data-alibaba-intl-per-m="0.1" data-alibaba-cn-per-m="0.5" data-siliconflow-pro-per-m="0.07">
           <caption class="sr-only">按上面填写的用量，估算各厂商每月的重排序费用</caption>
           <thead>
             <tr>
@@ -142,6 +142,7 @@
         <li><strong>Cohere Rerank 4 Fast 对比 Voyage rerank-3</strong> —— 只有当 query 加段落占满最后一块的 80% 以上时，Fast 才更便宜。<code>-lite</code> 档在任何负载下都比两者便宜。</li>
       </ul>
       <p>Rerank 5 没有这种取整：Cohere 按 token 计费，标价和 Voyage 一样 —— Pro 每 100 万 token $0.05，rerank-3 是 $0.05；Fast 是 $0.02，rerank-3-lite 是 $0.02。Cohere 没说明查询怎么计入，计算器按 Voyage 的方式算，于是这两组价格完全持平。在它们之间选，看效果，不看价格。</p>
+      <p><strong>Jina</strong> 同样是每 100 万 token $0.05，但 token 的算法又不一样：v3.5 是 listwise，query 和所有候选共享同一个 131K token 的上下文，query 每次查询只算一遍，而不是每篇文档算一遍。候选很多时这笔省下的量并不大 —— 而且它也不是你选 Jina 的理由。它真正给你的是 listwise 这种横向比较本身；token 只是这单生意里更便宜的那一半。</p>
       <div class="callout">
         <p><strong>2026 年 10 月更正：</strong>此前本页说 Cohere 按 500 token 拆分计费是误传，并称按次计费与段落长度无关。Cohere 自己的价格 FAQ 写的正相反：文档（连同 query）超过 500 token 就会被拆分，每一块都计入每次检索的 100 篇文档。计算器现已按此建模，旧版里 Cohere 在长段落上的优势也随之消失。</p>
       </div>
@@ -157,6 +158,7 @@
       <ul>
         <li><strong>Cohere Rerank 4</strong> —— 每次检索 $0.0025（Pro）和 $0.002（Fast）。一次检索 = 一个 query 加最多 100 篇文档；按 Cohere 价格 FAQ，文档连同 query 超过 500 token 就会被拆分，每一块算一篇文档。这是 Cohere 最后公布的价格（每千次检索 $2.50 和 $2）：2026 年 10 月 21 日公布 Rerank 5 价格时，它的<a href="https://cohere.com/pricing" rel="noopener noreferrer">价格页</a>不再列出 Rerank 4，不过 Rerank 4 仍在提供服务。</li>
         <li><strong>Voyage rerank-3</strong> —— 每百万 token $0.05，<code>rerank-3-lite</code> 为 $0.02。计费 token = query 按每篇文档各算一次，再加上你发送的全部文档 token —— 所以 50 个候选意味着 query 被计费 50 次。旧版 <code>rerank-2.5</code> 及其 <code>-lite</code> 的单价相同。这里没有计入免费 token 和 Batch API 折扣 —— 哪些模型适用，见 <a href="/zh/models/voyage-rerank">Voyage 专页</a>。</li>
+        <li><strong>Jina Reranker v3.5</strong> —— 每 100 万 token $0.05，取自 Jina 的模型发现接口（<a href="https://api.jina.ai/v1/models" rel="noopener noreferrer">api.jina.ai/v1/models</a>），它把 <code>jina-ai/jina-reranker-v3.5</code> 的单价按「每个 token」列出；jina.ai 自己的页面不写数字，只卖预付的 token 包。Jina 对 Reranker API 用量口径的说明是「输入请求里的 token 数」，而 v3.5 把 query 和全部候选放进同一个上下文窗口，所以本页按每次请求只算一遍 query，而不是每篇文档算一遍。新 key 附赠的试用 token 未计入。</li>
         <li><strong>Google Vertex AI 排序</strong> —— 每 1,000 次查询 $1.00；一次查询最多 100 篇文档，每多 100 篇算一次查询（<a href="https://cloud.google.com/generative-ai-app-builder/pricing" rel="noopener noreferrer">Google 价格页</a>）。段落长短不影响价格，但模型每条记录只读 1,024 token。</li>
         <li><strong>阿里云百炼</strong> —— qwen3-rerank 国际版每百万输入 token $0.1，北京地域 ¥0.5，qwen3.7-text-rerank 在北京地域同价（<a href="https://help.aliyun.com/zh/model-studio/model-pricing" rel="noopener noreferrer">价格页</a>）。阿里云按输入 token 计费，单次请求上限按 query token × 文档数 + 文档 token 总和计算，所以本页和 Voyage 用同一种方式数 token。qwen3-rerank 遇到单篇超过 4,000 token 的文档会直接报错，不会截断。</li>
         <li><strong>硅基流动</strong> —— 价格页上 bge-reranker-v2-m3 免费，Pro 版每百万 token ¥0.07（<a href="https://siliconflow.cn/pricing" rel="noopener noreferrer">价格页</a>）。硅基流动没有说明重排序怎么数 token，本页假定与阿里云、Voyage 的算法相同。它同时提供的 Qwen3-Reranker 在价格页上没有标价。</li>
@@ -246,7 +248,7 @@
     </div>
   </footer>
   <script src="/assets/js/main.js?v=8e785706b2"></script>
-  <script src="/assets/js/cost-calculator.js?v=fc6806f4b1"></script>
+  <script src="/assets/js/cost-calculator.js?v=4f1775a384"></script>
   <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
 </body>
 </html>

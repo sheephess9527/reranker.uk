@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 13 Nov 2026 04:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 14 Nov 2026 04:00:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>14 Nov 2026 — Filters for input and licence, Jina's price, and two Chinese-side gaps</title>
+      <link>https://reranker.uk/changelog#2026-11-14-filters</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-11-14-filters</guid>
+      <pubDate>Sat, 14 Nov 2026 04:00:00 GMT</pubDate>
+      <description>The models table can now filter on what a model ranks (text, or text plus images) and on what an open-weights licence allows; the cost calculator prices Jina's listwise API; bce-reranker-base_v1 joins the table and the mainland China guide, and hs-rerank-1 the self-hosting guide.</description>
+    </item>
     <item>
       <title>13 Nov 2026 — An NDCG and MRR calculator</title>
       <link>https://reranker.uk/changelog#2026-11-13-ndcg</link>
