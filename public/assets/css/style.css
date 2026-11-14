@@ -700,6 +700,11 @@ select { font-family: var(--mono); font-size: 0.85rem; }
 /* Selects sit inline with the filter box rather than inheriting the full-width
    form-control rule and wrapping onto their own rows. */
 .models-toolbar select { width: auto; min-width: 152px; flex: 0 0 auto; }
+/* Four selects beside the search box: on a phone let them pair up two to a row
+   instead of each holding a 152px minimum and wrapping one per line. */
+@media (max-width: 560px) {
+  .models-toolbar select { flex: 1 1 45%; min-width: 0; }
+}
 .models-count { font-size: 0.82rem; margin-left: auto; }
 /* Nine columns need real room; the wrapper scrolls when the viewport can't give it. */
 #models-table { min-width: 900px; }

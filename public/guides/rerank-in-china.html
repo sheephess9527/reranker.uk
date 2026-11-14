@@ -30,8 +30,8 @@
   <meta property="og:image:alt" content="Reranking in mainland China" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/guides/rerank-in-china.jpg?v=3f7b39bdec" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css?v=704baf0dee" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css?v=704baf0dee" >
+  <link rel="preload" href="/assets/css/style.css?v=71c7ffaf81" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=71c7ffaf81" >
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Reranking in mainland China: Alibaba Cloud, SiliconFlow or your own server","datePublished":"2026-10-14","dateModified":"2026-10-14","inLanguage":"en","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/rerank-in-china","description":"How to add a reranker from mainland China: Alibaba Cloud Model Studio (qwen3-rerank), SiliconFlow (hosted bge-reranker-v2-m3 and Qwen3-Reranker) or self-hosting via hf-mirror and ModelScope — prices in yuan, Chinese benchmark scores and code."}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://reranker.uk/guides/"},{"@type":"ListItem","position":3,"name":"Reranking in mainland China","item":"https://reranker.uk/guides/rerank-in-china"}]}</script>
 
@@ -67,7 +67,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Reranking in mainland China</div>
       <h1>Reranking in mainland China: Alibaba Cloud, SiliconFlow or your own server</h1>
-      <p class="meta">Practical · ~8 min read · <time datetime="2026-10-14">Updated 14 Oct 2026</time></p>
+      <p class="meta">Practical · ~8 min read · <time datetime="2026-11-14">Updated 14 Nov 2026</time></p>
       <p class="lead">From a server in mainland China, the usual advice — call Cohere or Voyage, or download weights from Hugging Face — runs into slow or blocked connections and foreign-currency billing. There are three routes that work well from inside China: <strong>Alibaba Cloud Model Studio</strong>, <strong>SiliconFlow</strong>, or <strong>running an open model yourself</strong>. This guide compares them on price, Chinese-language quality and setup, using only what each vendor publishes.</p>
 
       <div class="toc">
@@ -75,6 +75,7 @@
         <ol>
           <li><a href="#routes">Three routes at a glance</a></li>
           <li><a href="#chinese">How well the models handle Chinese</a></li>
+          <li><a href="#bce">bce-reranker-base_v1: the Chinese-first open option</a></li>
           <li><a href="#alibaba">Alibaba Cloud Model Studio</a></li>
           <li><a href="#siliconflow">SiliconFlow</a></li>
           <li><a href="#self-host">Self-hosting: getting the weights</a></li>
@@ -130,6 +131,11 @@
       </div>
       <p class="muted" style="font-size:.85rem">From the <a href="https://huggingface.co/Qwen/Qwen3-Reranker-4B" rel="noopener noreferrer">Qwen3-Reranker model card</a>, checked daily. Alibaba Cloud publishes no scores for its hosted qwen3-rerank, qwen3.7-text-rerank or qwen3-vl-rerank, so they are not in the table.</p>
       <p>Two things stand out. The 306M <strong>gte-multilingual-reranker-base</strong> scores above bge-reranker-v2-m3 on Chinese at about half its size, which makes it the cheapest model to serve here. And the step from bge-reranker-v2-m3 to <strong>Qwen3-Reranker-4B</strong> is small on Chinese but large on the multilingual column — worth it if your corpus mixes languages, less so for Chinese alone. The classic English models (ms-marco MiniLM, Jina v1, mxbai v1) were not trained on Chinese and don’t belong in this list.</p>
+
+      <h2 id="bce">bce-reranker-base_v1: the Chinese-first open option</h2>
+      <p>Before Qwen3-Reranker, the open reranker most Chinese RAG stacks started with was <strong>bce-reranker-base_v1</strong> from NetEase Youdao’s BCEmbedding project. It is an XLM-R base model of 279M that scores one query-and-passage pair at a time, trained for Chinese, English, Japanese and Korean <em>and</em> for pairs that mix them — a Chinese query against an English passage, which is the case a Chinese-only model cannot rank. It is Apache 2.0 and small enough to run on a CPU, and SiliconFlow serves it, so you can try it before downloading anything.</p>
+      <p>Two things make it practical here. Its scores are absolute rather than a bare ordering, so weak passages can be cut with a fixed threshold — Youdao suggest 0.35 — instead of reranking and keeping the top 5 whatever they score. And its model card measures it on the 12 Reranking datasets of MTEB / C-MTEB, run in the en, zh, en-zh and zh-en setting: 61.29, against 59.04 for bge-reranker-base and 60.86 for bge-reranker-large in that same run. That is Youdao’s own evaluation and a different suite from the CMTEB-R table above, so the two are not comparable — the <a href="/models/#bce-reranker-base_v1">models table</a> carries the same caveat.</p>
+      <p>The limit is length: 512 tokens per query-and-passage pair, and pairs are scored one at a time, so long documents need chunking first — BCEmbedding’s own wrapper does that for you, and SiliconFlow does it server-side. For 32K context, instructions or code, look at <a href="/models/qwen-reranker">Qwen3-Reranker</a> instead.</p>
 
       <h2 id="alibaba">Alibaba Cloud Model Studio</h2>
       <p>Model Studio (百炼) sells three rerankers, billed per million input tokens in yuan in the Beijing region:</p>

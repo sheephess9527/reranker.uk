@@ -12,9 +12,12 @@
  * counted once per document reranked. Google bills per query of up to 100
  * documents, and so do Amazon Bedrock's Amazon Rerank (per query) and Pinecone
  * (per request). Cohere Rerank 5, Alibaba Cloud, SiliconFlow, ZeroEntropy and
- * Contextual bill input tokens, counted here like Voyage's. Each is modelled as the vendor states it rather than
- * flattened into one "cost per 1k docs" figure. Yuan-priced options get
- * their own table: converting currencies would add a rate nobody checks.
+ * Contextual bill input tokens, counted here like Voyage's. Jina also bills
+ * input tokens, but v3.5 is listwise: the query and every candidate go into one
+ * request, so the query is counted once per query, not once per document. Each
+ * is modelled as the vendor states it rather than flattened into one "cost per
+ * 1k docs" figure. Yuan-priced options get their own table: converting
+ * currencies would add a rate nobody checks.
  */
 (function () {
   const zh = () => (document.documentElement.lang || "").toLowerCase().indexOf("zh") === 0;
@@ -83,6 +86,17 @@
       price: fact("voyagePerM"),
       cost: (w, o) => (tokens(w) / 1e6) * o.price,
       volume: (w) => fmtTokens(tokens(w)),
+    },
+    {
+      id: "jina",
+      nameEn: "Jina Reranker v3.5",
+      nameZh: "Jina Reranker v3.5",
+      unitEn: "per token (one listwise request)",
+      unitZh: "按 token（每次请求整体计）",
+      href: "/models/jina-reranker",
+      price: fact("jinaPerM"),
+      cost: (w, o) => (listwiseTokens(w) / 1e6) * o.price,
+      volume: (w) => fmtTokens(listwiseTokens(w)),
     },
     {
       id: "google",
@@ -233,6 +247,12 @@
   /** Voyage: query tokens × documents + sum of document tokens (their formula). */
   function tokens(w) {
     return w.queries * w.topk * (w.queryTokens + w.passageTokens);
+  }
+
+  /** Jina v3.5: the query and every candidate share one listwise request, so the
+   *  query is counted once per query instead of once per document. */
+  function listwiseTokens(w) {
+    return w.queries * (w.queryTokens + w.topk * w.passageTokens);
   }
 
   const els = {

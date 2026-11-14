@@ -30,8 +30,8 @@
   <meta property="og:image:alt" content="更新日志 — reranker.uk 版本记录 | reranker.uk" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/changelog.jpg?v=bd81e0c8c5" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css?v=704baf0dee" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css?v=704baf0dee" >
+  <link rel="preload" href="/assets/css/style.css?v=71c7ffaf81" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=71c7ffaf81" >
   
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"更新日志","item":"https://reranker.uk/zh/changelog"}]}</script>
 
@@ -70,6 +70,16 @@
     </section>
 
     <section class="section container narrow">
+      <article class="changelog-entry">
+        <h2 id="2026-11-14-filters">2026 年 11 月 14 日 —— 按输入类型和许可证筛选、Jina 的价格，以及中文侧补上的两处缺口</h2>
+        <ul class="feature-list">
+          <li><strong><a href="/zh/models/">模型对比表</a>多了两个筛选</strong> —— 一个是按模型打分的输入类型（<em>仅文本</em>，或<em>文本 + 图片</em>：Qwen3-VL-Reranker、LightOn-rerank、Nemotron-3.5-Rerank-8B、llama-nemotron-rerank-vl-1b-v2，以及阿里云托管的 qwen3-vl-rerank），一个是按开源权重的许可证：把 Apache 2.0 / MIT / OpenMDW 的行与 Jina v3.5、v3 和 Contextual AI 的 CC BY-NC 权重区分开。纯托管行在两个许可证下都不出现，因为托管 API 没有可授权的权重。LightOn 那一行现在两个架构筛选都能命中 —— 它既能逐点也能列表式排序，过去只出现在 cross-encoder 下</li>
+          <li><strong><a href="/zh/rerank-cost-calculator">成本计算器</a>加了 Jina，每 100 万 token $0.05</strong> —— jina.ai 自己的页面不写数字（token 包价格在前端渲染），但它的模型发现接口按每个 token 列出了单价，每日来源核对跟的就是这个。v3.5 是 listwise，所以计算器按每次请求只算一遍 query，而不是像 Voyage 那样每篇文档算一遍</li>
+          <li><strong>bce-reranker-base_v1 进了<a href="/zh/models/#bce-reranker-base_v1">模型对比表</a>和<a href="/zh/guides/rerank-in-china#bce">国内指南</a></strong> —— 网易有道面向中文的 XLM-R cross-encoder：279M，每对 query 加文档 512 token，Apache 2.0，CPU 就能跑，训练覆盖中文、英文、日文、韩文以及它们之间的跨语种组合。分数是绝对值，可以拿 0.35 当过滤阈值。它在 MTEB / C-MTEB 的 12 个 Reranking 数据集、多语种设置下得 61.29 —— 这是有道自己的测试，既不是 BEIR 也不是 CMTEB-R，表里因此标注了协议</li>
+          <li><strong>hs-rerank-1 进了<a href="/zh/guides/self-host-reranker">自建指南</a></strong> —— 选型表现在点出了最轻的 CPU 方案：总共 114M，其中 transformer 只有 15M，8,192 token，MIT 许可，带 int8 ONNX 版本和 Text Embeddings Inference 的部署配置</li>
+        </ul>
+      </article>
+
       <article class="changelog-entry">
         <h2 id="2026-11-13-ndcg">2026 年 11 月 13 日 —— NDCG 与 MRR 计算器</h2>
         <ul class="feature-list">
@@ -137,15 +147,14 @@
           <li><strong>盯住 Pinecone 的下架</strong> —— <code>pinecone-rerank-v0</code> 已经从 Pinecone 的模型总览页消失，但文档和价目表上仍然提供。发布监控现在除了重排序文档，还会读 Pinecone 的更新日志；一旦它被标为弃用或从页面上消失，就会开 issue，好让<a href="/zh/models/#pinecone">模型对比表</a>和<a href="/zh/guides/rerank-vector-database#pinecone">向量数据库指南</a>跟着改</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>2026 年 11 月更早的更新（1 条）</summary><article class="changelog-entry">
         <h2 id="2026-11-01-vendors">2026 年 11 月 1 日 —— 厂商更新：Pinecone 和 NVIDIA NIM</h2>
         <ul class="feature-list">
           <li><strong>Pinecone 把一个限制减半了</strong> —— Pinecone 上的 <code>cohere-rerank-4-fast</code> 现在每个文档最多 4,096 token，原来是 8,192；<a href="/zh/guides/rerank-vector-database#pinecone">向量数据库指南</a>已改成新数字。这次变化是本站每天的来源核对发现的</li>
           <li><strong>Nemotron-3.5-Rerank-8B 有了 NIM</strong> —— NVIDIA 的 NIM 2.4 版以 <code>nemotron-rerank</code> 提供它，默认每对限制 10,240 token，可以手动调高。llama-nemotron 系列仍留在 NIM 2.3 版。<a href="/zh/models/nvidia-rerank">NVIDIA 页面</a>已更新</li>
           <li><strong>换掉一个失效链接</strong> —— 硅基流动的 <code>docs.siliconflow.cn</code> 站点无法访问，<a href="/zh/guides/rerank-in-china">国内重排序指南</a>改为链接 <code>docs.siliconflow.com</code> 上同一个重排序 API 页面的中文版</li>
         </ul>
-      </article>
+      </article></details>
 <details class="changelog-month"><summary>2026 年 10 月（38 条）</summary><article class="changelog-entry">
         <h2 id="2026-10-24-minilm">2026 年 10 月 24 日 —— 更快的 ms-marco MiniLM</h2>
         <ul class="feature-list">
@@ -596,6 +605,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 

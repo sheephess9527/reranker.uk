@@ -95,4 +95,12 @@ window.I18N_PAGE = { zh: {
   // Oct 2026: jina-reranker-v3.5, licences
   "<strong>GPU:</strong> worth it once you rerank more than a few dozen passages per query. Measure p50 / p95 on your own hardware before sizing — model cards rarely publish latency, and we don’t quote figures we haven’t measured.":
     "<strong>GPU：</strong>每次查询要重排几十段以上时就值得上 GPU。确定配置前，请在你自己的硬件上实测 p50 / p95 —— 模型卡很少公布延迟，我们也不引用自己没测过的数字。",
+
+  // Nov 2026: hs-rerank-1 as the lightest CPU option
+  "Production · ~10 min read · <time datetime=\"2026-11-14\">Updated 14 Nov 2026</time>":
+    "生产环境 · 约 10 分钟阅读 · <time datetime=\"2026-11-14\">更新于 2026 年 11 月 14 日</time>",
+  "<strong>Lightest CPU option</strong> — int8 ONNX, {{fact:hs-rerank-1.context_tokens}} tokens, English / Spanish / French / German / Portuguese / Chinese / Japanese / Korean":
+    "<strong>最轻的 CPU 方案</strong> —— int8 ONNX，{{fact:hs-rerank-1.context_tokens}} token，支持英语、西班牙语、法语、德语、葡萄牙语、中文、日语、韩语",
+  "If there is no GPU at all, the smallest option is <strong>hs-rerank-1</strong>: {{fact:hs-rerank-1.params}} in total, of which {{fact:hs-rerank-1.embedding_params}} are the embedding table and only {{fact:hs-rerank-1.transformer_params}} the transformer, {{fact:hs-rerank-1.context_tokens}} tokens per query-and-passage pair, MIT-licensed, with an int8 ONNX build for CPUs and the deployment config Text Embeddings Inference needs. Hindsight publish its results only as an image on the model card, so there is no score here to compare it by — measure it on your own queries before choosing it over bge-reranker-v2-m3.":
+    "如果完全没有 GPU，最小的选择是 <strong>hs-rerank-1</strong>：总共 {{fact:hs-rerank-1.params}}，其中 {{fact:hs-rerank-1.embedding_params}} 是词嵌入表，transformer 只有 {{fact:hs-rerank-1.transformer_params}}；每对 query 加段落 {{fact:hs-rerank-1.context_tokens}} token，MIT 许可，带 CPU 用的 int8 ONNX 版本，也有 Text Embeddings Inference 需要的部署配置。Hindsight 只在模型卡上以图片形式给出结果，所以这里没有可比的分数 —— 在拿它替代 bge-reranker-v2-m3 之前，请先在你自己的查询上测一遍。",
 }};

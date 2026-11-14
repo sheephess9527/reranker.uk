@@ -448,6 +448,71 @@
       "check_pattern": "\\|\\s*\\**jina-reranker-v3\\.5\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "STRUCTIR",
       "verified_on": "2026-10-12"
+    },
+    "api_usd_per_m": {
+      "value": "0.05",
+      "source_url": "https://api.jina.ai/v1/models",
+      "check_url": "https://api.jina.ai/v1/models",
+      "check_raw": true,
+      "check_pattern": "\"id\":\"jina-ai/jina-reranker-v3\\.5\"[\\s\\S]{0,400}?\"prompt\":\"0\\.00000005\"",
+      "check_hint": "prompt",
+      "verified_on": "2026-11-14",
+      "note": "Jina publish the rate per token, not per million: the model-discovery API (public, no key) lists jina-ai/jina-reranker-v3.5 with pricing.prompt 0.00000005, i.e. $0.05 per 1M tokens. jina.ai's own pages quote no number — its token packages render client-side — so this machine-readable endpoint is the source of record, and the check pattern pins the per-token string rather than interpolating the per-million value. The same rate covers jina-reranker-v3, -m0, -v2-base-multilingual and the v1 models. jina.ai/reranker's FAQ confirms tokens are billed as 'the number of tokens in the input request' and shared across all its APIs."
+    }
+  },
+  "bce-reranker-base_v1": {
+    "params": {
+      "value": "279M",
+      "source_url": "https://huggingface.co/maidalun1020/bce-reranker-base_v1",
+      "check_url": "https://huggingface.co/maidalun1020/bce-reranker-base_v1/raw/main/README.md",
+      "check_pattern": "\\|\\s*bce-reranker-base_v1\\s*\\|\\s*`RerankerModel`\\s*\\|\\s*ch, en, ja, ko\\s*\\|\\s*{value}\\s*\\|",
+      "check_hint": "RerankerModel",
+      "verified_on": "2026-11-14"
+    },
+    "max_pair_tokens": {
+      "value": "512",
+      "source_url": "https://huggingface.co/maidalun1020/bce-reranker-base_v1",
+      "check_url": "https://huggingface.co/maidalun1020/bce-reranker-base_v1/raw/main/README.md",
+      "check_pattern": "more than {value} limit",
+      "check_hint": "512",
+      "verified_on": "2026-11-14",
+      "note": "The card's examples load it with max_length=512; the BCEmbedding RerankerModel.rerank wrapper adds its own preprocessing for passages longer than that."
+    },
+    "rerank12_avg": {
+      "value": "61.29",
+      "source_url": "https://huggingface.co/maidalun1020/bce-reranker-base_v1",
+      "check_url": "https://huggingface.co/maidalun1020/bce-reranker-base_v1/raw/main/README.md",
+      "check_pattern": "\\|\\s*\\*\\*\\*bce-reranker-base_v1\\*\\*\\*\\s*\\|\\s*\\*\\*{value}\\*\\*",
+      "check_hint": "Reranking",
+      "verified_on": "2026-11-14",
+      "note": "NetEase Youdao's own run: the 12 Reranking datasets of MTEB/C-MTEB, evaluated in the [\"en\", \"zh\", \"en-zh\", \"zh-en\"] setting — not BEIR, and not the CMTEB-R retrieval suite Qwen report. In the same run the card puts bge-reranker-base at 59.04 and bge-reranker-large at 60.86."
+    },
+    "filter_threshold": {
+      "value": "0.35",
+      "source_url": "https://huggingface.co/maidalun1020/bce-reranker-base_v1",
+      "check_url": "https://huggingface.co/maidalun1020/bce-reranker-base_v1/raw/main/README.md",
+      "check_pattern": "threshold of {value} or 0\\.4",
+      "check_hint": "threshold",
+      "verified_on": "2026-11-14",
+      "note": "The card recommends 0.35 or 0.4 for filtering out low-quality passages with its absolute scores."
+    },
+    "bge_base_same_run": {
+      "value": "59.04",
+      "source_url": "https://huggingface.co/maidalun1020/bce-reranker-base_v1",
+      "check_url": "https://huggingface.co/maidalun1020/bce-reranker-base_v1/raw/main/README.md",
+      "check_pattern": "\\|\\s*bge-reranker-base\\s*\\|\\s*{value}\\s*\\|",
+      "check_hint": "bge-reranker-base",
+      "verified_on": "2026-11-14",
+      "note": "Third-party: bge-reranker-base's score in Youdao's own 12-dataset reranking run, from the bce-reranker-base_v1 card's Reranker Models leaderboard."
+    },
+    "bge_large_same_run": {
+      "value": "60.86",
+      "source_url": "https://huggingface.co/maidalun1020/bce-reranker-base_v1",
+      "check_url": "https://huggingface.co/maidalun1020/bce-reranker-base_v1/raw/main/README.md",
+      "check_pattern": "\\|\\s*bge-reranker-large\\s*\\|\\s*{value}\\s*\\|",
+      "check_hint": "bge-reranker-large",
+      "verified_on": "2026-11-14",
+      "note": "Third-party: bge-reranker-large's score in Youdao's own 12-dataset reranking run, from the bce-reranker-base_v1 card's Reranker Models leaderboard."
     }
   },
   "qwen3-reranker-4b": {

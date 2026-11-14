@@ -24,6 +24,7 @@ test("every vendor is priced, in the right table", async ({ page }) => {
       "Cohere Rerank 5 Fast",
       "Cohere Rerank 5 Pro",
       "Google Vertex AI ranking",
+      "Jina Reranker v3.5",
       "Voyage rerank-3",
       "Voyage rerank-3-lite",
       "ZeroEntropy zerank-2",
@@ -79,6 +80,23 @@ test("Cohere Rerank 5 bills tokens like Voyage, at the same list prices", async 
   expect(cost("Cohere Rerank 5 Fast")).toEqual(["50.0M tokens", "$1.00"]);
   expect(cost("Voyage rerank-3")).toEqual(cost("Cohere Rerank 5 Pro"));
   expect(cost("Voyage rerank-3-lite")).toEqual(cost("Cohere Rerank 5 Fast"));
+});
+
+test("Jina counts one listwise request, so the query is billed once", async ({ page }) => {
+  await page.goto("/rerank-cost-calculator");
+  await page.fill("#calc-queries", "1000");
+  await page.fill("#calc-topk", "100");
+  await page.fill("#calc-passage", "485");
+  await page.fill("#calc-query-tokens", "15");
+  const r = await rows(page, "calc-rows");
+  const jina = r.find((x) => x[0].startsWith("Jina"));
+  const voyage = r.find((x) => x[0].startsWith("Voyage rerank-3") && !x[0].includes("lite"));
+  // Jina: 1,000 × (15 + 100 × 485) = 48.5M tokens → $2.43 at $0.05 per 1M.
+  expect(jina[2]).toBe("48.5M tokens");
+  expect(jina[3]).toBe("$2.43");
+  // Voyage bills the query once per document: 1,000 × 100 × 500 = 50M → $2.50.
+  expect(voyage[2]).toBe("50.0M tokens");
+  expect(voyage[3]).toBe("$2.50");
 });
 
 test("long passages warn about qwen3-rerank's 4,000-token limit", async ({ page }) => {

@@ -181,6 +181,40 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 
 > 完成：新增 `/ndcg-calculator`（中英文、meta、WebApplication JSON-LD、社交卡片）。两个文本框（重排序前 / 后，每行一条查询，按名次写相关度标签，空格或逗号分隔，支持 0/1/2/3 分级）+ k，算 NDCG@k（增益取标签本身、折损 1/log2(名次+1)、理想排序取该行自己的标签）、MRR@k、Hit@1，再给逐条查询表。没有相关候选的查询不计入平均并提示；两行标签不一致、行数不等、含非数字都会说明原因。纯前端（`public/assets/js/ndcg-calculator.js`），不上传。评测指南、页脚、llms.txt 的 Tools 都链到它。`tests/ndcg-calculator.spec.js`（已进 `npm test`）用手算的值核对（0.631 / 0.860 等），中文页也测。更新日志 `#2026-11-13-ndcg`。**第六轮只剩 ④ 中文专项**（bce-reranker 等，优先级低，等用户确认再做）。
 
+## 第七轮（2026-11-14：模型表筛选、Jina 定价、中文专项，用户指定的三项）
+
+### ~~24. `/models/` 加「输入类型」和「许可证」两个筛选~~（2026-11-14 已完成）
+
+> 完成：工具栏在两个原有下拉后面加了 `#models-input-filter`（全部输入 / 仅文本 / 文本 + 图片）和 `#models-license-filter`（全部许可 / 可商用 / 仅限非商用），逻辑在 `models-index.js` 的 `applyFilters()`，两个新属性和 `data-type` 一样是空格分隔的多值判断。
+>
+> **选型的判断依据**：`data-modal="1"` 只给真正能吃页面图片、截图或视频的行 —— Qwen3-VL-Reranker、LightOn-rerank、Nemotron-3.5-Rerank-8B、llama-nemotron-rerank-vl-1b-v2，以及阿里云那一行（它托管的 qwen3-vl-rerank 处理图片和视频）。`data-license` 只写在**有开源权重**的行上（`commercial`：Apache 2.0 / MIT / OpenMDW / NVIDIA Open Model License；`noncommercial`：Jina v3.5、v3、Contextual AI 的开源权重，均 CC BY-NC），所以纯托管行在任一许可证下都不出现 —— 托管 API 适用的是服务条款，没有可授权的权重；两个下拉的 `title` 里写明了这一点。zerank-2 按 HF 上的 Apache 2.0 归为可商用，模型卡与文档的矛盾仍写在同行「Best for」里。ColBERTv2 的 MIT 是从 HF API 的 `cardData.license` 查的。
+>
+> 顺带修了 `lighton-rerank` 的 `data-arch`（改成 `cross-encoder listwise`，架构筛选改成像 type 一样按空格拆开比对）—— 它逐点和列表式都支持，之前只出现在 cross-encoder 下。
+>
+> 手机上四个下拉不再各自占 152px：`@media (max-width: 560px)` 里改成 `flex: 1 1 45%`，两两一行。`tests/models-table.spec.js` 加了中英文两组筛选用例（多模态五行的精确集合、仅文本是补集、非商用只剩三行、可商用不含纯托管行、两个筛选叠加、LightOn 双架构、中文下拉文案、390px 工具栏不溢出）。
+
+### ~~25. 成本计算器加 Jina Reranker v3.5~~（2026-11-14 已完成）
+
+> 完成：Jina 的价格**可以核实**，来源是它自己的模型发现接口 `https://api.jina.ai/v1/models`（公开、不需要 key），`jina-ai/jina-reranker-v3.5` 的 `pricing.prompt = 0.00000005`，即 **$0.05 / 100 万 token**（v3、m0、v2-base-multilingual、v1 各型号同价）。jina.ai 的页面**没有任何数字**（token 包价格是前端渲染的），所以新增 fact `jina-reranker-v3.5.api_usd_per_m` 用 `check_raw` + 钉住 `"prompt":"0.00000005"` 的正则；**注意这个正则不插值 `{value}`**，因为事实值是「每百万」而接口写的是「每 token」，`note` 里说明了这层换算，以后改价要连正则一起改。
+>
+> 计费口径：Jina 对 Reranker API 的用量说明是「输入请求里的 token 数」，v3.5 的上下文是「query 加全部候选合计」，所以是 **listwise 口径 —— query 每次查询只算一遍**，与 Voyage「每篇文档都算一遍 query」不同。`cost-calculator.js` 为此加了 `listwiseTokens()`，选项的计费单位写「per token (one listwise request)」。`tests/cost-calculator.spec.js` 用 1,000 查询 × 100 候选 × 485 token 段落核对：Jina 48.5M token / $2.43 对 Voyage 50.0M / $2.50。
+>
+> Jina 自己的模型页 `src/pages/models/jina-reranker.html` 的「Pricing」一节原本写「我们不在这里写数字」，现在改成给出这个每百万 token 单价并说明数字来自 models API、包价仍在浏览器里渲染，否则它会和模型表、计算器互相矛盾。
+>
+> 同时把 `/models/` 两行 Jina 的价格格从「Free trial tokens, then token packages」改成「送试用 token，之后 $0.05/M token†」，并把这些单位的 † 脚注补上 Jina。`/models/` 与计算器的价格因此不会各说各话。
+
+### ~~26. 中文专项：bce-reranker-base_v1 进表与国内指南，hs-rerank-1 进自建指南~~（2026-11-14 已完成）
+
+> 完成：`netease-youdao/bce-reranker-base_v1` 在 HF 上**已 401**（该组织仓库不可访问），公众能访问的是同一团队的 `maidalun1020/bce-reranker-base_v1`（模型卡自述 NetEase Youdao BCEmbedding），所以 fact 的 `source_url` 用后者。6 个新 fact（`bce-reranker-base_v1`：params 279M、max_pair_tokens 512、rerank12_avg 61.29、filter_threshold 0.35、bge_base_same_run 59.04、bge_large_same_run 60.86，全部在模型卡原文上验证只命中一次）。
+>
+> **分数协议**：61.29 是 MTEB / C-MTEB 的 12 个 Reranking 数据集、按 en / zh / en-zh / zh-en 设置跑的，**既不是 BEIR 也不是 Qwen 的 CMTEB-R**，所以表里写作「Rerank-12 61.29」，`data-beir` 留空（不参与 BEIR 列排序），hover 说明是谁测的、同一测试里 bge 两个模型的分数。国内指南新增 `#bce` 一节（绝对分数可直接用 0.35 过滤、512 token 对、跨语种、SiliconFlow 托管），TOC 自动跟着新 h2 翻译。
+>
+> `hs-rerank-1` 只在**自建指南**的选型表加了一行 + 一段说明（114M，其中 transformer 只有 15M、8,192 token、MIT、int8 ONNX + TEI 配置），并写明它的分数只有图片，没有可比数字。**没有**进 `/models/`（10 日已进表），也没有重复它的分数。
+>
+> 两篇指南的 `Updated` 日期都改成 2026-11-14（含中文键）。更新日志 `#2026-11-14-filters`。
+>
+> 本地跑测试的环境备注：这个沙箱没有 `/etc/hosts` 里的 `localhost`，Playwright 的 webServer 探测会 ENOTFOUND；TMPDIR 只有 128MB，浏览器下载会 ENOSPC；headless shell 还缺 `libatk`/`libatspi`。绕法是 `TMPDIR=/workspace/tmp/tmpdir`、`PLAYWRIGHT_BROWSERS_PATH=/workspace/tmp/pw-browsers`、`LD_LIBRARY_PATH` 指向解开的 at-spi2 .deb，再用 `pw.config.local.mjs`（baseURL 127.0.0.1）跑；**这个本地配置文件不要提交**。
+
 ## 发布监控处理记录
 
 - **2026-10-21 Cohere Rerank 5**：Cohere 当天发布（changelog「Announcing Cohere's Rerank 5 Models」）。Cohere 页改为 Rerank 5（新增「What's new in Rerank 5」：校准分数、Context Focus、只支持文本、不支持指令、可用渠道），模型表加 v5 Pro / Fast 两行，首页和表里的卡片更新，代码示例改用 `rerank-v5.0-pro`。3 个新 fact（`cohere-rerank-5`）。**价格还没公布**：页面写「尚未公布」，计算器暂不加；`data/release-watch.json` 新增「Cohere pricing」页面监控（`Rerank N Pro|Fast`，已知 Rerank 4），价格一出现就会报到 release-watch issue，届时补 price fact、计算器选项和价格表行。
