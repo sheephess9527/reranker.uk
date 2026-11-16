@@ -28,4 +28,13 @@ medium and campaign labels are used; no user identifiers or new scripts.
   no page errors or horizontal overflow at mobile/desktop widths.
 - Generated public pages are included with source as this repository expects.
   No reranker scores, prices, scoring code, dependencies or new analytics changed.
-- Work prepared on feature/quantized-cross-links. Production validation follows merge.
+- Application commit `8e35f70` was fast-forward merged into `main` and pushed.
+- GitHub `build-and-test` completed successfully. [Cloudflare Workers deployment](https://dash.cloudflare.com/7d5a680e05e83711c23f19702fc6480d/workers/services/view/reranker/production/builds/f024f50d-a6a8-4c1d-ba36-ded0ed77259d)
+  completed successfully.
+- Post-deployment Chromium checks passed for **EN and ZH** on the live homepage,
+  picker and model index, alongside quantized.uk's model/VRAM forward links.
+  Destination language, UTM source, clickable links, LLM scope text, no page
+  errors and mobile/desktop overflow checks all passed.
+- Quantized reciprocal application commit `fb2c3da` also passed CI and deployment.
+- This delivery follow-up changes Markdown only; tested application sources stay
+  unchanged. Merged feature branches are removed after production verification.
