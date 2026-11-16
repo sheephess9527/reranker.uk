@@ -4,6 +4,15 @@ window.I18N_PAGE = {
     "models.tableCaption": "重排序模型对比：架构、类型、适用场景、语言、延迟、价格与 BEIR 分数",
   },
   zh: {
+  "English-only CPU candidate ({{fact:ettin-reranker-17m-v1.params}}); {{fact:ettin-reranker-17m-v1.context_tokens}}-token pairs; benchmark on your own queries":
+    "英文 CPU 候选（{{fact:ettin-reranker-17m-v1.params}}）；每对 {{fact:ettin-reranker-17m-v1.context_tokens}} token；请用自己的查询评测",
+  "The publisher reports NanoBEIR and retrieval evaluations with different first-stage models; these are not a classic full BEIR average":
+    "发布方提供 NanoBEIR 及搭配不同第一阶段模型的检索评测，不能当作传统完整 BEIR 均分",
+  "not comparable*":
+    "不可直接比较*",
+  "<a href=\"/guides/self-host-reranker.html#ettin\">ettin-reranker-17m-v1</a>":
+    "<a href=\"/guides/self-host-reranker.html#ettin\">ettin-reranker-17m-v1</a>",
+
   "<a href=\"https://huggingface.co/hindsight-ai/hs-rerank-1\" rel=\"noopener noreferrer\">hs-rerank-1</a>":
     "<a href=\"https://huggingface.co/hindsight-ai/hs-rerank-1\" rel=\"noopener noreferrer\">hs-rerank-1</a>",
   "MIT":

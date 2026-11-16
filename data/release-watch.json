@@ -54,7 +54,8 @@
     "hindsight-ai/hs-decide-1-flash",
     "hindsight-ai/hs-rerank-1",
     "Asteromorph/AsteroRank-Lepton",
-    "airun-ai/GlanceRAG-MiMo-9B-Reranker"
+    "airun-ai/GlanceRAG-MiMo-9B-Reranker",
+    "cross-encoder/ettin-reranker-17m-v1"
   ],
   "pages": [
     {

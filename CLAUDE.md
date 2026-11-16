@@ -248,3 +248,11 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 - 明确这是 RAG 中 LLM 的预算，不能当成 reranker 批量激活内存估算。
 - 仅加公开来源 UTM，无用户标识或新追踪脚本。修改 src，构建产物由 build 生成。
 - 公共更新日志、中文和 RSS 同步；详情见 docs/changes/2026-11-16-cross-links.md。
+
+
+## 2026-11-16 定时巡检：补录 Ettin 17M
+
+- [x] 不设热度门槛补查近期 rerank / text-ranking / ColBERT，核实 Kervyn、UltraBERT、Kalbur 和 Horizon-Labs 原始模型卡，候选结论见 docs/changes/2026-11-16-patrol.md。
+- [x] 官方 cross-encoder 的 ettin-reranker-17m-v1 补进模型表和自建指南：17M、英文、Apache 2.0，输入上限按模型卡写 7999，不从基础模型猜 8192；两个数走 fact 并能自动核对。官方文章日期 2026-05-19，这是补漏，不作新发布进 news。
+- [x] 不把 NanoBEIR 写成完整 BEIR 均分；不新增 Demo 模型或测速承诺。hs-rerank-1 改称紧凑多语言 CPU 方案，去掉绝对最小表述。中英文、changelog、RSS 同步，hf_seen 记入已处理模型。
+- [x] 人工复核 BAAI 官方图片：bge-v2-m3 55.36、v2-gemma 60.71 均未变，仅刷新这两项 verified_on。原有浏览器历史测量与 Cohere 4 最后公布价不伪称重新测量。
