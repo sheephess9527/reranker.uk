@@ -483,3 +483,7 @@ used to be duplicated here were removed in favour of that single source.
 ## Licence & affiliation
 
 Open educational resource · not affiliated with any model vendor.
+
+### Scheduled maintenance records
+
+Source checks, reviewed candidates and deployment evidence for scheduled reranker patrols are recorded in `docs/changes/YYYY-MM-DD-patrol.md`. The [16 November 2026 patrol](docs/changes/2026-11-16-patrol.md) adds the previously missed Ettin 17M English CPU option; it is not a new November model release.

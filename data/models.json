@@ -177,7 +177,7 @@
       "protocol_note": "BAAI's own evaluation: 15 BEIR datasets, reranking the top 100 results from bge-large-en-v1.5",
       "check": "manual",
       "check_note": "BAAI publish this table only as an image — research/llm_reranker/evaluation/BEIR-bge-en-v1.5.png in FlagOpen/FlagEmbedding — read by eye; re-read it at each review",
-      "verified_on": "2026-10-01"
+      "verified_on": "2026-11-16"
     },
     "qwen_mteb_r": {
       "value": "57.03",
@@ -244,7 +244,7 @@
       "protocol_note": "BAAI's own evaluation: 15 BEIR datasets, reranking the top 100 results from bge-large-en-v1.5",
       "check": "manual",
       "check_note": "BAAI publish this table only as an image — research/llm_reranker/evaluation/BEIR-bge-en-v1.5.png in FlagOpen/FlagEmbedding — read by eye; re-read it at each review",
-      "verified_on": "2026-10-01"
+      "verified_on": "2026-11-16"
     }
   },
   "bge-reranker-base": {
@@ -2221,6 +2221,26 @@
       "check_pattern": "up to {value} tokens per query and document pair",
       "check_hint": "tokens per query",
       "verified_on": "2026-11-10"
+    }
+  },
+  "ettin-reranker-17m-v1": {
+    "params": {
+      "value": "17M",
+      "source_url": "https://huggingface.co/cross-encoder/ettin-reranker-17m-v1",
+      "check_url": "https://huggingface.co/cross-encoder/ettin-reranker-17m-v1/raw/main/README.md",
+      "check_pattern": "\\| \\*\\*{value}\\*\\* \\| SDPA \\|",
+      "check_hint": "17M",
+      "note": "Nominal model size in the publisher CPU comparison table; not a measured memory footprint.",
+      "verified_on": "2026-11-16"
+    },
+    "context_tokens": {
+      "value": 7999,
+      "source_url": "https://huggingface.co/cross-encoder/ettin-reranker-17m-v1",
+      "check_url": "https://huggingface.co/cross-encoder/ettin-reranker-17m-v1/raw/main/README.md",
+      "check_pattern": "Maximum Sequence Length:\\*\\* {value} tokens",
+      "check_hint": "Maximum Sequence Length",
+      "note": "Maximum sequence length stated by the reranker card, not the base encoder configuration.",
+      "verified_on": "2026-11-16"
     }
   }
 }

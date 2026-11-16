@@ -5,6 +5,10 @@ changelog page (src/pages/changelog.html).
 
 ## 2026-11-16
 
+- Recorded the scheduled source/candidate patrol and added sourced Ettin 17M
+  coverage to the bilingual model table and self-hosting guide. The May release
+  is labelled as a catch-up; no full BEIR score or new-release news was invented.
+
 - Added bilingual quantized.uk LLM-memory handoff to the shared footer, with
   explicit reranker-memory scope and public referral labels. Source, public
   changelog, Chinese text, RSS and generated pages are kept together.

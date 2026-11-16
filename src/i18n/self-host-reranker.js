@@ -1,4 +1,13 @@
 window.I18N_PAGE = { zh: {
+  "Production · ~10 min read · <time datetime=\"2026-11-16\">Updated 16 Nov 2026</time>":
+    "生产实践 · 约 10 分钟阅读 · <time datetime=\"2026-11-16\">更新于 2026 年 11 月 16 日</time>",
+  "A smaller English-only CPU candidate":
+    "更小的纯英文 CPU 候选",
+  "For English-only search, also test <a href=\"https://huggingface.co/cross-encoder/ettin-reranker-17m-v1\" rel=\"noopener noreferrer\">ettin-reranker-17m-v1</a>: {{fact:ettin-reranker-17m-v1.params}}, Apache 2.0, with a model-card limit of {{fact:ettin-reranker-17m-v1.context_tokens}} tokens per query-and-passage pair. Its publisher reports CPU results using SDPA; this is a self-hosting candidate, not a model added to our browser demo. Keep passages short and measure quality and latency on your own workload.":
+    "仅做英文检索时，也可以测试 <a href=\"https://huggingface.co/cross-encoder/ettin-reranker-17m-v1\" rel=\"noopener noreferrer\">ettin-reranker-17m-v1</a>：{{fact:ettin-reranker-17m-v1.params}}，Apache 2.0，模型卡标明每对 query 加段落上限为 {{fact:ettin-reranker-17m-v1.context_tokens}} token。发布方提供了使用 SDPA 的 CPU 评测；这是自建候选，没有加入本站的浏览器 Demo。请保持段落简短，并在自己的负载上测量效果和延迟。",
+  "This is a coverage catch-up: the <a href=\"https://huggingface.co/blog/ettin-reranker\" rel=\"noopener noreferrer\">official release article</a> dates to May 2026. The card reports NanoBEIR and retrieval tests with different first-stage models. Those results do not supply a directly comparable full BEIR average for our table, and English support does not establish Chinese or multilingual quality.":
+    "这是补录遗漏：<a href=\"https://huggingface.co/blog/ettin-reranker\" rel=\"noopener noreferrer\">官方发布文章</a>发表于 2026 年 5 月。模型卡提供 NanoBEIR 及搭配不同第一阶段模型的检索评测，无法为本站表格提供可以直接比较的完整 BEIR 均分；支持英文也不等于已经证明中文或多语言效果。",
+
   "Production · ~10 min read · <time datetime=\"2026-10-12\">Updated 12 Oct 2026</time>":
     "生产实践 · 约 10 分钟阅读 · <time datetime=\"2026-10-12\">更新于 2026 年 10 月 12 日</time>",
   "When you need multilingual quality with minimal ops, a hosted API — <a href=\"/models/cohere-rerank.html\">Cohere</a>, <a href=\"/models/voyage-rerank.html\">Voyage</a>, or in mainland China <a href=\"/models/#alibaba-model-studio\">Alibaba Cloud Model Studio</a> and <a href=\"/models/#siliconflow\">SiliconFlow</a> — may still be cheaper all-in. The <a href=\"/rerank-cost-calculator.html\">cost calculator</a> prices your volume; see also <a href=\"/guides/choose-reranker-scenario.html\">choose by scenario</a>.":
@@ -99,8 +108,8 @@ window.I18N_PAGE = { zh: {
   // Nov 2026: hs-rerank-1 as the lightest CPU option
   "Production · ~10 min read · <time datetime=\"2026-11-14\">Updated 14 Nov 2026</time>":
     "生产环境 · 约 10 分钟阅读 · <time datetime=\"2026-11-14\">更新于 2026 年 11 月 14 日</time>",
-  "<strong>Lightest CPU option</strong> — int8 ONNX, {{fact:hs-rerank-1.context_tokens}} tokens, English / Spanish / French / German / Portuguese / Chinese / Japanese / Korean":
-    "<strong>最轻的 CPU 方案</strong> —— int8 ONNX，{{fact:hs-rerank-1.context_tokens}} token，支持英语、西班牙语、法语、德语、葡萄牙语、中文、日语、韩语",
-  "If there is no GPU at all, the smallest option is <strong>hs-rerank-1</strong>: {{fact:hs-rerank-1.params}} in total, of which {{fact:hs-rerank-1.embedding_params}} are the embedding table and only {{fact:hs-rerank-1.transformer_params}} the transformer, {{fact:hs-rerank-1.context_tokens}} tokens per query-and-passage pair, MIT-licensed, with an int8 ONNX build for CPUs and the deployment config Text Embeddings Inference needs. Hindsight publish its results only as an image on the model card, so there is no score here to compare it by — measure it on your own queries before choosing it over bge-reranker-v2-m3.":
-    "如果完全没有 GPU，最小的选择是 <strong>hs-rerank-1</strong>：总共 {{fact:hs-rerank-1.params}}，其中 {{fact:hs-rerank-1.embedding_params}} 是词嵌入表，transformer 只有 {{fact:hs-rerank-1.transformer_params}}；每对 query 加段落 {{fact:hs-rerank-1.context_tokens}} token，MIT 许可，带 CPU 用的 int8 ONNX 版本，也有 Text Embeddings Inference 需要的部署配置。Hindsight 只在模型卡上以图片形式给出结果，所以这里没有可比的分数 —— 在拿它替代 bge-reranker-v2-m3 之前，请先在你自己的查询上测一遍。",
+  "<strong>Compact multilingual CPU option</strong> — int8 ONNX, {{fact:hs-rerank-1.context_tokens}} tokens, English / Spanish / French / German / Portuguese / Chinese / Japanese / Korean":
+    "<strong>紧凑的多语言 CPU 方案</strong> —— int8 ONNX，{{fact:hs-rerank-1.context_tokens}} token，支持英语、西班牙语、法语、德语、葡萄牙语、中文、日语、韩语",
+  "For a compact multilingual CPU option, consider <strong>hs-rerank-1</strong>: {{fact:hs-rerank-1.params}} in total, of which {{fact:hs-rerank-1.embedding_params}} are the embedding table and only {{fact:hs-rerank-1.transformer_params}} the transformer, {{fact:hs-rerank-1.context_tokens}} tokens per query-and-passage pair, MIT-licensed, with an int8 ONNX build for CPUs and the deployment config Text Embeddings Inference needs. Hindsight publish its results only as an image on the model card, so there is no score here to compare it by — measure it on your own queries before choosing it over bge-reranker-v2-m3.":
+    "需要紧凑的多语言 CPU 方案时，可以考虑 <strong>hs-rerank-1</strong>：总共 {{fact:hs-rerank-1.params}}，其中 {{fact:hs-rerank-1.embedding_params}} 是词嵌入表，transformer 只有 {{fact:hs-rerank-1.transformer_params}}；每对 query 加段落 {{fact:hs-rerank-1.context_tokens}} token，MIT 许可，带 CPU 用的 int8 ONNX 版本，也有 Text Embeddings Inference 需要的部署配置。Hindsight 只在模型卡上以图片形式给出结果，所以这里没有可比的分数 —— 在拿它替代 bge-reranker-v2-m3 之前，请先在你自己的查询上测一遍。",
 }};

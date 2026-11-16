@@ -1,4 +1,9 @@
 window.I18N_PAGE = { zh: {
+  "16 Nov 2026 — Catching up on a small English CPU reranker":
+    "2026 年 11 月 16 日 —— 补录小型英文 CPU 重排序模型",
+  "Added <a href=\"/models/#ettin-reranker-17m-v1\">ettin-reranker-17m-v1</a> to the comparison table and <a href=\"/guides/self-host-reranker.html#ettin\">self-hosting guide</a>. This fills an older coverage gap, not a new release: the official announcement is from May 2026. The model size and input limit are sourced, no full BEIR score is inferred from NanoBEIR, and hs-rerank-1 is now described as a compact multilingual option rather than the smallest CPU model.":
+    "<a href=\"/models/#ettin-reranker-17m-v1\">ettin-reranker-17m-v1</a> 已加入模型对比表和<a href=\"/guides/self-host-reranker.html#ettin\">自建指南</a>。这是补上历史遗漏，不是新发布：官方公告发表于 2026 年 5 月。参数规模与输入上限均有来源，没有从 NanoBEIR 推算完整 BEIR 分数；hs-rerank-1 的描述也从最小 CPU 模型改为紧凑的多语言选择。",
+
   "16 Nov 2026 — LLM memory planning alongside reranker selection": "2026 年 11 月 16 日 —— 选择 reranker 时也能规划生成模型显存",
   "The site footer links to quantized.uk’s VRAM calculator for the LLM in a RAG pipeline. Chinese pages link to its Chinese calculator. Reranker activation memory still needs a separate check.": "网站页脚新增 quantized.uk 显存计算器入口，用于规划 RAG 中生成模型的显存。中文页链接至中文计算器；reranker 的激活内存仍需单独核实。",
 

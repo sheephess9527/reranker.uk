@@ -71,6 +71,10 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-16-ettin-catchup">2026 年 11 月 16 日 —— 补录小型英文 CPU 重排序模型</h2>
+        <p><a href="/zh/models/#ettin-reranker-17m-v1">ettin-reranker-17m-v1</a> 已加入模型对比表和<a href="/zh/guides/self-host-reranker#ettin">自建指南</a>。这是补上历史遗漏，不是新发布：官方公告发表于 2026 年 5 月。参数规模与输入上限均有来源，没有从 NanoBEIR 推算完整 BEIR 分数；hs-rerank-1 的描述也从最小 CPU 模型改为紧凑的多语言选择。</p>
+      </article>
+      <article class="changelog-entry">
         <h2 id="2026-11-16-quantized-link">2026 年 11 月 16 日 —— 选择 reranker 时也能规划生成模型显存</h2>
         <p>网站页脚新增 quantized.uk 显存计算器入口，用于规划 RAG 中生成模型的显存。中文页链接至中文计算器；reranker 的激活内存仍需单独核实。</p>
       </article>
@@ -132,15 +136,14 @@
           <li><strong>Cohere 的 Model Vault 改按 GPU 计价</strong> —— 价格页现在列的是每种 GPU 的每小时价格，L4 按需价从每小时 $3.00 起，另按副本数计费。本站 10 月 22 日引用的 Rerank 5 单模型价格（每小时 $4.00、每月 $2,500）已不再公布，所以 <a href="/zh/models/cohere-rerank#pricing">Cohere 页</a>改为写页面现在列出的内容</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>2026 年 11 月更早的更新（4 条）</summary><article class="changelog-entry">
         <h2 id="2026-11-05-compare">2026 年 11 月 5 日 —— reranker 横向对比</h2>
         <ul class="feature-list">
           <li><strong><a href="/zh/guides/compare-rerankers">横向对比指南</a></strong> —— Qwen3、bge、mxbai、Jina、GTE 和托管 API，只在分数来自同一次评测时才并排放：Qwen3 对比 bge-reranker-v2-m3 用的是 Qwen 自己的评测，Qwen3、mxbai 和 Jina 用的是 Jina 的 2026 年评测。每一项都写明是谁跑的，也直说 GTE 和 Cohere 没有可以对齐的数字。还有一个藏在各模型页里的发现：Qwen3-Reranker-0.6B 在中文检索上落后于 bge-reranker-v2-m3</li>
           <li><strong>每个模型页都能跳转过来</strong> —— 八个模型评测页的“其他模型”部分都加了入口，指南列表和页脚里也有</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>2026 年 11 月更早的更新（3 条）</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-11-03-pinecone">2026 年 11 月 3 日 —— Pinecone 弃用 pinecone-rerank-v0</h2>
         <ul class="feature-list">
           <li><strong>Pinecone 自家的重排序模型已弃用</strong> —— Pinecone 文档现在写明，<code>pinecone-rerank-v0</code> 仍然响应重排序请求，但新项目不要再用，也没给停用日期。<a href="/zh/models/#pinecone">模型对比表</a>、<a href="/zh/guides/rerank-vector-database#pinecone">向量数据库指南</a>和<a href="/zh/rerank-cost-calculator">成本计算器</a>都已注明，并改为推荐 bge-reranker-v2-m3 或 cohere-rerank-4-fast。文档改动后的第二天早上，发布监控就发现了</li>
@@ -612,6 +615,8 @@
         </ul>
       </article></details>
 
+
+      
 
       
 
