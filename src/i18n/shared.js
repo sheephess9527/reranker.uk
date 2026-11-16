@@ -1,5 +1,6 @@
 window.I18N_SHARED = {
   keys: {
+    "shared.footer.gpuBudget": "<a href=\"https://quantized.uk/zh/tools/vram-calc/?utm_source=reranker.uk&amp;utm_medium=referral&amp;utm_campaign=rag_tools\" target=\"_blank\" rel=\"noopener noreferrer\">显卡能跑吗？</a> 在 quantized.uk 估算 RAG 中生成模型的显存；reranker 的激活内存需单独核实。",
     "shared.search.open": "搜索全站（按 /）",
     "shared.search.label": "搜索 reranker.uk",
     "shared.search.placeholder": "搜索指南和模型…",

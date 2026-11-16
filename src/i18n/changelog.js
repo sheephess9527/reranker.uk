@@ -1,4 +1,7 @@
 window.I18N_PAGE = { zh: {
+  "16 Nov 2026 — LLM memory planning alongside reranker selection": "2026 年 11 月 16 日 —— 选择 reranker 时也能规划生成模型显存",
+  "The site footer links to quantized.uk’s VRAM calculator for the LLM in a RAG pipeline. Chinese pages link to its Chinese calculator. Reranker activation memory still needs a separate check.": "网站页脚新增 quantized.uk 显存计算器入口，用于规划 RAG 中生成模型的显存。中文页链接至中文计算器；reranker 的激活内存仍需单独核实。",
+
   "14 Nov 2026 — Search recovery and keyboard-friendly mobile navigation": "2026 年 11 月 14 日 —— 搜索失败可重试，手机菜单支持键盘操作",
   "Search now distinguishes a loading failure from an empty result and retries when you edit the query or reopen the panel. The mobile menu closes with Escape, a click outside, or keyboard focus moving away; opening search closes it too.": "搜索现在会区分加载失败与没有匹配结果，修改搜索词或重新打开面板即可重试。手机菜单支持按 Escape 关闭，点击菜单外部或将键盘焦点移出菜单也会关闭；打开搜索时同样会收起菜单。",
   "14 Nov 2026 — Filters for input and licence, Jina's price, and two Chinese-side gaps":

@@ -3,6 +3,12 @@
 Repository and tooling changes. Site-facing data updates live on the public
 changelog page (src/pages/changelog.html).
 
+## 2026-11-16
+
+- Added bilingual quantized.uk LLM-memory handoff to the shared footer, with
+  explicit reranker-memory scope and public referral labels. Source, public
+  changelog, Chinese text, RSS and generated pages are kept together.
+
 ## 2026-11-13
 
 ### scripts/check-sources.mjs: transient fetch errors no longer fail the run

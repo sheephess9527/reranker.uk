@@ -423,6 +423,15 @@ without a version. The daily `headers` job checks the live Cache-Control
 header. Scripts must not load files from `/assets/` themselves: those URLs
 would carry no version.
 
+## Related RAG tools
+
+The shared footer links to the same-owner quantized.uk VRAM calculator. EN/ZH
+pages target the matching language. Public UTM labels identify reranker.uk as the
+referring tool, without user IDs. The destination sizes the **LLM** in the RAG
+pipeline; reranker batch/sequence activation memory requires a separate check.
+
+See [the change record](docs/changes/2026-11-16-cross-links.md).
+
 ## Deploy (Cloudflare Workers)
 
 ```bash
