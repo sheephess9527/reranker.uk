@@ -6,6 +6,13 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-20-copy-watch">20 Nov 2026 — A stale count on the cost calculator, and a watch that outlasts the year</h2>
+        <ul class="feature-list">
+          <li><strong>The models card under the <a href="/rerank-cost-calculator.html">cost calculator</a> stops counting models</strong> — it read <em>across 16 models</em>, a figure from when the table was smaller. The table has 38 rows now, five of them hosted platforms rather than models, so no fixed number stays right for long: the line now sends you to the table without naming one</li>
+          <li><strong>The release watch follows Pinecone’s notes without a yearly edit</strong> — that entry watched <code>/release-notes/2026</code>, which had to be moved to <code>/release-notes/2027</code> every January. It now uses the undated <code>/release-notes</code>, which redirects to the current year’s page, and the watch warns when that address lands on another year instead of quietly reading last year’s announcements</li>
+        </ul>
+      </article>
+      <article class="changelog-entry">
         <h2 id="2026-11-16-ettin-catchup">16 Nov 2026 — Catching up on a small English CPU reranker</h2>
         <p>Added <a href="/models/#ettin-reranker-17m-v1">ettin-reranker-17m-v1</a> to the comparison table and <a href="/guides/self-host-reranker.html#ettin">self-hosting guide</a>. This fills an older coverage gap, not a new release: the official announcement is from May 2026. The model size and input limit are sourced, no full BEIR score is inferred from NanoBEIR, and hs-rerank-1 is now described as a compact multilingual option rather than the smallest CPU model.</p>
       </article>

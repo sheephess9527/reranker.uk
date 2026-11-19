@@ -320,8 +320,12 @@ recommends that must stay on that page, and `retired` is a pattern
 one next to "deprecated", "retired" or "end of life". Either opens an
 issue; once the site is updated, take the model out of those lists. The
 Pinecone entries use both — `pinecone-rerank-v0` had already left
-Pinecone's models overview on 1 Nov 2026 — and the Pinecone changelog URL
-is per year, so it moves to `/release-notes/2027` in January.
+Pinecone's models overview on 1 Nov 2026. The changelog entry is marked
+`current_year`: it watches `/release-notes`, the undated entry point that
+Pinecone redirects to the current year's page (checked 20 Nov 2026: a 308 to
+`/release-notes/2026`), so January needs no edit, and a redirect that ever
+settles on another year is reported as a warning instead of quietly reading
+last year's notes.
 
 `node scripts/watch-releases.mjs --baseline` prints what each vendor page
 lists today (and, for pages with `expect` or `retired_ids`, which are

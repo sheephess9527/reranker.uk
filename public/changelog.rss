@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Mon, 16 Nov 2026 13:45:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 19 Nov 2026 22:45:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>20 Nov 2026 — A stale count on the cost calculator, and a watch that outlasts the year</title>
+      <link>https://reranker.uk/changelog#2026-11-20-copy-watch</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-11-20-copy-watch</guid>
+      <pubDate>Thu, 19 Nov 2026 22:45:00 GMT</pubDate>
+      <description>The cost calculator's models card no longer quotes a model count, and the release watch follows Pinecone's undated release-notes page, which redirects to the current year, instead of a URL that needed editing every January.</description>
+    </item>
     <item>
       <title>16 Nov 2026 — Catching up on a small English CPU reranker</title>
       <link>https://reranker.uk/changelog#2026-11-16-ettin-catchup</link>

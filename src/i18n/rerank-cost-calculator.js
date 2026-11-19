@@ -101,7 +101,7 @@ window.I18N_PAGE = { zh: {
 
   "Keep reading": "继续阅读",
   "Compare rerank models": "对比重排序模型",
-  "Architecture, latency, languages and cost across 16 models.": "16 个模型的架构、延迟、语言与成本对比。",
+  "Architecture, latency, languages and cost for every reranker in the table.": "表格里每个重排序模型的架构、延迟、语言与成本。",
   "Choose by scenario": "按场景选型",
   "Which reranker suits support, legal, code or multilingual search.": "客服、法律、代码或多语言检索各自适合哪种重排序器。",
 

@@ -1,4 +1,10 @@
 window.I18N_PAGE = { zh: {
+  "20 Nov 2026 — A stale count on the cost calculator, and a watch that outlasts the year":
+    "2026 年 11 月 20 日 —— 成本计算器上的过期数字，以及能跨年的发布监控",
+  "<strong>The models card under the <a href=\"/rerank-cost-calculator.html\">cost calculator</a> stops counting models</strong> — it read <em>across 16 models</em>, a figure from when the table was smaller. The table has 38 rows now, five of them hosted platforms rather than models, so no fixed number stays right for long: the line now sends you to the table without naming one":
+    "<strong><a href=\"/rerank-cost-calculator.html\">成本计算器</a>下方的模型卡片不再写模型数量</strong> —— 原来写的是<em>16 个模型</em>，那是表格还小的时候的数字。现在表格有 38 行，其中五行是托管平台而不是模型，写死任何一个数字很快就会对不上：这句话改为直接指向表格，不再报数",
+  "<strong>The release watch follows Pinecone’s notes without a yearly edit</strong> — that entry watched <code>/release-notes/2026</code>, which had to be moved to <code>/release-notes/2027</code> every January. It now uses the undated <code>/release-notes</code>, which redirects to the current year’s page, and the watch warns when that address lands on another year instead of quietly reading last year’s announcements":
+    "<strong>发布监控盯 Pinecone 公告不用每年改链接了</strong> —— 这条原来盯 <code>/release-notes/2026</code>，每年 1 月都得换成 <code>/release-notes/2027</code>。现在改用不带年份的 <code>/release-notes</code>，它会跳转到当年的页面；万一这个地址落到别的年份，监控会报警，而不是默默去读去年的公告",
   "16 Nov 2026 — Catching up on a small English CPU reranker":
     "2026 年 11 月 16 日 —— 补录小型英文 CPU 重排序模型",
   "Added <a href=\"/models/#ettin-reranker-17m-v1\">ettin-reranker-17m-v1</a> to the comparison table and <a href=\"/guides/self-host-reranker.html#ettin\">self-hosting guide</a>. This fills an older coverage gap, not a new release: the official announcement is from May 2026. The model size and input limit are sourced, no full BEIR score is inferred from NanoBEIR, and hs-rerank-1 is now described as a compact multilingual option rather than the smallest CPU model.":
