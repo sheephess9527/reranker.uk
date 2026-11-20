@@ -37,8 +37,8 @@ window.I18N_PAGE = { zh: {
     "<strong>自托管、有 GPU、想要最好的开源模型：</strong><a href=\"/models/qwen-reranker.html\">Qwen3-Reranker-4B</a>。下面两次评测里它都在榜首或接近榜首，而且是 Apache 2.0 协议。",
   "<strong>Small, CPU-friendly, multilingual:</strong> <a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> is the standard baseline; the <a href=\"/models/gte-reranker.html\">GTE rerankers</a> are smaller still, and Hindsight’s <a href=\"https://huggingface.co/hindsight-ai/hs-rerank-1\" rel=\"noopener noreferrer\">hs-rerank-1</a> (MIT, {{fact:hs-rerank-1.params}}) is smaller again but comes with no scores we can quote.":
     "<strong>要小、能在 CPU 上跑、支持多语言：</strong><a href=\"/models/bge-reranker.html\">bge-reranker-v2-m3</a> 是通行的基线；<a href=\"/models/gte-reranker.html\">GTE reranker</a> 还要更小，Hindsight 的 <a href=\"https://huggingface.co/hindsight-ai/hs-rerank-1\" rel=\"noopener noreferrer\">hs-rerank-1</a>（MIT，{{fact:hs-rerank-1.params}}）更小，但没有可以引用的分数。",
-  "<strong>No GPU and no ops:</strong> a hosted API. <a href=\"/models/cohere-rerank.html\">Cohere Rerank 5</a> and <a href=\"/models/voyage-rerank.html\">Voyage rerank-3</a> are the established ones, <a href=\"/models/zerank.html\">zerank-2</a> the cheapest per token.":
-    "<strong>没有 GPU，也不想运维：</strong>用托管 API。<a href=\"/models/cohere-rerank.html\">Cohere Rerank 5</a> 和 <a href=\"/models/voyage-rerank.html\">Voyage rerank-3</a> 是老牌选择，<a href=\"/models/zerank.html\">zerank-2</a> 按 token 算最便宜。",
+  "<strong>No GPU and no ops:</strong> a hosted API. <a href=\"/models/cohere-rerank.html\">Cohere Rerank 5</a> and <a href=\"/models/voyage-rerank.html\">Voyage rerank-3</a> are the established ones; <a href=\"/models/zerank.html\">zerank-2</a> was the cheapest per token, but its API closed in September 2026.":
+    "<strong>没有 GPU，也不想运维：</strong>用托管 API。<a href=\"/models/cohere-rerank.html\">Cohere Rerank 5</a> 和 <a href=\"/models/voyage-rerank.html\">Voyage rerank-3</a> 是老牌选择；<a href=\"/models/zerank.html\">zerank-2</a> 按 token 算最便宜，但它的 API 已于 2026 年 9 月关停。",
   "<strong>Commercial product, open weights:</strong> check the licence first. <a href=\"/models/jina-reranker.html\">Jina’s</a> weights are non-commercial.":
     "<strong>商用产品、想用开源权重：</strong>先看许可证。<a href=\"/models/jina-reranker.html\">Jina</a> 的权重是非商用的。",
   "Which numbers can be compared":
@@ -155,14 +155,14 @@ window.I18N_PAGE = { zh: {
     "{{fact:voyage-rerank-3.context_tokens}} token",
   "Voyage’s own evaluations only":
     "仅有 Voyage 自己的评测",
-  "<a href=\"/models/zerank.html\">zerank-2</a>":
-    "<a href=\"/models/zerank.html\">zerank-2</a>",
+  "<a href=\"/models/zerank.html\">zerank-2</a> (last listed)":
+    "<a href=\"/models/zerank.html\">zerank-2</a>（最后公布价）",
   "{{fact:zerank-2.context_tokens}} tokens":
     "{{fact:zerank-2.context_tokens}} token",
   "ZeroEntropy’s own run only":
     "仅有 ZeroEntropy 自己的评测",
-  "Per-token and per-search prices are billed differently, so the cheapest sticker price is not always the cheapest bill. The <a href=\"/rerank-cost-calculator.html\">cost calculator</a> works it out for your documents per query and queries per month.":
-    "按 token 计费和按次计费的算法不同，所以标价最低的不一定账单最低。<a href=\"/rerank-cost-calculator.html\">成本计算器</a>可以按你每次查询的文档数和每月查询量算出来。",
+  "Per-token and per-search prices are billed differently, so the cheapest sticker price is not always the cheapest bill. The <a href=\"/rerank-cost-calculator.html\">cost calculator</a> works it out for your documents per query and queries per month. ZeroEntropy’s API is the one closed entry: the company joined Notion and sunset its products on 4 September 2026, so zerank-2 is a row to read and self-host, not one to buy.":
+    "按 token 计费和按次计费的算法不同，所以标价最低的不一定账单最低。<a href=\"/rerank-cost-calculator.html\">成本计算器</a>可以按你每次查询的文档数和每月查询量算出来。ZeroEntropy 是表里唯一已经关停的一家：它并入 Notion 后于 2026 年 9 月 4 日下线，所以 zerank-2 这一行值得看、可以自己部署，但已经买不到了。",
   "How to decide":
     "怎么选",
   "<strong>Pick two candidates from this page</strong>: one open model you could host and one hosted API.":

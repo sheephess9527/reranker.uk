@@ -117,29 +117,6 @@
       ]
     },
     {
-      "name": "ZeroEntropy models",
-      "url": "https://docs.zeroentropy.dev/models",
-      "pattern": "zerank-\\d+(?:\\.\\d+)?(?:-(?:small|nano|mini|base|large))?(?![\\w-]|\\.\\w)",
-      "known": [
-        "zerank-1",
-        "zerank-1-small",
-        "zerank-2",
-        "zerank-2-nano"
-      ]
-    },
-    {
-      "name": "ZeroEntropy pricing",
-      "url": "https://www.zeroentropy.dev/pricing",
-      "pattern": "zerank-\\d+(?:\\.\\d+)?(?:-(?:small|nano|mini|base|large))?(?![\\w-]|\\.\\w)",
-      "known": [
-        "zerank-1",
-        "zerank-1-small",
-        "zerank-2",
-        "zerank-2-nano",
-        "zerank-2-small"
-      ]
-    },
-    {
       "name": "Mixedbread docs index",
       "url": "https://www.mixedbread.com/llms.txt",
       "pattern": "mxbai-rerank-(?:(?:large|base|xsmall)-)?v\\d+(?:\\.\\d+)?(?:-listwise)?(?![\\w-]|\\.\\w)",

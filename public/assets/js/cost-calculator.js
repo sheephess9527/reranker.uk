@@ -122,8 +122,8 @@
     },
     {
       id: "zeroentropy",
-      nameEn: "ZeroEntropy zerank-2",
-      nameZh: "ZeroEntropy zerank-2",
+      nameEn: "ZeroEntropy zerank-2 (API closed)",
+      nameZh: "ZeroEntropy zerank-2（API 已关停）",
       unitEn: "per token",
       unitZh: "按 token",
       href: "/models/zerank",

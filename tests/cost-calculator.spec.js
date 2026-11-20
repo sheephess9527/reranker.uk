@@ -27,7 +27,7 @@ test("every vendor is priced, in the right table", async ({ page }) => {
       "Jina Reranker v3.5",
       "Voyage rerank-3",
       "Voyage rerank-3-lite",
-      "ZeroEntropy zerank-2",
+      "ZeroEntropy zerank-2 (API closed)",
       "Amazon Bedrock, Amazon Rerank 1.0",
       "Pinecone bge-reranker-v2-m3 / pinecone-rerank-v0 (deprecated)",
       "Contextual AI Rerank v2",

@@ -6,6 +6,15 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-20-zeroentropy">20 Nov 2026 — ZeroEntropy’s API is gone, and the site said it was still selling</h2>
+        <ul class="feature-list">
+          <li><strong><a href="/models/zerank.html">zerank-2</a> is described as weights, not as a live API</strong> — ZeroEntropy joined Notion on 24 July 2026, kept its products up until 4 September 2026 and then sunset them. <code>zeroentropy.dev</code> and <code>docs.zeroentropy.dev</code> no longer resolve — the domain’s nameservers refuse queries (SERVFAIL at Cloudflare’s and Google’s resolvers, 20 November 2026). The page, the models table and the home card now say the API closed and the Apache 2.0 weights on Hugging Face are how to run the model</li>
+          <li><strong>The licence caveat is settled, not just removed</strong> — the same announcement relicensed every ZeroEntropy model to Apache 2.0, so the “model card and docs disagree” warning is replaced by what the vendor announced and what the model card says</li>
+          <li><strong>The last listed price stays, labelled</strong> — ${{fact:zerank-2.api_usd_per_m}} per 1M tokens remains in the <a href="/rerank-cost-calculator.html">cost calculator</a> and the <a href="/guides/compare-rerankers.html">hosted-API comparison</a> marked as closed, so the comparison is not quietly rewritten. The daily source check treats it as a manual fact whose reference is the archived docs page</li>
+          <li><strong>The release watch drops the two dead vendor pages</strong> — with no DNS there is nothing to fetch; new models from the zeroentropy account on Hugging Face are still reported by the author watch. The retirement is on <a href="/news#2026-09-04-zeroentropy">/news</a> too</li>
+        </ul>
+      </article>
+      <article class="changelog-entry">
         <h2 id="2026-11-20-copy-watch">20 Nov 2026 — A stale count on the cost calculator, and a watch that outlasts the year</h2>
         <ul class="feature-list">
           <li><strong>The models card under the <a href="/rerank-cost-calculator.html">cost calculator</a> stops counting models</strong> — it read <em>across 16 models</em>, a figure from when the table was smaller. The table has 38 rows now, five of them hosted platforms rather than models, so no fixed number stays right for long: the line now sends you to the table without naming one</li>

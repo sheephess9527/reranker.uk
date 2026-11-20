@@ -1,4 +1,12 @@
 window.I18N_PAGE = { zh: {
+  "4 Sep 2026 — ZeroEntropy closes its API after joining Notion":
+    "2026 年 9 月 4 日 —— ZeroEntropy 并入 Notion 后关停 API",
+  "ZeroEntropy was acquired by Notion on 24 July 2026. It said at the time that all of its products would be supported until 4 September 2026 and then sunset, and that is what happened: new signups closed on the day of the announcement, and <code>zeroentropy.dev</code> and <code>docs.zeroentropy.dev</code> do not resolve at all: the domain’s nameservers refuse queries (SERVFAIL at Cloudflare and Google, 20 November 2026). Its reranker zerank-2 last listed ${{fact:zerank-2.api_usd_per_m}} per million tokens.":
+    "ZeroEntropy 于 2026 年 7 月 24 日被 Notion 收购。当时它说明所有产品支持到 2026 年 9 月 4 日、之后下线，事实也是如此：宣布当天就关闭了新注册，<code>zeroentropy.dev</code> 和 <code>docs.zeroentropy.dev</code> 现在完全解析不了——域名的权威名称服务器直接拒绝查询（Cloudflare 和 Google 都返回 SERVFAIL）。它的重排序模型 zerank-2 最后一次公布的 API 价格是每百万 token ${{fact:zerank-2.api_usd_per_m}}。",
+  "The same announcement relicensed every ZeroEntropy model to Apache 2.0, so zerank-2, zerank-1 and zembed-1 can still be downloaded and used commercially. What is gone is the hosted API and any support behind it.":
+    "同一份公告把 ZeroEntropy 的全部模型改为 Apache 2.0，所以 zerank-2、zerank-1 和 zembed-1 仍然可以下载、可以商用。消失的是托管 API 和它背后的支持。",
+  "Source: <a href=\"https://web.archive.org/web/20260727091207/https://zeroentropy.dev/articles/zeroentropy-is-joining-notion/\" rel=\"noopener noreferrer\">ZeroEntropy’s announcement</a> (archived; the live site is gone) and <a href=\"https://www.notion.com/blog/zeroentropy-is-joining-notion\" rel=\"noopener noreferrer\">Notion’s</a>. On this site: <a href=\"/models/zerank.html\">zerank-2 review</a>.":
+    "出处：<a href=\"https://web.archive.org/web/20260727091207/https://zeroentropy.dev/articles/zeroentropy-is-joining-notion/\" rel=\"noopener noreferrer\">ZeroEntropy 的公告</a>（存档；原站已下线）和 <a href=\"https://www.notion.com/blog/zeroentropy-is-joining-notion\" rel=\"noopener noreferrer\">Notion 的公告</a>。本站：<a href=\"/models/zerank.html\">zerank-2 评测</a>。",
   "Reranker news":
     "重排序动态",
   "Releases, price changes and retirements from the companies that make rerankers. One short entry each, with the vendor’s own page as the source. No site housekeeping: that is in the <a href=\"/changelog.html\">changelog</a>.":

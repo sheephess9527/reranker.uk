@@ -11,7 +11,7 @@
  *   - Hugging Face, catch-up: `text-ranking` models with at least
  *     `hf_catchup_min_likes` likes, whenever they came out, that no page
  *     on the site mentions — popular releases the watch started too late for;
- *   - vendor pages for hosted APIs (Cohere, Voyage, Jina, ZeroEntropy,
+ *   - vendor pages for hosted APIs (Cohere, Voyage, Jina,
  *     Mixedbread, Alibaba Cloud, SiliconFlow, Pinecone, Contextual AI,
  *     Amazon Bedrock, Google Vertex AI, NVIDIA NIM): model IDs matching each
  *     page's `pattern` that aren't in its `known` list — and, the other way

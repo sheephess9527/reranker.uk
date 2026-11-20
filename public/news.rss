@@ -5,7 +5,7 @@
     <link>https://reranker.uk/news</link>
     <description>Releases, price changes and retirements from reranker vendors, each sourced to the vendor's own page.</description>
     <language>en-gb</language>
-    <lastBuildDate>Wed, 11 Nov 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 20 Nov 2026 00:10:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/news.rss" rel="self" type="application/rss+xml"/>
     <item>
       <title>11 Nov 2026 — sentence-transformers 6.3.0</title>
@@ -69,6 +69,13 @@
       <guid isPermaLink="true">https://reranker.uk/news#2026-09-30-voyage-rerank-3</guid>
       <pubDate>Wed, 30 Sep 2026 12:00:00 GMT</pubDate>
       <description>Voyage rerank-3 is a drop-in upgrade from rerank-2.5 at the same price, with the largest gains on long documents.</description>
+    </item>
+    <item>
+      <title>4 Sep 2026 — ZeroEntropy closes its API after joining Notion</title>
+      <link>https://reranker.uk/news#2026-09-04-zeroentropy</link>
+      <guid isPermaLink="true">https://reranker.uk/news#2026-09-04-zeroentropy</guid>
+      <pubDate>Fri, 04 Sep 2026 12:00:00 GMT</pubDate>
+      <description>ZeroEntropy, acquired by Notion in July 2026, sunset its products on 4 September 2026: the hosted API and its domains are gone, and the models remain Apache 2.0 on Hugging Face.</description>
     </item>
   </channel>
 </rss>

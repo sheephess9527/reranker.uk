@@ -135,8 +135,8 @@ window.I18N_PAGE = {
     "Google 没有为排序模型公布评测分数。一次查询最多计 100 篇文档，每多 100 篇算一次查询",
   "<a href=\"https://docs.cloud.google.com/generative-ai-app-builder/docs/ranking\" rel=\"noopener noreferrer\">Google Vertex AI ranking</a> <span class=\"muted\">(semantic-ranker)</span>":
     "<a href=\"https://docs.cloud.google.com/generative-ai-app-builder/docs/ranking\" rel=\"noopener noreferrer\">Google Vertex AI 排序</a> <span class=\"muted\">（semantic-ranker）</span>",
-  "4B on Qwen3-4B, 32K context; also served by ZeroEntropy’s API. Relicensed to Apache 2.0 on Hugging Face in July 2026 — ZeroEntropy’s own docs still call it non-commercial":
-    "4B，基于 Qwen3-4B，32K 上下文；ZeroEntropy 的 API 也提供。2026 年 7 月在 Hugging Face 上改为 Apache 2.0 许可 —— ZeroEntropy 自己的文档仍写着非商用",
+  "4B on Qwen3-4B, 32K context. Apache 2.0 since July 2026; ZeroEntropy’s hosted API closed on 4 September 2026, so the weights are the way to run it":
+    "4B，基于 Qwen3-4B，32K 上下文。2026 年 7 月起全部模型统一为 Apache 2.0；ZeroEntropy 的托管 API 已于 2026 年 9 月 4 日关停，要跑就只能用它的权重",
   "1.2B, 8K context; licensed for commercial use. NIM also serves a smaller llama-nemotron-rerank-500m-v2":
     "1.2B，8K 上下文；许可允许商用。NIM 还提供更小的 llama-nemotron-rerank-500m-v2",
   "306M, 8K context; small multilingual default, served by Text Embeddings Inference":
@@ -151,10 +151,6 @@ window.I18N_PAGE = {
     "30+ 种语言",
   "Qwen publish no BEIR average for it. Their own runs, from the model card: ViDoRe v3 {{fact:qwen3-vl-reranker-8b.vidore_v3}} for the 8B and {{fact:qwen3-vl-reranker-2b.vidore_v3}} for the 2B, MMTEB retrieval {{fact:qwen3-vl-reranker-8b.mmteb_r}} for the 8B. LightOn's run puts the 2B at {{fact:qwen3-vl-reranker-2b.beir_lighton}} on 11 BEIR datasets over BM25's top 100":
     "Qwen 没有为它公布 BEIR 平均分。模型卡里 Qwen 自己的测试：ViDoRe v3 上 8B 为 {{fact:qwen3-vl-reranker-8b.vidore_v3}}、2B 为 {{fact:qwen3-vl-reranker-2b.vidore_v3}}，MMTEB 检索上 8B 为 {{fact:qwen3-vl-reranker-8b.mmteb_r}}。LightOn 的测试中，2B 在 11 个 BEIR 数据集上（对 BM25 召回的前 100 条重排序）得分 {{fact:qwen3-vl-reranker-2b.beir_lighton}}",
-  "4B on Qwen3-4B, 32K context; also served by ZeroEntropy’s API":
-    "4B，基于 Qwen3-4B，32K 上下文；ZeroEntropy 的 API 也提供",
-  "Free (self-host) / API":
-    "免费（自建）/ API",
   "ZeroEntropy publish their own NDCG@10 over seven domains, reranking the top 100 from OpenAI text-embedding-3-small: {{fact:zerank-2.avg_ndcg10}} on average, against {{fact:zerank-2.cohere_3_5_same_run}} for Cohere rerank-3.5 in the same run. Not a BEIR average":
     "ZeroEntropy 公布的是自己在七个领域上的 NDCG@10，对 OpenAI text-embedding-3-small 召回的前 100 条重排序：平均 {{fact:zerank-2.avg_ndcg10}}，同一测试中 Cohere rerank-3.5 为 {{fact:zerank-2.cohere_3_5_same_run}}。不是 BEIR 平均分",
   "<strong>Tagged as a reranker, but not one for RAG:</strong> <a href=\"https://huggingface.co/Contrastive-LM/CLM-v0.1-8B\" rel=\"noopener noreferrer\">CLM-v0.1-8B</a> from Contrastive-LM (September 2026) was the most-liked <code>text-ranking</code> model on Hugging Face by early October. It scores candidate actions and answers for agents — two small heads on a frozen Qwen3-8B, which you serve separately for its embeddings — and its headline results are agent benchmarks with fine-tuned heads, not retrieval. That is why it isn’t in this table.":

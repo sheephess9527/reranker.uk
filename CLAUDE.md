@@ -257,6 +257,20 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 - [x] 不把 NanoBEIR 写成完整 BEIR 均分；不新增 Demo 模型或测速承诺。hs-rerank-1 改称紧凑多语言 CPU 方案，去掉绝对最小表述。中英文、changelog、RSS 同步，hf_seen 记入已处理模型。
 - [x] 人工复核 BAAI 官方图片：bge-v2-m3 55.36、v2-gemma 60.71 均未变，仅刷新这两项 verified_on。原有浏览器历史测量与 Cohere 4 最后公布价不伪称重新测量。
 
+## 2026-11-20 ZeroEntropy 关停：把 zerank-2 从「在卖的 API」改回「Apache 2.0 权重」
+
+起因是每日巡检一直把 `zerank-2.api_usd_per_m` 报成「源站不可达」，页面上还有四条 `docs.zeroentropy.dev` 的链接。查下来不是临时故障：
+
+- **ZeroEntropy 已被 Notion 收购并关停。** 2026-07-24 的公告（原站已下线，用 Wayback 存档核对：`https://web.archive.org/web/20260727091207/https://zeroentropy.dev/articles/zeroentropy-is-joining-notion/`，收购方公告 `https://www.notion.com/blog/zeroentropy-is-joining-notion`）写明：所有模型即日起改为 **Apache 2.0**，全部产品支持到 **2026-09-04** 后 sunset，新注册当天关闭。API、文档、dashboard 都已不存在。
+- **DNS 实测（2026-11-20T00:07:49Z）：** 不是 NXDOMAIN，是**域名委派下的权威服务器拒答**。`zeroentropy.dev` 在 `.dev` 仍被委派给 216.239.32–38.109，这几个服务器对 A 查询回 REFUSED；Cloudflare DoH 返回 `Status 2` + `EDE(22) No Reachable Authority at delegation zeroentropy.dev`，Google DoH 返回 `Status 2` + `Name servers refused query (lame delegation?)`。`docs.` / `www.` / `api.` 子域相同，curl 全部 000；同一轮里 Hugging Face 模型卡 200。
+- **处理原则：不删模型、不改分数、不编替代链接。** zerank-2 的权重本身没问题（HF 卡片 Apache 2.0、4B、32,768 token），站点据实改成「Apache 2.0 权重 + API 已于 2026-09-04 关停」，许可证那节从「模型卡与文档矛盾」改成厂商公告的原话（矛盾已被公告解决，旧文档也随站下线）。
+- **最后公布价保留但标清性质：** `api_usd_per_m` 改为 `check: "manual"` + `check_note`，`source_url` 指向 `docs.zeroentropy.dev/models` 的 Wayback 副本（2026-07-12，$0.000025/1M token 就出自那页）；成本计算器的选项名改成 `ZeroEntropy zerank-2 (API closed)`，对比页那行标 `(last listed)`。这样对比不被悄悄改写，也不会让人以为今天还能买。
+- **release-watch 删掉两个 ZeroEntropy 页面**（没有 DNS 就无从抓取，留着只会天天告警）。HF 的 `hf_authors` 仍含 `zeroentropy`，将来出 zerank-3 会从那条路报出来。
+- **厂商动作进 `/news`：** 加了一条 2026-09-04 的下线记录（排在最下面），出处是存档公告 + Notion 公告。
+- 细节与实测原文见 `docs/changes/2026-11-20-zeroentropy.md`。
+
+**以后遇到「厂商站点整站失联」照此办理**：先查一手公告（含 Wayback 存档）确认是迁移还是关停；确认关停后保留模型与最后公布数字，用 `check: "manual"` + `check_note` 记明它为何不再可核对，把死链换成 HF 卡片或存档链接，并在 release-watch 里撤掉无法再抓的页面，而不是让它每天报警。
+
 ## 2026-11-20 成本计算器文案与跨年链接
 
 - [x] 成本计算器「Keep reading」里的「Compare rerank models」卡片原来写 `Architecture, latency, languages and cost across 16 models.`，表里早已不是 16 行：`/models/` 的 `tbody` 现在 38 行（其中 5 行是托管平台：阿里云、硅基流动、Bedrock、Pinecone、Vertex AI）。改成不写数字：`Architecture, latency, languages and cost for every reranker in the table.`，`src/i18n/rerank-cost-calculator.js` 的键跟着换（键是规范化后的 inner HTML，旧键必须一起删，否则中文页仍显示 16）。
