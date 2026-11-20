@@ -3,6 +3,21 @@
 Repository and tooling changes. Site-facing data updates live on the public
 changelog page (src/pages/changelog.html).
 
+## 2026-11-20
+
+- The cost calculator's "Compare rerank models" card no longer quotes a model
+  count. It read "across 16 models" while the table has carried 38 rows since
+  (five of them hosted platforms); the line now names no number, so adding a
+  model cannot make it stale again.
+
+- `data/release-watch.json`: the Pinecone changelog entry watches the undated
+  `https://docs.pinecone.io/release-notes`, which 308-redirects to the current
+  year's page (`/release-notes/2026` when checked on 2026-11-20), instead of
+  `/release-notes/2026`, which needed a hand edit every January. The new
+  `current_year` flag makes `scripts/watch-releases.mjs` warn when that
+  address lands on a year other than this one, so a redirect that stops
+  following the calendar is reported rather than silently watching old notes.
+
 ## 2026-11-16
 
 - Recorded the scheduled source/candidate patrol and added sourced Ettin 17M

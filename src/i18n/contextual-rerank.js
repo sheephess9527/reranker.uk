@@ -115,8 +115,8 @@ window.I18N_PAGE = { zh: {
     "Apache 2.0，支持指令。",
   "Hosted, takes instructions in the query.":
     "托管，指令写在查询里。",
-  "Weights and API from ZeroEntropy.":
-    "ZeroEntropy 的权重和 API。",
+  "Apache 2.0 weights from ZeroEntropy; its hosted API has closed.":
+    "ZeroEntropy 的 Apache 2.0 权重；它的托管 API 已经关停。",
   "Hosted API, Pro and Fast.":
     "托管 API，分 Pro 和 Fast 两档。",
 }};

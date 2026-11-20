@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-  <title>zerank-2：ZeroEntropy 的 4B 重排序模型，开源权重与 API | reranker.uk</title>
-  <meta name="description" content="zerank-2 评测（2026 年 10 月）：基于 Qwen3-4B 的 ZeroEntropy 4B 重排序模型，模型卡与官方文档在许可证上的矛盾，ZeroEntropy 自己对比 Cohere rerank-3.5 的分数，API 价格，以及 sentence-transformers 快速上手。" >
+  <title>zerank-2：ZeroEntropy 的 4B 重排序模型，Apache 2.0 权重 | reranker.uk</title>
+  <meta name="description" content="zerank-2 评测（2026 年 11 月）：基于 Qwen3-4B 的 ZeroEntropy 4B 重排序模型，Hugging Face 上的 Apache 2.0 权重，托管 API 随公司并入 Notion 于 2026 年 9 月 4 日关停，ZeroEntropy 自己对比 Cohere rerank-3.5 的分数，以及 sentence-transformers 快速上手。" >
   <link rel="canonical" href="https://reranker.uk/zh/models/zerank" >
   <link rel="alternate" hreflang="en" href="https://reranker.uk/models/zerank" >
   <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/models/zerank" >
@@ -17,23 +17,23 @@
   <link rel="manifest" href="/site.webmanifest" >
   <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
   <meta property="og:type" content="article" >
-  <meta property="og:title" content="zerank-2：ZeroEntropy 的 4B 重排序模型，开源权重与 API | reranker.uk" >
-  <meta property="og:description" content="zerank-2 评测（2026 年 10 月）：基于 Qwen3-4B 的 ZeroEntropy 4B 重排序模型，模型卡与官方文档在许可证上的矛盾，ZeroEntropy 自己对比 Cohere rerank-3.5 的分数，API 价格，以及 sentence-transformers 快速上手。" >
+  <meta property="og:title" content="zerank-2：ZeroEntropy 的 4B 重排序模型，Apache 2.0 权重 | reranker.uk" >
+  <meta property="og:description" content="zerank-2 评测（2026 年 11 月）：基于 Qwen3-4B 的 ZeroEntropy 4B 重排序模型，Hugging Face 上的 Apache 2.0 权重，托管 API 随公司并入 Notion 于 2026 年 9 月 4 日关停，ZeroEntropy 自己对比 Cohere rerank-3.5 的分数，以及 sentence-transformers 快速上手。" >
   <meta property="og:url" content="https://reranker.uk/zh/models/zerank" >
   <meta property="og:site_name" content="reranker.uk" >
   <meta property="og:locale" content="zh_CN" >
   <meta property="og:locale:alternate" content="en_GB" >
   <meta name="twitter:card" content="summary_large_image" >
-  <meta property="og:image" content="https://reranker.uk/assets/og/zh/models/zerank.jpg?v=8df27d841c" >
+  <meta property="og:image" content="https://reranker.uk/assets/og/zh/models/zerank.jpg?v=cd388b59ec" >
   <meta property="og:image:width" content="1200" >
   <meta property="og:image:height" content="630" >
-  <meta property="og:image:alt" content="zerank-2：ZeroEntropy 的 4B 重排序模型，开源权重与 API | reranker.uk" >
-  <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/models/zerank.jpg?v=8df27d841c" >
+  <meta property="og:image:alt" content="zerank-2：ZeroEntropy 的 4B 重排序模型，Apache 2.0 权重 | reranker.uk" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/models/zerank.jpg?v=cd388b59ec" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
   <link rel="preload" href="/assets/css/style.css?v=71c7ffaf81" as="style" >
   <link rel="stylesheet" href="/assets/css/style.css?v=71c7ffaf81" >
   <!-- seo:jsonld -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"模型对比","item":"https://reranker.uk/zh/models/"},{"@type":"ListItem","position":3,"name":"zerank-2：ZeroEntropy 的 4B 重排序模型，开源权重与 API","item":"https://reranker.uk/zh/models/zerank"}]},{"@type":"Article","headline":"zerank-2：ZeroEntropy 的 4B 重排序模型，开源权重与 API","description":"zerank-2 评测（2026 年 10 月）：基于 Qwen3-4B 的 ZeroEntropy 4B 重排序模型，模型卡与官方文档在许可证上的矛盾，ZeroEntropy 自己对比 Cohere rerank-3.5 的分数，API 价格，以及 sentence-transformers 快速上手。","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"zh-Hans","datePublished":"2026-10-15","dateModified":"2026-10-15","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/zh/"},"mainEntityOfPage":"https://reranker.uk/zh/models/zerank","about":{"@type":"Thing","name":"zerank-2 reranker model"}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"模型对比","item":"https://reranker.uk/zh/models/"},{"@type":"ListItem","position":3,"name":"zerank-2：ZeroEntropy 的 4B 重排序模型，Apache 2.0 权重","item":"https://reranker.uk/zh/models/zerank"}]},{"@type":"Article","headline":"zerank-2：ZeroEntropy 的 4B 重排序模型，Apache 2.0 权重","description":"zerank-2 评测（2026 年 11 月）：基于 Qwen3-4B 的 ZeroEntropy 4B 重排序模型，Hugging Face 上的 Apache 2.0 权重，托管 API 随公司并入 Notion 于 2026 年 9 月 4 日关停，ZeroEntropy 自己对比 Cohere rerank-3.5 的分数，以及 sentence-transformers 快速上手。","image":"https://reranker.uk/assets/img/og-cover.png","inLanguage":"zh-Hans","datePublished":"2026-10-15","dateModified":"2026-10-15","author":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/"},"publisher":{"@type":"Organization","name":"reranker.uk","url":"https://reranker.uk/zh/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},"isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/zh/"},"mainEntityOfPage":"https://reranker.uk/zh/models/zerank","about":{"@type":"Thing","name":"zerank-2 reranker model"}}]}</script>
 
 </head>
 <body>
@@ -67,25 +67,25 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/models/">模型对比</a><span>/</span>zerank-2</div>
       <h1>zerank-2</h1>
-      <p class="meta">开源权重 + 托管 API · ZeroEntropy · <time datetime="2026-10-15">更新于 2026 年 10 月 15 日</time></p>
-      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill warn">许可证：先确认</span><span class="pill">托管 API</span><span class="pill">建议用 GPU</span></div>
-      <p class="lead"><strong>zerank-2</strong> 是 ZeroEntropy 的 4B 重排序模型，基于 Qwen3-4B，上下文 32,768 个 token。权重放在 Hugging Face 上，ZeroEntropy 也通过自家 API 提供同一个模型，每百万 token $0.025。它公布的分数来自 ZeroEntropy 自己的七领域测试：成绩不错，但不能和任何人的 BEIR 分数直接比较。</p>
+      <p class="meta">开源权重 · ZeroEntropy（已并入 Notion） · <time datetime="2026-11-20">更新于 2026 年 11 月 20 日</time></p>
+      <div class="tag-row" style="margin-bottom:1.2rem"><span class="pill good">开源权重</span><span class="pill good">Apache 2.0</span><span class="pill">建议用 GPU</span><span class="pill warn">API 已关停</span></div>
+      <p class="lead"><strong>zerank-2</strong> 是 ZeroEntropy 的 4B 重排序模型，基于 Qwen3-4B，上下文 32,768 个 token。权重以 Apache 2.0 放在 Hugging Face 上，可以自己部署。ZeroEntropy 自家的 API（最后公布价每百万 token $0.025）已随公司并入 Notion 于 2026 年 9 月 4 日关停。它公布的分数来自 ZeroEntropy 自己的七领域测试：成绩不错，但不能和任何人的 BEIR 分数直接比较。</p>
 
       <div class="toc">
         <strong>本页目录</strong>
         <ol>
-          <li><a href="#licence">许可证问题</a></li>
+          <li><a href="#licence">许可证</a></li>
           <li><a href="#scores">分数，以及是谁测的</a></li>
           <li><a href="#usage">快速上手</a></li>
-          <li><a href="#api">托管 API</a></li>
+          <li><a href="#api">API，以及现在用什么代替</a></li>
           <li><a href="#when">什么时候选 zerank-2</a></li>
           <li><a href="#pros-cons">优缺点</a></li>
         </ol>
       </div>
 
-      <h2 id="licence">许可证问题</h2>
-      <p><a href="https://huggingface.co/zeroentropy/zerank-2-reranker" rel="noopener noreferrer">Hugging Face 模型卡</a>写的是 Apache 2.0，仓库在 2026 年 7 月改了许可证。但 ZeroEntropy 的<a href="https://docs.zeroentropy.dev/models" rel="noopener noreferrer">模型文档</a>仍然写着 zerank-2 “按非商业许可证”提供下载，并请商业用户联系他们。</p>
-      <p>在两边说法一致之前，如果要在商业产品里自托管，先拿到 ZeroEntropy 的书面确认。通过 API 使用则受 ZeroEntropy 的服务条款约束，不涉及这个问题；更早的 <strong>zerank-1-small</strong> 在两边都是 Apache 2.0。</p>
+      <h2 id="licence">许可证</h2>
+      <p>ZeroEntropy 在 2026 年 7 月 24 日<a href="https://web.archive.org/web/20260727091207/https://zeroentropy.dev/articles/zeroentropy-is-joining-notion/" rel="noopener noreferrer">宣布并入 Notion</a>当天，把所有模型都改成了 Apache 2.0，<a href="https://huggingface.co/zeroentropy/zerank-2-reranker" rel="noopener noreferrer">Hugging Face 模型卡</a>写的也是 Apache 2.0。ZeroEntropy 早先的模型文档（已随整站下线）曾把 zerank-2 写成非商用、请商业用户联系他们；厂商自己的公告已经取代了那句话。</p>
+      <p>因此商业自托管依据的就是模型卡上的 Apache 2.0 许可。它不带质保，也没有支持合同——ZeroEntropy 已经不再提供这两样。</p>
 
       <h2 id="scores">分数，以及是谁测的</h2>
       <div class="table-wrap" tabindex="0" role="region" aria-label="分数，以及是谁测的">
@@ -123,26 +123,17 @@ rankings = model.rank(
 # [{'corpus_id': 0, 'score': 5.40625}, {'corpus_id': 1, 'score': -4.5}]</code></pre>
       <p>从 2026 年 5 月起，<code>predict()</code> 和 <code>rank()</code> 返回原始 logit，而不是 0–1 的概率，排序结果不变。需要 0–1 分数时，按模型卡的做法计算 <code>sigmoid(score / 5)</code>。加载时也不再需要 <code>trust_remote_code=True</code>。</p>
 
-      <h2 id="api">托管 API</h2>
-      <pre tabindex="0"><code>pip install zeroentropy
-
-from zeroentropy import ZeroEntropy
-
-zclient = ZeroEntropy()   # reads ZEROENTROPY_API_KEY
-response = zclient.models.rerank(
-    model="zerank-2",
-    query="What is 2+2?",
-    documents=["4", "The answer is definitely 1 million."],
-)</code></pre>
-      <p>API 价格为每百万 token $0.025。ZeroEntropy 文档里 zerank-1 和 zerank-1-small 价格相同，API 部署在美国东部、美国西部和欧洲。速率限制取决于订阅档位，当前数值见<a href="https://docs.zeroentropy.dev/models" rel="noopener noreferrer">文档</a>。这个模型也在 AWS 和 Azure 应用市场上架，部署后运行在你自己的云账号里。</p>
-      <p>ZeroEntropy 网站上还列了两个更小的模型 <strong>zerank-2-small</strong> 和 <strong>zerank-2-nano</strong>，但文档里还没有给出价格或模型卡；nano 可以通过 AWS Marketplace 使用。想在你的负载下比较 zerank-2 按 token 计价和其他托管重排序 API 的花费，可以用<a href="/zh/rerank-cost-calculator">成本计算器</a>。</p>
+      <h2 id="api">API，以及现在用什么代替</h2>
+      <p>ZeroEntropy 曾以托管 API 提供 zerank-2：每百万 token $0.025，与 zerank-1、zerank-1-small 同价，服务部署在美国东部、美国西部和欧洲。这个 API 已经关停。ZeroEntropy 于 2026 年 7 月 24 日被 Notion 收购，并<a href="https://web.archive.org/web/20260727091207/https://zeroentropy.dev/articles/zeroentropy-is-joining-notion/" rel="noopener noreferrer">说明产品支持到 2026 年 9 月 4 日、之后下线</a>；<code>zeroentropy.dev</code> 和 <code>docs.zeroentropy.dev</code> 现在已无 DNS 解析（2026 年 11 月 20 日实测）。上面那个价格是它最后一次公布的，今天买不到。</p>
+      <p>剩下的是模型本身：Hugging Face 上的权重就是当年 API 提供的那些，上面的 sentence-transformers 快速上手可以在自己的 GPU 上跑起来。如果不想自己养 GPU，<a href="/zh/rerank-cost-calculator">成本计算器</a>比较的是还在卖的托管重排序服务——Cohere Rerank 5、Voyage rerank-3、Jina 以及各家云平台。</p>
+      <p>ZeroEntropy 网站还列过两个更小的模型 <strong>zerank-2-small</strong> 和 <strong>zerank-2-nano</strong>，既没有价格也没有模型卡，两者在 Hugging Face 上都没有发布。公司已经不在了，这两个模型也就没有什么可说的了。</p>
 
       <h2 id="when">什么时候选 zerank-2</h2>
       <ul>
-        <li><strong>适合：</strong>想先调用 API，以后再自托管，而且换部署方式时模型行为不变。</li>
+        <li><strong>适合：</strong>想要一个 Apache 2.0 的 4B 重排序模型，自己拿着权重部署，中间不经过任何 API。</li>
         <li><strong>适合：</strong>你的文档和 ZeroEntropy 测过的领域相近：法律、金融、代码、生物医学、技术文档。</li>
         <li><strong>先测试：</strong>英语以外的语言。模型卡只列了英语，ZeroEntropy 的发布文章却称它支持多语言。两种说法都别直接信，先用带标注的查询测你要用的语言。</li>
-        <li><strong>可能不适合：</strong>许可证问题解决前的商业自托管（见<a href="#licence">上文</a>），或者只有 CPU 的部署。4B 模型需要 GPU；只有 CPU 的话，先试 <a href="/zh/models/bge-reranker">bge-reranker</a>。</li>
+        <li><strong>可能不适合：</strong>只有 CPU 的部署，或者希望有事能找厂商负责的团队。4B 模型需要 GPU，而且 zerank-2 已经没有托管服务；只有 CPU 的话，先试 <a href="/zh/models/bge-reranker">bge-reranker</a>。</li>
       </ul>
 
       <h2 id="pros-cons">优缺点</h2>
@@ -150,7 +141,7 @@ response = zclient.models.rerank(
         <div class="card">
           <h3 style="color:var(--good);margin-top:0">优点</h3>
           <ul class="feature-list">
-            <li>同一个模型既有权重也有 API</li>
+            <li>Apache 2.0 权重，自托管没有按 token 的账单</li>
             <li>32K 上下文</li>
             <li>可直接用 sentence-transformers 的 <code>CrossEncoder</code> 加载</li>
             <li>在 ZeroEntropy 自己的测试里，每个领域都领先 Cohere rerank-3.5</li>
@@ -159,7 +150,7 @@ response = zclient.models.rerank(
         <div class="card">
           <h3 style="color:var(--danger);margin-top:0">缺点</h3>
           <ul style="padding-left:1.2rem;color:var(--text-soft)">
-            <li>模型卡和官方文档对许可证说法不一</li>
+            <li>2026 年 9 月起没有托管 API：只能自己部署</li>
             <li>公布的分数是厂商自己用自己的数据集测的</li>
             <li>4B 参数：要有 GPU 延迟才舒服</li>
             <li>太大，放不进我们的浏览器内 Demo</li>

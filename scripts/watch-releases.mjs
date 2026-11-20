@@ -11,14 +11,16 @@
  *   - Hugging Face, catch-up: `text-ranking` models with at least
  *     `hf_catchup_min_likes` likes, whenever they came out, that no page
  *     on the site mentions — popular releases the watch started too late for;
- *   - vendor pages for hosted APIs (Cohere, Voyage, Jina, ZeroEntropy,
+ *   - vendor pages for hosted APIs (Cohere, Voyage, Jina,
  *     Mixedbread, Alibaba Cloud, SiliconFlow, Pinecone, Contextual AI,
  *     Amazon Bedrock, Google Vertex AI, NVIDIA NIM): model IDs matching each
  *     page's `pattern` that aren't in its `known` list — and, the other way
  *     round, IDs in a page's `expect` list (models the site tells people to
  *     use) that are no longer on it, or that a page's `retired` pattern finds
  *     next to words like "deprecated" (`{id}` stands for each ID in
- *     `retired_ids`, or in `expect` if there's no such list);
+ *     `retired_ids`, or in `expect` if there's no such list); a page marked
+ *     `current_year` (today only Pinecone's changelog) must land on the current
+ *     year's page, whether its URL names the year or redirects to one;
  *   - GitHub releases of the libraries the site's code and guides depend on
  *     (`libraries`): a stable release newer than `known`.
  *
@@ -46,12 +48,18 @@ const ISSUE = process.argv.includes("--issue");
 const LABEL = "release-watch";
 const UA = { "user-agent": "reranker.uk release watch (+https://reranker.uk)" };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// Where a URL actually landed, so an entry point that redirects to the current
+// year's page can be checked against the year it is (see `current_year`).
+const finalUrls = new Map();
 
 async function get(url, as = "text") {
   for (let attempt = 0; ; attempt++) {
     const auth = url.startsWith("https://api.github.com/") && process.env.GITHUB_TOKEN ? { authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {};
     const res = await fetch(url, { headers: { ...UA, ...auth }, signal: AbortSignal.timeout(30_000) });
-    if (res.ok) return as === "json" ? res.json() : res.text();
+    if (res.ok) {
+      finalUrls.set(url, res.url);
+      return as === "json" ? res.json() : res.text();
+    }
     if ((res.status === 429 || res.status >= 500) && attempt < 2) {
       await sleep(5000 * (attempt + 1));
       continue;
@@ -167,6 +175,19 @@ for (const page of CONFIG.pages) {
     const retired = page.retired
       ? retireIds.filter((id) => new RegExp(page.retired.replaceAll("{id}", id.replace(/[.]/g, "\\.")), "i").test(text))
       : [];
+    // The one failure a year-scoped page cannot otherwise show: last year's notes
+    // still answer 200 and still list model IDs, so a stale entry looks healthy
+    // while it watches announcements that stop coming.
+    if (page.current_year) {
+      const landed = finalUrls.get(page.url) || page.url;
+      const year = (landed.match(/\/(20\d\d)(?:[./#?]|$)/) || [])[1];
+      const thisYear = new Date().getUTCFullYear();
+      if (String(year) !== String(thisYear)) {
+        warnings.push(
+          `${page.name}: ${page.url} lands on ${landed} — ${year ? `${year}, not ${thisYear}` : "no year in that address"}; point it at this year's page`
+        );
+      }
+    }
     if (BASELINE) {
       console.log(`${page.name} (${page.url}):\n  ${JSON.stringify(ids)}`);
       if (expect.length || retireIds.length) {

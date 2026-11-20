@@ -87,7 +87,7 @@
       <ul>
         <li><strong>Self-hosting on a GPU and want the best open model:</strong> <a href="/models/qwen-reranker">Qwen3-Reranker-4B</a>. In both runs below it is at or near the top, and it is Apache 2.0.</li>
         <li><strong>Small, CPU-friendly, multilingual:</strong> <a href="/models/bge-reranker">bge-reranker-v2-m3</a> is the standard baseline; the <a href="/models/gte-reranker">GTE rerankers</a> are smaller still, and Hindsight’s <a href="https://huggingface.co/hindsight-ai/hs-rerank-1" rel="noopener noreferrer">hs-rerank-1</a> (MIT, 114M) is smaller again but comes with no scores we can quote.</li>
-        <li><strong>No GPU and no ops:</strong> a hosted API. <a href="/models/cohere-rerank">Cohere Rerank 5</a> and <a href="/models/voyage-rerank">Voyage rerank-3</a> are the established ones, <a href="/models/zerank">zerank-2</a> the cheapest per token.</li>
+        <li><strong>No GPU and no ops:</strong> a hosted API. <a href="/models/cohere-rerank">Cohere Rerank 5</a> and <a href="/models/voyage-rerank">Voyage rerank-3</a> are the established ones; <a href="/models/zerank">zerank-2</a> was the cheapest per token, but its API closed in September 2026.</li>
         <li><strong>Commercial product, open weights:</strong> check the licence first. <a href="/models/jina-reranker">Jina’s</a> weights are non-commercial.</li>
       </ul>
 
@@ -157,11 +157,11 @@
           <tbody>
             <tr><td><a href="/models/cohere-rerank">Cohere Rerank 5</a> Pro / Fast</td><td>$0.05 / $0.02</td><td>32,768 tokens</td><td>None published</td></tr>
             <tr><td><a href="/models/voyage-rerank">Voyage rerank-3</a> / lite</td><td>$0.05 / $0.02</td><td>32,000 tokens</td><td>Voyage’s own evaluations only</td></tr>
-            <tr><td><a href="/models/zerank">zerank-2</a></td><td>$0.025</td><td>32,768 tokens</td><td>ZeroEntropy’s own run only</td></tr>
+            <tr><td><a href="/models/zerank">zerank-2</a> (last listed)</td><td>$0.025</td><td>32,768 tokens</td><td>ZeroEntropy’s own run only</td></tr>
           </tbody>
         </table>
       </div>
-      <p>Per-token and per-search prices are billed differently, so the cheapest sticker price is not always the cheapest bill. The <a href="/rerank-cost-calculator">cost calculator</a> works it out for your documents per query and queries per month.</p>
+      <p>Per-token and per-search prices are billed differently, so the cheapest sticker price is not always the cheapest bill. The <a href="/rerank-cost-calculator">cost calculator</a> works it out for your documents per query and queries per month. ZeroEntropy’s API is the one closed entry: the company joined Notion and sunset its products on 4 September 2026, so zerank-2 is a row to read and self-host, not one to buy.</p>
 
       <h2 id="decide">How to decide</h2>
       <ol>
