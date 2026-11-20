@@ -56,7 +56,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/guides/compare-rerankers</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/compare-rerankers" />
@@ -65,7 +65,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/guides/compare-rerankers</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/compare-rerankers" />
@@ -290,7 +290,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/" />
@@ -299,7 +299,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/" />
@@ -344,7 +344,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/models/contextual-rerank</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/contextual-rerank" />
@@ -353,7 +353,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/models/contextual-rerank</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/contextual-rerank" />
@@ -380,7 +380,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/models/</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/" />
@@ -389,7 +389,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/models/</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/" />
@@ -524,7 +524,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/models/zerank</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/zerank" />
@@ -533,7 +533,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/models/zerank</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/models/zerank" />
@@ -560,7 +560,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/news</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/news" />
@@ -569,7 +569,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/news</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/news" />
