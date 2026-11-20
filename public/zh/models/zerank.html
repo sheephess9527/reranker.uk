@@ -84,7 +84,7 @@
       </div>
 
       <h2 id="licence">许可证</h2>
-      <p>ZeroEntropy 在 2026 年 7 月 24 日宣布并入 Notion 当天，把所有模型都改成了 Apache 2.0，<a href="https://huggingface.co/zeroentropy/zerank-2-reranker" rel="noopener noreferrer">Hugging Face 模型卡</a>写的也是 Apache 2.0。ZeroEntropy 早先的模型文档（已随整站下线）曾把 zerank-2 写成非商用、请商业用户联系他们；厂商自己的公告已经取代了那句话。</p>
+      <p>ZeroEntropy 在 2026 年 7 月 24 日<a href="https://web.archive.org/web/20260727091207/https://zeroentropy.dev/articles/zeroentropy-is-joining-notion/" rel="noopener noreferrer">宣布并入 Notion</a>当天，把所有模型都改成了 Apache 2.0，<a href="https://huggingface.co/zeroentropy/zerank-2-reranker" rel="noopener noreferrer">Hugging Face 模型卡</a>写的也是 Apache 2.0。ZeroEntropy 早先的模型文档（已随整站下线）曾把 zerank-2 写成非商用、请商业用户联系他们；厂商自己的公告已经取代了那句话。</p>
       <p>因此商业自托管依据的就是模型卡上的 Apache 2.0 许可。它不带质保，也没有支持合同——ZeroEntropy 已经不再提供这两样。</p>
 
       <h2 id="scores">分数，以及是谁测的</h2>
@@ -124,7 +124,7 @@ rankings = model.rank(
       <p>从 2026 年 5 月起，<code>predict()</code> 和 <code>rank()</code> 返回原始 logit，而不是 0–1 的概率，排序结果不变。需要 0–1 分数时，按模型卡的做法计算 <code>sigmoid(score / 5)</code>。加载时也不再需要 <code>trust_remote_code=True</code>。</p>
 
       <h2 id="api">API，以及现在用什么代替</h2>
-      <p>ZeroEntropy 曾以托管 API 提供 zerank-2：每百万 token $0.025，与 zerank-1、zerank-1-small 同价，服务部署在美国东部、美国西部和欧洲。这个 API 已经关停。ZeroEntropy 于 2026 年 7 月 24 日被 Notion 收购，并说明产品支持到 2026 年 9 月 4 日、之后下线；<code>zeroentropy.dev</code> 和 <code>docs.zeroentropy.dev</code> 现在已无 DNS 解析（2026 年 11 月 20 日实测）。上面那个价格是它最后一次公布的，今天买不到。</p>
+      <p>ZeroEntropy 曾以托管 API 提供 zerank-2：每百万 token $0.025，与 zerank-1、zerank-1-small 同价，服务部署在美国东部、美国西部和欧洲。这个 API 已经关停。ZeroEntropy 于 2026 年 7 月 24 日被 Notion 收购，并<a href="https://web.archive.org/web/20260727091207/https://zeroentropy.dev/articles/zeroentropy-is-joining-notion/" rel="noopener noreferrer">说明产品支持到 2026 年 9 月 4 日、之后下线</a>；<code>zeroentropy.dev</code> 和 <code>docs.zeroentropy.dev</code> 现在已无 DNS 解析（2026 年 11 月 20 日实测）。上面那个价格是它最后一次公布的，今天买不到。</p>
       <p>剩下的是模型本身：Hugging Face 上的权重就是当年 API 提供的那些，上面的 sentence-transformers 快速上手可以在自己的 GPU 上跑起来。如果不想自己养 GPU，<a href="/zh/rerank-cost-calculator">成本计算器</a>比较的是还在卖的托管重排序服务——Cohere Rerank 5、Voyage rerank-3、Jina 以及各家云平台。</p>
       <p>ZeroEntropy 网站还列过两个更小的模型 <strong>zerank-2-small</strong> 和 <strong>zerank-2-nano</strong>，既没有价格也没有模型卡，两者在 Hugging Face 上都没有发布。公司已经不在了，这两个模型也就没有什么可说的了。</p>
 
