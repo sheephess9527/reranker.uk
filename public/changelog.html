@@ -71,6 +71,22 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-20-zeroentropy">20 Nov 2026 — ZeroEntropy’s API is gone, and the site said it was still selling</h2>
+        <ul class="feature-list">
+          <li><strong><a href="/models/zerank">zerank-2</a> is described as weights, not as a live API</strong> — ZeroEntropy joined Notion on 24 July 2026, kept its products up until 4 September 2026 and then sunset them. <code>zeroentropy.dev</code> and <code>docs.zeroentropy.dev</code> no longer resolve — the domain’s nameservers refuse queries (SERVFAIL at Cloudflare’s and Google’s resolvers, 20 November 2026). The page, the models table and the home card now say the API closed and the Apache 2.0 weights on Hugging Face are how to run the model</li>
+          <li><strong>The licence caveat is settled, not just removed</strong> — the same announcement relicensed every ZeroEntropy model to Apache 2.0, so the “model card and docs disagree” warning is replaced by what the vendor announced and what the model card says</li>
+          <li><strong>The last listed price stays, labelled</strong> — $0.025 per 1M tokens remains in the <a href="/rerank-cost-calculator">cost calculator</a> and the <a href="/guides/compare-rerankers">hosted-API comparison</a> marked as closed, so the comparison is not quietly rewritten. The daily source check treats it as a manual fact whose reference is the archived docs page</li>
+          <li><strong>The release watch drops the two dead vendor pages</strong> — with no DNS there is nothing to fetch; new models from the zeroentropy account on Hugging Face are still reported by the author watch. The retirement is on <a href="/news#2026-09-04-zeroentropy">/news</a> too</li>
+        </ul>
+      </article>
+      <article class="changelog-entry">
+        <h2 id="2026-11-20-copy-watch">20 Nov 2026 — A stale count on the cost calculator, and a watch that outlasts the year</h2>
+        <ul class="feature-list">
+          <li><strong>The models card under the <a href="/rerank-cost-calculator">cost calculator</a> stops counting models</strong> — it read <em>across 16 models</em>, a figure from when the table was smaller. The table has 38 rows now, five of them hosted platforms rather than models, so no fixed number stays right for long: the line now sends you to the table without naming one</li>
+          <li><strong>The release watch follows Pinecone’s notes without a yearly edit</strong> — that entry watched <code>/release-notes/2026</code>, which had to be moved to <code>/release-notes/2027</code> every January. It now uses the undated <code>/release-notes</code>, which redirects to the current year’s page, and the watch warns when that address lands on another year instead of quietly reading last year’s announcements</li>
+        </ul>
+      </article>
+      <article class="changelog-entry">
         <h2 id="2026-11-16-ettin-catchup">16 Nov 2026 — Catching up on a small English CPU reranker</h2>
         <p>Added <a href="/models/#ettin-reranker-17m-v1">ettin-reranker-17m-v1</a> to the comparison table and <a href="/guides/self-host-reranker#ettin">self-hosting guide</a>. This fills an older coverage gap, not a new release: the official announcement is from May 2026. The model size and input limit are sourced, no full BEIR score is inferred from NanoBEIR, and hs-rerank-1 is now described as a compact multilingual option rather than the smallest CPU model.</p>
       </article>
@@ -120,23 +136,21 @@
           <li><strong>A <a href="/news">news page</a> for what the vendors do</strong> — new rerankers, price changes and retirements, one short entry each with the vendor’s own page as the source, starting from Voyage rerank-3 in September. It has its own <a href="/news.rss">RSS feed</a>, separate from this changelog, which stays about the site itself</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>Earlier in November 2026 (6 entries)</summary><article class="changelog-entry">
         <h2 id="2026-11-10-hs-rerank">10 Nov 2026 — A small multilingual reranker, and a hole in the release watch</h2>
         <ul class="feature-list">
           <li><strong>hs-rerank-1 in the <a href="/models/#hs-rerank-1">models table</a> and the <a href="/guides/compare-rerankers">comparison guide</a></strong> — Hindsight’s cross-encoder is 114M (a 15M-parameter transformer on top of a 98M embedding table), takes 8,192 tokens, covers English, Spanish, French, German, Portuguese, Chinese, Japanese and Korean, is MIT-licensed and ships an int8 ONNX file for CPUs. Its model card shows results only as an image, so the site quotes no scores for it</li>
           <li><strong>The release watch had missed it</strong> — hs-rerank-1 came out on 28 October and had 600,000 downloads within two weeks, but only 5 likes, under the bar of 10 for models from organisations we don’t track. The watch now also reports any new reranker with 5,000 or more downloads. Two other new models were read and left out: a non-commercial 4B reranker with 28 downloads, and a research LoRA adapter that isn’t a standalone model</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-11-05-vendors">5 Nov 2026 — Vendor docs reorganised: Pinecone and Cohere</h2>
         <ul class="feature-list">
           <li><strong>Pinecone moved every reranker’s limits onto its own page</strong> — the figures are unchanged (512 tokens per pair for <code>pinecone-rerank-v0</code>, 1024 for <code>bge-reranker-v2-m3</code>, 4,096 per document for <code>cohere-rerank-4-fast</code>), but the daily source check had stopped finding them. It now reads each model’s page</li>
           <li><strong>Cohere priced Model Vault by the GPU</strong> — its pricing page now lists an hourly rate per GPU type, from $3.00 an hour for an L4 on demand, plus replicas. The per-model rates this site quoted for Rerank 5 on 22 October ($4.00 an hour, $2,500 a month) are no longer published, so the <a href="/models/cohere-rerank#pricing">Cohere page</a> says what the page now lists instead</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>Earlier in November 2026 (4 entries)</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-11-05-compare">5 Nov 2026 — A comparison of the rerankers</h2>
         <ul class="feature-list">
           <li><strong>A <a href="/guides/compare-rerankers">head-to-head guide</a></strong> — Qwen3, bge, mxbai, Jina, GTE and the hosted APIs, with scores set side by side only where they come from one run: Qwen’s own run for Qwen3 against bge-reranker-v2-m3, and Jina’s 2026 run for Qwen3, mxbai and Jina. It says whose run each is, and says plainly that GTE and Cohere have no number that can be lined up. One finding that the model pages bury: Qwen3-Reranker-0.6B trails bge-reranker-v2-m3 on Chinese retrieval</li>
@@ -615,6 +629,10 @@
         </ul>
       </article></details>
 
+
+      
+
+      
 
       
 

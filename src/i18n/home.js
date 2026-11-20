@@ -21,8 +21,12 @@ window.I18N_PAGE = {
     "Cohere Rerank 5",
   "Mature hosted API, new generation on 21 October 2026: Pro and Fast, 32k context, 100+ languages, calibrated scores and Context Focus.":
     "成熟的托管 API，2026 年 10 月 21 日发布新一代：Pro 和 Fast 两档，32k 上下文、100 多种语言、校准过的分数和 Context Focus。",
-  "ZeroEntropy’s 4B reranker, as open weights and as an API. Check the licence first: the model card and the docs disagree.":
-    "ZeroEntropy 的 4B 重排序模型，既有开源权重也有 API。先确认许可证：模型卡和官方文档的说法不一致。",
+  "ZeroEntropy’s 4B reranker, Apache 2.0 weights on Hugging Face. Its hosted API closed in September 2026, when the team joined Notion.":
+    "ZeroEntropy 的 4B 重排序模型，Apache 2.0 权重放在 Hugging Face 上。它的托管 API 已随团队并入 Notion 于 2026 年 9 月关停。",
+  "Open weights":
+    "开源权重",
+  "API closed":
+    "API 已关停",
   "Reranks page images, screenshots and video, not just text. 2B and 8B, Apache 2.0.":
     "不只是文本，还能给页面图片、截图和视频重排序。2B 和 8B，Apache 2.0。",
   "Licence: check first":

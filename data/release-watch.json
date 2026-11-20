@@ -117,29 +117,6 @@
       ]
     },
     {
-      "name": "ZeroEntropy models",
-      "url": "https://docs.zeroentropy.dev/models",
-      "pattern": "zerank-\\d+(?:\\.\\d+)?(?:-(?:small|nano|mini|base|large))?(?![\\w-]|\\.\\w)",
-      "known": [
-        "zerank-1",
-        "zerank-1-small",
-        "zerank-2",
-        "zerank-2-nano"
-      ]
-    },
-    {
-      "name": "ZeroEntropy pricing",
-      "url": "https://www.zeroentropy.dev/pricing",
-      "pattern": "zerank-\\d+(?:\\.\\d+)?(?:-(?:small|nano|mini|base|large))?(?![\\w-]|\\.\\w)",
-      "known": [
-        "zerank-1",
-        "zerank-1-small",
-        "zerank-2",
-        "zerank-2-nano",
-        "zerank-2-small"
-      ]
-    },
-    {
       "name": "Mixedbread docs index",
       "url": "https://www.mixedbread.com/llms.txt",
       "pattern": "mxbai-rerank-(?:(?:large|base|xsmall)-)?v\\d+(?:\\.\\d+)?(?:-listwise)?(?![\\w-]|\\.\\w)",
@@ -209,12 +186,13 @@
     },
     {
       "name": "Pinecone changelog",
-      "url": "https://docs.pinecone.io/release-notes/2026",
+      "url": "https://docs.pinecone.io/release-notes",
+      "current_year": true,
       "pattern": "(?:pinecone-rerank-v\\d+|bge-reranker-v\\d+-m\\d+|cohere-rerank-\\d+(?:\\.\\d+)?(?:-(?:fast|pro))?)(?![\\w-]|\\.\\w)",
       "known": ["cohere-rerank-3.5", "cohere-rerank-4-fast"],
       "retired_ids": ["bge-reranker-v2-m3", "cohere-rerank-4-fast"],
       "retired": "{id}[^.`]{0,120}?\\b(?:is|are|will be|has been)[ -](?:deprecated|retired|removed)|\\b(?:deprecat\\w*|end[ -]of[ -]life|retir\\w*)\\b[:\\s-][^.`]{0,60}?{id}",
-      "why": "Pinecone announce deprecations here first (\"cohere-rerank-3.5 is deprecated\", 1 Jul 2026). The URL is per year: move it to /release-notes/2027 in January",
+      "why": "Pinecone announce deprecations here first (\"cohere-rerank-3.5 is deprecated\", 1 Jul 2026). The URL is the undated entry point: it 308-redirects to the current year's notes (checked 20 Nov 2026: /release-notes -> /release-notes/2026), so it does not need editing every January. `current_year` makes the watch say so if that redirect ever stops following the year",
       "why_expect": "update the models table row, the vector-database guide's Pinecone section and the cost calculator; keep the model listed until Pinecone's removal date"
     },
     {

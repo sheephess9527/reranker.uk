@@ -71,6 +71,22 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-20-zeroentropy">2026 年 11 月 20 日 —— ZeroEntropy 的 API 已经没了，而本站还写着它在卖</h2>
+        <ul class="feature-list">
+          <li><strong><a href="/zh/models/zerank">zerank-2</a> 现在写的是权重，而不是一个在卖的 API</strong> —— ZeroEntropy 于 2026 年 7 月 24 日并入 Notion，产品维持到 2026 年 9 月 4 日之后下线。<code>zeroentropy.dev</code> 和 <code>docs.zeroentropy.dev</code> 已经解析不了：域名的名称服务器直接拒绝查询（2026 年 11 月 20 日，Cloudflare 和 Google 的解析器都返回 SERVFAIL）。模型页、对比表和首页卡片都已改为：API 已关停，能跑这个模型的是 Hugging Face 上的 Apache 2.0 权重</li>
+          <li><strong>许可证的疑点是有了结论，而不只是删掉</strong> —— 同一份公告把 ZeroEntropy 的全部模型改为 Apache 2.0，所以“模型卡和文档说法不一”的提醒换成了厂商公告和模型卡的原话</li>
+          <li><strong>最后公布的价格保留，但标清楚</strong> —— 每 100 万 token $0.025 仍留在<a href="/zh/rerank-cost-calculator">成本计算器</a>和<a href="/zh/guides/compare-rerankers">托管 API 横向对比</a>里，并注明已关停，免得对比被偷偷改写。每日来源核对把它当作人工核对项，参照存档的文档页</li>
+          <li><strong>发布监控去掉了两个已失效的厂商页</strong> —— 没有 DNS 就无从抓取；Hugging Face 上 zeroentropy 账号出的新模型仍由作者监控覆盖。这次下线也写进了<a href="/zh/news#2026-09-04-zeroentropy">重排序动态</a></li>
+        </ul>
+      </article>
+      <article class="changelog-entry">
+        <h2 id="2026-11-20-copy-watch">2026 年 11 月 20 日 —— 成本计算器上的过期数字，以及能跨年的发布监控</h2>
+        <ul class="feature-list">
+          <li><strong><a href="/zh/rerank-cost-calculator">成本计算器</a>下方的模型卡片不再写模型数量</strong> —— 原来写的是<em>16 个模型</em>，那是表格还小的时候的数字。现在表格有 38 行，其中五行是托管平台而不是模型，写死任何一个数字很快就会对不上：这句话改为直接指向表格，不再报数</li>
+          <li><strong>发布监控盯 Pinecone 公告不用每年改链接了</strong> —— 这条原来盯 <code>/release-notes/2026</code>，每年 1 月都得换成 <code>/release-notes/2027</code>。现在改用不带年份的 <code>/release-notes</code>，它会跳转到当年的页面；万一这个地址落到别的年份，监控会报警，而不是默默去读去年的公告</li>
+        </ul>
+      </article>
+      <article class="changelog-entry">
         <h2 id="2026-11-16-ettin-catchup">2026 年 11 月 16 日 —— 补录小型英文 CPU 重排序模型</h2>
         <p><a href="/zh/models/#ettin-reranker-17m-v1">ettin-reranker-17m-v1</a> 已加入模型对比表和<a href="/zh/guides/self-host-reranker#ettin">自建指南</a>。这是补上历史遗漏，不是新发布：官方公告发表于 2026 年 5 月。参数规模与输入上限均有来源，没有从 NanoBEIR 推算完整 BEIR 分数；hs-rerank-1 的描述也从最小 CPU 模型改为紧凑的多语言选择。</p>
       </article>
@@ -120,23 +136,21 @@
           <li><strong>新增<a href="/zh/news">动态页</a>，记录厂商的动作</strong> —— 新 reranker、调价和下线，每条一小段，以厂商自己的页面为出处，从 9 月的 Voyage rerank-3 开始。它有单独的 <a href="/news.rss">RSS</a>，和这份更新日志分开；更新日志仍然只讲本站自己</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>2026 年 11 月更早的更新（6 条）</summary><article class="changelog-entry">
         <h2 id="2026-11-10-hs-rerank">2026 年 11 月 10 日 —— 一个小型多语言 reranker，和发布监控的一个漏洞</h2>
         <ul class="feature-list">
           <li><strong>hs-rerank-1 进了<a href="/zh/models/#hs-rerank-1">模型对比表</a>和<a href="/zh/guides/compare-rerankers">横向对比指南</a></strong> —— Hindsight 的 cross-encoder 是 114M（98M 的词嵌入表上只有 15M 参数的 transformer），支持 8,192 token，覆盖英、西、法、德、葡、中、日、韩八种语言，MIT 许可证，还提供给 CPU 用的 int8 ONNX 文件。它的模型卡只以图片展示结果，所以本站不引用它的分数</li>
           <li><strong>发布监控当时漏掉了它</strong> —— hs-rerank-1 在 10 月 28 日发布，两周内下载了 60 万次，却只有 5 个赞，没达到「不在跟踪名单里的机构要 10 个赞」的门槛。监控现在也会报告下载量达到 5,000 的新 reranker。另外两个新模型读过后没收录：一个下载只有 28 次的非商用 4B reranker，和一个不能单独使用的研究用 LoRA 适配器</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-11-05-vendors">2026 年 11 月 5 日 —— 厂商文档改版：Pinecone 和 Cohere</h2>
         <ul class="feature-list">
           <li><strong>Pinecone 把每个 reranker 的限制挪到了各自的页面</strong> —— 数字没有变（<code>pinecone-rerank-v0</code> 每对 512 token，<code>bge-reranker-v2-m3</code> 1024，<code>cohere-rerank-4-fast</code> 每篇文档 4,096），但每日的来源核对已经找不到它们。现在改为读每个模型自己的页面</li>
           <li><strong>Cohere 的 Model Vault 改按 GPU 计价</strong> —— 价格页现在列的是每种 GPU 的每小时价格，L4 按需价从每小时 $3.00 起，另按副本数计费。本站 10 月 22 日引用的 Rerank 5 单模型价格（每小时 $4.00、每月 $2,500）已不再公布，所以 <a href="/zh/models/cohere-rerank#pricing">Cohere 页</a>改为写页面现在列出的内容</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>2026 年 11 月更早的更新（4 条）</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-11-05-compare">2026 年 11 月 5 日 —— reranker 横向对比</h2>
         <ul class="feature-list">
           <li><strong><a href="/zh/guides/compare-rerankers">横向对比指南</a></strong> —— Qwen3、bge、mxbai、Jina、GTE 和托管 API，只在分数来自同一次评测时才并排放：Qwen3 对比 bge-reranker-v2-m3 用的是 Qwen 自己的评测，Qwen3、mxbai 和 Jina 用的是 Jina 的 2026 年评测。每一项都写明是谁跑的，也直说 GTE 和 Cohere 没有可以对齐的数字。还有一个藏在各模型页里的发现：Qwen3-Reranker-0.6B 在中文检索上落后于 bge-reranker-v2-m3</li>
@@ -615,6 +629,10 @@
         </ul>
       </article></details>
 
+
+      
+
+      
 
       
 

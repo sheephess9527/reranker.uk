@@ -1373,11 +1373,11 @@
     },
     "api_usd_per_m": {
       "value": "0.025",
-      "source_url": "https://docs.zeroentropy.dev/models",
-      "check_url": "https://docs.zeroentropy.dev/models",
-      "check_pattern": "zerank-2\\s+\\$0\\.000025\\s+\\${value}",
+      "source_url": "https://web.archive.org/web/20260712030817/https://docs.zeroentropy.dev/models",
+      "check": "manual",
+      "check_note": "Last listed API price, not a current one: ZeroEntropy's models docs listed zerank-2 at $0.000025 per 1M tokens before the site went offline. ZeroEntropy said on 24 Jul 2026 (archived announcement) that all its products would be supported until 4 Sep 2026 and then sunset; docs.zeroentropy.dev has returned SERVFAIL since (Cloudflare and Google DoH, 2026-11-20), so there is no live page to re-check. The archived docs page, now the source_url, is the reference for the figure.",
       "check_hint": "Pricing",
-      "verified_on": "2026-10-15"
+      "verified_on": "2026-11-20"
     },
     "context_tokens": {
       "value": "32,768",

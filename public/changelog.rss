@@ -5,8 +5,22 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Mon, 16 Nov 2026 13:45:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 20 Nov 2026 00:10:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>20 Nov 2026 — ZeroEntropy’s API is gone, and the site said it was still selling</title>
+      <link>https://reranker.uk/changelog#2026-11-20-zeroentropy</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-11-20-zeroentropy</guid>
+      <pubDate>Fri, 20 Nov 2026 00:10:00 GMT</pubDate>
+      <description>ZeroEntropy sunset its products on 4 September 2026 after joining Notion. zerank-2 is now described as Apache 2.0 weights rather than a live API, its last listed price is labelled, and the two dead vendor pages left the release watch.</description>
+    </item>
+    <item>
+      <title>20 Nov 2026 — A stale count on the cost calculator, and a watch that outlasts the year</title>
+      <link>https://reranker.uk/changelog#2026-11-20-copy-watch</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-11-20-copy-watch</guid>
+      <pubDate>Thu, 19 Nov 2026 22:45:00 GMT</pubDate>
+      <description>The cost calculator's models card no longer quotes a model count, and the release watch follows Pinecone's undated release-notes page, which redirects to the current year, instead of a URL that needed editing every January.</description>
+    </item>
     <item>
       <title>16 Nov 2026 — Catching up on a small English CPU reranker</title>
       <link>https://reranker.uk/changelog#2026-11-16-ettin-catchup</link>
