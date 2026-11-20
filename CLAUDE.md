@@ -277,3 +277,10 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 - [x] `data/release-watch.json` 的 Pinecone changelog 改用 **`https://docs.pinecone.io/release-notes`**：实测 308 → `/release-notes/2026`（原路径 200，`/release-notes/2027` 现在 404）。不带年份，1 月不用手改。同时加 `current_year: true`，`watch-releases.mjs` 记下 `res.url`，落地年份不是当年就推一条 warning（试过把 URL 临时改 2025，报警正常）。
 - [x] 其余带年份的地址查过：`models.json` 里 Voyage 的 `blog.voyageai.com/2026/09/30/rerank-3/` 是文章路径（200），不会跨年失效；NIM、Bedrock 用的是 `/latest/`。
 - [x] 验证：`npm run build && npm run check:links && npm run check:ld`、`npm test` 全过；`watch-releases.mjs --baseline` 的 Pinecone changelog 仍是 `cohere-rerank-3.5` / `cohere-rerank-4-fast`，无缺失、无弃用。
+
+
+## 2026-11-20 晚间定时巡检（仅记录）
+
+- [x] 同步已有 #78–#80，不重复修复 ZeroEntropy、计算器和 Pinecone。NVIDIA 两项来源现已通过原检查器；244 项自动匹配、17 项明确人工/历史例外。归档公告独立重读出现 503，不能把旧核验说成新核验。
+- [x] 不设热度门槛补查 28 个近期候选，复查原始模型卡与上轮暂缓项，尚无达到既有收录标准的新模型；不硬凑网站更新。
+- 详情与交付状态见 docs/changes/2026-11-20-patrol.md；沿用 #77 归档两轮记录。产品文件、分数、价格、监控名单不改。
