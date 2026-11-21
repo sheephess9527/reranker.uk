@@ -108,24 +108,8 @@
       <p>v3 引入了 Jina 所说的 <em>last but not late</em> 交互：query 与所有候选文档作为同一个序列做因果自注意力，每篇文档的分数是特殊 token 位置上投影向量之间的余弦相似度 —— 所以文档是放在彼此的上下文里评判的，而不只是对着 query。v3.5 保留了这一点，并把统一的全局注意力换成「三层滑动窗口（窗口 1,024 token）+ 两层全局」的交替结构，最后一层始终是全局的。它还加入了法律、医疗、金融和结构化数据的训练，并从同等体量的全注意力教师模型蒸馏而来。Jina 测得短文本延迟降低 1.22 倍、长文本降低 1.56 倍（A100，每次 100 个候选）。详见 <a href="https://arxiv.org/abs/2607.18152" rel="noopener noreferrer">v3.5 论文</a>和 <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">v3 论文</a>。</p>
 
       <h2 id="benchmarks">谁测的分数？</h2>
-      <p>为了 v3.5，Jina 用同一套方法把所有模型重新测了一遍：13 个 BEIR 数据集、覆盖 18 种语言的 MIRACL、RTEB（法律、金融、代码、医疗）以及 Struct-IR，每项都是对 jina-embeddings-v5-text-small 召回的前 100 个候选重排。</p>
-      <div class="table-wrap" tabindex="0" role="region" aria-label="谁测的分数？">
-        <table>
-          <thead>
-            <tr><th>模型</th><th>参数</th><th>BEIR</th><th>MIRACL</th><th>RTEB</th><th>Struct-IR</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>jina-reranker-v3.5</td><td>0.6B</td><td>63.20</td><td>74.11</td><td>70.95</td><td>48.3</td></tr>
-            <tr><td>mxbai-rerank-large-v2</td><td>1.5B</td><td>62.45</td><td>69.65</td><td>70.81</td><td>43.0</td></tr>
-            <tr><td>Qwen3-Reranker-4B</td><td>4.0B</td><td>62.28</td><td>76.56</td><td>77.68</td><td>55.6</td></tr>
-            <tr><td>jina-reranker-v3</td><td>0.6B</td><td>62.10</td><td>72.20</td><td>68.01</td><td>38.7</td></tr>
-            <tr><td>mxbai-rerank-base-v2</td><td>0.5B</td><td>59.58</td><td>64.90</td><td>61.44</td><td>30.4</td></tr>
-            <tr><td>Qwen3-Reranker-0.6B</td><td>0.6B</td><td>56.94</td><td>67.12</td><td>68.41</td><td>41.9</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="muted" style="font-size:.85rem">指标为 nDCG@10，取自 <a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">jina-reranker-v3.5 模型卡</a>。Struct-IR 用的是受控候选池（全部正确文档加上最难的 30 个干扰项），因此不能和其他 Struct-IR 排行榜直接比较。</p>
-      <p>v3.5 在 BEIR 上领先，但不到一分；另外三项都是 4B 领先，Jina 自己的文章也直说了这一点。v3 论文在 2025 年用另一个第一阶段召回模型测过一次，当时 v3 是 61.94*，Qwen3-Reranker-4B 是 61.16* —— 本站直到 2026 年 10 月都在重复的「v3 超过 Qwen3-Reranker-4B」就出自这里；在新的评测里，这个结论已经不成立。同一家厂商测的两次结果里，Qwen3-Reranker-4B 就差了一分多，这正说明 BEIR 均值应当当作档位来看，而不是精确排名。</p>
+      <p>在 2026 年 7 月的<a href="https://arxiv.org/html/2607.18152v1" rel="noopener noreferrer">评测（表 6）</a>中，Jina 作者使用 jina-embeddings-v5-text-small 为每个查询召回 100 个候选。在这些 BEIR 数据集上，按百分制计算，jina-reranker-v3.5 的平均 nDCG@10 为 63.20*，Qwen3-Reranker-4B 为 62.28。</p>
+      <p>同一报告中，Qwen3-Reranker-4B 在 MIRACL、RTEB 和 Struct-IR 上得分更高。完整对比及 Struct-IR 单独使用的候选集规则见论文表 1。</p>
 
       <h2 id="licence">许可证：哪些能自建部署</h2>
       <p><code>v2</code>、<code>v3</code>、<code>v3.5</code> 和 <code>m0</code> 的权重采用 <strong>CC BY-NC 4.0</strong> 发布：可以免费下载和评估，但不能商用。生产环境有三条路：Jina 的托管 API，按 token 计费；v3.5 还可以走 Elastic Inference Service（Elastic Stack 9.3 及以上）；或者购买商用许可，现在由 Elastic 的销售团队负责。Jina 还把 v3 上架到了 Azure 和 Google Cloud 的应用市场。只有旧版的 <code>v1</code> 英文模型是 Apache 2.0。</p>
