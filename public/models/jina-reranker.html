@@ -108,24 +108,8 @@
       <p>v3 introduced what Jina call <em>last but not late</em> interaction: the query and every candidate run through causal self-attention as one sequence, and each document’s score is the cosine between projected embeddings taken at special token positions — so documents are judged in the context of each other, not just the query. v3.5 keeps that and replaces uniform global attention with a schedule of three sliding-window layers (1,024-token windows) followed by two global layers, with the final layer always global. It adds legal, medical, financial and structured-data training, and distils from a same-size full-attention teacher. Jina measure 1.22× lower latency on short passages and 1.56× on long ones (A100, top-100 lists). Details in the <a href="https://arxiv.org/abs/2607.18152" rel="noopener noreferrer">v3.5 paper</a> and the <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">v3 paper</a>.</p>
 
       <h2 id="benchmarks">Whose benchmark?</h2>
-      <p>For v3.5, Jina re-ran every model under one protocol: 13 BEIR datasets, MIRACL across 18 languages, RTEB (legal, finance, code, medical) and Struct-IR, each reranking the top 100 candidates from jina-embeddings-v5-text-small.</p>
-      <div class="table-wrap" tabindex="0" role="region" aria-label="Whose benchmark?">
-        <table>
-          <thead>
-            <tr><th>Model</th><th>Params</th><th>BEIR</th><th>MIRACL</th><th>RTEB</th><th>Struct-IR</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>jina-reranker-v3.5</td><td>0.6B</td><td>63.20</td><td>74.11</td><td>70.95</td><td>48.3</td></tr>
-            <tr><td>mxbai-rerank-large-v2</td><td>1.5B</td><td>62.45</td><td>69.65</td><td>70.81</td><td>43.0</td></tr>
-            <tr><td>Qwen3-Reranker-4B</td><td>4.0B</td><td>62.28</td><td>76.56</td><td>77.68</td><td>55.6</td></tr>
-            <tr><td>jina-reranker-v3</td><td>0.6B</td><td>62.10</td><td>72.20</td><td>68.01</td><td>38.7</td></tr>
-            <tr><td>mxbai-rerank-base-v2</td><td>0.5B</td><td>59.58</td><td>64.90</td><td>61.44</td><td>30.4</td></tr>
-            <tr><td>Qwen3-Reranker-0.6B</td><td>0.6B</td><td>56.94</td><td>67.12</td><td>68.41</td><td>41.9</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="muted" style="font-size:.85rem">nDCG@10, from the <a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">jina-reranker-v3.5 model card</a>. Struct-IR uses a controlled candidate pool (all gold documents plus the 30 hardest distractors), so it isn’t comparable to other Struct-IR leaderboards.</p>
-      <p>v3.5 leads on BEIR, by under a point. On the other three the 4B is ahead, which Jina’s own write-up says plainly. The v3 paper’s 2025 run, over a different first-stage retriever, had v3 at 61.94* and Qwen3-Reranker-4B at 61.16*. That is where “v3 beats Qwen3-Reranker-4B”, repeated on this site until October 2026, came from; on the newer run it no longer holds. Qwen3-Reranker-4B moving by more than a point between two runs from the same vendor is a good reason to read BEIR averages as tiers rather than rankings.</p>
+      <p>In their July 2026 <a href="https://arxiv.org/html/2607.18152v1" rel="noopener noreferrer">evaluation (Table 6)</a>, the Jina authors used jina-embeddings-v5-text-small to retrieve 100 candidates per query. Across the BEIR datasets, mean nDCG@10 on a 100-point scale was 63.20* for jina-reranker-v3.5 and 62.28 for Qwen3-Reranker-4B.</p>
+      <p>In the same report, Qwen3-Reranker-4B scored higher on MIRACL, RTEB and Struct-IR. See Table 1 for the full comparison and the separate Struct-IR candidate protocol.</p>
 
       <h2 id="licence">Licence: what you can self-host</h2>
       <p>The <code>v2</code>, <code>v3</code>, <code>v3.5</code> and <code>m0</code> weights are released under <strong>CC BY-NC 4.0</strong>: free to download and evaluate, not to use commercially. For production there are three routes: Jina’s hosted API, billed per token; for v3.5, Elastic Inference Service (Elastic Stack 9.3 and later); or a commercial licence, which Jina now arrange through Elastic’s sales team. Jina also list v3 on the Azure and Google Cloud marketplaces. Only the legacy <code>v1</code> English models are Apache 2.0.</p>

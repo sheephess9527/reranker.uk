@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "21 Nov 2026 — Jina benchmark attribution": "2026 年 11 月 21 日 —— 补充 Jina 评测出处",
+  "The Jina model page links its BEIR comparison to the original experiment and describes the candidate pool.": "Jina 模型页补充 BEIR 对比的原始论文链接及候选集设置。",
   "20 Nov 2026 — ZeroEntropy’s API is gone, and the site said it was still selling":
     "2026 年 11 月 20 日 —— ZeroEntropy 的 API 已经没了，而本站还写着它在卖",
   "<strong><a href=\"/models/zerank.html\">zerank-2</a> is described as weights, not as a live API</strong> — ZeroEntropy joined Notion on 24 July 2026, kept its products up until 4 September 2026 and then sunset them. <code>zeroentropy.dev</code> and <code>docs.zeroentropy.dev</code> no longer resolve — the domain’s nameservers refuse queries (SERVFAIL at Cloudflare’s and Google’s resolvers, 20 November 2026). The page, the models table and the home card now say the API closed and the Apache 2.0 weights on Hugging Face are how to run the model":

@@ -3,6 +3,10 @@
 Repository and tooling changes. Site-facing data updates live on the public
 changelog page (src/pages/changelog.html).
 
+## 2026-11-21
+
+- The Jina model page links its BEIR comparison to the original experiment and describes the candidate pool. Removed broad equivalence claims from the home, comparison and cost pages in both languages.
+
 ## 2026-11-20
 
 - The cost calculator's "Compare rerank models" card no longer quotes a model

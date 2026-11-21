@@ -454,8 +454,8 @@ window.I18N_PAGE = {
     "Jina Reranker v3.5",
   "0.6B listwise model at {{fact:jina-reranker-v3.5.beir}} BEIR in Jina's own test, just ahead of Qwen3-Reranker-4B's {{fact:qwen3-reranker-4b.beir_jina_2026}} there — though the 4B still leads on multilingual and legal/medical retrieval. Self-hosting the weights commercially needs a licence. v1-tiny (Apache 2.0) still powers our demo.":
     "0.6B 的 listwise 模型，在 Jina 自己的测试里 BEIR 为 {{fact:jina-reranker-v3.5.beir}}，略高于同一测试中 Qwen3-Reranker-4B 的 {{fact:qwen3-reranker-4b.beir_jina_2026}} —— 不过在多语言和法律 / 医疗检索上仍是 4B 领先。商用自建部署需要另购许可。v1-tiny（Apache 2.0）仍在驱动我们的 Demo。",
-  "{{fact:jina-reranker-v3.5.beir}} BEIR nDCG@10 from 0.6B in Jina's own test — level with Qwen3-Reranker-4B, ~7× its size":
-    "0.6B 在 Jina 自己的测试里拿到 {{fact:jina-reranker-v3.5.beir}} BEIR nDCG@10 —— 与体量约 7 倍的 Qwen3-Reranker-4B 持平",
+  "Jina reports {{fact:jina-reranker-v3.5.beir}} mean BEIR nDCG@10 for its 0.6B model on its top-100 candidate sets":
+    "Jina 自测中，这款 0.6B 模型对每个查询的前 100 个候选重排序，BEIR 平均 nDCG@10 为 {{fact:jina-reranker-v3.5.beir}}",
   "Listwise: the query and all candidates share one 131K-token context":
     "Listwise：query 和全部候选文档共享同一个 131K token 上下文",
   "Weights are CC BY-NC 4.0: use the API, or license them for commercial self-hosting":
