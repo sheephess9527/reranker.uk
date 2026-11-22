@@ -101,6 +101,23 @@ test("Google counts one query per started 100 documents", async ({ page }) => {
   expect(at101[3]).toBe("$2.00");
 });
 
+test("going back from a model link recalculates with the restored workload", async ({ page }) => {
+  await page.goto("/rerank-cost-calculator");
+  const passage = page.locator("#calc-passage");
+  await passage.press("ControlOrMeta+a");
+  await passage.pressSequentially("1000");
+  const note = page.locator("#calc-note");
+  await expect(note).toContainText("Google Vertex AI ranking at $100.00");
+
+  await page.locator("#calc-rows").getByRole("link", { name: "Google Vertex AI ranking" }).click();
+  await expect(page).toHaveURL(/\/models\/#vertex-ai-ranking$/);
+  await page.goBack();
+
+  await expect(passage).toHaveValue("1000");
+  await expect(note).toContainText("Google Vertex AI ranking at $100.00");
+  await expect(page.locator("#calc-summary")).toContainText("5.08B tokens");
+});
+
 test("Bedrock and Pinecone count one query or request per started 100 documents", async ({ page }) => {
   await page.goto("/rerank-cost-calculator");
   await page.fill("#calc-queries", "1000");

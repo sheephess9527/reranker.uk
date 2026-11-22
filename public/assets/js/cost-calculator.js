@@ -399,5 +399,11 @@
     if (el) el.addEventListener("input", render);
   });
   document.addEventListener("i18n:changed", render);
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted || performance.getEntriesByType("navigation")[0]?.type === "back_forward") {
+      // History traversal can restore form values after pageshow.
+      setTimeout(render, 0);
+    }
+  });
   render();
 })();
