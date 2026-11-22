@@ -151,6 +151,83 @@ function fill(tpl, vars) {
 const escXml = (s) =>
   String(s).replace(/[<>&"']/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;", "'": "&apos;" }[c]));
 
+const EVALUATION_LANGUAGES = {
+  en: ["English", "英文"],
+  zh: ["Chinese", "中文"],
+  "zh-en": ["Chinese → English", "中→英"],
+  "en-zh": ["English → Chinese", "英→中"],
+  multi: ["Multilingual average", "多语言平均"],
+  mixed: ["English, Chinese and both directions", "中英文及双向合计"],
+};
+
+function renderBenchmarkEvidence(root, zh, pageDict) {
+  const label = (en, cn) => zh ? cn : en;
+  const protocols = MODELS_DATA._benchmark_protocols;
+  for (const cell of root.querySelectorAll("[data-benchmark-models], [data-benchmark-facts]")) {
+    const modelIds = cell.getAttribute("data-benchmark-models")?.split(" ") || [];
+    const refs = cell.getAttribute("data-benchmark-facts")?.split(" ") ||
+      modelIds.flatMap((id) => Object.keys(MODELS_DATA[id] || {})
+        .filter((field) => MODELS_DATA[id][field].protocol_id)
+        .map((field) => id + "." + field));
+    if (!refs.length) throw new Error("Unmapped benchmark evidence in " + (modelIds.join(", ") || cell.toString()));
+
+    const taskNames = new Map();
+    let firstScore;
+    const items = refs.map((ref) => {
+      const dot = ref.lastIndexOf(".");
+      const id = ref.slice(0, dot);
+      const fact = MODELS_DATA[id]?.[ref.slice(dot + 1)];
+      const protocol = protocols[fact?.protocol_id];
+      const language = EVALUATION_LANGUAGES[fact?.language_key];
+      if (!protocol || !language || !fact.source_url || !fact.verified_on ||
+          !["string", "number"].includes(typeof fact.value) ||
+          String(fact.value).trim() === "" || !Number.isFinite(Number(fact.value))) {
+        throw new Error("Invalid benchmark evidence for " + ref);
+      }
+      const task = protocol.task_id;
+      const key = "models.task." + task;
+      const taskOption = root.querySelector('#models-task-filter option[value="' + task + '"]');
+      const taskName = taskOption?.text || (zh ? pageDict.keys?.[key] || "C-MTEB（重排）" : "C-MTEB (reranking)");
+      taskNames.set(task, taskName);
+
+      const model = modelIds.length > 1 ? id + " · " : "";
+      const protocolLabel = label(protocol.label, protocol.label_zh);
+      const headline = [model + taskName, label(...language), fact.value, protocolLabel].join(" · ");
+      firstScore ??= fact.value;
+      const unknown = label("Not disclosed", "未披露");
+      const datasets = protocol.datasets?.join(", ") || label(protocol.dataset_scope, protocol.dataset_scope_zh) || unknown;
+      const candidate = [protocol.candidate_retriever, protocol.candidate_k && label("top " + protocol.candidate_k, "前 " + protocol.candidate_k + " 条")]
+        .filter(Boolean).join(" · ") || unknown;
+      const metadata = [
+        [label("Protocol", "协议"), protocolLabel],
+        [label("Datasets", "数据集"), datasets],
+        [label("Metric", "指标"), protocol.metric || unknown],
+        [label("Aggregation", "汇总方式"), protocol.aggregation === "mean" ? label("Mean", "均值") : null],
+        [label("Candidate pool", "候选集"), candidate],
+        [label("Version", "版本"), label(protocol.benchmark_version, protocol.benchmark_version_zh || protocol.benchmark_version) || unknown],
+        [label("Split", "评测切分"), protocol.split],
+        [label("Tested", "测试日期"), fact.evaluated_on || unknown],
+        [label("Source checked", "来源核验日期"), fact.verified_on],
+        [label("Source revision", "来源版本"), fact.source_revision && (fact.source_revision.length === 40
+          ? fact.source_revision.slice(0, 12) : fact.source_revision)],
+      ].filter(([, value]) => value).map(([name, value]) =>
+        '<div><dt>' + escXml(name) + '</dt><dd>' + escXml(value) + '</dd></div>').join("");
+      const source = '<a href="' + escXml(fact.source_url) + '" rel="noopener noreferrer">' +
+        escXml(label("Source", "来源")) + '</a>';
+      const comparable = protocol.comparable ? "" : '<p>' +
+        label("Comparison protocol not fully documented.", "可比协议未完整披露。") + '</p>';
+      return '<li data-benchmark-task="' + escXml(task) + '" data-eval-language="' + escXml(fact.language_key) +
+        '" data-benchmark-protocol="' + escXml(fact.protocol_id) + '">' +
+        '<p class="benchmark-score">' + escXml(headline) + '</p><dl>' + metadata + '</dl>' + comparable + source + '</li>';
+    });
+    const summary = modelIds.length ? [...taskNames.values()].join(" · ") : firstScore;
+    cell.removeAttribute("title");
+    cell.set_content('<details class="benchmark-evidence"><summary><span class="benchmark-summary">' +
+      escXml(summary) + '</span><span class="sr-only"> ' +
+      label("Datasets and protocol", "查看数据集与口径") + '</span></summary><ul>' + items.join("") + '</ul></details>');
+  }
+}
+
 /* ------------------------------------------------------------------ *
  * Source discovery
  * ------------------------------------------------------------------ */
@@ -692,6 +769,9 @@ function assemble({ meta, body, relPath, locale, lastmod }) {
     stats = translate(root, pageDict);
     localiseLinks(root);
     root.querySelector("html")?.setAttribute("data-prerendered", "zh");
+  }
+  if (relPath === "models/index.html" || relPath === "models/bge-reranker.html") {
+    renderBenchmarkEvidence(root, zh, pageDict);
   }
   stripExtensionLinks(root);
   // A code block wider than the viewport scrolls horizontally, and keyboard

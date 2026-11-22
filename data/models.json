@@ -1,22 +1,328 @@
 {
   "_comment": "Single source of truth for benchmark numbers rendered via {{fact:<model-id>.<field>}} tokens in src/pages/. Every value must carry a source_url — scripts/build.mjs refuses to render a fact without one. protocol_note forces a '*' footnote suffix: vendors each run BEIR on their own dataset subset and first-stage retriever, so in practice every BEIR figure has one. verified_on drives a build-time staleness warning; it does not gate the build. scripts/check-sources.mjs (daily, real network) re-fetches each source and fails if the value is gone — check_url overrides what it fetches, check: \"manual\" + check_note skips a figure that only exists in an image.",
+  "_benchmark_protocols": {
+    "beir-jina-2026": {
+      "task_id": "beir",
+      "label": "Jina 2026 · Table 6",
+      "label_zh": "Jina 2026 · 表 6",
+      "benchmark_version": "arXiv:2607.18152v1 · MTEB v2",
+      "datasets": [
+        "TREC-COVID",
+        "NFCorpus",
+        "NQ",
+        "HotpotQA",
+        "FiQA",
+        "ArguAna",
+        "Touche",
+        "DBPedia",
+        "SCIDOCS",
+        "FEVER",
+        "Climate-FEVER",
+        "SciFact",
+        "Quora"
+      ],
+      "candidate_retriever": "jina-embeddings-v5-text-small",
+      "candidate_k": 100,
+      "metric": "nDCG@10 (%)",
+      "aggregation": "mean",
+      "comparable": true
+    },
+    "miracl-jina-2026": {
+      "task_id": "miracl",
+      "label": "Jina 2026 · Table 7",
+      "label_zh": "Jina 2026 · 表 7",
+      "benchmark_version": "arXiv:2607.18152v1 · MTEB v2",
+      "datasets": [
+        "MIRACL"
+      ],
+      "candidate_retriever": "jina-embeddings-v5-text-small",
+      "candidate_k": 100,
+      "metric": "nDCG@10 (%)",
+      "aggregation": "mean",
+      "comparable": true
+    },
+    "miracl-jina-2026-zh": {
+      "task_id": "miracl",
+      "label": "Jina 2026 · Table 7",
+      "label_zh": "Jina 2026 · 表 7",
+      "benchmark_version": "arXiv:2607.18152v1 · MTEB v2",
+      "datasets": [
+        "MIRACL (zh)"
+      ],
+      "candidate_retriever": "jina-embeddings-v5-text-small",
+      "candidate_k": 100,
+      "metric": "nDCG@10 (%)",
+      "comparable": true
+    },
+    "miracl-jina-2026-en": {
+      "task_id": "miracl",
+      "label": "Jina 2026 · Table 7",
+      "label_zh": "Jina 2026 · 表 7",
+      "benchmark_version": "arXiv:2607.18152v1 · MTEB v2",
+      "datasets": [
+        "MIRACL (en)"
+      ],
+      "candidate_retriever": "jina-embeddings-v5-text-small",
+      "candidate_k": 100,
+      "metric": "nDCG@10 (%)",
+      "comparable": true
+    },
+    "mteb-r-qwen": {
+      "task_id": "mteb-r",
+      "label": "Qwen · retrieval subset",
+      "label_zh": "Qwen · 检索子集",
+      "benchmark_version": "MTEB(eng, v2)",
+      "benchmark_version_zh": "MTEB 英文版 v2",
+      "candidate_retriever": "Qwen3-Embedding-0.6B",
+      "candidate_k": 100,
+      "metric": "nDCG@10 (%)",
+      "aggregation": "mean",
+      "comparable": true,
+      "dataset_scope": "MTEB(eng, v2) retrieval subset",
+      "dataset_scope_zh": "MTEB(eng, v2) 检索子集"
+    },
+    "cmteb-r-qwen": {
+      "task_id": "cmteb-r",
+      "label": "Qwen · retrieval subset",
+      "label_zh": "Qwen · 检索子集",
+      "benchmark_version": "MTEB(cmn, v1)",
+      "benchmark_version_zh": "MTEB 中文版 v1",
+      "candidate_retriever": "Qwen3-Embedding-0.6B",
+      "candidate_k": 100,
+      "metric": "nDCG@10 (%)",
+      "aggregation": "mean",
+      "comparable": true,
+      "dataset_scope": "MTEB(cmn, v1) retrieval subset",
+      "dataset_scope_zh": "MTEB(cmn, v1) 检索子集"
+    },
+    "mmteb-r-qwen": {
+      "task_id": "mmteb-r",
+      "label": "Qwen · retrieval subset",
+      "label_zh": "Qwen · 检索子集",
+      "benchmark_version": "MMTEB",
+      "candidate_retriever": "Qwen3-Embedding-0.6B",
+      "candidate_k": 100,
+      "metric": "nDCG@10 (%)",
+      "aggregation": "mean",
+      "comparable": true,
+      "dataset_scope": "MMTEB retrieval subset",
+      "dataset_scope_zh": "MMTEB 检索子集"
+    },
+    "mmteb-r-qwen-vl": {
+      "task_id": "mmteb-r",
+      "label": "Qwen3-VL · model cards",
+      "label_zh": "Qwen3-VL · 模型卡",
+      "benchmark_version": "MMTEB",
+      "aggregation": "mean",
+      "comparable": false,
+      "dataset_scope": "MMTEB retrieval subset",
+      "dataset_scope_zh": "MMTEB 检索子集"
+    },
+    "beir-baai": {
+      "task_id": "beir",
+      "label": "BAAI · 15 datasets",
+      "label_zh": "BAAI · 15 个数据集",
+      "candidate_retriever": "bge-large-en-v1.5",
+      "candidate_k": 100,
+      "metric": "nDCG@10 (%)",
+      "aggregation": "mean",
+      "comparable": true,
+      "dataset_scope": "15 BEIR datasets",
+      "dataset_scope_zh": "15 个 BEIR 数据集"
+    },
+    "beir-mixedbread": {
+      "task_id": "beir",
+      "label": "Mixedbread · vendor evaluation",
+      "label_zh": "Mixedbread · 厂商评测",
+      "metric": "nDCG@10 (%)",
+      "aggregation": "mean",
+      "comparable": false
+    },
+    "chinese-mixedbread": {
+      "task_id": "vendor-chinese",
+      "label": "Mixedbread · Chinese",
+      "label_zh": "Mixedbread · 中文评测",
+      "comparable": false
+    },
+    "mrtydi-mixedbread": {
+      "task_id": "mr-tydi",
+      "label": "Mixedbread · Mr.TyDi",
+      "label_zh": "Mixedbread · Mr.TyDi",
+      "datasets": [
+        "Mr.TyDi"
+      ],
+      "aggregation": "mean",
+      "comparable": false
+    },
+    "beir-jina-v1": {
+      "task_id": "beir",
+      "label": "Jina v1 · 17 datasets",
+      "label_zh": "Jina v1 · 17 个数据集",
+      "metric": "nDCG@10 (%)",
+      "aggregation": "mean",
+      "comparable": false,
+      "dataset_scope": "17 BEIR datasets",
+      "dataset_scope_zh": "17 个 BEIR 数据集"
+    },
+    "beir-gte": {
+      "task_id": "beir",
+      "label": "Alibaba · ModernBERT model card",
+      "label_zh": "阿里巴巴 · ModernBERT 模型卡",
+      "metric": "nDCG@10 (%)",
+      "aggregation": "mean",
+      "comparable": false
+    },
+    "beir-lighton": {
+      "task_id": "beir",
+      "label": "LightOn · 11 held-out datasets",
+      "label_zh": "LightOn · 11 个留出数据集",
+      "candidate_retriever": "BM25",
+      "candidate_k": 100,
+      "metric": "nDCG@10 (%)",
+      "aggregation": "mean",
+      "comparable": true,
+      "dataset_scope": "11 held-out BEIR datasets",
+      "dataset_scope_zh": "11 个留出的 BEIR 数据集"
+    },
+    "rerank12-youdao": {
+      "task_id": "rerank-12",
+      "label": "Youdao · 12 datasets",
+      "label_zh": "有道 · 12 个数据集",
+      "datasets": [
+        "AskUbuntuDupQuestions",
+        "MindSmallReranking",
+        "SciDocsRR",
+        "StackOverflowDupQuestions",
+        "T2Reranking",
+        "MMarcoReranking",
+        "CMedQAv1",
+        "CMedQAv2",
+        "T2RerankingEn2Zh",
+        "MMarcoRerankingEn2Zh",
+        "T2RerankingZh2En",
+        "MMarcoRerankingZh2En"
+      ],
+      "aggregation": "mean",
+      "comparable": true
+    },
+    "rerank12-youdao-en": {
+      "task_id": "rerank-12",
+      "label": "Youdao · language subset",
+      "label_zh": "有道 · 语言分项",
+      "datasets": [
+        "AskUbuntuDupQuestions",
+        "MindSmallReranking",
+        "SciDocsRR",
+        "StackOverflowDupQuestions"
+      ],
+      "aggregation": "mean",
+      "comparable": true
+    },
+    "rerank12-youdao-zh": {
+      "task_id": "rerank-12",
+      "label": "Youdao · language subset",
+      "label_zh": "有道 · 语言分项",
+      "datasets": [
+        "T2Reranking",
+        "MMarcoReranking",
+        "CMedQAv1",
+        "CMedQAv2"
+      ],
+      "aggregation": "mean",
+      "comparable": true
+    },
+    "rerank12-youdao-en-zh": {
+      "task_id": "rerank-12",
+      "label": "Youdao · language subset",
+      "label_zh": "有道 · 语言分项",
+      "datasets": [
+        "T2RerankingEn2Zh",
+        "MMarcoRerankingEn2Zh"
+      ],
+      "aggregation": "mean",
+      "comparable": true
+    },
+    "rerank12-youdao-zh-en": {
+      "task_id": "rerank-12",
+      "label": "Youdao · language subset",
+      "label_zh": "有道 · 语言分项",
+      "datasets": [
+        "T2RerankingZh2En",
+        "MMarcoRerankingZh2En"
+      ],
+      "aggregation": "mean",
+      "comparable": true
+    },
+    "cmteb-baai-zh": {
+      "task_id": "cmteb-rerank",
+      "label": "BAAI · FlagEmbedding reranker table",
+      "label_zh": "BAAI · FlagEmbedding 重排表",
+      "datasets": [
+        "T2Reranking"
+      ],
+      "metric": "MAP",
+      "comparable": true
+    },
+    "cmteb-baai-zh-en": {
+      "task_id": "cmteb-rerank",
+      "label": "BAAI · FlagEmbedding reranker table",
+      "label_zh": "BAAI · FlagEmbedding 重排表",
+      "datasets": [
+        "T2RerankingZh2En"
+      ],
+      "metric": "MAP",
+      "comparable": true
+    },
+    "cmteb-baai-en-zh": {
+      "task_id": "cmteb-rerank",
+      "label": "BAAI · FlagEmbedding reranker table",
+      "label_zh": "BAAI · FlagEmbedding 重排表",
+      "datasets": [
+        "T2RerankingEn2Zh"
+      ],
+      "metric": "MAP",
+      "comparable": true
+    },
+    "cmteb-rerank": {
+      "task_id": "cmteb-rerank",
+      "label": "BAAI · FlagEmbedding reranker table",
+      "label_zh": "BAAI · FlagEmbedding 重排表",
+      "datasets": [
+        "T2Reranking",
+        "T2RerankingZh2En",
+        "T2RerankingEn2Zh",
+        "MMarcoReranking",
+        "CMedQAv1",
+        "CMedQAv2"
+      ],
+      "metric": "MAP",
+      "aggregation": "mean",
+      "comparable": true
+    }
+  },
   "mxbai-rerank-large-v1": {
     "beir": {
       "value": 49.32,
       "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
       "protocol_note": "mixedbread's own cross-generation comparison table (mxbai-rerank-v2 README), evaluated for a fair v1-vs-v2 comparison rather than the classic BEIR 18-dataset suite other open-weight rows in this table use. Their original 2024 launch blog reported ~48.8 NDCG@10 on 11 BEIR datasets via Pyserini — in the same range, not the ~62.1 this site carried before Sep 2026.",
-      "verified_on": "2026-09-25"
+      "verified_on": "2026-09-25",
+      "protocol_id": "beir-mixedbread",
+      "language_key": "en"
     },
     "chinese": {
       "value": 72.53,
       "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
-      "verified_on": "2026-09-25"
+      "verified_on": "2026-09-25",
+      "protocol_id": "chinese-mixedbread",
+      "language_key": "zh"
     },
     "multilingual": {
       "value": 21.88,
       "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
       "protocol_note": "Mr.TyDi multilingual average, mixedbread's own comparison table",
-      "verified_on": "2026-09-25"
+      "verified_on": "2026-09-25",
+      "protocol_id": "mrtydi-mixedbread",
+      "language_key": "multi"
     },
     "latency_a100_s": {
       "value": "2.24",
@@ -48,18 +354,24 @@
       "value": 55.57,
       "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
       "protocol_note": "mixedbread's own comparison table, not confirmed against the classic BEIR 18-dataset suite other open-weight rows in this table use",
-      "verified_on": "2026-09-25"
+      "verified_on": "2026-09-25",
+      "protocol_id": "beir-mixedbread",
+      "language_key": "en"
     },
     "chinese": {
       "value": "83.70",
       "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
-      "verified_on": "2026-09-25"
+      "verified_on": "2026-09-25",
+      "protocol_id": "chinese-mixedbread",
+      "language_key": "zh"
     },
     "multilingual": {
       "value": 28.56,
       "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
       "protocol_note": "Mr.TyDi multilingual average, mixedbread's own comparison table",
-      "verified_on": "2026-09-25"
+      "verified_on": "2026-09-25",
+      "protocol_id": "mrtydi-mixedbread",
+      "language_key": "multi"
     },
     "latency_a100_s": {
       "value": "0.67",
@@ -75,7 +387,9 @@
       "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**mxbai-rerank-base-v2\\**\\s*\\|\\s*0\\.5B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "BEIR",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "beir-jina-2026",
+      "language_key": "en"
     },
     "jina2026_miracl": {
       "value": "64.90",
@@ -83,7 +397,9 @@
       "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**mxbai-rerank-base-v2\\**\\s*\\|\\s*0\\.5B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "MIRACL",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "miracl-jina-2026",
+      "language_key": "multi"
     },
     "jina2026_rteb": {
       "value": "61.44",
@@ -100,6 +416,26 @@
       "check_pattern": "\\|\\s*\\**mxbai-rerank-base-v2\\**\\s*\\|\\s*0\\.5B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "STRUCTIR",
       "verified_on": "2026-10-12"
+    },
+    "jina2026_miracl_zh": {
+      "value": "62.66",
+      "source_url": "https://arxiv.org/html/2607.18152v1#A2",
+      "verified_on": "2026-11-22",
+      "source_revision": "arXiv:2607.18152v1",
+      "check_pattern": "(?<!\\S)ZH(?: \\d+\\.\\d+){1} {value}(?!\\d)",
+      "check_hint": "Table 7",
+      "protocol_id": "miracl-jina-2026-zh",
+      "language_key": "zh"
+    },
+    "jina2026_miracl_en": {
+      "value": "62.56",
+      "source_url": "https://arxiv.org/html/2607.18152v1#A2",
+      "verified_on": "2026-11-22",
+      "source_revision": "arXiv:2607.18152v1",
+      "check_pattern": "(?<!\\S)EN(?: \\d+\\.\\d+){1} {value}(?!\\d)",
+      "check_hint": "Table 7",
+      "protocol_id": "miracl-jina-2026-en",
+      "language_key": "en"
     }
   },
   "mxbai-rerank-large-v2": {
@@ -107,18 +443,24 @@
       "value": 57.49,
       "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
       "protocol_note": "mixedbread's own comparison table, not confirmed against the classic BEIR 18-dataset suite other open-weight rows in this table use",
-      "verified_on": "2026-09-25"
+      "verified_on": "2026-09-25",
+      "protocol_id": "beir-mixedbread",
+      "language_key": "en"
     },
     "chinese": {
       "value": 84.16,
       "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
-      "verified_on": "2026-09-25"
+      "verified_on": "2026-09-25",
+      "protocol_id": "chinese-mixedbread",
+      "language_key": "zh"
     },
     "multilingual": {
       "value": 29.79,
       "source_url": "https://github.com/mixedbread-ai/mxbai-rerank",
       "protocol_note": "Mr.TyDi multilingual average, mixedbread's own comparison table",
-      "verified_on": "2026-09-25"
+      "verified_on": "2026-09-25",
+      "protocol_id": "mrtydi-mixedbread",
+      "language_key": "multi"
     },
     "latency_a100_s": {
       "value": "0.89",
@@ -134,7 +476,9 @@
       "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**mxbai-rerank-large-v2\\**\\s*\\|\\s*1\\.5B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "BEIR",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "beir-jina-2026",
+      "language_key": "en"
     },
     "jina2026_miracl": {
       "value": "69.65",
@@ -142,7 +486,9 @@
       "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**mxbai-rerank-large-v2\\**\\s*\\|\\s*1\\.5B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "MIRACL",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "miracl-jina-2026",
+      "language_key": "multi"
     },
     "jina2026_rteb": {
       "value": "70.81",
@@ -168,6 +514,26 @@
       "check_hint": "BEIR",
       "verified_on": "2026-10-12",
       "protocol_note": "Third-party: Jina's 2025 evaluation for the jina-reranker-v3 paper, 13 BEIR datasets reranking the top 100 from jina-embeddings-v3"
+    },
+    "jina2026_miracl_zh": {
+      "value": "64.27",
+      "source_url": "https://arxiv.org/html/2607.18152v1#A2",
+      "verified_on": "2026-11-22",
+      "source_revision": "arXiv:2607.18152v1",
+      "check_pattern": "(?<!\\S)ZH(?: \\d+\\.\\d+){2} {value}(?!\\d)",
+      "check_hint": "Table 7",
+      "protocol_id": "miracl-jina-2026-zh",
+      "language_key": "zh"
+    },
+    "jina2026_miracl_en": {
+      "value": "64.13",
+      "source_url": "https://arxiv.org/html/2607.18152v1#A2",
+      "verified_on": "2026-11-22",
+      "source_revision": "arXiv:2607.18152v1",
+      "check_pattern": "(?<!\\S)EN(?: \\d+\\.\\d+){2} {value}(?!\\d)",
+      "check_hint": "Table 7",
+      "protocol_id": "miracl-jina-2026-en",
+      "language_key": "en"
     }
   },
   "bge-reranker-v2-m3": {
@@ -177,7 +543,9 @@
       "protocol_note": "BAAI's own evaluation: 15 BEIR datasets, reranking the top 100 results from bge-large-en-v1.5",
       "check": "manual",
       "check_note": "BAAI publish this table only as an image — research/llm_reranker/evaluation/BEIR-bge-en-v1.5.png in FlagOpen/FlagEmbedding — read by eye; re-read it at each review",
-      "verified_on": "2026-11-16"
+      "verified_on": "2026-11-16",
+      "protocol_id": "beir-baai",
+      "language_key": "en"
     },
     "qwen_mteb_r": {
       "value": "57.03",
@@ -185,7 +553,9 @@
       "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**BGE-reranker-v2-m3\\**\\s*\\|\\s*0\\.6B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "MTEB-R",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "mteb-r-qwen",
+      "language_key": "en"
     },
     "qwen_cmteb_r": {
       "value": "72.16",
@@ -193,7 +563,9 @@
       "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**BGE-reranker-v2-m3\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "CMTEB-R",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "cmteb-r-qwen",
+      "language_key": "zh"
     },
     "qwen_mmteb_r": {
       "value": "58.36",
@@ -201,7 +573,9 @@
       "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**BGE-reranker-v2-m3\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "MMTEB-R",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "mmteb-r-qwen",
+      "language_key": "multi"
     },
     "qwen_mldr": {
       "value": "59.51",
@@ -244,7 +618,9 @@
       "protocol_note": "BAAI's own evaluation: 15 BEIR datasets, reranking the top 100 results from bge-large-en-v1.5",
       "check": "manual",
       "check_note": "BAAI publish this table only as an image — research/llm_reranker/evaluation/BEIR-bge-en-v1.5.png in FlagOpen/FlagEmbedding — read by eye; re-read it at each review",
-      "verified_on": "2026-11-16"
+      "verified_on": "2026-11-16",
+      "protocol_id": "beir-baai",
+      "language_key": "en"
     }
   },
   "bge-reranker-base": {
@@ -253,7 +629,42 @@
       "source_url": "https://github.com/FlagOpen/FlagEmbedding/tree/master/research/reranker",
       "check_url": "https://raw.githubusercontent.com/FlagOpen/FlagEmbedding/master/research/reranker/README.md",
       "protocol_note": "C-MTEB reranking average (MAP over T2Reranking, its two cross-language variants, MMarcoReranking, CMedQAv1, CMedQAv2) — a Chinese-centric benchmark, not BEIR",
-      "verified_on": "2026-10-01"
+      "verified_on": "2026-10-01",
+      "protocol_id": "cmteb-rerank",
+      "language_key": "mixed"
+    },
+    "cmteb_t2_zh": {
+      "value": "67.28",
+      "source_url": "https://github.com/FlagOpen/FlagEmbedding/blob/897baa67c0ffddbfccf4e6776ff55310d67809d4/research/reranker/README.md#evaluation",
+      "verified_on": "2026-11-22",
+      "source_revision": "897baa67c0ffddbfccf4e6776ff55310d67809d4",
+      "check_url": "https://raw.githubusercontent.com/FlagOpen/FlagEmbedding/897baa67c0ffddbfccf4e6776ff55310d67809d4/research/reranker/README.md",
+      "check_pattern": "\\|\\s*`?bge-reranker-base`?\\s*\\|(?:\\s*\\d+(?:\\.\\d+)?\\s*\\|){0}\\s*{value}\\s*\\|",
+      "check_hint": "bge-reranker-base",
+      "protocol_id": "cmteb-baai-zh",
+      "language_key": "zh"
+    },
+    "cmteb_t2_zh_en": {
+      "value": "63.95",
+      "source_url": "https://github.com/FlagOpen/FlagEmbedding/blob/897baa67c0ffddbfccf4e6776ff55310d67809d4/research/reranker/README.md#evaluation",
+      "verified_on": "2026-11-22",
+      "source_revision": "897baa67c0ffddbfccf4e6776ff55310d67809d4",
+      "check_url": "https://raw.githubusercontent.com/FlagOpen/FlagEmbedding/897baa67c0ffddbfccf4e6776ff55310d67809d4/research/reranker/README.md",
+      "check_pattern": "\\|\\s*`?bge-reranker-base`?\\s*\\|(?:\\s*\\d+(?:\\.\\d+)?\\s*\\|){1}\\s*{value}\\s*\\|",
+      "check_hint": "bge-reranker-base",
+      "protocol_id": "cmteb-baai-zh-en",
+      "language_key": "zh-en"
+    },
+    "cmteb_t2_en_zh": {
+      "value": "60.45",
+      "source_url": "https://github.com/FlagOpen/FlagEmbedding/blob/897baa67c0ffddbfccf4e6776ff55310d67809d4/research/reranker/README.md#evaluation",
+      "verified_on": "2026-11-22",
+      "source_revision": "897baa67c0ffddbfccf4e6776ff55310d67809d4",
+      "check_url": "https://raw.githubusercontent.com/FlagOpen/FlagEmbedding/897baa67c0ffddbfccf4e6776ff55310d67809d4/research/reranker/README.md",
+      "check_pattern": "\\|\\s*`?bge-reranker-base`?\\s*\\|(?:\\s*\\d+(?:\\.\\d+)?\\s*\\|){2}\\s*{value}\\s*\\|",
+      "check_hint": "bge-reranker-base",
+      "protocol_id": "cmteb-baai-en-zh",
+      "language_key": "en-zh"
     }
   },
   "bge-reranker-large": {
@@ -262,7 +673,42 @@
       "source_url": "https://github.com/FlagOpen/FlagEmbedding/tree/master/research/reranker",
       "check_url": "https://raw.githubusercontent.com/FlagOpen/FlagEmbedding/master/research/reranker/README.md",
       "protocol_note": "C-MTEB reranking average (MAP over T2Reranking, its two cross-language variants, MMarcoReranking, CMedQAv1, CMedQAv2) — a Chinese-centric benchmark, not BEIR",
-      "verified_on": "2026-10-01"
+      "verified_on": "2026-10-01",
+      "protocol_id": "cmteb-rerank",
+      "language_key": "mixed"
+    },
+    "cmteb_t2_zh": {
+      "value": "67.60",
+      "source_url": "https://github.com/FlagOpen/FlagEmbedding/blob/897baa67c0ffddbfccf4e6776ff55310d67809d4/research/reranker/README.md#evaluation",
+      "verified_on": "2026-11-22",
+      "source_revision": "897baa67c0ffddbfccf4e6776ff55310d67809d4",
+      "check_url": "https://raw.githubusercontent.com/FlagOpen/FlagEmbedding/897baa67c0ffddbfccf4e6776ff55310d67809d4/research/reranker/README.md",
+      "check_pattern": "\\|\\s*`?bge-reranker-large`?\\s*\\|(?:\\s*\\d+(?:\\.\\d+)?\\s*\\|){0}\\s*{value}\\s*\\|",
+      "check_hint": "bge-reranker-large",
+      "protocol_id": "cmteb-baai-zh",
+      "language_key": "zh"
+    },
+    "cmteb_t2_zh_en": {
+      "value": "64.04",
+      "source_url": "https://github.com/FlagOpen/FlagEmbedding/blob/897baa67c0ffddbfccf4e6776ff55310d67809d4/research/reranker/README.md#evaluation",
+      "verified_on": "2026-11-22",
+      "source_revision": "897baa67c0ffddbfccf4e6776ff55310d67809d4",
+      "check_url": "https://raw.githubusercontent.com/FlagOpen/FlagEmbedding/897baa67c0ffddbfccf4e6776ff55310d67809d4/research/reranker/README.md",
+      "check_pattern": "\\|\\s*`?bge-reranker-large`?\\s*\\|(?:\\s*\\d+(?:\\.\\d+)?\\s*\\|){1}\\s*{value}\\s*\\|",
+      "check_hint": "bge-reranker-large",
+      "protocol_id": "cmteb-baai-zh-en",
+      "language_key": "zh-en"
+    },
+    "cmteb_t2_en_zh": {
+      "value": "61.45",
+      "source_url": "https://github.com/FlagOpen/FlagEmbedding/blob/897baa67c0ffddbfccf4e6776ff55310d67809d4/research/reranker/README.md#evaluation",
+      "verified_on": "2026-11-22",
+      "source_revision": "897baa67c0ffddbfccf4e6776ff55310d67809d4",
+      "check_url": "https://raw.githubusercontent.com/FlagOpen/FlagEmbedding/897baa67c0ffddbfccf4e6776ff55310d67809d4/research/reranker/README.md",
+      "check_pattern": "\\|\\s*`?bge-reranker-large`?\\s*\\|(?:\\s*\\d+(?:\\.\\d+)?\\s*\\|){2}\\s*{value}\\s*\\|",
+      "check_hint": "bge-reranker-large",
+      "protocol_id": "cmteb-baai-en-zh",
+      "language_key": "en-zh"
     }
   },
   "jina-reranker-v3": {
@@ -285,7 +731,9 @@
       "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**jina-reranker-v3\\**\\s*\\|\\s*0\\.6B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "BEIR",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "beir-jina-2026",
+      "language_key": "en"
     },
     "jina2026_miracl": {
       "value": "72.20",
@@ -293,7 +741,9 @@
       "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**jina-reranker-v3\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "MIRACL",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "miracl-jina-2026",
+      "language_key": "multi"
     },
     "jina2026_rteb": {
       "value": "68.01",
@@ -310,6 +760,26 @@
       "check_pattern": "\\|\\s*\\**jina-reranker-v3\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "STRUCTIR",
       "verified_on": "2026-10-12"
+    },
+    "jina2026_miracl_zh": {
+      "value": "68.53",
+      "source_url": "https://arxiv.org/html/2607.18152v1#A2",
+      "verified_on": "2026-11-22",
+      "source_revision": "arXiv:2607.18152v1",
+      "check_pattern": "(?<!\\S)ZH(?: \\d+\\.\\d+){5} {value}(?!\\d)",
+      "check_hint": "Table 7",
+      "protocol_id": "miracl-jina-2026-zh",
+      "language_key": "zh"
+    },
+    "jina2026_miracl_en": {
+      "value": "64.26",
+      "source_url": "https://arxiv.org/html/2607.18152v1#A2",
+      "verified_on": "2026-11-22",
+      "source_revision": "arXiv:2607.18152v1",
+      "check_pattern": "(?<!\\S)EN(?: \\d+\\.\\d+){5} {value}(?!\\d)",
+      "check_hint": "Table 7",
+      "protocol_id": "miracl-jina-2026-en",
+      "language_key": "en"
     }
   },
   "jina-reranker-v1-tiny-en": {
@@ -317,7 +787,9 @@
       "value": 48.54,
       "source_url": "https://huggingface.co/jinaai/jina-reranker-v1-tiny-en",
       "protocol_note": "Jina's own evaluation, from the jina-reranker-v1 model card: NDCG@10 averaged over 17 BEIR datasets",
-      "verified_on": "2026-10-01"
+      "verified_on": "2026-10-01",
+      "protocol_id": "beir-jina-v1",
+      "language_key": "en"
     },
     "browser_ms_10": {
       "value": "229",
@@ -353,7 +825,9 @@
       "value": 48.64,
       "source_url": "https://huggingface.co/jinaai/jina-reranker-v1-tiny-en",
       "protocol_note": "Third-party: Jina measured it alongside their v1 models (17 BEIR datasets, jina-reranker-v1 model card). sentence-transformers, who trained it, publish TREC DL 19 and MS MARCO Dev figures but no BEIR average",
-      "verified_on": "2026-10-01"
+      "verified_on": "2026-10-01",
+      "protocol_id": "beir-jina-v1",
+      "language_key": "en"
     },
     "browser_ms_10": {
       "value": "276",
@@ -423,7 +897,9 @@
       "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**jina-reranker-v3\\.5\\**\\s*\\|\\s*0\\.6B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "BEIR",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "beir-jina-2026",
+      "language_key": "en"
     },
     "jina2026_miracl": {
       "value": "74.11",
@@ -431,7 +907,9 @@
       "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**jina-reranker-v3\\.5\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "MIRACL",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "miracl-jina-2026",
+      "language_key": "multi"
     },
     "jina2026_rteb": {
       "value": "70.95",
@@ -458,6 +936,26 @@
       "check_hint": "prompt",
       "verified_on": "2026-11-14",
       "note": "Jina publish the rate per token, not per million: the model-discovery API (public, no key) lists jina-ai/jina-reranker-v3.5 with pricing.prompt 0.00000005, i.e. $0.05 per 1M tokens. jina.ai's own pages quote no number — its token packages render client-side — so this machine-readable endpoint is the source of record, and the check pattern pins the per-token string rather than interpolating the per-million value. The same rate covers jina-reranker-v3, -m0, -v2-base-multilingual and the v1 models. jina.ai/reranker's FAQ confirms tokens are billed as 'the number of tokens in the input request' and shared across all its APIs."
+    },
+    "jina2026_miracl_zh": {
+      "value": "69.61",
+      "source_url": "https://arxiv.org/html/2607.18152v1#A2",
+      "verified_on": "2026-11-22",
+      "source_revision": "arXiv:2607.18152v1",
+      "check_pattern": "(?<!\\S)ZH(?: \\d+\\.\\d+){6} {value}(?!\\d)",
+      "check_hint": "Table 7",
+      "protocol_id": "miracl-jina-2026-zh",
+      "language_key": "zh"
+    },
+    "jina2026_miracl_en": {
+      "value": "66.36",
+      "source_url": "https://arxiv.org/html/2607.18152v1#A2",
+      "verified_on": "2026-11-22",
+      "source_revision": "arXiv:2607.18152v1",
+      "check_pattern": "(?<!\\S)EN(?: \\d+\\.\\d+){6} {value}(?!\\d)",
+      "check_hint": "Table 7",
+      "protocol_id": "miracl-jina-2026-en",
+      "language_key": "en"
     }
   },
   "bce-reranker-base_v1": {
@@ -485,7 +983,9 @@
       "check_pattern": "\\|\\s*\\*\\*\\*bce-reranker-base_v1\\*\\*\\*\\s*\\|\\s*\\*\\*{value}\\*\\*",
       "check_hint": "Reranking",
       "verified_on": "2026-11-14",
-      "note": "NetEase Youdao's own run: the 12 Reranking datasets of MTEB/C-MTEB, evaluated in the [\"en\", \"zh\", \"en-zh\", \"zh-en\"] setting — not BEIR, and not the CMTEB-R retrieval suite Qwen report. In the same run the card puts bge-reranker-base at 59.04 and bge-reranker-large at 60.86."
+      "note": "NetEase Youdao's own run: the 12 Reranking datasets of MTEB/C-MTEB, evaluated in the [\"en\", \"zh\", \"en-zh\", \"zh-en\"] setting — not BEIR, and not the CMTEB-R retrieval suite Qwen report. In the same run the card puts bge-reranker-base at 59.04 and bge-reranker-large at 60.86.",
+      "protocol_id": "rerank12-youdao",
+      "language_key": "mixed"
     },
     "filter_threshold": {
       "value": "0.35",
@@ -513,6 +1013,50 @@
       "check_hint": "bge-reranker-large",
       "verified_on": "2026-11-14",
       "note": "Third-party: bge-reranker-large's score in Youdao's own 12-dataset reranking run, from the bce-reranker-base_v1 card's Reranker Models leaderboard."
+    },
+    "rerank12_en": {
+      "value": "51.48",
+      "source_url": "https://github.com/netease-youdao/BCEmbedding/blob/1aa07ea64f94523965c8672e93da47c3faf4d2cd/Docs/EvaluationSummary/reranker_eval_summary.md#language-en",
+      "verified_on": "2026-11-22",
+      "source_revision": "1aa07ea64f94523965c8672e93da47c3faf4d2cd",
+      "check_url": "https://raw.githubusercontent.com/netease-youdao/BCEmbedding/1aa07ea64f94523965c8672e93da47c3faf4d2cd/Docs/EvaluationSummary/reranker_eval_summary.md",
+      "check_pattern": "Language:\\s*`en`(?:(?!## Language:)[\\s\\S])*?\\|\\s*bce-reranker-base_v1\\s*\\|(?:\\s*\\d+\\.\\d+\\s*\\|){4}\\s*{value}\\s*\\|",
+      "check_hint": "bce-reranker-base_v1",
+      "protocol_id": "rerank12-youdao-en",
+      "language_key": "en"
+    },
+    "rerank12_zh": {
+      "value": "66.33",
+      "source_url": "https://github.com/netease-youdao/BCEmbedding/blob/1aa07ea64f94523965c8672e93da47c3faf4d2cd/Docs/EvaluationSummary/reranker_eval_summary.md#language-zh",
+      "verified_on": "2026-11-22",
+      "source_revision": "1aa07ea64f94523965c8672e93da47c3faf4d2cd",
+      "check_url": "https://raw.githubusercontent.com/netease-youdao/BCEmbedding/1aa07ea64f94523965c8672e93da47c3faf4d2cd/Docs/EvaluationSummary/reranker_eval_summary.md",
+      "check_pattern": "Language:\\s*`zh`(?:(?!## Language:)[\\s\\S])*?\\|\\s*bce-reranker-base_v1\\s*\\|(?:\\s*\\d+\\.\\d+\\s*\\|){4}\\s*{value}\\s*\\|",
+      "check_hint": "bce-reranker-base_v1",
+      "protocol_id": "rerank12-youdao-zh",
+      "language_key": "zh"
+    },
+    "rerank12_en_zh": {
+      "value": "65.78",
+      "source_url": "https://github.com/netease-youdao/BCEmbedding/blob/1aa07ea64f94523965c8672e93da47c3faf4d2cd/Docs/EvaluationSummary/reranker_eval_summary.md#language-en-zh",
+      "verified_on": "2026-11-22",
+      "source_revision": "1aa07ea64f94523965c8672e93da47c3faf4d2cd",
+      "check_url": "https://raw.githubusercontent.com/netease-youdao/BCEmbedding/1aa07ea64f94523965c8672e93da47c3faf4d2cd/Docs/EvaluationSummary/reranker_eval_summary.md",
+      "check_pattern": "Language:\\s*`en-zh`(?:(?!## Language:)[\\s\\S])*?\\|\\s*bce-reranker-base_v1\\s*\\|(?:\\s*\\d+\\.\\d+\\s*\\|){2}\\s*{value}\\s*\\|",
+      "check_hint": "bce-reranker-base_v1",
+      "protocol_id": "rerank12-youdao-en-zh",
+      "language_key": "en-zh"
+    },
+    "rerank12_zh_en": {
+      "value": "66.31",
+      "source_url": "https://github.com/netease-youdao/BCEmbedding/blob/1aa07ea64f94523965c8672e93da47c3faf4d2cd/Docs/EvaluationSummary/reranker_eval_summary.md#language-zh-en",
+      "verified_on": "2026-11-22",
+      "source_revision": "1aa07ea64f94523965c8672e93da47c3faf4d2cd",
+      "check_url": "https://raw.githubusercontent.com/netease-youdao/BCEmbedding/1aa07ea64f94523965c8672e93da47c3faf4d2cd/Docs/EvaluationSummary/reranker_eval_summary.md",
+      "check_pattern": "Language:\\s*`zh-en`(?:(?!## Language:)[\\s\\S])*?\\|\\s*bce-reranker-base_v1\\s*\\|(?:\\s*\\d+\\.\\d+\\s*\\|){2}\\s*{value}\\s*\\|",
+      "check_hint": "bce-reranker-base_v1",
+      "protocol_id": "rerank12-youdao-zh-en",
+      "language_key": "zh-en"
     }
   },
   "qwen3-reranker-4b": {
@@ -530,7 +1074,9 @@
       "check_pattern": "Qwen3-Reranker-4B\\*\\*\\s*\\|\\s*4B\\s*\\|\\s*(\\*\\*)?{value}",
       "check_hint": "MTEB-R",
       "protocol_note": "Qwen's own run: retrieval subsets of MTEB(eng, v2), reranking the top 100 from Qwen3-Embedding-0.6B — an English NDCG@10 average, but MTEB-R, not BEIR",
-      "verified_on": "2026-10-01"
+      "verified_on": "2026-10-01",
+      "protocol_id": "mteb-r-qwen",
+      "language_key": "en"
     },
     "jina2026_beir": {
       "value": "62.28",
@@ -538,7 +1084,9 @@
       "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**Qwen3-Reranker-4B\\**\\s*\\|\\s*4\\.0B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "BEIR",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "beir-jina-2026",
+      "language_key": "en"
     },
     "jina2026_miracl": {
       "value": "76.56",
@@ -546,7 +1094,9 @@
       "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**Qwen3-Reranker-4B\\**\\s*\\|\\s*4\\.0B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "MIRACL",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "miracl-jina-2026",
+      "language_key": "multi"
     },
     "jina2026_rteb": {
       "value": "77.68",
@@ -570,7 +1120,9 @@
       "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**Qwen3-Reranker-4B\\**\\s*\\|\\s*4B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "CMTEB-R",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "cmteb-r-qwen",
+      "language_key": "zh"
     },
     "mmteb_r": {
       "value": "72.74",
@@ -578,7 +1130,9 @@
       "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**Qwen3-Reranker-4B\\**\\s*\\|\\s*4B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "MMTEB-R",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "mmteb-r-qwen",
+      "language_key": "multi"
     },
     "mldr": {
       "value": "69.97",
@@ -612,6 +1166,26 @@
       "check_hint": "BEIR",
       "verified_on": "2026-10-12",
       "protocol_note": "Third-party: Jina's 2025 evaluation for the jina-reranker-v3 paper, 13 BEIR datasets reranking the top 100 from jina-embeddings-v3"
+    },
+    "jina2026_miracl_zh": {
+      "value": "71.97",
+      "source_url": "https://arxiv.org/html/2607.18152v1#A2",
+      "verified_on": "2026-11-22",
+      "source_revision": "arXiv:2607.18152v1",
+      "check_pattern": "(?<!\\S)ZH(?: \\d+\\.\\d+){4} {value}(?!\\d)",
+      "check_hint": "Table 7",
+      "protocol_id": "miracl-jina-2026-zh",
+      "language_key": "zh"
+    },
+    "jina2026_miracl_en": {
+      "value": "69.66",
+      "source_url": "https://arxiv.org/html/2607.18152v1#A2",
+      "verified_on": "2026-11-22",
+      "source_revision": "arXiv:2607.18152v1",
+      "check_pattern": "(?<!\\S)EN(?: \\d+\\.\\d+){4} {value}(?!\\d)",
+      "check_hint": "Table 7",
+      "protocol_id": "miracl-jina-2026-en",
+      "language_key": "en"
     }
   },
   "cohere-rerank-4-pro": {
@@ -757,7 +1331,9 @@
       "check_pattern": "Qwen3-Reranker-0\\.6B\\*\\*\\s*\\|\\s*0\\.6B\\s*\\|\\s*(\\*\\*)?{value}",
       "check_hint": "MTEB-R",
       "protocol_note": "Qwen's own run: retrieval subsets of MTEB(eng, v2), reranking the top 100 from Qwen3-Embedding-0.6B — an English NDCG@10 average, but MTEB-R, not BEIR",
-      "verified_on": "2026-10-01"
+      "verified_on": "2026-10-01",
+      "protocol_id": "mteb-r-qwen",
+      "language_key": "en"
     },
     "jina2026_beir": {
       "value": "56.94",
@@ -765,7 +1341,9 @@
       "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**Qwen3-Reranker-0\\.6B\\**\\s*\\|\\s*0\\.6B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "BEIR",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "beir-jina-2026",
+      "language_key": "en"
     },
     "jina2026_miracl": {
       "value": "67.12",
@@ -773,7 +1351,9 @@
       "check_url": "https://huggingface.co/jinaai/jina-reranker-v3.5/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**Qwen3-Reranker-0\\.6B\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "MIRACL",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "miracl-jina-2026",
+      "language_key": "multi"
     },
     "jina2026_rteb": {
       "value": "68.41",
@@ -797,7 +1377,9 @@
       "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**Qwen3-Reranker-0\\.6B\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "CMTEB-R",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "cmteb-r-qwen",
+      "language_key": "zh"
     },
     "mmteb_r": {
       "value": "66.36",
@@ -805,7 +1387,9 @@
       "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**Qwen3-Reranker-0\\.6B\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "MMTEB-R",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "mmteb-r-qwen",
+      "language_key": "multi"
     },
     "mldr": {
       "value": "67.28",
@@ -830,6 +1414,26 @@
       "check_pattern": "\\|\\s*\\**Qwen3-Reranker-0\\.6B\\**\\s*\\|\\s*0\\.6B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "FOLLOWIR",
       "verified_on": "2026-10-12"
+    },
+    "jina2026_miracl_zh": {
+      "value": "60.80",
+      "source_url": "https://arxiv.org/html/2607.18152v1#A2",
+      "verified_on": "2026-11-22",
+      "source_revision": "arXiv:2607.18152v1",
+      "check_pattern": "(?<!\\S)ZH(?: \\d+\\.\\d+){3} {value}(?!\\d)",
+      "check_hint": "Table 7",
+      "protocol_id": "miracl-jina-2026-zh",
+      "language_key": "zh"
+    },
+    "jina2026_miracl_en": {
+      "value": "60.99",
+      "source_url": "https://arxiv.org/html/2607.18152v1#A2",
+      "verified_on": "2026-11-22",
+      "source_revision": "arXiv:2607.18152v1",
+      "check_pattern": "(?<!\\S)EN(?: \\d+\\.\\d+){3} {value}(?!\\d)",
+      "check_hint": "Table 7",
+      "protocol_id": "miracl-jina-2026-en",
+      "language_key": "en"
     }
   },
   "qwen3-reranker-8b": {
@@ -840,7 +1444,9 @@
       "check_pattern": "Qwen3-Reranker-8B\\*\\*\\s*\\|\\s*8B\\s*\\|\\s*(\\*\\*)?{value}",
       "check_hint": "MTEB-R",
       "protocol_note": "Qwen's own run: retrieval subsets of MTEB(eng, v2), reranking the top 100 from Qwen3-Embedding-0.6B — an English NDCG@10 average, but MTEB-R, not BEIR",
-      "verified_on": "2026-10-01"
+      "verified_on": "2026-10-01",
+      "protocol_id": "mteb-r-qwen",
+      "language_key": "en"
     },
     "cmteb_r": {
       "value": "77.45",
@@ -848,7 +1454,9 @@
       "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**Qwen3-Reranker-8B\\**\\s*\\|\\s*8B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "CMTEB-R",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "cmteb-r-qwen",
+      "language_key": "zh"
     },
     "mmteb_r": {
       "value": "72.94",
@@ -856,7 +1464,9 @@
       "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**Qwen3-Reranker-8B\\**\\s*\\|\\s*8B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "MMTEB-R",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "mmteb-r-qwen",
+      "language_key": "multi"
     },
     "mldr": {
       "value": "70.19",
@@ -891,7 +1501,9 @@
       "check_pattern": "gte-reranker-modernbert-base`\\]\\([^)]*\\)\\s*\\|[^|]*\\|[^|]*\\|[^|]*149M[^|]*\\|[^|]*8192[^|]*\\|[^|]*\\|[^|]*\\|\\s*{value}",
       "check_hint": "BEIR",
       "protocol_note": "Alibaba's own figure from the model card; the card doesn't state which BEIR datasets or which first-stage retriever",
-      "verified_on": "2026-10-01"
+      "verified_on": "2026-10-01",
+      "protocol_id": "beir-gte",
+      "language_key": "en"
     },
     "loco": {
       "value": "90.68",
@@ -966,7 +1578,9 @@
       "check_pattern": "Decontaminated mean[^|]*\\|\\s*\\*\\*{value}\\*\\*",
       "check_hint": "Decontaminated",
       "protocol_note": "LightOn's own run: 11 BEIR datasets not in the training mix, reranking BM25's top 100",
-      "verified_on": "2026-10-05"
+      "verified_on": "2026-10-05",
+      "protocol_id": "beir-lighton",
+      "language_key": "en"
     },
     "vidore_v3": {
       "value": "59.87",
@@ -995,7 +1609,9 @@
       "check_pattern": "Decontaminated mean[^|]*\\|\\s*\\*\\*{value}\\*\\*",
       "check_hint": "Decontaminated",
       "protocol_note": "LightOn's own run: 11 BEIR datasets not in the training mix, reranking BM25's top 100",
-      "verified_on": "2026-10-16"
+      "verified_on": "2026-10-16",
+      "protocol_id": "beir-lighton",
+      "language_key": "en"
     }
   },
   "qwen3-vl-reranker-8b": {
@@ -1015,7 +1631,9 @@
       "check_pattern": "Qwen3-VL-Reranker-8B\\s*\\|\\s*8B\\s*\\|(?:[^|]*\\|){4}\\s*{value}\\s*\\|",
       "check_hint": "MMTEB",
       "protocol_note": "Qwen's own run: the retrieval tasks of MMTEB, from the model card — not BEIR",
-      "verified_on": "2026-10-09"
+      "verified_on": "2026-10-09",
+      "protocol_id": "mmteb-r-qwen-vl",
+      "language_key": "multi"
     },
     "mmeb_avg": {
       "value": "79.2",
@@ -1079,7 +1697,9 @@
       "check_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B/raw/main/README.md",
       "check_pattern": "Qwen3-VL-Reranker-2B {value}\\.",
       "check_hint": "decontaminated",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "beir-lighton",
+      "language_key": "en"
     },
     "mmeb_avg": {
       "value": "75.1",
@@ -1124,7 +1744,9 @@
       "check_pattern": "Qwen3\\-VL\\-Reranker\\-2B\\s*\\|\\s*2B\\s*\\|(?:[^|]*\\|){4}\\s*{value}\\s*\\|",
       "check_hint": "MMTEB",
       "protocol_note": "Qwen's own run, from the model card; the card doesn't say which first stage was reranked",
-      "verified_on": "2026-10-15"
+      "verified_on": "2026-10-15",
+      "protocol_id": "mmteb-r-qwen-vl",
+      "language_key": "multi"
     },
     "jinavdr": {
       "value": "80.9",
@@ -1495,7 +2117,9 @@
       "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**gte-multilingual-reranker-base\\**\\s*\\|\\s*0\\.3B\\s*\\|\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "MTEB-R",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "mteb-r-qwen",
+      "language_key": "en"
     },
     "qwen_cmteb_r": {
       "value": "74.08",
@@ -1503,7 +2127,9 @@
       "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**gte-multilingual-reranker-base\\**\\s*\\|\\s*0\\.3B\\s*\\|(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "CMTEB-R",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "cmteb-r-qwen",
+      "language_key": "zh"
     },
     "qwen_mmteb_r": {
       "value": "59.44",
@@ -1511,7 +2137,9 @@
       "check_url": "https://huggingface.co/Qwen/Qwen3-Reranker-4B/raw/main/README.md",
       "check_pattern": "\\|\\s*\\**gte-multilingual-reranker-base\\**\\s*\\|\\s*0\\.3B\\s*\\|(?:[^|]*\\|)(?:[^|]*\\|)\\s*\\**{value}\\**\\s*\\|",
       "check_hint": "MMTEB-R",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "mmteb-r-qwen",
+      "language_key": "multi"
     }
   },
   "jina-reranker-m0": {
@@ -1521,7 +2149,9 @@
       "check_url": "https://huggingface.co/lightonai/LightOn-rerank-PW-2B/raw/main/README.md",
       "check_pattern": "jina-reranker-m0 scores {value} decontaminated",
       "check_hint": "decontaminated",
-      "verified_on": "2026-10-12"
+      "verified_on": "2026-10-12",
+      "protocol_id": "beir-lighton",
+      "language_key": "en"
     },
     "qwen_mmeb_image": {
       "value": "68.2",
@@ -1824,7 +2454,9 @@
       "check_pattern": "\\(LW-2B: {value}\\)",
       "check_hint": "LW-2B",
       "protocol_note": "LightOn's own run: 11 BEIR datasets not in the training mix, reranking BM25's top 100",
-      "verified_on": "2026-10-16"
+      "verified_on": "2026-10-16",
+      "protocol_id": "beir-lighton",
+      "language_key": "en"
     }
   },
   "lighton-rerank-pw-4b": {

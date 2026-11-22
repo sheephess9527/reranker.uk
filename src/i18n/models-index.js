@@ -1,7 +1,31 @@
 window.I18N_PAGE = {
   keys: {
+    "models.taskLabel": "基准任务",
+    "models.languageLabel": "评测语言",
+    "models.evidence": "评测证据",
+    "models.filterHelp": "筛选依据为公开评测记录。仅在数据集、候选集、指标和统计口径一致时比较分数。",
+    "models.bgeEvidence": "查看 BGE base/large 的 C-MTEB 中文、中→英和英→中分项",
+    "models.clear": "清除筛选",
+    "models.noMatches": "未找到符合条件的模型",
+    "models.languageSupport": "模型支持语言",
+    "models.task.all": "全部任务",
+    "models.task.beir": "BEIR",
+    "models.task.mteb-r": "MTEB-R",
+    "models.task.cmteb-r": "CMTEB-R（检索）",
+    "models.task.cmteb-rerank": "C-MTEB（重排）",
+    "models.task.rerank-12": "Rerank-12",
+    "models.task.mmteb-r": "MMTEB-R",
+    "models.task.miracl": "MIRACL",
+    "models.task.mr-tydi": "Mr.TyDi",
+    "models.task.vendor-chinese": "Mixedbread 中文评测",
+    "models.language.all": "全部语言",
+    "models.language.en": "英文",
+    "models.language.zh": "中文",
+    "models.language.zh-en": "中→英",
+    "models.language.en-zh": "英→中",
+    "models.language.multi": "多语言平均",
     "models.tableAriaLabel": "重排序模型对比表",
-    "models.tableCaption": "重排序模型对比：架构、类型、适用场景、语言、延迟、价格与 BEIR 分数",
+    "models.tableCaption": "重排序模型对比：架构、类型、适用场景、支持语言、延迟、价格与评测证据",
   },
   zh: {
   "English-only CPU candidate ({{fact:ettin-reranker-17m-v1.params}}); {{fact:ettin-reranker-17m-v1.context_tokens}}-token pairs; benchmark on your own queries":
@@ -243,8 +267,8 @@ window.I18N_PAGE = {
     "<strong>最近核对：</strong>2026 年 9 月（新增 mxbai-rerank-v2；修正了 mxbai-rerank-large-v1 的 BEIR 数字 —— 本表此前挂着一个没有来源的 ~62.1，而 mixedbread 自己的对比表给出的是 {{fact:mxbai-rerank-large-v1.beir}}）· <strong>下次复核：</strong>2026 年 11 月。标 <strong>*</strong> 的列使用 MTEB-R、厂商或任务特定协议，<em>不同于</em> bge / Jina 行所用的经典 BEIR 18 数据集均值。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档）计费，Voyage 按 <em>token</em> 计费。我们的<a href=\"/rerank-cost-calculator.html\">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。",
   "<strong>Last verified:</strong> September 2026 (added mxbai-rerank-v2; corrected mxbai-rerank-large-v1's BEIR figure, which this table carried at an unsourced ~62.1 — mixedbread's own comparison table puts it at {{fact:mxbai-rerank-large-v1.beir}}; ms-marco MiniLM-L6 now reads not published — sentence-transformers' own docs report NDCG@10 on TREC DL 19, not a BEIR average, so the ~55.0 this table carried had nowhere to point) · <strong>Next review:</strong> Nov 2026. Columns marked <strong>*</strong> use MTEB-R, vendor, or task-specific protocols — <em>not</em> the same classic BEIR 18-dataset avg as the bge/Jina rows. Where a vendor publishes no comparable number we say <em>not published</em> rather than guess. <strong>†</strong> Note the differing units: Cohere bills per <em>search</em> (one query + up to 100 docs), Voyage per <em>token</em>. Our <a href=\"/rerank-cost-calculator.html\">cost calculator</a> works out which is cheaper for your volume. Demo-capable models only: mxbai xsmall, Jina tiny, ms-marco MiniLM.":
     "<strong>最近核对：</strong>2026 年 9 月（新增 mxbai-rerank-v2；修正了 mxbai-rerank-large-v1 的 BEIR 数字 —— 本表此前挂着一个没有来源的 ~62.1，而 mixedbread 自己的对比表给出的是 {{fact:mxbai-rerank-large-v1.beir}}；ms-marco MiniLM-L6 现在写「未公布」—— sentence-transformers 自己的文档给的是 TREC DL 19 上的 NDCG@10，并不是 BEIR 均值，所以本表此前挂着的 ~55.0 根本无处可查）· <strong>下次复核：</strong>2026 年 11 月。标 <strong>*</strong> 的列使用 MTEB-R、厂商或任务特定协议，<em>不同于</em> bge / Jina 行所用的经典 BEIR 18 数据集均值。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere 按<em>每次检索</em>（一个 query + 最多 100 篇文档）计费，Voyage 按 <em>token</em> 计费。我们的<a href=\"/rerank-cost-calculator.html\">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。",
-  "<strong>Last verified:</strong> October 2026 (added Qwen3-VL-Reranker, zerank-2 and gte-multilingual-reranker-base; added jina-reranker-v3.5; Jina rows now share one 2026 protocol; bge-reranker-v2-m3 corrected from an untraceable ~60.1 to BAAI's own {{fact:bge-reranker-v2-m3.beir}}; Jina v1 tiny and ms-marco MiniLM-L6 now show the BEIR figures Jina published for them; in September, mxbai-rerank-large-v1 was corrected from an unsourced ~62.1) · <strong>Next review:</strong> Nov 2026. <strong>*</strong> No two vendors run BEIR the same way — BAAI average 15 datasets over bge-large-en-v1.5's top 100, Jina 13 datasets over jina-embeddings-v5-text-small's top 100, mixedbread their own set — so every BEIR figure here carries a * and its protocol on hover. The differences are not small: Jina's run puts bge-reranker-v2-m3 at {{fact:bge-reranker-v2-m3.beir_jina_2025}} against BAAI's own {{fact:bge-reranker-v2-m3.beir}}, and mxbai-rerank-large-v2 at {{fact:mxbai-rerank-large-v2.beir_jina_2025}} against mixedbread's {{fact:mxbai-rerank-large-v2.beir}}. Read the column as rough tiers, not decimals. Other * cells use MTEB-R or task-specific metrics. Where a vendor publishes no comparable number we say <em>not published</em> rather than guess. <strong>†</strong> Note the differing units: Cohere Rerank 4 was billed per <em>search</em> (one query + up to 100 docs, each counted once per {{fact:cohere-rerank.billing_chunk_tokens}} tokens), Cohere Rerank 5, Voyage and Jina per <em>token</em> — Jina counting one request’s tokens, the query plus every candidate, where Voyage counts the query once per document. Cohere’s pricing page stopped listing Rerank 4 on 21 October 2026, so its prices here are the last listed. Our <a href=\"/rerank-cost-calculator.html\">cost calculator</a> works out which is cheaper for your volume. Demo-capable models only: mxbai xsmall, Jina tiny, ms-marco MiniLM.":
-    "<strong>最近核对：</strong>2026 年 10 月（新增 Qwen3-VL-Reranker、zerank-2 和 gte-multilingual-reranker-base；新增 jina-reranker-v3.5；Jina 各行改用同一套 2026 年评测；bge-reranker-v2-m3 由查不到出处的 ~60.1 改为 BAAI 自己公布的 {{fact:bge-reranker-v2-m3.beir}}；Jina v1 tiny 与 ms-marco MiniLM-L6 现在显示 Jina 为它们公布的 BEIR 分数；9 月已将 mxbai-rerank-large-v1 由没有来源的 ~62.1 修正）· <strong>下次复核：</strong>2026 年 11 月。<strong>*</strong> 各家跑 BEIR 的方式都不一样 —— BAAI 用 15 个数据集、对 bge-large-en-v1.5 召回的前 100 条重排，Jina 用 13 个数据集、对 jina-embeddings-v5-text-small 的前 100 条重排，mixedbread 用自己选的一套 —— 所以本列每个 BEIR 数字都带 *，鼠标悬停可见其评测方法。差距并不小：Jina 的评测里 bge-reranker-v2-m3 是 {{fact:bge-reranker-v2-m3.beir_jina_2025}}，BAAI 自己测的是 {{fact:bge-reranker-v2-m3.beir}}；mxbai-rerank-large-v2 在 Jina 那边是 {{fact:mxbai-rerank-large-v2.beir_jina_2025}}，mixedbread 自己测的是 {{fact:mxbai-rerank-large-v2.beir}}。请把这一列当作大致的档位，而不是精确到小数的排名。其余带 * 的格子用的是 MTEB-R 或任务特定指标。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere Rerank 4 按<em>每次检索</em>（一个 query + 最多 100 篇文档，每篇按每 {{fact:cohere-rerank.billing_chunk_tokens}} token 计一次）计费，Cohere Rerank 5、Voyage 和 Jina 按 <em>token</em> 计费 —— Jina 按一次请求的全部 token 计（query 加全部候选文档），Voyage 则是每篇文档都把 query 算一遍。Cohere 的价格页自 2026 年 10 月 21 日起不再列出 Rerank 4，所以这里的 Rerank 4 价格是它最后公布的价格。我们的<a href=\"/rerank-cost-calculator.html\">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。",
+  "<strong>Verification:</strong> See the source check date in each benchmark result. The benchmark column groups scores by the reported evaluation protocol. <strong>†</strong> Note the differing units: Cohere Rerank 4 was billed per <em>search</em> (one query + up to 100 docs, each counted once per {{fact:cohere-rerank.billing_chunk_tokens}} tokens), Cohere Rerank 5, Voyage and Jina per <em>token</em> — Jina counting one request’s tokens, the query plus every candidate, where Voyage counts the query once per document. Cohere’s pricing page stopped listing Rerank 4 on 21 October 2026, so its prices here are the last listed. Our <a href=\"/rerank-cost-calculator.html\">cost calculator</a> works out which is cheaper for your volume. Demo-capable models only: mxbai xsmall, Jina tiny, ms-marco MiniLM.":
+    "<strong>核验：</strong>各项成绩均标注来源核验日期。评测证据列按来源披露的评测口径展示成绩。<strong>†</strong> 注意计价单位不同：Cohere Rerank 4 按<em>每次检索</em>（一个 query + 最多 100 篇文档，每篇按每 {{fact:cohere-rerank.billing_chunk_tokens}} token 计一次）计费，Cohere Rerank 5、Voyage 和 Jina 按 <em>token</em> 计费 —— Jina 按一次请求的全部 token 计（query 加全部候选文档），Voyage 则是每篇文档都把 query 算一遍。Cohere 的价格页自 2026 年 10 月 21 日起不再列出 Rerank 4，所以这里的 Rerank 4 价格是它最后公布的价格。我们的<a href=\"/rerank-cost-calculator.html\">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。",
   "The preview <code>rerank-3</code> tier now carries the 200M free-token grant that 2.5 launched with; 33% off via the Batch API":
     "预览版 <code>rerank-3</code> 现在带着 2.5 当初发布时的那份 2 亿免费 token 额度；走 Batch API 还能再打 67 折",
   "Classic baseline; largest of the three demo models": "经典基线；三个 Demo 模型里体积最大",

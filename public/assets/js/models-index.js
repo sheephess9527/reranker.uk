@@ -13,9 +13,24 @@
   const archFilter = document.getElementById("models-arch-filter");
   const inputFilter = document.getElementById("models-input-filter");
   const licenseFilter = document.getElementById("models-license-filter");
+  const taskFilter = document.getElementById("models-task-filter");
+  const languageFilter = document.getElementById("models-language-filter");
+  const clearFilters = document.getElementById("models-clear-filters");
+  const noMatches = document.getElementById("models-no-matches");
   if (!table || !tbody) return;
 
   const rows = Array.from(tbody.querySelectorAll("tr"));
+  const evidenceByRow = new Map(rows.map((row) => {
+    const summary = row.querySelector(".benchmark-summary");
+    return [row, {
+      summary,
+      defaultSummary: summary?.textContent,
+      results: Array.from(row.querySelectorAll("[data-benchmark-task]")),
+    }];
+  }));
+  const filters = [typeFilter, archFilter, inputFilter, licenseFilter, taskFilter, languageFilter];
+  const filterGroup = document.getElementById("benchmark-filters");
+  if (filterGroup) filterGroup.hidden = false;
 
   function isZh() {
     return (document.documentElement.lang || "").toLowerCase().indexOf("zh") === 0;
@@ -34,6 +49,9 @@
     const arch = archFilter?.value || "all";
     const input = inputFilter?.value || "all";
     const licence = licenseFilter?.value || "all";
+    const task = taskFilter?.value || "all";
+    const language = languageFilter?.value || "all";
+    const filteringEvidence = task !== "all" || language !== "all";
     rows.forEach((row) => {
       const types = (row.dataset.type || "").split(/\s+/);
       const typeOk = type === "all" || types.includes(type);
@@ -48,9 +66,23 @@
       // API has none, so it answers neither licence question.
       const licenceOk = licence === "all" || row.dataset.license === licence;
       const textOk = !q || rowText(row).includes(q);
-      row.hidden = !(typeOk && archOk && inputOk && licenceOk && textOk);
+      const evidence = evidenceByRow.get(row);
+      const matching = evidence.results.filter((result) => {
+        const match = (task === "all" || result.dataset.benchmarkTask === task) &&
+          (language === "all" || result.dataset.evalLanguage === language);
+        result.hidden = !match;
+        return match;
+      });
+      if (evidence.summary) {
+        evidence.summary.textContent = filteringEvidence
+          ? matching.map((result) => result.querySelector(".benchmark-score").textContent).join(" / ")
+          : evidence.defaultSummary;
+      }
+      const benchmarkOk = !filteringEvidence || matching.length > 0;
+      row.hidden = !(typeOk && archOk && inputOk && licenceOk && textOk && benchmarkOk);
     });
     const visible = rows.filter((r) => !r.hidden).length;
+    if (noMatches) noMatches.hidden = visible !== 0;
     const countEl = document.getElementById("models-count");
     if (countEl) {
       countEl.textContent = L(
@@ -65,17 +97,6 @@
     const sorted = rows.slice().sort((a, b) => {
       const av = a.dataset[key] || "";
       const bv = b.dataset[key] || "";
-      if (key === "beir") {
-        // Several models publish no comparable BEIR average. Those rows sink to
-        // the bottom either way — treating a blank as 0 would float them to the
-        // top of a descending sort, as if they had ranked worst.
-        const an = parseFloat(av);
-        const bn = parseFloat(bv);
-        const aMissing = !isFinite(an);
-        const bMissing = !isFinite(bn);
-        if (aMissing || bMissing) return aMissing && bMissing ? 0 : aMissing ? 1 : -1;
-        return (an - bn) * sign;
-      }
       return av.localeCompare(bv, undefined, { numeric: true, sensitivity: "base" }) * sign;
     });
     sorted.forEach((r) => tbody.appendChild(r));
@@ -114,10 +135,12 @@
   });
 
   if (filterInput) filterInput.addEventListener("input", applyFilters);
-  if (typeFilter) typeFilter.addEventListener("change", applyFilters);
-  if (archFilter) archFilter.addEventListener("change", applyFilters);
-  if (inputFilter) inputFilter.addEventListener("change", applyFilters);
-  if (licenseFilter) licenseFilter.addEventListener("change", applyFilters);
+  filters.forEach((filter) => filter?.addEventListener("change", applyFilters));
+  clearFilters?.addEventListener("click", () => {
+    if (filterInput) filterInput.value = "";
+    filters.forEach((filter) => { if (filter) filter.value = "all"; });
+    applyFilters();
+  });
 
   rows.forEach((row) => {
     const slug = row.dataset.demo;

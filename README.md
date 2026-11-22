@@ -114,10 +114,19 @@ Review the models table each quarter (target: **Nov 2026**, then Feb/May/Aug):
    land 1–4 points apart across them.
 3. Spot-check pricing, and note that the *units* differ: Cohere bills per search
    (one query + up to 100 docs), Voyage per token.
-4. Bump **Last verified** / **Next review** in `/models/`, add a changelog entry
-   and an item in `public/changelog.rss`.
+4. Update the checked facts’ `verified_on` in `data/models.json`, add a
+   changelog entry and an item in `public/changelog.rss`.
 
 ### `data/models.json` — sourced numbers, not hand-typed ones
+
+The models table indexes sourced facts with a `protocol_id` and a
+`language_key`. Shared settings live under `_benchmark_protocols`. Use
+separate protocol IDs for different candidate pools, dataset subsets, language
+directions, metrics, or aggregation rules, even when the benchmark names match.
+A language filter matches a published split or aggregate. Model language
+support is maintained separately. Fill `evaluated_on` only when the original
+source discloses the test date, and use `source_revision` for a known source
+revision. Add a scoped `check_pattern` for new numeric results.
 
 A benchmark number that's typed directly into a page drifts silently: a model
 gets superseded, the page doesn't, and nothing notices (this happened —

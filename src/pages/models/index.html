@@ -29,26 +29,53 @@
           <option value="commercial">Commercial use</option>
           <option value="noncommercial">Non-commercial</option>
         </select>
-        <span class="muted models-count" id="models-count"></span>
+        <div class="benchmark-filters" id="benchmark-filters" hidden>
+          <select id="models-task-filter" aria-label="Benchmark task" data-i18n-aria-label="models.taskLabel">
+            <option value="all" data-i18n="models.task.all">All tasks</option>
+            <option value="beir" data-i18n="models.task.beir">BEIR</option>
+            <option value="mteb-r" data-i18n="models.task.mteb-r">MTEB-R</option>
+            <option value="cmteb-r" data-i18n="models.task.cmteb-r">CMTEB-R (retrieval)</option>
+            <option value="cmteb-rerank" data-i18n="models.task.cmteb-rerank">C-MTEB (reranking)</option>
+            <option value="rerank-12" data-i18n="models.task.rerank-12">Rerank-12</option>
+            <option value="mmteb-r" data-i18n="models.task.mmteb-r">MMTEB-R</option>
+            <option value="miracl" data-i18n="models.task.miracl">MIRACL</option>
+            <option value="mr-tydi" data-i18n="models.task.mr-tydi">Mr.TyDi</option>
+            <option value="vendor-chinese" data-i18n="models.task.vendor-chinese">Mixedbread Chinese</option>
+          </select>
+          <select id="models-language-filter" aria-label="Evaluation language" data-i18n-aria-label="models.languageLabel">
+            <option value="all" data-i18n="models.language.all">All languages</option>
+            <option value="en" data-i18n="models.language.en">English</option>
+            <option value="zh" data-i18n="models.language.zh">Chinese</option>
+            <option value="zh-en" data-i18n="models.language.zh-en">Chinese → English</option>
+            <option value="en-zh" data-i18n="models.language.en-zh">English → Chinese</option>
+            <option value="multi" data-i18n="models.language.multi">Multilingual average</option>
+          </select>
+          <button type="button" id="models-clear-filters" class="btn btn-ghost btn-sm" data-i18n="models.clear">Clear filters</button>
+        </div>
+        <span class="muted models-count" id="models-count" role="status"></span>
       </div>
+      <p id="models-benchmark-help" class="muted"><span data-i18n="models.filterHelp">Filters use published evaluations. Compare scores only when the datasets, candidate pool, metric and aggregation match.</span>
+        <a href="/models/bge-reranker.html#cmteb-directions" data-i18n="models.bgeEvidence">See BGE base/large C-MTEB results for Chinese and both cross-language directions</a>.
+      </p>
+      <p id="models-no-matches" class="muted" data-i18n="models.noMatches" hidden>No models match these filters</p>
       <div class="table-wrap table-sticky" tabindex="0" role="region" data-i18n-aria-label="models.tableAriaLabel" aria-label="Rerank model comparison">
         <table id="models-table">
-          <caption class="sr-only" data-i18n-html="models.tableCaption">Rerank model comparison: architecture, type, best-for, languages, latency, pricing and BEIR score for each model</caption>
+          <caption class="sr-only" data-i18n-html="models.tableCaption">Rerank model comparison: architecture, type, best-for, supported languages, latency, pricing and benchmark evidence for each model</caption>
           <thead>
             <tr>
               <th scope="col" data-sort="name">Model</th>
               <th scope="col" data-sort="arch">Architecture</th>
               <th scope="col" data-sort="type">Type</th>
               <th scope="col">Best for</th>
-              <th scope="col" data-sort="langs">Languages</th>
+              <th scope="col" data-sort="langs" data-i18n="models.languageSupport">Supported languages</th>
               <th scope="col">Typ. latency <span class="th-hint">50 docs</span></th>
               <th scope="col" data-sort="pricing">Pricing</th>
-              <th scope="col" data-sort="beir">BEIR NDCG@10</th>
+              <th scope="col" data-i18n="models.evidence">Benchmark evidence</th>
               <th scope="col">Demo</th>
             </tr>
           </thead>
           <tbody>
-            <tr data-name="qwen3-reranker-4b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="" data-license="commercial">
+            <tr data-name="qwen3-reranker-4b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/models/qwen-reranker.html">Qwen3-Reranker-4B</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Apache 2.0</span><span class="pill info">Best Qwen3 size</span></td>
@@ -56,10 +83,10 @@
               <td>100+ langs · 32K ctx</td>
               <td>GPU required</td>
               <td>Free (self-host)</td>
-              <td class="muted" title="Qwen's own run: retrieval subsets of MTEB(eng, v2), reranking the top 100 from Qwen3-Embedding-0.6B — not a BEIR average. Jina's 2026 run measured the 4B at {{fact:qwen3-reranker-4b.beir_jina_2026}} on 13 BEIR datasets">MTEB-R {{fact:qwen3-reranker-4b.mteb_r}}</td>
+              <td data-benchmark-models="qwen3-reranker-4b" class="muted" title="Qwen's own run: retrieval subsets of MTEB(eng, v2), reranking the top 100 from Qwen3-Embedding-0.6B — not a BEIR average. Jina's 2026 run measured the 4B at {{fact:qwen3-reranker-4b.beir_jina_2026}} on 13 BEIR datasets">MTEB-R {{fact:qwen3-reranker-4b.mteb_r}}</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="qwen3-reranker-8b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="" data-license="commercial">
+            <tr data-name="qwen3-reranker-8b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/models/qwen-reranker.html">Qwen3-Reranker-8B</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Apache 2.0</span></td>
@@ -67,10 +94,10 @@
               <td>100+ langs · 32K ctx</td>
               <td>GPU / multi-GPU</td>
               <td>Free (self-host)</td>
-              <td class="muted" title="Qwen's own run, same suite as the 4B row, where the 4B scores higher. This table said ~0.48 points behind on BEIR until Oct 2026; Qwen's card gives 0.74 on MTEB-R">MTEB-R {{fact:qwen3-reranker-8b.mteb_r}}</td>
+              <td data-benchmark-models="qwen3-reranker-8b" class="muted" title="Qwen's own run, same suite as the 4B row, where the 4B scores higher. This table said ~0.48 points behind on BEIR until Oct 2026; Qwen's card gives 0.74 on MTEB-R">MTEB-R {{fact:qwen3-reranker-8b.mteb_r}}</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="qwen3-reranker-0.6b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="" data-license="commercial">
+            <tr data-name="qwen3-reranker-0.6b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/models/qwen-reranker.html">Qwen3-Reranker-0.6B</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Apache 2.0</span></td>
@@ -78,10 +105,10 @@
               <td>100+ langs · 32K ctx</td>
               <td>GPU recommended</td>
               <td>Free (self-host)</td>
-              <td class="muted" title="Qwen's own run, same suite as the 4B row">MTEB-R {{fact:qwen3-reranker-0.6b.mteb_r}}</td>
+              <td data-benchmark-models="qwen3-reranker-0.6b" class="muted" title="Qwen's own run, same suite as the 4B row">MTEB-R {{fact:qwen3-reranker-0.6b.mteb_r}}</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="bge-reranker-v2-m3" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="{{fact:bge-reranker-v2-m3.beir}}" data-license="commercial">
+            <tr data-name="bge-reranker-v2-m3" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/models/bge-reranker.html">bge-reranker-v2-m3</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span></td>
@@ -89,10 +116,10 @@
               <td>100+ langs</td>
               <td>CPU-capable; GPU faster</td>
               <td>Free (self-host)</td>
-              <td title="BAAI's own run: 15 BEIR datasets, reranking the top 100 from bge-large-en-v1.5. This table carried an untraceable ~60.1 here until Oct 2026">{{fact:bge-reranker-v2-m3.beir}}</td>
+              <td data-benchmark-models="bge-reranker-v2-m3" title="BAAI's own run: 15 BEIR datasets, reranking the top 100 from bge-large-en-v1.5. This table carried an untraceable ~60.1 here until Oct 2026">{{fact:bge-reranker-v2-m3.beir}}</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="bce-reranker-base_v1" data-type="open" data-arch="cross-encoder" data-langs="zh en ja ko" data-pricing="free" data-beir="" data-license="commercial">
+            <tr data-name="bce-reranker-base_v1" data-type="open" data-arch="cross-encoder" data-langs="zh en ja ko" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="https://huggingface.co/maidalun1020/bce-reranker-base_v1" rel="noopener noreferrer">bce-reranker-base_v1</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Apache 2.0</span><span class="pill info">Compact</span></td>
@@ -100,10 +127,10 @@
               <td>zh, en, ja, ko · cross-lingual</td>
               <td>CPU-capable; GPU faster</td>
               <td>Free (self-host)</td>
-              <td class="muted" title="Youdao's own run: the 12 Reranking datasets of MTEB / C-MTEB, evaluated in the en / zh / en-zh / zh-en setting — not BEIR, and not the CMTEB-R retrieval suite Qwen report. Same run: bge-reranker-base 59.04, bge-reranker-large 60.86">Rerank-12 {{fact:bce-reranker-base_v1.rerank12_avg}}</td>
+              <td data-benchmark-models="bce-reranker-base_v1" class="muted" title="Youdao's own run: the 12 Reranking datasets of MTEB / C-MTEB, evaluated in the en / zh / en-zh / zh-en setting — not BEIR, and not the CMTEB-R retrieval suite Qwen report. Same run: bge-reranker-base 59.04, bge-reranker-large 60.86">Rerank-12 {{fact:bce-reranker-base_v1.rerank12_avg}}</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="mxbai-rerank-large-v1" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="{{fact:mxbai-rerank-large-v1.beir}}" data-demo="mxbai-rerank" data-license="commercial">
+            <tr data-name="mxbai-rerank-large-v1" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-demo="mxbai-rerank" data-license="commercial">
               <th scope="row"><a href="/models/mxbai-rerank.html">mxbai-rerank-large-v1</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><br><span class="pill info">Browser ✓</span></td>
@@ -111,10 +138,10 @@
               <td>English</td>
               <td>CPU-capable; GPU faster</td>
               <td>Free (self-host)</td>
-              <td title="mixedbread's own cross-generation comparison table, not the classic BEIR 18-dataset average other open-weight rows use">{{fact:mxbai-rerank-large-v1.beir}}</td>
+              <td data-benchmark-models="mxbai-rerank-large-v1" title="mixedbread's own cross-generation comparison table, not the classic BEIR 18-dataset average other open-weight rows use">{{fact:mxbai-rerank-large-v1.beir}}</td>
               <td class="demo-link-cell"></td>
             </tr>
-            <tr data-name="mxbai-rerank-large-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="{{fact:mxbai-rerank-large-v2.beir}}" data-license="commercial">
+            <tr data-name="mxbai-rerank-large-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/models/mxbai-rerank.html">mxbai-rerank-large-v2</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><span class="pill info">Multilingual</span></td>
@@ -122,10 +149,10 @@
               <td>100+ langs</td>
               <td>GPU recommended</td>
               <td>Free (self-host)</td>
-              <td title="mixedbread's own comparison table, not the classic BEIR 18-dataset average other open-weight rows use">{{fact:mxbai-rerank-large-v2.beir}}</td>
+              <td data-benchmark-models="mxbai-rerank-large-v2" title="mixedbread's own comparison table, not the classic BEIR 18-dataset average other open-weight rows use">{{fact:mxbai-rerank-large-v2.beir}}</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="mxbai-rerank-base-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="{{fact:mxbai-rerank-base-v2.beir}}" data-license="commercial">
+            <tr data-name="mxbai-rerank-base-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/models/mxbai-rerank.html">mxbai-rerank-base-v2</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><span class="pill info">Multilingual</span></td>
@@ -133,10 +160,10 @@
               <td>100+ langs</td>
               <td>CPU-capable; GPU faster</td>
               <td>Free (self-host)</td>
-              <td title="mixedbread's own comparison table, not the classic BEIR 18-dataset average other open-weight rows use">{{fact:mxbai-rerank-base-v2.beir}}</td>
+              <td data-benchmark-models="mxbai-rerank-base-v2" title="mixedbread's own comparison table, not the classic BEIR 18-dataset average other open-weight rows use">{{fact:mxbai-rerank-base-v2.beir}}</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="jina-reranker-v3.5" data-type="open api" data-arch="listwise" data-langs="100+" data-pricing="freemium" data-beir="{{fact:jina-reranker-v3.5.beir}}" data-license="noncommercial">
+            <tr data-name="jina-reranker-v3.5" data-type="open api" data-arch="listwise" data-langs="100+" data-pricing="freemium" data-license="noncommercial">
               <th scope="row"><a href="/models/jina-reranker.html">Jina Reranker v3.5</a></th>
               <td><span class="pill info">Listwise</span></td>
               <td><span class="pill">Hosted API</span><span class="pill warn">Weights: non-commercial</span></td>
@@ -144,10 +171,10 @@
               <td>100+ langs</td>
               <td>API or GPU self-host</td>
               <td title="Jina bill the tokens of one request: the query plus every candidate, counted once, not the query once per document. The rate is per 1M tokens from api.jina.ai/v1/models; new keys get free trial tokens and packages are bought up front">Free trial tokens, then ${{fact:jina-reranker-v3.5.api_usd_per_m}}/M tokens†</td>
-              <td title="Jina's own 2026 run: 13 BEIR datasets, reranking the top 100 from jina-embeddings-v5-text-small. Same run: Qwen3-Reranker-4B {{fact:qwen3-reranker-4b.beir_jina_2026}}, mxbai-rerank-large-v2 {{fact:mxbai-rerank-large-v2.jina2026_beir}}">{{fact:jina-reranker-v3.5.beir}}</td>
+              <td data-benchmark-models="jina-reranker-v3.5" title="Jina's own 2026 run: 13 BEIR datasets, reranking the top 100 from jina-embeddings-v5-text-small. Same run: Qwen3-Reranker-4B {{fact:qwen3-reranker-4b.beir_jina_2026}}, mxbai-rerank-large-v2 {{fact:mxbai-rerank-large-v2.jina2026_beir}}">{{fact:jina-reranker-v3.5.beir}}</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="jina-reranker-v3" data-type="open api" data-arch="listwise" data-langs="100+" data-pricing="freemium" data-beir="{{fact:jina-reranker-v3.beir_2026}}" data-license="noncommercial">
+            <tr data-name="jina-reranker-v3" data-type="open api" data-arch="listwise" data-langs="100+" data-pricing="freemium" data-license="noncommercial">
               <th scope="row"><a href="/models/jina-reranker.html">Jina Reranker v3</a></th>
               <td><span class="pill info">Listwise</span></td>
               <td><span class="pill">Hosted API</span><span class="pill warn">Weights: non-commercial</span></td>
@@ -155,10 +182,10 @@
               <td>100+ langs</td>
               <td>API or GPU self-host</td>
               <td title="Jina bill the tokens of one request: the query plus every candidate, counted once, not the query once per document. The rate is per 1M tokens from api.jina.ai/v1/models; new keys get free trial tokens and packages are bought up front">Free trial tokens, then ${{fact:jina-reranker-v3.5.api_usd_per_m}}/M tokens†</td>
-              <td title="Jina's own 2026 run, same as the v3.5 row: 13 BEIR datasets over jina-embeddings-v5-text-small's top 100. The v3 paper's 2025 run, over jina-embeddings-v3, reported {{fact:jina-reranker-v3.beir}}">{{fact:jina-reranker-v3.beir_2026}}</td>
+              <td data-benchmark-models="jina-reranker-v3" title="Jina's own 2026 run, same as the v3.5 row: 13 BEIR datasets over jina-embeddings-v5-text-small's top 100. The v3 paper's 2025 run, over jina-embeddings-v3, reported {{fact:jina-reranker-v3.beir}}">{{fact:jina-reranker-v3.beir_2026}}</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="jina-reranker-tiny" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="{{fact:jina-reranker-v1-tiny-en.beir}}" data-demo="jina-reranker" data-license="commercial">
+            <tr data-name="jina-reranker-tiny" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-demo="jina-reranker" data-license="commercial">
               <th scope="row"><a href="/models/jina-reranker.html">jina-reranker v1 tiny</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><br><span class="pill info">Browser ✓</span></td>
@@ -166,10 +193,10 @@
               <td>English</td>
               <td title="Measured with the live demo: Chromium (WASM) on a 4-vCPU GitHub Actions runner, median of 5 runs, ~60-word passages, Oct 2026. Phones and older laptops will be slower — the demo shows the time for each run on your device">~{{fact:jina-reranker-v1-tiny-en.browser_ms_10}} ms per 10 passages (browser)</td>
               <td>Free (self-host)</td>
-              <td title="Jina's own run: 17 BEIR datasets, from the jina-reranker-v1 model card">{{fact:jina-reranker-v1-tiny-en.beir}}</td>
+              <td data-benchmark-models="jina-reranker-v1-tiny-en" title="Jina's own run: 17 BEIR datasets, from the jina-reranker-v1 model card">{{fact:jina-reranker-v1-tiny-en.beir}}</td>
               <td class="demo-link-cell"></td>
             </tr>
-            <tr id="cohere-rerank-5" data-name="cohere-rerank-5-pro" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
+            <tr id="cohere-rerank-5" data-name="cohere-rerank-5-pro" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid">
               <th scope="row"><a href="/models/cohere-rerank.html">Cohere Rerank 5 Pro</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Hosted API</span></td>
@@ -180,7 +207,7 @@
               <td class="muted" title="Cohere publish no benchmark table for Rerank 5">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="cohere-rerank-5-fast" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
+            <tr data-name="cohere-rerank-5-fast" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid">
               <th scope="row"><a href="/models/cohere-rerank.html">Cohere Rerank 5 Fast</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Hosted API</span></td>
@@ -191,7 +218,7 @@
               <td class="muted" title="Cohere publish no benchmark table for Rerank 5">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="cohere-rerank-4-pro" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
+            <tr data-name="cohere-rerank-4-pro" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid">
               <th scope="row"><a href="/models/cohere-rerank.html">Cohere Rerank 4 Pro</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Hosted API</span></td>
@@ -202,7 +229,7 @@
               <td class="muted" title="Cohere does not publish a classic BEIR 18-dataset average for Rerank 4">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="cohere-rerank-4-fast" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
+            <tr data-name="cohere-rerank-4-fast" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid">
               <th scope="row"><a href="/models/cohere-rerank.html">Cohere Rerank 4 Fast</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Hosted API</span></td>
@@ -213,7 +240,7 @@
               <td class="muted" title="Vendor does not publish a classic BEIR average">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="voyage-rerank-3" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+            <tr data-name="voyage-rerank-3" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid">
               <th scope="row"><a href="/models/voyage-rerank.html">Voyage rerank-3</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Hosted API</span></td>
@@ -224,7 +251,7 @@
               <td class="muted" title="Voyage publishes its own retrieval evals, not a classic BEIR average">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="voyage-rerank-3-lite" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+            <tr data-name="voyage-rerank-3-lite" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid">
               <th scope="row"><a href="/models/voyage-rerank.html">Voyage rerank-3-lite</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Hosted API</span></td>
@@ -235,7 +262,7 @@
               <td class="muted" title="Voyage publishes its own retrieval evals, not a classic BEIR average">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="voyage-rerank-2.5" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+            <tr data-name="voyage-rerank-2.5" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid">
               <th scope="row"><a href="/models/voyage-rerank.html">Voyage rerank-2.5</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Hosted API</span><span class="pill info">Instruction</span></td>
@@ -246,7 +273,7 @@
               <td class="muted" title="Voyage publishes its own retrieval evals, not a classic BEIR average">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="voyage-rerank-2.5-lite" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+            <tr data-name="voyage-rerank-2.5-lite" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid">
               <th scope="row"><a href="/models/voyage-rerank.html">Voyage rerank-2.5-lite</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Hosted API</span></td>
@@ -257,7 +284,7 @@
               <td class="muted" title="Voyage publishes its own retrieval evals, not a classic BEIR average">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="alibaba-model-studio" data-name="alibaba-model-studio" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="" data-modal="1">
+            <tr id="alibaba-model-studio" data-name="alibaba-model-studio" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-modal="1">
               <th scope="row"><a href="https://help.aliyun.com/zh/model-studio/text-rerank-api" rel="noopener noreferrer">Alibaba Cloud Model Studio</a> <span class="muted">(qwen3-rerank)</span></th>
               <td><span class="pill">Reranker API</span></td>
               <td><span class="pill">Hosted API</span></td>
@@ -268,7 +295,7 @@
               <td class="muted" title="Alibaba Cloud publish no benchmark for the hosted models. Prices are per million input tokens; the Beijing region includes a one-million-token free quota for 90 days. gte-rerank was retired on 30 May 2026; gte-rerank-v2 remains">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="siliconflow" data-name="siliconflow" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="">
+            <tr id="siliconflow" data-name="siliconflow" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium">
               <th scope="row"><a href="https://docs.siliconflow.com/en/api-reference/rerank/create-rerank" rel="noopener noreferrer">SiliconFlow</a> <span class="muted">(hosted open models)</span></th>
               <td><span class="pill">Reranker API</span></td>
               <td><span class="pill">Hosted API</span></td>
@@ -279,7 +306,7 @@
               <td class="muted" title="SiliconFlow serve other vendors’ open models, so the scores are those models’ own — see their rows. Its price page lists no price for the Qwen3-Reranker models">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="amazon-bedrock" data-name="amazon-bedrock" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+            <tr id="amazon-bedrock" data-name="amazon-bedrock" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid">
               <th scope="row"><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html" rel="noopener noreferrer">Amazon Bedrock rerank</a> <span class="muted">(AWS)</span></th>
               <td><span class="pill">Reranker API</span></td>
               <td><span class="pill">Hosted API</span></td>
@@ -290,7 +317,7 @@
               <td class="muted" title="Amazon publish no benchmark for Rerank 1.0; Cohere Rerank 3.5 is Cohere’s model. A query counts up to {{fact:amazon-bedrock-rerank.docs_per_query}} documents; each further {{fact:amazon-bedrock-rerank.docs_per_query}} counts as another query">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="pinecone" data-name="pinecone" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="">
+            <tr id="pinecone" data-name="pinecone" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium">
               <th scope="row"><a href="https://docs.pinecone.io/guides/search/rerank-results" rel="noopener noreferrer">Pinecone rerank</a> <span class="muted">(hosted, in the vector DB)</span></th>
               <td><span class="pill">Reranker API</span></td>
               <td><span class="pill">Hosted API</span></td>
@@ -301,7 +328,7 @@
               <td class="muted" title="Pinecone publish no benchmark for pinecone-rerank-v0; the other two are BAAI’s and Cohere’s models — see their rows">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="vertex-ai-ranking" data-name="vertex-ai-ranking" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+            <tr id="vertex-ai-ranking" data-name="vertex-ai-ranking" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid">
               <th scope="row"><a href="https://docs.cloud.google.com/generative-ai-app-builder/docs/ranking" rel="noopener noreferrer">Google Vertex AI ranking</a> <span class="muted">(semantic-ranker)</span></th>
               <td><span class="pill">Reranker API</span></td>
               <td><span class="pill">Hosted API</span></td>
@@ -312,7 +339,7 @@
               <td class="muted" title="Google publish no benchmark for the ranking models. A query counts up to 100 documents; each further 100 counts as another query">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="gte-reranker-modernbert" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="{{fact:gte-reranker-modernbert-base.beir}}" data-license="commercial">
+            <tr data-name="gte-reranker-modernbert" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/models/gte-reranker.html">gte-reranker-modernbert-base</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><span class="pill info">Compact</span></td>
@@ -320,10 +347,10 @@
               <td>English</td>
               <td>Fast GPU / CPU-friendly</td>
               <td>Free (self-host)</td>
-              <td title="Alibaba's own figure from the model card, which doesn't state the datasets or first stage. This table showed &quot;Hit@1 ≈ nemotron&quot; until Oct 2026, with no source we could find">{{fact:gte-reranker-modernbert-base.beir}}</td>
+              <td data-benchmark-models="gte-reranker-modernbert-base" title="Alibaba's own figure from the model card, which doesn't state the datasets or first stage. This table showed &quot;Hit@1 ≈ nemotron&quot; until Oct 2026, with no source we could find">{{fact:gte-reranker-modernbert-base.beir}}</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="gte-multilingual-reranker-base" data-name="gte-multilingual-reranker-base" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-beir="" data-license="commercial">
+            <tr id="gte-multilingual-reranker-base" data-name="gte-multilingual-reranker-base" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/models/gte-reranker.html">gte-multilingual-reranker-base</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><span class="pill info">Compact</span></td>
@@ -331,10 +358,10 @@
               <td>70+ langs</td>
               <td>Fast GPU / CPU-friendly</td>
               <td>Free (self-host)</td>
-              <td class="muted" title="Alibaba publish its reranking results only as a chart on the model card and in the mGTE paper (EMNLP 2024). Third-party: Qwen’s run on the Qwen3-Reranker cards puts it at {{fact:gte-multilingual-reranker-base.qwen_mteb_r}} on MTEB-R, {{fact:gte-multilingual-reranker-base.qwen_cmteb_r}} on CMTEB-R and {{fact:gte-multilingual-reranker-base.qwen_mmteb_r}} on MMTEB-R. Alibaba Cloud's hosted rerankers are related models, not the same one, per the card">not published*</td>
+              <td data-benchmark-models="gte-multilingual-reranker-base" class="muted" title="Alibaba publish its reranking results only as a chart on the model card and in the mGTE paper (EMNLP 2024). Third-party: Qwen’s run on the Qwen3-Reranker cards puts it at {{fact:gte-multilingual-reranker-base.qwen_mteb_r}} on MTEB-R, {{fact:gte-multilingual-reranker-base.qwen_cmteb_r}} on CMTEB-R and {{fact:gte-multilingual-reranker-base.qwen_mmteb_r}} on MMTEB-R. Alibaba Cloud's hosted rerankers are related models, not the same one, per the card">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="ettin-reranker-17m-v1" data-name="ettin-reranker-17m-v1" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="" data-license="commercial">
+            <tr id="ettin-reranker-17m-v1" data-name="ettin-reranker-17m-v1" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/guides/self-host-reranker.html#ettin">ettin-reranker-17m-v1</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Apache 2.0</span></td>
@@ -345,7 +372,7 @@
               <td class="muted" title="The publisher reports NanoBEIR and retrieval evaluations with different first-stage models; these are not a classic full BEIR average">not comparable*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="hs-rerank-1" data-name="hs-rerank-1" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-beir="" data-license="commercial">
+            <tr id="hs-rerank-1" data-name="hs-rerank-1" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="https://huggingface.co/hindsight-ai/hs-rerank-1" rel="noopener noreferrer">hs-rerank-1</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">MIT</span><span class="pill info">Compact</span></td>
@@ -356,7 +383,7 @@
               <td class="muted" title="Hindsight show hs-rerank-1’s results only as an image on the model card, so there is no number to quote">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="qwen3-vl-reranker" data-name="qwen3-vl-reranker" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-beir="" data-license="commercial" data-modal="1">
+            <tr id="qwen3-vl-reranker" data-name="qwen3-vl-reranker" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-license="commercial" data-modal="1">
               <th scope="row"><a href="/models/qwen3-vl-reranker.html">Qwen3-VL-Reranker</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><span class="pill good">Apache 2.0</span></td>
@@ -364,10 +391,10 @@
               <td>30+ langs</td>
               <td>GPU</td>
               <td>Free (self-host)</td>
-              <td class="muted" title="Qwen publish no BEIR average for it. Their own runs, from the model card: ViDoRe v3 {{fact:qwen3-vl-reranker-8b.vidore_v3}} for the 8B and {{fact:qwen3-vl-reranker-2b.vidore_v3}} for the 2B, MMTEB retrieval {{fact:qwen3-vl-reranker-8b.mmteb_r}} for the 8B. LightOn's run puts the 2B at {{fact:qwen3-vl-reranker-2b.beir_lighton}} on 11 BEIR datasets over BM25's top 100">not published*</td>
+              <td data-benchmark-models="qwen3-vl-reranker-2b qwen3-vl-reranker-8b" class="muted" title="Qwen publish no BEIR average for it. Their own runs, from the model card: ViDoRe v3 {{fact:qwen3-vl-reranker-8b.vidore_v3}} for the 8B and {{fact:qwen3-vl-reranker-2b.vidore_v3}} for the 2B, MMTEB retrieval {{fact:qwen3-vl-reranker-8b.mmteb_r}} for the 8B. LightOn's run puts the 2B at {{fact:qwen3-vl-reranker-2b.beir_lighton}} on 11 BEIR datasets over BM25's top 100">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="zerank-2" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="" data-license="commercial">
+            <tr data-name="zerank-2" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/models/zerank.html">zerank-2</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><span class="pill good">Apache 2.0</span></td>
@@ -378,7 +405,7 @@
               <td class="muted" title="ZeroEntropy publish their own NDCG@10 over seven domains, reranking the top 100 from OpenAI text-embedding-3-small: {{fact:zerank-2.avg_ndcg10}} on average, against {{fact:zerank-2.cohere_3_5_same_run}} for Cohere rerank-3.5 in the same run. Not a BEIR average">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="nvidia-rerank" data-name="nemotron-3.5-rerank-8b" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="" data-license="commercial" data-modal="1">
+            <tr id="nvidia-rerank" data-name="nemotron-3.5-rerank-8b" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-license="commercial" data-modal="1">
               <th scope="row"><a href="/models/nvidia-rerank.html">Nemotron-3.5-Rerank-8B</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><span class="pill info">Images</span></td>
@@ -389,7 +416,7 @@
               <td class="muted" title="NVIDIA publish no BEIR average for it. Their own run, from the model card: ViDoRe V3 {{fact:nemotron-3.5-rerank-8b.vidore_v3_image_text}} (image + text) and MIRACL-VISION {{fact:nemotron-3.5-rerank-8b.miracl_vision}}, NDCG@10 over Nemotron-3.5-Embed-1B's top 50">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="llama-nemotron-rerank-vl-1b-v2" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="" data-license="commercial" data-modal="1">
+            <tr data-name="llama-nemotron-rerank-vl-1b-v2" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-license="commercial" data-modal="1">
               <th scope="row"><a href="/models/nvidia-rerank.html">llama-nemotron-rerank-vl-1b-v2</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Open + NIM API</span></td>
@@ -400,7 +427,7 @@
               <td class="muted" title="NVIDIA report average Recall@5 over ViDoRe V1–V3 and two internal sets ({{fact:llama-nemotron-rerank-vl-1b-v2.recall5_image_text}}% with image + text), not a BEIR NDCG">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="llama-nemotron-rerank-1b-v2" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="" data-license="commercial">
+            <tr data-name="llama-nemotron-rerank-1b-v2" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-license="commercial">
               <th scope="row"><a href="/models/nvidia-rerank.html">llama-nemotron-rerank-1b-v2</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">Open + NIM API</span></td>
@@ -411,7 +438,7 @@
               <td class="muted" title="NVIDIA report Recall@5 for their own embed + rerank pipeline ({{fact:llama-nemotron-rerank-1b-v2.pipeline_recall5}}% on NQ, HotpotQA, FiQA and TechQA), not a reranker-only BEIR NDCG. The Hit@1 83.0 this table showed until Oct 2026 has no source we could find">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="ms-marco-minilm" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="{{fact:ms-marco-minilm-l6-v2.beir}}" data-demo="ms-marco" data-license="commercial">
+            <tr data-name="ms-marco-minilm" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-demo="ms-marco" data-license="commercial">
               <th scope="row">ms-marco MiniLM-L6 <span class="muted">(browser)</span></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Open weights</span><br><span class="pill info">Browser ✓</span></td>
@@ -419,10 +446,10 @@
               <td>English</td>
               <td title="Measured with the live demo: Chromium (WASM) on a 4-vCPU GitHub Actions runner, median of 5 runs, ~60-word passages, Oct 2026. Phones and older laptops will be slower — the demo shows the time for each run on your device">~{{fact:ms-marco-minilm-l6-v2.browser_ms_10}} ms per 10 passages (browser)</td>
               <td>Free (self-host)</td>
-              <td title="Third-party figure: Jina measured it alongside their v1 models (17 BEIR datasets). sentence-transformers, who trained it, publish NDCG@10 on TREC DL 19 ({{fact:ms-marco-minilm-l6-v2.trec_dl19}}) and MRR@10 on MS MARCO Dev ({{fact:ms-marco-minilm-l6-v2.msmarco_mrr10}}) but no BEIR average. This table carried an unsourced ~55.0 here until Sep 2026">{{fact:ms-marco-minilm-l6-v2.beir}}</td>
+              <td data-benchmark-models="ms-marco-minilm-l6-v2" title="Third-party figure: Jina measured it alongside their v1 models (17 BEIR datasets). sentence-transformers, who trained it, publish NDCG@10 on TREC DL 19 ({{fact:ms-marco-minilm-l6-v2.trec_dl19}}) and MRR@10 on MS MARCO Dev ({{fact:ms-marco-minilm-l6-v2.msmarco_mrr10}}) but no BEIR average. This table carried an unsourced ~55.0 here until Sep 2026">{{fact:ms-marco-minilm-l6-v2.beir}}</td>
               <td class="demo-link-cell"></td>
             </tr>
-            <tr id="lighton-rerank" data-name="lighton-rerank" data-type="open" data-arch="cross-encoder listwise" data-langs="en" data-pricing="free" data-beir="" data-license="commercial" data-modal="1">
+            <tr id="lighton-rerank" data-name="lighton-rerank" data-type="open" data-arch="cross-encoder listwise" data-langs="en" data-pricing="free" data-license="commercial" data-modal="1">
               <th scope="row"><a href="/models/lighton-rerank.html">LightOn-rerank</a></th>
               <td><span class="pill">Cross-encoder</span><span class="pill info">Listwise</span></td>
               <td><span class="pill good">Open weights</span><span class="pill good">Apache 2.0</span></td>
@@ -430,10 +457,10 @@
               <td>English · French</td>
               <td>GPU</td>
               <td>Free (self-host)</td>
-              <td title="LightOn's own run (PW-2B): BEIR over BM25's top 100, averaged over the 11 datasets that weren't in its training data — not comparable with rows that rerank dense retrieval. Same run: jina-reranker-m0 {{fact:jina-reranker-m0.beir_lighton}}, Qwen3-VL-Reranker-2B {{fact:qwen3-vl-reranker-2b.beir_lighton}}. Its strength is visual documents: on ViDoRe V3 the listwise 4B scores {{fact:lighton-rerank-lw-4b.vidore_v3}}">{{fact:lighton-rerank-pw-2b.beir}}</td>
+              <td data-benchmark-models="lighton-rerank-pw-2b lighton-rerank-lw-2b lighton-rerank-lw-4b" title="LightOn's own run (PW-2B): BEIR over BM25's top 100, averaged over the 11 datasets that weren't in its training data — not comparable with rows that rerank dense retrieval. Same run: jina-reranker-m0 {{fact:jina-reranker-m0.beir_lighton}}, Qwen3-VL-Reranker-2B {{fact:qwen3-vl-reranker-2b.beir_lighton}}. Its strength is visual documents: on ViDoRe V3 the listwise 4B scores {{fact:lighton-rerank-lw-4b.vidore_v3}}">{{fact:lighton-rerank-pw-2b.beir}}</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="contextual-rerank-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="" data-license="noncommercial">
+            <tr data-name="contextual-rerank-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-license="noncommercial">
               <th scope="row"><a href="/models/contextual-rerank.html">Contextual AI Rerank v2</a></th>
               <td><span class="pill">Instruction</span></td>
               <td><span class="pill">Open weights</span><span class="pill warn">Weights: non-commercial</span></td>
@@ -444,7 +471,7 @@
               <td class="muted" title="Contextual AI publish BEIR results only as a chart in their blog post. Until Oct 2026 this row described the model as an English-only hosted API; the weights have been public on Hugging Face since Aug 2025">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="contextual-api" data-name="contextual-rerank-api" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+            <tr id="contextual-api" data-name="contextual-rerank-api" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid">
               <th scope="row"><a href="/models/contextual-rerank.html#routes">Contextual AI Rerank API</a></th>
               <td><span class="pill">Instruction</span></td>
               <td><span class="pill">Hosted API</span></td>
@@ -455,7 +482,7 @@
               <td class="muted" title="Contextual AI publish BEIR results only as a chart in their blog post">not published*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="colbertv2" data-type="open" data-arch="late-interaction" data-langs="en" data-pricing="free" data-beir="" data-license="commercial">
+            <tr data-name="colbertv2" data-type="open" data-arch="late-interaction" data-langs="en" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/guides/late-interaction-rerank.html">ColBERTv2</a></th>
               <td><span class="pill info">Late-interaction</span></td>
               <td><span class="pill good">Open weights</span></td>
@@ -470,7 +497,7 @@
         </table>
       </div>
       <div class="benchmark-meta callout" style="margin-top:.8rem;padding:.85rem 1rem">
-        <p class="muted" style="font-size:.82rem;margin:0"><strong>Last verified:</strong> October 2026 (added Qwen3-VL-Reranker, zerank-2 and gte-multilingual-reranker-base; added jina-reranker-v3.5; Jina rows now share one 2026 protocol; bge-reranker-v2-m3 corrected from an untraceable ~60.1 to BAAI's own {{fact:bge-reranker-v2-m3.beir}}; Jina v1 tiny and ms-marco MiniLM-L6 now show the BEIR figures Jina published for them; in September, mxbai-rerank-large-v1 was corrected from an unsourced ~62.1) · <strong>Next review:</strong> Nov 2026. <strong>*</strong> No two vendors run BEIR the same way — BAAI average 15 datasets over bge-large-en-v1.5's top 100, Jina 13 datasets over jina-embeddings-v5-text-small's top 100, mixedbread their own set — so every BEIR figure here carries a * and its protocol on hover. The differences are not small: Jina's run puts bge-reranker-v2-m3 at {{fact:bge-reranker-v2-m3.beir_jina_2025}} against BAAI's own {{fact:bge-reranker-v2-m3.beir}}, and mxbai-rerank-large-v2 at {{fact:mxbai-rerank-large-v2.beir_jina_2025}} against mixedbread's {{fact:mxbai-rerank-large-v2.beir}}. Read the column as rough tiers, not decimals. Other * cells use MTEB-R or task-specific metrics. Where a vendor publishes no comparable number we say <em>not published</em> rather than guess. <strong>†</strong> Note the differing units: Cohere Rerank 4 was billed per <em>search</em> (one query + up to 100 docs, each counted once per {{fact:cohere-rerank.billing_chunk_tokens}} tokens), Cohere Rerank 5, Voyage and Jina per <em>token</em> — Jina counting one request’s tokens, the query plus every candidate, where Voyage counts the query once per document. Cohere’s pricing page stopped listing Rerank 4 on 21 October 2026, so its prices here are the last listed. Our <a href="/rerank-cost-calculator.html">cost calculator</a> works out which is cheaper for your volume. Demo-capable models only: mxbai xsmall, Jina tiny, ms-marco MiniLM.</p>
+        <p class="muted" style="font-size:.82rem;margin:0"><strong>Verification:</strong> See the source check date in each benchmark result. The benchmark column groups scores by the reported evaluation protocol. <strong>†</strong> Note the differing units: Cohere Rerank 4 was billed per <em>search</em> (one query + up to 100 docs, each counted once per {{fact:cohere-rerank.billing_chunk_tokens}} tokens), Cohere Rerank 5, Voyage and Jina per <em>token</em> — Jina counting one request’s tokens, the query plus every candidate, where Voyage counts the query once per document. Cohere’s pricing page stopped listing Rerank 4 on 21 October 2026, so its prices here are the last listed. Our <a href="/rerank-cost-calculator.html">cost calculator</a> works out which is cheaper for your volume. Demo-capable models only: mxbai xsmall, Jina tiny, ms-marco MiniLM.</p>
         <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">Sources: <a href="https://huggingface.co/Qwen" rel="noopener noreferrer">Qwen3-Reranker</a> · <a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">jina-reranker-v3.5</a> · <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">jina-reranker-v3 paper</a> · <a href="https://huggingface.co/jinaai/jina-reranker-v1-tiny-en" rel="noopener noreferrer">jina-reranker-v1</a> · <a href="https://docs.voyageai.com/docs/reranker" rel="noopener noreferrer">Voyage rerankers</a> · <a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">mxbai-rerank</a> · <a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">nemotron-rerank</a> · <a href="https://huggingface.co/spaces/mteb/leaderboard" rel="noopener noreferrer">MTEB</a> · <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR</a> · <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker" rel="noopener noreferrer">BAAI evals</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">GTE ModernBERT</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-multilingual-reranker-base" rel="noopener noreferrer">mGTE reranker</a> · <a href="https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B" rel="noopener noreferrer">Qwen3-VL-Reranker</a> · <a href="https://huggingface.co/zeroentropy/zerank-2-reranker" rel="noopener noreferrer">zerank-2</a> · <a href="/models/qwen-reranker.html">Qwen guide</a> · <a href="/guides/instruction-reranker.html">instruction</a> · <a href="/guides/late-interaction-rerank.html">ColBERT</a></p>
         <p class="muted" style="font-size:.82rem;margin:.5rem 0 0"><strong>Tagged as a reranker, but not one for RAG:</strong> <a href="https://huggingface.co/Contrastive-LM/CLM-v0.1-8B" rel="noopener noreferrer">CLM-v0.1-8B</a> from Contrastive-LM (September 2026) was the most-liked <code>text-ranking</code> model on Hugging Face by early October. It scores candidate actions and answers for agents — two small heads on a frozen Qwen3-8B, which you serve separately for its embeddings — and its headline results are agent benchmarks with fine-tuned heads, not retrieval. That is why it isn’t in this table.</p>
       </div>

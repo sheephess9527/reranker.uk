@@ -1,4 +1,11 @@
-window.I18N_PAGE = { zh: {
+window.I18N_PAGE = {
+  keys: {
+    "bge.directions": "C-MTEB 重排语言分项",
+    "bge.zh": "中文",
+    "bge.zh-en": "中→英",
+    "bge.en-zh": "英→中",
+    "bge.sameSource": "三列均来自同一份 BAAI FlagEmbedding 重排评测表，按各自数据集以 MAP 计分。点开各项查看来源与评测口径。",
+  }, zh: {
   "Deciding between them? <a href=\"/guides/compare-rerankers.html\">Compare the rerankers on the same benchmarks →</a>":
     "正在几个模型之间犹豫？<a href=\"/guides/compare-rerankers.html\">在同一评测下对比这些 reranker →</a>",
   "Open weights · BAAI · free to self-host · <time datetime=\"2026-10-12\">Updated 12 Oct 2026</time>":
