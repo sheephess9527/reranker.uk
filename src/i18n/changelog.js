@@ -1,4 +1,6 @@
 window.I18N_PAGE = { zh: {
+  "22 Nov 2026 — Benchmark filters on the models table": "2026 年 11 月 22 日 —— 模型对比表新增评测筛选",
+  "Filter the <a href=\"/models/\">models table</a> by benchmark and evaluation language. Expand a result to see its source, dataset, protocol and verification date. Chinese → English and English → Chinese have separate filters.": "<a href=\"/models/\">模型对比表</a>可按基准任务和评测语言筛选。展开成绩可查看来源、数据集、评测口径和核验日期。中→英与英→中可分别筛选。",
   "22 Nov 2026 — Current rates first in the cost calculator": "2026 年 11 月 22 日 —— 成本计算器优先显示当前报价",
   "The <a href=\"/rerank-cost-calculator.html\">cost calculator</a> keeps historical rates below current rates and leaves them out of the cheapest estimate. Links in the Chinese results now open Chinese pages. Going back from a link recalculates the estimate using the restored inputs.":
     "<a href=\"/rerank-cost-calculator.html\">成本计算器</a>把历史报价列在当前报价下方，且不计入最低成本估算。中文版结果中的链接现在会打开中文页面。点击链接后返回时，会按恢复的输入重新计算。",

@@ -49,6 +49,20 @@
       </div>
       <p class="muted" style="font-size:.85rem">* All figures are BAAI's own. BEIR: 15 datasets, reranking the top 100 results from bge-large-en-v1.5 (<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker" rel="noopener noreferrer">FlagEmbedding llm_reranker evaluation</a>). C-MTEB: average MAP over six reranking sets — T2Reranking, its two cross-language variants, MMarcoReranking, CMedQAv1 and CMedQAv2 (<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/research/reranker" rel="noopener noreferrer">FlagEmbedding reranker README</a>). Other evaluators get different BEIR numbers from their own setups — Jina's paper has v2-m3 at {{fact:bge-reranker-v2-m3.beir_jina_2025}} — so compare models within one source. Until October 2026 this table showed BEIR and MS MARCO figures for all four models that we could not trace to any source; they have been removed.</p>
 
+      <h3 id="cmteb-directions" data-i18n="bge.directions">C-MTEB reranking by language</h3>
+      <p data-i18n="bge.sameSource">All three columns use the same BAAI FlagEmbedding reranking table and report MAP for their respective datasets. Open a result to see the source and protocol.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Model</th><th scope="col" data-i18n="bge.zh">Chinese</th><th scope="col" data-i18n="bge.zh-en">Chinese → English</th><th scope="col" data-i18n="bge.en-zh">English → Chinese</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">bge-reranker-base</th><td data-benchmark-facts="bge-reranker-base.cmteb_t2_zh">{{fact:bge-reranker-base.cmteb_t2_zh}}</td><td data-benchmark-facts="bge-reranker-base.cmteb_t2_zh_en">{{fact:bge-reranker-base.cmteb_t2_zh_en}}</td><td data-benchmark-facts="bge-reranker-base.cmteb_t2_en_zh">{{fact:bge-reranker-base.cmteb_t2_en_zh}}</td></tr>
+            <tr><th scope="row">bge-reranker-large</th><td data-benchmark-facts="bge-reranker-large.cmteb_t2_zh">{{fact:bge-reranker-large.cmteb_t2_zh}}</td><td data-benchmark-facts="bge-reranker-large.cmteb_t2_zh_en">{{fact:bge-reranker-large.cmteb_t2_zh_en}}</td><td data-benchmark-facts="bge-reranker-large.cmteb_t2_en_zh">{{fact:bge-reranker-large.cmteb_t2_en_zh}}</td></tr>
+          </tbody>
+        </table>
+      </div>
+
       <h2 id="usage">Quick start</h2>
       <h3>Install</h3>
       <pre><code>pip install sentence-transformers</code></pre>

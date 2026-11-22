@@ -1,0 +1,18 @@
+.benchmark-filters:not([hidden]) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: inherit;
+  min-width: 0;
+  max-width: 100%;
+}
+.benchmark-evidence { min-width: 10rem; }
+.benchmark-evidence summary { position: relative; cursor: pointer; }
+.benchmark-evidence ul { padding-left: 1rem; }
+.benchmark-evidence li + li { margin-top: 0.75rem; }
+.benchmark-evidence p, .benchmark-evidence dl { margin: 0.25rem 0; }
+.benchmark-evidence dl div { display: flex; flex-wrap: wrap; column-gap: 0.35rem; }
+.benchmark-evidence dt { font-weight: 600; }
+.benchmark-evidence dd { margin: 0; overflow-wrap: anywhere; }
+
+.benchmark-summary { overflow-wrap: anywhere; }
