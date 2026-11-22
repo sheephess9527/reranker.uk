@@ -58,6 +58,7 @@
       id: "cohere-pro",
       nameEn: "Cohere Rerank 4 Pro (last listed)",
       nameZh: "Cohere Rerank 4 Pro（最后公布价）",
+      historical: true,
       unitEn: "per search",
       unitZh: "按次检索",
       href: "/models/cohere-rerank",
@@ -69,6 +70,7 @@
       id: "cohere-fast",
       nameEn: "Cohere Rerank 4 Fast (last listed)",
       nameZh: "Cohere Rerank 4 Fast（最后公布价）",
+      historical: true,
       unitEn: "per search",
       unitZh: "按次检索",
       href: "/models/cohere-rerank",
@@ -124,6 +126,7 @@
       id: "zeroentropy",
       nameEn: "ZeroEntropy zerank-2 (API closed)",
       nameZh: "ZeroEntropy zerank-2（API 已关停）",
+      historical: true,
       unitEn: "per token",
       unitZh: "按 token",
       href: "/models/zerank",
@@ -303,16 +306,18 @@
   const esc = (s) =>
     String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-  /** Fills one table, cheapest first; returns the cheapest option and cost. */
+  /** Sorts current rates first and returns the cheapest current estimate. */
   function fillTable(tbody, options, w, fmt) {
-    const priced = options.map((o) => ({ o, cost: o.cost(w, o) })).sort((a, b) => a.cost - b.cost);
-    const cheapest = priced[0];
+    const priced = options.map((o) => ({ o, cost: o.cost(w, o) })).sort((a, b) =>
+      Number(!!a.o.historical) - Number(!!b.o.historical) || a.cost - b.cost
+    );
+    const cheapest = priced.find(({ o }) => !o.historical);
     if (tbody) {
       tbody.innerHTML = priced
         .map(({ o, cost }) => {
-          const best = o.id === cheapest.o.id && w.queries > 0;
+          const best = o.id === cheapest?.o.id && w.queries > 0;
           return `<tr>
-          <td><a href="${o.href}">${esc(L(o.nameEn, o.nameZh))}</a>${
+          <td><a href="${L(o.href, `/zh${o.href}`)}">${esc(L(o.nameEn, o.nameZh))}</a>${
             best ? ` <span class="pill good">${esc(L("cheapest", "最便宜"))}</span>` : ""
           }</td>
           <td>${esc(L(o.unitEn, o.unitZh))}</td>
@@ -330,15 +335,19 @@
     const w = readWorkload();
 
     const cheapest = fillTable(els.rows, OPTIONS, w, money);
-    const perQuery = w.queries > 0 ? cheapest.cost / w.queries : 0;
-    els.note.textContent = L(
-      `Cheapest for this workload: ${cheapest.o.nameEn} at ${money(cheapest.cost)} a month — about ${money(
-        perQuery
-      )} per query. Free allowances and batch discounts are not applied.`,
-      `该负载下最便宜的是 ${cheapest.o.nameZh}，每月约 ${money(cheapest.cost)}，折合每次查询约 ${money(
-        perQuery
-      )}。未计入免费额度与批量折扣。`
-    );
+    if (cheapest && w.queries > 0) {
+      const perQuery = cheapest.cost / w.queries;
+      els.note.textContent = L(
+        `Lowest estimate at current listed rates: ${cheapest.o.nameEn} at ${money(cheapest.cost)} a month — about ${money(
+          perQuery
+        )} per query. Free allowances and batch discounts are not applied.`,
+        `按当前公开报价，估算成本最低的是 ${cheapest.o.nameZh}，每月约 ${money(cheapest.cost)}，折合每次查询约 ${money(
+          perQuery
+        )}。未计入免费额度与批量折扣。`
+      );
+    } else {
+      els.note.textContent = "";
+    }
 
     if (OPTIONS_CNY.length) {
       fillTable(els.rowsCny, OPTIONS_CNY, w, yuan);
@@ -390,5 +399,11 @@
     if (el) el.addEventListener("input", render);
   });
   document.addEventListener("i18n:changed", render);
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted || performance.getEntriesByType("navigation")[0]?.type === "back_forward") {
+      // History traversal can restore form values after pageshow.
+      setTimeout(render, 0);
+    }
+  });
   render();
 })();
