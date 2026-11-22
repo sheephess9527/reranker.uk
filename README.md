@@ -25,6 +25,12 @@ and `public/llms.txt` is generated — hand edits are overwritten on the next
 build. Static assets under `public/assets/`, plus `robots.txt` and
 `changelog.rss` and `news.rss`, are the exception and are edited directly.
 
+CI rebuilds the site and rejects changes to committed generated HTML, search
+index, `llms.txt` or `_headers`. Commit the build outputs with their source edits:
+otherwise the test build can pass while a static deployment still serves old
+pages. `sitemap.xml` is excluded from this drift check because its dates depend
+on checkout history; it is still built and checked for valid internal links.
+
 ### How a page is assembled
 
 ```

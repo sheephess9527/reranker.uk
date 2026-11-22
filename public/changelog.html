@@ -71,6 +71,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-22-generated-pages">22 Nov 2026 — Publish benchmark filters and add Horizon-Labs small</h2>
+        <p>The benchmark-task and evaluation-language filters were in the source but missing from the deployed model table. Rebuilt the English and Chinese pages, including their expandable benchmark evidence and the BGE detail page. CI now checks that committed generated pages match the source build, so passing tests cannot hide stale deployment files. Also added Horizon-Labs multilingual-reranker-small as a CPU candidate with sourced size, training length and its own sampled MIRACL protocol. This is older-model coverage catch-up, not a new release.</p>
+      </article>
+      <article class="changelog-entry">
+        <h2 id="2026-11-22-benchmark-filters">22 Nov 2026 — Benchmark filters on the models table</h2>
+        <p>Filter the <a href="/models/">models table</a> by benchmark and evaluation language. Expand a result to see its source, dataset, protocol and verification date. Chinese → English and English → Chinese have separate filters.</p>
+      </article>
+      <article class="changelog-entry">
         <h2 id="2026-11-22-cost-comparison">22 Nov 2026 — Current rates first in the cost calculator</h2>
         <p>The <a href="/rerank-cost-calculator">cost calculator</a> keeps historical rates below current rates and leaves them out of the cheapest estimate. Links in the Chinese results now open Chinese pages. Going back from a link recalculates the estimate using the restored inputs.</p>
       </article>
@@ -113,21 +121,19 @@
           <li><strong>hs-rerank-1 in the <a href="/guides/self-host-reranker">self-hosting guide</a></strong> — the pick-a-model table now names the lightest CPU option: 114M in total, of which 15M is the transformer, 8,192 tokens, MIT, with an int8 ONNX build and a Text Embeddings Inference config</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>Earlier in November 2026 (10 entries)</summary><article class="changelog-entry">
         <h2 id="2026-11-13-ndcg">13 Nov 2026 — An NDCG and MRR calculator</h2>
         <ul class="feature-list">
           <li><strong><a href="/ndcg-calculator">Did the reranker help?</a></strong> — paste the relevance labels of each query’s candidates before and after reranking and read off NDCG@k, MRR and Hit@1, with a per-query table. It runs in the browser and sends nothing anywhere, and the <a href="/guides/evaluate-reranker">evaluation guide</a> links to it</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-11-12-copy">12 Nov 2026 (night) — Copy buttons on code</h2>
         <ul class="feature-list">
           <li><strong>Every code block has a Copy button</strong> — the snippets in the guides and model pages can be copied in one click, without selecting around the line wraps</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>Earlier in November 2026 (8 entries)</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-11-12-picker">12 Nov 2026 (later) — A four-question reranker picker</h2>
         <ul class="feature-list">
           <li><strong><a href="/reranker-picker">Which reranker should I use?</a></strong> — say what you are ranking, where it will run, which languages and whether you need instructions, and the page narrows this site’s recommendations to the ones that fit, each linked to the review or guide behind it. It is the <a href="/guides/choose-reranker-scenario">scenario guide</a> as a tool, and works without JavaScript as a plain list</li>
@@ -632,6 +638,10 @@
         </ul>
       </article></details>
 
+
+      
+
+      
 
       
 

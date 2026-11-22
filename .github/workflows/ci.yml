@@ -24,6 +24,18 @@ jobs:
       - name: Build the site
         run: npm run build
 
+      # Static deployments serve committed public files; tests must not silently
+      # repair stale pages that production would still publish. Sitemap lastmod
+      # dates depend on checkout history and are intentionally excluded here.
+      - name: Check committed generated pages are current
+        run: |
+          generated_status=$(git status --porcelain -- ':(glob)public/**/*.html' public/search-index.json public/llms.txt public/_headers)
+          if [ -n "$generated_status" ]; then
+            printf '%s\n' "$generated_status"
+            echo "::error::Generated pages differ from the committed files. Run npm run build and commit its outputs."
+            exit 1
+          fi
+
       - name: Check for broken internal links
         run: npm run check:links
 

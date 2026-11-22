@@ -298,3 +298,13 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 - [x] 中英文模型表按同一条证据上的基准任务和评测语言组合筛选。表格维持 38 行，取消跨 BEIR 协议的分数排序。
 - [x] 复用已有来源数据。补充 Jina MIRACL 中英文、有道 Rerank-12 语言分项和 BGE C-MTEB 方向分项。测试日期与来源核验日期分别显示。
 - [x] 更新双语日志、RSS 和模型表回归测试。
+
+
+## 2026-11-22 晚间巡检：补齐实际发布的生成页面
+
+- [x] 同步 #81–#83，不重复实现评测筛选。实测线上 EN/ZH 模型表均没有 models-task-filter、models-language-filter；提交的 public 仍是旧 HTML，CI 却在运行时重建后测试，掩盖了发布产物遗漏。
+- [x] 通过 build 补齐模型表、BGE 详情页、更新日志的中英文产物；不改模型数字或既有筛选逻辑。
+- [x] CI 在 build 后检查生成 HTML/search-index/llms/_headers 的已提交一致性。sitemap 的日期依赖 Git 历史，不纳入此一致性门槛；保留原有构建、链接及回归检查。
+- 证据、候选与交付状态见 docs/changes/2026-11-22-patrol.md。
+
+- [x] 复查待选模型时 Horizon-Labs/multilingual-reranker-small 下载量达到既有门槛；核对原始卡、权重、配置后补录。141M、384 token 训练长度与独立的 MIRACL 抽样协议均走 fact，中英文分项可筛选；不当新发布、不把域内小样本结果当完整 BEIR。当前模型表 39 行，较大 base 同门未达门槛不一并收录。

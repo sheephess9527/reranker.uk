@@ -67,7 +67,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span>Self-host a reranker</div>
       <h1>How to self-host a reranker</h1>
-      <p class="meta">Production · ~10 min read · <time datetime="2026-11-16">Updated 16 Nov 2026</time></p>
+      <p class="meta">Production · ~10 min read · <time datetime="2026-11-22">Updated 22 Nov 2026</time></p>
       <p class="lead">Hosted rerank APIs are convenient, but <strong>self-hosting</strong> gives you zero per-call cost, full data control, and predictable latency on your own GPU or CPU fleet. Here’s a practical path from a first <code>CrossEncoder</code> call to a production microservice.</p>
 
       <div class="toc">
@@ -76,6 +76,7 @@
           <li><a href="#when">When self-hosting wins</a></li>
           <li><a href="#models">Pick a model</a></li>
           <li><a href="#ettin">A smaller English-only CPU candidate</a></li>
+          <li><a href="#horizon-small">Horizon-Labs small for multilingual CPU search</a></li>
           <li><a href="#quickstart">Quick start with sentence-transformers</a></li>
           <li><a href="#serve">Serving options</a></li>
           <li><a href="#ops">Ops checklist</a></li>
@@ -110,6 +111,10 @@
       <h2 id="ettin">A smaller English-only CPU candidate</h2>
       <p>For English-only search, also test <a href="https://huggingface.co/cross-encoder/ettin-reranker-17m-v1" rel="noopener noreferrer">ettin-reranker-17m-v1</a>: 17M, Apache 2.0, with a model-card limit of 7999 tokens per query-and-passage pair. Its publisher reports CPU results using SDPA; this is a self-hosting candidate, not a model added to our browser demo. Keep passages short and measure quality and latency on your own workload.</p>
       <p>This is a coverage catch-up: the <a href="https://huggingface.co/blog/ettin-reranker" rel="noopener noreferrer">official release article</a> dates to May 2026. The card reports NanoBEIR and retrieval tests with different first-stage models. Those results do not supply a directly comparable full BEIR average for our table, and English support does not establish Chinese or multilingual quality.</p>
+
+      <h2 id="horizon-small">Horizon-Labs small for multilingual CPU search</h2>
+      <p>Another multilingual CPU candidate is <a href="https://huggingface.co/Horizon-Labs/multilingual-reranker-small" rel="noopener noreferrer">Horizon-Labs multilingual-reranker-small</a>: 141M, Apache 2.0, distilled from Qwen3-Reranker-4B with ONNX exports. It was trained with 384 tokens per query-and-passage pair; do not substitute the base encoder’s architectural context limit for that training length. It is not added to this site’s browser demo.</p>
+      <p>Its publisher evaluates sampled MIRACL dev queries and other reranking tasks. MIRACL training data was used, so this is in-domain evaluation; the samples and candidate pools differ from Jina’s MIRACL run and from full BEIR. The <a href="/models/#horizon-multilingual-reranker-small">comparison table</a> keeps this protocol separate and exposes English and Chinese splits. Measure your own language and passage lengths before replacing an existing reranker.</p>
 
       <h2 id="quickstart">Quick start with sentence-transformers</h2>
       <pre tabindex="0"><code>pip install sentence-transformers torch

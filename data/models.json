@@ -298,6 +298,20 @@
       "metric": "MAP",
       "aggregation": "mean",
       "comparable": true
+    },
+    "miracl-horizon-small-v11": {
+      "task_id": "miracl",
+      "label": "Horizon-Labs · sampled MIRACL dev",
+      "label_zh": "Horizon-Labs · MIRACL dev 抽样",
+      "benchmark_version": "Publisher v1.1 · 18 languages, 60 queries per language",
+      "benchmark_version_zh": "发布方 v1.1 · 18 种语言，每种语言 60 个查询",
+      "candidate_retriever": "MTEB MIRACLReranking",
+      "candidate_k": 100,
+      "metric": "nDCG@10 (0–1)",
+      "aggregation": "mean",
+      "comparable": false,
+      "dataset_scope": "MIRACLReranking dev (18 language subsets)",
+      "dataset_scope_zh": "MIRACLReranking 开发集（18 种语言）"
     }
   },
   "mxbai-rerank-large-v1": {
@@ -2873,6 +2887,61 @@
       "check_hint": "Maximum Sequence Length",
       "note": "Maximum sequence length stated by the reranker card, not the base encoder configuration.",
       "verified_on": "2026-11-16"
+    }
+  },
+  "horizon-multilingual-reranker-small": {
+    "params": {
+      "value": "141M",
+      "source_url": "https://huggingface.co/Horizon-Labs/multilingual-reranker-small#evaluation",
+      "check_url": "https://huggingface.co/Horizon-Labs/multilingual-reranker-small/raw/main/README.md",
+      "verified_on": "2026-11-22",
+      "source_revision": "23139fec6f1f448cdf89a5ac2d2c6bf5e8c7b398",
+      "check_pattern": "# Multilingual Reranker \\(small, {value}\\)",
+      "check_hint": "MIRACL"
+    },
+    "trained_pair_tokens": {
+      "value": 384,
+      "source_url": "https://huggingface.co/Horizon-Labs/multilingual-reranker-small#evaluation",
+      "check_url": "https://huggingface.co/Horizon-Labs/multilingual-reranker-small/raw/main/README.md",
+      "verified_on": "2026-11-22",
+      "source_revision": "23139fec6f1f448cdf89a5ac2d2c6bf5e8c7b398",
+      "check_pattern": "trained with {value} tokens per pair",
+      "check_hint": "MIRACL",
+      "note": "Training pair length, not the ModernBERT architectural context limit."
+    },
+    "miracl_multi": {
+      "value": 0.779,
+      "source_url": "https://huggingface.co/Horizon-Labs/multilingual-reranker-small#evaluation",
+      "check_url": "https://huggingface.co/Horizon-Labs/multilingual-reranker-small/raw/main/README.md",
+      "verified_on": "2026-11-22",
+      "source_revision": "23139fec6f1f448cdf89a5ac2d2c6bf5e8c7b398",
+      "check_pattern": "\\| \\*\\*this model\\*\\* \\(141M\\) \\| Apache-2\\.0 \\| {value} \\|",
+      "check_hint": "MIRACL",
+      "protocol_id": "miracl-horizon-small-v11",
+      "language_key": "multi",
+      "note": "Publisher sample: 60 queries per language across 18 MIRACL languages, 100 candidates per query. MIRACL train was used in training; this dev evaluation is in-domain."
+    },
+    "miracl_en": {
+      "value": 0.716,
+      "source_url": "https://huggingface.co/Horizon-Labs/multilingual-reranker-small#evaluation",
+      "check_url": "https://huggingface.co/Horizon-Labs/multilingual-reranker-small/raw/main/README.md",
+      "verified_on": "2026-11-22",
+      "source_revision": "23139fec6f1f448cdf89a5ac2d2c6bf5e8c7b398",
+      "check_pattern": "\\| MIRACL en \\| {value} \\|",
+      "check_hint": "MIRACL",
+      "protocol_id": "miracl-horizon-small-v11",
+      "language_key": "en"
+    },
+    "miracl_zh": {
+      "value": 0.815,
+      "source_url": "https://huggingface.co/Horizon-Labs/multilingual-reranker-small#evaluation",
+      "check_url": "https://huggingface.co/Horizon-Labs/multilingual-reranker-small/raw/main/README.md",
+      "verified_on": "2026-11-22",
+      "source_revision": "23139fec6f1f448cdf89a5ac2d2c6bf5e8c7b398",
+      "check_pattern": "\\| MIRACL zh \\| {value} \\|",
+      "check_hint": "MIRACL",
+      "protocol_id": "miracl-horizon-small-v11",
+      "language_key": "zh"
     }
   }
 }
