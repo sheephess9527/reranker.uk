@@ -28,6 +28,13 @@ window.I18N_PAGE = {
     "models.tableCaption": "重排序模型对比：架构、类型、适用场景、支持语言、延迟、价格与评测证据",
   },
   zh: {
+  "<a href=\"/guides/self-host-reranker.html#horizon-small\">Horizon-Labs small</a>":
+    "<a href=\"/guides/self-host-reranker.html#horizon-small\">Horizon-Labs small</a>",
+  "{{fact:horizon-multilingual-reranker-small.params}} mmBERT-small distilled from Qwen3-Reranker-4B; trained on {{fact:horizon-multilingual-reranker-small.trained_pair_tokens}}-token pairs, with CPU and ONNX options. Publisher MIRACL dev results are in-domain, not full BEIR.":
+    "{{fact:horizon-multilingual-reranker-small.params}} 的 mmBERT-small，从 Qwen3-4B 蒸馏；以每对 {{fact:horizon-multilingual-reranker-small.trained_pair_tokens}} token 训练，支持 CPU 和 ONNX。发布方的 MIRACL dev 结果属于域内评测，不是完整 BEIR。",
+  "Multilingual incl. Chinese":
+    "多语言，含中文",
+
   "English-only CPU candidate ({{fact:ettin-reranker-17m-v1.params}}); {{fact:ettin-reranker-17m-v1.context_tokens}}-token pairs; benchmark on your own queries":
     "英文 CPU 候选（{{fact:ettin-reranker-17m-v1.params}}）；每对 {{fact:ettin-reranker-17m-v1.context_tokens}} token；请用自己的查询评测",
   "The publisher reports NanoBEIR and retrieval evaluations with different first-stage models; these are not a classic full BEIR average":

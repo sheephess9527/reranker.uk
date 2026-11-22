@@ -6,6 +6,10 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-22-generated-pages">22 Nov 2026 — Publish benchmark filters and add Horizon-Labs small</h2>
+        <p>The benchmark-task and evaluation-language filters were in the source but missing from the deployed model table. Rebuilt the English and Chinese pages, including their expandable benchmark evidence and the BGE detail page. CI now checks that committed generated pages match the source build, so passing tests cannot hide stale deployment files. Also added Horizon-Labs multilingual-reranker-small as a CPU candidate with sourced size, training length and its own sampled MIRACL protocol. This is older-model coverage catch-up, not a new release.</p>
+      </article>
+      <article class="changelog-entry">
         <h2 id="2026-11-22-benchmark-filters">22 Nov 2026 — Benchmark filters on the models table</h2>
         <p>Filter the <a href="/models/">models table</a> by benchmark and evaluation language. Expand a result to see its source, dataset, protocol and verification date. Chinese → English and English → Chinese have separate filters.</p>
       </article>

@@ -1,4 +1,8 @@
 window.I18N_PAGE = { zh: {
+  "22 Nov 2026 — Publish benchmark filters and add Horizon-Labs small":
+    "2026 年 11 月 22 日 —— 发布评测筛选页面并补录 Horizon-Labs small",
+  "The benchmark-task and evaluation-language filters were in the source but missing from the deployed model table. Rebuilt the English and Chinese pages, including their expandable benchmark evidence and the BGE detail page. CI now checks that committed generated pages match the source build, so passing tests cannot hide stale deployment files. Also added Horizon-Labs multilingual-reranker-small as a CPU candidate with sourced size, training length and its own sampled MIRACL protocol. This is older-model coverage catch-up, not a new release.":
+    "基准任务与评测语言筛选已在源码中实现，但线上模型表仍缺少这些控件。现已重新构建中英文页面，包括可展开的评测依据和 BGE 详情页。CI 增加了生成页面与已提交文件的一致性检查，避免测试通过却仍发布旧文件。另补录 Horizon-Labs multilingual-reranker-small 作为 CPU 候选，规模、训练长度和独立的 MIRACL 抽样协议均有来源。这是旧模型补录，不是新发布。",
   "22 Nov 2026 — Benchmark filters on the models table": "2026 年 11 月 22 日 —— 模型对比表新增评测筛选",
   "Filter the <a href=\"/models/\">models table</a> by benchmark and evaluation language. Expand a result to see its source, dataset, protocol and verification date. Chinese → English and English → Chinese have separate filters.": "<a href=\"/models/\">模型对比表</a>可按基准任务和评测语言筛选。展开成绩可查看来源、数据集、评测口径和核验日期。中→英与英→中可分别筛选。",
   "22 Nov 2026 — Current rates first in the cost calculator": "2026 年 11 月 22 日 —— 成本计算器优先显示当前报价",

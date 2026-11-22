@@ -52,3 +52,11 @@ changelog page (src/pages/changelog.html).
   - Default `RETRY_WAITS_MS` is now `5000,20000,60000` (third, longer retry).
 - **Opt-out:** set `STRICT_FETCH=1` to treat transient errors as failures
   again (old behaviour).
+
+
+## 2026-11-22 patrol
+
+- Regenerated the missing public benchmark-filter/evidence pages and added a CI
+  check for committed build-output drift, with checkout-dependent sitemap dates
+  excluded. Added sourced Horizon-Labs small catch-up and bilingual split-filter
+  regression coverage; detailed evidence is in docs/changes/2026-11-22-patrol.md.

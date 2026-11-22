@@ -34,6 +34,7 @@
   <link rel="stylesheet" href="/assets/css/style.css?v=71c7ffaf81" >
   <!-- seo:jsonld -->
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"模型对比","item":"https://reranker.uk/zh/models/"}]},{"@type":"CollectionPage","name":"重排序模型对比：cross-encoder、ColBERT、Qwen3 等","url":"https://reranker.uk/zh/models/","inLanguage":"zh-Hans","isPartOf":{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/zh/"},"description":"rerank 模型横向对比：五大成熟家族 + Qwen3-Reranker、Contextual AI、ColBERTv2 等 2026 方向。架构、质量、延迟、语言与成本一览。"},{"@type":"ItemList","name":"重排序模型对比：cross-encoder、ColBERT、Qwen3 等","itemListElement":[{"@type":"ListItem","position":1,"name":"bge-reranker","url":"https://reranker.uk/zh/models/bge-reranker"},{"@type":"ListItem","position":2,"name":"Cohere Rerank","url":"https://reranker.uk/zh/models/cohere-rerank"},{"@type":"ListItem","position":3,"name":"Jina Reranker","url":"https://reranker.uk/zh/models/jina-reranker"},{"@type":"ListItem","position":4,"name":"Voyage Rerank","url":"https://reranker.uk/zh/models/voyage-rerank"},{"@type":"ListItem","position":5,"name":"mxbai-rerank","url":"https://reranker.uk/zh/models/mxbai-rerank"}]}]}</script>
+  <link rel="stylesheet" href="/assets/css/benchmark-evidence.css?v=196656e688">
 
 </head>
 <body>
@@ -94,26 +95,53 @@
           <option value="commercial">Commercial use</option>
           <option value="noncommercial">Non-commercial</option>
         </select>
-        <span class="muted models-count" id="models-count"></span>
+        <div class="benchmark-filters" id="benchmark-filters" hidden>
+          <select id="models-task-filter" aria-label="基准任务" data-i18n-aria-label="models.taskLabel">
+            <option value="all" data-i18n="models.task.all">全部任务</option>
+            <option value="beir" data-i18n="models.task.beir">BEIR</option>
+            <option value="mteb-r" data-i18n="models.task.mteb-r">MTEB-R</option>
+            <option value="cmteb-r" data-i18n="models.task.cmteb-r">CMTEB-R（检索）</option>
+            <option value="cmteb-rerank" data-i18n="models.task.cmteb-rerank">C-MTEB（重排）</option>
+            <option value="rerank-12" data-i18n="models.task.rerank-12">Rerank-12</option>
+            <option value="mmteb-r" data-i18n="models.task.mmteb-r">MMTEB-R</option>
+            <option value="miracl" data-i18n="models.task.miracl">MIRACL</option>
+            <option value="mr-tydi" data-i18n="models.task.mr-tydi">Mr.TyDi</option>
+            <option value="vendor-chinese" data-i18n="models.task.vendor-chinese">Mixedbread 中文评测</option>
+          </select>
+          <select id="models-language-filter" aria-label="评测语言" data-i18n-aria-label="models.languageLabel">
+            <option value="all" data-i18n="models.language.all">全部语言</option>
+            <option value="en" data-i18n="models.language.en">英文</option>
+            <option value="zh" data-i18n="models.language.zh">中文</option>
+            <option value="zh-en" data-i18n="models.language.zh-en">中→英</option>
+            <option value="en-zh" data-i18n="models.language.en-zh">英→中</option>
+            <option value="multi" data-i18n="models.language.multi">多语言平均</option>
+          </select>
+          <button type="button" id="models-clear-filters" class="btn btn-ghost btn-sm" data-i18n="models.clear">清除筛选</button>
+        </div>
+        <span class="muted models-count" id="models-count" role="status"></span>
       </div>
+      <p id="models-benchmark-help" class="muted"><span data-i18n="models.filterHelp">筛选依据为公开评测记录。仅在数据集、候选集、指标和统计口径一致时比较分数。</span>
+        <a href="/zh/models/bge-reranker#cmteb-directions" data-i18n="models.bgeEvidence">查看 BGE base/large 的 C-MTEB 中文、中→英和英→中分项</a>.
+      </p>
+      <p id="models-no-matches" class="muted" data-i18n="models.noMatches" hidden>未找到符合条件的模型</p>
       <div class="table-wrap table-sticky" tabindex="0" role="region" data-i18n-aria-label="models.tableAriaLabel" aria-label="重排序模型对比表">
         <table id="models-table">
-          <caption class="sr-only" data-i18n-html="models.tableCaption">重排序模型对比：架构、类型、适用场景、语言、延迟、价格与 BEIR 分数</caption>
+          <caption class="sr-only" data-i18n-html="models.tableCaption">重排序模型对比：架构、类型、适用场景、支持语言、延迟、价格与评测证据</caption>
           <thead>
             <tr>
               <th scope="col" data-sort="name">模型</th>
               <th scope="col" data-sort="arch">架构</th>
               <th scope="col" data-sort="type">类型</th>
               <th scope="col">最适合</th>
-              <th scope="col" data-sort="langs">语言</th>
+              <th scope="col" data-sort="langs" data-i18n="models.languageSupport">模型支持语言</th>
               <th scope="col">典型延迟 <span class="th-hint">50 条文档</span></th>
               <th scope="col" data-sort="pricing">价格</th>
-              <th scope="col" data-sort="beir">BEIR NDCG@10</th>
+              <th scope="col" data-i18n="models.evidence">评测证据</th>
               <th scope="col">试用</th>
             </tr>
           </thead>
           <tbody>
-            <tr data-name="qwen3-reranker-4b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="" data-license="commercial">
+            <tr data-name="qwen3-reranker-4b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/zh/models/qwen-reranker">Qwen3-Reranker-4B</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Apache 2.0</span><span class="pill info">Qwen3 最佳档位</span></td>
@@ -121,10 +149,10 @@
               <td>100+ 种语言 · 32K 上下文</td>
               <td>需要 GPU</td>
               <td>免费（自建）</td>
-              <td class="muted" title="Qwen 自己的测试：MTEB(eng, v2) 的检索子集，对 Qwen3-Embedding-0.6B 召回的前 100 条重排序 —— 不是 BEIR 平均分。Jina 2026 年的测试中，4B 在 13 个 BEIR 数据集上得分 62.28*">MTEB-R 69.76*</td>
+              <td data-benchmark-models="qwen3-reranker-4b" class="muted"><details class="benchmark-evidence"><summary><span class="benchmark-summary">MTEB-R · BEIR · MIRACL · CMTEB-R（检索） · MMTEB-R</span><span class="sr-only"> 查看数据集与口径</span></summary><ul><li data-benchmark-task="mteb-r" data-eval-language="en" data-benchmark-protocol="mteb-r-qwen"><p class="benchmark-score">MTEB-R · 英文 · 69.76 · Qwen · 检索子集</p><dl><div><dt>协议</dt><dd>Qwen · 检索子集</dd></div><div><dt>数据集</dt><dd>MTEB(eng, v2) 检索子集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>Qwen3-Embedding-0.6B · 前 100 条</dd></div><div><dt>版本</dt><dd>MTEB 英文版 v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-01</dd></div></dl><a href="https://huggingface.co/Qwen/Qwen3-Reranker-4B" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="beir" data-eval-language="en" data-benchmark-protocol="beir-jina-2026"><p class="benchmark-score">BEIR · 英文 · 62.28 · Jina 2026 · 表 6</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 6</dd></div><div><dt>数据集</dt><dd>TREC-COVID, NFCorpus, NQ, HotpotQA, FiQA, ArguAna, Touche, DBPedia, SCIDOCS, FEVER, Climate-FEVER, SciFact, Quora</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="multi" data-benchmark-protocol="miracl-jina-2026"><p class="benchmark-score">MIRACL · 多语言平均 · 76.56 · Jina 2026 · 表 7</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 7</dd></div><div><dt>数据集</dt><dd>MIRACL</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="cmteb-r" data-eval-language="zh" data-benchmark-protocol="cmteb-r-qwen"><p class="benchmark-score">CMTEB-R（检索） · 中文 · 75.94 · Qwen · 检索子集</p><dl><div><dt>协议</dt><dd>Qwen · 检索子集</dd></div><div><dt>数据集</dt><dd>MTEB(cmn, v1) 检索子集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>Qwen3-Embedding-0.6B · 前 100 条</dd></div><div><dt>版本</dt><dd>MTEB 中文版 v1</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/Qwen/Qwen3-Reranker-4B" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="mmteb-r" data-eval-language="multi" data-benchmark-protocol="mmteb-r-qwen"><p class="benchmark-score">MMTEB-R · 多语言平均 · 72.74 · Qwen · 检索子集</p><dl><div><dt>协议</dt><dd>Qwen · 检索子集</dd></div><div><dt>数据集</dt><dd>MMTEB 检索子集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>Qwen3-Embedding-0.6B · 前 100 条</dd></div><div><dt>版本</dt><dd>MMTEB</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/Qwen/Qwen3-Reranker-4B" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="zh" data-benchmark-protocol="miracl-jina-2026-zh"><p class="benchmark-score">MIRACL · 中文 · 71.97 · Jina 2026 · 表 7</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 7</dd></div><div><dt>数据集</dt><dd>MIRACL (zh)</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>arXiv:2607.18152v1</dd></div></dl><a href="https://arxiv.org/html/2607.18152v1#A2" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="en" data-benchmark-protocol="miracl-jina-2026-en"><p class="benchmark-score">MIRACL · 英文 · 69.66 · Jina 2026 · 表 7</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 7</dd></div><div><dt>数据集</dt><dd>MIRACL (en)</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>arXiv:2607.18152v1</dd></div></dl><a href="https://arxiv.org/html/2607.18152v1#A2" rel="noopener noreferrer">来源</a></li></ul></details></td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="qwen3-reranker-8b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="" data-license="commercial">
+            <tr data-name="qwen3-reranker-8b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/zh/models/qwen-reranker">Qwen3-Reranker-8B</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Apache 2.0</span></td>
@@ -132,10 +160,10 @@
               <td>100+ 种语言 · 32K 上下文</td>
               <td>GPU / 多 GPU</td>
               <td>免费（自建）</td>
-              <td class="muted" title="Qwen 自己的测试，与 4B 那一行相同的测试集，其中 4B 得分更高。本表到 2026 年 10 月之前写的是在 BEIR 上落后约 0.48 分；Qwen 的模型卡在 MTEB-R 上给出的差距是 0.74">MTEB-R 69.02*</td>
+              <td data-benchmark-models="qwen3-reranker-8b" class="muted"><details class="benchmark-evidence"><summary><span class="benchmark-summary">MTEB-R · CMTEB-R（检索） · MMTEB-R</span><span class="sr-only"> 查看数据集与口径</span></summary><ul><li data-benchmark-task="mteb-r" data-eval-language="en" data-benchmark-protocol="mteb-r-qwen"><p class="benchmark-score">MTEB-R · 英文 · 69.02 · Qwen · 检索子集</p><dl><div><dt>协议</dt><dd>Qwen · 检索子集</dd></div><div><dt>数据集</dt><dd>MTEB(eng, v2) 检索子集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>Qwen3-Embedding-0.6B · 前 100 条</dd></div><div><dt>版本</dt><dd>MTEB 英文版 v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-01</dd></div></dl><a href="https://huggingface.co/Qwen/Qwen3-Reranker-8B" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="cmteb-r" data-eval-language="zh" data-benchmark-protocol="cmteb-r-qwen"><p class="benchmark-score">CMTEB-R（检索） · 中文 · 77.45 · Qwen · 检索子集</p><dl><div><dt>协议</dt><dd>Qwen · 检索子集</dd></div><div><dt>数据集</dt><dd>MTEB(cmn, v1) 检索子集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>Qwen3-Embedding-0.6B · 前 100 条</dd></div><div><dt>版本</dt><dd>MTEB 中文版 v1</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/Qwen/Qwen3-Reranker-4B" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="mmteb-r" data-eval-language="multi" data-benchmark-protocol="mmteb-r-qwen"><p class="benchmark-score">MMTEB-R · 多语言平均 · 72.94 · Qwen · 检索子集</p><dl><div><dt>协议</dt><dd>Qwen · 检索子集</dd></div><div><dt>数据集</dt><dd>MMTEB 检索子集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>Qwen3-Embedding-0.6B · 前 100 条</dd></div><div><dt>版本</dt><dd>MMTEB</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/Qwen/Qwen3-Reranker-4B" rel="noopener noreferrer">来源</a></li></ul></details></td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="qwen3-reranker-0.6b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="" data-license="commercial">
+            <tr data-name="qwen3-reranker-0.6b" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/zh/models/qwen-reranker">Qwen3-Reranker-0.6B</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Apache 2.0</span></td>
@@ -143,10 +171,10 @@
               <td>100+ 种语言 · 32K 上下文</td>
               <td>建议 GPU</td>
               <td>免费（自建）</td>
-              <td class="muted" title="Qwen 自己的测试，与 4B 那一行相同的测试集">MTEB-R 65.80*</td>
+              <td data-benchmark-models="qwen3-reranker-0.6b" class="muted"><details class="benchmark-evidence"><summary><span class="benchmark-summary">MTEB-R · BEIR · MIRACL · CMTEB-R（检索） · MMTEB-R</span><span class="sr-only"> 查看数据集与口径</span></summary><ul><li data-benchmark-task="mteb-r" data-eval-language="en" data-benchmark-protocol="mteb-r-qwen"><p class="benchmark-score">MTEB-R · 英文 · 65.80 · Qwen · 检索子集</p><dl><div><dt>协议</dt><dd>Qwen · 检索子集</dd></div><div><dt>数据集</dt><dd>MTEB(eng, v2) 检索子集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>Qwen3-Embedding-0.6B · 前 100 条</dd></div><div><dt>版本</dt><dd>MTEB 英文版 v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-01</dd></div></dl><a href="https://huggingface.co/Qwen/Qwen3-Reranker-0.6B" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="beir" data-eval-language="en" data-benchmark-protocol="beir-jina-2026"><p class="benchmark-score">BEIR · 英文 · 56.94 · Jina 2026 · 表 6</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 6</dd></div><div><dt>数据集</dt><dd>TREC-COVID, NFCorpus, NQ, HotpotQA, FiQA, ArguAna, Touche, DBPedia, SCIDOCS, FEVER, Climate-FEVER, SciFact, Quora</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="multi" data-benchmark-protocol="miracl-jina-2026"><p class="benchmark-score">MIRACL · 多语言平均 · 67.12 · Jina 2026 · 表 7</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 7</dd></div><div><dt>数据集</dt><dd>MIRACL</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="cmteb-r" data-eval-language="zh" data-benchmark-protocol="cmteb-r-qwen"><p class="benchmark-score">CMTEB-R（检索） · 中文 · 71.31 · Qwen · 检索子集</p><dl><div><dt>协议</dt><dd>Qwen · 检索子集</dd></div><div><dt>数据集</dt><dd>MTEB(cmn, v1) 检索子集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>Qwen3-Embedding-0.6B · 前 100 条</dd></div><div><dt>版本</dt><dd>MTEB 中文版 v1</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/Qwen/Qwen3-Reranker-4B" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="mmteb-r" data-eval-language="multi" data-benchmark-protocol="mmteb-r-qwen"><p class="benchmark-score">MMTEB-R · 多语言平均 · 66.36 · Qwen · 检索子集</p><dl><div><dt>协议</dt><dd>Qwen · 检索子集</dd></div><div><dt>数据集</dt><dd>MMTEB 检索子集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>Qwen3-Embedding-0.6B · 前 100 条</dd></div><div><dt>版本</dt><dd>MMTEB</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/Qwen/Qwen3-Reranker-4B" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="zh" data-benchmark-protocol="miracl-jina-2026-zh"><p class="benchmark-score">MIRACL · 中文 · 60.80 · Jina 2026 · 表 7</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 7</dd></div><div><dt>数据集</dt><dd>MIRACL (zh)</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>arXiv:2607.18152v1</dd></div></dl><a href="https://arxiv.org/html/2607.18152v1#A2" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="en" data-benchmark-protocol="miracl-jina-2026-en"><p class="benchmark-score">MIRACL · 英文 · 60.99 · Jina 2026 · 表 7</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 7</dd></div><div><dt>数据集</dt><dd>MIRACL (en)</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>arXiv:2607.18152v1</dd></div></dl><a href="https://arxiv.org/html/2607.18152v1#A2" rel="noopener noreferrer">来源</a></li></ul></details></td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="bge-reranker-v2-m3" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="55.36*" data-license="commercial">
+            <tr data-name="bge-reranker-v2-m3" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/zh/models/bge-reranker">bge-reranker-v2-m3</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">开源权重</span></td>
@@ -154,10 +182,10 @@
               <td>100+ 种语言</td>
               <td>CPU 可运行；GPU 更快</td>
               <td>免费（自建）</td>
-              <td title="BAAI 自己的测试：15 个 BEIR 数据集，对 bge-large-en-v1.5 召回的前 100 条重排序。本表到 2026 年 10 月之前这里写的是一个查不到出处的 ~60.1">55.36*</td>
+              <td data-benchmark-models="bge-reranker-v2-m3"><details class="benchmark-evidence"><summary><span class="benchmark-summary">BEIR · MTEB-R · CMTEB-R（检索） · MMTEB-R</span><span class="sr-only"> 查看数据集与口径</span></summary><ul><li data-benchmark-task="beir" data-eval-language="en" data-benchmark-protocol="beir-baai"><p class="benchmark-score">BEIR · 英文 · 55.36 · BAAI · 15 个数据集</p><dl><div><dt>协议</dt><dd>BAAI · 15 个数据集</dd></div><div><dt>数据集</dt><dd>15 个 BEIR 数据集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>bge-large-en-v1.5 · 前 100 条</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-16</dd></div></dl><a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="mteb-r" data-eval-language="en" data-benchmark-protocol="mteb-r-qwen"><p class="benchmark-score">MTEB-R · 英文 · 57.03 · Qwen · 检索子集</p><dl><div><dt>协议</dt><dd>Qwen · 检索子集</dd></div><div><dt>数据集</dt><dd>MTEB(eng, v2) 检索子集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>Qwen3-Embedding-0.6B · 前 100 条</dd></div><div><dt>版本</dt><dd>MTEB 英文版 v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/Qwen/Qwen3-Reranker-4B" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="cmteb-r" data-eval-language="zh" data-benchmark-protocol="cmteb-r-qwen"><p class="benchmark-score">CMTEB-R（检索） · 中文 · 72.16 · Qwen · 检索子集</p><dl><div><dt>协议</dt><dd>Qwen · 检索子集</dd></div><div><dt>数据集</dt><dd>MTEB(cmn, v1) 检索子集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>Qwen3-Embedding-0.6B · 前 100 条</dd></div><div><dt>版本</dt><dd>MTEB 中文版 v1</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/Qwen/Qwen3-Reranker-4B" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="mmteb-r" data-eval-language="multi" data-benchmark-protocol="mmteb-r-qwen"><p class="benchmark-score">MMTEB-R · 多语言平均 · 58.36 · Qwen · 检索子集</p><dl><div><dt>协议</dt><dd>Qwen · 检索子集</dd></div><div><dt>数据集</dt><dd>MMTEB 检索子集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>Qwen3-Embedding-0.6B · 前 100 条</dd></div><div><dt>版本</dt><dd>MMTEB</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/Qwen/Qwen3-Reranker-4B" rel="noopener noreferrer">来源</a></li></ul></details></td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="bce-reranker-base_v1" data-type="open" data-arch="cross-encoder" data-langs="zh en ja ko" data-pricing="free" data-beir="" data-license="commercial">
+            <tr data-name="bce-reranker-base_v1" data-type="open" data-arch="cross-encoder" data-langs="zh en ja ko" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="https://huggingface.co/maidalun1020/bce-reranker-base_v1" rel="noopener noreferrer">bce-reranker-base_v1</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Apache 2.0</span><span class="pill info">轻量</span></td>
@@ -165,10 +193,10 @@
               <td>中、英、日、韩 · 支持跨语种</td>
               <td>CPU 可运行；GPU 更快</td>
               <td>免费（自建）</td>
-              <td class="muted" title="Youdao's own run: the 12 Reranking datasets of MTEB / C-MTEB, evaluated in the en / zh / en-zh / zh-en setting — not BEIR, and not the CMTEB-R retrieval suite Qwen report. Same run: bge-reranker-base 59.04, bge-reranker-large 60.86">Rerank-12 61.29</td>
+              <td data-benchmark-models="bce-reranker-base_v1" class="muted"><details class="benchmark-evidence"><summary><span class="benchmark-summary">Rerank-12</span><span class="sr-only"> 查看数据集与口径</span></summary><ul><li data-benchmark-task="rerank-12" data-eval-language="mixed" data-benchmark-protocol="rerank12-youdao"><p class="benchmark-score">Rerank-12 · 中英文及双向合计 · 61.29 · 有道 · 12 个数据集</p><dl><div><dt>协议</dt><dd>有道 · 12 个数据集</dd></div><div><dt>数据集</dt><dd>AskUbuntuDupQuestions, MindSmallReranking, SciDocsRR, StackOverflowDupQuestions, T2Reranking, MMarcoReranking, CMedQAv1, CMedQAv2, T2RerankingEn2Zh, MMarcoRerankingEn2Zh, T2RerankingZh2En, MMarcoRerankingZh2En</dd></div><div><dt>指标</dt><dd>未披露</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-14</dd></div></dl><a href="https://huggingface.co/maidalun1020/bce-reranker-base_v1" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="rerank-12" data-eval-language="en" data-benchmark-protocol="rerank12-youdao-en"><p class="benchmark-score">Rerank-12 · 英文 · 51.48 · 有道 · 语言分项</p><dl><div><dt>协议</dt><dd>有道 · 语言分项</dd></div><div><dt>数据集</dt><dd>AskUbuntuDupQuestions, MindSmallReranking, SciDocsRR, StackOverflowDupQuestions</dd></div><div><dt>指标</dt><dd>未披露</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>1aa07ea64f94</dd></div></dl><a href="https://github.com/netease-youdao/BCEmbedding/blob/1aa07ea64f94523965c8672e93da47c3faf4d2cd/Docs/EvaluationSummary/reranker_eval_summary.md#language-en" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="rerank-12" data-eval-language="zh" data-benchmark-protocol="rerank12-youdao-zh"><p class="benchmark-score">Rerank-12 · 中文 · 66.33 · 有道 · 语言分项</p><dl><div><dt>协议</dt><dd>有道 · 语言分项</dd></div><div><dt>数据集</dt><dd>T2Reranking, MMarcoReranking, CMedQAv1, CMedQAv2</dd></div><div><dt>指标</dt><dd>未披露</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>1aa07ea64f94</dd></div></dl><a href="https://github.com/netease-youdao/BCEmbedding/blob/1aa07ea64f94523965c8672e93da47c3faf4d2cd/Docs/EvaluationSummary/reranker_eval_summary.md#language-zh" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="rerank-12" data-eval-language="en-zh" data-benchmark-protocol="rerank12-youdao-en-zh"><p class="benchmark-score">Rerank-12 · 英→中 · 65.78 · 有道 · 语言分项</p><dl><div><dt>协议</dt><dd>有道 · 语言分项</dd></div><div><dt>数据集</dt><dd>T2RerankingEn2Zh, MMarcoRerankingEn2Zh</dd></div><div><dt>指标</dt><dd>未披露</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>1aa07ea64f94</dd></div></dl><a href="https://github.com/netease-youdao/BCEmbedding/blob/1aa07ea64f94523965c8672e93da47c3faf4d2cd/Docs/EvaluationSummary/reranker_eval_summary.md#language-en-zh" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="rerank-12" data-eval-language="zh-en" data-benchmark-protocol="rerank12-youdao-zh-en"><p class="benchmark-score">Rerank-12 · 中→英 · 66.31 · 有道 · 语言分项</p><dl><div><dt>协议</dt><dd>有道 · 语言分项</dd></div><div><dt>数据集</dt><dd>T2RerankingZh2En, MMarcoRerankingZh2En</dd></div><div><dt>指标</dt><dd>未披露</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>1aa07ea64f94</dd></div></dl><a href="https://github.com/netease-youdao/BCEmbedding/blob/1aa07ea64f94523965c8672e93da47c3faf4d2cd/Docs/EvaluationSummary/reranker_eval_summary.md#language-zh-en" rel="noopener noreferrer">来源</a></li></ul></details></td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="mxbai-rerank-large-v1" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="49.32*" data-demo="mxbai-rerank" data-license="commercial">
+            <tr data-name="mxbai-rerank-large-v1" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-demo="mxbai-rerank" data-license="commercial">
               <th scope="row"><a href="/zh/models/mxbai-rerank">mxbai-rerank-large-v1</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">开源权重</span><br><span class="pill info">浏览器可跑 ✓</span></td>
@@ -176,10 +204,10 @@
               <td>英文</td>
               <td>CPU 可运行；GPU 更快</td>
               <td>免费（自建）</td>
-              <td title="mixedbread 自己的跨代对比表，不是其他开源权重行使用的经典 BEIR 18 数据集平均分">49.32*</td>
+              <td data-benchmark-models="mxbai-rerank-large-v1"><details class="benchmark-evidence"><summary><span class="benchmark-summary">BEIR · Mixedbread 中文评测 · Mr.TyDi</span><span class="sr-only"> 查看数据集与口径</span></summary><ul><li data-benchmark-task="beir" data-eval-language="en" data-benchmark-protocol="beir-mixedbread"><p class="benchmark-score">BEIR · 英文 · 49.32 · Mixedbread · 厂商评测</p><dl><div><dt>协议</dt><dd>Mixedbread · 厂商评测</dd></div><div><dt>数据集</dt><dd>未披露</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-09-25</dd></div></dl><p>可比协议未完整披露。</p><a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="vendor-chinese" data-eval-language="zh" data-benchmark-protocol="chinese-mixedbread"><p class="benchmark-score">Mixedbread 中文评测 · 中文 · 72.53 · Mixedbread · 中文评测</p><dl><div><dt>协议</dt><dd>Mixedbread · 中文评测</dd></div><div><dt>数据集</dt><dd>未披露</dd></div><div><dt>指标</dt><dd>未披露</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-09-25</dd></div></dl><p>可比协议未完整披露。</p><a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="mr-tydi" data-eval-language="multi" data-benchmark-protocol="mrtydi-mixedbread"><p class="benchmark-score">Mr.TyDi · 多语言平均 · 21.88 · Mixedbread · Mr.TyDi</p><dl><div><dt>协议</dt><dd>Mixedbread · Mr.TyDi</dd></div><div><dt>数据集</dt><dd>Mr.TyDi</dd></div><div><dt>指标</dt><dd>未披露</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-09-25</dd></div></dl><p>可比协议未完整披露。</p><a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">来源</a></li></ul></details></td>
               <td class="demo-link-cell"></td>
             </tr>
-            <tr data-name="mxbai-rerank-large-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="57.49*" data-license="commercial">
+            <tr data-name="mxbai-rerank-large-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/zh/models/mxbai-rerank">mxbai-rerank-large-v2</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">开源权重</span><span class="pill info">多语言</span></td>
@@ -187,10 +215,10 @@
               <td>100+ 种语言</td>
               <td>建议 GPU</td>
               <td>免费（自建）</td>
-              <td title="mixedbread 自己的对比表，不是其他开源权重行使用的经典 BEIR 18 数据集平均分">57.49*</td>
+              <td data-benchmark-models="mxbai-rerank-large-v2"><details class="benchmark-evidence"><summary><span class="benchmark-summary">BEIR · Mixedbread 中文评测 · Mr.TyDi · MIRACL</span><span class="sr-only"> 查看数据集与口径</span></summary><ul><li data-benchmark-task="beir" data-eval-language="en" data-benchmark-protocol="beir-mixedbread"><p class="benchmark-score">BEIR · 英文 · 57.49 · Mixedbread · 厂商评测</p><dl><div><dt>协议</dt><dd>Mixedbread · 厂商评测</dd></div><div><dt>数据集</dt><dd>未披露</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-09-25</dd></div></dl><p>可比协议未完整披露。</p><a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="vendor-chinese" data-eval-language="zh" data-benchmark-protocol="chinese-mixedbread"><p class="benchmark-score">Mixedbread 中文评测 · 中文 · 84.16 · Mixedbread · 中文评测</p><dl><div><dt>协议</dt><dd>Mixedbread · 中文评测</dd></div><div><dt>数据集</dt><dd>未披露</dd></div><div><dt>指标</dt><dd>未披露</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-09-25</dd></div></dl><p>可比协议未完整披露。</p><a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="mr-tydi" data-eval-language="multi" data-benchmark-protocol="mrtydi-mixedbread"><p class="benchmark-score">Mr.TyDi · 多语言平均 · 29.79 · Mixedbread · Mr.TyDi</p><dl><div><dt>协议</dt><dd>Mixedbread · Mr.TyDi</dd></div><div><dt>数据集</dt><dd>Mr.TyDi</dd></div><div><dt>指标</dt><dd>未披露</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-09-25</dd></div></dl><p>可比协议未完整披露。</p><a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="beir" data-eval-language="en" data-benchmark-protocol="beir-jina-2026"><p class="benchmark-score">BEIR · 英文 · 62.45 · Jina 2026 · 表 6</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 6</dd></div><div><dt>数据集</dt><dd>TREC-COVID, NFCorpus, NQ, HotpotQA, FiQA, ArguAna, Touche, DBPedia, SCIDOCS, FEVER, Climate-FEVER, SciFact, Quora</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="multi" data-benchmark-protocol="miracl-jina-2026"><p class="benchmark-score">MIRACL · 多语言平均 · 69.65 · Jina 2026 · 表 7</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 7</dd></div><div><dt>数据集</dt><dd>MIRACL</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="zh" data-benchmark-protocol="miracl-jina-2026-zh"><p class="benchmark-score">MIRACL · 中文 · 64.27 · Jina 2026 · 表 7</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 7</dd></div><div><dt>数据集</dt><dd>MIRACL (zh)</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>arXiv:2607.18152v1</dd></div></dl><a href="https://arxiv.org/html/2607.18152v1#A2" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="en" data-benchmark-protocol="miracl-jina-2026-en"><p class="benchmark-score">MIRACL · 英文 · 64.13 · Jina 2026 · 表 7</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 7</dd></div><div><dt>数据集</dt><dd>MIRACL (en)</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>arXiv:2607.18152v1</dd></div></dl><a href="https://arxiv.org/html/2607.18152v1#A2" rel="noopener noreferrer">来源</a></li></ul></details></td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="mxbai-rerank-base-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="55.57*" data-license="commercial">
+            <tr data-name="mxbai-rerank-base-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/zh/models/mxbai-rerank">mxbai-rerank-base-v2</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">开源权重</span><span class="pill info">多语言</span></td>
@@ -198,10 +226,10 @@
               <td>100+ 种语言</td>
               <td>CPU 可运行；GPU 更快</td>
               <td>免费（自建）</td>
-              <td title="mixedbread 自己的对比表，不是其他开源权重行使用的经典 BEIR 18 数据集平均分">55.57*</td>
+              <td data-benchmark-models="mxbai-rerank-base-v2"><details class="benchmark-evidence"><summary><span class="benchmark-summary">BEIR · Mixedbread 中文评测 · Mr.TyDi · MIRACL</span><span class="sr-only"> 查看数据集与口径</span></summary><ul><li data-benchmark-task="beir" data-eval-language="en" data-benchmark-protocol="beir-mixedbread"><p class="benchmark-score">BEIR · 英文 · 55.57 · Mixedbread · 厂商评测</p><dl><div><dt>协议</dt><dd>Mixedbread · 厂商评测</dd></div><div><dt>数据集</dt><dd>未披露</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-09-25</dd></div></dl><p>可比协议未完整披露。</p><a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="vendor-chinese" data-eval-language="zh" data-benchmark-protocol="chinese-mixedbread"><p class="benchmark-score">Mixedbread 中文评测 · 中文 · 83.70 · Mixedbread · 中文评测</p><dl><div><dt>协议</dt><dd>Mixedbread · 中文评测</dd></div><div><dt>数据集</dt><dd>未披露</dd></div><div><dt>指标</dt><dd>未披露</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-09-25</dd></div></dl><p>可比协议未完整披露。</p><a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="mr-tydi" data-eval-language="multi" data-benchmark-protocol="mrtydi-mixedbread"><p class="benchmark-score">Mr.TyDi · 多语言平均 · 28.56 · Mixedbread · Mr.TyDi</p><dl><div><dt>协议</dt><dd>Mixedbread · Mr.TyDi</dd></div><div><dt>数据集</dt><dd>Mr.TyDi</dd></div><div><dt>指标</dt><dd>未披露</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-09-25</dd></div></dl><p>可比协议未完整披露。</p><a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="beir" data-eval-language="en" data-benchmark-protocol="beir-jina-2026"><p class="benchmark-score">BEIR · 英文 · 59.58 · Jina 2026 · 表 6</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 6</dd></div><div><dt>数据集</dt><dd>TREC-COVID, NFCorpus, NQ, HotpotQA, FiQA, ArguAna, Touche, DBPedia, SCIDOCS, FEVER, Climate-FEVER, SciFact, Quora</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="multi" data-benchmark-protocol="miracl-jina-2026"><p class="benchmark-score">MIRACL · 多语言平均 · 64.90 · Jina 2026 · 表 7</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 7</dd></div><div><dt>数据集</dt><dd>MIRACL</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="zh" data-benchmark-protocol="miracl-jina-2026-zh"><p class="benchmark-score">MIRACL · 中文 · 62.66 · Jina 2026 · 表 7</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 7</dd></div><div><dt>数据集</dt><dd>MIRACL (zh)</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>arXiv:2607.18152v1</dd></div></dl><a href="https://arxiv.org/html/2607.18152v1#A2" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="en" data-benchmark-protocol="miracl-jina-2026-en"><p class="benchmark-score">MIRACL · 英文 · 62.56 · Jina 2026 · 表 7</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 7</dd></div><div><dt>数据集</dt><dd>MIRACL (en)</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>arXiv:2607.18152v1</dd></div></dl><a href="https://arxiv.org/html/2607.18152v1#A2" rel="noopener noreferrer">来源</a></li></ul></details></td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="jina-reranker-v3.5" data-type="open api" data-arch="listwise" data-langs="100+" data-pricing="freemium" data-beir="63.20*" data-license="noncommercial">
+            <tr data-name="jina-reranker-v3.5" data-type="open api" data-arch="listwise" data-langs="100+" data-pricing="freemium" data-license="noncommercial">
               <th scope="row"><a href="/zh/models/jina-reranker">Jina Reranker v3.5</a></th>
               <td><span class="pill info">Listwise</span></td>
               <td><span class="pill">托管 API</span><span class="pill warn">权重：仅限非商用</span></td>
@@ -209,10 +237,10 @@
               <td>100+ 种语言</td>
               <td>API 或 GPU 自建</td>
               <td title="Jina bill the tokens of one request: the query plus every candidate, counted once, not the query once per document. The rate is per 1M tokens from api.jina.ai/v1/models; new keys get free trial tokens and packages are bought up front">送试用 token，之后 $0.05/M token†</td>
-              <td title="Jina 自己 2026 年的测试：13 个 BEIR 数据集，对 jina-embeddings-v5-text-small 召回的前 100 条重排序。同一测试中：Qwen3-Reranker-4B 62.28*，mxbai-rerank-large-v2 62.45">63.20*</td>
+              <td data-benchmark-models="jina-reranker-v3.5"><details class="benchmark-evidence"><summary><span class="benchmark-summary">BEIR · MIRACL</span><span class="sr-only"> 查看数据集与口径</span></summary><ul><li data-benchmark-task="beir" data-eval-language="en" data-benchmark-protocol="beir-jina-2026"><p class="benchmark-score">BEIR · 英文 · 63.20 · Jina 2026 · 表 6</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 6</dd></div><div><dt>数据集</dt><dd>TREC-COVID, NFCorpus, NQ, HotpotQA, FiQA, ArguAna, Touche, DBPedia, SCIDOCS, FEVER, Climate-FEVER, SciFact, Quora</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="multi" data-benchmark-protocol="miracl-jina-2026"><p class="benchmark-score">MIRACL · 多语言平均 · 74.11 · Jina 2026 · 表 7</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 7</dd></div><div><dt>数据集</dt><dd>MIRACL</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="zh" data-benchmark-protocol="miracl-jina-2026-zh"><p class="benchmark-score">MIRACL · 中文 · 69.61 · Jina 2026 · 表 7</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 7</dd></div><div><dt>数据集</dt><dd>MIRACL (zh)</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>arXiv:2607.18152v1</dd></div></dl><a href="https://arxiv.org/html/2607.18152v1#A2" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="en" data-benchmark-protocol="miracl-jina-2026-en"><p class="benchmark-score">MIRACL · 英文 · 66.36 · Jina 2026 · 表 7</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 7</dd></div><div><dt>数据集</dt><dd>MIRACL (en)</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>arXiv:2607.18152v1</dd></div></dl><a href="https://arxiv.org/html/2607.18152v1#A2" rel="noopener noreferrer">来源</a></li></ul></details></td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="jina-reranker-v3" data-type="open api" data-arch="listwise" data-langs="100+" data-pricing="freemium" data-beir="62.10*" data-license="noncommercial">
+            <tr data-name="jina-reranker-v3" data-type="open api" data-arch="listwise" data-langs="100+" data-pricing="freemium" data-license="noncommercial">
               <th scope="row"><a href="/zh/models/jina-reranker">Jina Reranker v3</a></th>
               <td><span class="pill info">Listwise</span></td>
               <td><span class="pill">托管 API</span><span class="pill warn">权重：仅限非商用</span></td>
@@ -220,10 +248,10 @@
               <td>100+ 种语言</td>
               <td>API 或 GPU 自建</td>
               <td title="Jina bill the tokens of one request: the query plus every candidate, counted once, not the query once per document. The rate is per 1M tokens from api.jina.ai/v1/models; new keys get free trial tokens and packages are bought up front">送试用 token，之后 $0.05/M token†</td>
-              <td title="Jina 自己 2026 年的测试，与 v3.5 那一行相同：13 个 BEIR 数据集，对 jina-embeddings-v5-text-small 召回的前 100 条重排序。v3 论文 2025 年基于 jina-embeddings-v3 的测试报告的是 61.94*">62.10*</td>
+              <td data-benchmark-models="jina-reranker-v3"><details class="benchmark-evidence"><summary><span class="benchmark-summary">BEIR · MIRACL</span><span class="sr-only"> 查看数据集与口径</span></summary><ul><li data-benchmark-task="beir" data-eval-language="en" data-benchmark-protocol="beir-jina-2026"><p class="benchmark-score">BEIR · 英文 · 62.10 · Jina 2026 · 表 6</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 6</dd></div><div><dt>数据集</dt><dd>TREC-COVID, NFCorpus, NQ, HotpotQA, FiQA, ArguAna, Touche, DBPedia, SCIDOCS, FEVER, Climate-FEVER, SciFact, Quora</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="multi" data-benchmark-protocol="miracl-jina-2026"><p class="benchmark-score">MIRACL · 多语言平均 · 72.20 · Jina 2026 · 表 7</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 7</dd></div><div><dt>数据集</dt><dd>MIRACL</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="zh" data-benchmark-protocol="miracl-jina-2026-zh"><p class="benchmark-score">MIRACL · 中文 · 68.53 · Jina 2026 · 表 7</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 7</dd></div><div><dt>数据集</dt><dd>MIRACL (zh)</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>arXiv:2607.18152v1</dd></div></dl><a href="https://arxiv.org/html/2607.18152v1#A2" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="en" data-benchmark-protocol="miracl-jina-2026-en"><p class="benchmark-score">MIRACL · 英文 · 64.26 · Jina 2026 · 表 7</p><dl><div><dt>协议</dt><dd>Jina 2026 · 表 7</dd></div><div><dt>数据集</dt><dd>MIRACL (en)</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>候选集</dt><dd>jina-embeddings-v5-text-small · 前 100 条</dd></div><div><dt>版本</dt><dd>arXiv:2607.18152v1 · MTEB v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>arXiv:2607.18152v1</dd></div></dl><a href="https://arxiv.org/html/2607.18152v1#A2" rel="noopener noreferrer">来源</a></li></ul></details></td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="jina-reranker-tiny" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="48.54*" data-demo="jina-reranker" data-license="commercial">
+            <tr data-name="jina-reranker-tiny" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-demo="jina-reranker" data-license="commercial">
               <th scope="row"><a href="/zh/models/jina-reranker">jina-reranker v1 tiny</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">开源权重</span><br><span class="pill info">浏览器可跑 ✓</span></td>
@@ -231,10 +259,10 @@
               <td>英文</td>
               <td title="用在线 Demo 实测：在 4 核 GitHub Actions 机器上用 Chromium（WASM）运行，5 次取中位数，每段约 60 个英文单词，2026 年 10 月。手机和较旧的笔记本会更慢 —— Demo 会显示每次在你设备上的耗时">浏览器中每 10 段约 229 ms</td>
               <td>免费（自建）</td>
-              <td title="Jina 自己的测试：17 个 BEIR 数据集，出自 jina-reranker-v1 的模型卡">48.54*</td>
+              <td data-benchmark-models="jina-reranker-v1-tiny-en"><details class="benchmark-evidence"><summary><span class="benchmark-summary">BEIR</span><span class="sr-only"> 查看数据集与口径</span></summary><ul><li data-benchmark-task="beir" data-eval-language="en" data-benchmark-protocol="beir-jina-v1"><p class="benchmark-score">BEIR · 英文 · 48.54 · Jina v1 · 17 个数据集</p><dl><div><dt>协议</dt><dd>Jina v1 · 17 个数据集</dd></div><div><dt>数据集</dt><dd>17 个 BEIR 数据集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-01</dd></div></dl><p>可比协议未完整披露。</p><a href="https://huggingface.co/jinaai/jina-reranker-v1-tiny-en" rel="noopener noreferrer">来源</a></li></ul></details></td>
               <td class="demo-link-cell"></td>
             </tr>
-            <tr id="cohere-rerank-5" data-name="cohere-rerank-5-pro" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
+            <tr id="cohere-rerank-5" data-name="cohere-rerank-5-pro" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid">
               <th scope="row"><a href="/zh/models/cohere-rerank">Cohere Rerank 5 Pro</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">托管 API</span></td>
@@ -245,7 +273,7 @@
               <td class="muted" title="Cohere 没有公布 Rerank 5 的评测表">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="cohere-rerank-5-fast" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
+            <tr data-name="cohere-rerank-5-fast" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid">
               <th scope="row"><a href="/zh/models/cohere-rerank">Cohere Rerank 5 Fast</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">托管 API</span></td>
@@ -256,7 +284,7 @@
               <td class="muted" title="Cohere 没有公布 Rerank 5 的评测表">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="cohere-rerank-4-pro" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
+            <tr data-name="cohere-rerank-4-pro" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid">
               <th scope="row"><a href="/zh/models/cohere-rerank">Cohere Rerank 4 Pro</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">托管 API</span></td>
@@ -267,7 +295,7 @@
               <td class="muted" title="Cohere 没有为 Rerank 4 公布经典的 BEIR 18 数据集平均分">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="cohere-rerank-4-fast" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="">
+            <tr data-name="cohere-rerank-4-fast" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid">
               <th scope="row"><a href="/zh/models/cohere-rerank">Cohere Rerank 4 Fast</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">托管 API</span></td>
@@ -278,7 +306,7 @@
               <td class="muted" title="厂商没有公布经典的 BEIR 平均分">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="voyage-rerank-3" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+            <tr data-name="voyage-rerank-3" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid">
               <th scope="row"><a href="/zh/models/voyage-rerank">Voyage rerank-3</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">托管 API</span></td>
@@ -289,7 +317,7 @@
               <td class="muted" title="Voyage 公布的是自己的检索评测，不是经典的 BEIR 平均分">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="voyage-rerank-3-lite" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+            <tr data-name="voyage-rerank-3-lite" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid">
               <th scope="row"><a href="/zh/models/voyage-rerank">Voyage rerank-3-lite</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">托管 API</span></td>
@@ -300,7 +328,7 @@
               <td class="muted" title="Voyage 公布的是自己的检索评测，不是经典的 BEIR 平均分">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="voyage-rerank-2.5" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+            <tr data-name="voyage-rerank-2.5" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid">
               <th scope="row"><a href="/zh/models/voyage-rerank">Voyage rerank-2.5</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">托管 API</span><span class="pill info">Instruction</span></td>
@@ -311,7 +339,7 @@
               <td class="muted" title="Voyage 公布的是自己的检索评测，不是经典的 BEIR 平均分">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="voyage-rerank-2.5-lite" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+            <tr data-name="voyage-rerank-2.5-lite" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid">
               <th scope="row"><a href="/zh/models/voyage-rerank">Voyage rerank-2.5-lite</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">托管 API</span></td>
@@ -322,7 +350,7 @@
               <td class="muted" title="Voyage 公布的是自己的检索评测，不是经典的 BEIR 平均分">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="alibaba-model-studio" data-name="alibaba-model-studio" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-beir="" data-modal="1">
+            <tr id="alibaba-model-studio" data-name="alibaba-model-studio" data-type="api" data-arch="cross-encoder" data-langs="100+" data-pricing="paid" data-modal="1">
               <th scope="row"><a href="https://help.aliyun.com/zh/model-studio/text-rerank-api" rel="noopener noreferrer">阿里云百炼</a> <span class="muted">（qwen3-rerank）</span></th>
               <td><span class="pill">重排序 API</span></td>
               <td><span class="pill">托管 API</span></td>
@@ -333,7 +361,7 @@
               <td class="muted" title="阿里云没有为托管模型公布评测分数。价格按每百万输入 token 计；北京地域开通后 90 天内有 100 万 token 免费额度。gte-rerank 已于 2026 年 5 月 30 日下线，gte-rerank-v2 仍可用">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="siliconflow" data-name="siliconflow" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="">
+            <tr id="siliconflow" data-name="siliconflow" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium">
               <th scope="row"><a href="https://docs.siliconflow.com/en/api-reference/rerank/create-rerank" rel="noopener noreferrer">硅基流动 SiliconFlow</a> <span class="muted">（托管开源模型）</span></th>
               <td><span class="pill">重排序 API</span></td>
               <td><span class="pill">托管 API</span></td>
@@ -344,7 +372,7 @@
               <td class="muted" title="硅基流动托管的是其他厂商的开源模型，分数就是这些模型自己的 —— 见对应的行。它的价格页没有列出 Qwen3-Reranker 的价格">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="amazon-bedrock" data-name="amazon-bedrock" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+            <tr id="amazon-bedrock" data-name="amazon-bedrock" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid">
               <th scope="row"><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html" rel="noopener noreferrer">Amazon Bedrock 重排序</a> <span class="muted">（AWS）</span></th>
               <td><span class="pill">重排序 API</span></td>
               <td><span class="pill">托管 API</span></td>
@@ -355,7 +383,7 @@
               <td class="muted" title="Amazon 没有公布 Rerank 1.0 的评测分数；Cohere Rerank 3.5 是 Cohere 的模型。一次查询最多算 100 个文档，每多 100 个算一次新查询">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="pinecone" data-name="pinecone" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="">
+            <tr id="pinecone" data-name="pinecone" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium">
               <th scope="row"><a href="https://docs.pinecone.io/guides/search/rerank-results" rel="noopener noreferrer">Pinecone 重排序</a> <span class="muted">（托管，内置于向量数据库）</span></th>
               <td><span class="pill">重排序 API</span></td>
               <td><span class="pill">托管 API</span></td>
@@ -366,7 +394,7 @@
               <td class="muted" title="Pinecone 没有公布 pinecone-rerank-v0 的评测分数；另外两个是 BAAI 和 Cohere 的模型，见它们各自那一行">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="vertex-ai-ranking" data-name="vertex-ai-ranking" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+            <tr id="vertex-ai-ranking" data-name="vertex-ai-ranking" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid">
               <th scope="row"><a href="https://docs.cloud.google.com/generative-ai-app-builder/docs/ranking" rel="noopener noreferrer">Google Vertex AI 排序</a> <span class="muted">（semantic-ranker）</span></th>
               <td><span class="pill">重排序 API</span></td>
               <td><span class="pill">托管 API</span></td>
@@ -377,7 +405,7 @@
               <td class="muted" title="Google 没有为排序模型公布评测分数。一次查询最多计 100 篇文档，每多 100 篇算一次查询">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="gte-reranker-modernbert" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="56.19*" data-license="commercial">
+            <tr data-name="gte-reranker-modernbert" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/zh/models/gte-reranker">gte-reranker-modernbert-base</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">开源权重</span><span class="pill info">轻量</span></td>
@@ -385,10 +413,10 @@
               <td>英文</td>
               <td>GPU 上快，CPU 友好</td>
               <td>免费（自建）</td>
-              <td title="阿里巴巴在模型卡里给出的数字，没有说明用了哪些数据集、第一阶段用的什么检索。本表到 2026 年 10 月之前写的是“Hit@1 ≈ nemotron”，我们找不到任何出处">56.19*</td>
+              <td data-benchmark-models="gte-reranker-modernbert-base"><details class="benchmark-evidence"><summary><span class="benchmark-summary">BEIR</span><span class="sr-only"> 查看数据集与口径</span></summary><ul><li data-benchmark-task="beir" data-eval-language="en" data-benchmark-protocol="beir-gte"><p class="benchmark-score">BEIR · 英文 · 56.19 · 阿里巴巴 · ModernBERT 模型卡</p><dl><div><dt>协议</dt><dd>阿里巴巴 · ModernBERT 模型卡</dd></div><div><dt>数据集</dt><dd>未披露</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-01</dd></div></dl><p>可比协议未完整披露。</p><a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">来源</a></li></ul></details></td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="gte-multilingual-reranker-base" data-name="gte-multilingual-reranker-base" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-beir="" data-license="commercial">
+            <tr id="gte-multilingual-reranker-base" data-name="gte-multilingual-reranker-base" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/zh/models/gte-reranker">gte-multilingual-reranker-base</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">开源权重</span><span class="pill info">轻量</span></td>
@@ -396,10 +424,10 @@
               <td>70+ 种语言</td>
               <td>GPU 上快，CPU 友好</td>
               <td>免费（自建）</td>
-              <td class="muted" title="阿里巴巴只在模型卡的图表和 mGTE 论文（EMNLP 2024）里公布了它的重排序结果。第三方数据：Qwen3-Reranker 模型卡里 Qwen 的测试中，它在 MTEB-R 上为 59.51，CMTEB-R 上为 74.08，MMTEB-R 上为 59.44。据模型卡说明，阿里云托管的重排序模型是相关模型，但不是同一个">未公布*</td>
+              <td data-benchmark-models="gte-multilingual-reranker-base" class="muted"><details class="benchmark-evidence"><summary><span class="benchmark-summary">MTEB-R · CMTEB-R（检索） · MMTEB-R</span><span class="sr-only"> 查看数据集与口径</span></summary><ul><li data-benchmark-task="mteb-r" data-eval-language="en" data-benchmark-protocol="mteb-r-qwen"><p class="benchmark-score">MTEB-R · 英文 · 59.51 · Qwen · 检索子集</p><dl><div><dt>协议</dt><dd>Qwen · 检索子集</dd></div><div><dt>数据集</dt><dd>MTEB(eng, v2) 检索子集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>Qwen3-Embedding-0.6B · 前 100 条</dd></div><div><dt>版本</dt><dd>MTEB 英文版 v2</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/Qwen/Qwen3-Reranker-4B" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="cmteb-r" data-eval-language="zh" data-benchmark-protocol="cmteb-r-qwen"><p class="benchmark-score">CMTEB-R（检索） · 中文 · 74.08 · Qwen · 检索子集</p><dl><div><dt>协议</dt><dd>Qwen · 检索子集</dd></div><div><dt>数据集</dt><dd>MTEB(cmn, v1) 检索子集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>Qwen3-Embedding-0.6B · 前 100 条</dd></div><div><dt>版本</dt><dd>MTEB 中文版 v1</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/Qwen/Qwen3-Reranker-4B" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="mmteb-r" data-eval-language="multi" data-benchmark-protocol="mmteb-r-qwen"><p class="benchmark-score">MMTEB-R · 多语言平均 · 59.44 · Qwen · 检索子集</p><dl><div><dt>协议</dt><dd>Qwen · 检索子集</dd></div><div><dt>数据集</dt><dd>MMTEB 检索子集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>Qwen3-Embedding-0.6B · 前 100 条</dd></div><div><dt>版本</dt><dd>MMTEB</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/Qwen/Qwen3-Reranker-4B" rel="noopener noreferrer">来源</a></li></ul></details></td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="ettin-reranker-17m-v1" data-name="ettin-reranker-17m-v1" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="" data-license="commercial">
+            <tr id="ettin-reranker-17m-v1" data-name="ettin-reranker-17m-v1" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/zh/guides/self-host-reranker#ettin">ettin-reranker-17m-v1</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">Apache 2.0</span></td>
@@ -410,7 +438,18 @@
               <td class="muted" title="发布方提供 NanoBEIR 及搭配不同第一阶段模型的检索评测，不能当作传统完整 BEIR 均分">不可直接比较*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="hs-rerank-1" data-name="hs-rerank-1" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-beir="" data-license="commercial">
+            <tr id="horizon-multilingual-reranker-small" data-name="horizon-multilingual-reranker-small" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-license="commercial">
+              <th scope="row"><a href="/zh/guides/self-host-reranker#horizon-small">Horizon-Labs small</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill good">Apache 2.0</span></td>
+              <td>141M 的 mmBERT-small，从 Qwen3-4B 蒸馏；以每对 384 token 训练，支持 CPU 和 ONNX。发布方的 MIRACL dev 结果属于域内评测，不是完整 BEIR。</td>
+              <td>多语言，含中文</td>
+              <td>CPU 可运行；GPU 更快</td>
+              <td>免费（自建）</td>
+              <td data-benchmark-models="horizon-multilingual-reranker-small"><details class="benchmark-evidence"><summary><span class="benchmark-summary">MIRACL</span><span class="sr-only"> 查看数据集与口径</span></summary><ul><li data-benchmark-task="miracl" data-eval-language="multi" data-benchmark-protocol="miracl-horizon-small-v11"><p class="benchmark-score">MIRACL · 多语言平均 · 0.779 · Horizon-Labs · MIRACL dev 抽样</p><dl><div><dt>协议</dt><dd>Horizon-Labs · MIRACL dev 抽样</dd></div><div><dt>数据集</dt><dd>MIRACLReranking 开发集（18 种语言）</dd></div><div><dt>指标</dt><dd>nDCG@10 (0–1)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>MTEB MIRACLReranking · 前 100 条</dd></div><div><dt>版本</dt><dd>发布方 v1.1 · 18 种语言，每种语言 60 个查询</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>23139fec6f1f</dd></div></dl><p>可比协议未完整披露。</p><a href="https://huggingface.co/Horizon-Labs/multilingual-reranker-small#evaluation" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="en" data-benchmark-protocol="miracl-horizon-small-v11"><p class="benchmark-score">MIRACL · 英文 · 0.716 · Horizon-Labs · MIRACL dev 抽样</p><dl><div><dt>协议</dt><dd>Horizon-Labs · MIRACL dev 抽样</dd></div><div><dt>数据集</dt><dd>MIRACLReranking 开发集（18 种语言）</dd></div><div><dt>指标</dt><dd>nDCG@10 (0–1)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>MTEB MIRACLReranking · 前 100 条</dd></div><div><dt>版本</dt><dd>发布方 v1.1 · 18 种语言，每种语言 60 个查询</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>23139fec6f1f</dd></div></dl><p>可比协议未完整披露。</p><a href="https://huggingface.co/Horizon-Labs/multilingual-reranker-small#evaluation" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="miracl" data-eval-language="zh" data-benchmark-protocol="miracl-horizon-small-v11"><p class="benchmark-score">MIRACL · 中文 · 0.815 · Horizon-Labs · MIRACL dev 抽样</p><dl><div><dt>协议</dt><dd>Horizon-Labs · MIRACL dev 抽样</dd></div><div><dt>数据集</dt><dd>MIRACLReranking 开发集（18 种语言）</dd></div><div><dt>指标</dt><dd>nDCG@10 (0–1)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>MTEB MIRACLReranking · 前 100 条</dd></div><div><dt>版本</dt><dd>发布方 v1.1 · 18 种语言，每种语言 60 个查询</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-11-22</dd></div><div><dt>来源版本</dt><dd>23139fec6f1f</dd></div></dl><p>可比协议未完整披露。</p><a href="https://huggingface.co/Horizon-Labs/multilingual-reranker-small#evaluation" rel="noopener noreferrer">来源</a></li></ul></details></td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
+            <tr id="hs-rerank-1" data-name="hs-rerank-1" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="https://huggingface.co/hindsight-ai/hs-rerank-1" rel="noopener noreferrer">hs-rerank-1</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">MIT</span><span class="pill info">轻量</span></td>
@@ -421,7 +460,7 @@
               <td class="muted" title="Hindsight 只在模型卡上以图片形式展示 hs-rerank-1 的结果，没有可以引用的数字">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="qwen3-vl-reranker" data-name="qwen3-vl-reranker" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-beir="" data-license="commercial" data-modal="1">
+            <tr id="qwen3-vl-reranker" data-name="qwen3-vl-reranker" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-license="commercial" data-modal="1">
               <th scope="row"><a href="/zh/models/qwen3-vl-reranker">Qwen3-VL-Reranker</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">开源权重</span><span class="pill good">Apache 2.0</span></td>
@@ -429,10 +468,10 @@
               <td>30+ 种语言</td>
               <td>GPU</td>
               <td>免费（自建）</td>
-              <td class="muted" title="Qwen 没有为它公布 BEIR 平均分。模型卡里 Qwen 自己的测试：ViDoRe v3 上 8B 为 66.7*、2B 为 60.8*，MMTEB 检索上 8B 为 74.9*。LightOn 的测试中，2B 在 11 个 BEIR 数据集上（对 BM25 召回的前 100 条重排序）得分 49.08">未公布*</td>
+              <td data-benchmark-models="qwen3-vl-reranker-2b qwen3-vl-reranker-8b" class="muted"><details class="benchmark-evidence"><summary><span class="benchmark-summary">BEIR · MMTEB-R</span><span class="sr-only"> 查看数据集与口径</span></summary><ul><li data-benchmark-task="beir" data-eval-language="en" data-benchmark-protocol="beir-lighton"><p class="benchmark-score">qwen3-vl-reranker-2b · BEIR · 英文 · 49.08 · LightOn · 11 个留出数据集</p><dl><div><dt>协议</dt><dd>LightOn · 11 个留出数据集</dd></div><div><dt>数据集</dt><dd>11 个留出的 BEIR 数据集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>BM25 · 前 100 条</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-12</dd></div></dl><a href="https://huggingface.co/lightonai/LightOn-rerank-PW-2B" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="mmteb-r" data-eval-language="multi" data-benchmark-protocol="mmteb-r-qwen-vl"><p class="benchmark-score">qwen3-vl-reranker-2b · MMTEB-R · 多语言平均 · 70.0 · Qwen3-VL · 模型卡</p><dl><div><dt>协议</dt><dd>Qwen3-VL · 模型卡</dd></div><div><dt>数据集</dt><dd>MMTEB 检索子集</dd></div><div><dt>指标</dt><dd>未披露</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>MMTEB</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-15</dd></div></dl><p>可比协议未完整披露。</p><a href="https://huggingface.co/Qwen/Qwen3-VL-Reranker-2B" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="mmteb-r" data-eval-language="multi" data-benchmark-protocol="mmteb-r-qwen-vl"><p class="benchmark-score">qwen3-vl-reranker-8b · MMTEB-R · 多语言平均 · 74.9 · Qwen3-VL · 模型卡</p><dl><div><dt>协议</dt><dd>Qwen3-VL · 模型卡</dd></div><div><dt>数据集</dt><dd>MMTEB 检索子集</dd></div><div><dt>指标</dt><dd>未披露</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>MMTEB</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-09</dd></div></dl><p>可比协议未完整披露。</p><a href="https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B" rel="noopener noreferrer">来源</a></li></ul></details></td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="zerank-2" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="" data-license="commercial">
+            <tr data-name="zerank-2" data-type="open" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/zh/models/zerank">zerank-2</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">开源权重</span><span class="pill good">Apache 2.0</span></td>
@@ -443,7 +482,7 @@
               <td class="muted" title="ZeroEntropy 公布的是自己在七个领域上的 NDCG@10，对 OpenAI text-embedding-3-small 召回的前 100 条重排序：平均 0.6714*，同一测试中 Cohere rerank-3.5 为 0.5847*。不是 BEIR 平均分">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="nvidia-rerank" data-name="nemotron-3.5-rerank-8b" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="" data-license="commercial" data-modal="1">
+            <tr id="nvidia-rerank" data-name="nemotron-3.5-rerank-8b" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-license="commercial" data-modal="1">
               <th scope="row"><a href="/zh/models/nvidia-rerank">Nemotron-3.5-Rerank-8B</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">开源权重</span><span class="pill info">图片</span></td>
@@ -454,7 +493,7 @@
               <td class="muted" title="NVIDIA 没有公布它的 BEIR 平均分。NVIDIA 自己的测试（取自模型卡）：ViDoRe V3 67.56（图片 + 文本）、MIRACL-VISION 78.69，NDCG@10，对 Nemotron-3.5-Embed-1B 的前 50 条重排">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="llama-nemotron-rerank-vl-1b-v2" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="" data-license="commercial" data-modal="1">
+            <tr data-name="llama-nemotron-rerank-vl-1b-v2" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-license="commercial" data-modal="1">
               <th scope="row"><a href="/zh/models/nvidia-rerank">llama-nemotron-rerank-vl-1b-v2</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">开源 + NIM API</span></td>
@@ -465,7 +504,7 @@
               <td class="muted" title="NVIDIA 报告的是 ViDoRe V1–V3 和两个内部数据集上的平均 Recall@5（图片 + 文本时为 77.64%），不是 BEIR NDCG">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="llama-nemotron-rerank-1b-v2" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-beir="" data-license="commercial">
+            <tr data-name="llama-nemotron-rerank-1b-v2" data-type="open api" data-arch="cross-encoder" data-langs="multi" data-pricing="freemium" data-license="commercial">
               <th scope="row"><a href="/zh/models/nvidia-rerank">llama-nemotron-rerank-1b-v2</a></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill">开源 + NIM API</span></td>
@@ -476,7 +515,7 @@
               <td class="muted" title="NVIDIA 公布的是他们自己的嵌入 + 重排序流水线的 Recall@5（在 NQ、HotpotQA、FiQA 和 TechQA 上为 73.64%），不是只测重排序模型的 BEIR NDCG。本表到 2026 年 10 月之前写的 Hit@1 83.0 找不到任何出处">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="ms-marco-minilm" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-beir="48.64*" data-demo="ms-marco" data-license="commercial">
+            <tr data-name="ms-marco-minilm" data-type="open browser" data-arch="cross-encoder" data-langs="en" data-pricing="free" data-demo="ms-marco" data-license="commercial">
               <th scope="row">ms-marco MiniLM-L6 <span class="muted">（浏览器）</span></th>
               <td><span class="pill">Cross-encoder</span></td>
               <td><span class="pill good">开源权重</span><br><span class="pill info">浏览器可跑 ✓</span></td>
@@ -484,10 +523,10 @@
               <td>英文</td>
               <td title="用在线 Demo 实测：在 4 核 GitHub Actions 机器上用 Chromium（WASM）运行，5 次取中位数，每段约 60 个英文单词，2026 年 10 月。手机和较旧的笔记本会更慢 —— Demo 会显示每次在你设备上的耗时">浏览器中每 10 段约 276 ms</td>
               <td>免费（自建）</td>
-              <td title="第三方数字：Jina 在测自家 v1 模型时一起测了它（17 个 BEIR 数据集）。训练它的 sentence-transformers 公布了 TREC DL 19 上的 NDCG@10（74.30）和 MS MARCO Dev 上的 MRR@10（39.01），但没有 BEIR 平均分。本表到 2026 年 9 月之前这里写的是一个没有出处的 ~55.0">48.64*</td>
+              <td data-benchmark-models="ms-marco-minilm-l6-v2"><details class="benchmark-evidence"><summary><span class="benchmark-summary">BEIR</span><span class="sr-only"> 查看数据集与口径</span></summary><ul><li data-benchmark-task="beir" data-eval-language="en" data-benchmark-protocol="beir-jina-v1"><p class="benchmark-score">BEIR · 英文 · 48.64 · Jina v1 · 17 个数据集</p><dl><div><dt>协议</dt><dd>Jina v1 · 17 个数据集</dd></div><div><dt>数据集</dt><dd>17 个 BEIR 数据集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>未披露</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-01</dd></div></dl><p>可比协议未完整披露。</p><a href="https://huggingface.co/jinaai/jina-reranker-v1-tiny-en" rel="noopener noreferrer">来源</a></li></ul></details></td>
               <td class="demo-link-cell"></td>
             </tr>
-            <tr id="lighton-rerank" data-name="lighton-rerank" data-type="open" data-arch="cross-encoder listwise" data-langs="en" data-pricing="free" data-beir="" data-license="commercial" data-modal="1">
+            <tr id="lighton-rerank" data-name="lighton-rerank" data-type="open" data-arch="cross-encoder listwise" data-langs="en" data-pricing="free" data-license="commercial" data-modal="1">
               <th scope="row"><a href="/zh/models/lighton-rerank">LightOn-rerank</a></th>
               <td><span class="pill">Cross-encoder</span><span class="pill info">Listwise</span></td>
               <td><span class="pill good">开源权重</span><span class="pill good">Apache 2.0</span></td>
@@ -495,10 +534,10 @@
               <td>英语 · 法语</td>
               <td>GPU</td>
               <td>免费（自建）</td>
-              <td title="LightOn 自己的测试（PW-2B）：对 BM25 召回的前 100 条重排序，取训练中没用到的 11 个 BEIR 数据集的平均分 —— 与对稠密检索结果重排序的行不可比。同一测试中：jina-reranker-m0 51.97，Qwen3-VL-Reranker-2B 49.08。它的强项是视觉文档：在 ViDoRe V3 上，列表式 4B 得分 64.69*">49.13*</td>
+              <td data-benchmark-models="lighton-rerank-pw-2b lighton-rerank-lw-2b lighton-rerank-lw-4b"><details class="benchmark-evidence"><summary><span class="benchmark-summary">BEIR</span><span class="sr-only"> 查看数据集与口径</span></summary><ul><li data-benchmark-task="beir" data-eval-language="en" data-benchmark-protocol="beir-lighton"><p class="benchmark-score">lighton-rerank-pw-2b · BEIR · 英文 · 49.13 · LightOn · 11 个留出数据集</p><dl><div><dt>协议</dt><dd>LightOn · 11 个留出数据集</dd></div><div><dt>数据集</dt><dd>11 个留出的 BEIR 数据集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>BM25 · 前 100 条</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-05</dd></div></dl><a href="https://huggingface.co/lightonai/LightOn-rerank-PW-2B" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="beir" data-eval-language="en" data-benchmark-protocol="beir-lighton"><p class="benchmark-score">lighton-rerank-lw-2b · BEIR · 英文 · 48.12 · LightOn · 11 个留出数据集</p><dl><div><dt>协议</dt><dd>LightOn · 11 个留出数据集</dd></div><div><dt>数据集</dt><dd>11 个留出的 BEIR 数据集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>BM25 · 前 100 条</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-16</dd></div></dl><a href="https://huggingface.co/lightonai/LightOn-rerank-PW-2B" rel="noopener noreferrer">来源</a></li><li data-benchmark-task="beir" data-eval-language="en" data-benchmark-protocol="beir-lighton"><p class="benchmark-score">lighton-rerank-lw-4b · BEIR · 英文 · 48.33 · LightOn · 11 个留出数据集</p><dl><div><dt>协议</dt><dd>LightOn · 11 个留出数据集</dd></div><div><dt>数据集</dt><dd>11 个留出的 BEIR 数据集</dd></div><div><dt>指标</dt><dd>nDCG@10 (%)</dd></div><div><dt>汇总方式</dt><dd>均值</dd></div><div><dt>候选集</dt><dd>BM25 · 前 100 条</dd></div><div><dt>版本</dt><dd>未披露</dd></div><div><dt>测试日期</dt><dd>未披露</dd></div><div><dt>来源核验日期</dt><dd>2026-10-16</dd></div></dl><a href="https://huggingface.co/lightonai/LightOn-rerank-LW-4B" rel="noopener noreferrer">来源</a></li></ul></details></td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="contextual-rerank-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-beir="" data-license="noncommercial">
+            <tr data-name="contextual-rerank-v2" data-type="open" data-arch="cross-encoder" data-langs="100+" data-pricing="free" data-license="noncommercial">
               <th scope="row"><a href="/zh/models/contextual-rerank">Contextual AI Rerank v2</a></th>
               <td><span class="pill">Instruction</span></td>
               <td><span class="pill">开源权重</span><span class="pill warn">权重：仅限非商用</span></td>
@@ -509,7 +548,7 @@
               <td class="muted" title="Contextual AI 只在博客文章里以图表形式公布 BEIR 结果。到 2026 年 10 月之前，本行把这个模型写成仅英文的托管 API；其实它的权重自 2025 年 8 月起就已在 Hugging Face 公开">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr id="contextual-api" data-name="contextual-rerank-api" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid" data-beir="">
+            <tr id="contextual-api" data-name="contextual-rerank-api" data-type="api" data-arch="cross-encoder" data-langs="multi" data-pricing="paid">
               <th scope="row"><a href="/zh/models/contextual-rerank#routes">Contextual AI Rerank API</a></th>
               <td><span class="pill">Instruction</span></td>
               <td><span class="pill">托管 API</span></td>
@@ -520,7 +559,7 @@
               <td class="muted" title="Contextual AI 只在博客里用图表给出 BEIR 结果">未公布*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
-            <tr data-name="colbertv2" data-type="open" data-arch="late-interaction" data-langs="en" data-pricing="free" data-beir="" data-license="commercial">
+            <tr data-name="colbertv2" data-type="open" data-arch="late-interaction" data-langs="en" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="/zh/guides/late-interaction-rerank">ColBERTv2</a></th>
               <td><span class="pill info">Late-interaction</span></td>
               <td><span class="pill good">开源权重</span></td>
@@ -535,7 +574,7 @@
         </table>
       </div>
       <div class="benchmark-meta callout" style="margin-top:.8rem;padding:.85rem 1rem">
-        <p class="muted" style="font-size:.82rem;margin:0"><strong>最近核对：</strong>2026 年 10 月（新增 Qwen3-VL-Reranker、zerank-2 和 gte-multilingual-reranker-base；新增 jina-reranker-v3.5；Jina 各行改用同一套 2026 年评测；bge-reranker-v2-m3 由查不到出处的 ~60.1 改为 BAAI 自己公布的 55.36*；Jina v1 tiny 与 ms-marco MiniLM-L6 现在显示 Jina 为它们公布的 BEIR 分数；9 月已将 mxbai-rerank-large-v1 由没有来源的 ~62.1 修正）· <strong>下次复核：</strong>2026 年 11 月。<strong>*</strong> 各家跑 BEIR 的方式都不一样 —— BAAI 用 15 个数据集、对 bge-large-en-v1.5 召回的前 100 条重排，Jina 用 13 个数据集、对 jina-embeddings-v5-text-small 的前 100 条重排，mixedbread 用自己选的一套 —— 所以本列每个 BEIR 数字都带 *，鼠标悬停可见其评测方法。差距并不小：Jina 的评测里 bge-reranker-v2-m3 是 56.51*，BAAI 自己测的是 55.36*；mxbai-rerank-large-v2 在 Jina 那边是 61.44*，mixedbread 自己测的是 57.49*。请把这一列当作大致的档位，而不是精确到小数的排名。其余带 * 的格子用的是 MTEB-R 或任务特定指标。厂商未公布可比数字时，我们写「未公布」而不去猜。<strong>†</strong> 注意计价单位不同：Cohere Rerank 4 按<em>每次检索</em>（一个 query + 最多 100 篇文档，每篇按每 500 token 计一次）计费，Cohere Rerank 5、Voyage 和 Jina 按 <em>token</em> 计费 —— Jina 按一次请求的全部 token 计（query 加全部候选文档），Voyage 则是每篇文档都把 query 算一遍。Cohere 的价格页自 2026 年 10 月 21 日起不再列出 Rerank 4，所以这里的 Rerank 4 价格是它最后公布的价格。我们的<a href="/zh/rerank-cost-calculator">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。</p>
+        <p class="muted" style="font-size:.82rem;margin:0"><strong>核验：</strong>各项成绩均标注来源核验日期。评测证据列按来源披露的评测口径展示成绩。<strong>†</strong> 注意计价单位不同：Cohere Rerank 4 按<em>每次检索</em>（一个 query + 最多 100 篇文档，每篇按每 500 token 计一次）计费，Cohere Rerank 5、Voyage 和 Jina 按 <em>token</em> 计费 —— Jina 按一次请求的全部 token 计（query 加全部候选文档），Voyage 则是每篇文档都把 query 算一遍。Cohere 的价格页自 2026 年 10 月 21 日起不再列出 Rerank 4，所以这里的 Rerank 4 价格是它最后公布的价格。我们的<a href="/zh/rerank-cost-calculator">成本计算器</a>可以算出在你的量级下哪家更便宜。可在 Demo 中运行的仅有：mxbai xsmall、Jina tiny、ms-marco MiniLM。</p>
         <p class="muted" style="font-size:.82rem;margin:.5rem 0 0">资料来源： <a href="https://huggingface.co/Qwen" rel="noopener noreferrer">Qwen3-Reranker</a> · <a href="https://huggingface.co/jinaai/jina-reranker-v3.5" rel="noopener noreferrer">jina-reranker-v3.5</a> · <a href="https://arxiv.org/abs/2509.25085" rel="noopener noreferrer">jina-reranker-v3 论文</a> · <a href="https://huggingface.co/jinaai/jina-reranker-v1-tiny-en" rel="noopener noreferrer">jina-reranker-v1</a> · <a href="https://docs.voyageai.com/docs/reranker" rel="noopener noreferrer">Voyage 重排序器</a> · <a href="https://github.com/mixedbread-ai/mxbai-rerank" rel="noopener noreferrer">mxbai-rerank</a> · <a href="https://huggingface.co/nvidia/llama-nemotron-rerank-1b-v2" rel="noopener noreferrer">nemotron-rerank</a> · <a href="https://huggingface.co/spaces/mteb/leaderboard" rel="noopener noreferrer">MTEB</a> · <a href="https://github.com/beir-cellar/beir" rel="noopener noreferrer">BEIR</a> · <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/research/llm_reranker" rel="noopener noreferrer">BAAI 评测</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-reranker-modernbert-base" rel="noopener noreferrer">GTE ModernBERT</a> · <a href="https://huggingface.co/Alibaba-NLP/gte-multilingual-reranker-base" rel="noopener noreferrer">mGTE 重排序模型</a> · <a href="https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B" rel="noopener noreferrer">Qwen3-VL-Reranker</a> · <a href="https://huggingface.co/zeroentropy/zerank-2-reranker" rel="noopener noreferrer">zerank-2</a> · <a href="/zh/models/qwen-reranker">Qwen 指南</a> · <a href="/zh/guides/instruction-reranker">指令跟随</a> · <a href="/zh/guides/late-interaction-rerank">ColBERT</a></p>
         <p class="muted" style="font-size:.82rem;margin:.5rem 0 0"><strong>标着重排序，但不是给 RAG 用的：</strong>Contrastive-LM 的 <a href="https://huggingface.co/Contrastive-LM/CLM-v0.1-8B" rel="noopener noreferrer">CLM-v0.1-8B</a>（2026 年 9 月）到 10 月初已是 Hugging Face 上点赞最多的 <code>text-ranking</code> 模型。它给智能体的候选动作和答案打分 —— 在冻结的 Qwen3-8B 上加两个小的投影头，Qwen3-8B 要另外部署来提供嵌入 —— 主要成绩是用微调过的投影头跑的智能体基准，不是检索。所以本表没有收录它。</p>
       </div>
@@ -723,7 +762,7 @@
     </div>
   </footer>
   <script src="/assets/js/main.js?v=c84d5fd363"></script>
-  <script src="/assets/js/models-index.js?v=497affc9ad"></script>
+  <script src="/assets/js/models-index.js?v=c9b84dc345"></script>
   <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
 </body>
 </html>

@@ -136,7 +136,7 @@ for (const [path, lang] of [["/models/", "en"], ["/zh/models/", "zh"]]) {
     const task = page.locator("#models-task-filter");
     const language = page.locator("#models-language-filter");
     const count = page.locator("#models-count");
-    expect(await visible(page)).toHaveLength(38);
+    expect(await visible(page)).toHaveLength(39);
     await expect(task).toHaveAccessibleName(lang === "zh" ? "基准任务" : "Benchmark task");
     await expect(language).toHaveAccessibleName(lang === "zh" ? "评测语言" : "Evaluation language");
     await task.selectOption("mteb-r");
@@ -176,7 +176,7 @@ for (const [path, lang] of [["/models/", "en"], ["/zh/models/", "zh"]]) {
     await page.selectOption("#models-license-filter", "noncommercial");
     expect(await visible(page)).toEqual([]);
     await page.locator("#models-clear-filters").click();
-    expect(await visible(page)).toHaveLength(38);
+    expect(await visible(page)).toHaveLength(39);
     await task.selectOption("cmteb-rerank");
     await expect(page.locator("#models-benchmark-help a")).toHaveAttribute(
       "href", lang === "zh" ? "/zh/models/bge-reranker#cmteb-directions" : "/models/bge-reranker#cmteb-directions",
@@ -213,3 +213,30 @@ test("BGE C-MTEB shows the three sourced direction scores", async ({ page }) => 
   await expect(table.locator("thead th")).toHaveText(["模型", "中文", "中→英", "英→中"]);
   await expect(table.locator("tbody tr").nth(1).locator(".benchmark-summary")).toHaveText(["67.60", "64.04", "61.45"]);
 });
+
+
+for (const locale of ["", "/zh"]) {
+  test(`Horizon MIRACL split filtering keeps its own protocol (${locale || "en"})`, async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(locale + "/models/");
+    await page.locator("#models-filter").fill("Horizon-Labs");
+    await page.selectOption("#models-task-filter", "miracl");
+    await page.selectOption("#models-language-filter", "zh");
+    expect(await visible(page)).toEqual(["horizon-multilingual-reranker-small"]);
+    const row = page.locator('[data-name="horizon-multilingual-reranker-small"]');
+    await expect(row.locator(".benchmark-summary")).toContainText("0.815");
+    await row.locator("summary").click();
+    const result = row.locator('[data-eval-language="zh"]');
+    await expect(result).toBeVisible();
+    await expect(result).toContainText("nDCG@10 (0–1)");
+    await expect(result.locator("a")).toHaveAttribute("href", /Horizon-Labs\/multilingual-reranker-small#evaluation$/);
+    await expect(row.locator('[data-eval-language="multi"]')).toBeHidden();
+    await page.selectOption("#models-language-filter", "en");
+    await expect(row.locator(".benchmark-summary")).toContainText("0.716");
+    await page.selectOption("#models-task-filter", "beir");
+    expect(await visible(page)).toEqual([]);
+    await page.locator("#models-clear-filters").click();
+    expect(await visible(page)).toHaveLength(39);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  });
+}

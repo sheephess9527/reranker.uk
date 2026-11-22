@@ -71,6 +71,14 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-22-generated-pages">2026 年 11 月 22 日 —— 发布评测筛选页面并补录 Horizon-Labs small</h2>
+        <p>基准任务与评测语言筛选已在源码中实现，但线上模型表仍缺少这些控件。现已重新构建中英文页面，包括可展开的评测依据和 BGE 详情页。CI 增加了生成页面与已提交文件的一致性检查，避免测试通过却仍发布旧文件。另补录 Horizon-Labs multilingual-reranker-small 作为 CPU 候选，规模、训练长度和独立的 MIRACL 抽样协议均有来源。这是旧模型补录，不是新发布。</p>
+      </article>
+      <article class="changelog-entry">
+        <h2 id="2026-11-22-benchmark-filters">2026 年 11 月 22 日 —— 模型对比表新增评测筛选</h2>
+        <p><a href="/zh/models/">模型对比表</a>可按基准任务和评测语言筛选。展开成绩可查看来源、数据集、评测口径和核验日期。中→英与英→中可分别筛选。</p>
+      </article>
+      <article class="changelog-entry">
         <h2 id="2026-11-22-cost-comparison">2026 年 11 月 22 日 —— 成本计算器优先显示当前报价</h2>
         <p><a href="/zh/rerank-cost-calculator">成本计算器</a>把历史报价列在当前报价下方，且不计入最低成本估算。中文版结果中的链接现在会打开中文页面。点击链接后返回时，会按恢复的输入重新计算。</p>
       </article>
@@ -113,21 +121,19 @@
           <li><strong>hs-rerank-1 进了<a href="/zh/guides/self-host-reranker">自建指南</a></strong> —— 选型表现在点出了最轻的 CPU 方案：总共 114M，其中 transformer 只有 15M，8,192 token，MIT 许可，带 int8 ONNX 版本和 Text Embeddings Inference 的部署配置</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>2026 年 11 月更早的更新（10 条）</summary><article class="changelog-entry">
         <h2 id="2026-11-13-ndcg">2026 年 11 月 13 日 —— NDCG 与 MRR 计算器</h2>
         <ul class="feature-list">
           <li><strong><a href="/zh/ndcg-calculator">reranker 有没有帮上忙？</a></strong> —— 粘贴每条查询候选在重排序前后的相关度标签，就能读出 NDCG@k、MRR 和 Hit@1，还有逐条查询的表。全部在浏览器里计算，不发送任何数据；<a href="/zh/guides/evaluate-reranker">评测指南</a>里有它的入口</li>
         </ul>
       </article>
-
-      <article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-11-12-copy">2026 年 11 月 12 日（夜）—— 代码块加了复制按钮</h2>
         <ul class="feature-list">
           <li><strong>每个代码块都有复制按钮</strong> —— 指南和模型页里的代码片段可以一键复制，不用再绕着换行去选</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>2026 年 11 月更早的更新（8 条）</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-11-12-picker">2026 年 11 月 12 日（稍后）—— 四个问题的 reranker 选型向导</h2>
         <ul class="feature-list">
           <li><strong><a href="/zh/reranker-picker">我该用哪个 reranker？</a></strong> —— 说明你要排序什么、在哪里运行、哪些语言、要不要指令，页面就把本站的推荐缩小到符合的那几条，每条都链到背后的评测或指南。它就是<a href="/zh/guides/choose-reranker-scenario">场景指南</a>的工具版，不开 JavaScript 时是一份普通列表</li>
@@ -632,6 +638,10 @@
         </ul>
       </article></details>
 
+
+      
+
+      
 
       
 

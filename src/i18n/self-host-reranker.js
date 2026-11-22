@@ -1,4 +1,13 @@
 window.I18N_PAGE = { zh: {
+  "Horizon-Labs small for multilingual CPU search":
+    "Horizon-Labs small：多语言 CPU 检索候选",
+  "Another multilingual CPU candidate is <a href=\"https://huggingface.co/Horizon-Labs/multilingual-reranker-small\" rel=\"noopener noreferrer\">Horizon-Labs multilingual-reranker-small</a>: {{fact:horizon-multilingual-reranker-small.params}}, Apache 2.0, distilled from Qwen3-Reranker-4B with ONNX exports. It was trained with {{fact:horizon-multilingual-reranker-small.trained_pair_tokens}} tokens per query-and-passage pair; do not substitute the base encoder’s architectural context limit for that training length. It is not added to this site’s browser demo.":
+    "另一个多语言 CPU 候选是 <a href=\"https://huggingface.co/Horizon-Labs/multilingual-reranker-small\" rel=\"noopener noreferrer\">Horizon-Labs multilingual-reranker-small</a>：{{fact:horizon-multilingual-reranker-small.params}}，Apache 2.0，从 Qwen3-Reranker-4B 蒸馏，提供 ONNX 导出。训练时每对 query 加段落使用 {{fact:horizon-multilingual-reranker-small.trained_pair_tokens}} token；不能用基础编码器的架构上下文上限代替这个训练长度。它没有加入本站的浏览器 Demo。",
+  "Its publisher evaluates sampled MIRACL dev queries and other reranking tasks. MIRACL training data was used, so this is in-domain evaluation; the samples and candidate pools differ from Jina’s MIRACL run and from full BEIR. The <a href=\"/models/#horizon-multilingual-reranker-small\">comparison table</a> keeps this protocol separate and exposes English and Chinese splits. Measure your own language and passage lengths before replacing an existing reranker.":
+    "发布方评测了抽样的 MIRACL dev 查询及其他重排序任务。训练使用了 MIRACL 训练集，因此属于域内评测；样本和候选集与 Jina 的 MIRACL 评测以及完整 BEIR 不同。<a href=\"/models/#horizon-multilingual-reranker-small\">模型对比表</a>单独保留该协议，并提供英文、中文分项。替换已有模型前，请在自己的语言和段落长度上测量。",
+  "Production · ~10 min read · <time datetime=\"2026-11-22\">Updated 22 Nov 2026</time>":
+    "生产实践 · 约 10 分钟阅读 · <time datetime=\"2026-11-22\">更新于 2026 年 11 月 22 日</time>",
+
   "Production · ~10 min read · <time datetime=\"2026-11-16\">Updated 16 Nov 2026</time>":
     "生产实践 · 约 10 分钟阅读 · <time datetime=\"2026-11-16\">更新于 2026 年 11 月 16 日</time>",
   "A smaller English-only CPU candidate":

@@ -67,7 +67,7 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/guides/">指南</a><span>/</span>自托管 reranker</div>
       <h1>如何自托管 reranker</h1>
-      <p class="meta">生产实践 · 约 10 分钟阅读 · <time datetime="2026-11-16">更新于 2026 年 11 月 16 日</time></p>
+      <p class="meta">生产实践 · 约 10 分钟阅读 · <time datetime="2026-11-22">更新于 2026 年 11 月 22 日</time></p>
       <p class="lead">托管 rerank API 很方便，但<strong>自托管</strong>能带来零按次成本、数据完全可控，以及在自己 GPU/CPU 集群上的可预测延迟。本文从第一次 <code>CrossEncoder</code> 调用，到生产级微服务的实操路径。</p>
 
       <div class="toc">
@@ -76,6 +76,7 @@
           <li><a href="#when">何时值得自托管</a></li>
           <li><a href="#models">选择模型</a></li>
           <li><a href="#ettin">更小的纯英文 CPU 候选</a></li>
+          <li><a href="#horizon-small">Horizon-Labs small：多语言 CPU 检索候选</a></li>
           <li><a href="#quickstart">sentence-transformers 快速上手</a></li>
           <li><a href="#serve">服务化方案</a></li>
           <li><a href="#ops">运维清单</a></li>
@@ -110,6 +111,10 @@
       <h2 id="ettin">更小的纯英文 CPU 候选</h2>
       <p>仅做英文检索时，也可以测试 <a href="https://huggingface.co/cross-encoder/ettin-reranker-17m-v1" rel="noopener noreferrer">ettin-reranker-17m-v1</a>：17M，Apache 2.0，模型卡标明每对 query 加段落上限为 7999 token。发布方提供了使用 SDPA 的 CPU 评测；这是自建候选，没有加入本站的浏览器 Demo。请保持段落简短，并在自己的负载上测量效果和延迟。</p>
       <p>这是补录遗漏：<a href="https://huggingface.co/blog/ettin-reranker" rel="noopener noreferrer">官方发布文章</a>发表于 2026 年 5 月。模型卡提供 NanoBEIR 及搭配不同第一阶段模型的检索评测，无法为本站表格提供可以直接比较的完整 BEIR 均分；支持英文也不等于已经证明中文或多语言效果。</p>
+
+      <h2 id="horizon-small">Horizon-Labs small：多语言 CPU 检索候选</h2>
+      <p>另一个多语言 CPU 候选是 <a href="https://huggingface.co/Horizon-Labs/multilingual-reranker-small" rel="noopener noreferrer">Horizon-Labs multilingual-reranker-small</a>：141M，Apache 2.0，从 Qwen3-Reranker-4B 蒸馏，提供 ONNX 导出。训练时每对 query 加段落使用 384 token；不能用基础编码器的架构上下文上限代替这个训练长度。它没有加入本站的浏览器 Demo。</p>
+      <p>发布方评测了抽样的 MIRACL dev 查询及其他重排序任务。训练使用了 MIRACL 训练集，因此属于域内评测；样本和候选集与 Jina 的 MIRACL 评测以及完整 BEIR 不同。<a href="/zh/models/#horizon-multilingual-reranker-small">模型对比表</a>单独保留该协议，并提供英文、中文分项。替换已有模型前，请在自己的语言和段落长度上测量。</p>
 
       <h2 id="quickstart">sentence-transformers 快速上手</h2>
       <pre tabindex="0"><code>pip install sentence-transformers torch

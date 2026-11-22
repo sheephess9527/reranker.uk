@@ -372,6 +372,17 @@
               <td class="muted" title="The publisher reports NanoBEIR and retrieval evaluations with different first-stage models; these are not a classic full BEIR average">not comparable*</td>
               <td class="demo-link-cell muted">—</td>
             </tr>
+            <tr id="horizon-multilingual-reranker-small" data-name="horizon-multilingual-reranker-small" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-license="commercial">
+              <th scope="row"><a href="/guides/self-host-reranker.html#horizon-small">Horizon-Labs small</a></th>
+              <td><span class="pill">Cross-encoder</span></td>
+              <td><span class="pill good">Apache 2.0</span></td>
+              <td>{{fact:horizon-multilingual-reranker-small.params}} mmBERT-small distilled from Qwen3-Reranker-4B; trained on {{fact:horizon-multilingual-reranker-small.trained_pair_tokens}}-token pairs, with CPU and ONNX options. Publisher MIRACL dev results are in-domain, not full BEIR.</td>
+              <td>Multilingual incl. Chinese</td>
+              <td>CPU-capable; GPU faster</td>
+              <td>Free (self-host)</td>
+              <td data-benchmark-models="horizon-multilingual-reranker-small"></td>
+              <td class="demo-link-cell muted">—</td>
+            </tr>
             <tr id="hs-rerank-1" data-name="hs-rerank-1" data-type="open" data-arch="cross-encoder" data-langs="multi" data-pricing="free" data-license="commercial">
               <th scope="row"><a href="https://huggingface.co/hindsight-ai/hs-rerank-1" rel="noopener noreferrer">hs-rerank-1</a></th>
               <td><span class="pill">Cross-encoder</span></td>
