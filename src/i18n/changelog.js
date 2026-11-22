@@ -1,4 +1,7 @@
 window.I18N_PAGE = { zh: {
+  "22 Nov 2026 — Current rates first in the cost calculator": "2026 年 11 月 22 日 —— 成本计算器优先显示当前报价",
+  "The <a href=\"/rerank-cost-calculator.html\">cost calculator</a> keeps historical rates below current rates and leaves them out of the cheapest estimate. Links in the Chinese results now open Chinese pages.":
+    "<a href=\"/rerank-cost-calculator.html\">成本计算器</a>把历史报价列在当前报价下方，且不计入最低成本估算。中文版结果中的链接现在会打开中文页面。",
   "21 Nov 2026 — Jina benchmark attribution": "2026 年 11 月 21 日 —— 补充 Jina 评测出处",
   "The Jina model page links its BEIR comparison to the original experiment and describes the candidate pool.": "Jina 模型页补充 BEIR 对比的原始论文链接及候选集设置。",
   "20 Nov 2026 — ZeroEntropy’s API is gone, and the site said it was still selling":

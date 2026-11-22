@@ -2,8 +2,8 @@
     <article class="article container narrow">
       <div class="breadcrumb"><a href="/">Home</a><span>/</span>Rerank cost calculator</div>
       <h1>Rerank cost calculator</h1>
-      <p class="meta">Tool · <time datetime="2026-11-14">Updated 14 Nov 2026</time></p>
-      <p class="lead">Hosted rerankers do not bill the same way. Cohere Rerank 4 is priced per <strong>search</strong> — one query plus up to {{fact:cohere-rerank.docs_per_search}} documents, with any document over {{fact:cohere-rerank.billing_chunk_tokens}} tokens counted as several. Google and Amazon Bedrock charge per <strong>query</strong> of up to 100 documents, and Pinecone per <strong>request</strong> of up to 100, whatever their length. Cohere Rerank 5, Voyage, Jina, Contextual AI and Alibaba Cloud charge per <strong>token</strong> — Jina counting one request's tokens, the query plus every candidate — and so do the yuan-priced services in mainland China. Which is cheapest depends on how your passages round. Put your own numbers in.</p>
+      <p class="meta">Tool · <time datetime="2026-11-22">Updated 22 Nov 2026</time></p>
+      <p class="lead">Hosted rerankers do not bill the same way. Cohere Rerank 4’s last listed rate was per <strong>search</strong> — one query plus up to {{fact:cohere-rerank.docs_per_search}} documents, with any document over {{fact:cohere-rerank.billing_chunk_tokens}} tokens counted as several. Google and Amazon Bedrock charge per <strong>query</strong> of up to 100 documents, and Pinecone per <strong>request</strong> of up to 100, whatever their length. Cohere Rerank 5, Voyage, Jina, Contextual AI and Alibaba Cloud charge per <strong>token</strong> — Jina counting one request's tokens, the query plus every candidate — and so do the yuan-priced services in mainland China. Which is cheapest depends on how your passages round. Put your own numbers in.</p>
 
       <section class="demo-panel" aria-labelledby="calc-head">
         <h2 id="calc-head" class="mt-0" style="margin-bottom:1rem">Your workload</h2>
@@ -34,6 +34,7 @@
       </section>
 
       <h2 id="results">Monthly cost</h2>
+      <p>Historical rates appear at the bottom of the dollar table for reference only. The cheapest estimate uses current listed rates.</p>
       <div class="table-wrap">
         <table id="calc-table" data-contextual-v2-per-m="{{fact:contextual-rerank-api.v2_usd_per_m}}" data-contextual-mini-per-m="{{fact:contextual-rerank-api.v2_mini_usd_per_m}}" data-zeroentropy-per-m="{{fact:zerank-2.api_usd_per_m}}" data-bedrock-amazon-per-k-queries="{{fact:amazon-bedrock-rerank.amazon_rerank_usd_per_1000_queries}}" data-bedrock-docs-per-query="{{fact:amazon-bedrock-rerank.docs_per_query}}" data-pinecone-per-k-requests="{{fact:pinecone-rerank.usd_per_1000_requests}}" data-pinecone-docs-per-request="{{fact:pinecone-rerank.v0_max_docs}}" data-docs-per-search="{{fact:cohere-rerank.docs_per_search}}" data-chunk-tokens="{{fact:cohere-rerank.billing_chunk_tokens}}" data-cohere5-pro-per-m="{{fact:cohere-rerank-5.pro_usd_per_m}}" data-cohere5-fast-per-m="{{fact:cohere-rerank-5.fast_usd_per_m}}" data-cohere-pro-per-search="{{fact:cohere-rerank-4-pro.price_per_search}}" data-cohere-fast-per-search="{{fact:cohere-rerank-4-fast.price_per_search}}" data-voyage-per-m="{{fact:voyage-rerank-3.price_per_m_tokens}}" data-voyage-lite-per-m="{{fact:voyage-rerank-3-lite.price_per_m_tokens}}" data-jina-per-m="{{fact:jina-reranker-v3.5.api_usd_per_m}}" data-google-per-k-queries="{{fact:vertex-ai-ranking.usd_per_1000_queries}}" data-alibaba-intl-per-m="{{fact:alibaba-model-studio-rerank.qwen3_rerank_usd_per_m}}" data-alibaba-cn-per-m="{{fact:alibaba-model-studio-rerank.qwen3_rerank_cny_per_m}}" data-siliconflow-pro-per-m="{{fact:siliconflow-rerank.bge_v2_m3_pro_cny_per_m}}">
           <caption class="sr-only">Estimated monthly rerank cost by vendor for the workload entered above</caption>
@@ -103,7 +104,7 @@
         <li><strong>Pinecone</strong> — bge-reranker-v2-m3 and the {{fact:pinecone-rerank.v0_status}} pinecone-rerank-v0 at ${{fact:pinecone-rerank.usd_per_1000_requests}} per 1,000 requests on the paid plans; a request takes up to {{fact:pinecone-rerank.v0_max_docs}} documents, so more need further requests (<a href="https://www.pinecone.io/pricing/" rel="noopener noreferrer">Pinecone pricing</a>). The included free requests aren’t applied, and cohere-rerank-4-fast is left out because Pinecone doesn’t define the “rerank unit” it bills it in.</li>
         <li><strong>Cohere Rerank 5</strong> — ${{fact:cohere-rerank-5.pro_usd_per_m}} per 1M tokens (Pro) and ${{fact:cohere-rerank-5.fast_usd_per_m}} (Fast), from <a href="https://cohere.com/pricing" rel="noopener noreferrer">cohere.com/pricing</a>. Cohere don’t say how a rerank request’s tokens are counted; this page counts them like Voyage’s, the query once per document.</li>
         <li>Token counts are approximate — every vendor tokenises differently, and this page multiplies your averages rather than tokenising real text.</li>
-        <li>Rates verified in October 2026 and re-checked daily against each vendor’s price page by this site’s source check. Confirm before committing to a budget.</li>
+        <li>The daily source check looks for current rates at the linked sources. Confirm pricing with the vendor before committing to a budget.</li>
       </ul>
 
       <div class="cta-band">

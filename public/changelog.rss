@@ -5,8 +5,15 @@
     <link>https://reranker.uk/changelog</link>
     <description>Release notes for reranker.uk — demo features, guides, and site improvements.</description>
     <language>en-gb</language>
-    <lastBuildDate>Sat, 21 Nov 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 22 Nov 2026 00:20:00 GMT</lastBuildDate>
     <atom:link href="https://reranker.uk/changelog.rss" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>22 Nov 2026 — Current rates first in the cost calculator</title>
+      <link>https://reranker.uk/changelog#2026-11-22-cost-comparison</link>
+      <guid isPermaLink="true">https://reranker.uk/changelog#2026-11-22-cost-comparison</guid>
+      <pubDate>Sun, 22 Nov 2026 00:20:00 GMT</pubDate>
+      <description>The cost calculator keeps historical rates below current rates and leaves them out of the cheapest estimate. Links in the Chinese results now open Chinese pages.</description>
+    </item>
     <item><title>21 Nov 2026 — Jina benchmark attribution</title><link>https://reranker.uk/changelog#2026-11-21-jina-benchmark</link><guid isPermaLink="true">https://reranker.uk/changelog#2026-11-21-jina-benchmark</guid><pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate><description>The Jina model page links its BEIR comparison to the original experiment and describes the candidate pool.</description></item>
     <item>
       <title>20 Nov 2026 — ZeroEntropy’s API is gone, and the site said it was still selling</title>

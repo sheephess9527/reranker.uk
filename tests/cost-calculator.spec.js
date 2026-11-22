@@ -41,6 +41,53 @@ test("every vendor is priced, in the right table", async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
+for (const locale of [
+  {
+    route: "/rerank-cost-calculator",
+    linkPrefix: "",
+    historical: /last listed|API closed/,
+    badge: "cheapest",
+    note: "Lowest estimate at current listed rates:",
+  },
+  {
+    route: "/zh/rerank-cost-calculator",
+    linkPrefix: "/zh",
+    historical: /最后公布价|API 已关停/,
+    badge: "最便宜",
+    note: "按当前公开报价，估算成本最低的是",
+  },
+]) {
+  test(`historical USD rates remain visible without winning the comparison on ${locale.route}`, async ({ page }) => {
+    await page.goto(locale.route);
+    const usd = page.locator("#calc-rows tr");
+    const historical = usd.filter({ hasText: locale.historical });
+    const winner = usd.filter({ has: page.getByText(locale.badge, { exact: true }) });
+
+    await expect(historical).toHaveCount(3);
+    await expect(historical.filter({ hasText: "ZeroEntropy" }).locator("td").last()).toHaveText("$26.88");
+    await expect(winner).toHaveCount(1);
+    await expect(winner).not.toContainText(locale.historical);
+    await expect(usd.first().locator(".pill")).toHaveText(locale.badge);
+    await expect(usd.nth(-3)).toContainText(locale.historical);
+    await expect(usd.nth(-2)).toContainText(locale.historical);
+    await expect(usd.last()).toContainText(locale.historical);
+    const note = page.locator("#calc-note");
+    await expect(note).toContainText(locale.note);
+    await expect(note).toContainText(await winner.locator("a").innerText());
+    await expect(note).not.toContainText(locale.historical);
+  });
+
+  test(`cost links retain the page language on ${locale.route}`, async ({ page }) => {
+    await page.goto(locale.route);
+    const links = page.locator("#calc-rows a, #calc-rows-cny a");
+    await expect(links).toHaveCount(17);
+    const hrefs = await links.evaluateAll((anchors) => anchors.map((a) => a.getAttribute("href")));
+    for (const href of hrefs) {
+      expect(href).toMatch(new RegExp(`^${locale.linkPrefix}/(?:models|guides)/`));
+    }
+  });
+}
+
 test("Google counts one query per started 100 documents", async ({ page }) => {
   await page.goto("/rerank-cost-calculator");
   await page.fill("#calc-queries", "1000");
