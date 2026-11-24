@@ -115,11 +115,13 @@ Review the models table each quarter (target: **Nov 2026**, then Feb/May/Aug):
 2. Where a vendor publishes no comparable figure, write **not published** — do
    not substitute a number from a different protocol without marking it `*`.
    There is no common BEIR protocol to fall back on: BAAI average 15 datasets
-   over bge-large-en-v1.5's top 100, Jina 13 over jina-embeddings-v3's top 100
-   (17 for their v1 models), mixedbread their own set, and the same model can
-   land 1–4 points apart across them.
-3. Spot-check pricing, and note that the *units* differ: Cohere bills per search
-   (one query + up to 100 docs), Voyage per token.
+   over bge-large-en-v1.5's top 100. Jina's 2026 table 6 uses 13 datasets
+   and jina-embeddings-v5-text-small's top 100; its older v3 experiment uses
+   jina-embeddings-v3 (and v1 used 17 datasets). Keep each experiment's
+   attribution and protocol separate, including mixedbread's own set.
+3. Spot-check pricing and billing units against the current model's source:
+   Cohere Rerank 5 and Voyage bill per token. Cohere Rerank 4's per-search
+   quotation (one query + up to 100 docs) is historical, not current pricing.
 4. Update the checked facts’ `verified_on` in `data/models.json`, add a
    changelog entry and an item in `public/changelog.rss`.
 
