@@ -9,10 +9,10 @@
   <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/instruction-reranker" >
   <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/instruction-reranker" >
   <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/instruction-reranker" >
-  <meta name="theme-color" content="#0b0d17" >
+  <meta name="theme-color" content="#1c2128" >
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" >
   <meta name="author" content="reranker.uk" >
-  <link rel="icon" href="/assets/img/favicon.svg?v=1bb58b097e" type="image/svg+xml" >
+  <link rel="icon" href="/assets/img/favicon.svg?v=122bad26c0" type="image/svg+xml" >
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=6edeebfac7" >
   <link rel="manifest" href="/site.webmanifest" >
   <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
@@ -30,8 +30,8 @@
   <meta property="og:image:alt" content="指令跟随 reranker — Contextual AI 与任务导向排序 | reranker.uk" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/guides/instruction-reranker.jpg?v=34bb5b46a9" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css?v=71c7ffaf81" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css?v=71c7ffaf81" >
+  <link rel="preload" href="/assets/css/style.css?v=3c7508d427" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=3c7508d427" >
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"指令跟随 reranker — Contextual AI 与任务导向排序","datePublished":"2026-06-25","dateModified":"2026-10-12","inLanguage":"zh-Hans","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/zh/guides/instruction-reranker","description":"指令跟随（instruction-following）reranker 与经典 cross-encoder 的区别：任务指令如何改变相关性、何时用 Contextual AI 类 API，以及如何在自有标注上评测。"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"指南","item":"https://reranker.uk/zh/guides/"},{"@type":"ListItem","position":3,"name":"指令跟随 reranker","item":"https://reranker.uk/zh/guides/instruction-reranker"}]}</script>
 
@@ -46,25 +46,31 @@
         <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
         <li><a href="/zh/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">指南</a></li>
         <li><a href="/zh/models/" data-i18n="shared.nav.models">模型对比</a></li>
+        <li><a href="/zh/reranker-picker" data-i18n="shared.nav.picker">选型向导</a></li>
+        <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.nav.cost">成本计算</a></li>
+        <li><a href="/zh/news" data-i18n="shared.nav.news">动态</a></li>
         <li><a class="nav-cta" href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
       </ul>
       <div class="nav-right">
-        <button type="button" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="site-search" data-i18n-aria-label="shared.search.open" aria-label="搜索全站（按 /）" title="/">⌕</button>
-        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+        <button type="button" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="site-search" data-i18n-aria-label="shared.search.open" aria-label="搜索全站（按 /）" title="/"><span aria-hidden="true">⌕</span><span class="search-label" data-i18n="shared.search.short">搜索</span><kbd aria-hidden="true">/</kbd></button>
+        <div class="theme-group" role="group" data-i18n-aria-label="shared.theme.group" aria-label="外观模式">
+          <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+          <button type="button" class="theme-mode-btn" id="theme-auto" data-theme-pick="auto" aria-pressed="true" data-i18n="shared.theme.auto" data-i18n-aria-label="shared.theme.autoLabel" aria-label="跟随系统外观">自动</button>
+        </div>
         <a class="lang-toggle" href="/guides/instruction-reranker" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
       </div>
     </nav>
     <div class="site-search" id="site-search" role="search" hidden>
       <div class="container narrow">
         <label class="sr-only" for="site-search-input" data-i18n="shared.search.label">搜索 reranker.uk</label>
-        <input id="site-search-input" type="search" autocomplete="off" spellcheck="false" data-i18n-placeholder="shared.search.placeholder" placeholder="搜索指南和模型…" aria-describedby="site-search-status">
+        <input id="site-search-input" type="search" autocomplete="off" spellcheck="false" data-i18n-placeholder="shared.search.placeholder" placeholder="搜索指南、模型和工具…" aria-describedby="site-search-status">
         <p class="search-status" id="site-search-status" aria-live="polite"></p>
         <ul class="search-results" id="site-search-results"></ul>
       </div>
     </div>
   </header>
 <main id="main">
-    <article class="article container narrow">
+    <article class="article container has-toc-layout"><div class="doc-grid"><div class="doc-prose">
       <div class="breadcrumb"><a href="/zh/">首页</a><span>/</span><a href="/zh/guides/">指南</a><span>/</span>指令跟随 rerank</div>
       <h1>指令跟随 reranker</h1>
       <p class="meta">新兴方向 · 约 7 分钟阅读 · <time datetime="2026-10-12">更新于 2026 年 10 月 12 日</time></p>
@@ -155,7 +161,16 @@ ranked = model.rank(
         <a class="card" href="/zh/guides/choose-reranker-scenario"><h3>按场景选型</h3><p>RAG / 客服 / 法律 / 代码。</p></a>
         <a class="card" href="/zh/guides/evaluate-reranker"><h3>评测 reranker</h3><p>NDCG、MRR、标注查询。</p></a>
       </div>
-    </article>
+    </div><aside class="doc-aside" aria-label="本页目录"><div class="toc">
+        <strong>本页目录</strong>
+        <ol>
+          <li><a href="#why">为何纯相关性不够</a></li>
+          <li><a href="#how">指令 rerank 有何不同</a></li>
+          <li><a href="#when">何时使用</a></li>
+          <li><a href="#vs">对比经典 cross-encoder</a></li>
+          <li><a href="#eval">如何评测</a></li>
+        </ol>
+      </div></aside></div></article>
   </main>
   <footer class="site-footer">
     <div class="container">
@@ -178,14 +193,21 @@ ranked = model.rank(
             <li><a href="/zh/guides/self-host-reranker" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
             <li><a href="/zh/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">按场景选型</a></li>
             <li><a href="/zh/guides/compare-rerankers" data-i18n="shared.footer.compare">横向对比 reranker</a></li>
+            <li><a href="/zh/guides/rerank-in-china" data-i18n="shared.footer.china">在国内做重排序</a></li>
             <li><a href="/zh/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
             <li><a href="/zh/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
             <li><a href="/zh/guides/reranking-not-working" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
             <li><a href="/zh/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
-            <li><a href="/zh/reranker-picker" data-i18n="shared.footer.picker">选型向导</a></li>
-            <li><a href="/zh/ndcg-calculator" data-i18n="shared.footer.ndcg">NDCG 计算器</a></li>
-            <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.toolsAndUpdates">工具与动态</h4>
+          <ul>
             <li><a href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/reranker-picker" data-i18n="shared.footer.picker">选型向导</a></li>
+            <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
+            <li><a href="/zh/ndcg-calculator" data-i18n="shared.footer.ndcg">NDCG 计算器</a></li>
+            <li><a href="/zh/models/" data-i18n="shared.footer.modelsTable">完整模型对比表</a></li>
             <li><a href="/zh/news" data-i18n="shared.footer.news">重排序动态</a></li>
             <li><a href="/news.rss" data-i18n="shared.footer.newsRss">动态 RSS</a></li>
             <li><a href="/zh/changelog" data-i18n="shared.footer.changelog">更新日志</a></li>
@@ -221,7 +243,7 @@ ranked = model.rank(
       </div>
     </div>
   </footer>
-  <script src="/assets/js/main.js?v=c84d5fd363"></script>
+  <script src="/assets/js/main.js?v=bb0fb3d788"></script>
   
   <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
 </body>

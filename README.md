@@ -13,7 +13,7 @@ Educational resource on rerankers for retrieval and RAG, with a live in-browser 
 
 ```bash
 npm install                     # node-html-parser, used to pre-render /zh/
-npm run build                   # assemble public/ (22 en + 22 zh pages) + sitemap
+npm run build                   # assemble public/ (36 en + 36 zh pages) + sitemap
 npm run dev                     # rebuild on src/ changes
 npm run check                   # build, then verify no internal link is broken
 npm run check:i18n              # legacy: report untranslated model-page strings
@@ -37,8 +37,8 @@ on checkout history; it is still built and checked for valid internal links.
 src/
   partials/
     head-open.html       # DOCTYPE + shared <head>, locale-aware
-    nav.html             # Sticky nav
-    footer.html          # Footer + script injection
+    nav.html             # Sticky nav + Search + Day/Night/Auto controls
+    footer.html          # 4-column footer + script injection
   pages/
     *.html               # <main>…</main> only
     *.meta.json          # title, description, canonical, head_extra, page_scripts
@@ -46,7 +46,7 @@ src/
     shared.js            # nav/footer keys
     <page>.js            # per-page Chinese dictionary (build input, not shipped)
 scripts/
-  build.mjs              # assemble → public/ + public/zh/ + sitemap.xml
+  build.mjs              # assemble → public/ + public/zh/ + sitemap.xml + sticky 2-col TOC
   check-links.mjs        # broken internal links
   check-zh-coverage.mjs  # untranslated prose on /zh/
 ```
@@ -62,7 +62,9 @@ at `/zh/x` — and per page it:
 3. sets a self-referencing canonical plus `en` / `zh-Hans` / `x-default`
    hreflang;
 4. injects a `BreadcrumbList` when the page's meta doesn't already declare one;
-5. marks the active nav item and points the locale toggle at the counterpart URL;
+5. marks the active nav item, points the locale toggle at the counterpart URL,
+   and wraps any `<article class="article">` with a `.toc` into a two-column
+   desktop layout with a sticky table of contents (`applyDocLayout`);
 6. records a sitemap entry, with `lastmod` read from the file's last commit.
 
 The run also emits `public/llms.txt`, a plain-text map of the site for
@@ -76,12 +78,14 @@ page get rewritten to a `/zh/` path that does not exist.
 
 ### Interactive pages
 
-Two pages carry their own logic and are not just prose:
+Four pages carry their own client-side logic and are not just prose:
 
 | Page | Script | Notes |
 |------|--------|-------|
 | `/demo` | `public/assets/js/demo.js` | Cross-encoder in the browser. Deep links: `?s=<preset>` for a built-in scenario, `?q=&docs=` for literal contents, `?m=`/`?m2=` for models, `?z=` for gzipped state. An untouched preset shares as the short `?s=` form. |
-| `/rerank-cost-calculator` | `public/assets/js/cost-calculator.js` | Cohere per-search vs Voyage per-token pricing. Rates are hard-coded constants — update them alongside the models table each quarter. |
+| `/reranker-picker` | `public/assets/js/picker.js` | Four-question scenario matcher; narrows pre-rendered recommendation blocks client-side and degrades to the full list without JS. |
+| `/rerank-cost-calculator` | `public/assets/js/cost-calculator.js` | Per-token, per-search and per-query pricing across USD and CNY vendors, driven by `{{fact:...}}` attributes from `data/models.json`. |
+| `/ndcg-calculator` | `public/assets/js/ndcg-calculator.js` | Client-side NDCG@k, MRR and Hit@1 calculator with per-query table. |
 
 ### Bilingual (EN / 中文)
 

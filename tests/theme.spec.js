@@ -54,3 +54,17 @@ test("a system change applies only while nothing is stored", async ({ browser })
   expect(await theme(page)).toBe("dark");
   await ctx.close();
 });
+
+test("the auto button clears a stored override and resumes following the system", async ({ browser }) => {
+  const ctx = await browser.newContext({ colorScheme: "light" });
+  const page = await ctx.newPage();
+  await page.goto("http://localhost:4173/");
+  await expect(page.locator("#theme-auto")).toHaveAttribute("aria-pressed", "true");
+  await page.click("#theme-toggle"); // manual dark override
+  expect(await theme(page)).toBe("dark");
+  await expect(page.locator("#theme-auto")).toHaveAttribute("aria-pressed", "false");
+  await page.click("#theme-auto"); // clear override -> back to light system theme
+  expect(await theme(page)).toBe("light");
+  await expect(page.locator("#theme-auto")).toHaveAttribute("aria-pressed", "true");
+  await ctx.close();
+});

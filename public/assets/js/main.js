@@ -43,33 +43,12 @@
   var y = document.getElementById("year");
   if (y) y.textContent = new Date().getFullYear();
 
-  // Light / dark theme toggle
+  // Light / dark / auto system theme toggle
   var THEME_KEY = "rr_theme";
   var themeBtn = document.getElementById("theme-toggle");
+  var autoBtn = document.getElementById("theme-auto");
   var metaTheme = document.querySelector('meta[name="theme-color"]');
 
-  function applyTheme(theme) {
-    var light = theme === "light";
-    if (light) document.documentElement.dataset.theme = "light";
-    else document.documentElement.removeAttribute("data-theme");
-    if (themeBtn) {
-      themeBtn.textContent = light ? "🌙" : "☀";
-      themeBtn.setAttribute(
-        "aria-label",
-        light
-          ? (zh ? "切换到深色" : "Switch to dark theme")
-          : (zh ? "切换到浅色" : "Switch to light theme")
-      );
-      themeBtn.title = light
-        ? (zh ? "深色" : "Dark theme")
-        : (zh ? "浅色" : "Light theme");
-    }
-    if (metaTheme) metaTheme.setAttribute("content", light ? "#f4f5f9" : "#0b0d17");
-  }
-
-  // A choice the reader made with the toggle wins; until they make one, the
-  // site follows the system setting, including when it changes (the inline
-  // script in <head> does the same before first paint).
   var systemLight = window.matchMedia ? window.matchMedia("(prefers-color-scheme: light)") : null;
   function storedTheme() {
     try {
@@ -82,6 +61,31 @@
   function initialTheme() {
     return storedTheme() || (systemLight && systemLight.matches ? "light" : "dark");
   }
+
+  function applyTheme(theme) {
+    var light = theme === "light";
+    var isAuto = !storedTheme();
+    if (light) document.documentElement.dataset.theme = "light";
+    else document.documentElement.removeAttribute("data-theme");
+    if (themeBtn) {
+      themeBtn.textContent = light ? "🌙" : "☀";
+      themeBtn.setAttribute(
+        "aria-label",
+        light
+          ? (zh ? "切换到夜间模式" : "Switch to dark theme")
+          : (zh ? "切换到白天模式" : "Switch to light theme")
+      );
+      themeBtn.title = light
+        ? (zh ? "夜间模式" : "Dark theme")
+        : (zh ? "白天模式" : "Light theme");
+    }
+    if (autoBtn) {
+      autoBtn.setAttribute("aria-pressed", isAuto ? "true" : "false");
+      autoBtn.title = zh ? "跟随系统外观" : "Follow system theme";
+    }
+    if (metaTheme) metaTheme.setAttribute("content", light ? "#f5f7fa" : "#1c2128");
+  }
+
   applyTheme(initialTheme());
   if (systemLight) {
     var onSystemChange = function () {
@@ -99,6 +103,14 @@
         localStorage.setItem(THEME_KEY, next);
       } catch (e) {}
       applyTheme(next);
+    });
+  }
+  if (autoBtn) {
+    autoBtn.addEventListener("click", function () {
+      try {
+        localStorage.removeItem(THEME_KEY);
+      } catch (e) {}
+      applyTheme(initialTheme());
     });
   }
 

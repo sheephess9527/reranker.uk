@@ -3,6 +3,12 @@
 Repository and tooling changes. Site-facing data updates live on the public
 changelog page (src/pages/changelog.html).
 
+## 2026-11-27
+
+- Full site visual & layout redesign: replaced pitch-black + indigo gradient tokens with **B4-3 Fog-White Royal Deep Sapphire (`#f5f7fa` / `#1e40af`)** light theme and **B1 GitHub Dark Dimmed (`#1c2128` / `#22272e` / `#58a6ff`)** night theme, plus `#theme-auto` in the header to clear stored overrides and follow `prefers-color-scheme`.
+- Reorganized the homepage (`src/pages/index.html`) into 5 balanced full-width sections (split hero with first-screen pipeline diagram, 4-column interactive tools bench, reading path, job shortcuts, model matrix + vendor `/news` strip); expanded top nav (`Picker`, `Cost`, `News`, labeled `Search /` pill) and split the footer into 4 columns.
+- Added `applyDocLayout()` in `scripts/build.mjs` so all 25 guides and model reviews render a desktop two-column layout with a sticky table of contents (`> 1020px`), styled `/reranker-picker` options as selectable cards, regenerated stale OG preview cards, and updated bilingual changelog + `changelog.rss`. Details in `docs/changes/2026-11-27-redesign.md`.
+
 ## 2026-11-21
 
 - The Jina model page links its BEIR comparison to the original experiment and describes the candidate pool. Removed broad equivalence claims from the home, comparison and cost pages in both languages.

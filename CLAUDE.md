@@ -231,7 +231,7 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 ### 明确不要做
 
 - 不要改 `data/models.json` 里的分数，除非 `npm run check:sources` 证明厂商页面上的数字变了。
-- 不要为了「好看」重写 `public/assets/css/style.css` 的 token。对比度是用 axe 卡过的（浅色主题的 `--accent` 特意用了 teal-700）。
+- 维护 `public/assets/css/style.css` 的双主题 token 时必须跑过 `tests/a11y.spec.js`（2026-11-27 已按用户选定的 B4-3 雾白皇家深海蓝 `#f5f7fa / #1e40af` + B1 柔和炭灰蓝 `#1c2128 / #58a6ff` 完成升级，浅色 `--accent` 用 teal-800 `#115e59` 保证对比度）。
 - 不要把 Demo 的打分数学改了。`public/assets/js/demo.js` 里的 token-overlap 和 cross-encoder 路径有 `tests/demo.smoke.spec.js`（mock）和 `tests/demo.smoke.real.spec.js`（真模型，要联网）。
 - 不要新增 npm 依赖，除非这一项离开它就做不了。构建只用 `node-html-parser`。
 
@@ -322,3 +322,12 @@ Grok 刚改完首页。先读完这一份，再读 [README.md](README.md) 的 Bu
 - [x] main #85 已同步。watch 实际发现 nvidia/Nemotron-3.5-Rerank-1B-BF16；原卡明确标 2026-11-30 发布（晚于巡检），虽已有权重元数据，仍暂缓作为正式新模型收录，不加 hf_seen，11 月 28 日继续复核、30 日或之后确认。不能把本次写成 watch 无新候选。
 - [x] 不设热度门槛补查 17 个近期候选；从个人 GGUF 追到 Yuanbao-Search 原始卡，尚未达到既有未跟踪作者信号；不把转换当新模型、不因机构名另造例外。
 - [x] 271 项自动事实、67 外链、双语线上移动端筛选检查正常；17 人工/历史例外未冒充新测量。产品数据、页面与监控规则不改。证据、暂缓依据与验证见 docs/changes/2026-11-26-patrol.md。
+
+
+## 2026-11-27 全站视觉与页面版式改版（B4-3 皇家深海蓝 + B1 柔和炭灰蓝）
+
+- [x] **双主题与自动跟随系统**：按用户敲定的 **B4-3 雾白 + 皇家深海蓝**（`#f5f7fa / #ffffff`，主色 `#1e40af` 对比度 `8.72:1`，辅色 `#115e59`）与 **B1 炭灰蓝夜间主题**（`#1c2128 / #22272e`，主色 `#58a6ff`）替换旧版 `#090b13` 近纯黑底色、蓝紫渐变按钮及彩色雾光；顶部导航新增 `#theme-auto`（「自动 / Auto」）一键清除 `localStorage["rr_theme"]` 恢复跟随系统，补测试 `tests/theme.spec.js`。
+- [x] **导航与四栏页脚重整**：顶部导航补齐 `选型向导 / 成本计算 / 动态` 直达入口与带 `/` 快捷键提示的搜索按钮；页脚 22 条单列长清单拆分为「品牌与姊妹站 / 指南（13） / 工具与动态（10） / 模型（12）」四栏均衡网格。
+- [x] **首页五段式均衡重构（`src/pages/index.html`、`src/i18n/home.js`）**：首屏改为左文案动作、右两阶段检索流水线图并排直看；第二屏集中铺开四大交互工具四列等高卡片；保留入门三步与任务排障入口（补入自建指南、去掉花哨 Emoji）；底部新增三列 `/news` 厂商发布与弃用速览。
+- [x] **指南索引与详情页双栏吸顶目录**：`/guides/` 新增四列交互工具专区并保留 5 篇 `ol.reading-path` 顺序；`scripts/build.mjs` 新增 `applyDocLayout()`，在宽屏（`> 1020px`）自动将全部 25 篇带 `.toc` 的中英文指南与模型评测页包装为正文 + 右侧吸顶目录双栏排版，窄屏自动回退内联目录；`/reranker-picker` 单选项升级为高亮卡片样式。
+- [x] **产物、社交卡片与日志同步**：更新 `src/pages/changelog.html`、`src/i18n/changelog.js`、`public/changelog.rss`、`CHANGELOG.md`、`README.md` 与 `docs/changes/2026-11-27-redesign.md`；重跑 `npm run og` 生成最新社交预览卡片并提交全部 `public/` 构建产物。

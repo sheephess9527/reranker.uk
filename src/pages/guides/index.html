@@ -1,16 +1,17 @@
 <main id="main">
     <section class="hero container" style="padding-bottom:1.5rem">
-      <h1>Guides</h1>
-      <p class="lead">From “what is a reranker?” to hybrid retrieval pipelines and evaluation — pick a starting point or read straight through.</p>
+      <h1>Guides &amp; tools</h1>
+      <p class="lead">From “what is a reranker?” to hybrid retrieval pipelines, evaluation and interactive calculators — pick a starting point or read straight through.</p>
     </section>
 
     <section class="section container" aria-labelledby="read-in-order">
-      <h2 id="read-in-order">Read these in order</h2>
-      <p class="muted">Five guides that build on each other, from what a reranker does to measuring one on your own data.</p>
+      <div class="section-head">
+        <h2 id="read-in-order">Read these in order</h2>
+        <p>Five guides that build on each other, from what a reranker does to measuring one on your own data.</p>
+      </div>
       <ol class="grid grid-2 reading-path">
           <li>
             <a class="card" href="/guides/what-is-a-reranker.html">
-              <span class="ico" aria-hidden="true">🧭</span>
               <h3>What is a reranker?</h3>
               <p>Two-stage retrieval, why order matters, when reranking pays off.</p>
               <div class="tag-row"><span class="pill info">Fundamentals</span><span class="pill">~7 min</span></div>
@@ -18,7 +19,6 @@
           </li>
           <li>
             <a class="card" href="/guides/cross-encoder-vs-bi-encoder.html">
-              <span class="ico" aria-hidden="true">⚖️</span>
               <h3>Cross-encoder vs bi-encoder</h3>
               <p>Speed vs accuracy — and why production stacks use both.</p>
               <div class="tag-row"><span class="pill info">Architecture</span><span class="pill">~8 min</span></div>
@@ -26,7 +26,6 @@
           </li>
           <li>
             <a class="card" href="/guides/rerank-rag.html">
-              <span class="ico" aria-hidden="true">🔧</span>
               <h3>How to add reranking to RAG</h3>
               <p>Retrieve wide, rerank tight — with Python, LangChain, and latency tips.</p>
               <div class="tag-row"><span class="pill info">Practical</span><span class="pill">~10 min</span></div>
@@ -34,7 +33,6 @@
           </li>
           <li>
             <a class="card" href="/guides/hybrid-retrieval-rerank.html">
-              <span class="ico" aria-hidden="true">🔀</span>
               <h3>Hybrid retrieval + rerank</h3>
               <p>Combine BM25 and vector search, then let the reranker fix the merge.</p>
               <div class="tag-row"><span class="pill info">Production</span><span class="pill">~9 min</span></div>
@@ -42,7 +40,6 @@
           </li>
           <li>
             <a class="card" href="/guides/evaluate-reranker.html">
-              <span class="ico" aria-hidden="true">📊</span>
               <h3>How to evaluate rerankers</h3>
               <p>NDCG, MRR, labelled queries, and regression tests for your domain.</p>
               <div class="tag-row"><span class="pill info">Evaluation</span><span class="pill">~8 min</span></div>
@@ -51,69 +48,84 @@
       </ol>
     </section>
 
+    <section class="section container" aria-labelledby="interactive-tools">
+      <div class="section-head">
+        <h2 id="interactive-tools">Interactive tools</h2>
+        <p>Run client-side in your browser — no API keys and nothing uploaded.</p>
+      </div>
+      <div class="grid grid-4">
+        <a class="card" href="/demo.html?s=rag">
+          <span class="card-kicker">Browser ONNX</span>
+          <h3>Live in-browser demo</h3>
+          <p>Watch a cross-encoder reorder passages — bi-encoder proxy included.</p>
+          <div class="tag-row"><span class="pill good">Interactive</span></div>
+        </a>
+        <a class="card" href="/reranker-picker.html">
+          <span class="card-kicker">Decision</span>
+          <h3>Reranker picker</h3>
+          <p>Answer four questions to narrow the models table to the ones that fit.</p>
+          <div class="tag-row"><span class="pill good">Tool</span></div>
+        </a>
+        <a class="card" href="/rerank-cost-calculator.html">
+          <span class="card-kicker">Pricing</span>
+          <h3>Rerank cost calculator</h3>
+          <p>Per-search or per-token? Which rerank API is cheaper at your volume.</p>
+          <div class="tag-row"><span class="pill good">Tool</span></div>
+        </a>
+        <a class="card" href="/ndcg-calculator.html">
+          <span class="card-kicker">Evaluation</span>
+          <h3>NDCG &amp; MRR calculator</h3>
+          <p>Paste relevance labels before and after reranking to score your lift.</p>
+          <div class="tag-row"><span class="pill good">Tool</span></div>
+        </a>
+      </div>
+    </section>
+
     <section class="section container" aria-labelledby="have-a-question">
-      <h2 id="have-a-question">Already have a specific question?</h2>
-      <p class="muted">Go straight to the page for the job in front of you.</p>
+      <div class="section-head">
+        <h2 id="have-a-question">Already have a specific question?</h2>
+        <p>Go straight to the page for the job in front of you.</p>
+      </div>
       <div class="grid grid-2">
         <a class="card" href="/guides/choose-reranker-scenario.html">
-          <span class="ico" aria-hidden="true">🎯</span>
           <h3>Choose by scenario</h3>
           <p>RAG vs support vs legal vs code — which model fits your use case.</p>
           <div class="tag-row"><span class="pill info">Decision</span><span class="pill">~8 min</span></div>
         </a>
         <a class="card" href="/guides/compare-rerankers.html">
-          <span class="ico" aria-hidden="true">⚖️</span>
           <h3>Compare the rerankers</h3>
           <p>Qwen3, bge, mxbai, Jina, GTE and the hosted APIs, set side by side only where the numbers come from one run.</p>
           <div class="tag-row"><span class="pill info">Comparison</span><span class="pill">~7 min</span></div>
         </a>
         <a class="card" href="/guides/rerank-in-china.html">
-          <span class="ico" aria-hidden="true">🇨🇳</span>
           <h3>Reranking in mainland China</h3>
           <p>Alibaba Cloud, SiliconFlow or your own server — prices in yuan, Chinese scores, downloading weights.</p>
           <div class="tag-row"><span class="pill info">Practical</span><span class="pill">~8 min</span></div>
         </a>
         <a class="card" href="/guides/reranking-not-working.html">
-          <span class="ico" aria-hidden="true">🩺</span>
           <h3>Reranking didn't help</h3>
           <p>Seven reasons you see no lift — recall, pool size, truncation — and how to tell which one you have.</p>
           <div class="tag-row"><span class="pill info">Troubleshooting</span><span class="pill">~9 min</span></div>
         </a>
-        <a class="card" href="/rerank-cost-calculator.html">
-          <span class="ico" aria-hidden="true">🧮</span>
-          <h3>Rerank cost calculator</h3>
-          <p>Per-search or per-token? Which rerank API is cheaper at your volume.</p>
-          <div class="tag-row"><span class="pill good">Interactive</span><span class="pill">Tool</span></div>
-        </a>
         <a class="card" href="/guides/self-host-reranker.html">
-          <span class="ico" aria-hidden="true">🖥️</span>
           <h3>Self-host a reranker</h3>
           <p>sentence-transformers, GPU sizing, and a minimal FastAPI service.</p>
           <div class="tag-row"><span class="pill info">Production</span><span class="pill">~10 min</span></div>
         </a>
         <a class="card" href="/guides/rerank-vector-database.html">
-          <span class="ico" aria-hidden="true">🗄️</span>
           <h3>Rerank on a vector database</h3>
           <p>Wiring a rerank stage onto pgvector, Qdrant or Elasticsearch, with code.</p>
           <div class="tag-row"><span class="pill info">Practical</span><span class="pill">~10 min</span></div>
         </a>
         <a class="card" href="/guides/late-interaction-rerank.html">
-          <span class="ico" aria-hidden="true">🔗</span>
           <h3>Late-interaction (ColBERT)</h3>
           <p>When ColBERT beats bi-encoders and when you still need cross-encoder rerank.</p>
           <div class="tag-row"><span class="pill info">Architecture</span><span class="pill">~9 min</span></div>
         </a>
         <a class="card" href="/guides/instruction-reranker.html">
-          <span class="ico" aria-hidden="true">📋</span>
           <h3>Instruction-following rerank</h3>
           <p>Task instructions that change what “relevant” means — vs plain cross-encoders.</p>
           <div class="tag-row"><span class="pill info">Emerging</span><span class="pill">~7 min</span></div>
-        </a>
-        <a class="card" href="/demo.html?s=rag">
-          <span class="ico" aria-hidden="true">▶️</span>
-          <h3>Live in-browser demo</h3>
-          <p>Watch a cross-encoder reorder passages — bi-encoder proxy included.</p>
-          <div class="tag-row"><span class="pill good">Interactive</span></div>
         </a>
       </div>
     </section>

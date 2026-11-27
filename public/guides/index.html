@@ -9,10 +9,10 @@
   <link rel="alternate" hreflang="en" href="https://reranker.uk/guides/" >
   <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/guides/" >
   <link rel="alternate" hreflang="x-default" href="https://reranker.uk/guides/" >
-  <meta name="theme-color" content="#0b0d17" >
+  <meta name="theme-color" content="#1c2128" >
   <meta name="robots" content="index, follow" >
   <meta name="author" content="reranker.uk" >
-  <link rel="icon" href="/assets/img/favicon.svg?v=1bb58b097e" type="image/svg+xml" >
+  <link rel="icon" href="/assets/img/favicon.svg?v=122bad26c0" type="image/svg+xml" >
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=6edeebfac7" >
   <link rel="manifest" href="/site.webmanifest" >
   <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
@@ -24,14 +24,14 @@
   <meta property="og:locale" content="en_GB" >
   <meta property="og:locale:alternate" content="zh_CN" >
   <meta name="twitter:card" content="summary_large_image" >
-  <meta property="og:image" content="https://reranker.uk/assets/og/guides/index.jpg?v=a18eb572a8" >
+  <meta property="og:image" content="https://reranker.uk/assets/og/guides/index.jpg?v=a420dfa78b" >
   <meta property="og:image:width" content="1200" >
   <meta property="og:image:height" content="630" >
   <meta property="og:image:alt" content="Reranker guides" >
-  <meta name="twitter:image" content="https://reranker.uk/assets/og/guides/index.jpg?v=a18eb572a8" >
+  <meta name="twitter:image" content="https://reranker.uk/assets/og/guides/index.jpg?v=a420dfa78b" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css?v=71c7ffaf81" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css?v=71c7ffaf81" >
+  <link rel="preload" href="/assets/css/style.css?v=3c7508d427" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=3c7508d427" >
   
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Reranker guides","item":"https://reranker.uk/guides/"}]}</script>
 
@@ -46,18 +46,24 @@
         <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
         <li><a href="/guides/" data-i18n="shared.nav.guides" aria-current="page" class="active">Guides</a></li>
         <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
+        <li><a href="/reranker-picker" data-i18n="shared.nav.picker">Picker</a></li>
+        <li><a href="/rerank-cost-calculator" data-i18n="shared.nav.cost">Cost</a></li>
+        <li><a href="/news" data-i18n="shared.nav.news">News</a></li>
         <li><a class="nav-cta" href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <div class="nav-right">
-        <button type="button" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="site-search" data-i18n-aria-label="shared.search.open" aria-label="Search the site (press /)" title="/">⌕</button>
-        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+        <button type="button" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="site-search" data-i18n-aria-label="shared.search.open" aria-label="Search the site (press /)" title="/"><span aria-hidden="true">⌕</span><span class="search-label" data-i18n="shared.search.short">Search</span><kbd aria-hidden="true">/</kbd></button>
+        <div class="theme-group" role="group" data-i18n-aria-label="shared.theme.group" aria-label="Appearance">
+          <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+          <button type="button" class="theme-mode-btn" id="theme-auto" data-theme-pick="auto" aria-pressed="true" data-i18n="shared.theme.auto" data-i18n-aria-label="shared.theme.autoLabel" aria-label="Follow system theme">Auto</button>
+        </div>
         <a class="lang-toggle" href="/zh/guides/" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
     <div class="site-search" id="site-search" role="search" hidden>
       <div class="container narrow">
         <label class="sr-only" for="site-search-input" data-i18n="shared.search.label">Search reranker.uk</label>
-        <input id="site-search-input" type="search" autocomplete="off" spellcheck="false" data-i18n-placeholder="shared.search.placeholder" placeholder="Search guides and models…" aria-describedby="site-search-status" >
+        <input id="site-search-input" type="search" autocomplete="off" spellcheck="false" data-i18n-placeholder="shared.search.placeholder" placeholder="Search guides, models and tools…" aria-describedby="site-search-status" >
         <p class="search-status" id="site-search-status" aria-live="polite"></p>
         <ul class="search-results" id="site-search-results"></ul>
       </div>
@@ -65,17 +71,18 @@
   </header>
 <main id="main">
     <section class="hero container" style="padding-bottom:1.5rem">
-      <h1>Guides</h1>
-      <p class="lead">From “what is a reranker?” to hybrid retrieval pipelines and evaluation — pick a starting point or read straight through.</p>
+      <h1>Guides &amp; tools</h1>
+      <p class="lead">From “what is a reranker?” to hybrid retrieval pipelines, evaluation and interactive calculators — pick a starting point or read straight through.</p>
     </section>
 
     <section class="section container" aria-labelledby="read-in-order">
-      <h2 id="read-in-order">Read these in order</h2>
-      <p class="muted">Five guides that build on each other, from what a reranker does to measuring one on your own data.</p>
+      <div class="section-head">
+        <h2 id="read-in-order">Read these in order</h2>
+        <p>Five guides that build on each other, from what a reranker does to measuring one on your own data.</p>
+      </div>
       <ol class="grid grid-2 reading-path">
           <li>
             <a class="card" href="/guides/what-is-a-reranker">
-              <span class="ico" aria-hidden="true">🧭</span>
               <h3>What is a reranker?</h3>
               <p>Two-stage retrieval, why order matters, when reranking pays off.</p>
               <div class="tag-row"><span class="pill info">Fundamentals</span><span class="pill">~7 min</span></div>
@@ -83,7 +90,6 @@
           </li>
           <li>
             <a class="card" href="/guides/cross-encoder-vs-bi-encoder">
-              <span class="ico" aria-hidden="true">⚖️</span>
               <h3>Cross-encoder vs bi-encoder</h3>
               <p>Speed vs accuracy — and why production stacks use both.</p>
               <div class="tag-row"><span class="pill info">Architecture</span><span class="pill">~8 min</span></div>
@@ -91,7 +97,6 @@
           </li>
           <li>
             <a class="card" href="/guides/rerank-rag">
-              <span class="ico" aria-hidden="true">🔧</span>
               <h3>How to add reranking to RAG</h3>
               <p>Retrieve wide, rerank tight — with Python, LangChain, and latency tips.</p>
               <div class="tag-row"><span class="pill info">Practical</span><span class="pill">~10 min</span></div>
@@ -99,7 +104,6 @@
           </li>
           <li>
             <a class="card" href="/guides/hybrid-retrieval-rerank">
-              <span class="ico" aria-hidden="true">🔀</span>
               <h3>Hybrid retrieval + rerank</h3>
               <p>Combine BM25 and vector search, then let the reranker fix the merge.</p>
               <div class="tag-row"><span class="pill info">Production</span><span class="pill">~9 min</span></div>
@@ -107,7 +111,6 @@
           </li>
           <li>
             <a class="card" href="/guides/evaluate-reranker">
-              <span class="ico" aria-hidden="true">📊</span>
               <h3>How to evaluate rerankers</h3>
               <p>NDCG, MRR, labelled queries, and regression tests for your domain.</p>
               <div class="tag-row"><span class="pill info">Evaluation</span><span class="pill">~8 min</span></div>
@@ -116,69 +119,84 @@
       </ol>
     </section>
 
+    <section class="section container" aria-labelledby="interactive-tools">
+      <div class="section-head">
+        <h2 id="interactive-tools">Interactive tools</h2>
+        <p>Run client-side in your browser — no API keys and nothing uploaded.</p>
+      </div>
+      <div class="grid grid-4">
+        <a class="card" href="/demo?s=rag">
+          <span class="card-kicker">Browser ONNX</span>
+          <h3>Live in-browser demo</h3>
+          <p>Watch a cross-encoder reorder passages — bi-encoder proxy included.</p>
+          <div class="tag-row"><span class="pill good">Interactive</span></div>
+        </a>
+        <a class="card" href="/reranker-picker">
+          <span class="card-kicker">Decision</span>
+          <h3>Reranker picker</h3>
+          <p>Answer four questions to narrow the models table to the ones that fit.</p>
+          <div class="tag-row"><span class="pill good">Tool</span></div>
+        </a>
+        <a class="card" href="/rerank-cost-calculator">
+          <span class="card-kicker">Pricing</span>
+          <h3>Rerank cost calculator</h3>
+          <p>Per-search or per-token? Which rerank API is cheaper at your volume.</p>
+          <div class="tag-row"><span class="pill good">Tool</span></div>
+        </a>
+        <a class="card" href="/ndcg-calculator">
+          <span class="card-kicker">Evaluation</span>
+          <h3>NDCG &amp; MRR calculator</h3>
+          <p>Paste relevance labels before and after reranking to score your lift.</p>
+          <div class="tag-row"><span class="pill good">Tool</span></div>
+        </a>
+      </div>
+    </section>
+
     <section class="section container" aria-labelledby="have-a-question">
-      <h2 id="have-a-question">Already have a specific question?</h2>
-      <p class="muted">Go straight to the page for the job in front of you.</p>
+      <div class="section-head">
+        <h2 id="have-a-question">Already have a specific question?</h2>
+        <p>Go straight to the page for the job in front of you.</p>
+      </div>
       <div class="grid grid-2">
         <a class="card" href="/guides/choose-reranker-scenario">
-          <span class="ico" aria-hidden="true">🎯</span>
           <h3>Choose by scenario</h3>
           <p>RAG vs support vs legal vs code — which model fits your use case.</p>
           <div class="tag-row"><span class="pill info">Decision</span><span class="pill">~8 min</span></div>
         </a>
         <a class="card" href="/guides/compare-rerankers">
-          <span class="ico" aria-hidden="true">⚖️</span>
           <h3>Compare the rerankers</h3>
           <p>Qwen3, bge, mxbai, Jina, GTE and the hosted APIs, set side by side only where the numbers come from one run.</p>
           <div class="tag-row"><span class="pill info">Comparison</span><span class="pill">~7 min</span></div>
         </a>
         <a class="card" href="/guides/rerank-in-china">
-          <span class="ico" aria-hidden="true">🇨🇳</span>
           <h3>Reranking in mainland China</h3>
           <p>Alibaba Cloud, SiliconFlow or your own server — prices in yuan, Chinese scores, downloading weights.</p>
           <div class="tag-row"><span class="pill info">Practical</span><span class="pill">~8 min</span></div>
         </a>
         <a class="card" href="/guides/reranking-not-working">
-          <span class="ico" aria-hidden="true">🩺</span>
           <h3>Reranking didn't help</h3>
           <p>Seven reasons you see no lift — recall, pool size, truncation — and how to tell which one you have.</p>
           <div class="tag-row"><span class="pill info">Troubleshooting</span><span class="pill">~9 min</span></div>
         </a>
-        <a class="card" href="/rerank-cost-calculator">
-          <span class="ico" aria-hidden="true">🧮</span>
-          <h3>Rerank cost calculator</h3>
-          <p>Per-search or per-token? Which rerank API is cheaper at your volume.</p>
-          <div class="tag-row"><span class="pill good">Interactive</span><span class="pill">Tool</span></div>
-        </a>
         <a class="card" href="/guides/self-host-reranker">
-          <span class="ico" aria-hidden="true">🖥️</span>
           <h3>Self-host a reranker</h3>
           <p>sentence-transformers, GPU sizing, and a minimal FastAPI service.</p>
           <div class="tag-row"><span class="pill info">Production</span><span class="pill">~10 min</span></div>
         </a>
         <a class="card" href="/guides/rerank-vector-database">
-          <span class="ico" aria-hidden="true">🗄️</span>
           <h3>Rerank on a vector database</h3>
           <p>Wiring a rerank stage onto pgvector, Qdrant or Elasticsearch, with code.</p>
           <div class="tag-row"><span class="pill info">Practical</span><span class="pill">~10 min</span></div>
         </a>
         <a class="card" href="/guides/late-interaction-rerank">
-          <span class="ico" aria-hidden="true">🔗</span>
           <h3>Late-interaction (ColBERT)</h3>
           <p>When ColBERT beats bi-encoders and when you still need cross-encoder rerank.</p>
           <div class="tag-row"><span class="pill info">Architecture</span><span class="pill">~9 min</span></div>
         </a>
         <a class="card" href="/guides/instruction-reranker">
-          <span class="ico" aria-hidden="true">📋</span>
           <h3>Instruction-following rerank</h3>
           <p>Task instructions that change what “relevant” means — vs plain cross-encoders.</p>
           <div class="tag-row"><span class="pill info">Emerging</span><span class="pill">~7 min</span></div>
-        </a>
-        <a class="card" href="/demo?s=rag">
-          <span class="ico" aria-hidden="true">▶️</span>
-          <h3>Live in-browser demo</h3>
-          <p>Watch a cross-encoder reorder passages — bi-encoder proxy included.</p>
-          <div class="tag-row"><span class="pill good">Interactive</span></div>
         </a>
       </div>
     </section>
@@ -204,14 +222,21 @@
             <li><a href="/guides/self-host-reranker" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
             <li><a href="/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
             <li><a href="/guides/compare-rerankers" data-i18n="shared.footer.compare">Compare rerankers</a></li>
+            <li><a href="/guides/rerank-in-china" data-i18n="shared.footer.china">Reranking in China</a></li>
             <li><a href="/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
             <li><a href="/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
             <li><a href="/guides/reranking-not-working" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
             <li><a href="/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
-            <li><a href="/reranker-picker" data-i18n="shared.footer.picker">Reranker picker</a></li>
-            <li><a href="/ndcg-calculator" data-i18n="shared.footer.ndcg">NDCG calculator</a></li>
-            <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.toolsAndUpdates">Tools &amp; updates</h4>
+          <ul>
             <li><a href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
+            <li><a href="/reranker-picker" data-i18n="shared.footer.picker">Reranker picker</a></li>
+            <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
+            <li><a href="/ndcg-calculator" data-i18n="shared.footer.ndcg">NDCG calculator</a></li>
+            <li><a href="/models/" data-i18n="shared.footer.modelsTable">Full models table</a></li>
             <li><a href="/news" data-i18n="shared.footer.news">Reranker news</a></li>
             <li><a href="/news.rss" data-i18n="shared.footer.newsRss">News RSS</a></li>
             <li><a href="/changelog" data-i18n="shared.footer.changelog">Changelog</a></li>
@@ -247,7 +272,7 @@
       </div>
     </div>
   </footer>
-  <script src="/assets/js/main.js?v=c84d5fd363"></script>
+  <script src="/assets/js/main.js?v=bb0fb3d788"></script>
   
   <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
 </body>

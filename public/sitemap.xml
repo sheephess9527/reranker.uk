@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://reranker.uk/changelog</loc>
-    <lastmod>2026-11-22</lastmod>
+    <lastmod>2026-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/changelog" />
@@ -11,7 +11,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/changelog</loc>
-    <lastmod>2026-11-22</lastmod>
+    <lastmod>2026-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/changelog" />
@@ -20,7 +20,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/demo</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/demo" />
@@ -29,7 +29,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/demo</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/demo" />
@@ -74,7 +74,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/guides/cross-encoder-vs-bi-encoder</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/cross-encoder-vs-bi-encoder" />
@@ -83,7 +83,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/guides/cross-encoder-vs-bi-encoder</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/cross-encoder-vs-bi-encoder" />
@@ -128,7 +128,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/guides/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <lastmod>2026-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/" />
@@ -137,7 +137,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/guides/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <lastmod>2026-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/" />
@@ -272,7 +272,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/guides/what-is-a-reranker</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/what-is-a-reranker" />
@@ -281,7 +281,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/guides/what-is-a-reranker</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/guides/what-is-a-reranker" />
@@ -290,7 +290,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/" />
@@ -299,7 +299,7 @@
   </url>
   <url>
     <loc>https://reranker.uk/zh/</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://reranker.uk/" />

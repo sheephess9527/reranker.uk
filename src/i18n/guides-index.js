@@ -1,40 +1,38 @@
 window.I18N_PAGE = { zh: {
-  "Compare the rerankers":
-    "对比各个 reranker",
-  "Qwen3, bge, mxbai, Jina, GTE and the hosted APIs, set side by side only where the numbers come from one run.":
-    "Qwen3、bge、mxbai、Jina、GTE 和托管 API，只在数字来自同一次评测时才并排放。",
-  "Comparison":
-    "横向对比",
-  "Read these in order":
-    "按这个顺序读",
-  "Five guides that build on each other, from what a reranker does to measuring one on your own data.":
-    "五篇循序渐进的指南：从重排序模型是做什么的，到在你自己的数据上评估它。",
-  "Already have a specific question?":
-    "已经有具体问题？",
-  "Go straight to the page for the job in front of you.":
-    "直接去解决你手头问题的那一页。",
-  "Reranking in mainland China":
-    "在国内做重排序",
-  "Alibaba Cloud, SiliconFlow or your own server — prices in yuan, Chinese scores, downloading weights.":
-    "阿里云百炼、硅基流动还是自己部署 —— 人民币价格、中文分数、模型下载。",
-  "Reranking didn't help":
-    "重排序没起作用",
-  "Seven reasons you see no lift — recall, pool size, truncation — and how to tell which one you have.":
-    "看不到提升的七个原因 —— 召回、候选池大小、截断 —— 以及如何判断你属于哪一种。",
-  "Troubleshooting":
-    "排障",
-  "Rerank on a vector database":
-    "在向量数据库上做重排序",
-  "Wiring a rerank stage onto pgvector, Qdrant or Elasticsearch, with code.":
-    "把重排序这一步接到 pgvector、Qdrant 或 Elasticsearch 上，含代码。",
-  "Rerank cost calculator": "重排序成本计算器",
-  "Per-search or per-token? Which rerank API is cheaper at your volume.":
-    "按次计费还是按 token 计费？在你的量级下哪个 rerank API 更便宜。",
-  "Tool": "工具",
   "_title": "Reranker 指南 — 从入门到生产 | reranker.uk",
-  "_desc": "reranker.uk 全部指南：什么是 reranker、cross-encoder vs bi-encoder、RAG 集成、混合检索、自托管、场景选型，以及如何评测重排序模型。",
+  "_desc": "reranker.uk 全部指南与工具：什么是 reranker、cross-encoder vs bi-encoder、RAG 集成、混合检索、自托管、场景选型，以及选型向导、成本与 NDCG 计算器。",
   "Guides": "指南",
-  "From “what is a reranker?” to hybrid retrieval pipelines and evaluation — pick a starting point or read straight through.": "从「什么是 reranker？」到混合检索、评测与自托管 —— 选一个起点，或从头到尾读完。",
+  "Guides &amp; tools": "指南与工具",
+  "From “what is a reranker?” to hybrid retrieval pipelines, evaluation and interactive calculators — pick a starting point or read straight through.": "从「什么是 reranker？」到混合检索、评测与交互式计算工具 —— 选一个起点，或按顺序读完。",
+
+  "Read these in order": "按这个顺序读",
+  "Five guides that build on each other, from what a reranker does to measuring one on your own data.": "五篇循序渐进的指南：从重排序模型是做什么的，到在你自己的数据上评估它。",
+
+  "Interactive tools": "交互式工具",
+  "Run client-side in your browser — no API keys and nothing uploaded.": "全部在浏览器本地运行 —— 无需 API 密钥，不上传任何数据。",
+  "Browser ONNX": "浏览器 ONNX",
+  "Pricing": "费用测算",
+  "Reranker picker": "选型向导",
+  "Answer four questions to narrow the models table to the ones that fit.": "回答四个问题，把模型表缩小到适合你场景的几款。",
+  "NDCG &amp; MRR calculator": "NDCG 与 MRR 计算器",
+  "Paste relevance labels before and after reranking to score your lift.": "粘贴重排前后的相关度标签，计算排序提升幅度。",
+
+  "Already have a specific question?": "已经有具体问题？",
+  "Go straight to the page for the job in front of you.": "直接去解决你手头问题的那一页。",
+
+  "Compare the rerankers": "对比各个 reranker",
+  "Qwen3, bge, mxbai, Jina, GTE and the hosted APIs, set side by side only where the numbers come from one run.": "Qwen3、bge、mxbai、Jina、GTE 和托管 API，只在数字来自同一次评测时才并排放。",
+  "Comparison": "横向对比",
+  "Reranking in mainland China": "在国内做重排序",
+  "Alibaba Cloud, SiliconFlow or your own server — prices in yuan, Chinese scores, downloading weights.": "阿里云百炼、硅基流动还是自己部署 —— 人民币价格、中文分数、模型下载。",
+  "Reranking didn't help": "重排序没起作用",
+  "Seven reasons you see no lift — recall, pool size, truncation — and how to tell which one you have.": "看不到提升的七个原因 —— 召回、候选池大小、截断 —— 以及如何判断你属于哪一种。",
+  "Troubleshooting": "排障",
+  "Rerank on a vector database": "在向量数据库上做重排序",
+  "Wiring a rerank stage onto pgvector, Qdrant or Elasticsearch, with code.": "把重排序这一步接到 pgvector、Qdrant 或 Elasticsearch 上，含代码。",
+  "Rerank cost calculator": "重排序成本计算器",
+  "Per-search or per-token? Which rerank API is cheaper at your volume.": "按次计费还是按 token 计费？在你的量级下哪个 rerank API 更便宜。",
+  "Tool": "工具",
 
   "What is a reranker?": "什么是 reranker？",
   "Two-stage retrieval, why order matters, when reranking pays off.": "两阶段检索、排序为何重要、何时值得加重排序。",

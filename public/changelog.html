@@ -9,10 +9,10 @@
   <link rel="alternate" hreflang="en" href="https://reranker.uk/changelog" >
   <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/changelog" >
   <link rel="alternate" hreflang="x-default" href="https://reranker.uk/changelog" >
-  <meta name="theme-color" content="#0b0d17" >
+  <meta name="theme-color" content="#1c2128" >
   <meta name="robots" content="index, follow" >
   <meta name="author" content="reranker.uk" >
-  <link rel="icon" href="/assets/img/favicon.svg?v=1bb58b097e" type="image/svg+xml" >
+  <link rel="icon" href="/assets/img/favicon.svg?v=122bad26c0" type="image/svg+xml" >
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=6edeebfac7" >
   <link rel="manifest" href="/site.webmanifest" >
   <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
@@ -30,8 +30,8 @@
   <meta property="og:image:alt" content="reranker.uk changelog" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/changelog.jpg?v=36bc070c23" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css?v=71c7ffaf81" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css?v=71c7ffaf81" >
+  <link rel="preload" href="/assets/css/style.css?v=3c7508d427" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=3c7508d427" >
   
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://reranker.uk/changelog"}]}</script>
 
@@ -46,18 +46,24 @@
         <li><a href="/" data-i18n="shared.nav.home">Home</a></li>
         <li><a href="/guides/" data-i18n="shared.nav.guides">Guides</a></li>
         <li><a href="/models/" data-i18n="shared.nav.models">Models</a></li>
+        <li><a href="/reranker-picker" data-i18n="shared.nav.picker">Picker</a></li>
+        <li><a href="/rerank-cost-calculator" data-i18n="shared.nav.cost">Cost</a></li>
+        <li><a href="/news" data-i18n="shared.nav.news">News</a></li>
         <li><a class="nav-cta" href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
       </ul>
       <div class="nav-right">
-        <button type="button" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="site-search" data-i18n-aria-label="shared.search.open" aria-label="Search the site (press /)" title="/">⌕</button>
-        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+        <button type="button" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="site-search" data-i18n-aria-label="shared.search.open" aria-label="Search the site (press /)" title="/"><span aria-hidden="true">⌕</span><span class="search-label" data-i18n="shared.search.short">Search</span><kbd aria-hidden="true">/</kbd></button>
+        <div class="theme-group" role="group" data-i18n-aria-label="shared.theme.group" aria-label="Appearance">
+          <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+          <button type="button" class="theme-mode-btn" id="theme-auto" data-theme-pick="auto" aria-pressed="true" data-i18n="shared.theme.auto" data-i18n-aria-label="shared.theme.autoLabel" aria-label="Follow system theme">Auto</button>
+        </div>
         <a class="lang-toggle" href="/zh/changelog" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
     <div class="site-search" id="site-search" role="search" hidden>
       <div class="container narrow">
         <label class="sr-only" for="site-search-input" data-i18n="shared.search.label">Search reranker.uk</label>
-        <input id="site-search-input" type="search" autocomplete="off" spellcheck="false" data-i18n-placeholder="shared.search.placeholder" placeholder="Search guides and models…" aria-describedby="site-search-status" >
+        <input id="site-search-input" type="search" autocomplete="off" spellcheck="false" data-i18n-placeholder="shared.search.placeholder" placeholder="Search guides, models and tools…" aria-describedby="site-search-status" >
         <p class="search-status" id="site-search-status" aria-live="polite"></p>
         <ul class="search-results" id="site-search-results"></ul>
       </div>
@@ -70,6 +76,10 @@
     </section>
 
     <section class="section container narrow">
+      <article class="changelog-entry">
+        <h2 id="2026-11-27-redesign">27 Nov 2026 — Fog-white &amp; dimmed-slate themes, two-column reading layout, and direct tool access</h2>
+        <p>Replaced the near-black indigo palette with a glare-free fog-white and deep-sapphire light theme alongside a dimmed-slate dark theme, with an Auto control in the header to return to your system setting. The <a href="/">homepage</a> now puts the two-stage pipeline diagram in the first screen next to a four-tool bench (<a href="/demo">live demo</a>, <a href="/reranker-picker">reranker picker</a>, <a href="/rerank-cost-calculator">cost calculator</a> and <a href="/ndcg-calculator">NDCG calculator</a>) and recent <a href="/news">vendor news</a>. Every guide and model review now keeps a sticky table of contents in a second column on wide screens, and the header and four-column footer link directly to the picker, cost calculator and news feed.</p>
+      </article>
       <article class="changelog-entry">
         <h2 id="2026-11-22-generated-pages">22 Nov 2026 — Publish benchmark filters and add Horizon-Labs small</h2>
         <p>The benchmark-task and evaluation-language filters were in the source but missing from the deployed model table. Rebuilt the English and Chinese pages, including their expandable benchmark evidence and the BGE detail page. CI now checks that committed generated pages match the source build, so passing tests cannot hide stale deployment files. Also added Horizon-Labs multilingual-reranker-small as a CPU candidate with sourced size, training length and its own sampled MIRACL protocol. This is older-model coverage catch-up, not a new release.</p>
@@ -112,7 +122,7 @@
         <h2 id="2026-11-14-search-recovery">14 Nov 2026 — Search recovery and keyboard-friendly mobile navigation</h2>
         <p>Search now distinguishes a loading failure from an empty result and retries when you edit the query or reopen the panel. The mobile menu closes with Escape, a click outside, or keyboard focus moving away; opening search closes it too.</p>
       </article>
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>Earlier in November 2026 (11 entries)</summary><article class="changelog-entry">
         <h2 id="2026-11-14-filters">14 Nov 2026 — Filters for input and licence, Jina's price, and two Chinese-side gaps</h2>
         <ul class="feature-list">
           <li><strong>Two more filters on the <a href="/models/">models table</a></strong> — one for what a model ranks (<em>text only</em>, or <em>text + images</em>: Qwen3-VL-Reranker, LightOn-rerank, Nemotron-3.5-Rerank-8B, llama-nemotron-rerank-vl-1b-v2, and Alibaba Cloud's hosted qwen3-vl-rerank), one for what an open-weights licence allows, which separates the Apache 2.0 / MIT / OpenMDW rows from Jina v3.5, v3 and Contextual AI's CC BY-NC weights. Hosted-only rows answer neither licence, because a hosted API has no weights to licence. LightOn's row also answers both architecture filters now — it reranks pointwise or listwise, and only appeared under cross-encoder</li>
@@ -121,7 +131,7 @@
           <li><strong>hs-rerank-1 in the <a href="/guides/self-host-reranker">self-hosting guide</a></strong> — the pick-a-model table now names the lightest CPU option: 114M in total, of which 15M is the transformer, 8,192 tokens, MIT, with an int8 ONNX build and a Text Embeddings Inference config</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>Earlier in November 2026 (10 entries)</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-11-13-ndcg">13 Nov 2026 — An NDCG and MRR calculator</h2>
         <ul class="feature-list">
           <li><strong><a href="/ndcg-calculator">Did the reranker help?</a></strong> — paste the relevance labels of each query’s candidates before and after reranking and read off NDCG@k, MRR and Hit@1, with a per-query table. It runs in the browser and sends nothing anywhere, and the <a href="/guides/evaluate-reranker">evaluation guide</a> links to it</li>
@@ -638,6 +648,7 @@
         </ul>
       </article></details>
 
+      
 
       
 
@@ -793,14 +804,21 @@
             <li><a href="/guides/self-host-reranker" data-i18n="shared.footer.selfHost">Self-host a reranker</a></li>
             <li><a href="/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">Choose by scenario</a></li>
             <li><a href="/guides/compare-rerankers" data-i18n="shared.footer.compare">Compare rerankers</a></li>
+            <li><a href="/guides/rerank-in-china" data-i18n="shared.footer.china">Reranking in China</a></li>
             <li><a href="/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction (ColBERT)</a></li>
             <li><a href="/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">Instruction-following rerank</a></li>
             <li><a href="/guides/reranking-not-working" data-i18n="shared.footer.notWorking">Reranking didn't help</a></li>
             <li><a href="/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">Rerank on a vector DB</a></li>
-            <li><a href="/reranker-picker" data-i18n="shared.footer.picker">Reranker picker</a></li>
-            <li><a href="/ndcg-calculator" data-i18n="shared.footer.ndcg">NDCG calculator</a></li>
-            <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.toolsAndUpdates">Tools &amp; updates</h4>
+          <ul>
             <li><a href="/demo" data-i18n="shared.nav.demo">Live demo</a></li>
+            <li><a href="/reranker-picker" data-i18n="shared.footer.picker">Reranker picker</a></li>
+            <li><a href="/rerank-cost-calculator" data-i18n="shared.footer.costCalc">Rerank cost calculator</a></li>
+            <li><a href="/ndcg-calculator" data-i18n="shared.footer.ndcg">NDCG calculator</a></li>
+            <li><a href="/models/" data-i18n="shared.footer.modelsTable">Full models table</a></li>
             <li><a href="/news" data-i18n="shared.footer.news">Reranker news</a></li>
             <li><a href="/news.rss" data-i18n="shared.footer.newsRss">News RSS</a></li>
             <li><a href="/changelog" data-i18n="shared.footer.changelog">Changelog</a></li>
@@ -836,7 +854,7 @@
       </div>
     </div>
   </footer>
-  <script src="/assets/js/main.js?v=c84d5fd363"></script>
+  <script src="/assets/js/main.js?v=bb0fb3d788"></script>
   
   <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
 </body>

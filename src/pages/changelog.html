@@ -6,6 +6,10 @@
 
     <section class="section container narrow">
       <article class="changelog-entry">
+        <h2 id="2026-11-27-redesign">27 Nov 2026 — Fog-white &amp; dimmed-slate themes, two-column reading layout, and direct tool access</h2>
+        <p>Replaced the near-black indigo palette with a glare-free fog-white and deep-sapphire light theme alongside a dimmed-slate dark theme, with an Auto control in the header to return to your system setting. The <a href="/">homepage</a> now puts the two-stage pipeline diagram in the first screen next to a four-tool bench (<a href="/demo.html">live demo</a>, <a href="/reranker-picker.html">reranker picker</a>, <a href="/rerank-cost-calculator.html">cost calculator</a> and <a href="/ndcg-calculator.html">NDCG calculator</a>) and recent <a href="/news.html">vendor news</a>. Every guide and model review now keeps a sticky table of contents in a second column on wide screens, and the header and four-column footer link directly to the picker, cost calculator and news feed.</p>
+      </article>
+      <article class="changelog-entry">
         <h2 id="2026-11-22-generated-pages">22 Nov 2026 — Publish benchmark filters and add Horizon-Labs small</h2>
         <p>The benchmark-task and evaluation-language filters were in the source but missing from the deployed model table. Rebuilt the English and Chinese pages, including their expandable benchmark evidence and the BGE detail page. CI now checks that committed generated pages match the source build, so passing tests cannot hide stale deployment files. Also added Horizon-Labs multilingual-reranker-small as a CPU candidate with sourced size, training length and its own sampled MIRACL protocol. This is older-model coverage catch-up, not a new release.</p>
       </article>

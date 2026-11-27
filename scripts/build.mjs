@@ -348,6 +348,7 @@ const LEGACY_SEL = [
   "main td", "main th", "main label",
   "main .eyebrow", "main .btn", "main .meta", "main .breadcrumb",
   "main .toc strong", "main .pill",
+  "main .card-kicker", "main .card-cta", "main .news-card-meta > span",
 ].join(", ");
 
 function hasAncestor(el, test) {
@@ -713,6 +714,31 @@ function foldChangelog(root, zh) {
   last.insertAdjacentHTML("afterend", "\n" + html);
 }
 
+/**
+ * Wraps any <article class="article"> that carries a .toc into a two-column
+ * desktop layout (.doc-grid → .doc-prose + sticky .doc-aside) while keeping
+ * the original inline .toc inside .doc-prose for ≤1020px viewports. Runs after
+ * translate() and table aria-label resolution so Chinese TOC links and table
+ * regions are already finalised.
+ */
+function applyDocLayout(root, zh) {
+  const article = root.querySelector("main article.article");
+  const toc = article?.querySelector(".toc");
+  if (!article || !toc) return;
+  const cls = (article.getAttribute("class") || "")
+    .split(/\s+/)
+    .filter((c) => c && c !== "narrow");
+  if (!cls.includes("has-toc-layout")) cls.push("has-toc-layout");
+  article.setAttribute("class", cls.join(" "));
+  const asideLabel = (zh && SHARED_KEYS["shared.toc"]) || "On this page";
+  const inner = article.innerHTML;
+  const tocHtml = toc.toString();
+  article.set_content(
+    `<div class="doc-grid"><div class="doc-prose">${inner}</div>` +
+      `<aside class="doc-aside" aria-label="${asideLabel}">${tocHtml}</aside></div>`
+  );
+}
+
 function assemble({ meta, body, relPath, locale, lastmod }) {
   const urlPath = urlPathFor(relPath);
   const enUrl = SITE + urlPath;
@@ -801,6 +827,7 @@ function assemble({ meta, body, relPath, locale, lastmod }) {
   // not be swept up by the /zh prefixing pass.
   setLocaleToggle(root, urlPath, zh ? "zh" : "en");
   if (relPath === "changelog.html") foldChangelog(root, zh);
+  applyDocLayout(root, zh);
 
   const outRel = zh ? path.join("zh", relPath) : relPath;
   const outPath = path.join(PUBLIC, outRel);

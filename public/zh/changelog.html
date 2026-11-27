@@ -9,10 +9,10 @@
   <link rel="alternate" hreflang="en" href="https://reranker.uk/changelog" >
   <link rel="alternate" hreflang="zh-Hans" href="https://reranker.uk/zh/changelog" >
   <link rel="alternate" hreflang="x-default" href="https://reranker.uk/changelog" >
-  <meta name="theme-color" content="#0b0d17" >
+  <meta name="theme-color" content="#1c2128" >
   <meta name="robots" content="index, follow" >
   <meta name="author" content="reranker.uk" >
-  <link rel="icon" href="/assets/img/favicon.svg?v=1bb58b097e" type="image/svg+xml" >
+  <link rel="icon" href="/assets/img/favicon.svg?v=122bad26c0" type="image/svg+xml" >
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=6edeebfac7" >
   <link rel="manifest" href="/site.webmanifest" >
   <link rel="alternate" type="application/rss+xml" title="reranker.uk changelog" href="https://reranker.uk/changelog.rss" >
@@ -30,8 +30,8 @@
   <meta property="og:image:alt" content="更新日志 — reranker.uk 版本记录 | reranker.uk" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/zh/changelog.jpg?v=bd81e0c8c5" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css?v=71c7ffaf81" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css?v=71c7ffaf81" >
+  <link rel="preload" href="/assets/css/style.css?v=3c7508d427" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=3c7508d427" >
   
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://reranker.uk/zh/"},{"@type":"ListItem","position":2,"name":"更新日志","item":"https://reranker.uk/zh/changelog"}]}</script>
 
@@ -46,18 +46,24 @@
         <li><a href="/zh/" data-i18n="shared.nav.home">首页</a></li>
         <li><a href="/zh/guides/" data-i18n="shared.nav.guides">指南</a></li>
         <li><a href="/zh/models/" data-i18n="shared.nav.models">模型对比</a></li>
+        <li><a href="/zh/reranker-picker" data-i18n="shared.nav.picker">选型向导</a></li>
+        <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.nav.cost">成本计算</a></li>
+        <li><a href="/zh/news" data-i18n="shared.nav.news">动态</a></li>
         <li><a class="nav-cta" href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
       </ul>
       <div class="nav-right">
-        <button type="button" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="site-search" data-i18n-aria-label="shared.search.open" aria-label="搜索全站（按 /）" title="/">⌕</button>
-        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+        <button type="button" class="search-toggle" id="search-toggle" aria-expanded="false" aria-controls="site-search" data-i18n-aria-label="shared.search.open" aria-label="搜索全站（按 /）" title="/"><span aria-hidden="true">⌕</span><span class="search-label" data-i18n="shared.search.short">搜索</span><kbd aria-hidden="true">/</kbd></button>
+        <div class="theme-group" role="group" data-i18n-aria-label="shared.theme.group" aria-label="外观模式">
+          <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
+          <button type="button" class="theme-mode-btn" id="theme-auto" data-theme-pick="auto" aria-pressed="true" data-i18n="shared.theme.auto" data-i18n-aria-label="shared.theme.autoLabel" aria-label="跟随系统外观">自动</button>
+        </div>
         <a class="lang-toggle" href="/changelog" rel="alternate" hreflang="en" aria-label="Switch to English" title="Switch to English">EN</a>
       </div>
     </nav>
     <div class="site-search" id="site-search" role="search" hidden>
       <div class="container narrow">
         <label class="sr-only" for="site-search-input" data-i18n="shared.search.label">搜索 reranker.uk</label>
-        <input id="site-search-input" type="search" autocomplete="off" spellcheck="false" data-i18n-placeholder="shared.search.placeholder" placeholder="搜索指南和模型…" aria-describedby="site-search-status">
+        <input id="site-search-input" type="search" autocomplete="off" spellcheck="false" data-i18n-placeholder="shared.search.placeholder" placeholder="搜索指南、模型和工具…" aria-describedby="site-search-status">
         <p class="search-status" id="site-search-status" aria-live="polite"></p>
         <ul class="search-results" id="site-search-results"></ul>
       </div>
@@ -70,6 +76,10 @@
     </section>
 
     <section class="section container narrow">
+      <article class="changelog-entry">
+        <h2 id="2026-11-27-redesign">2026 年 11 月 27 日 —— 雾白皇家深蓝与柔和炭灰双主题、双栏吸顶目录与全站工具直达</h2>
+        <p>告别近纯黑与蓝紫渐变配色：白天采用清爽雾白配皇家深海蓝主题，夜间升级为柔和不刺眼的炭灰蓝暗色主题，并在顶部导航新增「自动」按钮随时恢复跟随系统。重构<a href="/zh/">首页</a>版式：首屏直接并排展示两阶段重排序流水线图，第二屏集中铺开四大交互工具（<a href="/zh/demo">实时 Demo</a>、<a href="/zh/reranker-picker">选型向导</a>、<a href="/zh/rerank-cost-calculator">成本计算器</a>、<a href="/zh/ndcg-calculator">NDCG 计算器</a>），底部新增<a href="/zh/news">厂商动态</a>速览。全部指南与模型评测页在宽屏下升级为右侧吸顶目录双栏排版，顶部导航与四栏页脚补齐工具与动态直达入口。</p>
+      </article>
       <article class="changelog-entry">
         <h2 id="2026-11-22-generated-pages">2026 年 11 月 22 日 —— 发布评测筛选页面并补录 Horizon-Labs small</h2>
         <p>基准任务与评测语言筛选已在源码中实现，但线上模型表仍缺少这些控件。现已重新构建中英文页面，包括可展开的评测依据和 BGE 详情页。CI 增加了生成页面与已提交文件的一致性检查，避免测试通过却仍发布旧文件。另补录 Horizon-Labs multilingual-reranker-small 作为 CPU 候选，规模、训练长度和独立的 MIRACL 抽样协议均有来源。这是旧模型补录，不是新发布。</p>
@@ -112,7 +122,7 @@
         <h2 id="2026-11-14-search-recovery">2026 年 11 月 14 日 —— 搜索失败可重试，手机菜单支持键盘操作</h2>
         <p>搜索现在会区分加载失败与没有匹配结果，修改搜索词或重新打开面板即可重试。手机菜单支持按 Escape 关闭，点击菜单外部或将键盘焦点移出菜单也会关闭；打开搜索时同样会收起菜单。</p>
       </article>
-      <article class="changelog-entry">
+<details class="changelog-month"><summary>2026 年 11 月更早的更新（11 条）</summary><article class="changelog-entry">
         <h2 id="2026-11-14-filters">2026 年 11 月 14 日 —— 按输入类型和许可证筛选、Jina 的价格，以及中文侧补上的两处缺口</h2>
         <ul class="feature-list">
           <li><strong><a href="/zh/models/">模型对比表</a>多了两个筛选</strong> —— 一个是按模型打分的输入类型（<em>仅文本</em>，或<em>文本 + 图片</em>：Qwen3-VL-Reranker、LightOn-rerank、Nemotron-3.5-Rerank-8B、llama-nemotron-rerank-vl-1b-v2，以及阿里云托管的 qwen3-vl-rerank），一个是按开源权重的许可证：把 Apache 2.0 / MIT / OpenMDW 的行与 Jina v3.5、v3 和 Contextual AI 的 CC BY-NC 权重区分开。纯托管行在两个许可证下都不出现，因为托管 API 没有可授权的权重。LightOn 那一行现在两个架构筛选都能命中 —— 它既能逐点也能列表式排序，过去只出现在 cross-encoder 下</li>
@@ -121,7 +131,7 @@
           <li><strong>hs-rerank-1 进了<a href="/zh/guides/self-host-reranker">自建指南</a></strong> —— 选型表现在点出了最轻的 CPU 方案：总共 114M，其中 transformer 只有 15M，8,192 token，MIT 许可，带 int8 ONNX 版本和 Text Embeddings Inference 的部署配置</li>
         </ul>
       </article>
-<details class="changelog-month"><summary>2026 年 11 月更早的更新（10 条）</summary><article class="changelog-entry">
+<article class="changelog-entry">
         <h2 id="2026-11-13-ndcg">2026 年 11 月 13 日 —— NDCG 与 MRR 计算器</h2>
         <ul class="feature-list">
           <li><strong><a href="/zh/ndcg-calculator">reranker 有没有帮上忙？</a></strong> —— 粘贴每条查询候选在重排序前后的相关度标签，就能读出 NDCG@k、MRR 和 Hit@1，还有逐条查询的表。全部在浏览器里计算，不发送任何数据；<a href="/zh/guides/evaluate-reranker">评测指南</a>里有它的入口</li>
@@ -638,6 +648,7 @@
         </ul>
       </article></details>
 
+      
 
       
 
@@ -793,14 +804,21 @@
             <li><a href="/zh/guides/self-host-reranker" data-i18n="shared.footer.selfHost">自托管 reranker</a></li>
             <li><a href="/zh/guides/choose-reranker-scenario" data-i18n="shared.footer.scenario">按场景选型</a></li>
             <li><a href="/zh/guides/compare-rerankers" data-i18n="shared.footer.compare">横向对比 reranker</a></li>
+            <li><a href="/zh/guides/rerank-in-china" data-i18n="shared.footer.china">在国内做重排序</a></li>
             <li><a href="/zh/guides/late-interaction-rerank" data-i18n="shared.footer.lateInteraction">Late-interaction（ColBERT）</a></li>
             <li><a href="/zh/guides/instruction-reranker" data-i18n="shared.footer.instructionRerank">指令跟随 rerank</a></li>
             <li><a href="/zh/guides/reranking-not-working" data-i18n="shared.footer.notWorking">重排序没起作用</a></li>
             <li><a href="/zh/guides/rerank-vector-database" data-i18n="shared.footer.vectorDb">在向量数据库上重排序</a></li>
-            <li><a href="/zh/reranker-picker" data-i18n="shared.footer.picker">选型向导</a></li>
-            <li><a href="/zh/ndcg-calculator" data-i18n="shared.footer.ndcg">NDCG 计算器</a></li>
-            <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="shared.footer.toolsAndUpdates">工具与动态</h4>
+          <ul>
             <li><a href="/zh/demo" data-i18n="shared.nav.demo">在线 Demo</a></li>
+            <li><a href="/zh/reranker-picker" data-i18n="shared.footer.picker">选型向导</a></li>
+            <li><a href="/zh/rerank-cost-calculator" data-i18n="shared.footer.costCalc">重排序成本计算器</a></li>
+            <li><a href="/zh/ndcg-calculator" data-i18n="shared.footer.ndcg">NDCG 计算器</a></li>
+            <li><a href="/zh/models/" data-i18n="shared.footer.modelsTable">完整模型对比表</a></li>
             <li><a href="/zh/news" data-i18n="shared.footer.news">重排序动态</a></li>
             <li><a href="/news.rss" data-i18n="shared.footer.newsRss">动态 RSS</a></li>
             <li><a href="/zh/changelog" data-i18n="shared.footer.changelog">更新日志</a></li>
@@ -836,7 +854,7 @@
       </div>
     </div>
   </footer>
-  <script src="/assets/js/main.js?v=c84d5fd363"></script>
+  <script src="/assets/js/main.js?v=bb0fb3d788"></script>
   
   <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
 </body>
