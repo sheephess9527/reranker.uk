@@ -30,8 +30,8 @@
   <meta property="og:image:alt" content="Adding a reranker to your vector database" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/guides/rerank-vector-database.jpg?v=cac26f05c9" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css?v=3c7508d427" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css?v=3c7508d427" >
+  <link rel="preload" href="/assets/css/style.css?v=867a1699b1" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=867a1699b1" >
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Adding a reranker to your vector database","datePublished":"2026-08-25","dateModified":"2026-08-25","author":{"@type":"Organization","name":"reranker.uk"},"mainEntityOfPage":"https://reranker.uk/guides/rerank-vector-database","description":"How to add a rerank stage on top of a vector database. The retrieve-wide-then-rerank pattern with working code for pgvector, Qdrant and Elasticsearch, plus HNSW ef_search, filtering order, and the pitfalls that make reranking look useless.","inLanguage":"en"}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reranker.uk/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://reranker.uk/guides/"},{"@type":"ListItem","position":3,"name":"Add a reranker to pgvector, Qdrant or Elasticsearch","item":"https://reranker.uk/guides/rerank-vector-database"}]}</script>
 
@@ -57,6 +57,7 @@
           <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
           <button type="button" class="theme-mode-btn" id="theme-auto" data-theme-pick="auto" aria-pressed="true" data-i18n="shared.theme.auto" data-i18n-aria-label="shared.theme.autoLabel" aria-label="Follow system theme">Auto</button>
         </div>
+        <button type="button" class="theme-mode-btn zh-only-btn" data-zh-script-toggle data-no-tc aria-pressed="false" aria-label="切換為繁體中文" title="切換為繁體中文">繁</button>
         <a class="lang-toggle" href="/zh/guides/rerank-vector-database" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
@@ -302,6 +303,7 @@ top = [h for _s, h in ranked[:5]]</code></pre>
     </div>
   </footer>
   <script src="/assets/js/main.js?v=bb0fb3d788"></script>
+  <script defer src="/assets/js/zh-hant.js?v=a352fa8f17"></script>
   
   <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
 </body>

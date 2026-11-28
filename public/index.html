@@ -30,8 +30,8 @@
   <meta property="og:image:alt" content="Reranker — the resource + a live in-browser rerank demo" >
   <meta name="twitter:image" content="https://reranker.uk/assets/og/index.jpg?v=3bcad81053" >
   <script>var t=null;try{t=localStorage.getItem("rr_theme");}catch(e){}if(t==="light"||(t!=="dark"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches))document.documentElement.dataset.theme="light";</script>
-  <link rel="preload" href="/assets/css/style.css?v=3c7508d427" as="style" >
-  <link rel="stylesheet" href="/assets/css/style.css?v=3c7508d427" >
+  <link rel="preload" href="/assets/css/style.css?v=867a1699b1" as="style" >
+  <link rel="stylesheet" href="/assets/css/style.css?v=867a1699b1" >
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://reranker.uk/#org","name":"reranker.uk","url":"https://reranker.uk/","logo":{"@type":"ImageObject","url":"https://reranker.uk/assets/img/icon-512.png"}},{"@type":"WebSite","name":"reranker.uk","url":"https://reranker.uk/","inLanguage":"en","publisher":{"@id":"https://reranker.uk/#org"},"description":"A practical guide to rerankers for search and RAG: what a rerank model is, cross-encoder vs bi-encoder, how to add reranking to RAG, model comparisons (bge, Cohere, Jina, Voyage), and a free demo that runs entirely in your browser."}]}</script>
 
 </head>
@@ -56,6 +56,7 @@
           <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle light theme" title="Toggle theme">☀</button>
           <button type="button" class="theme-mode-btn" id="theme-auto" data-theme-pick="auto" aria-pressed="true" data-i18n="shared.theme.auto" data-i18n-aria-label="shared.theme.autoLabel" aria-label="Follow system theme">Auto</button>
         </div>
+        <button type="button" class="theme-mode-btn zh-only-btn" data-zh-script-toggle data-no-tc aria-pressed="false" aria-label="切換為繁體中文" title="切換為繁體中文">繁</button>
         <a class="lang-toggle" href="/zh/" rel="alternate" hreflang="zh-Hans" aria-label="切换到中文" title="切换到中文">中文</a>
       </div>
     </nav>
@@ -334,6 +335,7 @@
     </div>
   </footer>
   <script src="/assets/js/main.js?v=bb0fb3d788"></script>
+  <script defer src="/assets/js/zh-hant.js?v=a352fa8f17"></script>
   
   <script src="/assets/js/i18n.js?v=f86a509aa2"></script>
 </body>

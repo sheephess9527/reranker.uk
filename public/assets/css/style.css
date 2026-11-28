@@ -281,6 +281,12 @@ hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
   .theme-mode-btn[data-theme-pick="auto"] { display: none; }
 }
 
+html:not([lang^="zh"]) .zh-only-btn { display: none !important; }
+.zh-only-btn {
+  background: var(--bg-card); border: 1px solid var(--border); color: var(--text-soft);
+  height: 36px; min-width: 34px; padding: 0 0.5rem; border-radius: 9px;
+}
+
 .lang-toggle {
   background: var(--bg-card); border: 1px solid var(--border); color: var(--text-soft);
   height: 36px; min-width: 48px; padding: 0 0.65rem; border-radius: 9px;
