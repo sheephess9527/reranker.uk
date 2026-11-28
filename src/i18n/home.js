@@ -22,7 +22,7 @@ window.I18N_PAGE = {
 
   "Reranker · rerank model · rerank for RAG": "Reranker · rerank 模型 · 为 RAG 重排序",
   "Understand rerankers. Then watch one run in your browser.": "读懂 reranker，再亲眼看它在你的浏览器里运行。",
-  "A reranker re-scores your retrieved candidates so the most relevant passages rise to the top. Learn how it works, compare the popular models, and try a cross-encoder live — with zero API cost and nothing leaving your machine.": "重排序器（reranker）会对检索得到的候选重新打分，让最相关的段落浮到最前面。在这里了解它的原理、对比主流模型，并实时体验一个 cross-encoder —— 零 API 成本，数据全程不离开你的设备。",
+  "A reranker re-scores your retrieved candidates so the most relevant passages rise to the top. Learn how it works, compare the popular models, and try a cross-encoder live — with zero API cost and nothing leaving your machine.": "重排序器（reranker）会对向量数据库（向量资料库）或检索增强生成（RAG）召回的候选重新打分，让最相关的段落浮到最前面。在这里了解它的原理、对比主流开源权重与伺服器自托管方案，并实时体验一个 cross-encoder —— 零 API 成本，数据全程不离开你的设备。",
   "▶ Try the live demo": "▶ 试试在线 Demo",
   "4-question picker →": "4 问选型向导 →",
   "Start with the basics": "从基础概念开始",
